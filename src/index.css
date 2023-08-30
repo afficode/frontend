@@ -1,26 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Barlow&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Alice&family=Arima+Madurai&family=Barlow&family=Crimson+Pro&family=Sono&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/*
-        font-family: 'Alice',
-        serif;
-    
-        font-family: 'Arima Madurai',
-        cursive;
-    
-        font-family: 'Barlow',
-        sans-serif;
-    
-        font-family: 'Crimson Pro',
-        serif;
-    
-        font-family: 'Sono',
-        sans-serif;
-*/
-
-.font-barlow {
-    font-family: 'Barlow', sans-serif;
-}
