@@ -1,3 +1,109 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html,
+html *,
+html *::before,
+html *::after {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	font-family: 'Rubik', sans-serif;
+}
+
+/* typography  */
+h1 {
+	@apply text-5xl;
+	@apply max-sm:text-4xl;
+}
+
+h2 {
+	@apply text-4xl font-semibold;
+	@apply max-sm:text-3xl;
+}
+
+h3 {
+	@apply text-3xl font-semibold;
+	@apply max-sm:text-2xl;
+}
+
+h4 {
+	@apply text-2xl font-semibold;
+	@apply max-sm:text-xl;
+}
+
+h5 {
+	@apply text-xl;
+	@apply max-sm:text-lg;
+}
+
+h6 {
+	@apply text-lg;
+	@apply max-sm:text-base;
+}
+
+p {
+	@apply text-base;
+	@apply max-sm:text-sm !important;
+}
+
+.card-text {
+	@apply text-lg;
+	@apply max-sm:text-base !important;
+}
+
+/* buttons  */
+.btn {
+	/* @apply text-base; */
+	@apply max-sm:text-base;
+}
+
+/* hero */
+.custom-hero {
+	background: radial-gradient(
+		132.01% 79.35% at 50% 49.94%,
+		rgba(12, 193, 142, 0.39) 31.83%,
+		rgba(217, 217, 217, 0) 78.15%
+	);
+}
+
+@media screen and (min-width: 1024px) {
+	.hero-card:nth-child(2) {
+		margin-bottom: 5.5rem;
+	}
+	.hero-card:nth-child(3) {
+		margin-bottom: 8rem;
+	}
+}
+
+/* homepage carousel */
+.carousel-con {
+	background: rgba(4, 127, 115, 0.1);
+}
+
+.react-multiple-carousel__arrow {
+	background: #ebba16;
+}
+
+.react-multiple-carousel__arrow--right {
+	right: 0;
+}
+.react-multiple-carousel__arrow--left {
+	left: 0;
+}
+.react-multi-carousel-dot-list button {
+	border: none;
+	background-color: #acacac;
+}
+.react-multi-carousel-dot--active button {
+	background-color: #ebba16;
+}
+
+/* welcome page  */
+.grab-btn {
+	background: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0) 100%);
+}

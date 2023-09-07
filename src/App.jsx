@@ -1,25 +1,22 @@
-import './App.css'
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { AboutUs, ContactUs, Home, Welcome } from './pages';
+import { AppLayout } from './layout';
+import { Approutes } from './constants';
 
 function App() {
-
-  return (
-    <>
-     
-
-   <div>
-   <div className="hero min-h-screen bg-base-200">
-  <div className="hero-content text-center">
-    <div className="max-w-md">
-      <h1 className="text-5xl font-bold">Hello Affi</h1>
-      <p className="py-6">Base Project</p>
-      <button className="btn btn-primary">Get Started</button>
-    </div>
-  </div>
-</div>
-   </div>
-   
-    </>
-  )
+	return (
+		<BrowserRouter>
+			<Routes>
+				{/* use NavBar and Footer layout  */}
+				<Route element={<AppLayout />}>
+					<Route path={Approutes.home} element={<Home />} />
+					<Route path={Approutes.welcome} element={<Welcome />} />
+					<Route path={Approutes.aboutUs} element={<AboutUs />} />
+					<Route path={Approutes.contactUs} element={<ContactUs />} />
+				</Route>
+			</Routes>
+		</BrowserRouter>
+	);
 }
 
-export default App
+export default App;
