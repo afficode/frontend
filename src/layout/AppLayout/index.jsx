@@ -3,9 +3,9 @@ import { Footer, NavBar } from '..';
 
 const AppLayout = () => {
 	return (
-		<div className=" min-h-screen overflow-x-hidden">
+		<div className="min-h-screen overflow-x-hidden ">
 			<NavBar />
-			<main>
+			<main className="max-w-[1380px] mx-auto mt-[152px] ">
 				<Outlet />
 			</main>
 			<Footer />

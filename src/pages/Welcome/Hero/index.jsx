@@ -7,14 +7,14 @@ const Hero = () => {
 	const firstTimer = true;
 
 	return (
-		<section className=" bg-blue flex flex-col gap-12 py-12 px-2 sm:px-8 m-2 rounded-md">
-			<h1 className="max-sm:text-center text-white">Welcome, Gideon</h1>
-			<span className="block text-white text-center text-base md:text-xl">
+		<section className="flex flex-col gap-12 px-2 py-12 m-2 rounded-md  bg-blue sm:px-8">
+			<h1 className="text-white max-sm:text-center">Welcome, Gideon</h1>
+			<span className="block text-base text-center text-white md:text-xl">
 				Tons of opportunities await you!. <br />
 				Please choose your next action below.
 			</span>
 
-			<div className="max-w-full flex flex-col md:flex-row gap-4 mx-auto">
+			<div className="flex flex-col max-w-full gap-4 mx-auto md:flex-row">
 				<div className={firstTimer ? 'dropdown dropdown-top dropdown-hover' : ''}>
 					<Link to={''}>
 						<button className="btn w-[15rem] text-lg rounded-xl shadow-lg capitalize hover:bg-yellow/80 bg-yellow border-none">
@@ -33,11 +33,11 @@ const Hero = () => {
 						<div className="w-[3.2rem] h-[3.2rem] bg-blue flex justify-center items-center border-yellow border-4 rounded-full absolute right-0 top-[-1rem]">
 							<AiOutlineInfo size={34} className="text-white" />
 						</div>
-						<h4 className="text-blue text-center whitespace-nowrap">Setting Up A Shop</h4>
+						<h4 className="text-center text-blue whitespace-nowrap">Setting Up A Shop</h4>
 						<div className="pt-2">
 							<p className="mb-2">It takes less than 5-mins to set up your account for success on AFFI.</p>
 							<span className="max-sm:text-sm">Benefits;</span>
-							<ul className="flex flex-col pl-6 list-disc pt-0 max-sm:text-sm text-base">
+							<ul className="flex flex-col pt-0 pl-6 text-base list-disc max-sm:text-sm">
 								<li>We drive clients to your store, constantly</li>
 								<li>You can have as many stores as you would like.</li>
 								<li>Monthly low-rate subscription.</li>
@@ -65,10 +65,10 @@ const Hero = () => {
 						<div className="w-[3.2rem] h-[3.2rem] bg-blue flex justify-center items-center border-yellow border-4 rounded-full absolute right-0 top-[-1rem]">
 							<AiOutlineInfo size={34} className="text-white" />
 						</div>
-						<h4 className=" text-blue text-center whitespace-nowrap">Becoming A Grabber</h4>
-						<div className="pt-2  ">
+						<h4 className="text-center  text-blue whitespace-nowrap">Becoming A Grabber</h4>
+						<div className="pt-2 ">
 							<p className="mb-2 ">As a grabber, you can do the following:</p>
-							<ul className="flex flex-col pl-6 list-disc pt-0 max-sm:text-sm text-base">
+							<ul className="flex flex-col pt-0 pl-6 text-base list-disc max-sm:text-sm">
 								<li>
 									Pick products/items and market on featured page or as the case may be, for share of the
 									sale.
@@ -101,7 +101,7 @@ const Hero = () => {
 						<div className="w-[3.2rem] h-[3.2rem] bg-blue flex justify-center items-center  border-yellow border-4 rounded-full absolute right-0 top-[-1rem]">
 							<AiOutlineInfo size={34} className="text-white" />
 						</div>
-						<h4 className=" text-blue text-center whitespace-nowrap">Quick Post</h4>
+						<h4 className="text-center  text-blue whitespace-nowrap">Quick Post</h4>
 						<div className="pt-2">
 							<p className="mb-4">I have an item/product to post for sale, Quickly.</p>
 							<p className="mb-4">Please click the Quick post to enlist your product on this platform.</p>

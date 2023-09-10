@@ -4,9 +4,9 @@ import { ScrollToTop } from '../../utils';
 
 const AboutUs = () => {
 	return (
-		<section className=" w-full mb-12">
+		<section className="w-full mb-12 ">
 			<div className="bg-blue py-12 px-4 sm:px-[4rem] m-2 rounded-md">
-				<h1 className="max-sm:text-center text-white">About Us</h1>
+				<h1 className="text-center text-white">About Us</h1>
 			</div>
 
 			{/* our story */}
@@ -38,7 +38,7 @@ const AboutUs = () => {
 			</div>
 
 			<div
-				className={`${sectionStyles} flex justify-between gap-4 max-md:flex-col max-md:items-center`}
+				className={`${sectionStyles} flex justify-between gap-6 max-md:flex-col max-md:items-center`}
 			>
 				<Card title={'Advertise with us'} img={Car} />
 				<Card title={'Join us'} img={Spa} />
@@ -68,38 +68,38 @@ const AboutUs = () => {
 
 			{/* our platform */}
 			<div className={`${sectionStyles} flex flex-col gap-8`}>
-				<h3 className="text-blue text-center">Our Platform</h3>
+				<h3 className="text-center text-blue">Our Platform</h3>
 
-				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 w-full gap-4 ">
-					<div className="border-r border-black/30 py-8 px-8">
+				<div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 ">
+					<div className="px-8 py-8 border-r border-black/30">
 						<span className="block text-4xl font-semibold text-blue">9.2m</span>
 						<p>Lorem ipsum dolor sit amet.</p>
 					</div>
-					<div className="max-md:border-r max-md:border-black/30 lg:border-r lg:border-black/30 py-8 px-8">
+					<div className="px-8 py-8 max-md:border-r max-md:border-black/30 lg:border-r lg:border-black/30">
 						<span className="block text-4xl font-semibold text-blue">9.2m</span>
 						<p>Lorem ipsum dolor sit amet.</p>
 					</div>
-					<div className="border-r border-black/30 py-8 px-8">
+					<div className="px-8 py-8 border-r border-black/30">
 						<span className="block text-4xl font-semibold text-blue">9.2m</span>
 						<p>Lorem ipsum dolor sit amet.</p>
 					</div>
-					<div className="max-md:border-r max-md:border-black/30 py-8 px-8">
+					<div className="px-8 py-8 max-md:border-r max-md:border-black/30">
 						<span className="block text-4xl font-semibold text-blue">9.2m</span>
 						<p>Lorem ipsum dolor sit amet.</p>
 					</div>
-					<div className="border-r border-black/30 py-8 px-8">
+					<div className="px-8 py-8 border-r border-black/30">
 						<span className="block text-4xl font-semibold text-blue">9.2m</span>
 						<p>Lorem ipsum dolor sit amet.</p>
 					</div>
-					<div className="max-md:border-r max-md:border-black/30 lg:border-r lg:border-black/30 py-8 px-8">
+					<div className="px-8 py-8 max-md:border-r max-md:border-black/30 lg:border-r lg:border-black/30">
 						<span className="block text-4xl font-semibold text-blue">9.2m</span>
 						<p>Lorem ipsum dolor sit amet.</p>
 					</div>
-					<div className="border-r border-black/30 py-8 px-8">
+					<div className="px-8 py-8 border-r border-black/30">
 						<span className="block text-4xl font-semibold text-blue">9.2m</span>
 						<p>Lorem ipsum dolor sit amet.</p>
 					</div>
-					<div className="max-md:border-r max-md:border-black/30 py-8 px-8">
+					<div className="px-8 py-8 max-md:border-r max-md:border-black/30">
 						<span className="block text-4xl font-semibold text-blue">9.2m</span>
 						<p>Lorem ipsum dolor sit amet.</p>
 					</div>
@@ -111,7 +111,7 @@ const AboutUs = () => {
 						dolorem libero dicta sint ut fugit odio vero quod.
 					</p>
 
-					<button className="btn rounded-3xl border-black/30 capitalize hover:bg-blue hover:text-white my-4">
+					<button className="my-4 capitalize btn rounded-3xl border-black/30 hover:bg-blue hover:text-white">
 						Advertise with us
 					</button>
 				</div>

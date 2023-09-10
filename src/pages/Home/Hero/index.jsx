@@ -2,16 +2,18 @@ import { Property, Sale, Services, Vehicles } from '../../../assets/images';
 
 const Hero = () => {
 	return (
-		<section className="custom-hero min-h-[79vh] w-full hero relative max-lg:pt-8 max-lg:pb-12">
-			<div className=" h-full pb-[3rem] px-10 sm:px-4 flex max-lg:grid max-lg:grid-cols-2 max-lg:gap-6 max-sm:grid-cols-1 items-end gap-2 ">
-				{cardData.map((card, index) => (
-					<Card key={index} {...card} />
-				))}
-			</div>
-			<div className="absolute bottom-[2rem] lg:bottom-[2.5rem] lg:w-[30%]">
-				<button className="btn hover:bg-yellow/80 bg-yellow rounded-3xl w-full text-lg sm:text-xl capitalize">
-					Set up a Shop Today!
-				</button>
+		<section className="px-4 pt-16 pb-12 mx-auto hero custom-hero">
+			<div className="mt-16 mb-4">
+				<div className="flex gap-4 max-lg:grid max-lg:grid-cols-2 max-lg:gap-6 max-sm:grid-cols-1 ">
+					{cardData.map((card, index) => (
+						<Card key={index} {...card} />
+					))}
+				</div>
+				<div className="max-w-[30rem] mx-auto mt-6 lg:mt-[-3rem]">
+					<button className="w-full text-lg capitalize border-none btn hover:bg-yellow hover:border-black/50 hover:border-solid bg-yellow rounded-3xl sm:text-xl ">
+						Set up a Shop Today!
+					</button>
+				</div>
 			</div>
 		</section>
 	);
@@ -21,11 +23,13 @@ export default Hero;
 
 const Card = ({ title, image, description, action }) => {
 	return (
-		<div className="w-full sm:max-w-[19rem] h-[24rem] flex flex-col items-center hero-card text-center justify-between  border border-black px-4 py-6 bg-white">
+		<div className="w-full sm:max-w-[18rem] h-[23rem] flex flex-col items-center hero-card text-center justify-between rounded-md px-4 py-6 bg-white shadow-md cursor-pointer hover:scale-105 hover:shadow-lg transition-all ">
 			<h3 className="xl:whitespace-nowrap">{title}</h3>
 			<img src={image} alt="for sale image" className="w-[11rem] h-[9rem] object-contain" />
 			<p className="card-text">{description}</p>
-			<button className="btn rounded-3xl hover:bg-yellow/80 bg-yellow capitalize mt-4 text-lg">{action}</button>
+			<button className="mt-4 text-lg capitalize border-none btn rounded-3xl hover:border-black/50 hover:border-solid hover:bg-yellow/90 bg-yellow">
+				{action}
+			</button>
 		</div>
 	);
 };
