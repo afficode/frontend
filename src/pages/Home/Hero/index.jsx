@@ -2,7 +2,7 @@ import { Property, Sale, Services, Vehicles } from '../../../assets/images';
 
 const Hero = () => {
 	return (
-		<section className="px-4 pt-16 pb-12 mx-auto hero custom-hero">
+		<section className="px-4 pt-16 pb-12 hero bg-gradient-to-r from-blue/30 via-blue/90 to-blue/40">
 			<div className="mt-16 mb-4">
 				<div className="flex gap-4 max-lg:grid max-lg:grid-cols-2 max-lg:gap-6 max-sm:grid-cols-1 ">
 					{cardData.map((card, index) => (

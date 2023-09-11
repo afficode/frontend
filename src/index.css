@@ -62,26 +62,7 @@ p {
 	@apply max-sm:text-base;
 }
 
-/* hero */
-.custom-hero {
-	background: radial-gradient(
-		132.01% 79.35% at 50% 49.94%,
-		rgba(0, 100, 50, 0.6) 31.83%,
-		rgba(100, 100, 100, 0) 78.15%
-	);
-
-	/* background: radial-gradient(
-		132.01% 79.35% at 50% 49.94%,
-		rgba(1, 104, 71, 0.39) 31.83%,
-		rgba(180, 180, 180, 0) 78.15%
-	); */
-	/* background: radial-gradient(
-		132.01% 79.35% at 50% 49.94%,
-		rgba(12, 193, 142, 0.39) 31.83%,
-		rgba(217, 217, 217, 0) 78.15%
-	); */
-}
-
+/* hero cards  */
 @media screen and (min-width: 1024px) {
 	.hero-card:nth-child(2) {
 		margin-top: -5rem;
