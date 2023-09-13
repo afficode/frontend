@@ -22,7 +22,7 @@ const RowContainer = ({ title }) => {
 					<BsFastForwardFill className="inline ml-2 max-sm:text-base text-[25px]" />
 				</span>
 			</div>
-			<div className="grid grid-cols-1 gap-4 place-items-center sm:grid-cols-2 lg:grid-cols-3">
+			<div className="grid grid-cols-1 gap-4 place-items-center sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 				{title === 'Discover more...'
 					? discoverMoreData.map((item) => <CardDetails key={item.title} {...item} />)
 					: title === 'Categories'
@@ -41,18 +41,18 @@ const CardDetails = ({ title, location, img, car, price }) => {
 			<img className=" w-full h-[70%] object-cover" src={img} alt="/" />
 			<div className="px-4 py-2">
 				{car ? (
-					<div className="flex items-center gap-2 xl:gap-4 ">
-						<p className="card-text">{car.year}</p>
+					<div className="flex items-center gap-2 xl:gap-4">
+						<p>{car.year}</p>
 						<span className="w-1 h-1 bg-black rounded-full " />
-						<p className="card-text">{car.mileage}</p>
+						<p>{car.mileage}</p>
 						<span className="w-1 h-1 bg-black rounded-full" />
-						<p className="card-text">{car.fuel}</p>
+						<p>{car.fuel}</p>
 					</div>
 				) : (
-					<span className="card-text">{price}</span>
+					<span className="p-lg">{price}</span>
 				)}
-				<p className="card-text">{title}</p>
-				<p className="card-text">{location}</p>
+				<p className="p-lg">{title}</p>
+				<p className="p-lg">{location}</p>
 			</div>
 		</div>
 	);
@@ -73,6 +73,10 @@ const categoriesData = [
 		img: Furniture,
 		title: 'Furnitures',
 	},
+	{
+		img: Furniture,
+		title: 'Furniture',
+	},
 ];
 
 const shopsData = [
@@ -87,6 +91,10 @@ const shopsData = [
 	{
 		img: Store,
 		title: 'K & K Kiddies Store.',
+	},
+	{
+		img: Store,
+		title: 'K & K.',
 	},
 ];
 
@@ -111,6 +119,12 @@ const discoverMoreData = [
 	{
 		img: KitchenTools,
 		title: 'Kitchen Ware',
+		price: '₦60,000',
+		location: 'Abuja.',
+	},
+	{
+		img: KitchenTools,
+		title: 'Kitchen',
 		price: '₦60,000',
 		location: 'Abuja.',
 	},

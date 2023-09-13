@@ -5,7 +5,7 @@ const AppLayout = () => {
 	return (
 		<div className="min-h-screen overflow-x-hidden ">
 			<NavBar />
-			<main className="max-w-[1380px] mx-auto mt-[152px] ">
+			<main className="max-w-[1380px] mx-auto mt-[147px] md:mt-[109px] ">
 				<Outlet />
 			</main>
 			<Footer />

@@ -7,7 +7,7 @@ const Hero = () => {
 	const firstTimer = true;
 
 	return (
-		<section className="flex flex-col gap-12 px-2 py-12 m-2 rounded-md  bg-blue sm:px-8">
+		<section className="flex flex-col gap-12 px-2 py-12 m-2 rounded-md bg-blue sm:px-8">
 			<h1 className="text-white max-sm:text-center">Welcome, Gideon</h1>
 			<span className="block text-base text-center text-white md:text-xl">
 				Tons of opportunities await you!. <br />
@@ -26,7 +26,7 @@ const Hero = () => {
 						tabIndex={0}
 						className={
 							firstTimer
-								? `dropdown-content transform -translate-x-[18%] min-h-fit w-[22rem]  z-[10] p-6 bg-white shadow-md rounded-3xl`
+								? `dropdown-content transform -translate-x-[18%] min-h-fit w-[22rem]  z-50 p-6 bg-white shadow-md rounded-3xl`
 								: 'hidden'
 						}
 					>
@@ -58,14 +58,14 @@ const Hero = () => {
 						tabIndex={0}
 						className={
 							firstTimer
-								? `dropdown-content transform -translate-x-[18%] min-h-fit w-[22rem]  z-[10] p-6 bg-white shadow-md rounded-3xl`
+								? `dropdown-content transform -translate-x-[18%] min-h-fit w-[22rem]  z-50 p-6 bg-white shadow-md rounded-3xl`
 								: 'hidden'
 						}
 					>
 						<div className="w-[3.2rem] h-[3.2rem] bg-blue flex justify-center items-center border-yellow border-4 rounded-full absolute right-0 top-[-1rem]">
 							<AiOutlineInfo size={34} className="text-white" />
 						</div>
-						<h4 className="text-center  text-blue whitespace-nowrap">Becoming A Grabber</h4>
+						<h4 className="text-center text-blue whitespace-nowrap">Becoming A Grabber</h4>
 						<div className="pt-2 ">
 							<p className="mb-2 ">As a grabber, you can do the following:</p>
 							<ul className="flex flex-col pt-0 pl-6 text-base list-disc max-sm:text-sm">
@@ -94,14 +94,14 @@ const Hero = () => {
 						tabIndex={0}
 						className={
 							firstTimer
-								? `dropdown-content transform -translate-x-[18%] min-h-fit w-[22rem]  z-[10] p-6 bg-white shadow-md rounded-3xl`
+								? `dropdown-content transform -translate-x-[18%] min-h-fit w-[22rem]  z-50 p-6 bg-white shadow-md rounded-3xl`
 								: 'hidden'
 						}
 					>
 						<div className="w-[3.2rem] h-[3.2rem] bg-blue flex justify-center items-center  border-yellow border-4 rounded-full absolute right-0 top-[-1rem]">
 							<AiOutlineInfo size={34} className="text-white" />
 						</div>
-						<h4 className="text-center  text-blue whitespace-nowrap">Quick Post</h4>
+						<h4 className="text-center text-blue whitespace-nowrap">Quick Post</h4>
 						<div className="pt-2">
 							<p className="mb-4">I have an item/product to post for sale, Quickly.</p>
 							<p className="mb-4">Please click the Quick post to enlist your product on this platform.</p>

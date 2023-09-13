@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { Approutes } from '../../constants/routes';
 import { Dropdown } from '../../ui';
-import { Banner } from '../../components';
 
 // icons
 import { HiSearch, HiOutlineSpeakerphone, HiBookmark } from 'react-icons/hi';
@@ -119,7 +118,7 @@ const Navbar = () => {
 									title="Click to sign-in or register"
 								>
 									<CgProfile size={25} />
-									<span className="text-xs whitespace-normal sm:text-sm">Sign-In</span>
+									<span className="text-xs whitespace-nowrap sm:text-sm">Sign-In</span>
 								</div>
 							) : (
 								<>
@@ -466,7 +465,6 @@ const Navbar = () => {
 					</div>
 				</div>
 			</nav>
-			<Banner />
 		</header>
 	);
 };

@@ -12,7 +12,7 @@ const Footer = () => {
 					<div className="grid grid-cols-1 items-center gap-[1rem] md:gap-0 md:grid-cols-3 md:divide-x-4 divide-white">
 						<div className="col-span-2 md:mr-[2rem] lg:mr-[8rem] space-y-2">
 							<h3 className="text-center md:text-start">Transact with peace of mind on Affi</h3>
-							<p className="card-text">
+							<p className="p-lg">
 								Indigenous platform for listing; services, cars and vehicles, properties, own an online
 								shop-saving you from the hassle of site building, Agency freelancing and enlisting items
 								(goods and products) for transactional purposes.
