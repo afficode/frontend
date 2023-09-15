@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { Approutes } from '../../constants/routes';
 import { Dropdown } from '../../ui';
-import axios from 'axios';
 
 // icons
 import { HiSearch, HiOutlineSpeakerphone, HiBookmark } from 'react-icons/hi';
