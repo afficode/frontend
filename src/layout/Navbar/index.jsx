@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { Approutes } from '../../constants/routes';
 import { Dropdown } from '../../ui';
+import { AffiLogo } from '../../assets/images';
 
 // icons
 import { HiSearch, HiOutlineSpeakerphone, HiBookmark } from 'react-icons/hi';
@@ -14,7 +15,6 @@ import { BsShop } from 'react-icons/bs';
 import { MdMiscellaneousServices } from 'react-icons/md';
 import { TbMoneybag } from 'react-icons/tb';
 import { FaCarSide, FaBuilding } from 'react-icons/fa';
-import { AffiLogo } from '../../assets/images';
 
 const Navbar = () => {
 	const [nav, setNav] = useState(false);

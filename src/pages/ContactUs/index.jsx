@@ -12,7 +12,7 @@ const ContactUs = () => {
 		<section>
 			<div className="bg-blue py-12 px-4 sm:px-[4rem] m-2 rounded-md text-center text-white">
 				<h1 className="text-white ">Contact Us</h1>
-				<h4 className="mt-2 ">Chat with our friendly team</h4>
+				<h4 className="mt-2 ">Chat with our friendly team.</h4>
 
 				<p className="mt-3 text-gray-500 dark:text-gray-400">
 					We'd love to hear from you. Please fill out this form or send us an email.
