@@ -7,7 +7,7 @@ const Hero = () => {
 	const firstTimer = true;
 
 	return (
-		<section className="flex flex-col gap-12 px-2 py-12 m-2 rounded-md bg-blue sm:px-8">
+		<section className="flex flex-col gap-12 px-2 py-12 my-2 rounded-md bg-blue sm:px-8">
 			<h1 className="text-white max-sm:text-center">Welcome, Gideon</h1>
 			<span className="block text-base text-center text-white md:text-xl">
 				Tons of opportunities await you!. <br />

@@ -11,8 +11,8 @@ const Footer = () => {
 				<div className="text-white flex flex-col gap-[1.5rem] md:gap-[3rem] py-8">
 					<div className="grid grid-cols-1 items-center gap-[1rem] md:gap-0 md:grid-cols-3 md:divide-x-4 divide-white">
 						<div className="col-span-2 md:mr-[2rem] lg:mr-[8rem] space-y-2">
-							<h3 className="text-center md:text-start">Transact with peace of mind on Affi</h3>
-							<p className="p-lg">
+							<h3 className="text-start">Transact with peace of mind on Affi</h3>
+							<p className="p-lg text-justify">
 								Indigenous platform for listing; services, cars and vehicles, properties, own an online
 								shop-saving you from the hassle of site building, Agency freelancing and enlisting items
 								(goods and products) for transactional purposes.
@@ -50,7 +50,7 @@ const Footer = () => {
 					</div>
 
 					{/* footer lists  */}
-					<ul className="flex flex-wrap items-center w-full divide-x-8 divide-white max-md:justify-center">
+					<ul className=" max-md:grid  max-md:grid-cols-3 max-sm:grid-cols-2 flex flex-wrap items-center w-full md:divide-x-8 md:divide-white max-md:justify-center">
 						<Link to={Approutes.aboutUs}>
 							<li className={`${listStyles} md:pl-0 `}>About US</li>
 						</Link>
@@ -91,4 +91,4 @@ const Footer = () => {
 export default Footer;
 
 const listStyles =
-	'capitalize cursor-pointer text-white text-sm md:text-base font-medium py-[.3rem] px-2 md:px-8 hover:text-yellow transition-colors ';
+	'capitalize cursor-pointer text-white text-sm md:text-base font-medium py-[.3rem] px-2 md:px-8 hover:text-yellow transition-colors whitespace-nowrap';

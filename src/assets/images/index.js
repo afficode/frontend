@@ -1,3 +1,4 @@
+export { default as AffiLogo } from './affiLogo.png';
 export { default as Car } from './car.png';
 export { default as Furniture } from './furniture.png';
 export { default as HairDryer } from './hairDryer.png';

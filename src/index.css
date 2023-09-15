@@ -54,6 +54,7 @@ p {
 .p-lg {
 	@apply text-lg;
 	@apply max-sm:text-base !important;
+	@apply leading-6 !important;
 }
 
 /* buttons  */

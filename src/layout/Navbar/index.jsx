@@ -2,10 +2,11 @@ import { useEffect, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { Approutes } from '../../constants/routes';
 import { Dropdown } from '../../ui';
+import axios from 'axios';
 
 // icons
 import { HiSearch, HiOutlineSpeakerphone, HiBookmark } from 'react-icons/hi';
-import { SlArrowDown, SlArrowRight } from 'react-icons/sl';
+import { SlArrowRight } from 'react-icons/sl';
 import { BiEnvelope } from 'react-icons/bi';
 import { IoMdClose } from 'react-icons/io';
 import { VscMenu } from 'react-icons/vsc';
@@ -14,9 +15,22 @@ import { BsShop } from 'react-icons/bs';
 import { MdMiscellaneousServices } from 'react-icons/md';
 import { TbMoneybag } from 'react-icons/tb';
 import { FaCarSide, FaBuilding } from 'react-icons/fa';
+import { AffiLogo } from '../../assets/images';
 
 const Navbar = () => {
 	const [nav, setNav] = useState(false);
+
+	// const [categories, setCategories] = useState([]);
+
+	// useEffect(() => {
+	// 	let cat;
+
+	// 	axios.get(`${BASE_URL}categories`).then((res) => {
+	// 		cat = res.data.filter((data) => data.id >= 10 && data.id < 100);
+	// 		setCategories(cat);
+	// 		console.log(cat);
+	// 	});
+	// }, []);
 
 	const navRef = useRef();
 
@@ -43,11 +57,11 @@ const Navbar = () => {
 			<nav className="relative ">
 				<div className="w-full pt-3 ">
 					{/* top nav  */}
-					<div className="max-w-[1380px] mx-auto px-4 lg:px-[2rem] flex items-center justify-between ">
+					<div className="max-w-[1380px] mx-auto px-2 flex items-center justify-between ">
 						{/* logo */}
-						<div className="flex items-center">
+						<div className="flex items-center bg-white rounded-full p-[2px]">
 							<NavLink to={'/'}>
-								<h1 className="text-3xl font-bold text-white">AFFI</h1>
+								<img src={AffiLogo} className="w-9 h-9" alt="" />
 							</NavLink>
 						</div>
 
@@ -76,7 +90,7 @@ const Navbar = () => {
 						</div>
 
 						{/* top nav items */}
-						<div className="flex items-center gap-2 md:mx-1 md:gap-4">
+						<div className="flex items-center gap-2  md:gap-4">
 							<div
 								className="flex flex-col items-center text-white cursor-pointer max-md:hidden "
 								title="Saved items"
@@ -139,9 +153,8 @@ const Navbar = () => {
 							{/* mobile categories/menu dropdown */}
 							{pathname === '/' ? (
 								<div className="dropdown dropdown-end">
-									<button className="flex flex-col gap-0 px-2 py-0 capitalize bg-white border-none max-sm:text-xs md:hidden btn btn-sm hover:text-yellow hover:bg-white">
+									<button className="flex flex-col gap-0 px-2 py-0 capitalize bg-white border-none max-sm:text-xs md:hidden btn btn-sm text-blue px-4 hover:bg-white">
 										Categories
-										<SlArrowDown size={10} className="block" />
 									</button>
 									<ul
 										tabIndex={0}
@@ -242,7 +255,7 @@ const Navbar = () => {
 														<SlArrowRight size={20} className="ml-auto text-black " />
 													</div>
 												</NavLink>
-												<NavLink to={'#'}>
+												<NavLink to={Approutes.contactUs}>
 													<div className="flex items-center hover:underline">
 														<li className="text-base whitespace-nowrap ">Help & Contact</li>
 														<SlArrowRight size={20} className="ml-auto text-black " />
@@ -263,7 +276,7 @@ const Navbar = () => {
 					</div>
 
 					{/* <!-- Mobile search input --> */}
-					<div className="flex items-center w-full mt-2 md:hidden ">
+					<div className="flex items-center w-full mt-2 md:hidden px-1">
 						<div className="relative w-full">
 							<input
 								title="Search for items here."
@@ -286,22 +299,21 @@ const Navbar = () => {
 
 					{/* bottom nav  */}
 					<div className="mt-2 border-y-2 border-y-white ">
-						<div className="max-w-[1380px] mx-auto px-4 lg:px-[2rem] relative flex items-center justify-between w-full  whitespace-nowrap  ">
+						<div className="max-w-[1380px] mx-auto px-2 relative flex items-center justify-between w-full  whitespace-nowrap  ">
 							{pathname === '/' ? (
 								// dropdown for categories
 								<div className="dropdown ">
-									<button className="flex flex-col gap-0 mr-16 text-sm capitalize bg-white border-none max-md:hidden btn btn-sm hover:text-yellow hover:bg-white">
+									<button className="flex flex-col gap-0 mr-16 text-sm capitalize bg-white border-none max-md:hidden btn btn-sm hover:bg-white text-blue px-5 cat-btn">
 										Categories
-										<SlArrowDown size={10} className="block" />
 									</button>
 
 									<ul
 										tabIndex={0}
-										className={`dropdown-content transform -translate-x-[5%] min-h-fit w-fit  z-[10] px-4 py-6 bg-white shadow-md rounded-md`}
+										className={`dropdown-content transform -translate-x-[1%] min-h-fit w-fit  z-[10] px-4 py-6 bg-white shadow-md rounded-md`}
 									>
 										<h4 className="font-semibold whitespace-nowrap">Categories</h4>
 										<ul className="flex flex-col menu max-h-full w-full z-[10] py-4 ">
-											{allCategories.map((category) => (
+											{allCategories?.map((category) => (
 												<NavLink to={'#'} key={category}>
 													<li className="text-lg capitalize max-sm:text-base lg:pr-12 hover:underline whitespace-nowrap">
 														{category}
@@ -451,14 +463,14 @@ const Navbar = () => {
 
 								<span className="border border-r-4 border-white h-[2rem]" />
 
-								<li className="dropdown dropdown-end dropdown-hover">
+								<li className="dropdown dropdown-end dropdown-hover mr-4">
 									<NavLink to={'#'} tabIndex={0} className={listStyles}>
-										FOR SALE
+										DEALS
 									</NavLink>
 									<NavLink to={'#'} className={mobileListStyles}>
 										<TbMoneybag size={25} />
 									</NavLink>
-									<Dropdown category={'FOR SALE'} subCategories={forSaleCategoriesData} />
+									<Dropdown category={'DEALS'} subCategories={forSaleCategoriesData} />
 								</li>
 							</ul>
 						</div>
@@ -470,6 +482,8 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+// const BASE_URL = 'http://109.237.25.252:4000/';
 
 const listStyles =
 	'hidden sm:block uppercase flex-grow-0 flex-shrink-0 cursor-pointer text-white text-sm md:text-base font-medium py-2 px-4  hover:text-yellow transition-colors ';
@@ -705,7 +719,7 @@ const allCategories = [
 	'Cars & Vehicles',
 	'Property',
 	'Services',
-	'For Sale',
+	'Deals',
 	'Agriculture & Food Products',
 	'Fashion',
 	'Health & Beauty',
@@ -716,4 +730,5 @@ const allCategories = [
 	'Tradesmen & Construction',
 	'Babies & Kids Stuffs',
 	'Software & Games',
+	'Requests',
 ];

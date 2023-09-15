@@ -1,19 +1,21 @@
 import { Link } from 'react-router-dom';
+import { ScrollToTop } from '../../utils';
 
 // icons
 import { BiEnvelope } from 'react-icons/bi';
 import { SlLocationPin } from 'react-icons/sl';
 import { FiPhone } from 'react-icons/fi';
+import { MdOutlineSupportAgent } from 'react-icons/md';
 
 const ContactUs = () => {
 	return (
 		<section>
 			<div className="bg-blue py-12 px-4 sm:px-[4rem] m-2 rounded-md text-center text-white">
 				<h1 className="text-white ">Contact Us</h1>
-				<h4 className="mt-2 ">Chat to our friendly team</h4>
+				<h4 className="mt-2 ">Chat with our friendly team</h4>
 
 				<p className="mt-3 text-gray-500 dark:text-gray-400">
-					We'd love to hear from you. Please fill out this form or shoot us an email.
+					We'd love to hear from you. Please fill out this form or send us an email.
 				</p>
 			</div>
 
@@ -36,7 +38,7 @@ const ContactUs = () => {
 					<div>
 						<Link to="https://wa.me/+2348136155728" rel="noopener noreferrer" target="_blank">
 							<span className="inline-block p-3 text-white transition-all rounded-full bg-blue hover:scale-105">
-								<SlLocationPin size={20} />
+								<MdOutlineSupportAgent size={20} />
 							</span>
 						</Link>
 						<h6 className="mt-4 font-medium text-black ">Live chat</h6>
@@ -120,6 +122,8 @@ const ContactUs = () => {
 					</form>
 				</div>
 			</div>
+
+			<ScrollToTop />
 		</section>
 	);
 };

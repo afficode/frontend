@@ -40,18 +40,21 @@ const CardDetails = ({ title, location, img, car, price }) => {
 		<div className=" max-w-[18rem] sm:max-w-[25rem] h-[22rem] border border-black/25 shadow-sm cursor-pointer hover:shadow-lg transition-all  ease-in-out">
 			<img className=" w-full h-[70%] object-cover" src={img} alt="/" />
 			<div className="px-4 py-2">
+				<span className="flex justify-between">
+					<p className="p-lg">{title}</p>
+					{car ? <p className="p-lg">{car.year}</p> : null}
+				</span>
+
 				{car ? (
 					<div className="flex items-center gap-2 xl:gap-4">
-						<p>{car.year}</p>
-						<span className="w-1 h-1 bg-black rounded-full " />
-						<p>{car.mileage}</p>
-						<span className="w-1 h-1 bg-black rounded-full" />
-						<p>{car.fuel}</p>
+						{/* <span className="w-1 h-1 bg-black rounded-full whitespace-nowrap" />
+						<p>{car.mileage}</p> */}
+						{/* <span className="w-1 h-1 bg-black rounded-full" /> */}
+						<p>{price}</p>
 					</div>
 				) : (
 					<span className="p-lg">{price}</span>
 				)}
-				<p className="p-lg">{title}</p>
 				<p className="p-lg">{location}</p>
 			</div>
 		</div>
@@ -108,7 +111,7 @@ const discoverMoreData = [
 	{
 		img: Toyota,
 		title: 'Toyota Corola',
-		// price: '₦60,000',
+		price: '₦60,000',
 		location: 'Idumota, Lagos.',
 		car: {
 			year: '2008',

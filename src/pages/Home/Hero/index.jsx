@@ -26,8 +26,8 @@ const Card = ({ title, image, description, action }) => {
 		<div className="w-full sm:max-w-[18rem] h-[23rem] flex flex-col items-center hero-card text-center justify-between rounded-md px-4 py-6 bg-white shadow-md cursor-pointer hover:scale-105 hover:shadow-lg transition-all ">
 			<h3 className="xl:whitespace-nowrap">{title}</h3>
 			<img src={image} alt="for sale image" className="w-[11rem] h-[9rem] object-contain" />
-			<p className="p-lg">{description}</p>
-			<button className="mt-4 text-lg capitalize border-none btn rounded-3xl hover:border-black/50 hover:border-solid hover:bg-yellow/90 bg-yellow">
+			<p className="p-lg ">{description}</p>
+			<button className="mt-4 text-lg capitalize border-none btn rounded-3xl hover:border-black/50 hover:border-solid hover:bg-yellow/90 bg-yellow px-8">
 				{action}
 			</button>
 		</div>
@@ -38,7 +38,7 @@ const cardData = [
 	{
 		title: 'For Sale',
 		image: Sale,
-		description: 'Buy, Sell and Make Money on Isowo.ng. \nGenuine products await you.',
+		description: 'Buy, Sell and Make Money on Affi. \nGenuine products await you.',
 		action: 'Transact Now',
 	},
 	{
