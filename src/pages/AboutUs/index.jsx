@@ -5,7 +5,7 @@ import { ScrollToTop } from '../../utils';
 const AboutUs = () => {
 	return (
 		<section className="w-full mb-12 ">
-			<div className="bg-blue py-12 px-4 sm:px-[4rem] m-2 rounded-md">
+			<div className="bg-blue-500 py-12 px-4 sm:px-[4rem] m-2 rounded-md">
 				<h1 className="text-center text-white">About Us</h1>
 			</div>
 
@@ -111,7 +111,7 @@ const AboutUs = () => {
 						dolorem libero dicta sint ut fugit odio vero quod.
 					</p>
 
-					<button className="my-4 capitalize btn rounded-3xl border-black/30 hover:bg-blue hover:text-white">
+					<button className="my-4 capitalize btn rounded-3xl border-black/30 hover:bg-blue-500 hover:text-white">
 						Advertise with us
 					</button>
 				</div>

@@ -54,7 +54,7 @@ const Navbar = () => {
   const authenticated = false;
 
   return (
-    <header className="fixed top-0 z-50 w-full bg-blue">
+    <header className="fixed top-0 z-50 w-full bg-blue-500">
       <nav className="relative ">
         <div className="w-full pt-3 ">
           {/* top nav  */}
@@ -82,7 +82,7 @@ const Navbar = () => {
                       <span className="ml-4 text-sm lg:text-base">Nigeria</span>
                     </span>
 
-                    <span className="bg-blue p-[0.4rem] rounded-xl">
+                    <span className="bg-blue-500 p-[0.4rem] rounded-xl">
                       <HiSearch size={23} className="text-white" />
                     </span>
                   </span>
@@ -374,7 +374,7 @@ const Navbar = () => {
                   <span className="ml-4 text-sm">Nigeria</span>
                 </span>
 
-                <span className="bg-blue p-[0.4rem] rounded-xl">
+                <span className="bg-blue-500 p-[0.4rem] rounded-xl">
                   <HiSearch size={23} className="text-white" />
                 </span>
               </span>

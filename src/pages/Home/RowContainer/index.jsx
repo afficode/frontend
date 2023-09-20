@@ -19,7 +19,7 @@ const RowContainer = ({ title }) => {
 				</span>
 			</div>
 			<div className="relative w-full pb-8">
-				<div className="py-4 bg-blue/20 md:px-4">
+				<div className="py-4 bg-blue-500/20 md:px-4">
 					<Carousel renderDotsOutside responsive={responsive} showDots={true}>
 						{title === 'Shops'
 							? Array(12)
