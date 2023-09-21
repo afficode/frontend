@@ -1,15 +1,15 @@
 import React from "react";
 import Register from "./Register";
-
+import Login from "./Login";
 
 const DesktopView = () => {
   return (
-    <div className="flex flex-col w-full lg:flex-row my-4 divide-x-4 divide-blue" >
+    <div className="flex flex-col w-full lg:flex-row my-4 divide-x-4 ">
       <div className="w-full">
         <Register />
       </div>
       <div className="w-full">
-      <Register />
+        <Login />
       </div>
     </div>
   );

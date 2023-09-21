@@ -1,13 +1,15 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const Banner = () => {
-	return (
-		<section className="flex flex-wrap items-center justify-center w-full py-2 space-x-2 text-center bg-yellow">
-			<p className="font-bold">Did you know?</p>
-			<p>You can own an online store customized for your product?</p>
-			<Link className="cursor-pointer text-black/60 hover:text-black hover:underline">learn more</Link>
-		</section>
-	);
+  return (
+    <section className="flex flex-wrap items-center justify-center w-full py-2 space-x-2 text-center bg-secondary">
+      <p className="font-bold">Did you know?</p>
+      <p>You can own an online store customized for your product?</p>
+      <Link className="cursor-pointer text-black/60 hover:text-black hover:underline">
+        learn more
+      </Link>
+    </section>
+  );
 };
 
 export default Banner;

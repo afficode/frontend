@@ -4,8 +4,8 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}", "node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}"],
   theme: {
     colors: {
-      'blue': "#2686CE",
-      'yellow': "#EBBA16",
+      blue: "#2686CE",
+      yellow: "#EBBA16",
       white: "#FFFFFF",
       black: "#000000",
       green: "#047F73",
@@ -17,6 +17,11 @@ export default {
   },
   plugins: [require("daisyui"), require('flowbite/plugin') ],
   daisyui: {
-    themes: ["light"],
+    themes: [{
+      mytheme: {
+        "primary": "#2686CE",
+        "secondary": "#EBBA16",
+      }
+    },"light"],
   },
 };
