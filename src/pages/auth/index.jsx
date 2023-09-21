@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from "react";
-import SignInForm from "./SignInForm";
-import SignUpForm from "./SignUpForm";
-import Register from "./Register";
 import DesktopView from "./DesktopView";
 import MobileView from "./MobileView";
 

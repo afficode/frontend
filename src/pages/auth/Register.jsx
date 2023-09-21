@@ -1,13 +1,16 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Formik, Form } from "formik";
-import { TextInput } from "flowbite-react";
 import * as Yup from "yup";
 import Input from "../../components/FormComponents/Input";
 import { MdAppRegistration } from "react-icons/md";
-import { Button } from "flowbite-react";
+import { Button, Spinner } from "flowbite-react";
+import { RegistrationHook } from "../../Hooks/AuthHook";
+import { toast } from "react-toastify";
 const Register = () => {
+  const navigate = useNavigate();
   const inputClass =
-    "input input-bordered border-black w-full bg-gray-100 text-black text-lg lg:text-xl rounded-none my-2 input-lg";
+    "input input-bordered border-black w-full bg-gray-100 text-black text-lg lg:text-xl rounded-none my-2 input-md lg:input-lg";
   const initialValues = {
     firstname: "",
     lastname: "",
@@ -45,7 +48,16 @@ const Register = () => {
       .required(),
   });
 
-  const onSubmit = (values, action) => console.log("Submited Values", values);
+  const onSubmit = async (values, { setSubmitting}) => {
+    const submit = await RegistrationHook(values, setSubmitting);
+    console.log("Here",submit);
+    if (submit?.success) {
+      toast.success(submit.message)
+      return navigate("/", { replace: true});
+    } else {
+      toast.error(submit.message)
+    }
+  };
 
   return (
     <div className="w-full ">
@@ -159,14 +171,15 @@ const Register = () => {
                   tabIndex="-1"
                   role="button"
                   aria-disabled="true"
-                  className={`btn text-white text-normal lg:text-lg border-0 bg-blue-500 btn-lg hover:bg-primary/80 ${
-                    !formik.isValid || !formik.dirty
+                  className={`btn text-white text-normal lg:text-lg border-0 bg-blue-500 btn-md lg:btn-lg hover:bg-primary/80 ${
+                    !formik.isValid || !formik.dirty || formik.isSubmitting
                       ? "cursor-not-allowed"
                       : "cursor-pointer"
                   }`}
                   disabled={!formik.isValid || !formik.dirty ? "disabled" : ""}
                 >
-                  Register <MdAppRegistration />
+                  {formik.isSubmitting ? <><Spinner aria-label="Loading" /> Submiting Data </> : <>Register <MdAppRegistration /></>}
+                  
                 </button>
               </div>
             </Form>

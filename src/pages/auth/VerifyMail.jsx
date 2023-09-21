@@ -1,37 +1,42 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Buttons from "../../components/Buttons";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { backendLink } from '../../constants'
+import Modal from "../../components/Modal";
 import axios from "axios";
+import ReverifyEmail from "./ReverifyEmail";
+import { notifySuccess, notifyError } from "../../ui/ErrorToast";
 
 const VerifyMail = () => {
   const navigate = useNavigate();
-  const notifyError = (message) => toast.error(message);
-  const notifySuccess = (message) => toast.success(message);
+  const [isOpen, setIsOpen] = useState(false)
+  const notifyErr = (message) => notifyError(message)
+  const notifySuc = (message) => notifySuccess(message);
   const verifyEmail = async () => {
     const searchParams = location.search;
     const token = searchParams.split("?token=")[1];
     if (token) {
       try {
-        const response = await axios.get(`auth/verify_account`, {
+        const response = await axios.get(`${backendLink}auth/verify_account`, {
           headers: {
             Authorization: `Bearer ${token}`,
             Accept: "application/json",
             "Content-Type": "application/json",
           },
         });
-        console.log(response);
         if (response.status === 200) {
-          notifySuccess(response?.data?.message);
+          notifySuc(response?.data?.message);
           setTimeout(() => {
             navigate("/auth");
           }, 1000);
         }
       } catch (error) {
-        notifyError(error?.message);
-        setTimeout(() => {
-          console.log(error);
-        }, 1000);
+        if(error?.response?.status === 401) {
+          notifyErr("Error verifying your account. The token is either broken or expired. Pleae try resending a verification email");
+        } else {
+          notifyError(error.response?.data.message);
+        }
+        
       }
     }
   };
@@ -40,11 +45,6 @@ const VerifyMail = () => {
   }, [location.search]);
   return (
     <div className="bg-white w-full  ">
-      {/* <div className="w-full bg-[#2686ce33] h-[100vh] hidden md:flex items-center justify-center">
-        <div className="w-[350px] h-[350px] bg-white p-10">
-          <img src={largeMail} alt="mailbox" />
-        </div>
-      </div> */}
       <div className="w-full  flex items-center justify-center  ">
         <div className="md:w-[50%] w-[90%] my-[5rem] ">
           <h1 className="text-center text-black text-[1.5rem] font-[500]">
@@ -72,6 +72,7 @@ const VerifyMail = () => {
               bgColor={"bg-lightBlue"}
               textColor={"text-white"}
               text={"Resend email"}
+              handleClick={() => setIsOpen(true)}
             />
           </div>
           <div className="mt-4">
@@ -81,6 +82,13 @@ const VerifyMail = () => {
               text={"Resend OTP"}
             />
           </div>
+          <Modal 
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+            modalHeader={true}
+            children={<ReverifyEmail />}
+            headerText={"Reverify Email"}
+          />
         </div>
       </div>
     </div>

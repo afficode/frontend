@@ -5,10 +5,12 @@ import { Approutes } from "./constants";
 import Auth from "./pages/auth";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import VerifyMail from "./pages/auth/VerifyMail";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
     <BrowserRouter>
+    <ToastContainer />
       <Routes>
         {/* use NavBar and Footer layout  */}
         <Route element={<AppLayout />}>

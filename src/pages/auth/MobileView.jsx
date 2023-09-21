@@ -9,7 +9,7 @@ const MobileView = () => {
   const [tab, setTab] = useState(0);
 
   return (
-    <div className="">
+    <div className="w-full">
       <Tabs.Group aria-label="Full width tabs" style="fullWidth">
         <Tabs.Item active icon={MdAppRegistration} title="Register">
           <Register />

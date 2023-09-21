@@ -73,3 +73,5 @@ export const Approutes = {
     christmas: "for-sale/christmas-decor",
   },
 };
+
+export const backendLink = "http://109.237.25.252:4000/";
