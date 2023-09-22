@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Buttons from "../../components/Buttons";
 import { useNavigate } from "react-router-dom";
-import { backendLink } from '../../constants'
+import { backendLink } from "../../constants";
 import Modal from "../../components/Modal";
 import axios from "axios";
 import ReverifyEmail from "./ReverifyEmail";
@@ -9,8 +9,8 @@ import { notifySuccess, notifyError } from "../../ui/ErrorToast";
 
 const VerifyMail = () => {
   const navigate = useNavigate();
-  const [isOpen, setIsOpen] = useState(false)
-  const notifyErr = (message) => notifyError(message)
+  const [isOpen, setIsOpen] = useState(false);
+  const notifyErr = (message) => notifyError(message);
   const notifySuc = (message) => notifySuccess(message);
   const verifyEmail = async () => {
     const searchParams = location.search;
@@ -31,12 +31,13 @@ const VerifyMail = () => {
           }, 1000);
         }
       } catch (error) {
-        if(error?.response?.status === 401) {
-          notifyErr("Error verifying your account. The token is either broken or expired. Pleae try resending a verification email");
+        if (error?.response?.status === 401) {
+          notifyErr(
+            "Error verifying your account. The token is either broken or expired. Please try resending a verification email"
+          );
         } else {
           notifyError(error.response?.data.message);
         }
-        
       }
     }
   };
@@ -82,7 +83,7 @@ const VerifyMail = () => {
               text={"Resend OTP"}
             />
           </div>
-          <Modal 
+          <Modal
             isOpen={isOpen}
             setIsOpen={setIsOpen}
             modalHeader={true}

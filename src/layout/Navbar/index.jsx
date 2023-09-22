@@ -15,7 +15,8 @@ import { BsShop } from "react-icons/bs";
 import { MdMiscellaneousServices } from "react-icons/md";
 import { TbMoneybag } from "react-icons/tb";
 import { FaCarSide, FaBuilding } from "react-icons/fa";
-
+// from user Hooks
+import { isLoggedIn } from "../../Hooks/UserHook";
 const Navbar = () => {
   const [nav, setNav] = useState(false);
 
@@ -340,17 +341,19 @@ const Navbar = () => {
                             />
                           </div>
                         </NavLink>
-                        <NavLink to={"#"}>
-                          <div className="flex items-center hover:underline">
-                            <li className="text-base whitespace-nowrap ">
-                              Logout
-                            </li>
-                            <SlArrowRight
-                              size={20}
-                              className="ml-auto text-black "
-                            />
-                          </div>
-                        </NavLink>
+                        {isLoggedIn && (
+                          <NavLink to={Approutes.logout}>
+                            <div className="flex items-center hover:underline">
+                              <li className="text-base whitespace-nowrap ">
+                                Logout
+                              </li>
+                              <SlArrowRight
+                                size={20}
+                                className="ml-auto text-black "
+                              />
+                            </div>
+                          </NavLink>
+                        )}
                       </ul>
                     </div>
                   </div>
@@ -549,17 +552,19 @@ const Navbar = () => {
                           />
                         </div>
                       </NavLink>
-                      <NavLink to={"#"}>
-                        <div className="flex items-center hover:underline">
-                          <li className="text-lg max-sm:text-base -12 whitespace-nowrap ">
-                            Logout
-                          </li>
-                          <SlArrowRight
-                            size={20}
-                            className="ml-auto text-black "
-                          />
-                        </div>
-                      </NavLink>
+                      {isLoggedIn && (
+                        <NavLink to={Approutes.logout}>
+                          <div className="flex items-center hover:underline">
+                            <li className="text-lg max-sm:text-base -12 whitespace-nowrap ">
+                              Logout
+                            </li>
+                            <SlArrowRight
+                              size={20}
+                              className="ml-auto text-black "
+                            />
+                          </div>
+                        </NavLink>
+                      )}
                     </ul>
                   </ul>
                 </div>

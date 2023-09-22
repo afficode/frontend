@@ -5,12 +5,14 @@ import { Approutes } from "./constants";
 import Auth from "./pages/auth";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import VerifyMail from "./pages/auth/VerifyMail";
+import ResetPassword from "./pages/auth/ResetPassword";
+import Logout from "./pages/auth/Logout";
 import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
     <BrowserRouter>
-    <ToastContainer />
+      <ToastContainer />
       <Routes>
         {/* use NavBar and Footer layout  */}
         <Route element={<AppLayout />}>
@@ -21,6 +23,8 @@ function App() {
           <Route path={Approutes.auth} element={<Auth />} />
           <Route path={Approutes.forgotPassword} element={<ForgotPassword />} />
           <Route path={Approutes.verifyMail} element={<VerifyMail />} />
+          <Route path={Approutes.resetPassword} element={<ResetPassword />} />
+          <Route path={Approutes.logout} element={<Logout />} />
         </Route>
       </Routes>
     </BrowserRouter>

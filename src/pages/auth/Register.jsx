@@ -48,14 +48,14 @@ const Register = () => {
       .required(),
   });
 
-  const onSubmit = async (values, { setSubmitting}) => {
-    const submit = await RegistrationHook(values, setSubmitting);
-    console.log("Here",submit);
+  const onSubmit = async (values, { setSubmitting }) => {
+    const submit = await RegistrationHook(values, setSubmitting, "register");
+    console.log("Here", submit);
     if (submit?.success) {
-      toast.success(submit.message)
-      return navigate("/", { replace: true});
+      toast.success(submit.message);
+      return navigate("/", { replace: true });
     } else {
-      toast.error(submit.message)
+      toast.error(submit.message);
     }
   };
 
@@ -166,21 +166,28 @@ const Register = () => {
                   </span>
                 </Button> */}
 
-                <button
+                <Button
                   type="submit"
                   tabIndex="-1"
-                  role="button"
                   aria-disabled="true"
-                  className={`btn text-white text-normal lg:text-lg border-0 bg-blue-500 btn-md lg:btn-lg hover:bg-primary/80 ${
+                  className={`text-white text-normal lg:text-lg border-0 bg-blue-500 btn-md lg:btn-lg hover:bg-primary/80 ${
                     !formik.isValid || !formik.dirty || formik.isSubmitting
                       ? "cursor-not-allowed"
                       : "cursor-pointer"
                   }`}
                   disabled={!formik.isValid || !formik.dirty ? "disabled" : ""}
                 >
-                  {formik.isSubmitting ? <><Spinner aria-label="Loading" /> Submiting Data </> : <>Register <MdAppRegistration /></>}
-                  
-                </button>
+                  {formik.isSubmitting ? (
+                    <>
+                      <Spinner aria-label="Loading" /> Submitting Data{" "}
+                    </>
+                  ) : (
+                    <span className="text-lg w-full flex lg:text-2xl">
+                      Register &nbsp;{" "}
+                      <MdAppRegistration className="text-lg my-auto lg:text-2xl" />
+                    </span>
+                  )}
+                </Button>
               </div>
             </Form>
           )}

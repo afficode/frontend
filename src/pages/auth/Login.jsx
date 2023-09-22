@@ -11,9 +11,11 @@ import AppleLogo from "../../assets/logos/appleLogo.svg";
 import facebook from "../../assets/logos/facebook.svg";
 import google from "../../assets/logos/google.svg";
 import { toast } from "react-toastify";
-import secureLocalStorage from "react-secure-storage";
+import { Approutes } from "../../constants";
+import { Spinner, Button } from "flowbite-react";
+
 const Login = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const inputClass =
     "input input-bordered border-black w-full bg-gray-100 text-black text-lg lg:text-xl rounded-none my-2 input-md lg:input-lg";
   const initialValues = {
@@ -34,29 +36,30 @@ const Login = () => {
       .matches(/[^\w]/, "Password requires a symbol"),
   });
 
-  const onSubmit = async (values) => {
-    const submit = await LoginHook(values)
-    console.log("Here",secureLocalStorage.getItem("user"));
-    
+  const onSubmit = async (values, { setSubmitting }) => {
+    const submit = await LoginHook(values, setSubmitting);
     if (submit?.success) {
-      toast.success("Welcome to Affi. \n\nYour world of endless possiblities", {
-        style: {
-          border: '4px solid #FAC213',
-          padding: '14px',
-          background: "#2686CE",
-          color: '#fff',
-        },
-        iconTheme: {
-          primary: "#2686CE",
-          secondary: "#EBBA16",
-        },
-        position: "top-center"
-      })
-      //return navigate("/", { replace: true});
+      toast.success(
+        "Welcome to Affi. \n\nYour world of endless possibilities",
+        {
+          style: {
+            border: "4px solid #FAC213",
+            padding: "14px",
+            background: "#2686CE",
+            color: "#fff",
+          },
+          iconTheme: {
+            primary: "#2686CE",
+            secondary: "#EBBA16",
+          },
+          position: "top-center",
+        }
+      );
+      return navigate("/", { replace: true });
     } else {
       toast.error(submit.message);
     }
-  }
+  };
   return (
     <div className="w-full ">
       <div className="w-[90%] mx-auto">
@@ -90,26 +93,34 @@ const Login = () => {
                 />
               </div>
               <div className=" form-control">
-                <button
+                <Button
                   type="submit"
-                  role="button"
                   aria-disabled="true"
-                  className={`btn text-white text-normal lg:text-lg border-0 bg-blue-500 btn-md lg:btn-lg hover:bg-primary/80 ${
+                  className={` text-white text-normal lg:text-lg border-0 bg-blue-500 btn-md lg:btn-lg hover:bg-primary/80 ${
                     !formik.isValid || !formik.dirty
                       ? "cursor-not-allowed"
                       : "cursor-pointer"
                   }`}
                   disabled={!formik.isValid || !formik.dirty ? "disabled" : ""}
                 >
-                  Login <MdLogin className="text-lg" />
-                </button>
+                  {formik.isSubmitting ? (
+                    <>
+                      <Spinner aria-label="Loading" /> Submitting Data{" "}
+                    </>
+                  ) : (
+                    <span className="text-lg w-full flex lg:text-2xl">
+                      Login &nbsp;{" "}
+                      <MdLogin className="text-lg my-auto lg:text-2xl" />
+                    </span>
+                  )}
+                </Button>
               </div>
             </Form>
           )}
         </Formik>
         <div className="w-full font-bold my-2 lg:my-8 hover:underline text-primary text-md lg:text-2xl text-center">
           <span className="">
-            <Link to={"/"}>Forgot your Password?</Link>
+            <Link to={Approutes.forgotPassword}>Forgot your Password?</Link>
           </span>
         </div>
       </div>
@@ -151,7 +162,6 @@ const Login = () => {
             hasBorder={true}
           />
         </div>
-
       </div>
     </div>
   );
