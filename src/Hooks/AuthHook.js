@@ -1,7 +1,6 @@
 import axios from "axios"
 import { backendLink } from "../constants";
-import secureLocalStorage from "react-secure-storage";
-import { setToken, setRefreshToken, setUser } from "../utils";
+import {api} from "../utils/axios";
 
 export const RegistrationHook = async (values, setSubmitting, endpoint) => {
     setSubmitting(true)
@@ -18,15 +17,12 @@ export const RegistrationHook = async (values, setSubmitting, endpoint) => {
 export const LoginHook = async (values, setSubmitting) => {
     setSubmitting(true)
     let userUpdate;
-    await axios.post(`${backendLink}auth/login`, values)
+    await api.post(`auth/login`, values, )
     .then(({data}) => {
         console.log(data)
     if(data.success) {
-            setUser(data.user);
-            setToken(data.token);
-            setRefreshToken(data.refreshToken);
-        } 
         userUpdate = data;        
+    } 
     }).catch(({response}) => {
         userUpdate = {success: false, ...response.data}        
     });
@@ -54,4 +50,10 @@ export const TokenHook = async (values, endpoint, token, setSubmitting) => {
     });
 
     return returnData;
+}
+
+export const updateUserInfo = async () => {
+    var returnedData;
+
+    axios.post()
 }

@@ -16,10 +16,10 @@ import { MdMiscellaneousServices } from "react-icons/md";
 import { TbMoneybag } from "react-icons/tb";
 import { FaCarSide, FaBuilding } from "react-icons/fa";
 // from user Hooks
-import { isLoggedIn } from "../../Hooks/UserHook";
+import useAuth from "../../context/UserContext";
 const Navbar = () => {
   const [nav, setNav] = useState(false);
-
+  const { isLogin, user } = useAuth();
   // const [categories, setCategories] = useState([]);
 
   // useEffect(() => {
@@ -52,7 +52,7 @@ const Navbar = () => {
 
   const { pathname } = useLocation();
 
-  const authenticated = false;
+  const authenticated = isLogin;
 
   return (
     <header className="fixed top-0 z-50 w-full bg-blue-500">
@@ -162,7 +162,7 @@ const Navbar = () => {
                   >
                     <CgProfile size={25} />
                     <span className="text-xs sm:text-sm whitespace-nowrap">
-                      Gideon
+                      {user ? user?.firstname : ""}
                     </span>
                   </div>
                 </>
@@ -341,7 +341,7 @@ const Navbar = () => {
                             />
                           </div>
                         </NavLink>
-                        {isLoggedIn && (
+                        {authenticated && (
                           <NavLink to={Approutes.logout}>
                             <div className="flex items-center hover:underline">
                               <li className="text-base whitespace-nowrap ">
@@ -552,7 +552,7 @@ const Navbar = () => {
                           />
                         </div>
                       </NavLink>
-                      {isLoggedIn && (
+                      {authenticated && (
                         <NavLink to={Approutes.logout}>
                           <div className="flex items-center hover:underline">
                             <li className="text-lg max-sm:text-base -12 whitespace-nowrap ">

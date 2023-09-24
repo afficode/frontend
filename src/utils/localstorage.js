@@ -1,29 +1,44 @@
 import secureLocalStorage from "react-secure-storage";
+import { userReducerOptions } from "../reducers/userReducer";
+
+// Set items to local storage
 export const setUser = (user) => {
-  secureLocalStorage.setItem("user", user);
+  secureLocalStorage.setItem(userReducerOptions.USER, user);
 };
 
-export const getUserFromLocalStorage = () => {
-  return secureLocalStorage.getItem("user");
-};
+export const setRefreshToken = (refresh_token) => {
+  secureLocalStorage.setItem(userReducerOptions.REFRESH_TOKEN, refresh_token)
+}
 
 export const setToken = (token) => {
-  secureLocalStorage.setItem("token", token);
-  return true;
+  secureLocalStorage.setItem(userReducerOptions.ACCESS_TOKEN, token);
 }
 
-export const getToken = () => {
-  return secureLocalStorage.getItem("token")
+export const setReducerInitialState = (initialState) => {
+  secureLocalStorage.setItem(userReducerOptions.INITIAL_STATE, initialState)
 }
 
+// clear Local storage
 export const clearLocalStorage = () => {
   secureLocalStorage.clear();
 }
 
-export const setRefreshToken = (refresh_token) => {
-  secureLocalStorage.setItem("refresh_token", refresh_token)
+// get stored item
+
+export const getUserFromLocalStorage = () => {
+  return secureLocalStorage.getItem(userReducerOptions.USER);
+};
+
+export const getToken = () => {
+  return secureLocalStorage.getItem(userReducerOptions.ACCESS_TOKEN)
 }
 
 export const getRefreshToken = () => {
-  secureLocalStorage.getItem("refresh_token");
+  return secureLocalStorage.getItem(userReducerOptions.REFRESH_TOKEN);
+}
+
+
+
+export const getReducerInitialState = () => {
+  return secureLocalStorage.getItem(userReducerOptions.INITIAL_STATE)
 }
