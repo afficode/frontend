@@ -3,6 +3,8 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { Approutes } from '../../constants/routes';
 import { Dropdown } from '../../ui';
 import { AffiLogo } from '../../assets/images';
+import { generateCategoryUrl } from '../../utils';
+import { useCategories } from '../../hooks';
 
 // icons
 import { HiSearch, HiOutlineSpeakerphone, HiBookmark } from 'react-icons/hi';
@@ -19,17 +21,15 @@ import { FaCarSide, FaBuilding } from 'react-icons/fa';
 const Navbar = () => {
 	const [nav, setNav] = useState(false);
 
-	// const [categories, setCategories] = useState([]);
+	const { data } = useCategories();
 
-	// useEffect(() => {
-	// 	let cat;
+	const allCat = data?.filter((data) => data.id >= 10 && data.id < 100);
+	const vehicleCat = data?.filter((data) => data.id >= 5000 && data.id < 5100);
+	const propertyCat = data?.filter((data) => data.id >= 5100 && data.id < 5200);
+	const servicesCat = data?.filter((data) => data.id >= 5200 && data.id < 5300);
+	const dealsCat = data?.filter((data) => data.id >= 6500 && data.id < 6600);
 
-	// 	axios.get(`${BASE_URL}categories`).then((res) => {
-	// 		cat = res.data.filter((data) => data.id >= 10 && data.id < 100);
-	// 		setCategories(cat);
-	// 		console.log(cat);
-	// 	});
-	// }, []);
+	allCat && console.log(allCat);
 
 	const navRef = useRef();
 
@@ -80,7 +80,7 @@ const Navbar = () => {
 											<span className="ml-4 text-sm lg:text-base">Nigeria</span>
 										</span>
 
-										<span className="bg-blue p-[0.4rem] rounded-xl">
+										<span className="bg-blue hover:bg-blue/80 p-[0.4rem] rounded-xl cursor-pointer">
 											<HiSearch size={23} className="text-white" />
 										</span>
 									</span>
@@ -114,10 +114,10 @@ const Navbar = () => {
 								>
 									<h4 className="font-semibold whitespace-nowrap">Post Ad in</h4>
 									<ul className="flex flex-col menu max-h-full w-full z-[10] py-4 ">
-										{allCategories.map((category) => (
-											<NavLink to={'#'} key={category}>
+										{allCat?.map((category) => (
+											<NavLink to={''} key={category.id}>
 												<li className="text-lg capitalize max-sm:text-base lg:pr-12 hover:underline whitespace-nowrap">
-													{category}
+													{category.name}
 												</li>
 											</NavLink>
 										))}
@@ -161,13 +161,14 @@ const Navbar = () => {
 									>
 										<h3 className="font-semibold max-lg:text-xl whitespace-nowrap">Categories</h3>
 										<ul className="flex flex-col menu max-h-full w-full z-[10] py-4 ">
-											{allCategories.map((category) => (
-												<NavLink to={'#'} key={category}>
-													<li className="text-lg capitalize max-sm:text-base lg:pr-12 hover:underline whitespace-nowrap">
-														{category}
-													</li>
-												</NavLink>
-											))}
+											{allCat &&
+												allCat?.map((category) => (
+													<NavLink to={generateCategoryUrl(category.name)} key={category.id}>
+														<li className="text-lg capitalize max-sm:text-base lg:pr-12 hover:underline whitespace-nowrap">
+															{category.name}
+														</li>
+													</NavLink>
+												))}
 										</ul>
 									</ul>
 								</div>
@@ -289,7 +290,7 @@ const Navbar = () => {
 									<span className="ml-4 text-sm">Nigeria</span>
 								</span>
 
-								<span className="bg-blue p-[0.4rem] rounded-xl">
+								<span className="bg-blue hover:bg-blue/80 cursor-pointer p-[0.4rem] rounded-xl">
 									<HiSearch size={23} className="text-white" />
 								</span>
 							</span>
@@ -312,10 +313,10 @@ const Navbar = () => {
 									>
 										<h4 className="font-semibold whitespace-nowrap">Categories</h4>
 										<ul className="flex flex-col menu max-h-full w-full z-[10] py-4 ">
-											{allCategories?.map((category) => (
-												<NavLink to={'#'} key={category}>
+											{allCat?.map((category) => (
+												<NavLink to={generateCategoryUrl(category.name)} key={category.id}>
 													<li className="text-lg capitalize max-sm:text-base lg:pr-12 hover:underline whitespace-nowrap">
-														{category}
+														{category.name}
 													</li>
 												</NavLink>
 											))}
@@ -427,49 +428,49 @@ const Navbar = () => {
 								<span className="border border-r-4 border-white h-[2rem]" />
 
 								<li className="dropdown dropdown-hover">
-									<NavLink to={'#'} tabIndex={0} className={listStyles}>
-										CARS & VEHICLES
+									<NavLink to={generateCategoryUrl('Vehicles')} tabIndex={0} className={listStyles}>
+										VEHICLES
 									</NavLink>
-									<NavLink to={'#'} className={mobileListStyles}>
+									<NavLink to={generateCategoryUrl('Vehicles')} className={mobileListStyles}>
 										<FaCarSide size={25} />
 									</NavLink>
-									<Dropdown category={'CARS & VEHICLES'} subCategories={automobileCategoriesData} />
+									{vehicleCat && <Dropdown category={'VEHICLES'} subCategories={vehicleCat} />}
 								</li>
 
 								<span className="border border-r-4 border-white h-[2rem]" />
 
 								<li className="dropdown dropdown-hover">
-									<NavLink to={'#'} tabIndex={0} className={listStyles}>
+									<NavLink to={generateCategoryUrl('Property')} tabIndex={0} className={listStyles}>
 										PROPERTY
 									</NavLink>
-									<NavLink to={'#'} className={mobileListStyles}>
+									<NavLink to={generateCategoryUrl('Property')} className={mobileListStyles}>
 										<FaBuilding size={25} />
 									</NavLink>
-									<Dropdown category={'PROPERTY'} subCategories={propertyCategoriesData} />
+									{propertyCat && <Dropdown category={'PROPERTY'} subCategories={propertyCat} />}
 								</li>
 
 								<span className="border border-r-4 border-white h-[2rem]" />
 
 								<li className="dropdown dropdown-hover ">
-									<NavLink to={'#'} tabIndex={0} className={listStyles}>
+									<NavLink to={generateCategoryUrl('Services')} tabIndex={0} className={listStyles}>
 										SERVICES
 									</NavLink>
-									<NavLink to={'#'} className={mobileListStyles}>
+									<NavLink to={generateCategoryUrl('Services')} className={mobileListStyles}>
 										<MdMiscellaneousServices size={25} />
 									</NavLink>
-									<Dropdown category={'SERVICES'} subCategories={servicesCategoriesData} />
+									{servicesCat && <Dropdown category={'SERVICES'} subCategories={servicesCat} />}
 								</li>
 
 								<span className="border border-r-4 border-white h-[2rem]" />
 
 								<li className="dropdown dropdown-end dropdown-hover mr-4">
-									<NavLink to={'#'} tabIndex={0} className={listStyles}>
+									<NavLink to={generateCategoryUrl('Deals')} tabIndex={0} className={listStyles}>
 										DEALS
 									</NavLink>
-									<NavLink to={'#'} className={mobileListStyles}>
+									<NavLink to={generateCategoryUrl('Deals')} className={mobileListStyles}>
 										<TbMoneybag size={25} />
 									</NavLink>
-									<Dropdown category={'DEALS'} subCategories={forSaleCategoriesData} />
+									{dealsCat && <Dropdown category={'DEALS'} subCategories={dealsCat} />}
 								</li>
 							</ul>
 						</div>
@@ -482,252 +483,7 @@ const Navbar = () => {
 
 export default Navbar;
 
-// const BASE_URL = 'http://109.237.25.252:4000/';
-
 const listStyles =
 	'hidden sm:block uppercase flex-grow-0 flex-shrink-0 cursor-pointer text-white text-sm md:text-base font-medium py-2 px-4  hover:text-yellow transition-colors ';
 
 const mobileListStyles = 'text-white sm:hidden cursor-pointer ';
-
-const automobileCategoriesData = [
-	{
-		name: 'cars',
-		NavLink: Approutes.automobile.cars,
-	},
-	{
-		name: 'motorbikes & scooters',
-		NavLink: Approutes.automobile.motorbikes,
-	},
-	{
-		name: 'vans',
-		NavLink: Approutes.automobile.vans,
-	},
-	{
-		name: 'trucks & lorries',
-		NavLink: Approutes.automobile.trucks,
-	},
-	{
-		name: 'auto parts & accessories',
-		NavLink: Approutes.automobile.accessories,
-	},
-	{
-		name: 'scooters',
-		NavLink: Approutes.automobile.scooters,
-	},
-	{
-		name: 'tractors & plants',
-		NavLink: Approutes.automobile.tractors,
-	},
-	{
-		name: 'autombiles & equipments',
-		NavLink: Approutes.automobile.automobileEquipments,
-	},
-	{
-		name: 'best deals',
-		NavLink: Approutes.automobile.bestDeals,
-	},
-	{
-		name: 'wanted',
-		NavLink: Approutes.automobile.wanted,
-	},
-	{
-		name: 'request',
-		NavLink: Approutes.automobile.request,
-	},
-	{
-		name: 'other vehicles',
-		NavLink: Approutes.automobile.others,
-	},
-];
-const propertyCategoriesData = [
-	{
-		name: 'House/Apartment for Sale',
-		NavLink: Approutes.property.forSale,
-	},
-	{
-		name: 'House/Apartment to Let',
-		NavLink: Approutes.property.toLet,
-	},
-	{
-		name: 'Property  To Share',
-		NavLink: Approutes.property.toShare,
-	},
-	{
-		name: 'Property for Lease',
-		NavLink: Approutes.property.forLease,
-	},
-	{
-		name: 'auto parts & accessories',
-		NavLink: Approutes.automobile.accessories,
-	},
-	{
-		name: 'scooters',
-		NavLink: Approutes.automobile.scooters,
-	},
-	{
-		name: 'Land for sale',
-		NavLink: Approutes.property.landForSale,
-	},
-	{
-		name: 'Property for Mosque',
-		NavLink: Approutes.property.forMosque,
-	},
-	{
-		name: 'Property for Church',
-		NavLink: Approutes.property.forChurch,
-	},
-	{
-		name: 'Short Let Property ',
-		NavLink: Approutes.property.shortLet,
-	},
-	{
-		name: 'Property for Commercial',
-		NavLink: Approutes.property.commercial,
-	},
-];
-const servicesCategoriesData = [
-	{
-		name: 'Business & Office',
-		NavLink: Approutes.services.business,
-	},
-	{
-		name: 'Child Care',
-		NavLink: Approutes.services.childCare,
-	},
-	{
-		name: 'Clothing',
-		NavLink: Approutes.services.clothing,
-	},
-	{
-		name: 'Food & Drink',
-		NavLink: Approutes.services.food,
-	},
-	{
-		name: 'Goods Suppliers & Retailers',
-		NavLink: Approutes.services.suppliers,
-	},
-	{
-		name: 'Legal & Finance',
-		NavLink: Approutes.services.legal,
-	},
-	{
-		name: 'Animals & Pets',
-		NavLink: Approutes.services.animals,
-	},
-	{
-		name: 'Property & Maintenance',
-		NavLink: Approutes.services.property,
-	},
-	{
-		name: 'Farming',
-		NavLink: Approutes.services.farming,
-	},
-	{
-		name: 'Clothes & Footwear',
-		NavLink: Approutes.services.clothes,
-	},
-	{
-		name: 'Tradesmen & Construction',
-		NavLink: Approutes.services.tradesmen,
-	},
-	{
-		name: 'Transport',
-		NavLink: Approutes.services.transport,
-	},
-	{
-		name: 'Weddings',
-		NavLink: Approutes.services.weddings,
-	},
-	{
-		name: 'Tutorials & Classes',
-		NavLink: Approutes.services.tutorials,
-	},
-	{
-		name: 'Entertanment',
-		NavLink: Approutes.services.entertainment,
-	},
-	{
-		name: 'Travel & Tourism',
-		NavLink: Approutes.services.travel,
-	},
-	{
-		name: 'Others',
-		NavLink: Approutes.services.others,
-	},
-];
-const forSaleCategoriesData = [
-	{
-		name: 'TV, DVD, Blu-Ray & Videos',
-		NavLink: Approutes.forSale.tv,
-	},
-	{
-		name: 'Phones, Mobile Phones & Telecoms',
-		NavLink: Approutes.forSale.phones,
-	},
-	{
-		name: 'Music, Films, Books & Games',
-		NavLink: Approutes.forSale.music,
-	},
-	{
-		name: 'Clothes, Footwears & Accessories',
-		NavLink: Approutes.forSale.clothes,
-	},
-	{
-		name: 'DIY Tools & Materials',
-		NavLink: Approutes.forSale.tools,
-	},
-	{
-		name: 'Computers & Software',
-		NavLink: Approutes.forSale.computers,
-	},
-	{
-		name: 'Office Furniture & Equipment',
-		NavLink: Approutes.forSale.office,
-	},
-	{
-		name: 'Cameras, Camcorders & Studio Equipment ',
-		NavLink: Approutes.forSale.cameras,
-	},
-	{
-		name: 'Audio & Stereo',
-		NavLink: Approutes.forSale.audio,
-	},
-	{
-		name: 'Printers & Scanners',
-		NavLink: Approutes.forSale.printers,
-	},
-	{
-		name: 'Baby & Kids Items',
-		NavLink: Approutes.forSale.baby,
-	},
-	{
-		name: 'Home Appliances',
-		NavLink: Approutes.forSale.home,
-	},
-	{
-		name: 'Softwares',
-		NavLink: Approutes.forSale.softwares,
-	},
-	{
-		name: 'Christmas Decor',
-		NavLink: Approutes.forSale.christmas,
-	},
-];
-
-const allCategories = [
-	'Cars & Vehicles',
-	'Property',
-	'Services',
-	'Deals',
-	'Agriculture & Food Products',
-	'Fashion',
-	'Health & Beauty',
-	'Home & Furniture',
-	'Pets',
-	'Sports, Music & Outdoors',
-	'Electronics',
-	'Tradesmen & Construction',
-	'Babies & Kids Stuffs',
-	'Software & Games',
-	'Requests',
-];
