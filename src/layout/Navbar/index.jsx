@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { Approutes } from '../../constants/routes';
 import { Dropdown } from '../../ui';
 import { AffiLogo } from '../../assets/images';
@@ -17,7 +17,8 @@ import { BsShop } from 'react-icons/bs';
 import { MdMiscellaneousServices } from 'react-icons/md';
 import { TbMoneybag } from 'react-icons/tb';
 import { FaCarSide, FaBuilding } from 'react-icons/fa';
-
+// from user Hooks
+import { isLoggedIn } from '../../hooks/UserHook';
 const Navbar = () => {
 	const [nav, setNav] = useState(false);
 
@@ -30,6 +31,8 @@ const Navbar = () => {
 	const dealsCat = data?.filter((data) => data.id >= 6500 && data.id < 6600);
 
 	allCat && console.log(allCat);
+
+	const navigate = useNavigate();
 
 	const navRef = useRef();
 
@@ -52,7 +55,7 @@ const Navbar = () => {
 	const authenticated = false;
 
 	return (
-		<header className="fixed top-0 z-50 w-full bg-blue">
+		<header className="fixed top-0 z-50 w-full bg-blue-500">
 			<nav className="relative ">
 				<div className="w-full pt-3 ">
 					{/* top nav  */}
@@ -80,7 +83,7 @@ const Navbar = () => {
 											<span className="ml-4 text-sm lg:text-base">Nigeria</span>
 										</span>
 
-										<span className="bg-blue hover:bg-blue/80 p-[0.4rem] rounded-xl cursor-pointer">
+										<span className="bg-blue-500 p-[0.4rem] rounded-xl">
 											<HiSearch size={23} className="text-white" />
 										</span>
 									</span>
@@ -114,10 +117,10 @@ const Navbar = () => {
 								>
 									<h4 className="font-semibold whitespace-nowrap">Post Ad in</h4>
 									<ul className="flex flex-col menu max-h-full w-full z-[10] py-4 ">
-										{allCat?.map((category) => (
-											<NavLink to={''} key={category.id}>
+										{allCategories.map((category) => (
+											<NavLink to={'#'} key={category}>
 												<li className="text-lg capitalize max-sm:text-base lg:pr-12 hover:underline whitespace-nowrap">
-													{category.name}
+													{category}
 												</li>
 											</NavLink>
 										))}
@@ -129,6 +132,9 @@ const Navbar = () => {
 								<div
 									className="flex flex-col items-center text-white cursor-pointer"
 									title="Click to sign-in or register"
+									onClick={() => {
+										navigate(Approutes.auth);
+									}}
 								>
 									<CgProfile size={25} />
 									<span className="text-xs whitespace-nowrap sm:text-sm">Sign-In</span>
@@ -152,7 +158,7 @@ const Navbar = () => {
 							{/* mobile categories/menu dropdown */}
 							{pathname === '/' ? (
 								<div className="dropdown dropdown-end">
-									<button className="flex flex-col gap-0 px-2 py-0 capitalize bg-white border-none max-sm:text-xs md:hidden btn btn-sm text-blue px-4 hover:bg-white">
+									<button className="flex flex-col gap-0  py-0 capitalize bg-white border-none max-sm:text-xs md:hidden btn btn-sm text-blue px-4 hover:bg-white">
 										Categories
 									</button>
 									<ul
@@ -161,14 +167,13 @@ const Navbar = () => {
 									>
 										<h3 className="font-semibold max-lg:text-xl whitespace-nowrap">Categories</h3>
 										<ul className="flex flex-col menu max-h-full w-full z-[10] py-4 ">
-											{allCat &&
-												allCat?.map((category) => (
-													<NavLink to={generateCategoryUrl(category.name)} key={category.id}>
-														<li className="text-lg capitalize max-sm:text-base lg:pr-12 hover:underline whitespace-nowrap">
-															{category.name}
-														</li>
-													</NavLink>
-												))}
+											{allCategories.map((category) => (
+												<NavLink to={'#'} key={category}>
+													<li className="text-lg capitalize max-sm:text-base lg:pr-12 hover:underline whitespace-nowrap">
+														{category}
+													</li>
+												</NavLink>
+											))}
 										</ul>
 									</ul>
 								</div>
@@ -261,12 +266,14 @@ const Navbar = () => {
 														<SlArrowRight size={20} className="ml-auto text-black " />
 													</div>
 												</NavLink>
-												<NavLink to={'#'}>
-													<div className="flex items-center hover:underline">
-														<li className="text-base whitespace-nowrap ">Logout</li>
-														<SlArrowRight size={20} className="ml-auto text-black " />
-													</div>
-												</NavLink>
+												{isLoggedIn && (
+													<NavLink to={Approutes.logout}>
+														<div className="flex items-center hover:underline">
+															<li className="text-base whitespace-nowrap ">Logout</li>
+															<SlArrowRight size={20} className="ml-auto text-black " />
+														</div>
+													</NavLink>
+												)}
 											</ul>
 										</div>
 									</div>
@@ -290,7 +297,7 @@ const Navbar = () => {
 									<span className="ml-4 text-sm">Nigeria</span>
 								</span>
 
-								<span className="bg-blue hover:bg-blue/80 cursor-pointer p-[0.4rem] rounded-xl">
+								<span className="bg-blue-500 p-[0.4rem] rounded-xl">
 									<HiSearch size={23} className="text-white" />
 								</span>
 							</span>
@@ -313,10 +320,10 @@ const Navbar = () => {
 									>
 										<h4 className="font-semibold whitespace-nowrap">Categories</h4>
 										<ul className="flex flex-col menu max-h-full w-full z-[10] py-4 ">
-											{allCat?.map((category) => (
-												<NavLink to={generateCategoryUrl(category.name)} key={category.id}>
+											{allCategories?.map((category) => (
+												<NavLink to={'#'} key={category}>
 													<li className="text-lg capitalize max-sm:text-base lg:pr-12 hover:underline whitespace-nowrap">
-														{category.name}
+														{category}
 													</li>
 												</NavLink>
 											))}
@@ -405,12 +412,14 @@ const Navbar = () => {
 													<SlArrowRight size={20} className="ml-auto text-black " />
 												</div>
 											</NavLink>
-											<NavLink to={'#'}>
-												<div className="flex items-center hover:underline">
-													<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Logout</li>
-													<SlArrowRight size={20} className="ml-auto text-black " />
-												</div>
-											</NavLink>
+											{isLoggedIn && (
+												<NavLink to={Approutes.logout}>
+													<div className="flex items-center hover:underline">
+														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Logout</li>
+														<SlArrowRight size={20} className="ml-auto text-black " />
+													</div>
+												</NavLink>
+											)}
 										</ul>
 									</ul>
 								</div>

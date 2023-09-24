@@ -10,7 +10,7 @@ import { MdOutlineSupportAgent } from 'react-icons/md';
 const ContactUs = () => {
 	return (
 		<section>
-			<div className="bg-blue py-12 px-4 sm:px-[4rem] m-2 rounded-md text-center text-white">
+			<div className="bg-blue-500 py-12 px-4 sm:px-[4rem] m-2 rounded-md text-center text-white">
 				<h1 className="text-white ">Contact Us</h1>
 				<h4 className="mt-2 ">Chat with our friendly team.</h4>
 
@@ -23,7 +23,7 @@ const ContactUs = () => {
 				<div className="grid grid-cols-1 gap-12 max-md:place-items-center max-md:text-center md:grid-cols-2">
 					<div>
 						<Link to="mailto:reachaffi@gmail.com">
-							<span className="inline-block p-3 text-white transition-all rounded-full bg-blue hover:scale-105">
+							<span className="inline-block p-3 text-white transition-all rounded-full bg-blue-500 hover:scale-105">
 								<BiEnvelope size={20} />
 							</span>
 						</Link>
@@ -37,7 +37,7 @@ const ContactUs = () => {
 
 					<div>
 						<Link to="https://wa.me/+2348136155728" rel="noopener noreferrer" target="_blank">
-							<span className="inline-block p-3 text-white transition-all rounded-full bg-blue hover:scale-105">
+							<span className="inline-block p-3 text-white transition-all rounded-full bg-blue-500 hover:scale-105">
 								<MdOutlineSupportAgent size={20} />
 							</span>
 						</Link>
@@ -49,7 +49,7 @@ const ContactUs = () => {
 					</div>
 
 					<div>
-						<span className="inline-block p-3 text-white rounded-full bg-blue">
+						<span className="inline-block p-3 text-white rounded-full bg-blue-500">
 							<SlLocationPin size={20} />
 						</span>
 
@@ -61,7 +61,7 @@ const ContactUs = () => {
 
 					<div>
 						<Link to={'tel:+2348136155728'}>
-							<span className="inline-block p-3 text-white transition-all rounded-full bg-blue hover:scale-105">
+							<span className="inline-block p-3 text-white transition-all rounded-full bg-blue-500 hover:scale-105">
 								<FiPhone size={20} />
 							</span>
 						</Link>
@@ -115,7 +115,7 @@ const ContactUs = () => {
 						</div>
 
 						<div className="max-sm:text-center">
-							<button className="px-6 py-3 mt-4 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform border-none rounded-lg btn bg-blue hover:bg-blue/80 focus:outline-none">
+							<button className="px-6 py-3 mt-4 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform border-none rounded-lg btn bg-blue-500 hover:bg-blue-500/80 focus:outline-none">
 								Send message <BiEnvelope size={20} />
 							</button>
 						</div>
