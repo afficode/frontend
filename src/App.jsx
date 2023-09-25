@@ -10,31 +10,34 @@ import VerifyMail from './pages/auth/VerifyMail';
 import ResetPassword from './pages/auth/ResetPassword';
 import Logout from './pages/auth/Logout';
 import { ToastContainer } from 'react-toastify';
+import { UserProvider } from './context/UserContext';
 
 function App() {
 	const queryClient = new QueryClient();
 
 	return (
 		<QueryClientProvider client={queryClient}>
-			<BrowserRouter>
-				<ToastContainer />
-				<Routes>
-					{/* use NavBar and Footer layout  */}
-					<Route element={<AppLayout />}>
-						<Route path={Approutes.home} element={<Home />} />
-						<Route path={Approutes.welcome} element={<Welcome />} />
-						<Route path={Approutes.aboutUs} element={<AboutUs />} />
-						<Route path={Approutes.contactUs} element={<ContactUs />} />
-						<Route path={Approutes.auth} element={<Auth />} />
-						<Route path={Approutes.forgotPassword} element={<ForgotPassword />} />
-						<Route path={Approutes.verifyMail} element={<VerifyMail />} />
-						<Route path={Approutes.resetPassword} element={<ResetPassword />} />
-						<Route path={Approutes.logout} element={<Logout />} />
-						<Route path="/:categoryName/:subCategoryName" element={<ProductList />} />
-						<Route path="/:categoryName" element={<ProductList />} />
-					</Route>
-				</Routes>
-			</BrowserRouter>
+			<UserProvider>
+				<BrowserRouter>
+					<ToastContainer />
+					<Routes>
+						{/* use NavBar and Footer layout  */}
+						<Route element={<AppLayout />}>
+							<Route path={Approutes.home} element={<Home />} />
+							<Route path={Approutes.welcome} element={<Welcome />} />
+							<Route path={Approutes.aboutUs} element={<AboutUs />} />
+							<Route path={Approutes.contactUs} element={<ContactUs />} />
+							<Route path={Approutes.auth} element={<Auth />} />
+							<Route path={Approutes.forgotPassword} element={<ForgotPassword />} />
+							<Route path={Approutes.verifyMail} element={<VerifyMail />} />
+							<Route path={Approutes.resetPassword} element={<ResetPassword />} />
+							<Route path={Approutes.logout} element={<Logout />} />
+							<Route path="/:categoryName/:subCategoryName" element={<ProductList />} />
+							<Route path="/:categoryName" element={<ProductList />} />
+						</Route>
+					</Routes>
+				</BrowserRouter>
+			</UserProvider>
 			<ReactQueryDevtools initialIsOpen={false} />
 		</QueryClientProvider>
 	);

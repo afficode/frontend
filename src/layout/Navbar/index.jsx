@@ -19,11 +19,10 @@ import { TbMoneybag } from 'react-icons/tb';
 import { FaCarSide, FaBuilding } from 'react-icons/fa';
 
 // from user Hooks
-import { isLoggedIn } from '../../hooks/UserHook';
-
+import useAuth from '../../context/UserContext';
 const Navbar = () => {
 	const [nav, setNav] = useState(false);
-
+	const { isLogin, user } = useAuth();
 	const { data } = useCategories();
 
 	const allCat = data?.filter((data) => data.id >= 10 && data.id < 100);
@@ -54,7 +53,7 @@ const Navbar = () => {
 
 	const { pathname } = useLocation();
 
-	const authenticated = false;
+	const authenticated = isLogin;
 
 	return (
 		<header className="fixed top-0 z-50 w-full bg-primary">
@@ -152,7 +151,9 @@ const Navbar = () => {
 									</div>
 									<div className="flex flex-col items-center text-white cursor-pointer" title="My profile">
 										<CgProfile size={25} />
-										<span className="text-xs sm:text-sm whitespace-nowrap">Gideon</span>
+										<span className="text-xs sm:text-sm whitespace-nowrap">
+											{user ? user?.firstname : ''}
+										</span>
 									</div>
 								</>
 							)}

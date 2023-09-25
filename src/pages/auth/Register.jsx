@@ -7,6 +7,7 @@ import { MdAppRegistration } from 'react-icons/md';
 import { Button, Spinner } from 'flowbite-react';
 import { RegistrationHook } from '../../hooks/AuthHook';
 import { toast } from 'react-toastify';
+import Spinner from '../../components/Spinners';
 
 const Register = () => {
 	const navigate = useNavigate();
@@ -174,7 +175,7 @@ const Register = () => {
 								>
 									{formik.isSubmitting ? (
 										<>
-											<Spinner aria-label="Loading" /> Submitting Data{' '}
+											<Spinner color={'secondary'} /> Submitting Data{' '}
 										</>
 									) : (
 										<span className="text-lg w-full flex lg:text-2xl">

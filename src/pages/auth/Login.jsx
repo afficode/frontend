@@ -12,9 +12,11 @@ import facebook from "../../assets/logos/facebook.svg";
 import google from "../../assets/logos/google.svg";
 import { toast } from "react-toastify";
 import { Approutes } from "../../constants";
-import { Spinner, Button } from "flowbite-react";
-
+import { Button } from "flowbite-react";
+import useAuth from "../../context/UserContext";
+import Spinner from "../../components/Spinners";
 const Login = () => {
+  const { login } = useAuth();
   const navigate = useNavigate();
   const inputClass =
     "input input-bordered border-black w-full bg-gray-100 text-black text-lg lg:text-xl rounded-none my-2 input-md lg:input-lg";
@@ -39,6 +41,8 @@ const Login = () => {
   const onSubmit = async (values, { setSubmitting }) => {
     const submit = await LoginHook(values, setSubmitting);
     if (submit?.success) {
+      // the login from the useAuth tied to a context hook, will update localstorge and set user to Login
+      login(submit);
       toast.success(
         "Welcome to Affi. \n\nYour world of endless possibilities",
         {
@@ -105,7 +109,10 @@ const Login = () => {
                 >
                   {formik.isSubmitting ? (
                     <>
-                      <Spinner aria-label="Loading" /> Submitting Data{" "}
+                      <Spinner color={"secondary"} /> &emsp;{" "}
+                      <span className="my-auto text-xl">
+                        Submitting Data...
+                      </span>{" "}
                     </>
                   ) : (
                     <span className="text-lg w-full flex lg:text-2xl">

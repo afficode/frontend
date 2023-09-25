@@ -1,21 +1,31 @@
 import { Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getToken, clearLocalStorage } from "../../utils";
+import {
+  getToken,
+  clearLocalStorage,
+  getUserFromLocalStorage,
+  getReducerInitialState,
+  getRefreshToken,
+} from "../../utils";
 import { backendLink } from "../../constants";
-import { notifyError, notifySuccess } from "../../ui";
-import api from "../../utils/axios";
+import { notifyError, notifySuccess, notifyInfo } from "../../ui";
+import { api } from "../../utils/axios";
+import useAuth from "../../context/UserContext";
 
 const Logout = () => {
+  const { logout } = useAuth();
   const navigate = useNavigate();
   const notifyErr = (message) => notifyError(message);
   const notifySuc = (message) => notifySuccess(message);
+  const notifyInf = (message) => notifyInfo(message);
   useEffect(() => {
-    // remove the user details from localStorage
-    console.log(getToken());
+    notifyInf(
+      "You are been logout. Allow us clean up your space against Hackers."
+    );
     const logoutBackend = async () => {
       await api
-        .get(`${backendLink}auth/protected`, {
+        .get(`${backendLink}auth/logout`, {
           headers: {
             Authorization: `Bearer ${getToken()}`,
             "Content-Type": "application/json",
@@ -24,24 +34,25 @@ const Logout = () => {
         })
         .then(({ data }) => {
           const { message } = data;
-          console.log(data);
-          // notifySuc(message);
-          // clearLocalStorage();
-          // navigate("/", { replace: "true" });
+          notifySuc(message);
         })
         .catch((err) => {
-          console.log(err);
-          // const { message } = response.data;
-          // if (message !== undefined) {
-          //   notifyErr(message);
-          // } else {
-          //   notifyErr("Something went wrong.");
-          // }
+          const { message } = response.data;
+          if (message !== undefined) {
+            notifyErr(message);
+          } else {
+            notifyErr("Something went wrong.");
+          }
         });
+      // remove the user details from localStorage
+      //clearLocalStorage();
+      logout();
+      navigate("/", { replace: "true" });
     };
-    logoutBackend();
+    setTimeout(() => {
+      logoutBackend();
+    }, 3000);
 
-    // return <Navigate to={"/"} replace={true} />;
     return;
   }, []);
 };

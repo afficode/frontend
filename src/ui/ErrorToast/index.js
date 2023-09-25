@@ -32,3 +32,8 @@ export const notifySuccess = (message) => (
         position: "top-center"
       })
 )
+export const notifyInfo = (message) => {
+  toast.info(message, {
+    position: "top-center"
+  });
+}

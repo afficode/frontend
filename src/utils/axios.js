@@ -3,11 +3,17 @@ import { getRefreshToken, getToken, setToken } from "./localstorage";
 import { backendLink } from "../constants";
 import { Navigate } from "react-router-dom";
 
-const api = axios.create({
+export const api = axios.create({
   baseURL: backendLink,
+  withCredentials: true,
 });
 
-api.interceptors.request.use((config) => {
+const  privateAxios = axios.create({
+  baseURL: backendLink,
+  withCredentials: true,
+});
+
+privateAxios.interceptors.request.use((config) => {
     const token = getToken();
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
@@ -17,7 +23,7 @@ api.interceptors.request.use((config) => {
 
 );
 
-api.interceptors.response.use((response) => response, async (error) => {
+privateAxios.interceptors.response.use((response) => response, async (error) => {
   const originalRequest = error.config;
   // check if the return status is 401
   console.log("Interceptors used")
@@ -27,22 +33,24 @@ api.interceptors.response.use((response) => response, async (error) => {
     originalRequest._retry = true
     // make a request to the refresh token api in the backend to get the api.
     try {
-      const response = await axios.post(`${backendLink}auth/refresh`).then((data) =>  {
-        console.log(data)
-      }).catch(err => {
-        console.log(err)
-      })
+      const response = await axios.get(`${backendLink}auth/refresh`, {
+          headers: {
+            Authorization: `Bearer ${getRefreshToken()}`,
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        })
       console.log(response)
       const { token } = response.data;
       setToken(token);
       originalRequest.headers.Authorization = `Bearer ${token}`;
       return axios(originalRequest);
     } catch (error) {
-      return location.href("/auth");
+      return Promise.reject(error);
     }
   }
 
   return Promise.reject(error);
-})
+});
 
-export default api;
+export default privateAxios;
