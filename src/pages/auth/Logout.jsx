@@ -30,7 +30,7 @@ const Logout = () => {
           const { message } = data;
           notifySuc(message);
         })
-        .catch((err) => {
+        .catch(({ response }) => {
           const { message } = response.data;
           if (message !== undefined) {
             notifyErr(message);
