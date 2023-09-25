@@ -26,10 +26,8 @@ privateAxios.interceptors.request.use((config) => {
 privateAxios.interceptors.response.use((response) => response, async (error) => {
   const originalRequest = error.config;
   // check if the return status is 401
-  console.log("Interceptors used")
   if(error.response.status === 401 && !originalRequest._retry) {
     // set the retry parameter
-    console.log("Interceptors used")
     originalRequest._retry = true
     // make a request to the refresh token api in the backend to get the api.
     try {
@@ -40,7 +38,6 @@ privateAxios.interceptors.response.use((response) => response, async (error) => 
             Accept: "application/json",
           },
         })
-      console.log(response)
       const { token } = response.data;
       setToken(token);
       originalRequest.headers.Authorization = `Bearer ${token}`;

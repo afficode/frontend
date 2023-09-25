@@ -19,7 +19,7 @@ const ReverifyEmail = ({ endpoint }) => {
       .required("Email is required")
       .email("Invalid email address"),
   });
-  console.log(endpoint);
+
   const onSubmit = async (values, { setSubmitting }) => {
     const backendEndpoint =
       endpoint !== undefined ? endpoint : "resend_verification";
@@ -28,7 +28,6 @@ const ReverifyEmail = ({ endpoint }) => {
       setSubmitting,
       backendEndpoint
     );
-    console.log("Here", submit);
     if (submit?.success) {
       notifySuc(submit.message);
       return navigate("/", { replace: true });
@@ -66,7 +65,6 @@ const ReverifyEmail = ({ endpoint }) => {
                 className="text-black bg-primary w-[60%] mx-auto text-md lg:text-2xl my-2"
                 disabled={!formik.isValid || !formik.dirty ? "disabled" : ""}
               >
-                {console.log(formik.isSubmitting)}
                 {!formik.isSubmitting ? (
                   <>
                     <span className="text-lg">Verify</span> &emsp;{" "}

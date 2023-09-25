@@ -1,27 +1,13 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useReducer,
-  useState,
-} from "react";
+import { createContext, useContext, useReducer } from "react";
 import userReducer, {
   initialState,
   userReducerOptions,
 } from "../reducers/userReducer";
-import { useQuery } from "react-query";
-import { TokenHook } from "../Hooks/AuthHook";
-import {
-  getReducerInitialState,
-  getRefreshToken,
-  getToken,
-  getUserFromLocalStorage,
-} from "../utils";
+import { getReducerInitialState } from "../utils";
 
 const UserContext = createContext(initialState);
 
 export const UserProvider = ({ children }) => {
-  console.log(getReducerInitialState());
   var defaultState;
   if (getReducerInitialState() !== null) {
     defaultState = getReducerInitialState();
@@ -29,7 +15,6 @@ export const UserProvider = ({ children }) => {
     defaultState = initialState;
   }
   const [state, dispatch] = useReducer(userReducer, defaultState);
-  const [useData, setUserData] = useState(null);
 
   const login = (loginData) => {
     dispatch({

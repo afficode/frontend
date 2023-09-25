@@ -28,7 +28,6 @@ const Navbar = () => {
   // 	axios.get(`${BASE_URL}categories`).then((res) => {
   // 		cat = res.data.filter((data) => data.id >= 10 && data.id < 100);
   // 		setCategories(cat);
-  // 		console.log(cat);
   // 	});
   // }, []);
 

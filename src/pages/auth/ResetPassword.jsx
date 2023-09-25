@@ -38,7 +38,6 @@ const ResetPassword = () => {
       token,
       setSubmitting
     );
-    console.log("Here", submit);
     if (submit?.success) {
       notifySuc(submit.message);
       return navigate("/auth", { replace: true });

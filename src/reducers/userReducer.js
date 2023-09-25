@@ -25,7 +25,6 @@ export const userReducerOptions = {
 
 const setUpUser = (payload, state) => {
     let userData = { ...state, ...payload };
-    console.log(payload)
     if (payload?.user?.verified === "1") {
         userData = {
             ...userData,
@@ -63,11 +62,9 @@ const setUpUser = (payload, state) => {
 
 const userReducer = (state, action) => {
     const { type, payload} = action;
-    console.log("payload", payload)
     switch(type) {
         case userReducerOptions.LOGIN_USER:
             const userStatus = setUpUser(payload, state);
-            console.log("user is login")
             setUser(payload.user);
             setToken(payload.token);
             setRefreshToken(payload.refreshToken);
