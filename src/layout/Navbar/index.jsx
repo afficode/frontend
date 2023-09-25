@@ -17,8 +17,10 @@ import { BsShop } from 'react-icons/bs';
 import { MdMiscellaneousServices } from 'react-icons/md';
 import { TbMoneybag } from 'react-icons/tb';
 import { FaCarSide, FaBuilding } from 'react-icons/fa';
+
 // from user Hooks
 import { isLoggedIn } from '../../hooks/UserHook';
+
 const Navbar = () => {
 	const [nav, setNav] = useState(false);
 
@@ -55,7 +57,7 @@ const Navbar = () => {
 	const authenticated = false;
 
 	return (
-		<header className="fixed top-0 z-50 w-full bg-blue-500">
+		<header className="fixed top-0 z-50 w-full bg-primary">
 			<nav className="relative ">
 				<div className="w-full pt-3 ">
 					{/* top nav  */}
@@ -74,16 +76,16 @@ const Navbar = () => {
 									<input
 										title="Search for items here."
 										type="text"
-										className="w-full lg:w-[32rem] xl:w-[40rem] py-2 pl-4 pr-[12rem] text-black bg-white border border-transparent rounded-3xl  focus:border-yellow outline-none focus:ring focus:ring-opacity-10 focus:ring-yellow"
+										className="w-full lg:w-[32rem] xl:w-[40rem] py-2 pl-4 pr-[12rem] text-black bg-white border border-transparent rounded-3xl  focus:border-secondary outline-none focus:ring focus:ring-opacity-10 focus:ring-secondary"
 										placeholder="Searching for?....."
 									/>
 
 									<span className="absolute inset-y-0 right-0 flex items-center pr-3">
-										<span className="mr-10 border-l-4 border-l-blue">
+										<span className="mr-10 border-l-4 border-l-primary">
 											<span className="ml-4 text-sm lg:text-base">Nigeria</span>
 										</span>
 
-										<span className="bg-blue-500 p-[0.4rem] rounded-xl">
+										<span className="bg-primary p-[0.4rem] rounded-xl">
 											<HiSearch size={23} className="text-white" />
 										</span>
 									</span>
@@ -117,10 +119,10 @@ const Navbar = () => {
 								>
 									<h4 className="font-semibold whitespace-nowrap">Post Ad in</h4>
 									<ul className="flex flex-col menu max-h-full w-full z-[10] py-4 ">
-										{allCategories.map((category) => (
-											<NavLink to={'#'} key={category}>
+										{allCat?.map((category) => (
+											<NavLink to={'#'} key={category.id}>
 												<li className="text-lg capitalize max-sm:text-base lg:pr-12 hover:underline whitespace-nowrap">
-													{category}
+													{category.name}
 												</li>
 											</NavLink>
 										))}
@@ -158,7 +160,7 @@ const Navbar = () => {
 							{/* mobile categories/menu dropdown */}
 							{pathname === '/' ? (
 								<div className="dropdown dropdown-end">
-									<button className="flex flex-col gap-0  py-0 capitalize bg-white border-none max-sm:text-xs md:hidden btn btn-sm text-blue px-4 hover:bg-white">
+									<button className="flex flex-col gap-0  py-0 capitalize bg-white border-none max-sm:text-xs md:hidden btn btn-sm text-primary px-4 hover:bg-white">
 										Categories
 									</button>
 									<ul
@@ -167,10 +169,10 @@ const Navbar = () => {
 									>
 										<h3 className="font-semibold max-lg:text-xl whitespace-nowrap">Categories</h3>
 										<ul className="flex flex-col menu max-h-full w-full z-[10] py-4 ">
-											{allCategories.map((category) => (
-												<NavLink to={'#'} key={category}>
+											{allCat?.map((category) => (
+												<NavLink to={'#'} key={category.id}>
 													<li className="text-lg capitalize max-sm:text-base lg:pr-12 hover:underline whitespace-nowrap">
-														{category}
+														{category.name}
 													</li>
 												</NavLink>
 											))}
@@ -288,16 +290,16 @@ const Navbar = () => {
 							<input
 								title="Search for items here."
 								type="text"
-								className="w-full py-2 pl-4 pr-[12rem] text-black bg-white border border-transparent rounded-3xl  focus:border-yellow outline-none focus:ring focus:ring-opacity-10 focus:ring-yellow"
+								className="w-full py-2 pl-4 pr-[12rem] text-black bg-white border border-transparent rounded-3xl  focus:border-secondary outline-none focus:ring focus:ring-opacity-10 focus:ring-secondary"
 								placeholder="Searching for?....."
 							/>
 
 							<span className="absolute inset-y-0 right-0 flex items-center pr-3">
-								<span className="mr-10 border-l-4 border-l-blue">
+								<span className="mr-10 border-l-4 border-l-primary">
 									<span className="ml-4 text-sm">Nigeria</span>
 								</span>
 
-								<span className="bg-blue-500 p-[0.4rem] rounded-xl">
+								<span className="bg-primary p-[0.4rem] rounded-xl">
 									<HiSearch size={23} className="text-white" />
 								</span>
 							</span>
@@ -310,7 +312,7 @@ const Navbar = () => {
 							{pathname === '/' ? (
 								// dropdown for categories
 								<div className="dropdown ">
-									<button className="flex flex-col gap-0 mr-16 text-sm capitalize bg-white border-none max-md:hidden btn btn-sm hover:bg-white text-blue px-5 cat-btn">
+									<button className="flex flex-col gap-0 mr-16 text-sm capitalize bg-white border-none max-md:hidden btn btn-sm hover:bg-white text-primary px-5 cat-btn">
 										Categories
 									</button>
 
@@ -320,10 +322,10 @@ const Navbar = () => {
 									>
 										<h4 className="font-semibold whitespace-nowrap">Categories</h4>
 										<ul className="flex flex-col menu max-h-full w-full z-[10] py-4 ">
-											{allCategories?.map((category) => (
-												<NavLink to={'#'} key={category}>
+											{allCat?.map((category) => (
+												<NavLink to={'#'} key={category.id}>
 													<li className="text-lg capitalize max-sm:text-base lg:pr-12 hover:underline whitespace-nowrap">
-														{category}
+														{category.name}
 													</li>
 												</NavLink>
 											))}
@@ -493,6 +495,6 @@ const Navbar = () => {
 export default Navbar;
 
 const listStyles =
-	'hidden sm:block uppercase flex-grow-0 flex-shrink-0 cursor-pointer text-white text-sm md:text-base font-medium py-2 px-4  hover:text-yellow transition-colors ';
+	'hidden sm:block uppercase flex-grow-0 flex-shrink-0 cursor-pointer text-white text-sm md:text-base font-medium py-2 px-4  hover:text-secondary transition-colors ';
 
 const mobileListStyles = 'text-white sm:hidden cursor-pointer ';
