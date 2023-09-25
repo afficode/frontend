@@ -4,6 +4,7 @@ const Spinners = ({
   spinnerType = "spinner",
   size = "md",
   color = "black",
+  otherClasses = "",
 }) => {
   /**
    * - spinnerType: spinner, dots, ring, ball, bars, infinity
@@ -12,7 +13,7 @@ const Spinners = ({
    */
   return (
     <span
-      className={`loading loading-${spinnerType} loading-${size} text-${color}`}
+      className={`loading loading-${spinnerType} loading-${size} text-${color} `}
     ></span>
   );
 };

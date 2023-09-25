@@ -19,7 +19,6 @@ export const LoginHook = async (values, setSubmitting) => {
     let userUpdate;
     await api.post(`auth/login`, values, )
     .then(({data}) => {
-        console.log(data)
     if(data.success) {
         userUpdate = data;        
     } 
