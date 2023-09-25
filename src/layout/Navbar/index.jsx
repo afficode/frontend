@@ -269,7 +269,7 @@ const Navbar = () => {
 														<SlArrowRight size={20} className="ml-auto text-black " />
 													</div>
 												</NavLink>
-												{isLoggedIn && (
+												{isLogin && (
 													<NavLink to={Approutes.logout}>
 														<div className="flex items-center hover:underline">
 															<li className="text-base whitespace-nowrap ">Logout</li>
@@ -415,7 +415,7 @@ const Navbar = () => {
 													<SlArrowRight size={20} className="ml-auto text-black " />
 												</div>
 											</NavLink>
-											{isLoggedIn && (
+											{isLogin && (
 												<NavLink to={Approutes.logout}>
 													<div className="flex items-center hover:underline">
 														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Logout</li>

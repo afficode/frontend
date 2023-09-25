@@ -4,7 +4,7 @@ import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import Input from '../../components/FormComponents/Input';
 import { MdAppRegistration } from 'react-icons/md';
-import { Button, Spinner } from 'flowbite-react';
+import { Button } from 'flowbite-react';
 import { RegistrationHook } from '../../hooks/AuthHook';
 import { toast } from 'react-toastify';
 import Spinner from '../../components/Spinners';
