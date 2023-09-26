@@ -157,7 +157,7 @@ const Navbar = () => {
 										</div>
 										<ul
 											tabIndex={0}
-											className={`dropdown-content transform -translate-x-[50%] sm:-translate-x-[80%] min-h-fit w-[20rem]  z-[10] p-4 bg-white shadow-md rounded-2xl`}
+											className={`dropdown-content transform -translate-x-[50%] sm:-translate-x-[74%] min-h-fit w-[15rem]  z-[10] p-4 bg-white shadow-md rounded-2xl`}
 										>
 											<ul className="flex flex-col gap-[0.4rem] menu max-h-full w-full z-[10] ">
 												{/* <NavLink to={'/'}>
@@ -168,73 +168,61 @@ const Navbar = () => {
 												<NavLink to={'#'}>
 													<div className="flex items-center hover:underline">
 														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Dashboard</li>
-														<SlArrowRight size={20} className="ml-auto text-black " />
 													</div>
 												</NavLink>
 												<NavLink to={'#'}>
 													<div className="flex items-center hover:underline">
 														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">My Details</li>
-														<SlArrowRight size={20} className="ml-auto text-black " />
 													</div>
 												</NavLink>
 												<NavLink to={'#'}>
 													<div className="flex items-center hover:underline">
 														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Messages</li>
-														<SlArrowRight size={20} className="ml-auto text-black " />
 													</div>
 												</NavLink>
 												<NavLink to={'#'}>
 													<div className="flex items-center hover:underline">
 														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">My Shop</li>
-														<SlArrowRight size={20} className="ml-auto text-black " />
 													</div>
 												</NavLink>
 												<NavLink to={'#'}>
 													<div className="flex items-center hover:underline">
 														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Grab</li>
-														<SlArrowRight size={20} className="ml-auto text-black " />
 													</div>
 												</NavLink>
 												<NavLink to={'#'}>
 													<div className="flex items-center hover:underline">
 														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">My Transactions</li>
-														<SlArrowRight size={20} className="ml-auto text-black " />
 													</div>
 												</NavLink>
 												<NavLink to={'#'}>
 													<div className="flex items-center hover:underline">
 														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Notifications</li>
-														<SlArrowRight size={20} className="ml-auto text-black " />
 													</div>
 												</NavLink>
 												<NavLink to={'#'}>
 													<div className="flex items-center hover:underline">
 														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Manage my Ads</li>
-														<SlArrowRight size={20} className="ml-auto text-black " />
 													</div>
 												</NavLink>
 												<NavLink to={'#'}>
 													<div className="flex items-center hover:underline">
 														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Manage my shop</li>
-														<SlArrowRight size={20} className="ml-auto text-black " />
 													</div>
 												</NavLink>
 												<NavLink to={'#'}>
 													<div className="flex items-center hover:underline">
 														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">My Saved Items</li>
-														<SlArrowRight size={20} className="ml-auto text-black " />
 													</div>
 												</NavLink>
 												<NavLink to={Approutes.contactUs}>
 													<div className="flex items-center hover:underline">
 														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Help & Contact</li>
-														<SlArrowRight size={20} className="ml-auto text-black " />
 													</div>
 												</NavLink>
 												<NavLink to={Approutes.logout}>
 													<div className="flex items-center hover:underline">
 														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Logout</li>
-														<SlArrowRight size={20} className="ml-auto text-black " />
 													</div>
 												</NavLink>
 											</ul>
