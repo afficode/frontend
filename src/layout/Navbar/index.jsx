@@ -5,6 +5,7 @@ import { Dropdown } from '../../ui';
 import { AffiLogo } from '../../assets/images';
 import { generateCategoryUrl } from '../../utils';
 import { useCategories } from '../../hooks';
+import useAuth from '../../context/UserContext';
 
 // icons
 import { HiSearch, HiOutlineSpeakerphone, HiBookmark } from 'react-icons/hi';
@@ -18,24 +19,22 @@ import { MdMiscellaneousServices } from 'react-icons/md';
 import { TbMoneybag } from 'react-icons/tb';
 import { FaCarSide, FaBuilding } from 'react-icons/fa';
 
-// from user Hooks
-import useAuth from '../../context/UserContext';
 const Navbar = () => {
 	const [nav, setNav] = useState(false);
+	const navRef = useRef();
+	const navigate = useNavigate();
+
 	const { isLogin, user } = useAuth();
+
+	// fetch categories
 	const { data } = useCategories();
 
+	// filter categories
 	const allCat = data?.filter((data) => data.id >= 10 && data.id < 100);
 	const vehicleCat = data?.filter((data) => data.id >= 5000 && data.id < 5100);
 	const propertyCat = data?.filter((data) => data.id >= 5100 && data.id < 5200);
 	const servicesCat = data?.filter((data) => data.id >= 5200 && data.id < 5300);
 	const dealsCat = data?.filter((data) => data.id >= 6500 && data.id < 6600);
-
-	allCat && console.log(allCat);
-
-	const navigate = useNavigate();
-
-	const navRef = useRef();
 
 	useEffect(() => {
 		const handleClickOutside = (e) => {
@@ -52,8 +51,6 @@ const Navbar = () => {
 	}, [setNav]);
 
 	const { pathname } = useLocation();
-
-	const authenticated = isLogin;
 
 	return (
 		<header className="fixed top-0 z-50 w-full bg-primary">
@@ -129,7 +126,7 @@ const Navbar = () => {
 								</ul>
 							</div>
 
-							{!authenticated ? (
+							{!isLogin ? (
 								<div
 									className="flex flex-col items-center text-white cursor-pointer"
 									title="Click to sign-in or register"
@@ -149,11 +146,99 @@ const Navbar = () => {
 										<BiEnvelope size={25} />
 										<span className="text-xs sm:text-sm whitespace-nowrap">Messages</span>
 									</div>
-									<div className="flex flex-col items-center text-white cursor-pointer" title="My profile">
-										<CgProfile size={25} />
-										<span className="text-xs sm:text-sm whitespace-nowrap">
-											{user ? user?.firstname : ''}
-										</span>
+									<div className="dropdown">
+										<div
+											tabIndex={0}
+											className="flex flex-col items-center text-white cursor-pointer"
+											title="My profile"
+										>
+											<CgProfile size={25} />
+											<span className="text-xs sm:text-sm whitespace-nowrap">{user?.firstname}</span>
+										</div>
+										<ul
+											tabIndex={0}
+											className={`dropdown-content transform -translate-x-[50%] sm:-translate-x-[80%] min-h-fit w-[20rem]  z-[10] p-4 bg-white shadow-md rounded-2xl`}
+										>
+											<ul className="flex flex-col gap-[0.4rem] menu max-h-full w-full z-[10] ">
+												{/* <NavLink to={'/'}>
+													<li className="text-lg capitalize max-sm:text-base lg:pr-12 hover:underline whitespace-nowrap">
+														HOME
+													</li>
+												</NavLink> */}
+												<NavLink to={'#'}>
+													<div className="flex items-center hover:underline">
+														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Dashboard</li>
+														<SlArrowRight size={20} className="ml-auto text-black " />
+													</div>
+												</NavLink>
+												<NavLink to={'#'}>
+													<div className="flex items-center hover:underline">
+														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">My Details</li>
+														<SlArrowRight size={20} className="ml-auto text-black " />
+													</div>
+												</NavLink>
+												<NavLink to={'#'}>
+													<div className="flex items-center hover:underline">
+														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Messages</li>
+														<SlArrowRight size={20} className="ml-auto text-black " />
+													</div>
+												</NavLink>
+												<NavLink to={'#'}>
+													<div className="flex items-center hover:underline">
+														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">My Shop</li>
+														<SlArrowRight size={20} className="ml-auto text-black " />
+													</div>
+												</NavLink>
+												<NavLink to={'#'}>
+													<div className="flex items-center hover:underline">
+														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Grab</li>
+														<SlArrowRight size={20} className="ml-auto text-black " />
+													</div>
+												</NavLink>
+												<NavLink to={'#'}>
+													<div className="flex items-center hover:underline">
+														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">My Transactions</li>
+														<SlArrowRight size={20} className="ml-auto text-black " />
+													</div>
+												</NavLink>
+												<NavLink to={'#'}>
+													<div className="flex items-center hover:underline">
+														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Notifications</li>
+														<SlArrowRight size={20} className="ml-auto text-black " />
+													</div>
+												</NavLink>
+												<NavLink to={'#'}>
+													<div className="flex items-center hover:underline">
+														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Manage my Ads</li>
+														<SlArrowRight size={20} className="ml-auto text-black " />
+													</div>
+												</NavLink>
+												<NavLink to={'#'}>
+													<div className="flex items-center hover:underline">
+														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Manage my shop</li>
+														<SlArrowRight size={20} className="ml-auto text-black " />
+													</div>
+												</NavLink>
+												<NavLink to={'#'}>
+													<div className="flex items-center hover:underline">
+														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">My Saved Items</li>
+														<SlArrowRight size={20} className="ml-auto text-black " />
+													</div>
+												</NavLink>
+												<NavLink to={Approutes.contactUs}>
+													<div className="flex items-center hover:underline">
+														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Help & Contact</li>
+														<SlArrowRight size={20} className="ml-auto text-black " />
+													</div>
+												</NavLink>
+												<NavLink to={Approutes.logout}>
+													<div className="flex items-center hover:underline">
+														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Logout</li>
+														<SlArrowRight size={20} className="ml-auto text-black " />
+													</div>
+												</NavLink>
+											</ul>
+										</ul>
 									</div>
 								</>
 							)}

@@ -43,8 +43,7 @@ const Register = () => {
 			.min(8, 'Password must be 8 characters long')
 			.matches(/[0-9]/, 'Password requires a number')
 			.matches(/[a-z]/, 'Password requires a lowercase letter')
-			.matches(/[A-Z]/, 'Password requires an uppercase letter')
-			.matches(/[^\w]/, 'Password requires a symbol'),
+			.matches(/[A-Z]/, 'Password requires an uppercase letter'),
 		confirmPassword: Yup.string()
 			.oneOf([Yup.ref('password'), null], 'Must match "password" field value')
 			.required(),
@@ -59,6 +58,7 @@ const Register = () => {
 				return navigate('/', { replace: true });
 			} else {
 				toast.error(submit.message);
+				console.log(submit.message);
 			}
 		}, 3000);
 	};
@@ -80,7 +80,7 @@ const Register = () => {
 				</div>
 			) : (
 				<>
-					<div className="w-[90%] mx-auto bg-[#d9d9d993] rounded-3xl border-solid border-4 border-blue-500">
+					<div className="w-[90%] mx-auto bg-[#d9d9d993] rounded-3xl border-solid border-4 border-primary">
 						<h1 className="text-center text-black font-normal text-[1.2rem] lg:text-3xl lg:pt-4 ">
 							Register To:
 						</h1>
@@ -185,7 +185,7 @@ const Register = () => {
 											type="submit"
 											tabIndex="-1"
 											aria-disabled="true"
-											className={`text-white text-normal lg:text-lg border-0 bg-blue-500 btn-md lg:btn-lg hover:bg-primary/80 ${
+											className={`text-white text-normal lg:text-lg border-0 bg-primary btn-md lg:btn-lg hover:bg-primary/80 ${
 												!formik.isValid || !formik.dirty || formik.isSubmitting
 													? 'cursor-not-allowed'
 													: 'cursor-pointer'
