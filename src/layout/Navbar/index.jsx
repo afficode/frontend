@@ -344,6 +344,7 @@ const Navbar = () => {
 	<NavLink to={'#'}>
 													<div className="flex items-center hover:underline">
 														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">My Adverts</li>
+                                                                                                                <SlArrowRight size={20} className="ml-auto text-black " />
 													</div>
 												</NavLink>
 												<NavLink to={Approutes.contactUs}>
@@ -356,7 +357,6 @@ const Navbar = () => {
 													<NavLink to={Approutes.logout}>
 														<div className="flex items-center hover:underline">
 															<li className="text-base whitespace-nowrap ">Logout</li>
-															<SlArrowRight size={20} className="ml-auto text-black " />
 														</div>
 													</NavLink>
 												)}
@@ -496,6 +496,7 @@ const Navbar = () => {
 	<NavLink to={'#'}>
 													<div className="flex items-center hover:underline">
 														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">My Adverts</li>
+<SlArrowRight size={20} className="ml-auto text-black " />
 													</div>
 												</NavLink>
 											<NavLink to={Approutes.contactUs}>
@@ -508,7 +509,7 @@ const Navbar = () => {
 												<NavLink to={Approutes.logout}>
 													<div className="flex items-center hover:underline">
 														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Logout</li>
-														<SlArrowRight size={20} className="ml-auto text-black " />
+														
 													</div>
 												</NavLink>
 											)}
@@ -564,7 +565,7 @@ const Navbar = () => {
 
 								<span className="border border-r-4 border-white h-[2rem]" />
 
-								<li className="dropdown dropdown-end dropdown-hover mr-4">
+								<li className="dropdown dropdown-end dropdown-hover">
 									<NavLink to={generateCategoryUrl('Deals')} tabIndex={0} className={listStyles}>
 										DEALS
 									</NavLink>
