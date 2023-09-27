@@ -215,6 +215,11 @@ const Navbar = () => {
 														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">My Saved Items</li>
 													</div>
 												</NavLink>
+		<NavLink to={'#'}>
+													<div className="flex items-center hover:underline">
+														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">My Adverts</li>
+													</div>
+												</NavLink>
 												<NavLink to={Approutes.contactUs}>
 													<div className="flex items-center hover:underline">
 														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Help & Contact</li>
@@ -334,6 +339,11 @@ const Navbar = () => {
 													<div className="flex items-center hover:underline">
 														<li className="text-base whitespace-nowrap ">My Saved Items</li>
 														<SlArrowRight size={20} className="ml-auto text-black " />
+													</div>
+												</NavLink>
+	<NavLink to={'#'}>
+													<div className="flex items-center hover:underline">
+														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">My Adverts</li>
 													</div>
 												</NavLink>
 												<NavLink to={Approutes.contactUs}>
@@ -482,6 +492,12 @@ const Navbar = () => {
 													<SlArrowRight size={20} className="ml-auto text-black " />
 												</div>
 											</NavLink>
+
+	<NavLink to={'#'}>
+													<div className="flex items-center hover:underline">
+														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">My Adverts</li>
+													</div>
+												</NavLink>
 											<NavLink to={Approutes.contactUs}>
 												<div className="flex items-center hover:underline">
 													<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Help & Contact</li>
@@ -514,12 +530,12 @@ const Navbar = () => {
 
 								<li className="dropdown dropdown-hover">
 									<NavLink to={generateCategoryUrl('Vehicles')} tabIndex={0} className={listStyles}>
-										VEHICLES
+										CARS & VEHICLES
 									</NavLink>
 									<NavLink to={generateCategoryUrl('Vehicles')} className={mobileListStyles}>
 										<FaCarSide size={25} />
 									</NavLink>
-									{vehicleCat && <Dropdown category={'VEHICLES'} subCategories={vehicleCat} />}
+									{vehicleCat && <Dropdown category={'CARS & VEHICLES'} subCategories={vehicleCat} />}
 								</li>
 
 								<span className="border border-r-4 border-white h-[2rem]" />
@@ -556,6 +572,18 @@ const Navbar = () => {
 										<TbMoneybag size={25} />
 									</NavLink>
 									{dealsCat && <Dropdown category={'DEALS'} subCategories={dealsCat} />}
+								</li>
+
+			<span className="border border-r-4 border-white h-[2rem]" />
+
+								<li className="dropdown dropdown-end dropdown-hover mr-4">
+									<NavLink to={generateCategoryUrl('Requests')} tabIndex={0} className={listStyles}>
+										REQUESTS
+									</NavLink>
+									<NavLink to={generateCategoryUrl('Deals')} className={mobileListStyles}>
+										<TbMoneybag size={25} />
+									</NavLink>
+									{dealsCat && <Dropdown category={'REQUESTS'} subCategories={dealsCat} />}
 								</li>
 							</ul>
 						</div>
