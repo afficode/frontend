@@ -8,16 +8,17 @@ import { useCategories } from '../../hooks';
 import useAuth from '../../context/UserContext';
 
 // icons
-import { HiSearch, HiOutlineSpeakerphone, HiBookmark } from 'react-icons/hi';
+import { HiSearch, HiOutlineSpeakerphone } from 'react-icons/hi';
 import { SlArrowRight } from 'react-icons/sl';
+import { AiOutlineBell } from 'react-icons/ai';
 import { BiEnvelope } from 'react-icons/bi';
+import { GoBookmark } from 'react-icons/go';
 import { IoMdClose } from 'react-icons/io';
-import { VscMenu } from 'react-icons/vsc';
+import { VscGitPullRequestGoToChanges, VscMenu } from 'react-icons/vsc';
 import { CgProfile } from 'react-icons/cg';
 import { BsShop } from 'react-icons/bs';
 import { MdMiscellaneousServices } from 'react-icons/md';
-import { TbMoneybag } from 'react-icons/tb';
-import { FaCarSide, FaBuilding } from 'react-icons/fa';
+import { FaCarSide, FaBuilding, FaRegHandshake } from 'react-icons/fa';
 
 const Navbar = () => {
 	const [nav, setNav] = useState(false);
@@ -66,7 +67,7 @@ const Navbar = () => {
 						</div>
 
 						{/* <!-- Search input on desktop screen --> */}
-						<div className="items-center justify-between hidden md:flex">
+						<div className="items-center justify-between hidden lg:flex">
 							<div className="w-full px-10 mx-auto ">
 								<div className="relative ">
 									<input
@@ -90,14 +91,23 @@ const Navbar = () => {
 						</div>
 
 						{/* top nav items */}
-						<div className="flex items-center gap-2  md:gap-4">
+						<div className="flex items-center gap-2 lg:gap-3">
 							<div
 								className="flex flex-col items-center text-white cursor-pointer max-md:hidden "
 								title="Saved items"
 							>
-								<HiBookmark size={25} />
+								<GoBookmark size={25} />
 								<span className="text-xs sm:text-sm">Saved</span>
 							</div>
+							{isLogin && (
+								<div
+									className="flex flex-col items-center text-white cursor-pointer "
+									title="My Notifications"
+								>
+									<AiOutlineBell size={25} />
+									<span className="text-xs sm:text-sm">Notifications</span>
+								</div>
+							)}
 
 							{/* post ad dropdown */}
 							<div className="dropdown ">
@@ -190,11 +200,11 @@ const Navbar = () => {
 														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Grab</li>
 													</div>
 												</NavLink>
-												<NavLink to={'#'}>
+												{/* <NavLink to={'#'}>
 													<div className="flex items-center hover:underline">
 														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">My Transactions</li>
 													</div>
-												</NavLink>
+												</NavLink> */}
 												<NavLink to={'#'}>
 													<div className="flex items-center hover:underline">
 														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Notifications</li>
@@ -215,7 +225,7 @@ const Navbar = () => {
 														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">My Saved Items</li>
 													</div>
 												</NavLink>
-		<NavLink to={'#'}>
+												<NavLink to={'#'}>
 													<div className="flex items-center hover:underline">
 														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">My Adverts</li>
 													</div>
@@ -239,7 +249,7 @@ const Navbar = () => {
 							{/* mobile categories/menu dropdown */}
 							{pathname === '/' ? (
 								<div className="dropdown dropdown-end">
-									<button className="flex flex-col gap-0  py-0 capitalize bg-white border-none max-sm:text-xs md:hidden btn btn-sm text-primary px-4 hover:bg-white">
+									<button className="flex flex-col gap-0  py-0 capitalize bg-white border-none max-sm:text-xs lg:hidden btn btn-sm text-primary px-4 hover:bg-white">
 										Categories
 									</button>
 									<ul
@@ -260,15 +270,15 @@ const Navbar = () => {
 								</div>
 							) : (
 								<>
-									<div className="text-white cursor-pointer md:hidden ">
+									<div className="text-white cursor-pointer ml-2 lg:hidden ">
 										<VscMenu size={28} onClick={() => setNav(!nav)} />
 									</div>
 
 									<div
 										className={
 											nav
-												? ` transform translate-x-[0%] w-full h-full transition-all duration-500 fixed top-0 right-0 bottom-0 left-0 bg-black/50 z-10 grid place-items-end`
-												: ` transform translate-x-[100%] transition-all duration-500 fixed top-0 right-0 bottom-0 left-0 bg-black/50 z-10 grid place-items-end`
+												? ` transform translate-x-[0%] w-full h-full transition-all duration-500 fixed top-0 right-0 bottom-0 left-0 bg-primary/50 z-10 grid place-items-end`
+												: ` transform translate-x-[100%] transition-all duration-500 fixed top-0 right-0 bottom-0 left-0 bg-primary/50 z-10 grid place-items-end`
 										}
 									>
 										<div ref={navRef} className="w-[70%] h-full bg-white p-4 flex flex-col gap-[3rem] ">
@@ -311,12 +321,12 @@ const Navbar = () => {
 														<SlArrowRight size={20} className="ml-auto text-black " />
 													</div>
 												</NavLink>
-												<NavLink to={'#'}>
+												{/* <NavLink to={'#'}>
 													<div className="flex items-center hover:underline">
 														<li className="text-base whitespace-nowrap ">My Transactions</li>
 														<SlArrowRight size={20} className="ml-auto text-black " />
 													</div>
-												</NavLink>
+												</NavLink> */}
 												<NavLink to={'#'}>
 													<div className="flex items-center hover:underline">
 														<li className="text-base whitespace-nowrap ">Notifications</li>
@@ -341,10 +351,10 @@ const Navbar = () => {
 														<SlArrowRight size={20} className="ml-auto text-black " />
 													</div>
 												</NavLink>
-	<NavLink to={'#'}>
+												<NavLink to={'#'}>
 													<div className="flex items-center hover:underline">
-														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">My Adverts</li>
-                                                                                                                <SlArrowRight size={20} className="ml-auto text-black " />
+														<li className="text-base whitespace-nowrap ">My Adverts</li>
+														<SlArrowRight size={20} className="ml-auto text-black " />
 													</div>
 												</NavLink>
 												<NavLink to={Approutes.contactUs}>
@@ -369,7 +379,7 @@ const Navbar = () => {
 					</div>
 
 					{/* <!-- Mobile search input --> */}
-					<div className="flex items-center w-full mt-2 md:hidden px-1">
+					<div className="flex items-center w-full mt-2 lg:hidden px-1">
 						<div className="relative w-full">
 							<input
 								title="Search for items here."
@@ -396,7 +406,7 @@ const Navbar = () => {
 							{pathname === '/' ? (
 								// dropdown for categories
 								<div className="dropdown ">
-									<button className="flex flex-col gap-0 mr-16 text-sm capitalize bg-white border-none max-md:hidden btn btn-sm hover:bg-white text-primary px-5 cat-btn">
+									<button className="flex flex-col gap-0 mr-16 text-sm capitalize bg-white border-none max-lg:hidden btn btn-sm hover:bg-white text-primary px-5 cat-btn">
 										Categories
 									</button>
 
@@ -419,7 +429,7 @@ const Navbar = () => {
 							) : (
 								//dropdown for menu
 								<div className="dropdown">
-									<div tabIndex={0} className="mr-16 text-white cursor-pointer max-md:hidden">
+									<div tabIndex={0} className="mr-16 text-white cursor-pointer max-lg:hidden">
 										<VscMenu size={30} />
 									</div>
 									<ul
@@ -462,12 +472,12 @@ const Navbar = () => {
 													<SlArrowRight size={20} className="ml-auto text-black " />
 												</div>
 											</NavLink>
-											<NavLink to={'#'}>
+											{/* <NavLink to={'#'}>
 												<div className="flex items-center hover:underline">
 													<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">My Transactions</li>
 													<SlArrowRight size={20} className="ml-auto text-black " />
 												</div>
-											</NavLink>
+											</NavLink> */}
 											<NavLink to={'#'}>
 												<div className="flex items-center hover:underline">
 													<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Notifications</li>
@@ -493,12 +503,12 @@ const Navbar = () => {
 												</div>
 											</NavLink>
 
-	<NavLink to={'#'}>
-													<div className="flex items-center hover:underline">
-														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">My Adverts</li>
-<SlArrowRight size={20} className="ml-auto text-black " />
-													</div>
-												</NavLink>
+											<NavLink to={'#'}>
+												<div className="flex items-center hover:underline">
+													<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">My Adverts</li>
+													<SlArrowRight size={20} className="ml-auto text-black " />
+												</div>
+											</NavLink>
 											<NavLink to={Approutes.contactUs}>
 												<div className="flex items-center hover:underline">
 													<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Help & Contact</li>
@@ -509,7 +519,6 @@ const Navbar = () => {
 												<NavLink to={Approutes.logout}>
 													<div className="flex items-center hover:underline">
 														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Logout</li>
-														
 													</div>
 												</NavLink>
 											)}
@@ -570,19 +579,19 @@ const Navbar = () => {
 										DEALS
 									</NavLink>
 									<NavLink to={generateCategoryUrl('Deals')} className={mobileListStyles}>
-										<TbMoneybag size={25} />
+										<FaRegHandshake size={25} />
 									</NavLink>
 									{dealsCat && <Dropdown category={'DEALS'} subCategories={dealsCat} />}
 								</li>
 
-			<span className="border border-r-4 border-white h-[2rem]" />
+								<span className="border border-r-4 border-white h-[2rem]" />
 
 								<li className="dropdown dropdown-end dropdown-hover mr-4">
 									<NavLink to={generateCategoryUrl('Requests')} tabIndex={0} className={listStyles}>
 										REQUESTS
 									</NavLink>
 									<NavLink to={generateCategoryUrl('Deals')} className={mobileListStyles}>
-										<TbMoneybag size={25} />
+										<VscGitPullRequestGoToChanges size={25} />
 									</NavLink>
 									{dealsCat && <Dropdown category={'REQUESTS'} subCategories={dealsCat} />}
 								</li>
@@ -598,6 +607,6 @@ const Navbar = () => {
 export default Navbar;
 
 const listStyles =
-	'hidden sm:block uppercase flex-grow-0 flex-shrink-0 cursor-pointer text-white text-sm md:text-base font-medium py-2 px-4  hover:text-secondary transition-colors ';
+	'hidden md:block uppercase flex-grow-0 flex-shrink-0 cursor-pointer text-white text-sm md:text-base font-medium py-2 px-4  hover:text-secondary transition-colors ';
 
-const mobileListStyles = 'text-white sm:hidden cursor-pointer ';
+const mobileListStyles = 'text-white md:hidden cursor-pointer ';
