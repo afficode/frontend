@@ -7,20 +7,18 @@ import * as Yup from 'yup';
 import { MdLogin } from 'react-icons/md';
 import { LoginHook } from '../../hooks/AuthHook';
 import { Apple, Facebook, Google } from '../../assets/svgs';
-import Buttons from '../../components/Buttons';
+import { Button } from '../../ui';
 import { toast } from 'react-toastify';
 import { Approutes } from '../../constants';
-import { Button } from 'flowbite-react';
+import { Button as FlowbiteButton } from 'flowbite-react';
 import useAuth from '../../context/UserContext';
-import Spinner from '../../components/Spinners';
-import { SpinnerSkeleton } from '../../components/Skeletons';
+import { SpinnerSkeleton, Spinner } from '../../components';
 
 const Login = () => {
 	const { login } = useAuth();
 	const [isLoading, setIsLoading] = useState(false);
 	const navigate = useNavigate();
-	const inputClass =
-		'input input-bordered border-black w-full bg-gray-100 text-black text-lg lg:text-xl rounded-none my-2 input-md lg:input-lg';
+
 	const initialValues = {
 		email: '',
 		password: '',
@@ -84,7 +82,7 @@ const Login = () => {
 						<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
 							{(formik) => (
 								<Form>
-									<div className="form-control my-2 lg:my-4">
+									<div className="form-control">
 										<Input
 											className={inputClass}
 											type="email"
@@ -96,7 +94,7 @@ const Login = () => {
 										/>
 									</div>
 
-									<div className="form-control my-2 lg:my-4">
+									<div className="form-control">
 										<Input
 											className={inputClass}
 											type="password"
@@ -108,7 +106,7 @@ const Login = () => {
 									</div>
 
 									<div className=" form-control">
-										<Button
+										<FlowbiteButton
 											type="submit"
 											aria-disabled="true"
 											className={` text-white text-normal lg:text-lg border-0 bg-primary btn-md lg:btn-lg hover:bg-primary/80 ${
@@ -126,7 +124,7 @@ const Login = () => {
 													Login &nbsp; <MdLogin className="text-lg my-auto lg:text-2xl" />
 												</span>
 											)}
-										</Button>
+										</FlowbiteButton>
 									</div>
 								</Form>
 							)}
@@ -140,39 +138,21 @@ const Login = () => {
 
 					<div className="w-[85%] mx-auto my-4">
 						<p className="w-full text-center text-md lg:text-2xl">Or Connect with:</p>
-						<div className="mt-6">
-							<Buttons
-								bgColor={'bg-[#0F8EEF]'}
-								textColor={'text-white'}
-								hasLogo={true}
-								text={'Continue with Facebook'}
-								logo={Facebook}
-								hasBorder={false}
-								handleClick={() => {
-									handleLogin();
-								}}
-							/>
-						</div>
-						<div className="mt-6">
-							<Buttons
-								bgColor={'bg-black'}
-								textColor={'text-white'}
-								hasLogo={true}
-								text={'Continue with Apple'}
-								logo={Apple}
-								hasBorder={true}
-							/>
-						</div>
-						<div className="mt-6">
-							<Buttons
-								bgColor={'bg-white'}
-								textColor={'text-black'}
-								hasLogo={true}
-								text={'Continue with Google'}
-								logo={Google}
-								hasBorder={true}
-							/>
-						</div>
+
+						<Button className="mt-6 w-full px-4 py-[.7rem] text-white bg-[#0F8EEF] flex items-center hover:brightness-90">
+							<img src={Facebook} alt="apple logo" className="mr-auto" />{' '}
+							<span className="text-center font-semibold w-full">Continue with Facebook</span>
+						</Button>
+
+						<Button className="mt-6 w-full px-4 py-[.7rem] text-white bg-black flex items-center hover:brightness-90">
+							<img src={Apple} alt="apple logo" className="mr-auto" />{' '}
+							<span className="text-center font-semibold w-full">Continue with Apple</span>
+						</Button>
+
+						<Button className="mt-6 w-full px-4 py-[.7rem] border border-black text-black bg-white flex items-center hover:brightness-90">
+							<img src={Google} alt="apple logo" className="mr-auto" />{' '}
+							<span className="text-center font-semibold w-full">Continue with Google</span>
+						</Button>
 					</div>
 				</>
 			)}
@@ -181,3 +161,6 @@ const Login = () => {
 };
 
 export default Login;
+
+const inputClass =
+	'input input-bordered border-black w-full bg-gray-100 text-black text-lg lg:text-xl rounded-none my-2 input-md lg:input-lg';

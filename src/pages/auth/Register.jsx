@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
@@ -7,8 +7,7 @@ import { MdAppRegistration } from 'react-icons/md';
 import { Button } from 'flowbite-react';
 import { RegistrationHook } from '../../hooks/AuthHook';
 import { toast } from 'react-toastify';
-import Spinner from '../../components/Spinners';
-import { SpinnerSkeleton } from '../../components/Skeletons';
+import { SpinnerSkeleton, Spinner } from '../../components';
 
 const Register = () => {
 	const [isLoading, setIsLoading] = useState(false);
@@ -109,7 +108,7 @@ const Register = () => {
 						<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
 							{(formik) => (
 								<Form>
-									<div className="form-control my-4">
+									<div className="form-control">
 										<Input
 											className={inputClass}
 											type="text"
@@ -119,7 +118,7 @@ const Register = () => {
 											{...formik.getFieldProps('firstname')}
 										/>
 									</div>
-									<div className="form-control my-4">
+									<div className="form-control">
 										<Input
 											className={inputClass}
 											type="text"
@@ -129,7 +128,7 @@ const Register = () => {
 											{...formik.getFieldProps('lastname')}
 										/>
 									</div>
-									<div className="form-control my-4">
+									<div className="form-control">
 										<Input
 											className={inputClass}
 											type="email"
@@ -139,7 +138,7 @@ const Register = () => {
 											{...formik.getFieldProps('email')}
 										/>
 									</div>
-									<div className="form-control my-4">
+									<div className="form-control">
 										<Input
 											className={inputClass}
 											type="text"
@@ -149,7 +148,7 @@ const Register = () => {
 											{...formik.getFieldProps('phone')}
 										/>
 									</div>
-									<div className="form-control my-4">
+									<div className="form-control">
 										<Input
 											className={inputClass}
 											type="password"
@@ -159,7 +158,7 @@ const Register = () => {
 											{...formik.getFieldProps('password')}
 										/>
 									</div>
-									<div className="form-control my-4">
+									<div className="form-control">
 										<Input
 											className={inputClass}
 											type="password"

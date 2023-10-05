@@ -1,5 +1,6 @@
 import { Car, Spa, SportCar } from '../../assets/images';
 import { Card } from '../../components';
+import { Button } from '../../ui';
 import { ScrollToTop } from '../../utils';
 
 const AboutUs = () => {
@@ -105,15 +106,15 @@ const AboutUs = () => {
 					</div>
 				</div>
 
-				<div className="text-center">
+				<div className="text-center ">
 					<p className="font-thin">
 						Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil, perspiciatis! Sapiente
 						dolorem libero dicta sint ut fugit odio vero quod.
 					</p>
 
-					<button className="my-4 capitalize btn rounded-3xl bg-white text-black hover:border-black/30 border-black/30 hover:bg-primary hover:text-white">
+					<Button variant="subtle" size="small" className="rounded-3xl font-semibold my-4">
 						Advertise with us
-					</button>
+					</Button>
 				</div>
 			</div>
 

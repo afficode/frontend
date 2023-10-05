@@ -1,4 +1,3 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { RegistrationHook } from '../../hooks/AuthHook';
 import { Button } from 'flowbite-react';
@@ -6,7 +5,7 @@ import * as Yup from 'yup';
 import { Formik, Form } from 'formik';
 import Input from '../../components/FormComponents/Input';
 import { FaEnvelope } from 'react-icons/fa';
-import Spinner from '../../components/Spinners';
+import { Spinner } from '../../components';
 import { notifySuccess, notifyError } from '../../ui/ErrorToast';
 
 const ReverifyEmail = ({ endpoint }) => {

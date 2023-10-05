@@ -62,7 +62,7 @@ const Navbar = () => {
 						{/* logo */}
 						<div className="flex items-center bg-white rounded-full p-[2px]">
 							<NavLink to={'/'}>
-								<img src={AffiLogo} className="w-9 h-9" alt="" />
+								<img src={AffiLogo} className="w-9 h-9" alt="Affi.ng" />
 							</NavLink>
 						</div>
 
@@ -141,7 +141,7 @@ const Navbar = () => {
 									className="flex flex-col items-center text-white cursor-pointer"
 									title="Click to sign-in or register"
 									onClick={() => {
-										navigate(Approutes.auth);
+										navigate(Approutes.auth.initial);
 									}}
 								>
 									<CgProfile size={25} />

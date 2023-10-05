@@ -1,0 +1,44 @@
+import { ErrorMessage, Field } from 'formik';
+import TextError from './TextError';
+
+const CheckboxGroup = (props) => {
+	const { label, name, options, required, ...rest } = props;
+	return (
+		<div className="my-4 space-y-2 ">
+			{label && (
+				<label className="block formLabel" htmlFor={name}>
+					{label}
+					{required ? (
+						<span className="text-black" title="This field is required">
+							*
+						</span>
+					) : null}
+				</label>
+			)}
+			<Field name={name}>
+				{({ field }) => {
+					return options.map((option) => {
+						// console.log(field);
+						return (
+							<div key={option.key} className="inline-block items-center pr-8 space-x-2">
+								<input
+									type="checkbox"
+									id={option.value}
+									{...field}
+									{...rest}
+									value={option.value}
+									checked={field.value.includes(option.value)}
+									// className="checkbox checkbox-primary"
+								/>
+								<label htmlFor={option.value}>{option.key}</label>
+							</div>
+						);
+					});
+				}}
+			</Field>
+			<ErrorMessage name={name} component={TextError} />
+		</div>
+	);
+};
+
+export default CheckboxGroup;

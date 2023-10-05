@@ -10,9 +10,6 @@ const Home = () => {
 			<Hero />
 			<RowContainer title={'Shops'} />
 			<RowContainer title={'Featured Products'} />
-			<div className="p-6">
-				<Button variant={'styled'}>Other Shops by K.Stitches</Button>
-			</div>
 		</>
 	);
 };

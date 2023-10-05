@@ -1,10 +1,10 @@
-import { Field, ErrorMessage } from 'formik';
+import { ErrorMessage, Field } from 'formik';
 import TextError from './TextError';
 
-const Input = (props) => {
-	const { label, name, required, className, ...rest } = props;
+const TextArea = (props) => {
+	const { label, name, required, ...rest } = props;
 	return (
-		<div className={className ? '' : 'formControlClass'}>
+		<div className="formControlClass">
 			{label && (
 				<label className="formLabel" htmlFor={name}>
 					{label}{' '}
@@ -15,10 +15,10 @@ const Input = (props) => {
 					) : null}
 				</label>
 			)}
-			<Field name={name} id={name} className={className} {...rest} />
+			<Field as="textarea" name={name} id={name} cols={30} rows={10} {...rest} />
 			<ErrorMessage name={name} component={TextError} />
 		</div>
 	);
 };
 
-export default Input;
+export default TextArea;

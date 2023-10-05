@@ -1,9 +1,8 @@
-import React from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { Formik, Form } from 'formik';
 import Input from '../../components/FormComponents/Input';
 import { Button } from 'flowbite-react';
-import Spinner from '../../components/Spinners';
+import { Spinner } from '../../components';
 import * as Yup from 'yup';
 import { TokenHook } from '../../hooks/AuthHook';
 import { notifyError, notifySuccess } from '../../ui';
