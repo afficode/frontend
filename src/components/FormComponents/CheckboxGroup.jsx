@@ -18,7 +18,6 @@ const CheckboxGroup = (props) => {
 			<Field name={name}>
 				{({ field }) => {
 					return options.map((option) => {
-						// console.log(field);
 						return (
 							<div key={option.key} className="inline-block items-center pr-8 space-x-2">
 								<input
@@ -28,7 +27,6 @@ const CheckboxGroup = (props) => {
 									{...rest}
 									value={option.value}
 									checked={field.value.includes(option.value)}
-									// className="checkbox checkbox-primary"
 								/>
 								<label htmlFor={option.value}>{option.key}</label>
 							</div>

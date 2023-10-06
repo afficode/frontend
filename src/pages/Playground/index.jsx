@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Button } from '../../ui';
 import { FormControl } from '../../components';
 import { Form, Formik } from 'formik';
+// import * as Yup from 'yup';
 import * as Yup from 'yup';
 import { ToggleSwitch } from 'flowbite-react';
 
@@ -11,7 +12,6 @@ const Playground = () => {
 
 	const initialValues = {
 		name: '',
-		// email: '',
 		description: '',
 		selectOption: '',
 		radioOption: '',
@@ -22,7 +22,6 @@ const Playground = () => {
 	};
 	const validationSchema = Yup.object({
 		name: Yup.string().required('Required'),
-		// email: Yup.string().required('Required'),
 		description: Yup.string().required('Required'),
 		selectOption: Yup.string().required('Required'),
 		radioOption: Yup.string().required('Required'),
@@ -50,8 +49,6 @@ const Playground = () => {
 			resetForm();
 		}, 3000);
 	};
-
-	// const [selectedFile, setSelectedFile] = useState([]);
 
 	return (
 		<div className="w-full max-w-5xl mx-auto">
@@ -141,52 +138,6 @@ const Playground = () => {
 												required={true}
 											/>
 											<FormControl control="imageinput" name="images" type="file" label="Enter your images" />
-											{/* <div className="flex gap-6 items-center flex-wrap">
-												<div className="relative rounded-md w-52 h-40">
-													<input
-														type="file"
-														id="fileInput"
-														onChange={(e) => {
-															const newSelectedFile = [...selectedFile];
-															const newImgUrl = [...formik.values.images];
-
-															// console.log(e.target.files[0]);
-															const file = e.target.files[0];
-															if (file && file.type.startsWith('image/')) {
-																newSelectedFile.push(file);
-																newImgUrl.push(URL.createObjectURL(file));
-
-																if (newImgUrl.length > 5) {
-																	alert('You can only upload up to 5 images.');
-																	return;
-																}
-															} else {
-																alert('Please select a valid image file.');
-															}
-
-															setSelectedFile(newSelectedFile);
-															formik.setFieldValue('images', newImgUrl);
-														}}
-														className=" sr-only"
-													/>
-
-													<label htmlFor="fileInput" className={`cursor-pointer transition-all duration-300`}>
-														<div className=" w-full h-full bg-gray-200 border border-primary text-primary rounded-md flex items-center justify-center">
-															<img src={Camera} alt="camera" /> <h5>Add image</h5>
-														</div>
-													</label>
-												</div>
-
-												{formik.values.images?.map((img, index) => {
-													if (selectedFile[index].size < 5 * 1024 * 1024) {
-														return (
-															<img key={index} src={img} className="w-52 h-40" alt={selectedFile[index].name} />
-														);
-													} else {
-														return <p>File to big!</p>;
-													}
-												})}
-											</div> */}
 
 											<FormControl control="textarea" name="description" type="text" label="Description" />
 
