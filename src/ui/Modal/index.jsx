@@ -1,16 +1,31 @@
-import React from 'react';
+import { useEffect } from 'react';
+import { useRef } from 'react';
 import { ImCancelCircle } from 'react-icons/im';
 
 const Modal = ({ isOpen, setIsOpen, modalHeader = true, children, headerText }) => {
-	return (
+	const modalRef = useRef();
+
+	useEffect(() => {
+		const handleClickOutside = (e) => {
+			if (modalRef.current && !modalRef.current.contains(e.target)) {
+				setIsOpen(!isOpen);
+			}
+		};
+
+		document.addEventListener('mousedown', handleClickOutside);
+
+		return () => {
+			document.removeEventListener('mousedown', handleClickOutside);
+		};
+	}, [isOpen, setIsOpen]);
+
+	return isOpen ? (
 		<div
-			style={{ zIndex: 100000002 }}
-			className={`fixed  inset-0 m-auto backdrop-opacity-5 backdrop-invert bg-primary/30 min-h-screen w-full backdrop-blur-sm md:p-0 p-5 items-center justify-center rounded-sm ${
-				isOpen ? 'flex' : 'hidden'
-			}`}
+			className={`fixed inset-0 z-[10000] bg-primary/50 h-full w-full flex items-center justify-center `}
 		>
 			<div
-				className={`shadow p-[20px] overflow-hidden rounded-lg bg-[#fff] w-[95%] lg:w-[40%] md:w-[60%] xl:w-[40%]`}
+				ref={modalRef}
+				className={` p-[20px] overflow-hidden rounded-lg bg-[#fff] w-[95%] lg:w-[40%] md:w-[60%] xl:w-[40%]`}
 			>
 				{modalHeader && (
 					<div className={`flex justify-between items-center pb-6`}>
@@ -26,7 +41,7 @@ const Modal = ({ isOpen, setIsOpen, modalHeader = true, children, headerText }) 
 				</div>
 			</div>
 		</div>
-	);
+	) : null;
 };
 
 export default Modal;
