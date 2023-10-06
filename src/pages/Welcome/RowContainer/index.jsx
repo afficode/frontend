@@ -17,7 +17,7 @@ const RowContainer = ({ title }) => {
 		<section className="px-4 md:px-[4rem] py-6">
 			<div className="flex items-center justify-between pb-4">
 				<h3 className="w-full font-normal">{title}</h3>
-				<span className="font-semibold capitalize cursor-pointer whitespace-nowrap max-sm:text-sm text-blue hover:underline">
+				<span className="font-semibold capitalize cursor-pointer whitespace-nowrap max-sm:text-sm text-primary hover:underline">
 					See More
 					<BsFastForwardFill className="inline ml-2 max-sm:text-base text-[25px]" />
 				</span>

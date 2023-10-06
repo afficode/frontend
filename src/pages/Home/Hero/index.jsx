@@ -2,7 +2,7 @@ import { Property, Sale, Services, Vehicles } from '../../../assets/images';
 
 const Hero = () => {
 	return (
-		<section className="px-4 lg:pt-16 pb-12 hero bg-gradient-to-b from-blue/20 via-blue/60 to-white">
+		<section className="px-4 lg:pt-16 pb-12 hero bg-gradient-to-b from-primary/20 via-primary/60 to-white">
 			<div className="mt-16 mb-4">
 				<div className="flex gap-4 max-lg:grid max-lg:grid-cols-2 max-lg:gap-6 max-sm:grid-cols-1 ">
 					{cardData.map((card, index) => (
@@ -10,7 +10,7 @@ const Hero = () => {
 					))}
 				</div>
 				<div className="max-w-[30rem] mx-auto mt-6 lg:mt-[-3rem]">
-					<button className="w-full text-lg capitalize border-none btn hover:bg-yellow hover:border-black/50 hover:border-solid bg-yellow rounded-3xl sm:text-xl ">
+					<button className="w-full text-lg capitalize border-none btn text-white hover:bg-secondary hover:border-black/50 hover:border-solid bg-secondary rounded-3xl sm:text-xl ">
 						Set up a Shop Today!
 					</button>
 				</div>
@@ -27,7 +27,7 @@ const Card = ({ title, image, description, action }) => {
 			<h3 className="xl:whitespace-nowrap">{title}</h3>
 			<img src={image} alt="for sale image" className="w-[11rem] h-[9rem] object-contain" />
 			<p className="p-lg ">{description}</p>
-			<button className="mt-4 text-lg capitalize border-none btn rounded-3xl hover:border-black/50 hover:border-solid hover:bg-yellow/90 bg-yellow px-8">
+			<button className="mt-4 text-lg capitalize border-none btn rounded-3xl hover:border-black/50 hover:border-solid hover:bg-secondary/90 bg-secondary px-8 text-white">
 				{action}
 			</button>
 		</div>

@@ -6,7 +6,7 @@ import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
 
 const Footer = () => {
 	return (
-		<footer className="bg-blue">
+		<footer className="bg-primary">
 			<section className=" w-full px-[1.5rem] lg:px-[4rem] max-w-[1380px] mx-auto">
 				<div className="text-white flex flex-col gap-[1.5rem] md:gap-[3rem] py-8">
 					<div className="grid grid-cols-1 items-center gap-[1rem] md:gap-0 md:grid-cols-3 md:divide-x-4 divide-white">
@@ -25,7 +25,7 @@ const Footer = () => {
 									to={'https://web.facebook.com/profile.php?id=61550635179141'}
 									rel="noopener noreferrer"
 									target="_blank"
-									className="hover:text-yellow"
+									className="hover:text-secondary"
 								>
 									<FaFacebook size={28} />
 								</Link>
@@ -33,7 +33,7 @@ const Footer = () => {
 									to={'https://twitter.com/affi_ng88124'}
 									rel="noopener noreferrer"
 									target="_blank"
-									className="hover:text-yellow"
+									className="hover:text-secondary"
 								>
 									<FaTwitter size={28} />
 								</Link>
@@ -41,7 +41,7 @@ const Footer = () => {
 									to={'https://www.instagram.com/contactaffi/'}
 									rel="noopener noreferrer"
 									target="_blank"
-									className="hover:text-yellow"
+									className="hover:text-secondary"
 								>
 									<FaInstagram size={28} />
 								</Link>
@@ -91,4 +91,4 @@ const Footer = () => {
 export default Footer;
 
 const listStyles =
-	'capitalize cursor-pointer text-white text-sm md:text-base font-medium py-[.3rem] px-2 md:px-8 hover:text-yellow transition-colors whitespace-nowrap';
+	'capitalize cursor-pointer text-white text-sm md:text-base font-medium py-[.3rem] px-2 md:px-8 hover:text-secondary transition-colors whitespace-nowrap';

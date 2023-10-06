@@ -13,3 +13,5 @@ export { default as Store } from './store.png';
 export { default as Tailor } from './tailor.png';
 export { default as Toyota } from './toyota.png';
 export { default as Vehicles } from './vehicles.png';
+export { default as Affi } from './Affi.png';
+export { default as largeMail } from './mail9.png';

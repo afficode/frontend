@@ -13,13 +13,13 @@ const RowContainer = ({ title }) => {
 		<section className="w-full px-4 md:px-[2rem] py-8">
 			<div className="relative flex items-center w-full pb-2">
 				<h2 className="max-sm:text-2xl sm:mx-auto ">{title}</h2>
-				<span className="absolute right-0 font-semibold capitalize cursor-pointer whitespace-nowrap text-blue hover:underline">
+				<span className="absolute right-0 font-semibold capitalize cursor-pointer whitespace-nowrap text-primary hover:underline">
 					{title === 'Shops' ? 'Visit Shops' : 'View More'}
 					<BsFastForwardFill className="inline ml-2 max-sm:text-base text-[25px]" />
 				</span>
 			</div>
 			<div className="relative w-full pb-8">
-				<div className="py-4 bg-blue/20 md:px-4">
+				<div className="py-4 bg-primary/20 md:px-4">
 					<Carousel renderDotsOutside responsive={responsive} showDots={true}>
 						{title === 'Shops'
 							? Array(12)
@@ -50,14 +50,14 @@ const ShopsCard = () => {
 					<h4 className="font-semibold">Jokals Cars</h4>
 					<span className="block font-semibold">[40 cars]</span>
 					<div className="flex gap-2">
-						<HiStar size={26} className="text-yellow" />
-						<HiStar size={26} className="text-yellow" />
-						<HiStar size={26} className="text-yellow" />
+						<HiStar size={26} className="text-secondary" />
+						<HiStar size={26} className="text-secondary" />
+						<HiStar size={26} className="text-secondary" />
 						<HiStar size={26} />
 						<HiStar size={26} />
 					</div>
 				</div>
-				<button className="py-0 mx-4 text-black capitalize border-none btn bg-yellow/90 hover:bg-yellow/90">
+				<button className="py-0 mx-4 text-black capitalize border-none btn bg-secondary/90 hover:bg-secondary/90">
 					Visit Shop
 				</button>
 			</div>
@@ -67,11 +67,11 @@ const ShopsCard = () => {
 
 const FeaturedProductsCard = () => {
 	return (
-		<div className="max-w-[11rem] max-h-[14rem]  sm:w-[13rem] sm:h-[16rem] flex items-center justify-center rounded-lg border-l-4 border-r-4 border-l-yellow border-r-yellow">
+		<div className="max-w-[11rem] max-h-[14rem]  sm:w-[13rem] sm:h-[16rem] flex items-center justify-center rounded-lg border-l-4 border-r-4 border-l-secondary border-r-secondary">
 			<img className="object-cover min-w-full rounded-lg max-h-fit" src={Car} alt="/" />
 			<div className="absolute top-0 bottom-0 left-0 right-0 flex flex-col justify-between py-2 w-[11rem]">
 				<div className="text-center mt-auto">
-					<button className=" mb-1  px-4 text-black capitalize border-none btn bg-yellow/90 hover:bg-yellow/90">
+					<button className=" mb-1  px-4 text-black capitalize border-none btn bg-secondary/90 hover:bg-secondary/90">
 						View Product
 					</button>
 				</div>
