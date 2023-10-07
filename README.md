@@ -1,8 +1,38 @@
-# React + Vite
+# Hi there
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+To get started, run
 
-Currently, two official plugins are available:
+### `npm install`
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+To install packages being used, then
+
+### `npm run dev`
+
+To start the server
+
+## Folder structure
+
+All modules in files are exported from the `index.js` file in the base folder except in `/assets` where each subfolder contains their own `index.js`. E.g
+`/constants` _Folder_
+
+`/routes.js` _File with modules_
+
+`/carouselSettings.js` _File with modules_
+
+`/index.js` _All modules from routes and carouselSettings should be exported from here_
+
+### Order
+
+Modules being exported from index.js file are arranged in alphabetical order. E.g
+
+`export { Abc } from 'a'`
+
+`export { Bcd } from 'a'`
+
+All`(*)` exports comes before named exports and are arranged according to their file names E.g
+
+`export * from 'a'`
+
+`export * from 'b'`
+
+`export { Abc } from 'a'`

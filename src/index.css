@@ -1,3 +1,151 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html,
+html *,
+html *::before,
+html *::after {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	font-family: 'Rubik', sans-serif;
+}
+
+/* typography  */
+h1 {
+	@apply text-5xl;
+	@apply max-sm:text-4xl;
+}
+
+h2 {
+	@apply text-4xl font-semibold;
+	@apply max-sm:text-3xl;
+}
+
+h3 {
+	@apply text-3xl font-semibold;
+	@apply max-sm:text-2xl;
+}
+
+h4 {
+	@apply text-2xl font-semibold;
+	@apply max-sm:text-xl;
+}
+
+h5 {
+	@apply text-xl;
+	@apply max-sm:text-lg;
+}
+
+h6 {
+	@apply text-lg;
+	@apply max-sm:text-base;
+}
+
+p {
+	@apply text-base;
+	@apply max-sm:text-sm !important;
+}
+
+.p-lg {
+	@apply text-lg;
+	@apply max-sm:text-base !important;
+	@apply leading-6 !important;
+}
+
+/* buttons  */
+.btn {
+	/* @apply text-base; */
+	@apply max-sm:text-base;
+}
+.outline-btn {
+	font-size: 1.2rem;
+	border-radius: 1.5rem;
+	background-color: #2686ce;
+	padding: 0.8rem 3rem;
+	color: #fff;
+	position: relative;
+}
+.outline-btn:after {
+	position: absolute;
+	content: '';
+	top: -6px;
+	right: -10px;
+	padding: 1rem 3rem;
+	height: 100%;
+	width: 100%;
+	border-radius: 1.6rem;
+	background-color: transparent;
+	border: 2px solid #2686ce;
+}
+.outline-btn:hover {
+	opacity: 0.9;
+	background-color: #2686ce;
+}
+
+/* form styles */
+.formControlClass {
+	@apply form-control my-4;
+}
+
+.formControlClass > input,
+select {
+	@apply focus:border-primary w-full placeholder-black/40 bg-white text-black text-base rounded-none my-2
+	 input-md;
+}
+textarea {
+	@apply focus:border-primary w-full placeholder-black/40 bg-white text-black text-base rounded-none my-2;
+}
+
+.formLabel {
+	@apply font-semibold;
+}
+
+/* hero cards  */
+@media screen and (min-width: 1024px) {
+	.hero-card:nth-child(2) {
+		margin-top: -5rem;
+	}
+	.hero-card:nth-child(3) {
+		margin-top: -5rem;
+	}
+}
+
+/* homepage carousel */
+.carousel-con {
+	background: rgba(4, 127, 115, 0.1);
+}
+
+.react-multiple-carousel__arrow {
+	background: #ebba16;
+}
+
+.react-multiple-carousel__arrow--right {
+	right: 0;
+	z-index: 10 !important;
+}
+.react-multiple-carousel__arrow--left {
+	left: 0;
+	z-index: 10 !important;
+}
+.react-multi-carousel-dot-list button {
+	border: none;
+	background-color: #acacac;
+}
+.react-multi-carousel-dot--active button {
+	background-color: #ebba16;
+}
+
+/* welcome page  */
+.grab-btn {
+	background: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0) 100%);
+}
+
+/* flowbite toggle class  */
+.toggle-bg {
+	background-color: #2686ce;
+}
