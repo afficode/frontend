@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Button } from '../../ui';
+import { Button, InputGroup } from '../../ui';
 import { FormControl } from '../../components';
-import { Form, Formik } from 'formik';
+import { Form, Formik, useFormik } from 'formik';
 // import * as Yup from 'yup';
 import * as Yup from 'yup';
 import { ToggleSwitch } from 'flowbite-react';
@@ -43,12 +43,65 @@ const Playground = () => {
 	const onSubmit = (values, { resetForm }) => {
 		setLoading(true);
 		setTimeout(() => {
-			console.log('Form data', values);
-			console.log('Saved data', JSON.parse(JSON.stringify(values)));
-			setLoading(false);
+			// console.log('Form data', values);
+			// console.log('Saved data', JSON.parse(JSON.stringify(values)));
+			// setLoading(false);
 			resetForm();
 		}, 3000);
 	};
+
+	//input group
+
+	const initialFormValues = {
+		name: '',
+		description: '',
+		bio: '',
+		age: '',
+	};
+
+	const formik = useFormik({
+		initialValues: initialFormValues,
+		onSubmit: (values) => {
+			console.log(values);
+		},
+		validate: (values) => {
+			let errors = {};
+
+			if (!values.name) {
+				errors.name = 'Required';
+			}
+
+			if (!values.description) {
+				errors.description = 'Required';
+			}
+			if (!values.bio) {
+				errors.bio = 'Required';
+			}
+
+			if (!values.age) {
+				errors.age = 'Required';
+			}
+			return errors;
+		},
+	});
+
+	// const handleChange = (e) => {
+	// 	const name = e.target.name;
+	// 	const value = e.target.value;
+
+	// 	setFormData((prev) => ({ ...prev, [name]: value }));
+	// };
+
+	// const formDataValidation = Yup.object().shape({
+	// 	name: Yup.string().required('Required'),
+	// 	description: Yup.string().required('Required'),
+	// });
+
+	// const handleSubmit = (e) => {
+	// 	e.preventDefault();
+
+	// 	console.log(formData);
+	// };
 
 	return (
 		<div className="w-full max-w-5xl mx-auto">
@@ -97,6 +150,51 @@ const Playground = () => {
 									Submit
 								</Button>
 							</div>
+						</div>
+					</div>
+
+					<div>
+						<h3>InputGroup</h3>
+
+						<div>
+							<form onSubmit={formik.handleSubmit}>
+								<InputGroup
+									name="name"
+									value={formik.values.name}
+									onBlur={formik.handleBlur}
+									onChange={formik.handleChange}
+									errorMsg={formik.touched.name && formik.errors.name ? formik.errors.name : null}
+								/>
+								<InputGroup
+									name="description"
+									value={formik.values.description}
+									onBlur={formik.handleBlur}
+									onChange={formik.handleChange}
+									errorMsg={
+										formik.touched.description && formik.errors.description ? formik.errors.description : null
+									}
+								/>
+							</form>
+							<form onSubmit={formik.handleSubmit}>
+								<InputGroup
+									name="bio"
+									value={formik.values.bio}
+									onBlur={formik.handleBlur}
+									onChange={formik.handleChange}
+									errorMsg={formik.touched.bio && formik.errors.bio ? formik.errors.bio : null}
+								/>
+								<InputGroup
+									name="age"
+									value={formik.values.age}
+									onBlur={formik.handleBlur}
+									onChange={formik.handleChange}
+									errorMsg={formik.touched.age && formik.errors.age ? formik.errors.age : null}
+								/>
+							</form>
+
+							<Button variant={'primary'} onClick={formik.handleSubmit} type="submit">
+								Submit
+							</Button>
 						</div>
 					</div>
 

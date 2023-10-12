@@ -149,3 +149,19 @@ textarea {
 .toggle-bg {
 	background-color: #2686ce;
 }
+
+/* dashboard sidebar  */
+.sidebar-list > a.active li {
+	@apply text-white bg-primary transition-all;
+}
+
+/* performance table  */
+.location-table {
+	width: 30rem;
+}
+.location-table .location-row:nth-child(odd) {
+	@apply bg-gray-100;
+}
+.location-table .location-row:nth-child(even) {
+	@apply bg-white border border-black/70;
+}

@@ -4,15 +4,21 @@ import {
 	Auth,
 	ContactUs,
 	ForgotPassword,
+	Help,
 	Home,
 	Logout,
+	Performance,
 	Playground,
+	PrivacyPolicy,
+	Profile,
 	// Products,
 	ResetPassword,
+	Security,
+	Settings,
 	VerifyMail,
 	Welcome,
 } from './pages';
-import { AppLayout } from './layout';
+import { AppLayout, DashboardLayout } from './layout';
 import { Approutes } from './constants';
 import { ToastContainer } from 'react-toastify';
 
@@ -35,8 +41,16 @@ function App() {
 					<Route path={Approutes.auth.verifyMail} element={<VerifyMail />} />
 					<Route path={Approutes.auth.resetPassword} element={<ResetPassword />} />
 					<Route path={Approutes.logout} element={<Logout />} />
-					{/* <Route path="/:categoryName/:subCategoryName" element={<Products />} />
-					<Route path="/:categoryName" element={<Products />} /> */}
+				</Route>
+
+				{/* use Dashboard layout  */}
+				<Route element={<DashboardLayout />}>
+					<Route path={Approutes.dashboard.performance} element={<Performance />} />
+					<Route path={Approutes.dashboard.profile} element={<Profile />} />
+					<Route path={Approutes.dashboard.settings} element={<Settings />} />
+					<Route path={Approutes.dashboard.security} element={<Security />} />
+					<Route path={Approutes.dashboard.privacyPolicy} element={<PrivacyPolicy />} />
+					<Route path={Approutes.dashboard.help} element={<Help />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>
