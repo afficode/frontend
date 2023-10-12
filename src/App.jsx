@@ -23,6 +23,7 @@ import { Approutes } from './constants';
 import { ToastContainer } from 'react-toastify';
 
 function App() {
+	const { isLogin } = useAuth();
 	return (
 		<BrowserRouter>
 			<ToastContainer />
@@ -32,7 +33,7 @@ function App() {
 
 				{/* use NavBar and Footer layout  */}
 				<Route element={<AppLayout />}>
-					<Route path={Approutes.home} element={<Home />} />
+					<Route path={Approutes.home} element={isLogin ? <Welcome /> : <Home />} />
 					<Route path={Approutes.welcome} element={<Welcome />} />
 					<Route path={Approutes.aboutUs} element={<AboutUs />} />
 					<Route path={Approutes.contactUs} element={<ContactUs />} />
