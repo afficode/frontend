@@ -29,7 +29,7 @@ const AboutUs = () => {
 					assumenda, ex accusantium facere! Lorem ipsum dolor sit amet consectetur adipisicing elit.
 					Amet, itaque! Consectetur expedita culpa totam aspernatur.
 				</p>
-
+  
 				<p>
 					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est ratione alias quis doloremque
 					laboriosam excepturi distinctio iusto esse deserunt nemo, tempore quasi ab totam ut earum

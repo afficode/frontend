@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import {
   AboutUs,
   Auth,
+  Categories,
   ContactUs,
   ForgotPassword,
   Home,
@@ -16,6 +17,7 @@ import { AppLayout } from "./layout";
 import { Approutes } from "./constants";
 import { ToastContainer } from "react-toastify";
 import useAuth from "./context/UserContext";
+import Categorychild from "./pages/Categorychild";
 
 function App() {
   const { isLogin } = useAuth();
@@ -34,6 +36,11 @@ function App() {
           />
           <Route path={Approutes.welcome} element={<Welcome />} />
           <Route path={Approutes.aboutUs} element={<AboutUs />} />
+
+          <Route path={Approutes.categories} element={<Categories />} />
+
+          <Route path={Approutes.categorychild} element={<Categorychild />} />
+
           <Route path={Approutes.contactUs} element={<ContactUs />} />
           <Route path={Approutes.auth.initial} element={<Auth />} />
           <Route path={Approutes.forgotPassword} element={<ForgotPassword />} />

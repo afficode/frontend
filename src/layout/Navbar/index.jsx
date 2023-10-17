@@ -30,6 +30,8 @@ const Navbar = () => {
   // fetch categories
   const { data } = useCategories();
 
+  // console.log(data)  
+
   // filter categories
   const allCat = data?.filter((data) => data.id >= 10 && data.id < 100);
   const vehicleCat = data?.filter((data) => data.id >= 5000 && data.id < 5100);
