@@ -1,6 +1,6 @@
 import TextError from '../../components/FormComponents/TextError';
 
-const InputGroup = ({ type, name, placeholder, className, errorMsg, ...rest }) => {
+const InputGroup = ({ children, type, name, placeholder, className, errorMsg, ...rest }) => {
 	return (
 		<div className="my-2">
 			{type === 'textarea' ? (
@@ -23,9 +23,25 @@ const InputGroup = ({ type, name, placeholder, className, errorMsg, ...rest }) =
 					{errorMsg && <TextError>{errorMsg}</TextError>}
 				</>
 			) : type === 'file' ? (
-				<label htmlFor={name}>
-					<input type="file" name={name} id={name} />
-				</label>
+				<>
+					<label htmlFor={name} className="cursor-pointer">
+						{children}
+						<input
+							type="file"
+							name={name}
+							id={name}
+							className={`hidden ${className ? className : ''}`}
+							onBlur={(e) => {
+								if (typeof onChange === 'function') onBlur(e);
+							}}
+							onChange={(e) => {
+								if (typeof onChange === 'function') onChange(e);
+							}}
+							{...rest}
+						/>
+					</label>
+					{errorMsg && <TextError>{errorMsg}</TextError>}
+				</>
 			) : (
 				<>
 					<input
@@ -51,4 +67,4 @@ const InputGroup = ({ type, name, placeholder, className, errorMsg, ...rest }) =
 
 export default InputGroup;
 
-const inputStyle = 'bg-gray-100';
+// const inputStyle = 'bg-gray-100';

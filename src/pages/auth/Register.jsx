@@ -59,6 +59,7 @@ const Register = () => {
 				toast.error(submit.message);
 				console.log(submit.message);
 			}
+			setIsLoading(false);
 		}, 3000);
 	};
 

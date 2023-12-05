@@ -17,7 +17,7 @@ const Button = ({ variant, size, loading, disabled, children, className, ...rest
 
 	const plainStyles = `${size === 'small' ? 'py-[0.5rem] px-[1.5rem]' : 'py-[.65rem] px-[2.8rem]'} ${
 		size === 'full' ? 'w-full' : 'w-auto'
-	} bg-white text-black hover:text-primary shadow-lg`;
+	} bg-white text-black hover:text-primary shadow-xl`;
 
 	return (
 		<button

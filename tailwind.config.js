@@ -9,7 +9,11 @@ export default {
 	theme: {
 		extend: {},
 	},
-	plugins: [require('daisyui'), require('flowbite/plugin')],
+	plugins: [
+		require('daisyui'),
+		require('flowbite/plugin'),
+		require('tailwind-scrollbar')({ nocompatible: true }),
+	],
 	daisyui: {
 		// prefix: '',
 		themes: [

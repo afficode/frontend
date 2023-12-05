@@ -1,7 +1,53 @@
 import ReactEcharts from 'echarts-for-react';
 import { PerformanceArrowUp } from '../../../assets/svgs';
+import { useState } from 'react';
 
-const PerformanceCharts = () => {
+const PerformanceCharts = ({ adsData }) => {
+	const [chartData, setChartData] = useState([
+		{
+			day: 'Mon',
+			account_interaction: 120,
+		},
+		{
+			day: 'Tue',
+			account_interaction: 200,
+		},
+		{
+			day: 'Wed',
+			account_interaction: 150,
+		},
+		{
+			day: 'Thu',
+			account_interaction: 80,
+		},
+		{
+			day: 'Fri',
+			account_interaction: 70,
+		},
+		{
+			day: 'Sat',
+			account_interaction: 120,
+		},
+
+		{
+			day: 'Sun',
+			account_interaction: 170,
+		},
+	]);
+
+	const barColors = ['#2686CE', '#047F73', '#EBBA16', '#B50444', '#FFB6B6', '#da4848', '#3929ca'];
+
+	const data = [
+		chartData.map((item) => {
+			return {
+				value: item.account_interaction,
+				color: barColors[Math.floor(Math.random() * barColors.length)],
+			};
+		}),
+	];
+
+	// console.log(data[0]);
+
 	const option = {
 		tooltip: {},
 		// legend: {},
@@ -17,51 +63,15 @@ const PerformanceCharts = () => {
 				name: 'Products',
 				barWidth: '50%',
 				type: 'bar',
-				data: [
-					{
-						value: 120,
+				data: data[0].map((item) => {
+					return {
+						value: item.value,
 						itemStyle: {
-							color: '#2686CE',
+							color: item.color,
 						},
-					},
-					{
-						value: 200,
-						itemStyle: {
-							color: '#047F73',
-						},
-					},
-					{
-						value: 150,
-						itemStyle: {
-							color: '#EBBA16',
-						},
-					},
-					{
-						value: 80,
-						itemStyle: {
-							color: '#B50444',
-						},
-					},
-					{
-						value: 70,
-						itemStyle: {
-							color: '#FFB6B6',
-						},
-					},
-					{
-						value: 120,
-						itemStyle: {
-							color: '#da4848',
-						},
-					},
+					};
+				}),
 
-					{
-						value: 170,
-						itemStyle: {
-							color: '#3929ca',
-						},
-					},
-				],
 				itemStyle: {
 					borderRadius: [20, 20, 0, 0],
 				},
@@ -74,7 +84,7 @@ const PerformanceCharts = () => {
 	};
 
 	return (
-		<div className="my-6 flex flex-col  gap-6">
+		<div className="flex flex-col gap-6 my-6">
 			{/* priducts table  */}
 			<div>
 				<h4>Products Activities Chart</h4>
@@ -82,7 +92,7 @@ const PerformanceCharts = () => {
 
 				<div className="w-full mt-4 overflow-auto border border-black/40">
 					<table className="table ">
-						<thead className="bg-gray-200 text-black text-sm font-medium">
+						<thead className="text-sm font-medium text-black bg-gray-200">
 							<tr>
 								<th>Product(s)</th>
 								<th className="text-center">Impression/ Views</th>
@@ -91,12 +101,12 @@ const PerformanceCharts = () => {
 							</tr>
 						</thead>
 						<tbody>
-							{tableData.map((item, i) => (
-								<tr key={i} className="font-medium whitespace-nowrap ">
-									<td>{item.product}</td>
-									<td className="text-primary text-center">[ {item.views} ]</td>
-									<td className="text-primary text-center">[ {item.chats} ]</td>
-									<td className="text-primary text-center">[ {item.grabs} ]</td>
+							{adsData?.ads_summary.map((ad) => (
+								<tr key={ad.id} className="font-medium whitespace-nowrap ">
+									<td className="capitalize">{ad.name}</td>
+									<td className="text-center text-primary">[ {ad.views} ]</td>
+									<td className="text-center text-primary">[ {ad.chats} ]</td>
+									<td className="text-center text-primary">[ 4 ]</td>
 								</tr>
 							))}
 						</tbody>
@@ -109,13 +119,13 @@ const PerformanceCharts = () => {
 				<h4>Monthly AD Performance</h4>
 				<p>See hot spots for your products. </p>
 
-				<div className="w-full mt-4 flex items-center gap-4 sm:gap-8 sm:pl-12">
+				<div className="flex items-center w-full gap-4 mt-4 sm:gap-8 sm:pl-12">
 					<div>
 						<img src={PerformanceArrowUp} className="h-[15rem] " alt="/" />
 					</div>
-					<div className="location-table space-y-2 ">
+					<div className="space-y-2 location-table ">
 						{monthlyPerformanceData.map((item, i) => (
-							<div key={i} className="location-row rounded-2xl flex justify-between py-3 px-6">
+							<div key={i} className="flex justify-between px-6 py-3 location-row rounded-2xl">
 								<div className="flex gap-8">
 									{' '}
 									<span style={{ background: item.color }} className="w-5 h-5 m-auto rounded-full" />{' '}

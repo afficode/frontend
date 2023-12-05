@@ -146,10 +146,15 @@ textarea {
 }
 
 /* flowbite toggle class  */
-.toggle-bg {
+.custom-toggle > .toggle-bg {
 	background-color: #2686ce;
 }
 
+/* profile nav  */
+.profile-navlist > a.active {
+	@apply text-white bg-primary transition-all;
+	color: #fff !important;
+}
 /* dashboard sidebar  */
 .sidebar-list > a.active li {
 	@apply text-white bg-primary transition-all;

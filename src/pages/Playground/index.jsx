@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Button, InputGroup } from '../../ui';
 import { FormControl } from '../../components';
 import { Form, Formik, useFormik } from 'formik';
-// import * as Yup from 'yup';
 import * as Yup from 'yup';
 import { ToggleSwitch } from 'flowbite-react';
 
@@ -43,9 +42,9 @@ const Playground = () => {
 	const onSubmit = (values, { resetForm }) => {
 		setLoading(true);
 		setTimeout(() => {
-			// console.log('Form data', values);
-			// console.log('Saved data', JSON.parse(JSON.stringify(values)));
-			// setLoading(false);
+			console.log('Form data', values);
+			console.log('Saved data', JSON.parse(JSON.stringify(values)));
+			setLoading(false);
 			resetForm();
 		}, 3000);
 	};
@@ -85,67 +84,57 @@ const Playground = () => {
 		},
 	});
 
-	// const handleChange = (e) => {
-	// 	const name = e.target.name;
-	// 	const value = e.target.value;
-
-	// 	setFormData((prev) => ({ ...prev, [name]: value }));
-	// };
-
-	// const formDataValidation = Yup.object().shape({
-	// 	name: Yup.string().required('Required'),
-	// 	description: Yup.string().required('Required'),
-	// });
-
-	// const handleSubmit = (e) => {
-	// 	e.preventDefault();
-
-	// 	console.log(formData);
-	// };
-
 	return (
 		<div className="w-full max-w-5xl mx-auto">
-			<div className=" w-full text-black">
-				<h1 className=" text-center my-4">Playground</h1>
+			<div className="w-full text-black ">
+				<h1 className="my-4 text-center ">Playground</h1>
 
 				<div className="p-6 space-y-12">
 					<div>
-						<h3 className=" text-center text-primary">Buttons</h3>
+						<h3 className="text-center text-primary">Buttons</h3>
+
+						<div className="w-[50rem]">
+							<p className="truncate">
+								Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo excepturi mollitia tenetur
+								maiores dolorem ipsa veritatis animi? Tempore modi voluptatum iure beatae sequi, quasi quos
+								doloribus excepturi quis dolores adipisci.
+							</p>
+						</div>
 
 						{/* <h5>Props </h5> */}
-						<div className="flex gap-12 flex-wrap justify-center my-3">
-							<div className=" text-center">
+						<div className="flex flex-wrap justify-center gap-12 my-3">
+							<div className="text-center ">
 								<p>variant - primary</p>
-								<Button variant="primary" className="my-4 text-lg rounded-full font-bold">
+								<Button variant="primary" className="my-4 text-lg font-bold rounded-full">
 									+ Follow
 								</Button>
 							</div>
-							<div className=" text-center">
+							<div className="text-center ">
 								<p>variant - secondary, size - small</p>
-								<Button variant="secondary" size={'small'} className="my-4 text-lg rounded-full font-bold">
+								<Button variant="secondary" size={'small'} className="my-4 text-lg font-bold rounded-full">
 									+ Follow
 								</Button>
 							</div>
 
-							<div className=" text-center">
+							<div className="text-center ">
 								<p>variant - subtle</p>
-								<Button variant="subtle" size={'full'} className="my-4 text-lg rounded-full font-bold">
+								<Button variant="subtle" size={'full'} className="my-4 text-lg font-bold rounded-full">
 									+ Follow
 								</Button>
 							</div>
-							<div className=" text-center">
+							<div className="text-center ">
 								<p>variant - outline</p>
-								<Button variant="outline" className="my-4 text-lg rounded-full font-bold">
+								<Button variant="outline" className="my-4 text-lg font-bold rounded-full">
 									Other Shops
 								</Button>
 							</div>
-							<div className=" text-center">
+							<div className="text-center ">
 								<p>variant - primary, loading - true, size - full</p>
 								<Button
 									loading={true}
 									variant="primary"
 									size={'full'}
-									className="my-4 text-lg rounded-full font-bold"
+									className="my-4 text-lg font-bold rounded-full"
 								>
 									Submit
 								</Button>
@@ -199,10 +188,10 @@ const Playground = () => {
 					</div>
 
 					<div>
-						<h3 className=" text-center text-primary ">Toggle</h3>
+						<h3 className="text-center text-primary">Toggle</h3>
 
-						<div className="flex flex-col justify-center items-center my-6">
-							<p className="text-center py-2">
+						<div className="flex flex-col items-center justify-center my-6">
+							<p className="py-2 text-center">
 								<b>ToggleSwitch</b> from flowbite
 							</p>
 							<ToggleSwitch
@@ -226,7 +215,7 @@ const Playground = () => {
 								{(formik) => {
 									return (
 										<Form>
-											<p className="my-0 py-0">control - input, type - text, required - true</p>
+											<p className="py-0 my-0">control - input, type - text, required - true</p>
 											<FormControl
 												control="input"
 												name="name"
@@ -265,6 +254,7 @@ const Playground = () => {
 												checked={formik.values.isVisible}
 												name="isVisible"
 												onChange={(e) => formik.setFieldValue('isVisible', e)}
+												className={formik.values.isVisible ? 'custom-toggle' : ''}
 											/>
 
 											<Button
@@ -272,7 +262,7 @@ const Playground = () => {
 												type="submit"
 												variant="primary"
 												size="full"
-												className="my-4 text-lg rounded-sm font-bold"
+												className="my-4 text-lg font-bold rounded-sm"
 											>
 												Submit
 											</Button>

@@ -54,7 +54,7 @@ const Login = () => {
 					},
 					position: 'top-center',
 				});
-				return navigate('/welcome', { replace: true });
+				return navigate(Approutes.welcome, { replace: true });
 			} else {
 				toast.error(submit.message);
 			}

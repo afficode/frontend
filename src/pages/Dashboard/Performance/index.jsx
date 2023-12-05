@@ -2,14 +2,29 @@ import { DashboardHeader } from '../../../components';
 import ActivitiesCharts from './PerformanceCharts';
 import Header from './Header';
 import ProductStats from './ProductStats';
+import LoadingScreen from './LoadingScreen';
+import { useUserAds } from '../../../hooks';
 
 const Performance = () => {
+	const { data, isLoading, isError } = useUserAds();
+
+	console.log(data);
+
+	if (isLoading) {
+		return (
+			<>
+				<DashboardHeader />
+				<LoadingScreen />;
+			</>
+		);
+	}
+
 	return (
 		<div>
 			<DashboardHeader />
 			<Header />
-			<ProductStats />
-			<ActivitiesCharts />
+			<ProductStats adsData={data} />
+			<ActivitiesCharts adsData={data} />
 		</div>
 	);
 };

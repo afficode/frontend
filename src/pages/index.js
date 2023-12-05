@@ -19,3 +19,11 @@ export { default as Settings } from './Dashboard/Settings';
 export { default as Security } from './Dashboard/Security';
 export { default as PrivacyPolicy } from './Dashboard/PrivacyPolicy';
 export { default as Help } from './Dashboard/Help';
+
+//profile
+export { default as Adverts } from './Profile/Adverts';
+export { default as Details } from './Profile/Details';
+export { default as ProfileLayout } from './Profile/Layout';
+export { default as Messages } from './Profile/Messages';
+export { default as Notifications } from './Profile/Notifications';
+export { default as SavedItems } from './Profile/SavedItems';

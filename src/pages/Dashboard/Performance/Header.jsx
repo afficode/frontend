@@ -5,6 +5,8 @@ import { Button } from '../../../ui';
 
 const Header = () => {
 	const [filteredDate, setFilteredDate] = useState('all');
+	const [date, setDate] = useState();
+	console.log(date);
 
 	return (
 		<div className="w-full bg-gray-200 px-2 sm:px-6 py-4 flex flex-col gap-4 my-2">
@@ -12,6 +14,8 @@ const Header = () => {
 				<DateView
 					placeholderText="Select dates"
 					className="border-transparent shadow-lg rounded-md w-[10rem]"
+					selected={date}
+					onChange={(val) => setDate(val)}
 				/>
 				<Button variant="primary" size="small" className="rounded-md font-medium">
 					+ Add Product
