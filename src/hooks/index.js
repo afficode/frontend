@@ -3,3 +3,4 @@ export * from './useDashboard';
 export * from './useMessages';
 export * from './UserHook';
 export { default as useCategories } from './useCategories';
+export * from './useProduct';

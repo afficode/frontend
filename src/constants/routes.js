@@ -21,6 +21,10 @@ export const Approutes = {
 		notifications: '/profile/notifications',
 		saved: '/profile/saved',
 	},
+	product: {
+		initial: '/product',
+		view: '/product/:id'
+	},
 	aboutUs: '/about-us',
 	contactUs: '/contact-us',
 	forgotPassword: '/forgot-password',

@@ -5,3 +5,4 @@ export { default as FormControl } from './FormComponents/FormControl';
 export { default as RequireAuth } from './RequireAuth';
 export { default as SpinnerSkeleton } from './SpinnersUi';
 export { default as Spinner } from './Spinners';
+export { default as ProductSkeleton } from './Skeleton/ProductSkeleton';
