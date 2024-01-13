@@ -150,11 +150,11 @@ const Navbar = () => {
 									<h4 className="font-semibold whitespace-nowrap">Post Ad in</h4>
 									<ul className="flex flex-col menu max-h-full w-full z-[10] py-4 ">
 										{filteredCategories?.allCat?.map((category) => (
-											<NavLink to={'#'} key={category.id}>
+											<Link to={`${Approutes.postAd}/${category.id}`} key={category.id}>
 												<li className="text-lg capitalize max-sm:text-base lg:pr-12 hover:underline whitespace-nowrap">
 													{category.name}
 												</li>
-											</NavLink>
+											</Link>
 										))}
 									</ul>
 								</ul>

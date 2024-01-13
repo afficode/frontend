@@ -15,7 +15,7 @@ const TextArea = (props) => {
 					) : null}
 				</label>
 			)}
-			<Field as="textarea" name={name} id={name} cols={30} rows={10} {...rest} />
+			<Field as="textarea" name={name} id={name} cols={30} rows={10} className="p-2" {...rest} />
 			<ErrorMessage name={name} component={TextError} />
 		</div>
 	);

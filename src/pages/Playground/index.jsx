@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { Button, InputGroup } from '../../ui';
+import { Button, InputGroup, Notification } from '../../ui';
 import { FormControl } from '../../components';
-import { Form, Formik, useFormik } from 'formik';
+import { Field, Form, Formik, useFormik } from 'formik';
 import * as Yup from 'yup';
 import { ToggleSwitch } from 'flowbite-react';
+import { useNotify } from '../../hooks';
 
 const Playground = () => {
 	const [loading, setLoading] = useState(false);
@@ -18,25 +19,22 @@ const Playground = () => {
 		images: [],
 		birthDate: null,
 		isVisible: false,
+		engine_size: [],
 	};
 	const validationSchema = Yup.object({
 		name: Yup.string().required('Required'),
 		description: Yup.string().required('Required'),
 		selectOption: Yup.string().required('Required'),
 		radioOption: Yup.string().required('Required'),
-		checkboxOption: Yup.array().required('Required'),
+		checkboxOption: Yup.array().min(1, 'Select at least one option').required('Required'),
 		birthDate: Yup.date().required('Required').nullable(),
-		images: Yup.array()
-			.required('At least one image is required')
-			.of(
-				Yup.mixed().test('fileFormat', 'Unsupported Format', (value) => {
-					if (!value) {
-						return true; // Allow empty values
-					}
-					// Ensure that every selected file is an image
-					return value.type.startsWith('image/');
-				})
-			),
+		images: Yup.array().min(1, 'At least one image is required').required(),
+		// .test('FILE_TYPE', 'Unsupported Format', (value) => {
+		// 	if (value) {
+		// 		return ['image/png', 'image/jpeg', 'imgae/jpg'].includes(value.type);
+		// 	}
+		// })
+		// .test('FILE_SIZE', 'Too big!', (value) => value && value < 1024 * 1024),
 	});
 
 	const onSubmit = (values, { resetForm }) => {
@@ -47,6 +45,14 @@ const Playground = () => {
 			setLoading(false);
 			resetForm();
 		}, 3000);
+	};
+
+	const notify = useNotify();
+
+	const clickHandler = () => {
+		notify('Hello world', 'success', {
+			position: 'top-center',
+		});
 	};
 
 	//input group
@@ -203,6 +209,18 @@ const Playground = () => {
 					</div>
 
 					<div>
+						<h3 className="text-center text-primary">Notification bar</h3>
+
+						<div className="flex flex-col items-center justify-center my-6">
+							<Notification status={'success'} message={'Login success!'} />
+
+							<Button variant={'primary'} onClick={clickHandler} className={'my-8 rounded-md'}>
+								Click me
+							</Button>
+						</div>
+					</div>
+
+					<div>
 						<h3 className="text-center text-primary">FormControl</h3>
 
 						{/* <h5>Props </h5> */}
@@ -247,6 +265,7 @@ const Playground = () => {
 												options={checkboxOptions}
 												name="checkboxOption"
 												label="Checkbox topic"
+												type="checkbox"
 											/>
 											<FormControl control="datepicker" name="birthDate" label="Pick a date" />
 

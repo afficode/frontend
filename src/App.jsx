@@ -13,6 +13,7 @@ import {
 	Notifications,
 	Performance,
 	Playground,
+	PostAd,
 	PrivacyPolicy,
 	Profile,
 	ProfileLayout,
@@ -21,20 +22,21 @@ import {
 	SavedItems,
 	Security,
 	Settings,
+	UpdateAd,
 	VerifyMail,
 	Welcome,
 } from './pages';
 import { AppLayout, DashboardLayout } from './layout';
 import { Approutes } from './constants';
-import { ToastContainer } from 'react-toastify';
 import { RequireAuth } from './components';
 import useAuth from './context/UserContext';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 	const { isLogin } = useAuth();
 	return (
 		<BrowserRouter>
-			<ToastContainer />
 			<Routes>
 				{/* Playground page for developers */}
 				<Route path={Approutes.playground} element={<Playground />} />
@@ -70,6 +72,8 @@ function App() {
 					{/* Use NavBar and Footer layout  */}
 					<Route element={<AppLayout />}>
 						<Route path={Approutes.welcome} element={<Welcome />} />
+						<Route path={`${Approutes.postAd}/:categoryId`} element={<PostAd />} />
+						<Route path={`${Approutes.updateAd}/:adId`} element={<UpdateAd />} />
 
 						{/* profile layout  */}
 						<Route element={<ProfileLayout />}>
@@ -86,6 +90,15 @@ function App() {
 					</Route>
 				</Route>
 			</Routes>
+
+			<ToastContainer
+				limit={1}
+				autoClose={3500}
+				newestOnTop={true}
+				closeButton={false}
+				position="top-center"
+				hideProgressBar={true}
+			/>
 		</BrowserRouter>
 	);
 }

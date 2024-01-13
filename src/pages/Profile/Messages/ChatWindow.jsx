@@ -49,7 +49,7 @@ const ChatWindow = ({ chat_id, chat_data }) => {
 						key={i}
 						className={`w-fit max-w-[80%] py-2 ${message.sender === user.id ? 'ml-auto' : ''}`}
 					>
-						<Message key={i} message={message.content} time={message.message_updated_on} />
+						<Message key={i} message={message} time={message.message_updated_on} />
 					</div>
 				))}
 			</div>

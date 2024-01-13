@@ -19,7 +19,7 @@ const Messages = () => {
 		return new Date(b.chat_updated_on) - new Date(a.chat_updated_on);
 	});
 
-	console.log(sortedChats);
+	// console.log(sortedChats);
 
 	return (
 		<div className="max-w-[1224px] my-6 mx-auto px-2 overflow-x-auto scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-400">
