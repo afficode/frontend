@@ -2486,13 +2486,13 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			{
 				control: 'select',
 				label: 'Type',
-				name: 'breed_type',
+				name: 'type',
 				options: petTypeOptions,
 			},
-			otherBreedType && {
+			otherType && {
 				control: 'input',
 				label: 'Other Type',
-				name: 'breed_type',
+				name: 'type',
 				type: 'text',
 				placeholder: 'Enter breed type',
 				required: true,
@@ -3648,7 +3648,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			description: Yup.string().required('Required'),
 			title: Yup.string().required('Required'),
 			breed: Yup.string(),
-			breed_type: Yup.string(),
+			type: Yup.string(),
 			price: Yup.number().required('Required'),
 			gender: Yup.string(),
 			age: Yup.string(),
@@ -3785,8 +3785,20 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			notify('Error uploading your images.', 'error');
 		}
 
+		// Function to convert string values in an object to lowercase
+		const convertObjectValuesToLowerCase = (obj) => {
+			const newObj = {};
+			for (const key in obj) {
+				if (Object.prototype.hasOwnProperty.call(obj, key)) {
+					newObj[key] = typeof obj[key] === 'string' ? obj[key].toLowerCase() : obj[key];
+				}
+			}
+			return newObj;
+		};
+
 		const formData = {
-			...values,
+			// ...values,
+			...convertObjectValuesToLowerCase(values),
 			category: parseInt(values.category),
 			state_id: parseInt(values.state_id),
 			lga_id: parseInt(values.lga_id),
@@ -3955,13 +3967,6 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 						// setOtherBreed(false);
 					}
 				}, [formik.values.breed]);
-				useEffect(() => {
-					if (formik.values.breed_type === 'other') {
-						setOtherBreedType(true);
-					} else {
-						// setOtherBreedType(false);
-					}
-				}, [formik.values.breed_type]);
 				useEffect(() => {
 					if (formik.values.platform === 'other') {
 						setOtherPlatform(true);

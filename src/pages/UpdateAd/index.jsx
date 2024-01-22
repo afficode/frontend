@@ -240,7 +240,7 @@ const PostAd = () => {
 			description: ad?.description,
 			title: ad?.title,
 			breed: ad?.breed,
-			breed_type: ad?.breed_type,
+			type: ad?.type,
 			gender: ad?.gender,
 			color: ad?.color,
 			condition: ad?.condition,

@@ -2497,13 +2497,13 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			{
 				control: 'select',
 				label: 'Type',
-				name: 'breed_type',
+				name: 'type',
 				options: petTypeOptions,
 			},
-			otherBreedType && {
+			otherType && {
 				control: 'input',
 				label: 'Other Type',
-				name: 'breed_type',
+				name: 'type',
 				type: 'text',
 				placeholder: 'Enter breed type',
 				required: true,
@@ -3668,7 +3668,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			description: Yup.string().required('Required'),
 			title: Yup.string().required('Required'),
 			breed: Yup.string(),
-			breed_type: Yup.string(),
+			type: Yup.string(),
 			price: Yup.number().required('Required'),
 			gender: Yup.string(),
 			age: Yup.string(),
@@ -3976,13 +3976,6 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 						// setOtherBreed(false);
 					}
 				}, [formik.values.breed]);
-				useEffect(() => {
-					if (formik.values.breed_type === 'other') {
-						setOtherBreedType(true);
-					} else {
-						// setOtherBreedType(false);
-					}
-				}, [formik.values.breed_type]);
 				useEffect(() => {
 					if (formik.values.platform === 'other') {
 						setOtherPlatform(true);
