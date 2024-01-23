@@ -91,10 +91,8 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 	const [otherSize, setOtherSize] = useState(false);
 	const [otherFormulation, setOtherFormulation] = useState(false);
 	const [otherBreed, setOtherBreed] = useState(false);
-	const [otherBreedType, setOtherBreedType] = useState(false);
 	const [otherPlatform, setOtherPlatform] = useState(false);
 	const [otherFormat, setOtherFormat] = useState(false);
-	// const [otherSoftwareType, setOtherSoftwareType] = useState(false);
 	const [otherGenre, setOtherGenre] = useState(false);
 	const [otherColor, setOtherColor] = useState(false);
 	const [otherExpertise, setOtherExpertise] = useState(false);
@@ -3914,139 +3912,91 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				useEffect(() => {
 					if (formik.values.make === 'other') {
 						setOtherMake(true);
-					} else {
-						// setOtherMake(false);
 					}
 				}, [formik.values.make]);
-				// useEffect(() => {
-				// 	if (formik.values.model === 'other') {
-				// 		setOtherModel(true);
-				// 	} else {
-				// 		setOtherModel(false);
-				// 	}
-				// }, [formik.values.model]);
 				useEffect(() => {
 					if (formik.values.brand === 'other') {
 						setOtherBrand(true);
-					} else {
-						// setOtherBrand(false);
 					}
 				}, [formik.values.brand]);
 				useEffect(() => {
 					if (formik.values.type === 'other') {
 						setOtherType(true);
-					} else {
-						// setOtherType(false);
 					}
 				}, [formik.values.type]);
 				useEffect(() => {
 					if (formik.values.material === 'other') {
 						setOtherMaterial(true);
-					} else {
-						// setOtherMaterial(false);
 					}
 				}, [formik.values.material]);
 				useEffect(() => {
 					if (formik.values.size === 'other') {
 						setOtherSize(true);
-					} else {
-						// setOtherSize(false);
 					}
 				}, [formik.values.size]);
 				useEffect(() => {
 					if (formik.values.formulation === 'other') {
 						setOtherFormulation(true);
-					} else {
-						// setOtherFormulation(false);
 					}
 				}, [formik.values.formulation]);
 				useEffect(() => {
 					if (formik.values.breed === 'other') {
 						setOtherBreed(true);
-					} else {
-						// setOtherBreed(false);
 					}
 				}, [formik.values.breed]);
 				useEffect(() => {
 					if (formik.values.platform === 'other') {
 						setOtherPlatform(true);
-					} else {
-						// setOtherPlatform(false);
 					}
 				}, [formik.values.platform]);
 				useEffect(() => {
 					if (formik.values.format === 'other') {
 						setOtherFormat(true);
-					} else {
-						// setOtherFormat(false);
 					}
 				}, [formik.values.format]);
-				// useEffect(() => {
-				// 	if (formik.values.software_type === 'other') {
-				// 		setOtherSoftwareType(true);
-				// 	}
-				// }, [formik.values.software_type]);
 				useEffect(() => {
 					if (formik.values.game_genre === 'other') {
 						setOtherGenre(true);
-					} else {
-						// setOtherGenre(false);
 					}
 				}, [formik.values.game_genre]);
 				useEffect(() => {
 					if (formik.values.color === 'other') {
 						setOtherColor(true);
-					} else {
-						// setOtherColor(false);
 					}
 				}, [formik.values.color]);
 				useEffect(() => {
 					if (formik.values.expertise === 'other') {
 						setOtherExpertise(true);
-					} else {
-						// setOtherExpertise(false);
 					}
 				}, [formik.values.expertise]);
 				useEffect(() => {
 					if (formik.values.room_bathroom === 'other') {
 						setOtherRoom(true);
-					} else {
-						// setOtherRoom(false);
 					}
 				}, [formik.values.room_bathroom]);
 				useEffect(() => {
 					if (formik.values.property_use === 'other') {
 						setOtherUse(true);
-					} else {
-						// setOtherUse(false);
 					}
 				}, [formik.values.property_use]);
 				useEffect(() => {
 					if (formik.values.condition === 'other') {
 						setOtherCondition(true);
-					} else {
-						// setOtherCondition(false);
 					}
 				}, [formik.values.condition]);
 				useEffect(() => {
 					if (formik.values.processor === 'other') {
 						setOtherProcessor(true);
-					} else {
-						// setOtherProcessor(false);
 					}
 				}, [formik.values.processor]);
 				useEffect(() => {
 					if (formik.values.scent_type === 'other') {
 						setOtherScent(true);
-					} else {
-						// setOtherProcessor(false);
 					}
 				}, [formik.values.scent_type]);
 				useEffect(() => {
 					if (formik.values.furniture_for === 'other') {
 						setOtherFurnitureFor(true);
-					} else {
-						// setOtherProcessor(false);
 					}
 				}, [formik.values.furniture_for]);
 
