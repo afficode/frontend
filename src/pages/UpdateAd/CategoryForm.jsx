@@ -97,6 +97,8 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 	const [otherUse, setOtherUse] = useState(false);
 	const [otherCondition, setOtherCondition] = useState(false);
 	const [otherProcessor, setOtherProcessor] = useState(false);
+	const [otherScent, setOtherScent] = useState(false);
+	const [otherFurnitureFor, setOtherFurnitureFor] = useState(false);
 
 	console.log(selectedElectronicsCategory);
 	const { data: cat } = useCategories();
@@ -3805,6 +3807,8 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 		} catch (error) {
 			console.log(error);
 			notify('Error uploading your images.', 'error');
+			setSubmitting(false);
+			return;
 		}
 
 		// Function to convert string values in an object to lowercase

@@ -3781,6 +3781,8 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 		} catch (error) {
 			console.log(error);
 			notify('Error uploading your images.', 'error');
+			setSubmitting(false);
+			return;
 		}
 
 		// Function to convert string values in an object to lowercase
