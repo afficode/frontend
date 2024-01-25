@@ -4,7 +4,7 @@ import TextError from './TextError';
 import 'react-datepicker/dist/react-datepicker.css';
 
 const DatePicker = (props) => {
-	const { label, name, required, ...rest } = props;
+	const { label, name, required, placeholder, ...rest } = props;
 	return (
 		<div className="my-4 space-y-2">
 			<label className="block formLabel" htmlFor={name}>
@@ -21,6 +21,7 @@ const DatePicker = (props) => {
 					const { value } = field;
 					return (
 						<DateView
+							placeholderText={placeholder}
 							id={name}
 							{...field}
 							{...rest}

@@ -16,9 +16,9 @@ const Select = (props) => {
 				</label>
 			)}
 			<Field as="select" name={name} id={name} {...rest}>
-				{options.map((option) => {
+				{options?.map((option, i) => {
 					return (
-						<option key={option.value} value={option.value}>
+						<option key={i} value={option.value}>
 							{option.key}
 						</option>
 					);
