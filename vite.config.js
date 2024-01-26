@@ -12,5 +12,10 @@ export default defineConfig({
 		"process.env": {
 			VITE_SECURE_LOCAL_STORAGE_HASH_KEY:"966485331a538d4c07ab0a43ea646f030f18fbeb"
 		}
-	}
+	},
+	hmr: {
+      host: 'localhost',
+    },
 });
+
+

@@ -3,7 +3,7 @@ export { default as ContactUs } from './ContactUs';
 export { default as Home } from './Home';
 export { default as Playground } from './Playground';
 export { default as PostAd } from './PostAd';
-export { default as Products } from './Products';
+//export { default as Products } from './Products';
 export { default as UpdateAd } from './UpdateAd';
 export { default as Welcome } from './Welcome';
 
@@ -29,3 +29,9 @@ export { default as ProfileLayout } from './Profile/Layout';
 export { default as Messages } from './Profile/Messages';
 export { default as Notifications } from './Profile/Notifications';
 export { default as SavedItems } from './Profile/SavedItems';
+
+// product
+export { default as Products}  from './Products/Default'
+export { default as ViewProduct} from './Products/View';
+export { default as Categories} from './Products/Category'
+export { default as Category } from './Products/ViewBy/Category';

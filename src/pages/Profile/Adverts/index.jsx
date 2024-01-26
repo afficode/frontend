@@ -11,9 +11,10 @@ const Adverts = () => {
 	const [filteredAd, setFilteredAd] = useState('all');
 
 	const { data: ads, isLoading } = useMyAds();
-	// console.log('data', ads);
 
-	const adsData = ads?.active_ads;
+	const adsData = ads?.active_ads.sort((a, b) => b.id - a.id);
+	console.log(adsData);
+
 	return (
 		<div className="max-w-[1224px] mx-auto px-4 my-10">
 			<div className="px-2 py-6 mb-12 space-y-8 border lg:px-8 border-black/30 rounded-3xl">

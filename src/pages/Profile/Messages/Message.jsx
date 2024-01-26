@@ -7,7 +7,7 @@ const Message = ({ message, time }) => {
 	return (
 		<div className="bg-gray-200 px-3 py-1 rounded-l-2xl rounded-t-2xl min-w-[8rem] flex flex-col justify-between relative">
 			<span
-				className={`absolute top-[-1rem] font-extrabold text-sm text-white ${
+				className={` font-semibold text-sm text-black truncate ${
 					message.sender === user.id ? 'right-2' : 'left-1'
 				}`}
 			>

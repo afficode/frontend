@@ -22,3 +22,9 @@ export const useChats = () => {
 		refetchInterval: 1000,
 	});
 };
+
+export const createChat = () => {
+	const createChat = (ad_id) => privateAxios.post('chat', ad_id);
+
+	return useMutation(['new_chat'], createChat);
+}
