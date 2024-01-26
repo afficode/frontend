@@ -2,7 +2,7 @@ import { ErrorMessage, Field } from 'formik';
 import TextError from './TextError';
 
 const CheckboxGroup = (props) => {
-	const { label, name, options, required, ...rest } = props;
+	const { label, name, options, required, type, ...rest } = props;
 	return (
 		<div className="my-4 space-y-2 ">
 			{label && (
@@ -21,12 +21,13 @@ const CheckboxGroup = (props) => {
 						return (
 							<div key={option.key} className="inline-block items-center pr-8 space-x-2">
 								<input
-									type="checkbox"
+									type={type}
 									id={option.value}
 									{...field}
 									{...rest}
 									value={option.value}
-									checked={field.value.includes(option.value)}
+									checked={Array.isArray(field.value) && field.value.includes(option.value)}
+									aria-labelledby={option.value}
 								/>
 								<label htmlFor={option.value}>{option.key}</label>
 							</div>

@@ -68,7 +68,7 @@ const make = [
     "Rivian",
 ];
 // color options
-export const colors = [
+const colors = [
 	'Orange',
 	'Pearl',
 	'Pink',
@@ -91,7 +91,7 @@ export const colors = [
 	'Beige',
 	'Other',
 ];
-export const sportBrands = {
+const sportBrands = {
 	6202: [
 		'Behringer',
 		'Casio',
@@ -575,7 +575,7 @@ export const sportBrands = {
 		'Other',
 	],
 };
-export const sportTypes = {
+const sportTypes = {
 	6201: [
 		'TV, DVD & VCR Accessories',
 		'Televisions, Plasma & LCD TVs',
@@ -791,7 +791,7 @@ export const sportTypes = {
 		'Other',
 	],
 };
-export const motorbikeMake = {
+const motorbikeMake = {
 	6301: [
 		'Honda',
 		'TVS',
@@ -889,7 +889,7 @@ export const motorbikeMake = {
 		'Other',
 	],
 };
-export const motorbikeType = [
+const motorbikeType = [
 	'Cruiser',
 	'Dual Sport',
 	'Motocross',
@@ -958,7 +958,7 @@ const otherVehicleType = [
 	'other',
 ];
 //software category
-export const softwareTypes = [
+const softwareTypes = [
 	'Operating Systems',
 	'Application Software',
 	'Utility Software',
@@ -981,7 +981,7 @@ export const softwareTypes = [
 	'IoT (Internet of Things) Software',
 	'Other',
 ];
-export const softwarePlatforms = {
+const softwarePlatforms = {
 	5901: ['Android', 'iOS', 'Linux', 'Mac', 'Windows', 'other'],
 	default: [
 		'Android',
@@ -1000,7 +1000,7 @@ export const softwarePlatforms = {
 		'other',
 	],
 };
-export const gameGenre = [
+const gameGenre = [
 	'Action',
 	'Adventure',
 	'Shooter',
@@ -1113,7 +1113,7 @@ const propertyFacilities = {
 	],
 }
 // Services
-export const servicesType = {
+const servicesType = {
 	5201: [
 		'Accounting',
 		'Office Service',
@@ -1246,7 +1246,7 @@ export const servicesType = {
 		'Other',
 	],
 };
-export const tutorialTopics = [
+const tutorialTopics = [
 	'Entrepreneurship',
 	'Instruments',
 	'IT Certifications',
@@ -1299,11 +1299,11 @@ export const tutorialTopics = [
 	'Real Estate',
 	'Video Editing',
 	'Test Prep',
-	'Other',
+	'Other'
 ];
 
 // Agriculture
-export const agricultureTypes = {
+const agricultureTypes = {
 	5301: [
 		'All',
 		'Fish',
@@ -1381,7 +1381,7 @@ export const agricultureTypes = {
 	],
 };
 // Electronics
-export const displaySizes = [
+const displaySizes = [
 	'10.1"',
 	'11" / 11.6"',
 	'12" / 12.3"',
@@ -1394,7 +1394,7 @@ export const displaySizes = [
 	'21"',
 	'21" and more',
 ];
-export const electronicsBrands = {
+const electronicsBrands = {
 	5401: [
 		'Apple',
 		'Dell',
@@ -3000,7 +3000,7 @@ export const electronicsBrands = {
 		'Other',
 	],
 };
-export const electronicsType = {
+const electronicsType = {
 	5404: [
 		'Dot-Matrix Printer',
 		'Flatbed Scanner',
@@ -3081,7 +3081,7 @@ export const electronicsType = {
 	default: null,
 };
 // Fashion
-export const fashionBrands = {
+const fashionBrands = {
 	5501: [
 		'Louis Vuitton',
 		'Alberto Fellini',
@@ -3260,7 +3260,7 @@ export const fashionBrands = {
 		'Other',
 	],
 };
-export const fashionTypes = {
+const fashionTypes = {
 	5501: [
 		'Loafers',
 		'Sandals',
@@ -3402,7 +3402,7 @@ export const fashionTypes = {
 		'Other',
 	],
 };
-export const fashionMaterials = {
+const fashionMaterials = {
 	5504: [
 		'Gold',
 		'Leather',
@@ -3468,13 +3468,13 @@ export const fashionMaterials = {
 		'Other',
 	],
 };
-export const fashionSizes = {
+const fashionSizes = {
 	5501: ['35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', 'Other'],
 	default: ['XL', 'S', 'M', 'XXL', 'L', 'XS', '3XL', '4XL'],
 };
 
 // health category
-export const healthProductFormulation = {
+const healthProductFormulation = {
 	5603: ['Oil', 'Pencil', 'Roll-on', 'Body spray'],
 	default: [
 		'Capsule',
@@ -3510,7 +3510,7 @@ export const healthProductFormulation = {
 		'Other',
 	],
 };
-export const healthBrands = {
+const healthBrands = {
 	5601: [
 		'Avon',
 		'Aura',
@@ -4961,7 +4961,7 @@ export const healthBrands = {
 		'other',
 	],
 };
-export const healthTypes = {
+const healthTypes = {
 	5601: [
 		'Conditioners',
 		'Styling Products',
@@ -5215,7 +5215,7 @@ export const healthTypes = {
 	],
 };
 // Home and Accessories
-export const homeBrands = {
+const homeBrands = {
 	5701: [
 		'Remington',
 		'Relax',
@@ -7361,7 +7361,7 @@ export const homeBrands = {
 		'Other',
 	],
 };
-export const homeTypes = {
+const homeTypes = {
 	5701: [
 		'Chairs',
 		'Tables',
@@ -7690,7 +7690,7 @@ export const homeTypes = {
 		'Other',
 	],
 };
-export const homeMaterials = [
+const homeMaterials = [
 	'Fabric',
 	'Leather',
 	'Marble',
@@ -7793,7 +7793,7 @@ export const homeMaterials = [
 ];
 
 // Tradesman
-export const tradesmanType = {
+const tradesmanType = {
 	5803: [
 		'Physical Security',
 		'Electronic Security',
@@ -7927,7 +7927,7 @@ export const tradesmanType = {
 		'Digital Transformation',
 	],
 };
-export const tradesmanArea = {
+const tradesmanArea = {
 	5802: [
 		'Residential',
 		'Industrial',
@@ -7997,7 +7997,7 @@ export const tradesmanArea = {
 };
 
 // Pets
-export const petBreeds = {
+const petBreeds = {
 	6001: [
 		'American Eskimo',
 		'Boerboel',
@@ -8105,7 +8105,7 @@ export const petBreeds = {
 		'Other',
 	],
 };
-export const petTypes = {
+const petTypes = {
 	6002: ['Fish for aquariums', 'Air Stones', 'Air Blower', 'Fish for food', 'Other'],
 	6003: [
 		'Cages',
@@ -8140,7 +8140,7 @@ export const petTypes = {
 	default: ['Mixed Breed', 'Pure Breed'],
 };
 //babies category
-export const babiesBrands = {
+const babiesBrands = {
 	6102: [
 		'Pep',
 		'Crocs',
@@ -8955,7 +8955,7 @@ export const babiesBrands = {
 		'Other',
 	],
 };
-export const babiesTypes = {
+const babiesTypes = {
 	6101: [
 		'Food',
 		'Diapers',
@@ -9474,7 +9474,7 @@ export const filterFields = [
       ],
     },
 ];
-export const cars = [
+const cars = [
     {
       id: "location",
       title: "Location",
@@ -9679,7 +9679,7 @@ export const cars = [
       ],
     },
 ];
-export const vans = [
+const vans = [
     {
       id: "location",
       title: "Location",
@@ -9923,7 +9923,7 @@ export const vans = [
       ],
     },
 ];
-export const automobile = [
+const automobile = [
     {
       id: "location",
       title: "Location",
@@ -10065,7 +10065,7 @@ export const automobile = [
 ];
 
 // Properties.
-export const propertyFields = [
+const propertyFields = [
     {
       id: "location",
       title: "Location",
@@ -10151,7 +10151,7 @@ export const propertyFields = [
         })),
     },
 ];
-export const propertyHouseApartment = [
+const propertyHouseApartment = [
     {
       id: "location",
       title: "Location",
@@ -10223,7 +10223,7 @@ export const propertyHouseApartment = [
     },
 ];
 
-export const propertyLand = [
+const propertyLand = [
     {
       id: "location",
       title: "Location",

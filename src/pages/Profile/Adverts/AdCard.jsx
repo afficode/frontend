@@ -1,34 +1,51 @@
+import { useNavigate } from 'react-router-dom';
 import { Suzuki } from '../../../assets/images';
 import { CameraWhite } from '../../../assets/svgs';
 import { Button } from '../../../ui';
+import { toMoney } from '../../../utils';
 
-const AdCard = () => {
+const AdCard = ({ title, images, active, price, subscribe, views, adId }) => {
+	const navigate = useNavigate();
+
+	const handleEdit = (adId) => {
+		navigate(`/update-ad/${adId}`);
+		// console.log(adId);
+	};
+
 	return (
 		<div className="bg-gray-200 w-fit">
 			{/* image  */}
-			<div className="max-w-[22rem] h-16rem] relative">
-				<img src={Suzuki} alt="/" className="h-full w-full object-fit" />
-				<div className="absolute bottom-0 w-full bg-black/60 flex gap-2 items-center p-2">
+			<div className="w-[18rem] h-[13rem] sm:w-[20rem] sm:h-[15rem] relative border border-gray-300">
+				<img src={images[0]?.path} alt={images[0]?.filename} className="w-full h-full object-fit" />
+				<div className="absolute bottom-0 flex items-center w-full gap-2 p-2 bg-black/60">
 					<img src={CameraWhite} alt="/" className="w-4" />
-					<span className="text-white">12</span>
+					<span className="text-white">{images.length}</span>
 				</div>
-				<span className="absolute top-4 right-4 text-white font-semibold bg-[#047F73] py-2 px-4 rounded-xl text-center border-4 border-white max-sm:text-sm">
-					Active
-				</span>
+				{active === '1' && (
+					<span className="absolute top-4 right-4 text-white font-semibold bg-[#047F73] py-1 px-2 rounded-xl text-center border-4 border-white max-sm:text-sm">
+						Active
+					</span>
+				)}
 			</div>
 
 			{/* details  */}
 			<div className="flex flex-col justify-between px-3 py-2 ">
 				<div className="">
-					<h4>Suzuki Bike</h4>
-					<span className="block text-primary max-sm:text-sm"># 1,500,00.00</span>
-					<span className="mt-3  max-sm:text-sm">
-						Promoted till: <b>01/10</b>
-					</span>
+					<h4 className="capitalize">{title}</h4>
+					<span className="block font-semibold text-primary max-sm:text-sm">₦{toMoney(price)}</span>
+					{subscribe === '1' ? (
+						<span className="mt-3 max-sm:text-sm">
+							Promoted till: <b>01/10</b>
+						</span>
+					) : (
+						<span className="mt-3 max-sm:text-sm">
+							Promoted till: <b>None</b>
+						</span>
+					)}
 				</div>
 
-				<div className="flex justify-between mt-6">
-					<div className="bg-white py-3 pl-3 pr-5 space-y-1 max-sm:text-sm">
+				<div className="flex justify-between mt-3">
+					<div className="py-3 pl-3 pr-5 space-y-1 bg-white max-sm:text-sm">
 						<div>
 							<span>Reach:</span> <b>2,000</b>
 						</div>
@@ -36,7 +53,7 @@ const AdCard = () => {
 							<span>Clicks:</span> <b>500</b>
 						</div>
 						<div>
-							<span>Phone Views:</span> <b>13</b>
+							<span>Phone Views:</span> <b>{views}</b>
 						</div>
 						<div>
 							<span>Chats:</span> <b>20</b>
@@ -47,6 +64,7 @@ const AdCard = () => {
 							variant={'plain'}
 							size={'small'}
 							className={'text-primary rounded-lg shadow-none hover:shadow-md'}
+							onClick={() => handleEdit(adId)}
 						>
 							Edit
 						</Button>

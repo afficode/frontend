@@ -5,6 +5,8 @@ import RadioButtons from './RadioButtons';
 import CheckboxGroup from './CheckboxGroup';
 import DatePicker from './DatePicker';
 import ImageInput from './ImageInput';
+import Toggle from './Toggle';
+import UrgentField from './UrgentField';
 
 const FormControl = (props) => {
 	const { control, ...rest } = props;
@@ -30,6 +32,12 @@ const FormControl = (props) => {
 
 		case 'imageinput':
 			return <ImageInput {...rest} />;
+
+		case 'toggle':
+			return <Toggle {...rest} />;
+
+		case 'urgent':
+			return <UrgentField {...rest} />;
 
 		default:
 			return null;

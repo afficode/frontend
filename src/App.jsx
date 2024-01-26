@@ -14,25 +14,26 @@ import {
   Performance,
   Playground,
   PrivacyPolicy,
-  Products,
   Profile,
   ProfileLayout,
-  // Products,
+  Products,
   ResetPassword,
   SavedItems,
   Security,
   Settings,
   VerifyMail,
-  ViewProduct,
   Welcome,
+  ViewProduct,
+  Categories,
+  Category,
+  PostAd,
+  UpdateAd,
 } from "./pages";
 import { AppLayout, DashboardLayout } from "./layout";
 import { Approutes } from "./constants";
 import { ToastContainer } from "react-toastify";
 import { RequireAuth } from "./components";
 import useAuth from "./context/UserContext";
-import Category from "./pages/Products/ViewBy/Category";
-import { Categories } from "./pages";
 
 function App() {
   const { isLogin } = useAuth();
@@ -93,6 +94,14 @@ function App() {
           {/* Use NavBar and Footer layout  */}
           <Route element={<AppLayout />}>
             <Route path={Approutes.welcome} element={<Welcome />} />
+            <Route
+              path={`${Approutes.postAd}/:categoryId`}
+              element={<PostAd />}
+            />
+            <Route
+              path={`${Approutes.updateAd}/:adId`}
+              element={<UpdateAd />}
+            />
             {/* profile layout  */}
             <Route element={<ProfileLayout />}>
               <Route
@@ -111,6 +120,15 @@ function App() {
           </Route>
         </Route>
       </Routes>
+
+      <ToastContainer
+        limit={1}
+        autoClose={3500}
+        newestOnTop={true}
+        closeButton={false}
+        position="top-center"
+        hideProgressBar={true}
+      />
     </BrowserRouter>
   );
 }

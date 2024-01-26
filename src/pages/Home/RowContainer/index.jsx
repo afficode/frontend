@@ -32,7 +32,7 @@ const RowContainer = ({ title, link }) => {
                   .map((_) => <ShopsCard key={uuidv4()} />)
               : Array(12)
                   .fill(1)
-                  .map((_) => <FeaturedProductsCard key={uuidv4} />)}
+                  .map((_) => <FeaturedProductsCard key={uuidv4()} />)}
           </Carousel>
         </div>
       </div>

@@ -12,8 +12,11 @@ import {
 } from "../../../assets/images";
 import { Card } from "../../../components";
 import { Link } from "react-router-dom";
+import { useProduct } from "../../../hooks";
 
 const RowContainer = ({ title, link }) => {
+  const product = useProduct();
+  console.log(product?.data?.ads.slice(0, 4));
   return (
     <section className="px-4 md:px-[4rem] py-6">
       <div className="flex items-center justify-between pb-4">
@@ -80,11 +83,11 @@ const categoriesData = [
   },
   {
     img: Furniture,
-    title: "Furnitures",
+    title: "Home and Accessories",
   },
   {
-    img: Furniture,
-    title: "Furniture",
+    img: Tailor,
+    title: "Fashion",
   },
 ];
 

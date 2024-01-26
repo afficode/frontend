@@ -8,7 +8,7 @@ const Welcome = () => {
     <>
       <Banner />
       <Hero />
-      <RowContainer title={"Categories"} />
+      <RowContainer title={"Categories"} link={Approutes.product.category} />
       <RowContainer title={"Shops"} />
       <RowContainer
         title={"Discover more..."}

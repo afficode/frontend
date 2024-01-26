@@ -3,14 +3,22 @@ import AdCard from './AdCard';
 import { Button } from '../../../ui';
 import { Link } from 'react-router-dom';
 import { Approutes } from '../../../constants';
+import { useMyAds } from '../../../hooks';
+import { ScrollToTop } from '../../../utils';
+import LoadingScreen from './LoadingScreen';
 
 const Adverts = () => {
 	const [filteredAd, setFilteredAd] = useState('all');
 
+	const { data: ads, isLoading } = useMyAds();
+
+	const adsData = ads?.active_ads.sort((a, b) => b.id - a.id);
+	console.log(adsData);
+
 	return (
 		<div className="max-w-[1224px] mx-auto px-4 my-10">
-			<div className="py-6 px-2 lg:px-8 space-y-8 border-black/30 border rounded-3xl mb-12">
-				<div className="flex justify-between items-center flex-wrap">
+			<div className="px-2 py-6 mb-12 space-y-8 border lg:px-8 border-black/30 rounded-3xl">
+				<div className="flex flex-wrap items-center justify-between">
 					<div
 						onClick={() => setFilteredAd('all')}
 						className={`${
@@ -80,16 +88,26 @@ const Adverts = () => {
 					</Link>
 				</div>
 			</div>
-			<div className="grid sm:grid-cols-2 lg:grid-cols-3 place-items-center gap-6">
-				<AdCard />
-				<AdCard />
-				<AdCard />
-				<AdCard />
-				<AdCard />
-				<AdCard />
-				<AdCard />
-				<AdCard />
-			</div>
+			{isLoading ? (
+				<LoadingScreen />
+			) : (
+				<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 place-items-center">
+					{adsData?.map((ad) => (
+						<AdCard
+							key={ad?.id}
+							title={ad?.title}
+							images={ad?.images}
+							active={ad?.active}
+							price={ad?.price}
+							views={ad.views}
+							subscribe={ad?.subscribe}
+							adId={ad?.id}
+						/>
+					))}
+				</div>
+			)}
+
+			<ScrollToTop />
 		</div>
 	);
 };
