@@ -24,6 +24,7 @@ export const userReducerOptions = {
 	REFRESH_TOKEN: 'sfiurf',
 	USER: 'bs',
 	INITIAL_STATE: '_tye',
+	REDIRECT_LINK: '_plyvw'
 };
 
 const setUpUser = (payload, state) => {

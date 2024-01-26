@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { getRefreshToken, getToken, setToken } from './localstorage';
-import { backendLink } from '../constants';
+import { getRefreshToken, getToken, setRedirectLink, setToken } from './localstorage';
+import { Approutes, backendLink } from '../constants';
 import { Navigate } from 'react-router-dom';
 
 export const api = axios.create({
@@ -30,6 +30,7 @@ privateAxios.interceptors.response.use(
 		const originalRequest = error.config;
 		// check if the return status is 401
 		if (error.response.status === 401 && !originalRequest._retry) {
+			//console.log(getRefreshToken())
 			// set the retry parameter
 			originalRequest._retry = true;
 			// make a request to the refresh token api in the backend to get the api.
@@ -46,10 +47,12 @@ privateAxios.interceptors.response.use(
 				originalRequest.headers.Authorization = `Bearer ${token}`;
 				return axios(originalRequest);
 			} catch (error) {
+				setRedirectLink(window.location.href);
+				//return window.location.assign(Approutes.auth.initial)
 				return Promise.reject(error);
 			}
 		}
-
+		//return window.location.assign(Approutes.auth.initial)
 		return Promise.reject(error);
 	}
 );

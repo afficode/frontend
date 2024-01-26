@@ -5,9 +5,12 @@ import { backendLink } from '../constants';
 export const useCategories = () => {
 	const fetchCategories = () => axios.get(`${backendLink}categories`).then((res) => res?.data);
 
-	return useQuery('all-categories', fetchCategories);
+	return useQuery('all-categories', fetchCategories, {
+		refetchInterval: false
+	});
 };
 
+// export default useCategories;
 export const useSubCategories = (category_id) => {
 	const fetchSubCategories = () =>
 		axios.get(`${backendLink}categories/${category_id}/subcategories`).then((res) => res?.data);
