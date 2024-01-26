@@ -10,24 +10,29 @@ import { Sidebar } from "../../../ui";
 import { manipulateCategory } from "../../../utils/dataManipulations";
 import { VscMenu } from "react-icons/vsc";
 import Drawer from "../../../ui/Drawer";
+
+import { useSearchParams } from "react-router-dom";
 const items = [
   { name: "Home", link: Approutes.home },
   { name: "Products", link: Approutes.product.initial },
 ];
 
 const Products = () => {
+  let [searchParams, setSearchParams] = useSearchParams();
   const [categories, setCategories] = useState({});
   const result = useCategories();
   const [product, setProduct] = useState({ ads: [] });
   const [featured, setFeatured] = useState([]);
-  const { isLoading, error, data } = useProduct();
+  const { isLoading, error, data } = useProduct({
+    page: searchParams.get("page"),
+  });
 
-  console.log(isLoading);
   useEffect(() => {
     // when product change, we update the featured product immediately
     if (data) {
+      console.log(data);
       setProduct((prev) => ({ ...data }));
-      if (data.ads.length > 15) {
+      if (data.ads.length > 0) {
         // TODO: Revisit this after discussing with Mr Lawal the criteria for the Featured.
         setFeatured((prev) => [...data.ads.slice(0, 8)]);
       }
@@ -38,7 +43,7 @@ const Products = () => {
     if (result.data) {
       setCategories((prev) => manipulateCategory([...result.data]));
     }
-    console.log(result.data);
+    //console.log(result.data);
   }, [result.isLoading]);
 
   return (
@@ -50,7 +55,7 @@ const Products = () => {
         <h1 className="text-3xl text-white font-bold pt-2 tracking-wide px-6">
           Featured Product
         </h1>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:px-1 lg:p-4 p-2">
+        <div className="flex flex-wrap items-center justify-evenly gap-2 gap-y-4 sm:px-1 lg:p-4 p-2">
           {isLoading ? (
             <>
               {Array(8)
@@ -85,7 +90,7 @@ const Products = () => {
               />
             )}
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2 ">
+          <div className="flex flex-wrap items-center justify-evenly gap-2 gap-y-4">
             {isLoading || (product && product?.ads.length === 0) ? (
               <>
                 {Array(8)
@@ -99,23 +104,35 @@ const Products = () => {
             )}
           </div>
 
-          <div className="join mx-auto mt-4 bg-primary text-white">
-            <button className="join-item btn bg-primary text-white border-gray-300 hover:bg-secondary hover:text-black hover:border-gray-300">
-              1
-            </button>
-            <button className="join-item btn bg-primary text-white border-gray-300  hover:bg-secondary hover:text-black hover:border-gray-300">
-              2
-            </button>
-            <button className="join-item btn bg-primary text-white border-gray-300  hover:bg-secondary hover:text-black hover:border-gray-300 btn-disabled">
-              ...
-            </button>
-            <button className="join-item btn bg-primary text-white border-gray-300  hover:bg-secondary hover:text-black hover:border-gray-300">
-              99
-            </button>
-            <button className="join-item btn bg-primary text-white border-gray-300  hover:bg-secondary hover:text-black hover:border-gray-300">
-              100
-            </button>
-          </div>
+          {/* <div className="join mx-auto mt-4 bg-primary text-white"> */}
+          {isLoading ||
+            (product && product?.ads.length > 0 && (
+              <div className="join mx-auto mt-4 bg-primary text-white">
+                <button
+                  onClick={() => {
+                    setSearchParams({ page: product?.prev });
+                    window.location.reload();
+                  }}
+                  // to={`${Approutes.product.initial}?page=${product?.prev}`}
+                  className="join-item btn bg-primary text-white border-gray-300 hover:bg-secondary hover:text-black hover:border-gray-300"
+                  disabled={product?.prev === null}
+                >
+                  Prev
+                </button>
+                <button
+                  // to={`${Approutes.product.initial}?page=${product?.next}`}
+                  onClick={() => {
+                    setSearchParams({ page: product?.next });
+                    window.location.reload();
+                  }}
+                  className="join-item btn bg-primary text-white border-gray-300 hover:bg-secondary hover:text-black hover:border-gray-300"
+                  disabled={product?.next === null}
+                >
+                  Next
+                </button>
+              </div>
+            ))}
+          {/* </div> */}
         </main>
       </section>
     </section>

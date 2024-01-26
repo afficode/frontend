@@ -7,28 +7,27 @@ import { TbCurrencyNaira } from "react-icons/tb";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { noimage } from "../../../assets/images";
 import { Carousel } from "flowbite-react";
-import { FaCamera, FaMapMarkerAlt } from "react-icons/fa";
+import { FaCamera } from "react-icons/fa";
 import useAuth from "../../../context/UserContext";
+import ChatForm from "./ChatForm";
+import ViewProduct from "../../../components/Skeleton/ViewProduct";
 import {
   numberWithCommas,
   decodeProductId,
+  convertKeyToName,
 } from "../../../utils/dataManipulations";
 import { toast } from "react-toastify";
+import OverviewPills from "./OverviewPills";
 
 const index = () => {
   const { id } = useParams();
-  const [ad, setAd] = useState(null);
   const [items, setItems] = useState(null);
   const [revealNumber, setRevealNumber] = useState(false);
+  const [revealEmail, setRevealEmail] = useState(false);
   const { isLogin, user } = useAuth();
-
   const result = fetchProduct(decodeProductId(id));
-
-  console.log(items);
-
   useEffect(() => {
     if (result.data) {
-      console.log(result.data);
       setItems(() => [
         { name: "Home", link: Approutes.home },
         { name: "Products", link: Approutes.product.initial },
@@ -38,7 +37,7 @@ const index = () => {
   }, [result.isLoading]);
 
   return result.isLoading ? (
-    <>ISLOADING SKELETON</>
+    <ViewProduct />
   ) : (
     <section className="w-full p-2 lg:p-4">
       <header className="w-full">
@@ -48,7 +47,7 @@ const index = () => {
         />
       </header>
 
-      <section className="w-full flex flex-col md:flex-row gap-2 md:gap-8">
+      <section className="w-full flex flex-col md:flex-row gap-2 md:gap-8 tracking-tighter line-clamp-1">
         <main className="w-full md:w-[60%] xl:w-[70%] flex flex-col">
           <div className="w-full my-2 ml-2">
             <h6 className="w-full text-md md:text-2xl xl:text-3xl font-bold">
@@ -110,8 +109,8 @@ const index = () => {
             {result.data?.firstname}
           </h2>
           <p className="text-lg">Since 4+ years</p>
-          <hr class="h-px my-2 bg-gray-700 border-1 border-black" />
-          <div className="text-lg lg:text-xl w-full">
+          <hr className="h-px my-2 bg-gray-700 border-1 border-black" />
+          <div className="text-lg lg:text-xl w-full tracking-tighter">
             <p className="w-full">Contact {result.data?.firstname} </p>
             <div className="flex items-center justify-between">
               <p className="my-2 text-xl lg:text-2xl ">
@@ -121,10 +120,11 @@ const index = () => {
                     : `${result.data?.number.substring(0, 3)}XXXXXXXX`}
                 </span>
               </p>
+
               <button
                 className="btn bg-white btn-sm  rounded-none text-black hover:bg-primary hover:text-white hover:border-0 hover:rounded-sm font-bold "
                 onClick={() => {
-                  isLogin
+                  isLogin && result?.data?.contact_type.includes("phone")
                     ? setRevealNumber(!revealNumber)
                     : toast.warn("Please login to reveal phone number");
                 }}
@@ -140,12 +140,67 @@ const index = () => {
                 )}
               </button>
             </div>
+            {result?.data?.contact_type.includes("email") && (
+              <div className="flex w-full items-center justify-between">
+                <p
+                  className={`my-2 w-full overflow-scroll ${
+                    revealEmail ? "tooltip tooltip-primary" : ""
+                  }`}
+                  data-tip={revealEmail ? result.data?.email : ""}
+                >
+                  <span className="font-bold text-xl pr-1">
+                    {revealEmail && result.data?.email !== null
+                      ? result.data?.email
+                      : `${result.data?.email.substring(0, 3)}XXXXXXXX`}
+                  </span>
+                </p>
+
+                <button
+                  className="btn bg-white btn-sm  rounded-none text-black hover:bg-primary hover:text-white hover:border-0 hover:rounded-sm font-bold "
+                  onClick={() => {
+                    isLogin && result?.data?.contact_type.includes("email")
+                      ? setRevealEmail(!revealEmail)
+                      : toast.warn("Please login to reveal Ads owner email");
+                  }}
+                >
+                  {!revealEmail ? (
+                    <span className="flex items-center justify-center">
+                      <IoEye /> &nbsp; Reveal{" "}
+                    </span>
+                  ) : (
+                    <span className="flex items-center justify-center">
+                      <IoEyeOff /> &nbsp; Hide
+                    </span>
+                  )}
+                </button>
+              </div>
+            )}
           </div>
+          <ChatForm ad_id={result.data?.id} owner={result.data?.owner} />
         </aside>
       </section>
-      <section className="flex flex-col">
-        <div className="w-full">Description</div>
-        <div className="w-full">Overview</div>
+      <section className="flex flex-col bg-gray-200 p-2 xl:p-6 my-2 xl:my-4">
+        <div className="w-full flex flex-col items-start gap-2 justify-start tracking-tighter line-clamp-1">
+          <h2 className="text-xl xl:2xl">Description</h2>
+          <p className="bg-white p-4 min-h-[100px] text-justify text-lg ">
+            {result.data?.description} Lorem ipsum dolor sit amet consectetur
+            adipisicing elit. Odit, minus quibusdam. Soluta vero doloribus iste
+            sint sunt minima praesentium, asperiores, facere dolorum eaque
+            voluptate fugiat molestias? Provident harum nostrum omnis! Lorem
+            ipsum, dolor sit amet consectetur adipisicing elit. Dolorem veniam
+            molestiae, perspiciatis modi facilis labore soluta ipsa eveniet
+            mollitia, molestias quod rem non culpa hic laborum minima. Soluta,
+            ducimus vero?
+          </p>
+        </div>
+        <div className="w-full flex flex-col items-start gap-2 justify-start my-2">
+          <h2 className="text-xl tracking-tighter">Overview</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 w-full">
+            {convertKeyToName(result.data).map((val, index) => (
+              <OverviewPills overview={val} ad={result.data} key={index} />
+            ))}
+          </div>
+        </div>
       </section>
     </section>
   );

@@ -31,3 +31,4 @@ export { default as SavedItems } from './Profile/SavedItems';
 // product
 export { default as Products}  from './Products/Default'
 export { default as ViewProduct} from './Products/View';
+export { default as Categories} from './Products/Category'

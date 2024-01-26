@@ -31,6 +31,8 @@ import { Approutes } from "./constants";
 import { ToastContainer } from "react-toastify";
 import { RequireAuth } from "./components";
 import useAuth from "./context/UserContext";
+import Category from "./pages/Products/ViewBy/Category";
+import { Categories } from "./pages";
 
 function App() {
   const { isLogin } = useAuth();
@@ -59,6 +61,11 @@ function App() {
           <Route path={Approutes.logout} element={<Logout />} />
           <Route path={Approutes.product.initial} element={<Products />} />
           <Route path={Approutes.product.view} element={<ViewProduct />} />
+          <Route path={Approutes.product.category} element={<Categories />} />
+          <Route
+            path={Approutes.product.viewCategoryId}
+            element={<Category />}
+          />
         </Route>
 
         {/* Protected page routes */}

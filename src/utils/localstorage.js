@@ -24,7 +24,6 @@ export const clearLocalStorage = () => {
 }
 
 // get stored item
-
 export const getUserFromLocalStorage = () => {
   return secureLocalStorage.getItem(userReducerOptions.USER);
 };
@@ -41,4 +40,13 @@ export const getRefreshToken = () => {
 
 export const getReducerInitialState = () => {
   return secureLocalStorage.getItem(userReducerOptions.INITIAL_STATE)
+}
+
+// store the previous link before redirecting user to login
+export const setRedirectLink = (link) => {
+  secureLocalStorage.setItem(userReducerOptions.REDIRECT_LINK, link);
+}
+
+export const getRedirectLink = () => {
+  return secureLocalStorage.getItem(userReducerOptions.REDIRECT_LINK);
 }

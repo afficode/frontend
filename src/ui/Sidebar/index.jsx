@@ -1,24 +1,15 @@
 "use client";
 
-import { Flowbite, Sidebar } from "flowbite-react";
-import { useEffect } from "react";
-import {
-  HiArrowSmRight,
-  HiChartPie,
-  HiInbox,
-  HiOutlineMinusSm,
-  HiOutlinePlusSm,
-  HiShoppingBag,
-  HiTable,
-  HiUser,
-} from "react-icons/hi";
+import { Sidebar } from "flowbite-react";
+import { HiOutlineMinusSm, HiOutlinePlusSm } from "react-icons/hi";
 import { twMerge } from "tailwind-merge";
+import { Approutes } from "../../constants";
 
 const SidebarUI = ({ items }) => {
   return (
     <Sidebar
       aria-label="Sidebar for categories"
-      className="min-h-[1000px] bg-black w-full"
+      className="min-h-[1000px] bg-black w-full tracking-tighter line-clamp-1"
     >
       <Sidebar.Items>
         <Sidebar.ItemGroup>
@@ -46,13 +37,13 @@ const SidebarUI = ({ items }) => {
                   }}
                 >
                   {items[`${id}`].map(({ id, name }, index) => (
-                    <Sidebar.Item href="#" key={index}>
+                    <Sidebar.Item
+                      href={`${Approutes.product.category}/${btoa(id)}`}
+                      key={index}
+                    >
                       {name}
                     </Sidebar.Item>
                   ))}
-                  <Sidebar.Item href="#">Sales</Sidebar.Item>
-                  <Sidebar.Item href="#">Refunds</Sidebar.Item>
-                  <Sidebar.Item href="#">Shipping</Sidebar.Item>
                 </Sidebar.Collapse>
               ) : (
                 <Sidebar.Item href="#">{`${name}`}</Sidebar.Item>

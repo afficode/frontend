@@ -1,7 +1,6 @@
 import React from "react";
 
 const Drawer = ({ items, icon }) => {
-  console.log(icon);
   return (
     <div className="drawer z-[100] ">
       <input id="my-drawer" type="checkbox" className="drawer-toggle" />
