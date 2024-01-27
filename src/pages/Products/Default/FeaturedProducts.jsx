@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { encodeProductId } from "../../../utils/dataManipulations";
 import { numberWithCommas } from "../../../utils/dataManipulations";
 import NotFound from "../NotFound";
+import { formatDistance } from "date-fns";
 
 const FeaturedProducts = ({ product }) => {
   return (
@@ -44,7 +45,7 @@ const FeaturedProducts = ({ product }) => {
             to={`/product/${encodeProductId(ad.id)}`}
             className="p-2 tooltip tooltip-secondary w-full tracking-tighter line-clamp-1 hover:bg-gray-200"
           >
-            <p className="text-xl font-semibold overflow-hidden h-6 lg:h-8 flex items-start justify-start ">
+            <p className="text-xl font-semibold overflow-hidden h-6 lg:h-8 flex items-start justify-start uppercase ">
               {ad.title.trimEnd()}{" "}
             </p>
             <div className="block w-full mt-1 text-start text-ellipsis flex-nowrap line-clamp-1">
@@ -53,9 +54,21 @@ const FeaturedProducts = ({ product }) => {
                 {ad.location}
               </span>
             </div>
-            <p className="  mt-4 flex tracking-tighter line-clamp-1 ">
-              <TbCurrencyNaira className="mt-1" />
-              {numberWithCommas(ad.price)}
+            <p className="  mt-4 flex justify-between tracking-tighter line-clamp-1 ">
+              <span className="flex">
+                <TbCurrencyNaira className="mt-1" />
+                {numberWithCommas(ad.price)}
+              </span>
+              <span className="badge-primary badge">
+                {formatDistance(
+                  new Date(new Date(`${ad?.created_at}`)),
+                  Date.now(),
+                  {
+                    includeSeconds: true,
+                    addSuffix: true,
+                  }
+                )}
+              </span>
             </p>
           </Link>
         </div>

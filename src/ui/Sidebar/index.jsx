@@ -6,6 +6,7 @@ import { twMerge } from "tailwind-merge";
 import { Approutes } from "../../constants";
 
 const SidebarUI = ({ items }) => {
+  console.log(items);
   return (
     <Sidebar
       aria-label="Sidebar for categories"
@@ -36,6 +37,12 @@ const SidebarUI = ({ items }) => {
                     );
                   }}
                 >
+                  <Sidebar.Item
+                    href={`${Approutes.product.category}/${btoa(id)}`}
+                    key={index}
+                  >
+                    {name}
+                  </Sidebar.Item>
                   {items[`${id}`].map(({ id, name }, index) => (
                     <Sidebar.Item
                       href={`${Approutes.product.category}/${btoa(id)}`}

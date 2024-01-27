@@ -9,14 +9,22 @@ import {
   Store,
   Tailor,
   Toyota,
+  noimage,
 } from "../../../assets/images";
 import { Card } from "../../../components";
 import { Link } from "react-router-dom";
 import { useProduct } from "../../../hooks";
+import { Approutes } from "../../../constants";
+import { TbCurrencyNaira } from "react-icons/tb";
+import {
+  encodeProductId,
+  numberWithCommas,
+} from "../../../utils/dataManipulations";
+import { FaMapMarkerAlt } from "react-icons/fa";
+import { formatDistance } from "date-fns";
 
 const RowContainer = ({ title, link }) => {
   const product = useProduct();
-  console.log(product?.data?.ads.slice(0, 4));
   return (
     <section className="px-4 md:px-[4rem] py-6">
       <div className="flex items-center justify-between pb-4">
@@ -31,9 +39,9 @@ const RowContainer = ({ title, link }) => {
       </div>
       <div className="grid grid-cols-1 gap-4 place-items-center sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {title === "Discover more..."
-          ? discoverMoreData.map((item) => (
-              <CardDetails key={item.title} {...item} />
-            ))
+          ? product?.data?.ads
+              .slice(0, 4)
+              .map((item) => <CardDetails key={item.title} {...item} />)
           : title === "Categories"
           ? categoriesData.map((item) => <Card key={item.title} {...item} />)
           : shopsData.map((item) => <Card key={item.title} {...item} />)}
@@ -44,29 +52,39 @@ const RowContainer = ({ title, link }) => {
 
 export default RowContainer;
 
-const CardDetails = ({ title, location, img, car, price }) => {
+const CardDetails = ({ id, title, location, images, created_at, price }) => {
+  const img = images[0]?.path || noimage;
   return (
-    <div className=" max-w-[18rem] sm:max-w-[25rem] h-[22rem] border border-black/25 shadow-sm cursor-pointer hover:shadow-lg transition-all  ease-in-out">
-      <img className=" w-full h-[70%] object-cover" src={img} alt="/" />
-      <div className="px-4 py-2">
-        <span className="flex justify-between">
-          <p className="p-lg">{title}</p>
-          {car ? <p className="p-lg">{car.year}</p> : null}
+    <Link
+      to={`${Approutes.product.initial}/${encodeProductId(id)}`}
+      className=" w-[18rem] sm:max-w-[25rem] h-[22rem] border border-black/25 shadow-sm cursor-pointer hover:shadow-lg transition-all  ease-in-out"
+    >
+      <img className=" min-w-full h-[70%] object-cover" src={img} alt="/" />
+      <div className="px-2 py-2">
+        <span className="flex justify-between font-semibold tracking-tighter">
+          <p className="p-lg uppercase line-clamp-1">{title}</p>
         </span>
-
-        {car ? (
-          <div className="flex items-center gap-2 xl:gap-4">
-            {/* <span className="w-1 h-1 bg-black rounded-full whitespace-nowrap" />
-						<p>{car.mileage}</p> */}
-            {/* <span className="w-1 h-1 bg-black rounded-full" /> */}
-            <p>{price}</p>
-          </div>
-        ) : (
-          <span className="p-lg">{price}</span>
-        )}
-        <p className="p-lg">{location}</p>
+        <div className="block w-full mt-4 text-start text-ellipsis flex-nowrap line-clamp-1 text-sm">
+          <FaMapMarkerAlt className="mb-1 inline-block" />{" "}
+          <span className="hidden md:inline">&nbsp;</span>
+          <span className="text-xs md:text-md lg:text-lg tracking-tighter line-clamp-1 inline">
+            {location}
+          </span>
+        </div>
+        <p className="flex justify-between tracking-tighter line-clamp-1 ">
+          <span className="flex">
+            <TbCurrencyNaira className="mt-1" />
+            {numberWithCommas(price)}
+          </span>
+          <span className="badge-primary badge">
+            {formatDistance(new Date(new Date(`${created_at}`)), Date.now(), {
+              includeSeconds: true,
+              addSuffix: true,
+            })}
+          </span>
+        </p>
       </div>
-    </div>
+    </Link>
   );
 };
 
@@ -76,18 +94,22 @@ const categoriesData = [
   {
     img: SportCar,
     title: "Cars & Automobiles",
+    link: `${Approutes.product.category}/${btoa(50)}`,
   },
   {
     img: House,
     title: "Properties",
+    link: `${Approutes.product.category}/${btoa(51)}`,
   },
   {
     img: Furniture,
     title: "Home and Accessories",
+    link: `${Approutes.product.category}/${btoa(57)}`,
   },
   {
     img: Tailor,
     title: "Fashion",
+    link: `${Approutes.product.category}/${btoa(55)}`,
   },
 ];
 

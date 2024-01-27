@@ -34,6 +34,7 @@ export const Approutes = {
 	logout: '/logout',
 	playground: '/playground',
 	postAd: '/post-ad',
+	postDecision: '/post-decision',
 	updateAd: '/update-ad',
 	welcome: '/welcome',
 };

@@ -18,6 +18,7 @@ import {
 } from "../../../utils/dataManipulations";
 import { toast } from "react-toastify";
 import OverviewPills from "./OverviewPills";
+import { formatDistance } from "date-fns";
 
 const index = () => {
   const { id } = useParams();
@@ -35,7 +36,7 @@ const index = () => {
       ]);
     }
   }, [result.isLoading]);
-
+  console.log(result);
   return result.isLoading ? (
     <ViewProduct />
   ) : (
@@ -47,10 +48,10 @@ const index = () => {
         />
       </header>
 
-      <section className="w-full flex flex-col md:flex-row gap-2 md:gap-8 tracking-tighter line-clamp-1">
+      <section className="w-full flex flex-col md:flex-row gap-2 md:gap-8  line-clamp-1">
         <main className="w-full md:w-[60%] xl:w-[70%] flex flex-col">
           <div className="w-full my-2 ml-2">
-            <h6 className="w-full text-md md:text-2xl xl:text-3xl font-bold">
+            <h6 className="w-full text-md md:text-2xl xl:text-3xl font-bold uppercase">
               {result.data?.title}
             </h6>
             <div className="flex items-center justify-between">
@@ -108,7 +109,17 @@ const index = () => {
           <h2 className="w-full text-lg md:text-xl 2xl:text-3xl font-bold">
             {result.data?.firstname}
           </h2>
-          <p className="text-lg">Since 4+ years</p>
+          <p className="text-lg">
+            Since{" "}
+            {formatDistance(
+              new Date(new Date(`${result.data?.joined_on}`)),
+              Date.now(),
+              {
+                includeSeconds: true,
+                addSuffix: true,
+              }
+            )}
+          </p>
           <hr className="h-px my-2 bg-gray-700 border-1 border-black" />
           <div className="text-lg lg:text-xl w-full tracking-tighter">
             <p className="w-full">Contact {result.data?.firstname} </p>

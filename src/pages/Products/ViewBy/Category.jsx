@@ -38,6 +38,7 @@ const Category = () => {
         { name: "Categories", link: Approutes.product.category },
         { name: name },
       ]);
+      setSearchParams({ category: categoryId });
 
       setDisplayCategories(() => [...categoriesData]);
     }
