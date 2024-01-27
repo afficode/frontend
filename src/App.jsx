@@ -34,6 +34,7 @@ import { Approutes } from "./constants";
 import { ToastContainer } from "react-toastify";
 import { RequireAuth } from "./components";
 import useAuth from "./context/UserContext";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const { isLogin } = useAuth();
