@@ -28,6 +28,7 @@ import {
   Category,
   PostAd,
   UpdateAd,
+  PostDecision,
 } from "./pages";
 import { AppLayout, DashboardLayout } from "./layout";
 import { Approutes } from "./constants";
@@ -96,9 +97,14 @@ function App() {
           <Route element={<AppLayout />}>
             <Route path={Approutes.welcome} element={<Welcome />} />
             <Route
+              path={`${Approutes.postDecision}`}
+              element={<PostDecision />}
+            />
+            <Route
               path={`${Approutes.postAd}/:categoryId`}
               element={<PostAd />}
             />
+
             <Route
               path={`${Approutes.updateAd}/:adId`}
               element={<UpdateAd />}

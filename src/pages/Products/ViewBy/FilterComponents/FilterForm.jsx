@@ -1,4 +1,4 @@
-import React, { lazy } from "react";
+import React, { lazy, useEffect } from "react";
 import { Form, Formik } from "formik";
 import FilterCard from "./FilterCard";
 import {
@@ -10,7 +10,6 @@ import { manipulateFilterForm } from "../../../../utils/dataManipulations";
 import { toast } from "react-toastify";
 
 const FilterForm = ({ setSearchParams, categoryId }) => {
-  console.log(categoryId);
   return (
     <div className="my-2 ">
       <Formik

@@ -18,12 +18,17 @@ export default {
 		// prefix: '',
 		themes: [
 			{
-				mytheme: {
+				light: {
+					...require("daisyui/src/theming/themes")["light"],
 					primary: '#2686CE',
 					secondary: '#EBBA16',
+					"#root": {
+						"background-color": "#FBFBFB"
+					}
 				},
+				"dark": false,
 			},
-			'light',
+			
 		],
 	},
 };
