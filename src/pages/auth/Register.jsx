@@ -15,9 +15,6 @@ const Register = () => {
   const notifyErr = (message) => notifyError(message);
   const notifySuc = (message) => notifySuccess(message);
   const notifyInf = (message) => notifyInfo(message);
-
-const Register = () => {
-  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const inputClass =
     "input input-bordered border-black w-full bg-gray-100 text-black text-lg lg:text-xl rounded-none my-2 input-md lg:input-lg";
@@ -65,7 +62,6 @@ const Register = () => {
     setTimeout(async () => {
       const submit = await RegistrationHook(values, setSubmitting, "register");
       if (submit?.success) {
-
         notifySuc(submit.message);
         return navigate("/", { replace: true });
       } else {
