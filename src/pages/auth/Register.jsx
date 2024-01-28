@@ -8,6 +8,13 @@ import { Button } from "flowbite-react";
 import { RegistrationHook } from "../../hooks/AuthHook";
 import { toast } from "react-toastify";
 import { SpinnerSkeleton, Spinner } from "../../components";
+import { notifyError, notifySuccess, notifyInfo } from "../../ui";
+
+const Register = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const notifyErr = (message) => notifyError(message);
+  const notifySuc = (message) => notifySuccess(message);
+  const notifyInf = (message) => notifyInfo(message);
 
 const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -58,10 +65,11 @@ const Register = () => {
     setTimeout(async () => {
       const submit = await RegistrationHook(values, setSubmitting, "register");
       if (submit?.success) {
-        toast.success(submit.message);
+
+        notifySuc(submit.message);
         return navigate("/", { replace: true });
       } else {
-        toast.error(submit.message);
+        notifyErr(submit.message);
         console.log(submit.message);
       }
       setIsLoading(false);
