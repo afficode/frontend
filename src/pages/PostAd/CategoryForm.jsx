@@ -477,7 +477,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				control: 'radio',
 				type: 'radio',
 				label: ['5002', '5005'].includes(selectedVehicleCategory) ? 'Condition' : 'Vehicle Condition',
-				name: 'vehicle_condition',
+				name: 'ad_condition',
 				options: [
 					{ key: 'New', value: 'new' },
 					{ key: 'Nigerian Used', value: 'nigerian_used' },
@@ -708,7 +708,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			!['5105'].includes(selectedPropertyCategory) && {
 				control: 'radio',
 				label: 'Property Condition',
-				name: 'condition',
+				name: 'ad_ad_condition',
 				type: 'radio',
 				options: [
 					{ key: 'New', value: 'new' },
@@ -719,7 +719,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			['5101', '5102', '5103', '5104', '5107', '5108', '5109'].includes(selectedPropertyCategory) && {
 				control: 'radio',
 				label: 'Any Furnishing',
-				name: 'condition',
+				name: 'ad_ad_condition',
 				type: 'radio',
 				options: [
 					{ key: 'Furnished', value: 'furnished' },
@@ -1111,7 +1111,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			!['5302'].includes(selectedAgricultureCategory) && {
 				control: 'radio',
 				label: 'Condition',
-				name: 'condition',
+				name: 'ad_ad_condition',
 				type: 'radio',
 				options: [
 					{ key: 'New', value: 'new' },
@@ -1237,7 +1237,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			{
 				control: 'radio',
 				label: 'Condition',
-				name: 'condition',
+				name: 'ad_ad_condition',
 				type: 'radio',
 				options: [
 					{ key: 'New', value: 'new' },
@@ -1576,7 +1576,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			{
 				control: 'radio',
 				label: 'Condition',
-				name: 'condition',
+				name: 'ad_ad_condition',
 				type: 'radio',
 				options: [
 					{ key: 'New', value: 'new' },
@@ -1800,7 +1800,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			!['5603', '5607', '5602', '5604', '5606'].includes(selectedHealthCategory) && {
 				control: 'radio',
 				label: 'Condition',
-				name: 'condition',
+				name: 'ad_ad_condition',
 				type: 'radio',
 				options: [
 					{ key: 'New', value: 'new' },
@@ -1999,7 +1999,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			!['5704'].includes(selectedHomeCategory) && {
 				control: 'radio',
 				label: 'Condition',
-				name: 'condition',
+				name: 'ad_ad_condition',
 				type: 'radio',
 				options: [
 					{ key: 'Used', value: 'used' },
@@ -2292,7 +2292,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			['5902', '5903'].includes(selectedSoftwareCategory) && {
 				control: 'radio',
 				label: 'Condition',
-				name: 'condition',
+				name: 'ad_ad_condition',
 				type: 'radio',
 				options: [
 					{ key: 'New', value: 'new' },
@@ -2523,7 +2523,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			['6003'].includes(selectedPetCategory) && {
 				control: 'radio',
 				label: 'Condition',
-				name: 'condition',
+				name: 'ad_ad_condition',
 				type: 'radio',
 				options: [
 					{ key: 'Nigerian Used', value: 'Nigerian Used' },
@@ -2636,7 +2636,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			!['6111'].includes(selectedBabiesCategory) && {
 				control: 'radio',
 				label: 'Condition',
-				name: 'condition',
+				name: 'ad_ad_condition',
 				type: 'radio',
 				options: [
 					{ key: 'New', value: 'new' },
@@ -2814,7 +2814,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			!['6204'].includes(selectedSportsCategory) && {
 				control: 'radio',
 				label: 'Condition',
-				name: 'condition',
+				name: 'ad_ad_condition',
 				type: 'radio',
 				options: [
 					{ key: 'New', value: 'new' },
@@ -3027,7 +3027,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				control: 'checkbox',
 				type: 'checkbox',
 				label: 'Condition',
-				name: 'condition',
+				name: 'ad_ad_condition',
 				options: [
 					{ key: 'New', value: 'new' },
 					{ key: 'Nigerian Used', value: 'nigerian_used' },
@@ -3178,7 +3178,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			{
 				control: 'radio',
 				label: 'Condition',
-				name: 'condition',
+				name: 'ad_ad_condition',
 				type: 'radio',
 				options: [
 					{ key: 'New', value: 'new' },
@@ -3310,7 +3310,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			{
 				control: 'radio',
 				label: 'Condition',
-				name: 'condition',
+				name: 'ad_ad_condition',
 				type: 'radio',
 				options: [
 					{ key: 'New', value: 'new' },
@@ -3323,9 +3323,9 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			otherCondition && {
 				control: 'input',
 				label: 'Other Condition',
-				name: 'condition',
+				name: 'ad_ad_condition',
 				type: 'text',
-				placeholder: 'Enter condition',
+				placeholder: 'Enter ad_condition',
 				required: true,
 			},
 			{
@@ -3403,7 +3403,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			fuel_type: Yup.string(),
 			engine_size: Yup.string(),
 			vehicle_features: Yup.array(),
-			vehicle_condition: Yup.string(),
+			ad_ad_condition: Yup.string(),
 			vehicle_body_type: Yup.array(),
 			contact_type: Yup.array().min(1, 'At least one option is required').required('Required'),
 			price: Yup.number().required('Required'),
@@ -3428,7 +3428,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			marketed_by: Yup.string(),
 			title: Yup.string().required('Required'),
 			property_type: Yup.array(),
-			condition: Yup.string(),
+			ad_condition: Yup.string(),
 			// property_use: Yup.string(),
 			time_period: Yup.string(),
 			furnished: Yup.string(),
@@ -3474,7 +3474,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			title: Yup.string().required('Required'),
 			description: Yup.string().required('Required'),
 			type: Yup.string(),
-			condition: Yup.string(),
+			ad_condition: Yup.string(),
 			age: Yup.string(),
 			gender: Yup.string(),
 			color: Yup.string(),
@@ -3491,7 +3491,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			title: Yup.string().required('Required'),
 			description: Yup.string().required('Required'),
 			price: Yup.number().required('Required'),
-			condition: Yup.string(),
+			ad_condition: Yup.string(),
 			brand: Yup.string(),
 			...(['5404', '5405', '5407', '5408'].includes(selectedElectronicsCategory) && {
 				type: Yup.string(),
@@ -3543,7 +3543,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			gender: Yup.string(),
 			size: Yup.string(),
 			color: Yup.string(),
-			condition: Yup.string(),
+			ad_condition: Yup.string(),
 			type: Yup.string(),
 			brand: Yup.string(),
 			material: Yup.string(),
@@ -3566,7 +3566,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			type: Yup.string(),
 			age: Yup.string(),
 			gender: Yup.string(),
-			condition: Yup.string(),
+			ad_condition: Yup.string(),
 			formulation: Yup.string(),
 			scent_type: Yup.string(),
 			price: Yup.number().required('Required'),
@@ -3582,7 +3582,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			title: Yup.string().required('Required'),
 			description: Yup.string().required('Required'),
 			price: Yup.number().required('Required'),
-			condition: Yup.string(),
+			ad_condition: Yup.string(),
 			brand: Yup.string(),
 			type: Yup.string(),
 			material: Yup.string(),
@@ -3626,7 +3626,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			images: Yup.array().min(1, 'At least one image is required').required(),
 			title: Yup.string().required('Required'),
 			description: Yup.string().required('Required'),
-			condition: Yup.string(),
+			ad_condition: Yup.string(),
 			platform: Yup.string(),
 			type: Yup.string(),
 			format: Yup.string(),
@@ -3651,7 +3651,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			gender: Yup.string(),
 			age: Yup.string(),
 			color: Yup.string(),
-			condition: Yup.string(),
+			ad_condition: Yup.string(),
 			negotiable: Yup.boolean(),
 			contact_type: Yup.array().min(1, 'At least one option is required').required('Required'),
 			urgent: Yup.boolean(),
@@ -3665,7 +3665,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			description: Yup.string().required('Required'),
 			price: Yup.number().required('Required'),
 			bulk_price: Yup.number(),
-			condition: Yup.string(),
+			ad_condition: Yup.string(),
 			brand: Yup.string(),
 			type: Yup.string(),
 			gender: Yup.string(),
@@ -3684,7 +3684,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			title: Yup.string().required('Required'),
 			description: Yup.string().required('Required'),
 			price: Yup.number().required('Required'),
-			condition: Yup.string(),
+			ad_condition: Yup.string(),
 			brand: Yup.string(),
 			type: Yup.string(),
 			gender: Yup.string(),
@@ -3704,7 +3704,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			make: Yup.string(),
 			type: Yup.string(),
 			description: Yup.string().required('Required'),
-			condition: Yup.array(),
+			ad_condition: Yup.array(),
 			year: Yup.string(),
 			mileage: Yup.string(),
 			transmission: Yup.string(),
@@ -3724,7 +3724,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			images: Yup.array().required('Required'),
 			title: Yup.string().required('Required'),
 			description: Yup.string().required('Required'),
-			condition: Yup.string(),
+			ad_condition: Yup.string(),
 			color: Yup.string(),
 			type: Yup.string(),
 			min_price: Yup.number().required('Required'),
@@ -3741,7 +3741,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			title: Yup.string().required('Required'),
 			description: Yup.string().required('Required'),
 			reason_for_deal: Yup.string(),
-			condition: Yup.string(),
+			ad_condition: Yup.string(),
 			defects: Yup.string(),
 			defects_detail: Yup.string(),
 			price: Yup.number().required('Required'),
@@ -3982,10 +3982,10 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 					}
 				}, [formik.values.property_use]);
 				useEffect(() => {
-					if (formik.values.condition === 'other') {
+					if (formik.values.ad_condition === 'other') {
 						setOtherCondition(true);
 					}
-				}, [formik.values.condition]);
+				}, [formik.values.ad_condition]);
 				useEffect(() => {
 					if (formik.values.processor === 'other') {
 						setOtherProcessor(true);
