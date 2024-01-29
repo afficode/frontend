@@ -17,14 +17,13 @@ const ChatForm = ({ ad_id, owner }) => {
     await privateAxios
       .post("chat/verifyChat", { ad_id, owner })
       .then((res) => {
-        console.log(res);
         res?.data?.chat.length > 0 && setChatId(res?.data?.chat[0].chat_id);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   useEffect(() => {
-    console.log(user, isLogin);
+    // console.log(user, isLogin);
     if (user) {
       verifyChat();
     }
@@ -33,13 +32,13 @@ const ChatForm = ({ ad_id, owner }) => {
   const { mutate: creatingChat } = createChat();
   const { mutate, error } = useSendMessage();
   const sendMessage = (message) => {
-    console.log("message", message);
+    // console.log("message", message);
     mutate(message, {
       onError: ({ error }) => {
         console.log("Char", error);
       },
       onSuccess: ({ data }) => {
-        console.log(data);
+        // console.log(data);
         if (data.success) {
           setChatId(message.chat_id);
           toast.success(
@@ -55,7 +54,7 @@ const ChatForm = ({ ad_id, owner }) => {
       { ad_id },
       {
         onError: (error) => {
-          console.log("Char", error);
+          // console.log("Char", error);
           // we redirect the user to login
           navigate("/auth", { replace: false });
         },
@@ -63,7 +62,7 @@ const ChatForm = ({ ad_id, owner }) => {
           //console.log("returned", data);
           if (data?.chat_id) {
             const chat_id = data.chat_id;
-            console.log("On success", data.chat_id);
+            // console.log("On success", data.chat_id);
             sendMessage({ chat_id, content });
           }
         },

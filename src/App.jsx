@@ -28,12 +28,14 @@ import {
   Category,
   PostAd,
   UpdateAd,
+  PostDecision,
 } from "./pages";
 import { AppLayout, DashboardLayout } from "./layout";
 import { Approutes } from "./constants";
 import { ToastContainer } from "react-toastify";
 import { RequireAuth } from "./components";
 import useAuth from "./context/UserContext";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const { isLogin } = useAuth();
@@ -95,9 +97,14 @@ function App() {
           <Route element={<AppLayout />}>
             <Route path={Approutes.welcome} element={<Welcome />} />
             <Route
+              path={`${Approutes.postDecision}`}
+              element={<PostDecision />}
+            />
+            <Route
               path={`${Approutes.postAd}/:categoryId`}
               element={<PostAd />}
             />
+
             <Route
               path={`${Approutes.updateAd}/:adId`}
               element={<UpdateAd />}

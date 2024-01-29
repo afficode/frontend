@@ -15638,8 +15638,8 @@ export const formToDisplay = (categoryId) => {
 		return motorbike;
 	case 6301:
 		return motorbike01;
-    default:
-      return []
+	default:
+		return [];
   }
 }
 

@@ -1,15 +1,17 @@
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { Car } from "../../../assets/images";
-import { responsive } from "../../../constants";
+import { Approutes, responsive } from "../../../constants";
 import { v4 as uuidv4 } from "uuid";
+import { noimage } from "../../../assets/images";
 
 // icons
 import { HiStar } from "react-icons/hi";
 import { BsFastForwardFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { encodeProductId } from "../../../utils/dataManipulations";
 
-const RowContainer = ({ title, link }) => {
+const RowContainer = ({ title, link, data }) => {
   return (
     <section className="w-full px-4 md:px-[2rem] py-8">
       <div className="relative flex items-center w-full pb-2">
@@ -26,13 +28,17 @@ const RowContainer = ({ title, link }) => {
       <div className="relative w-full pb-8">
         <div className="py-4 bg-primary/20 md:px-4">
           <Carousel renderDotsOutside responsive={responsive} showDots={true}>
-            {title === "Shops"
-              ? Array(12)
-                  .fill(1)
-                  .map((_) => <ShopsCard key={uuidv4()} />)
+            {title !== "Shops"
+              ? data && data.length > 0
+                ? data.map((product) => (
+                    <FeaturedProductsCard key={uuidv4()} product={product} />
+                  ))
+                : Array(12)
+                    .fill(1)
+                    .map((_) => <FeaturedProductsCard key={uuidv4()} />)
               : Array(12)
                   .fill(1)
-                  .map((_) => <FeaturedProductsCard key={uuidv4()} />)}
+                  .map((_) => <ShopsCard key={uuidv4()} />)}
           </Carousel>
         </div>
       </div>
@@ -70,21 +76,29 @@ const ShopsCard = () => {
   );
 };
 
-const FeaturedProductsCard = () => {
+const FeaturedProductsCard = ({ product }) => {
   return (
-    <div className="max-w-[11rem] max-h-[14rem]  sm:w-[13rem] sm:h-[16rem] flex items-center justify-center rounded-lg border-l-4 border-r-4 border-l-secondary border-r-secondary">
+    <Link
+      to={`${Approutes.product.initial}/${encodeProductId(product?.id)}`}
+      className="max-w-[11rem] max-h-[14rem]  sm:w-[13rem] sm:h-[16rem] flex flex-col items-center justify-center rounded-lg bg-white "
+    >
       <img
-        className="object-cover min-w-full rounded-lg max-h-fit"
-        src={Car}
+        className="object-cover min-w-full h-[8rem] rounded-t-lg"
+        src={product?.images[0]?.path || noimage}
         alt="/"
       />
-      <div className="absolute top-0 bottom-0 left-0 right-0 flex flex-col justify-between py-2 w-[11rem]">
-        <div className="text-center mt-auto">
-          <button className=" mb-1  px-4 text-black capitalize border-none btn bg-secondary/90 hover:bg-secondary/90">
-            View Product
-          </button>
-        </div>
+
+      <div
+        className=" flex flex-col  justify-between py-2 w-[11rem] my-auto tooltip tooltip-secondary"
+        data-tip={product?.title.toUpperCase()}
+      >
+        <p className="line-clamp-1 uppercase mx-auto text-center ">
+          {product?.title}
+        </p>
+        <button className="py-0 mx-4 my-auto rounded-lg text-black capitalize border-none btn-sm bg-secondary/90 hover:bg-secondary/90 mt-4 hover:text-[#FBFBFB]">
+          View more
+        </button>
       </div>
-    </div>
+    </Link>
   );
 };
