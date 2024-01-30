@@ -4,17 +4,9 @@ import Header from "./Header";
 import ProductStats from "./ProductStats";
 import LoadingScreen from "./LoadingScreen";
 import { useUserAds } from "../../../hooks";
-import { useNavigate } from "react-router-dom";
-import { setRedirectLink } from "../../../utils";
-import { Approutes } from "../../../constants";
 
 const Performance = () => {
-  const { data, isLoading, isError, error } = useUserAds();
-  const navigate = useNavigate();
-
-  if (error?.response?.status === 401) {
-    navigate(Approutes.auth, { replace: true });
-  }
+  const { data, isLoading, isError } = useUserAds();
 
   if (isLoading) {
     return (
