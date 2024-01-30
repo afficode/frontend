@@ -5,14 +5,15 @@ import { Button } from 'flowbite-react';
 import { Spinner } from '../../components';
 import * as Yup from 'yup';
 import { TokenHook } from '../../hooks/AuthHook';
-import { notifyError, notifySuccess } from '../../ui';
+import { useNotify } from '../../hooks';
 
 const ResetPassword = () => {
 	const [searchParams] = useSearchParams();
 	const navigate = useNavigate();
 	const token = searchParams.get('token');
-	const notifyErr = (message) => notifyError(message);
-	const notifySuc = (message) => notifySuccess(message);
+	// const notifyErr = (message) => ror(message);
+	// const notifySuc = (message) => notifySuccess(message);
+	const notify = useNotify();
 	const initialValues = {
 		password: '',
 		confirmPassword: '',
@@ -33,10 +34,12 @@ const ResetPassword = () => {
 	const onSubmit = async (values, { setSubmitting }) => {
 		const submit = await TokenHook(values, 'change_password', token, setSubmitting);
 		if (submit?.success) {
-			notifySuc(submit.message);
+			// notifySuc(submit.message);
+			notify(submit.message, 'success');
 			return navigate('/auth', { replace: true });
 		} else {
-			notifyErr(submit.message);
+			// notifyErr(submit.message);
+			notify(submit.message, 'error');
 		}
 	};
 

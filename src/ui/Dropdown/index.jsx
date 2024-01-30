@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { generateCategoryUrl, generateSubCategoryUrl } from '../../utils';
+import { Approutes } from '../../constants';
 
 const Dropdown = ({ category, subCategories }) => {
 	return (
@@ -14,10 +15,7 @@ const Dropdown = ({ category, subCategories }) => {
 			<h5 className="font-semibold max-md:whitespace-normal">Browse sub-category in: {category}</h5>
 			<ul className="flex flex-col gap-[0.1rem] menu max-h-full w-full md:min-w-[40rem] py-4 ">
 				{subCategories.map((subCategory) => (
-					<Link
-						to={`${generateCategoryUrl(category)}/${generateSubCategoryUrl(subCategory.name)}`}
-						key={subCategory.id}
-					>
+					<Link to={`${Approutes.product.category}/${btoa(subCategory)}`} key={subCategory.id}>
 						<li className="text-lg capitalize whitespace-normal max-sm:text-base lg:pr-12 hover:underline">
 							{subCategory.name}
 						</li>

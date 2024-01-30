@@ -30,7 +30,7 @@ const Navbar = () => {
 	// fetch categories
 	const { data } = useCategories();
 
-	// console.log(data);
+	console.log(data);
 
 	// filter categories
 	const filteredCategories = {
