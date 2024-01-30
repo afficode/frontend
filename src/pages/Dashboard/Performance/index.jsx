@@ -14,7 +14,6 @@ const Performance = () => {
 
   if (error?.response?.status === 401) {
     navigate(Approutes.auth, { replace: true });
-    setRedirectLink(Approutes.dashboard.initial);
   }
 
   if (isLoading) {
