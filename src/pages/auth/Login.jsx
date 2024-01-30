@@ -60,7 +60,10 @@ const Login = () => {
             position: "top-center",
           }
         );
-
+        console.log(window.location);
+        if (window.location === getRedirectLink()) {
+          return navigate(Approutes.welcome);
+        }
         return navigate(getRedirectLink() || Approutes.welcome, {
           replace: true,
         });
