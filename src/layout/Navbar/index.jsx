@@ -82,7 +82,7 @@ const Navbar = () => {
             {/* logo */}
             <div className="flex items-center bg-white rounded-full p-[2px]">
               <NavLink to={"/"}>
-                <img src={AffiLogo} className="w-9 h-9" alt="Affi.ng" />
+                <img src={AffiLogo} className="w-9 h-9" alt="Boonfu.ng" />
               </NavLink>
             </div>
 

@@ -6,13 +6,15 @@ import { notifyError, notifySuccess, notifyInfo } from '../../ui';
 import { api } from '../../utils/axios';
 import useAuth from '../../context/UserContext';
 import { SpinnerSkeleton } from '../../components';
+import { useNotify } from '../../hooks';
 
 const Logout = () => {
+	const notify = useNotify();
 	const { logout } = useAuth();
 	const navigate = useNavigate();
-	const notifyErr = (message) => notifyError(message);
-	const notifySuc = (message) => notifySuccess(message);
-	const notifyInf = (message) => notifyInfo(message);
+	// const notifyErr = (message) => notifyError(message);
+	// const notifySuc = (message) => notifySuccess(message);
+	// const notifyInf = (message) => notifyInfo(message);
 	useEffect(() => {
 		// notifyInf(
 		//   "You are been logout. Allow us clean up your space against Hackers."
@@ -28,14 +30,15 @@ const Logout = () => {
 				})
 				.then(({ data }) => {
 					const { message } = data;
-					notifySuc(message);
+					notify(message, 'success');
+					return;
 				})
 				.catch(({ response }) => {
 					const { message } = response.data;
 					if (message !== undefined) {
-						notifyErr(message);
+						notify(message, 'error');
 					} else {
-						notifyErr('Something went wrong.');
+						notify('Something went wrong.', 'error');
 					}
 				});
 			// remove the user details from localStorage
