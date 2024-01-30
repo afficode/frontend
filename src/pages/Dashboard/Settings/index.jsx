@@ -40,7 +40,7 @@ const Settings = () => {
 
 	// submit function
 	const handleSave = (values) => {
-		const formData = { ...values, username: `affi.ng/${values.username}` };
+		const formData = { ...values, username: `Boonfu.ng/${values.username}` };
 
 		console.log(formData);
 		setToggleEdit(() => ({

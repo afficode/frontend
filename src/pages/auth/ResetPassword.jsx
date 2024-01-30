@@ -44,7 +44,7 @@ const ResetPassword = () => {
 		<section className="w-full mt-[100px] lg:mt-[200px] ">
 			<div className="w-[90%] md:w-[75%] lg:w-[50%] mx-auto h-[768px]">
 				<div className="w-full text-xl text-center mb-8">
-					We ensure we provide you comfort. <span className="text-primary font-bold">Affi</span>{' '}
+					We ensure we provide you comfort. <span className="text-primary font-bold">Boonfu</span>{' '}
 					encourage you to use a strong password.
 				</div>
 				<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
