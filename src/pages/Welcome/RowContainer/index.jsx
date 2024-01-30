@@ -76,7 +76,7 @@ const CardDetails = ({ id, title, location, images, created_at, price }) => {
             <TbCurrencyNaira className="mt-1" />
             {numberWithCommas(price)}
           </span>
-          <span className="badge-primary badge">
+          <span className="">
             {formatDistance(new Date(new Date(`${created_at}`)), Date.now(), {
               includeSeconds: true,
               addSuffix: true,

@@ -44,30 +44,28 @@ const Login = () => {
 			if (submit?.success) {
 				// the login from the useAuth tied to a context hook, will update localstorge and set user to Login
 				login(submit);
-				// toast.success(
-				//   "Welcome to Affi. \n\nYour world of endless possibilities",
-				//   {
-				//     style: {
-				//       border: "4px solid #FAC213",
-				//       padding: "14px",
-				//       background: "#2686CE",
-				//       color: "#fff",
-				//     },
-				//     iconTheme: {
-				//       primary: "#2686CE",
-				//       secondary: "#EBBA16",
-				//     },
-				//     position: "top-center",
-				//   }
-				// );
-				notify('Welcome to Affi. \n\nYour world of endless possibilities', 'success');
-
+				toast.success('Welcome to Affi. \n\nYour world of endless possibilities', {
+					style: {
+						border: '4px solid #FAC213',
+						padding: '14px',
+						background: '#2686CE',
+						color: '#fff',
+					},
+					iconTheme: {
+						primary: '#2686CE',
+						secondary: '#EBBA16',
+					},
+					position: 'top-center',
+				});
+				console.log(window.location);
+				if (window.location === getRedirectLink()) {
+					return navigate(Approutes.welcome);
+				}
 				return navigate(getRedirectLink() || Approutes.welcome, {
 					replace: true,
 				});
 			} else {
-				// toast.error(submit.message);
-				notify(submit.message, 'error');
+				toast.error(submit.message);
 			}
 			setIsLoading(false);
 		}, 3000);

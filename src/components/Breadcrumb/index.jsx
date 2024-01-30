@@ -8,7 +8,7 @@ const Breadcrumb = ({ items, className }) => {
           items.map((item, index) => (
             <li
               key={index}
-              className={`${
+              className={`uppercase ${
                 !item.link ? "text-black" : "hover:text-secondary text-primary"
               }`}
             >

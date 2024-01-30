@@ -30,7 +30,7 @@ const Navbar = () => {
 	// fetch categories
 	const { data } = useCategories();
 
-	console.log(data);
+	// console.log(data);
 
 	// filter categories
 	const filteredCategories = {
@@ -564,16 +564,12 @@ const Navbar = () => {
 								<span className="border border-r-4 border-white h-[2rem]" />
 
 								<li className="dropdown dropdown-hover">
-									<NavLink
-										to={`${Approutes.product.category}/${btoa(50)}`}
-										tabIndex={0}
-										className={listStyles}
-									>
+									<a href={`${Approutes.product.category}/${btoa(50)}`} tabIndex={0} className={listStyles}>
 										CARS & VEHICLES
-									</NavLink>
-									<NavLink to={`${Approutes.product.category}/${btoa(50)}`} className={mobileListStyles}>
+									</a>
+									<a href={`${Approutes.product.category}/${btoa(50)}`} className={mobileListStyles}>
 										<FaCarSide size={25} />
-									</NavLink>
+									</a>
 									{filteredCategories?.vehicleCat && (
 										<Dropdown category={'CARS & VEHICLES'} subCategories={filteredCategories?.vehicleCat} />
 									)}
@@ -582,16 +578,12 @@ const Navbar = () => {
 								<span className="border border-r-4 border-white h-[2rem]" />
 
 								<li className="dropdown dropdown-hover">
-									<NavLink
-										to={`${Approutes.product.category}/${btoa(51)}`}
-										tabIndex={0}
-										className={listStyles}
-									>
+									<a href={`${Approutes.product.category}/${btoa(51)}`} tabIndex={0} className={listStyles}>
 										PROPERTY
-									</NavLink>
-									<NavLink to={`${Approutes.product.category}/${btoa(51)}`} className={mobileListStyles}>
+									</a>
+									<a href={`${Approutes.product.category}/${btoa(51)}`} className={mobileListStyles}>
 										<FaBuilding size={25} />
-									</NavLink>
+									</a>
 									{filteredCategories?.propertyCat && (
 										<Dropdown category={'PROPERTY'} subCategories={filteredCategories?.propertyCat} />
 									)}
@@ -600,16 +592,12 @@ const Navbar = () => {
 								<span className="border border-r-4 border-white h-[2rem]" />
 
 								<li className="dropdown dropdown-hover ">
-									<NavLink
-										to={`${Approutes.product.category}/${btoa(52)}`}
-										tabIndex={0}
-										className={listStyles}
-									>
+									<a href={`${Approutes.product.category}/${btoa(52)}`} tabIndex={0} className={listStyles}>
 										SERVICES
-									</NavLink>
-									<NavLink to={`${Approutes.product.category}/${btoa(52)}`} className={mobileListStyles}>
+									</a>
+									<a href={`${Approutes.product.category}/${btoa(52)}`} className={mobileListStyles}>
 										<MdMiscellaneousServices size={25} />
-									</NavLink>
+									</a>
 									{filteredCategories?.servicesCat && (
 										<Dropdown category={'SERVICES'} subCategories={filteredCategories?.servicesCat} />
 									)}
