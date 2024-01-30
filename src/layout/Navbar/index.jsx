@@ -82,7 +82,7 @@ const Navbar = () => {
 						{/* logo */}
 						<div className="flex items-center bg-white rounded-full p-[2px]">
 							<NavLink to={'/'}>
-								<img src={AffiLogo} className="w-9 h-9" alt="Affi.ng" />
+								<img src={AffiLogo} className="w-9 h-9" alt="Boonfu.ng" />
 							</NavLink>
 						</div>
 
@@ -564,10 +564,14 @@ const Navbar = () => {
 								<span className="border border-r-4 border-white h-[2rem]" />
 
 								<li className="dropdown dropdown-hover">
-									<NavLink to={generateCategoryUrl('Vehicles')} tabIndex={0} className={listStyles}>
+									<NavLink
+										to={`${Approutes.product.category}/${btoa(50)}`}
+										tabIndex={0}
+										className={listStyles}
+									>
 										CARS & VEHICLES
 									</NavLink>
-									<NavLink to={generateCategoryUrl('Vehicles')} className={mobileListStyles}>
+									<NavLink to={`${Approutes.product.category}/${btoa(50)}`} className={mobileListStyles}>
 										<FaCarSide size={25} />
 									</NavLink>
 									{filteredCategories?.vehicleCat && (
@@ -578,10 +582,14 @@ const Navbar = () => {
 								<span className="border border-r-4 border-white h-[2rem]" />
 
 								<li className="dropdown dropdown-hover">
-									<NavLink to={generateCategoryUrl('Property')} tabIndex={0} className={listStyles}>
+									<NavLink
+										to={`${Approutes.product.category}/${btoa(51)}`}
+										tabIndex={0}
+										className={listStyles}
+									>
 										PROPERTY
 									</NavLink>
-									<NavLink to={generateCategoryUrl('Property')} className={mobileListStyles}>
+									<NavLink to={`${Approutes.product.category}/${btoa(51)}`} className={mobileListStyles}>
 										<FaBuilding size={25} />
 									</NavLink>
 									{filteredCategories?.propertyCat && (
@@ -592,10 +600,14 @@ const Navbar = () => {
 								<span className="border border-r-4 border-white h-[2rem]" />
 
 								<li className="dropdown dropdown-hover ">
-									<NavLink to={generateCategoryUrl('Services')} tabIndex={0} className={listStyles}>
+									<NavLink
+										to={`${Approutes.product.category}/${btoa(52)}`}
+										tabIndex={0}
+										className={listStyles}
+									>
 										SERVICES
 									</NavLink>
-									<NavLink to={generateCategoryUrl('Services')} className={mobileListStyles}>
+									<NavLink to={`${Approutes.product.category}/${btoa(52)}`} className={mobileListStyles}>
 										<MdMiscellaneousServices size={25} />
 									</NavLink>
 									{filteredCategories?.servicesCat && (
@@ -605,30 +617,32 @@ const Navbar = () => {
 
 								<span className="border border-r-4 border-white h-[2rem]" />
 
-								<li className="dropdown dropdown-end dropdown-hover">
-									<NavLink to={generateCategoryUrl('Deals')} tabIndex={0} className={listStyles}>
+								<li className="">
+									<NavLink
+										to={`${Approutes.product.category}/${btoa(65)}`}
+										tabIndex={0}
+										className={listStyles}
+									>
 										DEALS
 									</NavLink>
-									<NavLink to={generateCategoryUrl('Deals')} className={mobileListStyles}>
+									<NavLink to={`${Approutes.product.category}/${btoa(65)}`} className={mobileListStyles}>
 										<FaRegHandshake size={25} />
 									</NavLink>
-									{filteredCategories?.dealsCat && (
-										<Dropdown category={'DEALS'} subCategories={filteredCategories?.dealsCat} />
-									)}
 								</li>
 
 								<span className="border border-r-4 border-white h-[2rem]" />
 
-								<li className="dropdown dropdown-end dropdown-hover mr-4">
-									<NavLink to={generateCategoryUrl('Requests')} tabIndex={0} className={listStyles}>
+								<li className=" mr-4">
+									<NavLink
+										to={`${Approutes.product.category}/${btoa(64)}`}
+										tabIndex={0}
+										className={listStyles}
+									>
 										REQUESTS
 									</NavLink>
-									<NavLink to={generateCategoryUrl('Deals')} className={mobileListStyles}>
+									<NavLink to={`${Approutes.product.category}/${btoa(64)}`} className={mobileListStyles}>
 										<VscGitPullRequestGoToChanges size={25} />
 									</NavLink>
-									{filteredCategories?.dealsCat && (
-										<Dropdown category={'REQUESTS'} subCategories={filteredCategories?.dealsCat} />
-									)}
 								</li>
 							</ul>
 						</div>

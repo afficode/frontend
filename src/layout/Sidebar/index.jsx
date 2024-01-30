@@ -131,8 +131,8 @@ const navList = [
 		name: 'Help',
 		link: Approutes.dashboard.help,
 	},
-	{
-		name: 'Go to website',
-		link: Approutes.home,
-	},
+	// {
+	// 	name: 'Go to website',
+	// 	link: Approutes.home,
+	// },
 ];
