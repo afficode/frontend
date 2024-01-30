@@ -59,7 +59,7 @@ const FeaturedProducts = ({ product }) => {
                 <TbCurrencyNaira className="mt-1" />
                 {numberWithCommas(ad.price)}
               </span>
-              <span className="badge-primary badge">
+              <span className="">
                 {formatDistance(
                   new Date(new Date(`${ad?.created_at}`)),
                   Date.now(),
