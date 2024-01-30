@@ -1,32 +1,39 @@
-import { DashboardHeader } from '../../../components';
-import ActivitiesCharts from './PerformanceCharts';
-import Header from './Header';
-import ProductStats from './ProductStats';
-import LoadingScreen from './LoadingScreen';
-import { useUserAds } from '../../../hooks';
+import { DashboardHeader } from "../../../components";
+import ActivitiesCharts from "./PerformanceCharts";
+import Header from "./Header";
+import ProductStats from "./ProductStats";
+import LoadingScreen from "./LoadingScreen";
+import { useUserAds } from "../../../hooks";
+import { useNavigate } from "react-router-dom";
+import { setRedirectLink } from "../../../utils";
+import { Approutes } from "../../../constants";
 
 const Performance = () => {
-	const { data, isLoading, isError } = useUserAds();
+  const { data, isLoading, isError, error } = useUserAds();
+  const navigate = useNavigate();
 
-	console.log(data);
+  if (error?.response?.status === 401) {
+    navigate(Approutes.auth, { replace: true });
+    setRedirectLink(Approutes.dashboard.initial);
+  }
 
-	if (isLoading) {
-		return (
-			<>
-				<DashboardHeader />
-				<LoadingScreen />;
-			</>
-		);
-	}
+  if (isLoading) {
+    return (
+      <>
+        <DashboardHeader />
+        <LoadingScreen />;
+      </>
+    );
+  }
 
-	return (
-		<div>
-			<DashboardHeader />
-			<Header />
-			<ProductStats adsData={data} />
-			<ActivitiesCharts adsData={data} />
-		</div>
-	);
+  return (
+    <div>
+      <DashboardHeader />
+      <Header />
+      <ProductStats adsData={data} />
+      <ActivitiesCharts adsData={data} />
+    </div>
+  );
 };
 
 export default Performance;
