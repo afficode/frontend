@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getToken } from '../../utils';
 import { backendLink } from '../../constants';
-import { notifyError, notifySuccess, notifyInfo } from '../../ui';
+// import { notifyError, notifySuccess, notifyInfo } from '../../ui';
 import { api } from '../../utils/axios';
 import useAuth from '../../context/UserContext';
 import { SpinnerSkeleton } from '../../components';
