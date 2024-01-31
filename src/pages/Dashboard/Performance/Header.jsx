@@ -8,7 +8,6 @@ import { Approutes } from "../../../constants";
 const Header = () => {
   const [filteredDate, setFilteredDate] = useState("all");
   const [date, setDate] = useState();
-  console.log(date);
 
   return (
     <div className="w-full bg-gray-200 px-2 sm:px-6 py-4 flex flex-col gap-4 my-2">
