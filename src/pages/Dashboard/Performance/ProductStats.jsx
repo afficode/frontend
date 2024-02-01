@@ -1,38 +1,4 @@
 const ProductStats = ({ adsData }) => {
-<<<<<<< HEAD
-  const totalChats =
-    adsData?.ads_summary.map((ad) => ad.chats).reduce((a, b) => a + b, 0) || [];
-  console.log(totalChats);
-
-  return (
-    <div className="w-full">
-      <div className="flex gap-1 mx-auto rounded-lg">
-        <Pallet
-          color="primary"
-          title="Total Shop Visitor"
-          stat="9,420"
-          className="rounded-l-2xl "
-        />
-        <Pallet color="secondary" title="Total Chats" stat={totalChats} />
-        <Pallet
-          color="primary"
-          title="Total Sales"
-          stat="25"
-          className="rounded-r-2xl "
-        />
-      </div>
-
-      <div className="flex gap-4 mt-4">
-        <div className="self-end flex-1 text-center bg-gray-200">
-          <h4 className="py-5">Total Ads</h4>
-        </div>
-        <div className=" h-[7rem] border border-black/60 flex-1 mb-3 text-center flex flex-col justify-center rounded-2xl">
-          <h4>Total Ads</h4>
-          <h4>[ {adsData?.total_ads} ]</h4>
-        </div>
-      </div>
-
-=======
   return (
     <div className="w-full">
       <div className="flex gap-1 mx-auto rounded-lg">
@@ -61,7 +27,6 @@ const ProductStats = ({ adsData }) => {
         </div>
       </div>
 
->>>>>>> df729ee13763ad614daf1e907722e35bf0911838
       <div className="flex bg-gray-200">
         <div className="flex flex-col items-center flex-1 gap-4 px-4 py-6">
           <p className="font-bold text-[#047F73]">Active</p>
