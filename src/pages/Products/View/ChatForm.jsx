@@ -9,9 +9,10 @@ import { Approutes } from '../../../constants/routes.js';
 import { createChat, useSendMessage } from '../../../hooks/useMessages.js';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-const ChatForm = ({ ad_id, owner }) => {
+const ChatForm = ({ ad_id, owner, active }) => {
 	const { isLogin, user } = useAuth();
 	const navigate = useNavigate();
+	const [blocked, setBlocked] = useState(active === "0")
 	const [chatId, setChatId] = useState(null);
 	const verifyChat = async () =>
 		await privateAxios
@@ -88,7 +89,7 @@ const ChatForm = ({ ad_id, owner }) => {
 			{({ isSubmitting }) => (
 				<Form>
 					<Field
-						disabled={chatId !== null}
+						disabled={chatId !== null || blocked || user.id === owner}
 						as="textarea"
 						name="message"
 						id="message"
@@ -96,16 +97,15 @@ const ChatForm = ({ ad_id, owner }) => {
 							chatId !== null && 'bg-gray-300 cursor-not-allowed'
 						}`}
 						placeholder={
-							chatId !== null
+							(chatId !== null)
 								? 'Disabled... Please continue chat in the message section'
-								: `Hi There, I am interested in this 
-car, is it still available?`
+								: `Hi There, I am interested in this d, is it still available?`
 						}
 						cols={20}
 						rows={5}
 					/>
 					<Input
-						disabled={chatId !== null}
+						disabled={chatId !== null || blocked || user.id === owner}
 						name="phone"
 						id="phone"
 						placeholder={
@@ -124,6 +124,7 @@ car, is it still available?`
 					{chatId ? (
 						<Link to={Approutes.profile.messages}>
 							<Button
+							disabled={!isLogin || blocked || user.id === owner}
 								variant="secondary"
 								size={'full'}
 								className="my-2 text-lg font-bold tracking-tighter line-clamp-1"
@@ -137,7 +138,7 @@ car, is it still available?`
 							data-tip={`${!isLogin ? 'Please Login to send message' : 'Start a conversation'}`}
 						>
 							<Button
-								disabled={!isLogin}
+								disabled={!isLogin || blocked || user.id === owner}
 								loading={isSubmitting}
 								type="submit"
 								variant="primary"
@@ -152,14 +153,14 @@ car, is it still available?`
 						variant="secondary"
 						size={'full'}
 						className="my-2 text-lg tracking-tighter line-clamp-1"
-						disabled={!isLogin}
+						disabled={!isLogin || blocked || user.id === owner}
 					>
-						Grab Item
+						Grab Item 
 					</Button>
 					<Button
 						size={'full'}
 						className="my-2 text-lg text-white bg-slate-600 hover:bg-slate-500 w-full p-2 tracking-tighter line-clamp-1"
-						disabled={!isLogin}
+						disabled={!isLogin || blocked || user.id === owner}
 					>
 						Feedback
 					</Button>

@@ -732,6 +732,7 @@ const Navbar = () => {
 
                 <span className="border border-r-4 border-white h-[2rem]" />
 
+<<<<<<< HEAD
                 <li className="dropdown dropdown-hover">
                   <a
                     href={`${Approutes.product.category}/${btoa(50)}`}
@@ -753,9 +754,23 @@ const Navbar = () => {
                     />
                   )}
                 </li>
+=======
+								<li className="dropdown dropdown-hover">
+									<a href={`${Approutes.product.category}/${btoa(50)}`} tabIndex={0} className={listStyles}>
+										CARS & VEHICLES
+									</a>
+									<a href={`${Approutes.product.category}/${btoa(50)}`} className={mobileListStyles}>
+										<FaCarSide size={25} />
+									</a>
+									{filteredCategories?.vehicleCat && (
+										<Dropdown category={'CARS & VEHICLES'} subCategories={filteredCategories?.vehicleCat} />
+									)}
+								</li>
+>>>>>>> df729ee13763ad614daf1e907722e35bf0911838
 
                 <span className="border border-r-4 border-white h-[2rem]" />
 
+<<<<<<< HEAD
                 <li className="dropdown dropdown-hover">
                   <a
                     href={`${Approutes.product.category}/${btoa(51)}`}
@@ -777,9 +792,23 @@ const Navbar = () => {
                     />
                   )}
                 </li>
+=======
+								<li className="dropdown dropdown-hover">
+									<a href={`${Approutes.product.category}/${btoa(51)}`} tabIndex={0} className={listStyles}>
+										PROPERTY
+									</a>
+									<a href={`${Approutes.product.category}/${btoa(51)}`} className={mobileListStyles}>
+										<FaBuilding size={25} />
+									</a>
+									{filteredCategories?.propertyCat && (
+										<Dropdown category={'PROPERTY'} subCategories={filteredCategories?.propertyCat} />
+									)}
+								</li>
+>>>>>>> df729ee13763ad614daf1e907722e35bf0911838
 
                 <span className="border border-r-4 border-white h-[2rem]" />
 
+<<<<<<< HEAD
                 <li className="dropdown dropdown-hover ">
                   <a
                     href={`${Approutes.product.category}/${btoa(52)}`}
@@ -801,6 +830,19 @@ const Navbar = () => {
                     />
                   )}
                 </li>
+=======
+								<li className="dropdown dropdown-hover ">
+									<a href={`${Approutes.product.category}/${btoa(52)}`} tabIndex={0} className={listStyles}>
+										SERVICES
+									</a>
+									<a href={`${Approutes.product.category}/${btoa(52)}`} className={mobileListStyles}>
+										<MdMiscellaneousServices size={25} />
+									</a>
+									{filteredCategories?.servicesCat && (
+										<Dropdown category={'SERVICES'} subCategories={filteredCategories?.servicesCat} />
+									)}
+								</li>
+>>>>>>> df729ee13763ad614daf1e907722e35bf0911838
 
                 <span className="border border-r-4 border-white h-[2rem]" />
 

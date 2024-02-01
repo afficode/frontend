@@ -1,8 +1,14 @@
 import ReactEcharts from 'echarts-for-react';
 import { PerformanceArrowUp } from '../../../assets/svgs';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Approutes } from '../../../constants';
+import { encodeProductId } from '../../../utils/dataManipulations';
+import { FaEdit, FaTrash } from "react-icons/fa";
+import { MdEditNote } from "react-icons/md";
 
 const PerformanceCharts = ({ adsData }) => {
+	console.log
 	const [chartData, setChartData] = useState([
 		{
 			day: 'Mon',
@@ -90,23 +96,36 @@ const PerformanceCharts = ({ adsData }) => {
 				<h4>Products Activities Chart</h4>
 				<p>Monitor this chart regularly to make informed decisions</p>
 
-				<div className="w-full mt-4 overflow-auto border border-black/40">
-					<table className="table ">
-						<thead className="text-sm font-medium text-black bg-gray-200">
-							<tr>
+				<div className=" mt-4a overflow-x-auto border border-black/40 h-96 bg-white">
+					<table className="table table-pin-rows ">
+						<thead className="text-sm font-medium text-white bg-primar">
+							<tr className='bg-primary'>
 								<th>Product(s)</th>
 								<th className="text-center">Impression/ Views</th>
 								<th className="text-center">Chats</th>
 								<th className="text-center">Grabs</th>
+								<th className="text-center">Edit</th>
 							</tr>
 						</thead>
 						<tbody>
-							{adsData?.ads_summary.map((ad) => (
-								<tr key={ad.id} className="font-medium whitespace-nowrap ">
-									<td className="capitalize">{ad.name}</td>
+							{adsData?.ads_summary && adsData?.ads_summary.map((ad) => (
+								<tr key={ad.id} className="font-medium whitespace-nowrap hover:bg-gray-200">
+									<td className="capitalize hover:underline hover:underline-offset-4"><Link to={`${Approutes.product.initial}/${encodeProductId(ad.id)}`}>{ad.name}</Link></td>
 									<td className="text-center text-primary">[ {ad.views} ]</td>
 									<td className="text-center text-primary">[ {ad.chats} ]</td>
-									<td className="text-center text-primary">[ 4 ]</td>
+									<td className="text-center text-primary">[ 0 ]</td>
+									<td className="text-center text-gray-600 flex gap-x-2 justify-center">
+										<span className="hover:text-primary ">
+											<Link to={`${Approutes.updateAd}/${ad.id}`} target="_blank" rel="noopener noreferrer">
+												<FaEdit />
+											</Link>
+										</span> | 
+										<span className="text-red-600 ">
+											<Link to={`${Approutes.updateAd}/${ad.id}`} target="_blank" rel="noopener noreferrer">
+												<FaTrash />
+											</Link>
+										</span>
+									</td>
 								</tr>
 							))}
 						</tbody>

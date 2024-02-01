@@ -7,6 +7,10 @@ import { useUserAds } from "../../../hooks";
 
 const Performance = () => {
   const { data, isLoading, isError } = useUserAds();
+<<<<<<< HEAD
+=======
+  console.log(data)
+>>>>>>> df729ee13763ad614daf1e907722e35bf0911838
 
   if (isLoading) {
     return (
@@ -17,6 +21,10 @@ const Performance = () => {
     );
   }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> df729ee13763ad614daf1e907722e35bf0911838
   return (
     <div>
       <DashboardHeader />
