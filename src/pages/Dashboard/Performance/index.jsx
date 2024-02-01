@@ -7,6 +7,7 @@ import { useUserAds } from "../../../hooks";
 
 const Performance = () => {
   const { data, isLoading, isError } = useUserAds();
+  console.log(data)
 
   if (isLoading) {
     return (
