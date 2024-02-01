@@ -1,6 +1,7 @@
 import axios from "axios"
 import { backendLink } from "../constants";
 import {api} from "../utils/axios";
+import { socket } from "../utils/socket";
 
 export const RegistrationHook = async (values, setSubmitting, endpoint) => {
     setSubmitting(true)
@@ -20,7 +21,13 @@ export const LoginHook = async (values, setSubmitting) => {
     await api.post(`auth/login`, values, )
     .then(({data}) => {
     if(data.success) {
-        userUpdate = data;        
+        userUpdate = data; 
+        socket.emit("setup", data.user.id, (response) => {
+            console.log(response.connected); 
+        });
+        socket.on("connected", () => {
+            console.log(socket.id); // x8WIv7-mJelg7on_ALbx
+        });       
     } 
     }).catch(({response}) => {
         userUpdate = {success: false, ...response.data}        

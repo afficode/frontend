@@ -1,8 +1,4 @@
 const ProductStats = ({ adsData }) => {
-  const totalChats =
-    adsData?.ads_summary.map((ad) => ad.chats).reduce((a, b) => a + b, 0) || [];
-  console.log(totalChats);
-
   return (
     <div className="w-full">
       <div className="flex gap-1 mx-auto rounded-lg">
@@ -12,11 +8,11 @@ const ProductStats = ({ adsData }) => {
           stat="9,420"
           className="rounded-l-2xl "
         />
-        <Pallet color="secondary" title="Total Chats" stat={totalChats} />
+        <Pallet color="secondary" title="Total Chats" stat={adsData?.chats} />
         <Pallet
           color="primary"
           title="Total Sales"
-          stat="25"
+          stat={adsData?.sold_ads}
           className="rounded-r-2xl "
         />
       </div>
