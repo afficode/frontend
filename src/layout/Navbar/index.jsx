@@ -19,6 +19,7 @@ import { CgProfile } from "react-icons/cg";
 import { BsShop } from "react-icons/bs";
 import { MdMiscellaneousServices } from "react-icons/md";
 import { FaCarSide, FaBuilding, FaRegHandshake } from "react-icons/fa";
+
 import { encodeProductId } from "../../utils/dataManipulations";
 
 const Navbar = () => {
@@ -332,6 +333,7 @@ const Navbar = () => {
                           )}`}
                           key={category.id}
                         >
+
                           <li className="text-lg capitalize max-sm:text-base lg:pr-12 hover:underline whitespace-nowrap">
                             {category.name}
                           </li>
@@ -563,6 +565,7 @@ const Navbar = () => {
                           )}`}
                           key={category.id}
                         >
+
                           <li className="text-lg capitalize max-sm:text-base lg:pr-12 hover:underline whitespace-nowrap">
                             {category.name}
                           </li>
