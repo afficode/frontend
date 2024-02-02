@@ -4,6 +4,7 @@ import Header from "./Header";
 import ProductStats from "./ProductStats";
 import LoadingScreen from "./LoadingScreen";
 import { useUserAds } from "../../../hooks";
+import { useNavigate, Navigate } from "react-router-dom";
 
 const Performance = () => {
   const { data, isLoading, isError } = useUserAds();
@@ -16,7 +17,6 @@ const Performance = () => {
       </>
     );
   }
-
 
   return (
     <div>

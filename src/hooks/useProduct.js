@@ -12,7 +12,8 @@ export const useProduct = (params) => {
 };
 
 export const fetchProduct = (ad_id) => {
-	const fetchSingleProduct = () => axios.get(`${backendLink}ads/${ad_id}`).then((res) => res?.data);
+	const fetchSingleProduct = () => axios.get(`${backendLink}ads/${ad_id}`)
+	
 
 	return useQuery(['fetch-product', ad_id], fetchSingleProduct, {
 		refetchInterval: 180000,

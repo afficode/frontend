@@ -19,6 +19,8 @@ import { BsShop } from 'react-icons/bs';
 import { MdMiscellaneousServices } from 'react-icons/md';
 import { FaCarSide, FaBuilding, FaRegHandshake } from 'react-icons/fa';
 
+import { encodeProductId } from '../../utils/dataManipulations';
+
 const Navbar = () => {
 	const [nav, setNav] = useState(false);
 	const navRef = useRef();
@@ -285,7 +287,7 @@ const Navbar = () => {
 										<h3 className="font-semibold max-lg:text-xl whitespace-nowrap">Categories</h3>
 										<ul className="flex flex-col menu max-h-full w-full z-[10] py-4 ">
 											{filteredCategories?.allCat?.map((category) => (
-												<NavLink to={'#'} key={category.id}>
+												<NavLink to={`${Approutes.product.category}/${btoa(category.id)}`} key={category.id}>
 													<li className="text-lg capitalize max-sm:text-base lg:pr-12 hover:underline whitespace-nowrap">
 														{category.name}
 													</li>
@@ -441,7 +443,7 @@ const Navbar = () => {
 										<h4 className="font-semibold whitespace-nowrap">Categories</h4>
 										<ul className="flex flex-col menu max-h-full w-full z-[10] py-4 ">
 											{filteredCategories?.allCat?.map((category) => (
-												<NavLink to={'#'} key={category.id}>
+												<NavLink to={`${Approutes.product.category}/${btoa(category.id)}`} key={category.id}>
 													<li className="text-lg capitalize max-sm:text-base lg:pr-12 hover:underline whitespace-nowrap">
 														{category.name}
 													</li>
@@ -604,32 +606,30 @@ const Navbar = () => {
 
 								<span className="border border-r-4 border-white h-[2rem]" />
 
-								<li className="">
-									<NavLink
-										to={`${Approutes.product.category}/${btoa(65)}`}
-										tabIndex={0}
-										className={listStyles}
-									>
+								<li className="dropdown dropdown-end dropdown-hover">
+									<NavLink to={generateCategoryUrl('Deals')} tabIndex={0} className={listStyles}>
 										DEALS
 									</NavLink>
-									<NavLink to={`${Approutes.product.category}/${btoa(65)}`} className={mobileListStyles}>
+									<NavLink to={generateCategoryUrl('Deals')} className={mobileListStyles}>
 										<FaRegHandshake size={25} />
 									</NavLink>
+									{filteredCategories?.dealsCat && (
+										<Dropdown category={'DEALS'} subCategories={filteredCategories?.dealsCat} />
+									)}
 								</li>
 
 								<span className="border border-r-4 border-white h-[2rem]" />
 
-								<li className=" mr-4">
-									<NavLink
-										to={`${Approutes.product.category}/${btoa(64)}`}
-										tabIndex={0}
-										className={listStyles}
-									>
+								<li className="dropdown dropdown-end dropdown-hover mr-4">
+									<NavLink to={generateCategoryUrl('Requests')} tabIndex={0} className={listStyles}>
 										REQUESTS
 									</NavLink>
-									<NavLink to={`${Approutes.product.category}/${btoa(64)}`} className={mobileListStyles}>
+									<NavLink to={generateCategoryUrl('Deals')} className={mobileListStyles}>
 										<VscGitPullRequestGoToChanges size={25} />
 									</NavLink>
+									{filteredCategories?.dealsCat && (
+										<Dropdown category={'REQUESTS'} subCategories={filteredCategories?.dealsCat} />
+									)}
 								</li>
 							</ul>
 						</div>
