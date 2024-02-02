@@ -3,7 +3,6 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Approutes } from '../../constants/routes';
 import { Dropdown } from '../../ui';
 import { AffiLogo } from '../../assets/images';
-import { generateCategoryUrl } from '../../utils';
 import { useCategories } from '../../hooks';
 import useAuth from '../../context/UserContext';
 

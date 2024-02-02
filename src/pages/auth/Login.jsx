@@ -8,7 +8,6 @@ import { MdLogin } from 'react-icons/md';
 import { LoginHook } from '../../hooks/AuthHook';
 import { Apple, Facebook, Google } from '../../assets/svgs';
 import { Button } from '../../ui';
-// import { toast } from 'react-toastify';
 import { Approutes } from '../../constants';
 import { Button as FlowbiteButton } from 'flowbite-react';
 import useAuth from '../../context/UserContext';
@@ -42,21 +41,7 @@ const Login = () => {
 		setTimeout(async () => {
 			const submit = await LoginHook(values, setSubmitting);
 			if (submit?.success) {
-				// the login from the useAuth tied to a context hook, will update localstorge and set user to Login
 				login(submit);
-				// toast.success('Welcome to Affi. \n\nYour world of endless possibilities', {
-				// 	style: {
-				// 		border: '4px solid #FAC213',
-				// 		padding: '14px',
-				// 		background: '#2686CE',
-				// 		color: '#fff',
-				// 	},
-				// 	iconTheme: {
-				// 		primary: '#2686CE',
-				// 		secondary: '#EBBA16',
-				// 	},
-				// 	position: 'top-center',
-				// });
 
 				notify('Welcome to Affi. \n\nYour world of endless possibilities', 'success');
 				console.log(window.location);
