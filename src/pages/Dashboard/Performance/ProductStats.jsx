@@ -12,7 +12,7 @@ const ProductStats = ({ adsData }) => {
         <Pallet
           color="primary"
           title="Total Sales"
-          stat={adsData?.sold_ads}
+          stat={adsData?.sold_ads || 0}
           className="rounded-r-2xl "
         />
       </div>
@@ -23,7 +23,7 @@ const ProductStats = ({ adsData }) => {
         </div>
         <div className=" h-[7rem] border border-black/60 flex-1 mb-3 text-center flex flex-col justify-center rounded-2xl">
           <h4>Total Ads</h4>
-          <h4>[ {adsData?.total_ads} ]</h4>
+          <h4>[ {adsData?.total_ads || 0} ]</h4>
         </div>
       </div>
 
@@ -32,7 +32,7 @@ const ProductStats = ({ adsData }) => {
           <p className="font-bold text-[#047F73]">Active</p>
           <span className="px-10 py-2 text-center bg-white rounded-lg max-sm:px-4">
             <p className="font-semibold text-primary">
-              [ {adsData?.active_ads} ]
+              [ {adsData?.active_ads || 0} ]
             </p>
           </span>
         </div>
@@ -40,7 +40,7 @@ const ProductStats = ({ adsData }) => {
           <p className="font-bold">Blocked</p>
           <span className="px-10 py-2 text-center bg-white rounded-lg max-sm:px-4">
             <p className="font-semibold text-primary">
-              [ {adsData?.blocked_ads} ]
+              [ {adsData?.blocked_ads || 0} ]
             </p>
           </span>
         </div>
@@ -48,7 +48,7 @@ const ProductStats = ({ adsData }) => {
           <p className="font-bold text-[#B50444]">Sold</p>
           <span className="px-10 py-2 text-center bg-white rounded-lg max-sm:px-4">
             <p className="font-semibold text-primary">
-              [ {adsData?.sold_ads} ]
+              [ {adsData?.sold_ads || 0} ]
             </p>
           </span>
         </div>

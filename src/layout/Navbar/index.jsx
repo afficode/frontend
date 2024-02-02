@@ -20,6 +20,8 @@ import { BsShop } from "react-icons/bs";
 import { MdMiscellaneousServices } from "react-icons/md";
 import { FaCarSide, FaBuilding, FaRegHandshake } from "react-icons/fa";
 
+import { encodeProductId } from "../../utils/dataManipulations";
+
 const Navbar = () => {
   const [nav, setNav] = useState(false);
   const navRef = useRef();
@@ -325,7 +327,13 @@ const Navbar = () => {
                     </h3>
                     <ul className="flex flex-col menu max-h-full w-full z-[10] py-4 ">
                       {filteredCategories?.allCat?.map((category) => (
-                        <NavLink to={"#"} key={category.id}>
+                        <NavLink
+                          to={`${Approutes.product.category}/${btoa(
+                            category.id
+                          )}`}
+                          key={category.id}
+                        >
+
                           <li className="text-lg capitalize max-sm:text-base lg:pr-12 hover:underline whitespace-nowrap">
                             {category.name}
                           </li>
@@ -551,7 +559,13 @@ const Navbar = () => {
                     </h4>
                     <ul className="flex flex-col menu max-h-full w-full z-[10] py-4 ">
                       {filteredCategories?.allCat?.map((category) => (
-                        <NavLink to={"#"} key={category.id}>
+                        <NavLink
+                          to={`${Approutes.product.category}/${btoa(
+                            category.id
+                          )}`}
+                          key={category.id}
+                        >
+
                           <li className="text-lg capitalize max-sm:text-base lg:pr-12 hover:underline whitespace-nowrap">
                             {category.name}
                           </li>
