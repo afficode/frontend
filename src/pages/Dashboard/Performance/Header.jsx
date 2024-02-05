@@ -1,13 +1,43 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DateView from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Button } from "../../../ui";
 import { Link } from "react-router-dom";
 import { Approutes } from "../../../constants";
+import { useSearchParams } from "react-router-dom";
+import { sub } from "date-fns";
 
 const Header = () => {
   const [filteredDate, setFilteredDate] = useState("all");
   const [date, setDate] = useState();
+
+  useEffect(() => {
+    console.log(filteredDate);
+    if (filteredDate === "12 months") {
+      const result = sub(Date.now(), {
+        months: 12,
+      });
+      console.log(result);
+    }
+    if (filteredDate === "30 days") {
+      const result = sub(Date.now(), {
+        days: 30,
+      });
+      console.log(result);
+    }
+    if (filteredDate === "7 days") {
+      const result = sub(Date.now(), {
+        days: 7,
+      });
+      console.log(result);
+    }
+    if (filteredDate === "24 hours") {
+      const result = sub(Date.now(), {
+        days: 1,
+      });
+      console.log(result);
+    }
+  }, [filteredDate]);
 
   return (
     <div className="w-full bg-gray-200 px-2 sm:px-6 py-4 flex flex-col gap-4 my-2">
