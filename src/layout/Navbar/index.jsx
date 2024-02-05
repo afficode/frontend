@@ -1,5 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import {
+  Link,
+  NavLink,
+  useLocation,
+  useSearchParams,
+  useHistory,
+} from "react-router-dom";
 import { Approutes } from "../../constants/routes";
 import { Dropdown } from "../../ui";
 import { AffiLogo } from "../../assets/images";
@@ -19,10 +25,11 @@ import { CgProfile } from "react-icons/cg";
 import { BsShop } from "react-icons/bs";
 import { MdMiscellaneousServices } from "react-icons/md";
 import { FaCarSide, FaBuilding, FaRegHandshake } from "react-icons/fa";
-import { encodeProductId } from "../../utils/dataManipulations";
+import { useDebouncedCallback } from "use-debounce";
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
+  const history = useHistory();
   const navRef = useRef();
   // const navigate = useNavigate();
 
@@ -57,6 +64,17 @@ const Navbar = () => {
       }
     });
   }
+  const { pathname } = useLocation();
+  const handleSearch = useDebouncedCallback((query) => {
+    console.log(pathname);
+    if (query) {
+      history.push({
+        q: query,
+      });
+    } else {
+      // delete the query from the params
+    }
+  }, 500);
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -71,8 +89,6 @@ const Navbar = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [setNav]);
-
-  const { pathname } = useLocation();
 
   return (
     <header className="fixed top-0 z-50 w-full bg-primary">
@@ -96,6 +112,9 @@ const Navbar = () => {
                     type="text"
                     className="w-full lg:w-[32rem] xl:w-[40rem] py-2 pl-4 pr-[12rem] text-black bg-white border border-transparent rounded-3xl  focus:border-secondary outline-none focus:ring focus:ring-opacity-10 focus:ring-secondary"
                     placeholder="Searching for?....."
+                    onChange={(e) => {
+                      handleSearch(e.target.value);
+                    }}
                   />
 
                   <span className="absolute inset-y-0 right-0 flex items-center pr-3">
@@ -524,6 +543,9 @@ const Navbar = () => {
                 type="text"
                 className="w-full py-2 pl-4 pr-[12rem] text-black bg-white border border-transparent rounded-3xl  focus:border-secondary outline-none focus:ring focus:ring-opacity-10 focus:ring-secondary"
                 placeholder="Searching for?....."
+                onChange={(e) => {
+                  handleSearch(e.target.value);
+                }}
               />
 
               <span className="absolute inset-y-0 right-0 flex items-center pr-3">
