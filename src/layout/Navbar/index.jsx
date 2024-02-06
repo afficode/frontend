@@ -32,7 +32,6 @@ const Navbar = () => {
   const navigate = useNavigate();
   const navRef = useRef();
   let [searchParams, setSearchParams] = useSearchParams();
-
   const { isLogin, user } = useAuth();
 
   // fetch categories
@@ -66,7 +65,7 @@ const Navbar = () => {
   }
   const { pathname } = useLocation();
   const handleSearch = useDebouncedCallback((query) => {
-    console.log(pathname);
+    
     if (query) {
       setSearchParams({
         q: query,
@@ -81,7 +80,6 @@ const Navbar = () => {
       });
     }
   }, 500);
-  console.log(searchParams.get("q"));
 
   useEffect(() => {
     const handleClickOutside = (e) => {
