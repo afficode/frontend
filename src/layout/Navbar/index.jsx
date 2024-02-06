@@ -4,7 +4,7 @@ import {
   NavLink,
   useLocation,
   useSearchParams,
-  useHistory,
+  useNavigate,
 } from "react-router-dom";
 import { Approutes } from "../../constants/routes";
 import { Dropdown } from "../../ui";
@@ -29,9 +29,9 @@ import { useDebouncedCallback } from "use-debounce";
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
-  const history = useHistory();
+  const navigate = useNavigate();
   const navRef = useRef();
-  // const navigate = useNavigate();
+  let [searchParams, setSearchParams] = useSearchParams();
 
   const { isLogin, user } = useAuth();
 
@@ -68,13 +68,20 @@ const Navbar = () => {
   const handleSearch = useDebouncedCallback((query) => {
     console.log(pathname);
     if (query) {
-      history.push({
+      setSearchParams({
         q: query,
       });
+      if (!pathname.includes("product")) {
+        navigate(`${Approutes.product.initial}/?q=${query}`);
+      }
     } else {
       // delete the query from the params
+      setSearchParams({
+        q: "",
+      });
     }
   }, 500);
+  console.log(searchParams.get("q"));
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -112,6 +119,7 @@ const Navbar = () => {
                     type="text"
                     className="w-full lg:w-[32rem] xl:w-[40rem] py-2 pl-4 pr-[12rem] text-black bg-white border border-transparent rounded-3xl  focus:border-secondary outline-none focus:ring focus:ring-opacity-10 focus:ring-secondary"
                     placeholder="Searching for?....."
+                    defaultValue={searchParams.get("q")}
                     onChange={(e) => {
                       handleSearch(e.target.value);
                     }}
@@ -543,6 +551,7 @@ const Navbar = () => {
                 type="text"
                 className="w-full py-2 pl-4 pr-[12rem] text-black bg-white border border-transparent rounded-3xl  focus:border-secondary outline-none focus:ring focus:ring-opacity-10 focus:ring-secondary"
                 placeholder="Searching for?....."
+                defaultValue={searchParams.get("q")}
                 onChange={(e) => {
                   handleSearch(e.target.value);
                 }}
