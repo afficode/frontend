@@ -23,6 +23,9 @@ import { ScrollToTop } from "../../../utils";
 import { HiInformationCircle } from "react-icons/hi";
 import ContactAdmin from "./ContactAdmin";
 import { Alert } from "flowbite-react";
+import SaveProduct from "../Default/SaveProduct";
+import { getSaves } from "../../../hooks/useSaves";
+import useSaveContext from "../../../context/SaveContext";
 
 const index = () => {
   const { id } = useParams();
@@ -30,8 +33,11 @@ const index = () => {
   const [revealNumber, setRevealNumber] = useState(false);
   const [revealEmail, setRevealEmail] = useState(false);
   const { isLogin, user } = useAuth();
+  const { saves, savesId, setSaves, setSavesId } = useSaveContext();
   const { data: result, isLoading } = fetchProduct(decodeProductId(id));
-  console.log(result);
+  const { data, isLoading: saveLoading } = getSaves();
+  const [savedAds, setSavedAds] = useState([]);
+
   useEffect(() => {
     if (result?.data) {
       setItems(() => [
@@ -40,7 +46,16 @@ const index = () => {
         { name: result?.data?.title },
       ]);
     }
-  }, [isLoading]);
+
+    // if (isLogin && data?.saves?.length >= 0) {
+    //   const savedIds = data?.saves.map((save) => save.ads_id);
+    //   // console.log(savedIds);
+    //   setSavedAds(() => savedIds);
+    //   setSaves(() => savedAds?.saves);
+    //   console.log(savedIds);
+    //   setSavesId(() => savedIds);
+    // }
+  }, [isLoading, saveLoading]);
 
   return isLoading ? (
     <ViewProduct />
@@ -71,9 +86,11 @@ const index = () => {
       <section className="w-full flex flex-col md:flex-row gap-2 md:gap-8  line-clamp-1">
         <main className="w-full md:w-[60%] xl:w-[70%] flex flex-col">
           <div className="w-full my-2 ml-2">
-            <h6 className="w-full text-md md:text-2xl xl:text-3xl font-bold uppercase">
-              {result.data?.title}
-            </h6>
+            <div className="w-full text-md md:text-2xl xl:text-3xl font-bold uppercase flex items-center justify-between my-2">
+              <span className="">{result.data?.title}</span>
+              {/* TODO: Pass in the requierd props for this product */}
+              <SaveProduct ads_id={decodeProductId(id)} />
+            </div>
             <div className="flex items-center justify-between">
               <p className="w-full">
                 <Link
@@ -215,9 +232,9 @@ const index = () => {
         </aside>
       </section>
       <section className="flex flex-col bg-gray-200 p-2 xl:p-6 my-2 xl:my-4">
-        <div className="w-full flex flex-col items-start gap-2 justify-start tracking-tighter line-clamp-1">
+        <div className="w-full flex flex-col items-start gap-2 justify-start tracking-tighter lg:tracking-normal line-clamp-1">
           <h2 className="text-xl xl:2xl">Description</h2>
-          <p className="bg-white p-4 min-h-[100px] text-justify text-lg ">
+          <p className="bg-white p-4 min-h-[100px] text-justify text-lg border-t-4 border-t-primary">
             {result?.data?.description} Lorem ipsum dolor sit amet consectetur
             adipisicing elit. Odit, minus quibusdam. Soluta vero doloribus iste
             sint sunt minima praesentium, asperiores, facere dolorum eaque
@@ -229,7 +246,9 @@ const index = () => {
           </p>
         </div>
         <div className="w-full flex flex-col items-start gap-2 justify-start my-2">
-          <h2 className="text-xl tracking-tighter">Overview</h2>
+          <h2 className="text-xl tracking-tighter lg:tracking-normal">
+            Overview
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 w-full">
             {convertKeyToName(result?.data).map((val, index) => (
               <OverviewPills overview={val} ad={result?.data} key={index} />

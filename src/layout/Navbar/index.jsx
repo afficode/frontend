@@ -26,6 +26,7 @@ import { BsShop } from "react-icons/bs";
 import { MdMiscellaneousServices } from "react-icons/md";
 import { FaCarSide, FaBuilding, FaRegHandshake } from "react-icons/fa";
 import { useDebouncedCallback } from "use-debounce";
+import { getSaves } from "../../hooks/useSaves";
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
@@ -33,6 +34,7 @@ const Navbar = () => {
   const navRef = useRef();
   let [searchParams, setSearchParams] = useSearchParams();
   const { isLogin, user } = useAuth();
+  const { data: saves } = getSaves() || [];
 
   // fetch categories
   const { data } = useCategories();
@@ -65,7 +67,6 @@ const Navbar = () => {
   }
   const { pathname } = useLocation();
   const handleSearch = useDebouncedCallback((query) => {
-    
     if (query) {
       setSearchParams({
         q: query,
@@ -140,11 +141,16 @@ const Navbar = () => {
             <div className="flex items-center gap-2 lg:gap-3">
               <Link to={Approutes.profile.saved}>
                 <div
-                  className="flex flex-col items-center text-white cursor-pointer max-md:hidden "
+                  className="flex flex-col items-center text-white cursor-pointer max-md:hidden relative"
                   title="Saved items"
                 >
                   <GoBookmark size={25} />
                   <span className="text-xs sm:text-sm">Saved</span>
+                  {isLogin && saves?.saves.length > 0 && (
+                    <span className="absolute top-[-7px] rounded-full px-1 bg-secondary/90 right-0 font-semibold text-sm text-black">
+                      {saves?.saves.length}
+                    </span>
+                  )}
                 </div>
               </Link>
               {isLogin && (

@@ -2,14 +2,14 @@ import React from "react";
 
 const OverviewPills = ({ overview, ad }) => {
   return (
-    <div className="bg-white text-black flex p-2 items-center justify-start">
-      <h6 className="text-normal md:text-lg font-bold my-auto tracking-tighter">
+    <div className="bg-white text-black flex p-2 items-center justify-start border border-l-4 border-l-primary ">
+      <h6 className="text-normal md:text-lg font-bold my-auto tracking-tighter lg:tracking-normal">
         {overview?.name}:{" "}
       </h6>{" "}
       &emsp;
       <span className="my-auto tracking-tighter ">
         {Array.isArray(overview?.value) ? (
-          <ul className="list-disc list-inside ml-1 tracking-tighter">
+          <ul className="list-disc list-inside ml-1 tracking-tighter lg:tracking-normal">
             {overview?.value.map((val, index) => (
               <li key={index}>{val}</li>
             ))}
