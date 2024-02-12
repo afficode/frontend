@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link, NavLink, useLocation, useSearchParams, useHistory } from 'react-router-dom';
+import { Link, NavLink, useLocation, useSearchParams, useNavigate } from 'react-router-dom';
 import { Approutes } from '../../constants/routes';
 import { Dropdown } from '../../ui';
 import { AffiLogo } from '../../assets/images';
@@ -23,7 +23,7 @@ import { useDebouncedCallback } from 'use-debounce';
 
 const Navbar = () => {
 	const [nav, setNav] = useState(false);
-	const history = useHistory();
+	const history = useNavigate();
 	const navRef = useRef();
 	// const navigate = useNavigate();
 

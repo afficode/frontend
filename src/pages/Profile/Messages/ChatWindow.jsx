@@ -2,19 +2,19 @@ import { Link } from 'react-router-dom';
 import { RedCar } from '../../../assets/images';
 import Message from './Message';
 import MessageInput from './MessageInput';
-import { useMessages } from '../../../hooks';
 // import { io } from 'socket.io-client';
 // import { backendLink } from '../../../constants';
 import { getToken } from '../../../utils';
 import useAuth from '../../../context/UserContext';
+import { useLayoutEffect, useRef } from 'react';
 
-const ChatWindow = ({ chat_id, chat_data }) => {
+const ChatWindow = ({ chat_id, messageData, chat_data, title }) => {
 	const { user } = useAuth();
 	// const token = getToken();
 
 	// console.log(chat_id);
 
-	const { data: messageData, isLoading } = useMessages(chat_id);
+	// const { data: messageData, isLoading } = useMessages(chat_id);
 
 	const data = chat_data?.chats.find((chat) => chat.chat_id === chat_id);
 
@@ -25,6 +25,12 @@ const ChatWindow = ({ chat_id, chat_data }) => {
 	// 		token: token,
 	// 	},
 	// });
+	const latestMessageRef = useRef(null);
+	useLayoutEffect(() => {
+		if (latestMessageRef.current) {
+			latestMessageRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
+		}
+	}, [messageData]);
 
 	return (
 		<div className="bg-primary min-w-[380px] sm:w-full h-[calc(100vh-15rem)] overflow-x-auto rounded-xl pt-1 pb-4 px-1 flex flex-col justify-between ">
@@ -32,9 +38,10 @@ const ChatWindow = ({ chat_id, chat_data }) => {
 			<div className="flex justify-between w-full px-1 py-1 bg-gray-100 sm:py-2 rounded-xl shadow-lg">
 				<Link>
 					<div className="flex gap-2 ">
+						{/* data?.image ? data?.image[0].path :  */}
 						<img src={RedCar} alt={'/'} className="w-[3rem] h-[3rem]  object-fit rounded-full " />
 						<div className="py-2 ">
-							<h6 className="font-medium ">{isLoading ? 'Loading...' : data?.title}</h6>
+							<h6 className="font-medium ">{data?.title ? data.title : title}</h6>
 						</div>
 					</div>
 				</Link>
@@ -43,11 +50,12 @@ const ChatWindow = ({ chat_id, chat_data }) => {
 			</div>
 
 			{/* chat window */}
-			<div className="flex flex-col py-3 pr-3 overflow-y-auto scrollbar-thin scrollbar-track-white scrollbar-thumb-rounded-md scrollbar-thumb-secondary scrollbar-track-rounded-md">
+			<div className="flex flex-col py-3 pr-3 overflow-y-auto scrollbar-thin scrollbar-track-white scrollbar-thumb-rounded-md scrollbar-thumb-secondary scrollbar-track-rounded-md overflow-x-hidden ">
 				{messageData?.messages.map((message, i) => (
 					<div
 						key={i}
 						className={`w-fit max-w-[80%] py-2 ${message.sender === user.id ? 'ml-auto' : ''}`}
+						ref={i === messageData.messages.length - 1 ? latestMessageRef : null}
 					>
 						<Message key={i} message={message} time={message.message_updated_on} />
 					</div>
@@ -63,57 +71,3 @@ const ChatWindow = ({ chat_id, chat_data }) => {
 };
 
 export default ChatWindow;
-
-// messageData
-
-// const messageData = [
-// 	{
-// 		sender: 58,
-// 		sender_name: 'Samuel Ezeja',
-// 		content: 'Hi, is this still available?',
-// 		chat: 12,
-// 		message_updated_on: '2023-11-30T10:44:55.000Z',
-// 	},
-// 	{
-// 		sender: 61,
-// 		sender_name: 'Godstime Agholor',
-// 		content: 'Yes, its available',
-// 		chat: 12,
-// 		message_updated_on: '2023-11-30T10:44:55.000Z',
-// 	},
-// 	{
-// 		sender: 58,
-// 		sender_name: 'Samuel Ezeja',
-// 		content: 'How much is it?',
-// 		chat: 12,
-// 		message_updated_on: '2023-11-30T10:44:55.000Z',
-// 	},
-// 	{
-// 		sender: 58,
-// 		sender_name: 'Samuel Ezeja',
-// 		content: 'How reliable is this?',
-// 		chat: 12,
-// 		message_updated_on: '2023-11-30T10:44:55.000Z',
-// 	},
-// 	{
-// 		sender: 61,
-// 		sender_name: 'Godstime Agholor',
-// 		content: 'The amount is 50k, and its reliable. I have it for 5 years',
-// 		chat: 12,
-// 		message_updated_on: '2023-11-30T10:44:55.000Z',
-// 	},
-// 	{
-// 		sender: 58,
-// 		sender_name: 'Samuel Ezeja',
-// 		content: 'It is negotiable? 40K',
-// 		chat: 12,
-// 		message_updated_on: '2023-11-30T10:44:55.000Z',
-// 	},
-// 	{
-// 		sender: 61,
-// 		sender_name: 'Godstime Agholor',
-// 		content: 'Please I can go more than 50k, am saving to buy another Game disk',
-// 		chat: 12,
-// 		message_updated_on: '2023-11-30T10:44:55.000Z',
-// 	},
-// ];
