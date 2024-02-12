@@ -12,7 +12,8 @@ html *::after {
 }
 
 body {
-	font-family: 'Rubik', sans-serif;
+	/* font-family: 'Rubik', sans-serif; */
+	font-family: 'Work Sans', sans-serif;
 }
 
 /* typography  */

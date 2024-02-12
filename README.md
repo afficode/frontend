@@ -36,3 +36,9 @@ All`(*)` exports comes before named exports and are arranged according to their 
 `export * from 'b'`
 
 `export { Abc } from 'a'`
+
+TODO: Change the notification for revealing ads owner details to the lates notification
+
+TODO: Let the number in the save navbar reflect the information gotten from DB (badge)
+
+TODO: Phone number verification

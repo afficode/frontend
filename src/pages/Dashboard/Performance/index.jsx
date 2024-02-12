@@ -69,8 +69,8 @@ const Performance = () => {
 			<DashboardHeader />
 
 			{/* header  */}
-			<div className="w-full bg-gray-200 px-2 sm:px-6 py-4 flex flex-col gap-4 my-2">
-				<div className="ml-auto flex max-sm:flex-col items-center gap-4">
+			<div className="flex flex-col w-full gap-4 px-2 py-4 my-2 bg-gray-200 sm:px-6">
+				<div className="flex items-center gap-4 ml-auto max-sm:flex-col">
 					<DateView
 						placeholderText="Select dates"
 						className="border-transparent shadow-lg rounded-md w-[10rem]"
@@ -78,13 +78,13 @@ const Performance = () => {
 						onChange={(val) => setDate(val)}
 					/>
 					<Link to={Approutes.postDecision}>
-						<Button variant="primary" size="small" className="rounded-md font-medium">
+						<Button variant="primary" size="small" className="font-medium rounded-md">
 							+ Add Product
 						</Button>
 					</Link>
 				</div>
 
-				<div className=" flex flex-wrap gap-2">
+				<div className="flex flex-wrap gap-2 ">
 					<span
 						onClick={() => {
 							setFilteredDate('all');

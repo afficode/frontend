@@ -8,6 +8,7 @@ import { MdLogin } from 'react-icons/md';
 import { LoginHook } from '../../hooks/AuthHook';
 import { Apple, Facebook, Google } from '../../assets/svgs';
 import { Button } from '../../ui';
+// import { toast } from 'react-toastify';
 import { Approutes } from '../../constants';
 import { Button as FlowbiteButton } from 'flowbite-react';
 import useAuth from '../../context/UserContext';
@@ -41,13 +42,26 @@ const Login = () => {
 		setTimeout(async () => {
 			const submit = await LoginHook(values, setSubmitting);
 			if (submit?.success) {
+				// the login from the useAuth tied to a context hook, will update localstorge and set user to Login
 				login(submit);
+				// toast.success('Welcome to Affi. \n\nYour world of endless possibilities', {
+				// 	style: {
+				// 		border: '4px solid #FAC213',
+				// 		padding: '14px',
+				// 		background: '#2686CE',
+				// 		color: '#fff',
+				// 	},
+				// 	iconTheme: {
+				// 		primary: '#2686CE',
+				// 		secondary: '#EBBA16',
+				// 	},
+				// 	position: 'top-center',
+				// });
 
 				notify('Welcome to Affi. \n\nYour world of endless possibilities', 'success');
-				console.log(window.location);
-				if (window.location === getRedirectLink()) {
-					return navigate(Approutes.welcome);
-				}
+				// if (window.location.pathname === getRedirectLink()) {
+				//   return navigate(Approutes.welcome);
+				// }
 				return navigate(getRedirectLink() || Approutes.welcome, {
 					replace: true,
 				});
@@ -75,7 +89,7 @@ const Login = () => {
 				<>
 					<div className="w-[90%] mx-auto">
 						{' '}
-						<h2 className="text-xl lg:text-4xl my-4">Sign In</h2>
+						<h2 className="my-4 text-xl lg:text-4xl">Sign In</h2>
 						<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
 							{(formik) => (
 								<Form>
@@ -117,8 +131,8 @@ const Login = () => {
 													<span className="my-auto text-xl">Submitting Data...</span>{' '}
 												</>
 											) : (
-												<span className="text-lg w-full flex lg:text-2xl">
-													Login &nbsp; <MdLogin className="text-lg my-auto lg:text-2xl" />
+												<span className="flex w-full text-lg lg:text-2xl">
+													Login &nbsp; <MdLogin className="my-auto text-lg lg:text-2xl" />
 												</span>
 											)}
 										</FlowbiteButton>
@@ -126,7 +140,7 @@ const Login = () => {
 								</Form>
 							)}
 						</Formik>
-						<div className="w-full font-bold my-2 lg:my-8 hover:underline text-primary text-md lg:text-2xl text-center">
+						<div className="w-full my-2 font-bold text-center lg:my-8 hover:underline text-primary text-md lg:text-2xl">
 							<Link to={Approutes.forgotPassword}>Forgot your Password?</Link>
 						</div>
 					</div>
@@ -138,17 +152,17 @@ const Login = () => {
 
 						<Button className="mt-6 w-full px-4 py-[.7rem] text-white bg-[#0F8EEF] flex items-center hover:brightness-90">
 							<img src={Facebook} alt="apple logo" className="mr-auto" />{' '}
-							<span className="text-center font-semibold w-full">Continue with Facebook</span>
+							<span className="w-full font-semibold text-center">Continue with Facebook</span>
 						</Button>
 
 						<Button className="mt-6 w-full px-4 py-[.7rem] text-white bg-black flex items-center hover:brightness-90">
 							<img src={Apple} alt="apple logo" className="mr-auto" />{' '}
-							<span className="text-center font-semibold w-full">Continue with Apple</span>
+							<span className="w-full font-semibold text-center">Continue with Apple</span>
 						</Button>
 
 						<Button className="mt-6 w-full px-4 py-[.7rem] border border-black text-black bg-white flex items-center hover:brightness-90">
 							<img src={Google} alt="apple logo" className="mr-auto" />{' '}
-							<span className="text-center font-semibold w-full">Continue with Google</span>
+							<span className="w-full font-semibold text-center">Continue with Google</span>
 						</Button>
 					</div>
 				</>

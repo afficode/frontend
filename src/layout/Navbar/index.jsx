@@ -20,14 +20,17 @@ import { BsShop } from 'react-icons/bs';
 import { MdMiscellaneousServices } from 'react-icons/md';
 import { FaCarSide, FaBuilding, FaRegHandshake } from 'react-icons/fa';
 import { useDebouncedCallback } from 'use-debounce';
+import { getSaves } from '../../hooks/useSaves';
+
+import { encodeProductId } from '../../utils/dataManipulations';
 
 const Navbar = () => {
 	const [nav, setNav] = useState(false);
-	const history = useNavigate();
+	const navigate = useNavigate();
 	const navRef = useRef();
-	// const navigate = useNavigate();
-
+	let [searchParams, setSearchParams] = useSearchParams();
 	const { isLogin, user } = useAuth();
+	const { data: saves } = getSaves() || [];
 
 	// fetch categories
 	const { data } = useCategories();
@@ -60,13 +63,18 @@ const Navbar = () => {
 	}
 	const { pathname } = useLocation();
 	const handleSearch = useDebouncedCallback((query) => {
-		console.log(pathname);
 		if (query) {
-			history.push({
+			setSearchParams({
 				q: query,
 			});
+			if (!pathname.includes('product')) {
+				navigate(`${Approutes.product.initial}/?q=${query}`);
+			}
 		} else {
 			// delete the query from the params
+			setSearchParams({
+				q: '',
+			});
 		}
 	}, 500);
 
@@ -106,6 +114,7 @@ const Navbar = () => {
 										type="text"
 										className="w-full lg:w-[32rem] xl:w-[40rem] py-2 pl-4 pr-[12rem] text-black bg-white border border-transparent rounded-3xl  focus:border-secondary outline-none focus:ring focus:ring-opacity-10 focus:ring-secondary"
 										placeholder="Searching for?....."
+										defaultValue={searchParams.get('q')}
 										onChange={(e) => {
 											handleSearch(e.target.value);
 										}}
@@ -128,11 +137,16 @@ const Navbar = () => {
 						<div className="flex items-center gap-2 lg:gap-3">
 							<Link to={Approutes.profile.saved}>
 								<div
-									className="flex flex-col items-center text-white cursor-pointer max-md:hidden "
+									className="relative flex flex-col items-center text-white cursor-pointer max-md:hidden"
 									title="Saved items"
 								>
 									<GoBookmark size={25} />
 									<span className="text-xs sm:text-sm">Saved</span>
+									{isLogin && saves?.saves.length > 0 && (
+										<span className="absolute top-[-7px] rounded-full px-1 bg-secondary/90 right-0 font-semibold text-sm text-black">
+											{saves?.saves.length}
+										</span>
+									)}
 								</div>
 							</Link>
 							{isLogin && (
@@ -290,7 +304,7 @@ const Navbar = () => {
 							{/* mobile categories/menu dropdown */}
 							{pathname === '/' ? (
 								<div className="dropdown dropdown-end">
-									<button className="flex flex-col gap-0  py-0 capitalize bg-white border-none max-sm:text-xs lg:hidden btn btn-sm text-primary px-4 hover:bg-white">
+									<button className="flex flex-col gap-0 px-4 py-0 capitalize bg-white border-none max-sm:text-xs lg:hidden btn btn-sm text-primary hover:bg-white">
 										Categories
 									</button>
 									<ul
@@ -311,7 +325,7 @@ const Navbar = () => {
 								</div>
 							) : (
 								<>
-									<button onClick={() => setNav(!nav)} className="text-white cursor-pointer ml-2 lg:hidden ">
+									<button onClick={() => setNav(!nav)} className="ml-2 text-white cursor-pointer lg:hidden ">
 										<VscMenu size={28} />
 									</button>
 
@@ -418,13 +432,14 @@ const Navbar = () => {
 					</div>
 
 					{/* <!-- Mobile search input --> */}
-					<div className="flex items-center w-full mt-2 lg:hidden px-1">
+					<div className="flex items-center w-full px-1 mt-2 lg:hidden">
 						<div className="relative w-full">
 							<input
 								title="Search for items here."
 								type="text"
 								className="w-full py-2 pl-4 pr-[12rem] text-black bg-white border border-transparent rounded-3xl  focus:border-secondary outline-none focus:ring focus:ring-opacity-10 focus:ring-secondary"
 								placeholder="Searching for?....."
+								defaultValue={searchParams.get('q')}
 								onChange={(e) => {
 									handleSearch(e.target.value);
 								}}
@@ -448,7 +463,7 @@ const Navbar = () => {
 							{pathname === '/' ? (
 								// dropdown for categories
 								<div className="dropdown ">
-									<button className="flex flex-col gap-0 mr-16 text-sm capitalize bg-white border-none max-lg:hidden btn btn-sm hover:bg-white text-primary px-5 cat-btn">
+									<button className="flex flex-col gap-0 px-5 mr-16 text-sm capitalize bg-white border-none max-lg:hidden btn btn-sm hover:bg-white text-primary cat-btn">
 										Categories
 									</button>
 
@@ -636,7 +651,7 @@ const Navbar = () => {
 
 								<span className="border border-r-4 border-white h-[2rem]" />
 
-								<li className="dropdown dropdown-end dropdown-hover mr-4">
+								<li className="mr-4 dropdown dropdown-end dropdown-hover">
 									<NavLink to={generateCategoryUrl('Requests')} tabIndex={0} className={listStyles}>
 										REQUESTS
 									</NavLink>
