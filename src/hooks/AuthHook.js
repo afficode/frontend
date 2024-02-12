@@ -22,6 +22,7 @@ export const LoginHook = async (values, setSubmitting) => {
     .then(({data}) => {
     if(data.success) {
         userUpdate = data; 
+
         socket.emit("setup", data.user.id, (response) => {
             console.log(response.connected); 
         });

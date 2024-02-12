@@ -1,5 +1,6 @@
 import secureLocalStorage from "react-secure-storage";
 import { userReducerOptions } from "../reducers/userReducer";
+import { Approutes } from "../constants";
 
 // Set items to local storage
 export const setUser = (user) => {
@@ -44,7 +45,9 @@ export const getReducerInitialState = () => {
 
 // store the previous link before redirecting user to login
 export const setRedirectLink = (link) => {
-  secureLocalStorage.setItem(userReducerOptions.REDIRECT_LINK, link);
+  if (link !== Approutes.auth.initial) {
+    secureLocalStorage.setItem(userReducerOptions.REDIRECT_LINK, link);
+  }
 }
 
 export const getRedirectLink = () => {

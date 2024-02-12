@@ -47,7 +47,7 @@ privateAxios.interceptors.response.use(
 				originalRequest.headers.Authorization = `Bearer ${token}`;
 				return axios(originalRequest);
 			} catch (error) {
-				setRedirectLink(window.location.href);
+				setRedirectLink(window.location.pathname);
 				//return window.location.assign(Approutes.auth.initial)
 				return Promise.reject(error);
 			}

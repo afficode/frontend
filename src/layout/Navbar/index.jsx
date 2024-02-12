@@ -1,5 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import {
+  Link,
+  NavLink,
+  useLocation,
+  useSearchParams,
+  useNavigate,
+} from "react-router-dom";
 import { Approutes } from "../../constants/routes";
 import { Dropdown } from "../../ui";
 import { AffiLogo } from "../../assets/images";
@@ -19,15 +25,18 @@ import { CgProfile } from "react-icons/cg";
 import { BsShop } from "react-icons/bs";
 import { MdMiscellaneousServices } from "react-icons/md";
 import { FaCarSide, FaBuilding, FaRegHandshake } from "react-icons/fa";
+import { useDebouncedCallback } from "use-debounce";
+import { getSaves } from "../../hooks/useSaves";
 
 import { encodeProductId } from "../../utils/dataManipulations";
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
+  const navigate = useNavigate();
   const navRef = useRef();
-  // const navigate = useNavigate();
-
+  let [searchParams, setSearchParams] = useSearchParams();
   const { isLogin, user } = useAuth();
+  const { data: saves } = getSaves() || [];
 
   // fetch categories
   const { data } = useCategories();
@@ -58,6 +67,22 @@ const Navbar = () => {
       }
     });
   }
+  const { pathname } = useLocation();
+  const handleSearch = useDebouncedCallback((query) => {
+    if (query) {
+      setSearchParams({
+        q: query,
+      });
+      if (!pathname.includes("product")) {
+        navigate(`${Approutes.product.initial}/?q=${query}`);
+      }
+    } else {
+      // delete the query from the params
+      setSearchParams({
+        q: "",
+      });
+    }
+  }, 500);
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -72,8 +97,6 @@ const Navbar = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [setNav]);
-
-  const { pathname } = useLocation();
 
   return (
     <header className="fixed top-0 z-50 w-full bg-primary">
@@ -97,6 +120,10 @@ const Navbar = () => {
                     type="text"
                     className="w-full lg:w-[32rem] xl:w-[40rem] py-2 pl-4 pr-[12rem] text-black bg-white border border-transparent rounded-3xl  focus:border-secondary outline-none focus:ring focus:ring-opacity-10 focus:ring-secondary"
                     placeholder="Searching for?....."
+                    defaultValue={searchParams.get("q")}
+                    onChange={(e) => {
+                      handleSearch(e.target.value);
+                    }}
                   />
 
                   <span className="absolute inset-y-0 right-0 flex items-center pr-3">
@@ -116,11 +143,16 @@ const Navbar = () => {
             <div className="flex items-center gap-2 lg:gap-3">
               <Link to={Approutes.profile.saved}>
                 <div
-                  className="flex flex-col items-center text-white cursor-pointer max-md:hidden "
+                  className="flex flex-col items-center text-white cursor-pointer max-md:hidden relative"
                   title="Saved items"
                 >
                   <GoBookmark size={25} />
                   <span className="text-xs sm:text-sm">Saved</span>
+                  {isLogin && saves?.saves.length > 0 && (
+                    <span className="absolute top-[-7px] rounded-full px-1 bg-secondary/90 right-0 font-semibold text-sm text-black">
+                      {saves?.saves.length}
+                    </span>
+                  )}
                 </div>
               </Link>
               {isLogin && (
@@ -333,7 +365,6 @@ const Navbar = () => {
                           )}`}
                           key={category.id}
                         >
-
                           <li className="text-lg capitalize max-sm:text-base lg:pr-12 hover:underline whitespace-nowrap">
                             {category.name}
                           </li>
@@ -526,6 +557,10 @@ const Navbar = () => {
                 type="text"
                 className="w-full py-2 pl-4 pr-[12rem] text-black bg-white border border-transparent rounded-3xl  focus:border-secondary outline-none focus:ring focus:ring-opacity-10 focus:ring-secondary"
                 placeholder="Searching for?....."
+                defaultValue={searchParams.get("q")}
+                onChange={(e) => {
+                  handleSearch(e.target.value);
+                }}
               />
 
               <span className="absolute inset-y-0 right-0 flex items-center pr-3">
@@ -565,7 +600,6 @@ const Navbar = () => {
                           )}`}
                           key={category.id}
                         >
-
                           <li className="text-lg capitalize max-sm:text-base lg:pr-12 hover:underline whitespace-nowrap">
                             {category.name}
                           </li>

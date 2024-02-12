@@ -6,7 +6,6 @@ import { twMerge } from "tailwind-merge";
 import { Approutes } from "../../constants";
 
 const SidebarUI = ({ items }) => {
-  console.log(items);
   return (
     <Sidebar
       aria-label="Sidebar for categories"
@@ -15,7 +14,7 @@ const SidebarUI = ({ items }) => {
       <Sidebar.Items>
         <Sidebar.ItemGroup>
           {items?.null.map(({ id, name }, index) => (
-            <>
+            <div key={index}>
               {" "}
               {Array.isArray(items[`${id}`]) ? (
                 <Sidebar.Collapse
@@ -55,7 +54,7 @@ const SidebarUI = ({ items }) => {
               ) : (
                 <Sidebar.Item href="#">{`${name}`}</Sidebar.Item>
               )}
-            </>
+            </div>
           ))}
         </Sidebar.ItemGroup>
       </Sidebar.Items>

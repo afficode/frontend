@@ -1,5 +1,9 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import dotenv from 'dotenv'
+
+
+dotenv.config() // load env vars from .env
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -10,7 +14,7 @@ export default defineConfig({
 	},
 	define: {
 		"process.env": {
-			VITE_SECURE_LOCAL_STORAGE_HASH_KEY:"966485331a538d4c07ab0a43ea646f030f18fbeb"
+			VITE_SECURE_LOCAL_STORAGE_HASH_KEY:"966485331a538d4c07ab0a43ea646f030f18fbeb",
 		}
 	},
 	hmr: {
