@@ -57,6 +57,7 @@ const index = () => {
     // }
   }, [isLoading, saveLoading]);
 
+
   return isLoading ? (
     <ViewProduct />
   ) : (
@@ -91,6 +92,7 @@ const index = () => {
               {/* TODO: Pass in the requierd props for this product */}
               <SaveProduct ads_id={decodeProductId(id)} />
             </div>
+
             <div className="flex items-center justify-between">
               <p className="w-full">
                 <Link
@@ -235,6 +237,7 @@ const index = () => {
         <div className="w-full flex flex-col items-start gap-2 justify-start tracking-tighter lg:tracking-normal line-clamp-1">
           <h2 className="text-xl xl:2xl">Description</h2>
           <p className="bg-white p-4 min-h-[100px] text-justify text-lg border-t-4 border-t-primary">
+
             {result?.data?.description} Lorem ipsum dolor sit amet consectetur
             adipisicing elit. Odit, minus quibusdam. Soluta vero doloribus iste
             sint sunt minima praesentium, asperiores, facere dolorum eaque
@@ -249,6 +252,7 @@ const index = () => {
           <h2 className="text-xl tracking-tighter lg:tracking-normal">
             Overview
           </h2>
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 w-full">
             {convertKeyToName(result?.data).map((val, index) => (
               <OverviewPills overview={val} ad={result?.data} key={index} />

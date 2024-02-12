@@ -28,6 +28,8 @@ import { FaCarSide, FaBuilding, FaRegHandshake } from "react-icons/fa";
 import { useDebouncedCallback } from "use-debounce";
 import { getSaves } from "../../hooks/useSaves";
 
+import { encodeProductId } from "../../utils/dataManipulations";
+
 const Navbar = () => {
   const [nav, setNav] = useState(false);
   const navigate = useNavigate();
