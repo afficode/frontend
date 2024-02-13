@@ -59,7 +59,7 @@ const Performance = () => {
 		return (
 			<>
 				<DashboardHeader />
-				<LoadingScreen />;
+				<LoadingScreen />
 			</>
 		);
 	}

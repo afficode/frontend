@@ -637,30 +637,30 @@ const Navbar = () => {
 
 								<span className="border border-r-4 border-white h-[2rem]" />
 
-								<li className="dropdown dropdown-end dropdown-hover">
+								<li className="">
 									<NavLink to={generateCategoryUrl('Deals')} tabIndex={0} className={listStyles}>
 										DEALS
 									</NavLink>
 									<NavLink to={generateCategoryUrl('Deals')} className={mobileListStyles}>
 										<FaRegHandshake size={25} />
 									</NavLink>
-									{filteredCategories?.dealsCat && (
+									{/* {filteredCategories?.dealsCat && (
 										<Dropdown category={'DEALS'} subCategories={filteredCategories?.dealsCat} />
-									)}
+									)} */}
 								</li>
 
 								<span className="border border-r-4 border-white h-[2rem]" />
 
-								<li className="mr-4 dropdown dropdown-end dropdown-hover">
+								<li className="mr-4">
 									<NavLink to={generateCategoryUrl('Requests')} tabIndex={0} className={listStyles}>
 										REQUESTS
 									</NavLink>
 									<NavLink to={generateCategoryUrl('Deals')} className={mobileListStyles}>
 										<VscGitPullRequestGoToChanges size={25} />
 									</NavLink>
-									{filteredCategories?.dealsCat && (
+									{/* {filteredCategories?.dealsCat && (
 										<Dropdown category={'REQUESTS'} subCategories={filteredCategories?.dealsCat} />
-									)}
+									)} */}
 								</li>
 							</ul>
 						</div>
