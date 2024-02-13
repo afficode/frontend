@@ -47,19 +47,6 @@ function App() {
 
 				{/* Use NavBar and Footer layout  */}
 				<Route element={<AppLayout />}>
-					{/* <Route element={<DashboardLayout />}>
-						<Route
-							path={Approutes.dashboard.initial}
-							element={<Navigate to={Approutes.dashboard.performance} />}
-						/>
-						<Route path={Approutes.dashboard.performance} element={<Performance />} />
-						<Route path={Approutes.dashboard.profile} element={<Profile />} />
-						<Route path={Approutes.dashboard.settings} element={<Settings />} />
-						<Route path={Approutes.dashboard.security} element={<Security />} />
-						<Route path={Approutes.dashboard.privacyPolicy} element={<PrivacyPolicy />} />
-						<Route path={Approutes.dashboard.help} element={<Help />} />
-					</Route> */}
-
 					<Route path={Approutes.home} element={isLogin ? <Welcome /> : <Home />} />
 					<Route path={Approutes.aboutUs} element={<AboutUs />} />
 					<Route path={Approutes.contactUs} element={<ContactUs />} />
@@ -76,20 +63,6 @@ function App() {
 
 				{/* Protected page routes */}
 				<Route element={<RequireAuth />}>
-					{/* use Dashboard layout  */}
-					{/* <Route element={<DashboardLayout />}>
-						<Route
-							path={Approutes.dashboard.initial}
-							element={<Navigate to={Approutes.dashboard.performance} />}
-						/>
-						<Route path={Approutes.dashboard.performance} element={<Performance />} />
-						<Route path={Approutes.dashboard.profile} element={<Profile />} />
-						<Route path={Approutes.dashboard.settings} element={<Settings />} />
-						<Route path={Approutes.dashboard.security} element={<Security />} />
-						<Route path={Approutes.dashboard.privacyPolicy} element={<PrivacyPolicy />} />
-						<Route path={Approutes.dashboard.help} element={<Help />} />
-					</Route> */}
-
 					{/* Use NavBar and Footer layout  */}
 					<Route element={<AppLayout />}>
 						<Route element={<DashboardLayout />}>
