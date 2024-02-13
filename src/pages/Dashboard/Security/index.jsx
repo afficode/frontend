@@ -49,18 +49,18 @@ const Security = () => {
 				</div>
 
 				<div className="border-b border-black/30">
-					<div className="py-2 px-4 my-4 w-full bg-gray-200">
+					<div className="w-full px-4 py-2 my-4 bg-gray-200">
 						<h5 className="font-semibold">Login</h5>
 					</div>
 
-					<div className="flex items-center gap-2 sm:gap-8 w-full mt-2">
+					<div className="flex items-center w-full gap-2 mt-2 sm:gap-8">
 						<img src={Password} alt="/" className="w-6 sm:w-[2.5rem]" />
 						<div>
 							<h6 className="font-medium">Update Password</h6>
 							<p>Use a strong password that is not repeated on other account</p>
 						</div>
 						<div
-							className="flex gap-1 items-center text-primary text-lg font-medium cursor-pointer ml-auto"
+							className="flex items-center gap-1 ml-auto text-lg font-medium cursor-pointer text-primary"
 							onClick={() => setIsOpen(true)}
 						>
 							<img src={EditPencil} alt="/" className="w-4" />
@@ -68,7 +68,7 @@ const Security = () => {
 						</div>
 					</div>
 
-					<div className="flex items-center gap-2 sm:gap-8 w-full my-4">
+					<div className="flex items-center w-full gap-2 my-4 sm:gap-8">
 						<img src={LoginLock} alt="/" className="w-6 sm:w-[2.5rem]" />
 						<div>
 							<h6 className="font-medium">Save your login info</h6>
@@ -87,12 +87,12 @@ const Security = () => {
 					</div>
 				</div>
 
-				<div className="border-b border-black/30 my-4 pb-4">
-					<div className="py-2 px-4 my-4 w-full bg-gray-200">
+				<div className="pb-4 my-4 border-b border-black/30">
+					<div className="w-full px-4 py-2 my-4 bg-gray-200">
 						<h5 className="font-semibold">Setting Up Extra Security</h5>
 					</div>
 
-					<div className="flex items-center gap-2 sm:gap-8 w-full mt-2">
+					<div className="flex items-center w-full gap-2 mt-2 sm:gap-8">
 						<div className="w-6 sm:w-[2.5rem]">
 							<AiFillNotification className="text-xl sm:text-4xl" />
 						</div>
@@ -125,7 +125,7 @@ const Security = () => {
 			</div>
 
 			<Modal isOpen={isOpen} setIsOpen={setIsOpen} headerText="UPDATE PASSWORD">
-				<UpdatePassword />
+				<UpdatePassword setIsOpen={setIsOpen} />
 			</Modal>
 		</div>
 	);

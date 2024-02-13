@@ -2,59 +2,83 @@ import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { Button } from '../../../ui';
 import { FormControl } from '../../../components';
+import { updateUserPassword, useNotify } from '../../../hooks';
+import { Approutes } from '../../../constants';
+import { useNavigate } from 'react-router-dom';
 
-const UpdatePassword = () => {
+const UpdatePassword = ({ setIsOpen }) => {
+	const { mutate } = updateUserPassword();
+	const notify = useNotify();
+	const navigate = useNavigate();
+
 	const initialValues = {
-		old_password: '',
-		new_password: '',
-		confirm_password: '',
+		password: '',
+		confirmPassword: '',
 	};
 
 	const validationSchema = Yup.object({
-		old_password: Yup.string().required('Required'),
-		new_password: Yup.string()
+		password: Yup.string()
 			.required('Required')
 			.min(8, 'Password must be 8 characters long')
 			.matches(/[0-9]/, 'Password requires a number')
 			.matches(/[a-z]/, 'Password requires a lowercase letter')
 			.matches(/[A-Z]/, 'Password requires an uppercase letter'),
-		confirm_password: Yup.string()
-			.oneOf([Yup.ref('new_password'), null], 'Must match "New password" field ')
+		confirmPassword: Yup.string()
+			.oneOf([Yup.ref('password'), null], 'Must match "New password" field ')
 			.required('Required'),
 	});
 
-	const onSubmit = (values) => {
-		console.log(values);
+	const onSubmit = (values, { setSubmitting, resetForm }) => {
+		// console.log(values);
+
+		mutate(values, {
+			onSuccess: (data) => {
+				// console.log(data);
+				notify(data.message, 'success');
+				resetForm();
+				setSubmitting(false);
+				setIsOpen(false);
+			},
+			onError: (error) => {
+				// console.log(error);
+				if (error.response.data.errorCode === 422) {
+					notify('Session timeout, Login again', 'error');
+					navigate(Approutes.auth.initial);
+				} else {
+					notify(error.response.data.message, 'error');
+				}
+			},
+		});
 	};
+
 	return (
 		<div>
 			<Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
 				{(formik) => {
 					return (
-						<Form className="px-1 space-y-4 mt-1">
+						<Form className="px-1 mt-1 space-y-4">
 							<FormControl
 								control="input"
 								type="password"
-								name="old_password"
-								placeholder="Old password"
-								className={'w-full rounded-[.3rem]'}
-							/>
-							<FormControl
-								control="input"
-								type="password"
-								name="new_password"
+								name="password"
 								placeholder="New password"
 								className={'w-full rounded-[.3rem]'}
 							/>
 							<FormControl
 								control="input"
 								type="password"
-								name="confirm_password"
+								name="confirmPassword"
 								placeholder="Confirm new password"
 								className={'w-full rounded-[.3rem]'}
 							/>
 
-							<Button type="submit" variant="primary" size="full" className={' rounded-[.3rem]'}>
+							<Button
+								type="submit"
+								variant="primary"
+								size="full"
+								className={' rounded-[.3rem]'}
+								loading={formik.isSubmitting}
+							>
 								Done
 							</Button>
 						</Form>
@@ -66,13 +90,3 @@ const UpdatePassword = () => {
 };
 
 export default UpdatePassword;
-
-// update password form data
-
-/* 
-	{
-		old_password: '',
-		new_password: '',
-		confirm_password: '',
-	}
-*/

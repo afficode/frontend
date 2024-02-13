@@ -82,13 +82,23 @@ const ImageInput = (props) => {
 													setIsLoading(false);
 													return;
 												}
-												if (file.size > 1024 * 1024) {
+												if (file.size > 5 * 1024 * 1024) {
 													notify('Image is too big!.', 'error');
 													setIsLoading(false);
 													return;
 												}
 
-												newImgFiles.push(file);
+												// Check if the file is already in the array based on the entire file object
+												const isFileAlreadyAdded = newImgFiles.some(
+													(existingFile) => existingFile.name === file.name && existingFile.size === file.size
+												);
+
+												if (isFileAlreadyAdded) {
+													alert('File already added!!');
+													notify('This image is already added.', 'error');
+												} else {
+													newImgFiles.push(file);
+												}
 											});
 
 											if (newImgFiles.length > 10) {
