@@ -65,22 +65,7 @@ const Details = () => {
 						<label className="text-black/60" htmlFor="email_address">
 							Login email:
 						</label>
-						{toggleEdit.contact ? (
-							<p>{formik.values.email_address}</p>
-						) : (
-							<InputGroup
-								name="email_address"
-								type="email"
-								value={formik.values.email_address}
-								onChange={formik.handleChange}
-								onBlur={formik.handleBlur}
-								errorMsg={
-									formik.touched.email_address && formik.errors.email_address
-										? formik.errors.email_address
-										: null
-								}
-							/>
-						)}
+						<p>{formik.values.email_address}</p>
 					</div>
 					<div className="space-y-1">
 						<label className="text-black/60" htmlFor="password">
