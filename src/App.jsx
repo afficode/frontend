@@ -29,6 +29,7 @@ import {
 	PostAd,
 	UpdateAd,
 	PostDecision,
+	PostSuccess,
 } from './pages';
 import { AppLayout, DashboardLayout } from './layout';
 import { Approutes } from './constants';
@@ -80,8 +81,8 @@ function App() {
 						<Route path={Approutes.welcome} element={<Welcome />} />
 						<Route path={`${Approutes.postDecision}`} element={<PostDecision />} />
 						<Route path={`${Approutes.postAd}/:categoryId`} element={<PostAd />} />
-
 						<Route path={`${Approutes.updateAd}/:adId`} element={<UpdateAd />} />
+						<Route path={`${Approutes.postSuccess}/:adId`} element={<PostSuccess />} />
 						{/* profile layout  */}
 						<Route element={<ProfileLayout />}>
 							<Route

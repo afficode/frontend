@@ -98,7 +98,7 @@ select {
 	@apply w-full my-2 text-base text-black bg-white rounded-none focus:border-primary placeholder-black/40 input-md;
 }
 textarea {
-	@apply w-full my-2 text-base text-black bg-white rounded-none focus:border-primary placeholder-black/40;
+	@apply w-full p-2 my-2 text-base text-black bg-white rounded-none focus:border-primary placeholder-black/40;
 }
 
 .formLabel {

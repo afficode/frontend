@@ -29,7 +29,7 @@ const PostAd = () => {
 			description: ad?.description,
 			vehicle_features: ad?.vehicle_features,
 			ad_condition: ad?.ad_condition,
-			vehicle_body_type: ad?.vehicle_body_type,
+			vehicle_body: ad?.vehicle_body,
 			contact_type: ad?.contact_type,
 			price: ad?.price,
 			year: ad?.year,

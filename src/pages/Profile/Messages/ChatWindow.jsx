@@ -41,7 +41,7 @@ const ChatWindow = ({ chat_id, messageData, chat_data, title }) => {
 						{/* data?.image ? data?.image[0].path :  */}
 						<img src={RedCar} alt={'/'} className="w-[3rem] h-[3rem]  object-fit rounded-full " />
 						<div className="py-2 ">
-							<h6 className="font-medium ">{data?.title ? data.title : title}</h6>
+							<h6 className="font-medium capitalize">{data?.title ? data.title : title}</h6>
 						</div>
 					</div>
 				</Link>

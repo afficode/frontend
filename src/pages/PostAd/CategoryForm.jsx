@@ -62,8 +62,10 @@ import {
 	homeChemicals,
 	tradesmanForms,
 	babiesSizes,
+	Approutes,
 } from '../../constants';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { encodeProductId } from '../../utils/dataManipulations';
 
 const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 	const [stateId, setStateId] = useState(null);
@@ -82,6 +84,8 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 	const [selectedPropertyCategory, setSelectedPropertyCategory] = useState(null);
 	const [selectedServicesCategory, setSelectedServicesCategory] = useState(null);
 	const [selectedTradesmanCategory, setSelectedTradesmanCategory] = useState(null);
+
+	console.log(selectedVehicleCategory);
 
 	// if other option is selected
 	const [otherMake, setOtherMake] = useState(false);
@@ -419,6 +423,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				name: 'trim',
 				placeholder: 'e.g. 350',
 				options: [
+					{ key: 'Select a trim', value: '' },
 					{ key: '350', value: '350' },
 					{ key: '450', value: '450' },
 					{ key: '550', value: '550' },
@@ -456,7 +461,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 					{ key: 'Bluetooth Connectivity', value: 'Bluetooth Connectivity' },
 					{ key: 'Tinted Glass', value: 'Tinted Glass' },
 					{ key: 'Sat Navigation', value: 'Sat Navigation' },
-					{ key: 'Alloy Wheels', value: 'AlloyWheels' },
+					{ key: 'Alloy Wheels', value: 'Alloy Wheels' },
 					{ key: 'Sunroof', value: 'Sunroof' },
 					{ key: 'Power steering', value: 'Power steering' },
 					{ key: 'Keyless Entry', value: 'Keyless Entry' },
@@ -469,6 +474,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				label: 'Description',
 				name: 'description',
 				type: 'textarea',
+				maxLength: 350,
 				placeholder:
 					'Enter as much information as possible. Please state IF any defects.You could include reason for  selling, number of previous owners, if there had been colour changes or defects.',
 				required: true,
@@ -480,8 +486,8 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				name: 'ad_condition',
 				options: [
 					{ key: 'New', value: 'new' },
-					{ key: 'Nigerian Used', value: 'nigerian used' },
-					{ key: 'Foreign Used', value: 'foreign used' },
+					{ key: 'Nigerian Used', value: 'nigerian use' },
+					{ key: 'Foreign Used', value: 'foreign use' },
 					// { key: 'Painted', value: 'painted' },
 					// { key: 'Unpainted', value: 'unpainted' },
 				],
@@ -514,10 +520,10 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				placeholder: 'Enter your mileage eg. 105,000miles',
 			},
 			!['5002', '5005'].includes(selectedVehicleCategory) && {
-				control: 'checkbox',
-				type: 'checkbox',
+				control: 'radio',
+				type: 'radio',
 				label: 'Vehicle Body Type',
-				name: 'vehicle_body_type',
+				name: 'vehicle_body',
 				options: [
 					{ key: 'SUV', value: 'suv' },
 					{ key: 'Crossover', value: 'crossover' },
@@ -688,6 +694,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				label: 'Description',
 				name: 'description',
 				type: 'textarea',
+				maxLength: 350,
 				placeholder: 'Enter as much information as possible. Please state IF any defects.',
 				required: true,
 			},
@@ -708,7 +715,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			!['5105'].includes(selectedPropertyCategory) && {
 				control: 'radio',
 				label: 'Property Condition',
-				name: 'ad_ad_condition',
+				name: 'ad_condition',
 				type: 'radio',
 				options: [
 					{ key: 'New', value: 'new' },
@@ -719,7 +726,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			['5101', '5102', '5103', '5104', '5107', '5108', '5109'].includes(selectedPropertyCategory) && {
 				control: 'radio',
 				label: 'Any Furnishing',
-				name: 'ad_ad_condition',
+				name: 'ad_condition',
 				type: 'radio',
 				options: [
 					{ key: 'Furnished', value: 'furnished' },
@@ -974,6 +981,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				label: 'Description',
 				name: 'description',
 				type: 'textarea',
+				maxLength: 350,
 				placeholder: 'Enter as much information as possible. Please state IF any defects.',
 				required: true,
 			},
@@ -1091,6 +1099,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				label: 'Description',
 				name: 'description',
 				type: 'textarea',
+				maxLength: 350,
 				placeholder: 'Enter as much information as possible. Please state IF any defects.',
 				required: true,
 			},
@@ -1111,7 +1120,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			!['5302'].includes(selectedAgricultureCategory) && {
 				control: 'radio',
 				label: 'Condition',
-				name: 'ad_ad_condition',
+				name: 'ad_condition',
 				type: 'radio',
 				options: [
 					{ key: 'New', value: 'new' },
@@ -1231,13 +1240,14 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				label: 'Description',
 				name: 'description',
 				type: 'textarea',
+				maxLength: 350,
 				placeholder: 'Enter as much information as possible. Please state IF any defects.',
 				required: true,
 			},
 			{
 				control: 'radio',
 				label: 'Condition',
-				name: 'ad_ad_condition',
+				name: 'ad_condition',
 				type: 'radio',
 				options: [
 					{ key: 'New', value: 'new' },
@@ -1518,6 +1528,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				label: 'Description',
 				name: 'description',
 				type: 'textarea',
+				maxLength: 350,
 				placeholder: 'Enter as much information as possible. Please state IF any defects.',
 				required: true,
 			},
@@ -1576,12 +1587,12 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			{
 				control: 'radio',
 				label: 'Condition',
-				name: 'ad_ad_condition',
+				name: 'ad_condition',
 				type: 'radio',
 				options: [
 					{ key: 'New', value: 'new' },
-					{ key: 'Nigerian Used', value: 'nigerian used' },
-					{ key: 'Foreign Used', value: 'foreign used' },
+					{ key: 'Nigerian Used', value: 'nigerian use' },
+					{ key: 'Foreign Used', value: 'foreign use' },
 				],
 			},
 
@@ -1721,6 +1732,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				label: 'Description',
 				name: 'description',
 				type: 'textarea',
+				maxLength: 350,
 				placeholder: 'Enter as much information as possible. Please state IF any defects.',
 				required: true,
 			},
@@ -1800,7 +1812,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			!['5603', '5607', '5602', '5604', '5606'].includes(selectedHealthCategory) && {
 				control: 'radio',
 				label: 'Condition',
-				name: 'ad_ad_condition',
+				name: 'ad_condition',
 				type: 'radio',
 				options: [
 					{ key: 'New', value: 'new' },
@@ -1923,6 +1935,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				label: 'Description',
 				name: 'description',
 				type: 'textarea',
+				maxLength: 350,
 				placeholder: 'Enter as much information as possible. Please state IF any defects.',
 				required: true,
 			},
@@ -1999,7 +2012,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			!['5704'].includes(selectedHomeCategory) && {
 				control: 'radio',
 				label: 'Condition',
-				name: 'ad_ad_condition',
+				name: 'ad_condition',
 				type: 'radio',
 				options: [
 					{ key: 'Used', value: 'used' },
@@ -2100,6 +2113,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				label: 'Description',
 				name: 'description',
 				type: 'textarea',
+				maxLength: 350,
 				placeholder: 'Enter as much information as possible. Please state IF any defects.',
 				required: true,
 			},
@@ -2286,13 +2300,14 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				label: 'Description',
 				name: 'description',
 				type: 'textarea',
+				maxLength: 350,
 				placeholder: 'Enter as much information as possible. Please state IF any defects.',
 				required: true,
 			},
 			['5902', '5903'].includes(selectedSoftwareCategory) && {
 				control: 'radio',
 				label: 'Condition',
-				name: 'ad_ad_condition',
+				name: 'ad_condition',
 				type: 'radio',
 				options: [
 					{ key: 'New', value: 'new' },
@@ -2462,6 +2477,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				label: 'Description',
 				name: 'description',
 				type: 'textarea',
+				maxLength: 350,
 				placeholder: 'Enter as much information as possible. Please state IF any defects.',
 				required: true,
 			},
@@ -2523,7 +2539,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			['6003'].includes(selectedPetCategory) && {
 				control: 'radio',
 				label: 'Condition',
-				name: 'ad_ad_condition',
+				name: 'ad_condition',
 				type: 'radio',
 				options: [
 					{ key: 'Nigerian Used', value: 'Nigerian Used' },
@@ -2630,13 +2646,14 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				label: 'Description',
 				name: 'description',
 				type: 'textarea',
+				maxLength: 350,
 				placeholder: 'Enter as much information as possible. Please state IF any defects.',
 				required: true,
 			},
 			!['6111'].includes(selectedBabiesCategory) && {
 				control: 'radio',
 				label: 'Condition',
-				name: 'ad_ad_condition',
+				name: 'ad_condition',
 				type: 'radio',
 				options: [
 					{ key: 'New', value: 'new' },
@@ -2808,18 +2825,19 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				label: 'Description',
 				name: 'description',
 				type: 'textarea',
+				maxLength: 350,
 				placeholder: 'Enter as much information as possible. Please state IF any defects.',
 				required: true,
 			},
 			!['6204'].includes(selectedSportsCategory) && {
 				control: 'radio',
 				label: 'Condition',
-				name: 'ad_ad_condition',
+				name: 'ad_condition',
 				type: 'radio',
 				options: [
 					{ key: 'New', value: 'new' },
-					{ key: 'Nigerian Used', value: 'nigerian used' },
-					{ key: 'Foreign Used', value: 'foreign used' },
+					{ key: 'Nigerian Used', value: 'nigerian use' },
+					{ key: 'Foreign Used', value: 'foreign use' },
 				],
 			},
 			!['6205', '6206', '6204', '6201', '6202', '6203'].includes(selectedSportsCategory) && {
@@ -3019,6 +3037,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				label: 'Description',
 				name: 'description',
 				type: 'textarea',
+				maxLength: 350,
 				placeholder:
 					'Enter as much information as possible. Please state IF any defects.You could include reason for  selling, number of previous owners, if there had been colour changes or defects.',
 				required: true,
@@ -3027,11 +3046,11 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				control: 'checkbox',
 				type: 'checkbox',
 				label: 'Condition',
-				name: 'ad_ad_condition',
+				name: 'ad_condition',
 				options: [
 					{ key: 'New', value: 'new' },
-					{ key: 'Nigerian Used', value: 'nigerian used' },
-					{ key: 'Foreign Used', value: 'foreign used' },
+					{ key: 'Nigerian Used', value: 'nigerian use' },
+					{ key: 'Foreign Used', value: 'foreign use' },
 					{ key: 'Painted', value: 'painted' },
 					{ key: 'Unpainted', value: 'unpainted' },
 				],
@@ -3172,18 +3191,19 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				label: 'Description',
 				name: 'description',
 				type: 'textarea',
+				maxLength: 350,
 				placeholder: 'Enter as much information as possible. Please state IF any defects.',
 				required: true,
 			},
 			{
 				control: 'radio',
 				label: 'Condition',
-				name: 'ad_ad_condition',
+				name: 'ad_condition',
 				type: 'radio',
 				options: [
 					{ key: 'New', value: 'new' },
-					{ key: 'Foreign Used', value: 'foreign used' },
-					{ key: 'Nigerian Used', value: 'nigerian used' },
+					{ key: 'Foreign Used', value: 'foreign use' },
+					{ key: 'Nigerian Used', value: 'nigerian use' },
 					{ key: 'Refurbished', value: 'refurbished' },
 					{ key: 'None', value: 'none' },
 				],
@@ -3296,6 +3316,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				label: 'Description',
 				name: 'description',
 				type: 'textarea',
+				maxLength: 350,
 				placeholder: 'Enter as much information as possible. Please state IF any defects.',
 				required: true,
 			},
@@ -3310,12 +3331,12 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			{
 				control: 'radio',
 				label: 'Condition',
-				name: 'ad_ad_condition',
+				name: 'ad_condition',
 				type: 'radio',
 				options: [
 					{ key: 'New', value: 'new' },
-					{ key: 'Foreign Used', value: 'foreign used' },
-					{ key: 'Nigerian Used', value: 'nigerian used' },
+					{ key: 'Foreign Used', value: 'foreign use' },
+					{ key: 'Nigerian Used', value: 'nigerian use' },
 					{ key: 'Refurbished', value: 'refurbished' },
 					{ key: 'Other', value: 'other' },
 				],
@@ -3323,7 +3344,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			otherCondition && {
 				control: 'input',
 				label: 'Other Condition',
-				name: 'ad_ad_condition',
+				name: 'ad_condition',
 				type: 'text',
 				placeholder: 'Enter ad_condition',
 				required: true,
@@ -3403,8 +3424,8 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			fuel_type: Yup.string(),
 			engine_size: Yup.string(),
 			vehicle_features: Yup.array(),
-			ad_ad_condition: Yup.string(),
-			vehicle_body_type: Yup.array(),
+			ad_condition: Yup.string(),
+			vehicle_body: Yup.string(),
 			contact_type: Yup.array().min(1, 'At least one option is required').required('Required'),
 			price: Yup.number().required('Required'),
 			negotiable: Yup.boolean(),
@@ -3759,6 +3780,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				control={field.control}
 				name={field.name}
 				type={field.type}
+				maxLength={field.maxLength}
 				placeholder={field.placeholder}
 				label={field.label}
 				options={field.options}
@@ -3768,6 +3790,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 
 	const notify = useNotify();
 	const { mutate } = useCreateAd();
+	const navigate = useNavigate();
 
 	const onSubmit = async (values, { setSubmitting, resetForm }) => {
 		setSubmitting(true);
@@ -3810,6 +3833,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				notify(data.message, 'success');
 				setSubmitting(false);
 				resetForm();
+				navigate(`${Approutes.postSuccess}/${encodeProductId(data.ad_id)}`);
 			},
 			onError: async (error) => {
 				try {
