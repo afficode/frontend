@@ -25,7 +25,8 @@ import ContactAdmin from './ContactAdmin';
 import { Alert } from 'flowbite-react';
 import SaveProduct from '../Default/SaveProduct';
 import { getSaves } from '../../../hooks/useSaves';
-import useSaveContext from '../../../context/SaveContext';
+import { FaHandshake, FaHandshakeSlash } from "react-icons/fa6";
+import { GrabIcon, NegotiableIcon } from '../../../ui';
 
 const index = () => {
 	const { id } = useParams();
@@ -33,10 +34,8 @@ const index = () => {
 	const [revealNumber, setRevealNumber] = useState(false);
 	const [revealEmail, setRevealEmail] = useState(false);
 	const { isLogin, user } = useAuth();
-	const { saves, savesId, setSaves, setSavesId } = useSaveContext();
 	const { data: result, isLoading } = fetchProduct(decodeProductId(id));
 	const { data, isLoading: saveLoading } = getSaves();
-	const [savedAds, setSavedAds] = useState([]);
 
 	useEffect(() => {
 		if (result?.data) {
@@ -46,15 +45,6 @@ const index = () => {
 				{ name: result?.data?.title },
 			]);
 		}
-
-		// if (isLogin && data?.saves?.length >= 0) {
-		//   const savedIds = data?.saves.map((save) => save.ads_id);
-		//   // console.log(savedIds);
-		//   setSavedAds(() => savedIds);
-		//   setSaves(() => savedAds?.saves);
-		//   console.log(savedIds);
-		//   setSavesId(() => savedIds);
-		// }
 	}, [isLoading, saveLoading]);
 
 	return isLoading ? (
@@ -78,8 +68,18 @@ const index = () => {
 					<div className="w-full my-2 ml-2">
 						<div className="flex items-center justify-between w-full my-2 font-bold uppercase text-md md:text-2xl xl:text-3xl">
 							<span className="">{result.data?.title}</span>
-							{/* TODO: Pass in the requierd props for this product */}
-							<SaveProduct ads_id={decodeProductId(id)} />
+							<span className=" flex items-center gap-2 lg: gap-8 my-auto">
+							<NegotiableIcon negotiable={result.data?.negotiable} />
+                  
+                  			
+							{((isLogin && (parseInt(result.data?.owner) !== parseInt(user?.id))) || !isLogin) && 
+								<>
+									<GrabIcon className="text-green-400 cursor-pointer tooltip tooltip-success tooltip-bottom" data-tip="Grab Product" />
+									<SaveProduct ads_id={decodeProductId(id)} />
+								</>
+								
+							}
+							</span>
 						</div>
 
 						<div className="flex items-center justify-between">
@@ -207,10 +207,12 @@ const index = () => {
 			<section className="flex flex-col p-2 my-2 bg-gray-200 xl:p-6 xl:my-4">
 				<div className="flex flex-col items-start justify-start w-full gap-2 tracking-tighter lg:tracking-normal line-clamp-1">
 					<h2 className="text-xl xl:2xl">Description</h2>
-					<p className="bg-white p-4 min-h-[100px] text-justify text-lg border-t-4 border-t-primary">
+					<p className="bg-white p-4 min-h-[100px] text-justify text-lg border-t-4 border-t-primary whitespace-pre-line">
 						{result?.data?.description} Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit,
 						minus quibusdam. Soluta vero doloribus iste sint sunt minima praesentium, asperiores, facere
-						dolorum eaque voluptate fugiat molestias? Provident harum nostrum omnis! Lorem ipsum, dolor
+						dolorum eaque voluptate fugiat molestias? Provident harum nostrum omnis! 
+						
+						Lorem ipsum, dolor
 						sit amet consectetur adipisicing elit. Dolorem veniam molestiae, perspiciatis modi facilis
 						labore soluta ipsa eveniet mollitia, molestias quod rem non culpa hic laborum minima. Soluta,
 						ducimus vero?

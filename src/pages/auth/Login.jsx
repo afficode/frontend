@@ -1,62 +1,64 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Formik, Form } from 'formik';
-import { useNavigate } from 'react-router-dom';
-import Input from '../../components/FormComponents/Input';
-import * as Yup from 'yup';
-import { MdLogin } from 'react-icons/md';
-import { LoginHook } from '../../hooks/AuthHook';
-import { Apple, Facebook, Google } from '../../assets/svgs';
-import { Button } from '../../ui';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { Formik, Form } from "formik";
+import { useNavigate } from "react-router-dom";
+import Input from "../../components/FormComponents/Input";
+import * as Yup from "yup";
+import { MdLogin } from "react-icons/md";
+import { LoginHook } from "../../hooks/AuthHook";
+import { Apple, Facebook, Google } from "../../assets/svgs";
+import { Button } from "../../ui";
 // import { toast } from 'react-toastify';
-import { Approutes } from '../../constants';
-import { Button as FlowbiteButton } from 'flowbite-react';
-import useAuth from '../../context/UserContext';
-import { SpinnerSkeleton, Spinner } from '../../components';
-import { getRedirectLink } from '../../utils';
-import { useNotify } from '../../hooks';
+import { Approutes } from "../../constants";
+import { Button as FlowbiteButton } from "flowbite-react";
+import useAuth from "../../context/UserContext";
+import { SpinnerSkeleton, Spinner } from "../../components";
+import { getRedirectLink } from "../../utils";
+import { useNotify } from "../../hooks";
 
 const Login = () => {
-	const { login } = useAuth();
-	const [isLoading, setIsLoading] = useState(false);
-	const navigate = useNavigate();
+  const { login } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
-	const initialValues = {
-		email: '',
-		password: '',
-	};
+  const initialValues = {
+    email: "",
+    password: "",
+  };
 
-	const validationSchema = Yup.object({
-		email: Yup.string().required('Email field is required').email('Invalid email address'),
-		password: Yup.string()
-			.required()
-			.min(8, 'Password must be 8 characters long')
-			.matches(/[0-9]/, 'Password requires a number')
-			.matches(/[a-z]/, 'Password requires a lowercase letter')
-			.matches(/[A-Z]/, 'Password requires an uppercase letter'),
-	});
-	const notify = useNotify();
+  const validationSchema = Yup.object({
+    email: Yup.string()
+      .required("Email field is required")
+      .email("Invalid email address"),
+    password: Yup.string()
+      .required()
+      .min(8, "Password must be 8 characters long")
+      .matches(/[0-9]/, "Password requires a number")
+      .matches(/[a-z]/, "Password requires a lowercase letter")
+      .matches(/[A-Z]/, "Password requires an uppercase letter"),
+  });
+  const notify = useNotify();
 
-	const onSubmit = async (values, { setSubmitting }) => {
-		setIsLoading(true);
-		setTimeout(async () => {
-			const submit = await LoginHook(values, setSubmitting);
-			if (submit?.success) {
-				// the login from the useAuth tied to a context hook, will update localstorge and set user to Login
-				login(submit);
-				// toast.success('Welcome to Affi. \n\nYour world of endless possibilities', {
-				// 	style: {
-				// 		border: '4px solid #FAC213',
-				// 		padding: '14px',
-				// 		background: '#2686CE',
-				// 		color: '#fff',
-				// 	},
-				// 	iconTheme: {
-				// 		primary: '#2686CE',
-				// 		secondary: '#EBBA16',
-				// 	},
-				// 	position: 'top-center',
-				// });
+  const onSubmit = async (values, { setSubmitting }) => {
+    setIsLoading(true);
+    setTimeout(async () => {
+      const submit = await LoginHook(values, setSubmitting);
+      if (submit?.success) {
+        // the login from the useAuth tied to a context hook, will update localstorge and set user to Login
+        login(submit);
+        // toast.success('Welcome to Affi. \n\nYour world of endless possibilities', {
+        // 	style: {
+        // 		border: '4px solid #FAC213',
+        // 		padding: '14px',
+        // 		background: '#2686CE',
+        // 		color: '#fff',
+        // 	},
+        // 	iconTheme: {
+        // 		primary: '#2686CE',
+        // 		secondary: '#EBBA16',
+        // 	},
+        // 	position: 'top-center',
+        // });
 
 				notify('Welcome to Affi. \n\nYour world of endless possibilities', 'success');
 				// if (window.location.pathname === getRedirectLink()) {
@@ -105,16 +107,16 @@ const Login = () => {
 										/>
 									</div>
 
-									<div className="form-control">
-										<Input
-											className={inputClass}
-											type="password"
-											name="password"
-											id="password"
-											placeholder="Password"
-											{...formik.getFieldProps('password')}
-										/>
-									</div>
+                  <div className="form-control">
+                    <Input
+                      className={inputClass}
+                      type="password"
+                      name="password"
+                      id="password"
+                      placeholder="Password"
+                      {...formik.getFieldProps("password")}
+                    />
+                  </div>
 
 									<div className=" form-control">
 										<FlowbiteButton
@@ -145,10 +147,12 @@ const Login = () => {
 						</div>
 					</div>
 
-					<div className="w-[80%] mx-auto my-4 lg:my-8 p-[0.1rem] bg-black"></div>
+          <div className="w-[80%] mx-auto my-4 lg:my-8 p-[0.1rem] bg-black"></div>
 
-					<div className="w-[85%] mx-auto my-4">
-						<p className="w-full text-center text-md lg:text-2xl">Or Connect with:</p>
+          <div className="w-[85%] mx-auto my-4">
+            <p className="w-full text-center text-md lg:text-2xl">
+              Or Connect with:
+            </p>
 
 						<Button className="mt-6 w-full px-4 py-[.7rem] text-white bg-[#0F8EEF] flex items-center hover:brightness-90">
 							<img src={Facebook} alt="apple logo" className="mr-auto" />{' '}
@@ -174,4 +178,4 @@ const Login = () => {
 export default Login;
 
 const inputClass =
-	'input input-bordered border-black w-full bg-gray-100 text-black text-lg lg:text-xl rounded-none my-2 input-md lg:input-lg';
+  "input input-bordered border-black w-full bg-gray-100 text-black text-lg lg:text-xl rounded-none my-2 input-md lg:input-lg";

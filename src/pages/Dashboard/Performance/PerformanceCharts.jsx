@@ -95,7 +95,7 @@ const PerformanceCharts = ({ adsData }) => {
       },
     ],
   };
-
+  
   return (
     <div className="flex flex-col gap-6 my-6">
       {/* priducts table  */}
@@ -116,7 +116,11 @@ const PerformanceCharts = ({ adsData }) => {
             </thead>
             <tbody>
               {adsData?.ads_summary &&
-                adsData?.ads_summary.map((ad) => (
+                adsData?.ads_summary.sort((a, b) => {
+                  if (a.id < b.id) return 1;
+                  if (a.id > b.id) return -1
+                  return 0
+                }).map((ad) => (
                   <tr
                     key={ad.id}
                     className="font-medium whitespace-nowrap hover:bg-gray-200"
