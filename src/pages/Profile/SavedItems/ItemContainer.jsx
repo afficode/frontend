@@ -2,14 +2,15 @@ import { CameraWhite, Location } from "../../../assets/svgs";
 import { Button } from "../../../ui";
 import { AiOutlineClose } from "react-icons/ai";
 import { noimage } from "../../../assets/images";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Approutes } from "../../../constants";
 import { encodeProductId } from "../../../utils/dataManipulations";
 import { useQueryClient } from "react-query";
 import { useNotify } from "../../../hooks";
 import { useQuery } from "react-query";
 import { useState } from "react";
-import { unSaveAd, unSaveAll } from "../../../hooks/useSaves";
+import { unSaveAd } from "../../../hooks/useSaves";
+import { numberWithCommas } from "../../../utils/dataManipulations";
 
 const ItemContainer = ({
   name,
@@ -19,7 +20,6 @@ const ItemContainer = ({
   images,
   ads_id,
 }) => {
-  const navigate = useNavigate();
   const queryClient = useQueryClient();
   const notify = useNotify();
   const [unSave, setUnSave] = useState(false);
@@ -40,7 +40,10 @@ const ItemContainer = ({
   });
 
   return (
-    <div className="bg-gray-200 rounded-sm">
+    <Link
+      to={`${Approutes.product.initial}/${encodeProductId(ads_id)}`}
+    >
+    <div className="bg-gray-200 rounded-sm cursor-pointer">
       <div className="flex ">
         {/* image  */}
         <div className="h-[9.5rem] w-[8.5rem] sm:h-[12rem] sm:w-[12rem] md:h-[16rem] md:w-[16rem] relative">
@@ -59,10 +62,7 @@ const ItemContainer = ({
           )}
 
           <div className="absolute max-sm:left-2 bottom-0 sm:bottom-05 w-full flex  mx-auto p-1">
-            <div className="p-2 flex items-end gap-2 sm:gap-6 justify-around bg-black/70 w-full">
-              <Link
-                to={`${Approutes.product.initial}/${encodeProductId(ads_id)}`}
-              >
+            <div className="p-2 flex items-end gap-2 sm:gap-6 justify-around bg-black/70 w-full">              
                 <Button
                   variant={"primary"}
                   size={"small"}
@@ -73,7 +73,6 @@ const ItemContainer = ({
                   {" "}
                   Continue
                 </Button>
-              </Link>
               <div className="flex items-center gap-[.4rem] text-white max-sm:mr-auto my-auto">
                 <img src={CameraWhite} alt="/" className="w-4" />
                 <span className="text-sm sm:text-lg">{images?.length}</span>
@@ -128,7 +127,7 @@ const ItemContainer = ({
           <div className="flex items-center gap-4">
             {price ? (
               <span className="px-3 py-1 md:px-6 md:py-2 bg-white font-medium lg:font-semibold max-sm:text-sm">
-                {price}
+                {numberWithCommas(price)}
               </span>
             ) : (
               <Button
@@ -176,6 +175,7 @@ const ItemContainer = ({
         </Button>
       </div>
     </div>
+    </Link>
   );
 };
 

@@ -42,5 +42,5 @@ export const Approutes = {
 
 //export const backendLink = process.env.NODE_ENV !== "sam" ? 'http://109.237.25.252:4000/' : 'http://localhost:4000/';
 //export const backendLink = 'http://localhost:4000/';
-export const backendLink = 'https://4000-afficode-backend-cch37ds4fkj.ws-eu108.gitpod.io/';
+export const backendLink = import.meta.env.VITE_TESTING == "gitpod" ? 'https://4000-afficode-backend-cch37ds4fkj.ws-eu108.gitpod.io/' : import.meta.env.VITE_TESTING == "sam" ? 'http://localhost:4000/' : 'http://109.237.25.252:4000/';
 //console.log(process.env.VITE_TESTING)

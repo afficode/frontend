@@ -52,7 +52,7 @@ privateAxios.interceptors.response.use(
 				return Promise.reject(error);
 			}
 		}
-		return window.location.assign(Approutes.auth.initial)
+		// return window.location.assign(Approutes.auth.initial)
 		return Promise.reject(error);
 	}
 );

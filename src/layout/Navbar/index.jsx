@@ -62,12 +62,13 @@ const Navbar = () => {
 		});
 	}
 	const { pathname } = useLocation();
+	
 	const handleSearch = useDebouncedCallback((query) => {
 		if (query) {
 			setSearchParams({
 				q: query,
 			});
-			if (!pathname.includes('product')) {
+			if (!pathname !== '/product') {
 				navigate(`${Approutes.product.initial}/?q=${query}`);
 			}
 		} else {
