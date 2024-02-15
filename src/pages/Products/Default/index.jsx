@@ -27,7 +27,7 @@ const Products = () => {
   const result = useCategories();
 
   const { isLogin } = useAuth();
-  const { setSaves, setSavesId } = useSaveContext();
+  const { setSaves, setSavesId } = useSaveContext([]);
 
   const [product, setProduct] = useState({ ads: [] });
   const [featured, setFeatured] = useState([]);

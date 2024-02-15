@@ -9,10 +9,12 @@ import { numberWithCommas } from "../../../utils/dataManipulations";
 import { formatDistance } from "date-fns";
 import SaveProduct from "./SaveProduct";
 import useAuth from "../../../context/UserContext";
-
+import { FaHandshake, FaHandshakeSlash } from "react-icons/fa6";
+import { NegotiableIcon } from "../../../ui";
+import { GrabIcon } from "../../../ui";
 const FeaturedProducts = ({ product }) => {
-  const { isLogin } = useAuth();
-
+  const { isLogin, user } = useAuth();
+  console.log(import.meta.env.VITE_TESTING)
   return (
     <>
       {product.map((ad, index) => (
@@ -39,11 +41,12 @@ const FeaturedProducts = ({ product }) => {
                 className="h-[120px] md:h-[230px] rounded-none"
               />
             )}
-            <SaveProduct
-              ads_id={ad.id}
-              className="absolute h-12 top-4 right-4 bg-gray-200 hover:bg-white p-1 px-2 rounded shadow-2xl w-10"
-            />
-
+            {((isLogin && (parseInt(ad?.owner) !== parseInt(user?.id))) || !isLogin) && 
+              <SaveProduct
+                ads_id={ad.id}
+                className="absolute h-12 top-4 right-4 bg-gray-200 hover:bg-white p-1 px-2 rounded shadow-2xl w-10"
+              />
+            }
             <div className="w-full bg-black/50 h-10 absolute bottom-0 text-white pl-2 pt-2 flex rounded-none">
               <FaCamera className="my-auto text-lg" />
               &emsp; <span className="my-auto"> {ad.images.length}</span>
@@ -65,8 +68,14 @@ const FeaturedProducts = ({ product }) => {
             <p className="  mt-4 flex justify-between tracking-tighter line-clamp-1 ">
               <span className="flex">
                 <TbCurrencyNaira className="mt-1" />
-                {numberWithCommas(ad.price)}
+                {numberWithCommas(ad.price)}                
               </span>
+              <span className="flex justify-around my-auto text-xl font-bold gap-2">
+                  <NegotiableIcon negotiable={ad?.negotiable} />
+                  {((isLogin && (parseInt(ad?.owner) !== parseInt(user?.id))) || !isLogin) && 
+                    <GrabIcon className="text-secondary" />
+                  }
+                </span> &nbsp;
               <span className="tracking-tighter">
                 {formatDistance(
                   new Date(new Date(`${ad?.created_at}`)),
