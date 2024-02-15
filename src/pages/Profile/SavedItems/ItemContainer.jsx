@@ -63,19 +63,18 @@ const ItemContainer = ({ name, location, specifications, price, images, ads_id }
 					</div>
 
 					{/* details  */}
-					<div className="flex-1 flex flex-col justify-between px-1 py-2 sm:p-4">
+					<div className="flex-1 flex flex-col justify-between px-1 py-2 sm:p-4 ">
 						<div className="flex flex-col">
 							<div className="flex">
 								<h4 className="text-primary font-semibold max-lg:hidden uppercase">{name}</h4>
 								<h5 className="text-primary font-semibold lg:hidden max-sm:hidden uppercase">{name}</h5>
 								<h6 className="text-primary font-semibold sm:hidden uppercase">{name}</h6>
 
-								<button
-									className="p-1 sm:p-2 bg-white rounded-full ml-auto self-start "
-									onClick={() => setUnSave(true)}
-								>
-									<AiOutlineClose />
-								</button>
+								<Link onClick={() => setUnSave(true)}>
+									<button className="p-1 sm:p-2 bg-white rounded-full ml-auto self-start ">
+										<AiOutlineClose />
+									</button>
+								</Link>
 							</div>
 
 							<div className="flex items-center gap-2 md:mt-2">
@@ -133,13 +132,16 @@ const ItemContainer = ({ name, location, specifications, price, images, ads_id }
 					</div>
 				</div>
 
-				<div className="w-full flex items-center md:hidden divide-x-2 divide-gray-200">
-					<Button variant={'plain'} size={'small'} className={`font-semibold max-sm:text-sm flex-1`}>
+				{/* flex items-center */}
+				<div className="w-full  md:hidden divide-x-2 divide-gray-200 ">
+					{/* <Button variant={'plain'} size={'small'} className={`font-semibold max-sm:text-sm flex-1`}>
 						Show contact{' '}
-					</Button>
-					<Button variant={'plain'} size={'small'} className={`font-semibold max-sm:text-sm flex-1`}>
-						Send Message
-					</Button>
+					</Button> */}
+					<Link to={Approutes.profile.messages}>
+						<Button variant={'plain'} size={'full'} className={`font-semibold max-sm:text-sm`}>
+							Send Message
+						</Button>
+					</Link>
 				</div>
 			</div>
 		</Link>
