@@ -37,6 +37,7 @@ import { ToastContainer } from 'react-toastify';
 import { RequireAuth } from './components';
 import useAuth from './context/UserContext';
 import 'react-toastify/dist/ReactToastify.css';
+import UnderConstruction from './pages/UnderConstruction';
 
 function App() {
 	const { isLogin } = useAuth();
@@ -60,6 +61,7 @@ function App() {
 					<Route path={Approutes.product.view} element={<ViewProduct />} />
 					<Route path={Approutes.product.category} element={<Categories />} />
 					<Route path={Approutes.product.viewCategoryId} element={<Category />} />
+					<Route path={Approutes.underConstruction} element={<UnderConstruction />} />
 				</Route>
 
 				{/* Protected page routes */}

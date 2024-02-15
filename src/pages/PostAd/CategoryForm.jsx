@@ -85,7 +85,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 	const [selectedServicesCategory, setSelectedServicesCategory] = useState(null);
 	const [selectedTradesmanCategory, setSelectedTradesmanCategory] = useState(null);
 
-	console.log(selectedVehicleCategory);
+	// console.log(selectedVehicleCategory);
 
 	// if other option is selected
 	const [otherMake, setOtherMake] = useState(false);
@@ -476,7 +476,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				type: 'textarea',
 				maxLength: 350,
 				placeholder:
-					'Enter as much information as possible. Please state IF any defects.You could include reason for  selling, number of previous owners, if there had been colour changes or defects.',
+					'Enter as much information as possible. Please state IF any defects. You could include reason for  selling, number of previous owners, if there had been colour changes or defects.',
 				required: true,
 			},
 			{
@@ -3039,7 +3039,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				type: 'textarea',
 				maxLength: 350,
 				placeholder:
-					'Enter as much information as possible. Please state IF any defects.You could include reason for  selling, number of previous owners, if there had been colour changes or defects.',
+					'Enter as much information as possible. Please state IF any defects. You could include reason for  selling, number of previous owners, if there had been colour changes or defects.',
 				required: true,
 			},
 			{

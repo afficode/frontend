@@ -3,7 +3,6 @@ import { Link, NavLink, useLocation, useSearchParams, useNavigate } from 'react-
 import { Approutes } from '../../constants/routes';
 import { Dropdown } from '../../ui';
 import { AffiLogo } from '../../assets/images';
-import { generateCategoryUrl } from '../../utils';
 import { useCategories } from '../../hooks';
 import useAuth from '../../context/UserContext';
 
@@ -21,8 +20,6 @@ import { MdMiscellaneousServices } from 'react-icons/md';
 import { FaCarSide, FaBuilding, FaRegHandshake } from 'react-icons/fa';
 import { useDebouncedCallback } from 'use-debounce';
 import { getSaves } from '../../hooks/useSaves';
-
-import { encodeProductId } from '../../utils/dataManipulations';
 
 const Navbar = () => {
 	const [nav, setNav] = useState(false);
@@ -62,7 +59,7 @@ const Navbar = () => {
 		});
 	}
 	const { pathname } = useLocation();
-	
+
 	const handleSearch = useDebouncedCallback((query) => {
 		if (query) {
 			setSearchParams({
@@ -639,10 +636,10 @@ const Navbar = () => {
 								<span className="border border-r-4 border-white h-[2rem]" />
 
 								<li className="">
-									<NavLink to={generateCategoryUrl('Deals')} tabIndex={0} className={listStyles}>
+									<Link to={Approutes.underConstruction} tabIndex={0} className={listStyles}>
 										DEALS
-									</NavLink>
-									<NavLink to={generateCategoryUrl('Deals')} className={mobileListStyles}>
+									</Link>
+									<NavLink to={Approutes.underConstruction} className={mobileListStyles}>
 										<FaRegHandshake size={25} />
 									</NavLink>
 									{/* {filteredCategories?.dealsCat && (
@@ -653,10 +650,10 @@ const Navbar = () => {
 								<span className="border border-r-4 border-white h-[2rem]" />
 
 								<li className="mr-4">
-									<NavLink to={generateCategoryUrl('Requests')} tabIndex={0} className={listStyles}>
+									<Link to={Approutes.underConstruction} tabIndex={0} className={listStyles}>
 										REQUESTS
-									</NavLink>
-									<NavLink to={generateCategoryUrl('Deals')} className={mobileListStyles}>
+									</Link>
+									<NavLink to={Approutes.underConstruction} className={mobileListStyles}>
 										<VscGitPullRequestGoToChanges size={25} />
 									</NavLink>
 									{/* {filteredCategories?.dealsCat && (
