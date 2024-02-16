@@ -19,6 +19,10 @@ const Button = ({ variant, size, loading, disabled, children, className, ...rest
 		size === 'full' ? 'w-full' : 'w-auto'
 	} bg-white text-black hover:text-primary shadow-xl`;
 
+	const greyStyles = `${size === 'small' ? 'py-[0.5rem] px-[1.5rem]' : 'py-[.65rem] px-[2.8rem]'} ${
+		size === 'full' ? 'w-full' : 'w-auto'
+	} bg-[#D9D9D9] text-black shadow-xl`;
+
 	return (
 		<button
 			disabled={disabled || loading}
@@ -31,6 +35,8 @@ const Button = ({ variant, size, loading, disabled, children, className, ...rest
 					? subtleStyles
 					: variant === 'plain'
 					? plainStyles
+					: variant === 'grey'
+					? greyStyles
 					: variant === 'outline'
 					? 'outline-btn'
 					: ''

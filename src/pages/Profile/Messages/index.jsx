@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { RedCar, Suzuki } from '../../../assets/images';
 import { useChats, useMessages } from '../../../hooks';
 import ChatWindow from './ChatWindow';
@@ -41,7 +41,6 @@ const Messages = () => {
 						>
 							<div className="w-full ">
 								<div className="flex w-full gap-2 ">
-									{/* ad.image[0].path ? ad.image[0].path : Suzuki */}
 									<img
 										src={RedCar}
 										alt={ad.image[0].filename}
@@ -51,11 +50,11 @@ const Messages = () => {
 										<h6 className="text-base font-medium">
 											{ad.user_a != user.id ? ad.user_a_name : ad.user_b_name}
 										</h6>
-										<h6 className="font-medium truncate ">{ad.title}</h6>
+										<h6 className="font-medium truncate capitalize">{ad.title}</h6>
 										<div className="flex items-center gap-1">
-											{ad.read_status !== 1 && <span className=" p-1  bg-primary rounded-full"></span>}
+											{ad.read_status !== 1 && <span className=" p-1  bg-primary rounded-full" />}
 											<p className="text-sm truncate">
-												<span className="italic ">{user.id === ad.sender ? 'You:' : ''}</span> {ad.last_message}
+												<span className="italic">{user.id === ad.sender ? 'You:' : ''}</span> {ad.last_message}
 											</p>
 										</div>
 									</div>

@@ -94,7 +94,7 @@ const ImageInput = (props) => {
 												);
 
 												if (isFileAlreadyAdded) {
-													alert('File already added!!');
+													// alert('File already added!!');
 													notify('This image is already added.', 'error');
 												} else {
 													newImgFiles.push(file);
