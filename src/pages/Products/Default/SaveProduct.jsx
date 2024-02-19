@@ -46,7 +46,7 @@ const SaveProduct = ({ ads_id, className }) => {
   });
 
   if (isLogin && savesId?.includes(parseInt(ads_id))) {
-    return (      
+    return (
       <BiSolidBookmarkAltMinus
         className={`text-secondary/80 hover:text-primary cursor-pointer ${className}`}
         onClick={() => {

@@ -32,3 +32,15 @@ export const useMyAds = () => {
 
 	return useQuery(['getUserAds'], getUserAds);
 };
+
+export const useFeedback = (endpoint) => {
+	const createFeedback = (feedback) => privateAxios.post(`${backendLink}ads/${endpoint}`, feedback).then(res => res?.data);
+	
+	return useMutation(['createFeedback'], createFeedback);
+}
+
+export const fetchFeedbacks = (ads_id) => {
+	const getFeedbacks = () => privateAxios.get(`ads/feedback/${ads_id}`);
+
+	return useQuery(["feedbacks", ads_id], getFeedbacks)
+}

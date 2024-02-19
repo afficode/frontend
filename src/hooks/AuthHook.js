@@ -30,9 +30,7 @@ export const LoginHook = async (values, setSubmitting) => {
 				socket.emit('setup', data.user.id, (response) => {
 					console.log(response.connected);
 				});
-				socket.on('connected', () => {
-					console.log(socket.id); // x8WIv7-mJelg7on_ALbx
-				});
+				
 			}
 		})
 		.catch(({ response }) => {
