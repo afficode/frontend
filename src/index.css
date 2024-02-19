@@ -98,7 +98,7 @@ select {
 	@apply w-full my-2 text-base text-black bg-white rounded-none focus:border-primary placeholder-black/40 input-md;
 }
 textarea {
-	@apply w-full my-2 text-base text-black bg-white rounded-none focus:border-primary placeholder-black/40;
+	@apply w-full p-2 my-2 text-base text-black bg-white rounded-none focus:border-primary placeholder-black/40;
 }
 
 .formLabel {
@@ -192,4 +192,23 @@ input[type='number']::-webkit-outer-spin-button {
 }
 .Toastify__toast-body {
 	padding: 0;
+}
+
+/* under construction page  */
+.under_construction {
+	position: relative;
+	background-image: url(assets/svgs/underConstruction.svg);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.under_construction::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.3);
 }

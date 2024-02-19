@@ -6,3 +6,5 @@ export { default as Modal } from './Modal';
 export { default as Notification } from './Notification';
 export { default as Sidebar} from './Sidebar';
 export { default as Drawer } from './Drawer';
+export { default as GrabIcon } from './GrabIcon';
+export { default as NegotiableIcon } from './NegotiationIcon';

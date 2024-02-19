@@ -18,7 +18,7 @@ const SaveProduct = ({ ads_id, className }) => {
   const { mutate } = saveAd();
   const [unSave, setUnSave] = useState(false);
   const { data, refetch, isLoading } = getSaves();
-  const { isLogin } = useAuth();
+  const { isLogin, user } = useAuth();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const notify = useNotify();
@@ -48,7 +48,7 @@ const SaveProduct = ({ ads_id, className }) => {
   if (isLogin && savesId?.includes(parseInt(ads_id))) {
     return (
       <BiSolidBookmarkAltMinus
-        className={`text-secondary/80 hover:text-primary ${className}`}
+        className={`text-secondary/80 hover:text-primary cursor-pointer ${className}`}
         onClick={() => {
           if (isLogin) {
             setUnSave(true);
@@ -63,7 +63,7 @@ const SaveProduct = ({ ads_id, className }) => {
 
   return (
     <BiSolidBookmarkAltPlus
-      className={`text-primary/80 hover:text-secondary ${className}`}
+      className={`text-primary/80 hover:text-secondary cursor-pointer ${className}`}
       onClick={() => {
         if (isLogin) {
           mutate(

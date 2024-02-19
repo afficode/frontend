@@ -14,4 +14,5 @@ export { default as NotificationInfo } from './notificationInfo.svg';
 export { default as NotificationCool } from './notificationCool.svg';
 export { default as Password } from './password.svg';
 export { default as PerformanceArrowUp } from './performanceArrowUp.svg';
+export { default as UnderConstruction } from './underConstruction.svg';
 export { default as UploadDoc } from './uploadDoc.svg';

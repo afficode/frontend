@@ -64,9 +64,10 @@ const Login = () => {
           "Welcome to Affi. \n\nYour world of endless possibilities",
           "success"
         );
-        // if (window.location.pathname === getRedirectLink()) {
-        //   return navigate(Approutes.welcome);
-        // }
+        console.log(window.location);
+        if (window.location === getRedirectLink()) {
+          return navigate(Approutes.welcome);
+        }
         return navigate(getRedirectLink() || Approutes.welcome, {
           replace: true,
         });
@@ -148,9 +149,9 @@ const Login = () => {
                           </span>{" "}
                         </>
                       ) : (
-                        <span className="text-lg w-full flex lg:text-2xl">
+                        <span className="flex w-full text-lg lg:text-2xl">
                           Login &nbsp;{" "}
-                          <MdLogin className="text-lg my-auto lg:text-2xl" />
+                          <MdLogin className="my-auto text-lg lg:text-2xl" />
                         </span>
                       )}
                     </FlowbiteButton>
@@ -158,7 +159,7 @@ const Login = () => {
                 </Form>
               )}
             </Formik>
-            <div className="w-full font-bold my-2 lg:my-8 hover:underline text-primary text-md lg:text-2xl text-center">
+            <div className="w-full my-2 font-bold text-center lg:my-8 hover:underline text-primary text-md lg:text-2xl">
               <Link to={Approutes.forgotPassword}>Forgot your Password?</Link>
             </div>
           </div>
@@ -172,21 +173,21 @@ const Login = () => {
 
             <Button className="mt-6 w-full px-4 py-[.7rem] text-white bg-[#0F8EEF] flex items-center hover:brightness-90">
               <img src={Facebook} alt="apple logo" className="mr-auto" />{" "}
-              <span className="text-center font-semibold w-full">
+              <span className="w-full font-semibold text-center">
                 Continue with Facebook
               </span>
             </Button>
 
             <Button className="mt-6 w-full px-4 py-[.7rem] text-white bg-black flex items-center hover:brightness-90">
               <img src={Apple} alt="apple logo" className="mr-auto" />{" "}
-              <span className="text-center font-semibold w-full">
+              <span className="w-full font-semibold text-center">
                 Continue with Apple
               </span>
             </Button>
 
             <Button className="mt-6 w-full px-4 py-[.7rem] border border-black text-black bg-white flex items-center hover:brightness-90">
               <img src={Google} alt="apple logo" className="mr-auto" />{" "}
-              <span className="text-center font-semibold w-full">
+              <span className="w-full font-semibold text-center">
                 Continue with Google
               </span>
             </Button>

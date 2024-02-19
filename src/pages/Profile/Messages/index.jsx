@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { RedCar, Suzuki } from '../../../assets/images';
-import { useChats } from '../../../hooks';
+import { useChats, useMessages } from '../../../hooks';
 import ChatWindow from './ChatWindow';
 import useAuth from '../../../context/UserContext';
 
@@ -11,9 +11,11 @@ const Messages = () => {
 
 	const [chatId, setChatId] = useState(null);
 
-	useEffect(() => {
-		setChatId(chatData?.chats[0].chat_id);
-	}, []);
+	// useEffect(() => {
+	// 	setChatId(chatData?.chats[0].chat_id);
+	// }, []);
+
+	const { data: messageData } = useMessages(chatId ? chatId : chatData?.chats[0].chat_id);
 
 	const sortedChats = chatData?.chats.sort((a, b) => {
 		return new Date(b.chat_updated_on) - new Date(a.chat_updated_on);
@@ -29,11 +31,15 @@ const Messages = () => {
 						<div
 							key={i}
 							className={`px-4 py-2 transition-all border-t-2 border-gray-200 cursor-pointer h-5rem hover:bg-primary/30 ${
-								ad.chat_id === chatId ? 'bg-primary/30' : ''
+								chatId === null && ad.chat_updated_on === sortedChats[0].chat_updated_on
+									? 'bg-primary/30'
+									: ad.chat_id === chatId
+									? 'bg-primary/30'
+									: ''
 							}`}
 							onClick={() => setChatId(ad.chat_id)}
 						>
-							<div className="w-full">
+							<div className="w-full ">
 								<div className="flex w-full gap-2 ">
 									<img
 										src={RedCar}
@@ -44,10 +50,13 @@ const Messages = () => {
 										<h6 className="text-base font-medium">
 											{ad.user_a != user.id ? ad.user_a_name : ad.user_b_name}
 										</h6>
-										<h6 className="font-medium truncate ">{ad.title}</h6>
-										<p className="text-sm truncate">
-											<span className="italic ">{user.id === ad.sender ? 'You:' : ''}</span> {ad.last_message}
-										</p>
+										<h6 className="font-medium truncate capitalize">{ad.title}</h6>
+										<div className="flex items-center gap-1">
+											{ad.read_status !== 1 && <span className=" p-1  bg-primary rounded-full" />}
+											<p className="text-sm truncate">
+												<span className="italic">{user.id === ad.sender ? 'You:' : ''}</span> {ad.last_message}
+											</p>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -56,7 +65,12 @@ const Messages = () => {
 				</aside>
 
 				<div className="flex-1 ">
-					<ChatWindow chat_id={chatId} chat_data={chatData} />
+					<ChatWindow
+						chat_id={chatId}
+						messageData={messageData}
+						chat_data={chatData}
+						title={sortedChats && sortedChats[0]?.title}
+					/>
 				</div>
 			</div>
 		</div>

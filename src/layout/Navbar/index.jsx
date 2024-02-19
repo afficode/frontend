@@ -1,42 +1,33 @@
-import { useEffect, useRef, useState } from "react";
-import {
-  Link,
-  NavLink,
-  useLocation,
-  useSearchParams,
-  useNavigate,
-} from "react-router-dom";
-import { Approutes } from "../../constants/routes";
-import { Dropdown } from "../../ui";
-import { AffiLogo } from "../../assets/images";
-import { generateCategoryUrl } from "../../utils";
-import { useCategories } from "../../hooks";
-import useAuth from "../../context/UserContext";
+import { useEffect, useRef, useState } from 'react';
+import { Link, NavLink, useLocation, useSearchParams, useNavigate } from 'react-router-dom';
+import { Approutes } from '../../constants/routes';
+import { Dropdown } from '../../ui';
+import { AffiLogo } from '../../assets/images';
+import { useCategories } from '../../hooks';
+import useAuth from '../../context/UserContext';
 
 // icons
-import { HiSearch, HiOutlineSpeakerphone } from "react-icons/hi";
-import { SlArrowRight } from "react-icons/sl";
-import { AiOutlineBell } from "react-icons/ai";
-import { BiEnvelope } from "react-icons/bi";
-import { GoBookmark } from "react-icons/go";
-import { IoMdClose } from "react-icons/io";
-import { VscGitPullRequestGoToChanges, VscMenu } from "react-icons/vsc";
-import { CgProfile } from "react-icons/cg";
-import { BsShop } from "react-icons/bs";
-import { MdMiscellaneousServices } from "react-icons/md";
-import { FaCarSide, FaBuilding, FaRegHandshake } from "react-icons/fa";
-import { useDebouncedCallback } from "use-debounce";
-import { getSaves } from "../../hooks/useSaves";
-
-import { encodeProductId } from "../../utils/dataManipulations";
+import { HiSearch, HiOutlineSpeakerphone } from 'react-icons/hi';
+import { SlArrowRight } from 'react-icons/sl';
+import { AiOutlineBell } from 'react-icons/ai';
+import { BiEnvelope } from 'react-icons/bi';
+import { GoBookmark } from 'react-icons/go';
+import { IoMdClose } from 'react-icons/io';
+import { VscGitPullRequestGoToChanges, VscMenu } from 'react-icons/vsc';
+import { CgProfile } from 'react-icons/cg';
+import { BsShop } from 'react-icons/bs';
+import { MdMiscellaneousServices } from 'react-icons/md';
+import { FaCarSide, FaBuilding, FaRegHandshake } from 'react-icons/fa';
+import { useDebouncedCallback } from 'use-debounce';
+import { getSaves } from '../../hooks/useSaves';
 
 const Navbar = () => {
-  const [nav, setNav] = useState(false);
-  const navigate = useNavigate();
-  const navRef = useRef();
-  let [searchParams, setSearchParams] = useSearchParams();
-  const { isLogin, user } = useAuth();
-  const { data: saves } = getSaves() || [];
+	const [nav, setNav] = useState(false);
+	const navigate = useNavigate();
+	const navRef = useRef();
+	let [searchParams, setSearchParams] = useSearchParams();
+	const { isLogin, user } = useAuth();
+	const { data: saves } = getSaves() || [];
 
   // fetch categories
   const { data } = useCategories();
@@ -52,37 +43,38 @@ const Navbar = () => {
     dealsCat: [],
   };
 
-  if (Array.isArray(data)) {
-    data?.forEach((item) => {
-      if (item.id >= 10 && item.id < 100) {
-        filteredCategories.allCat.push(item);
-      } else if (item.id >= 5000 && item.id < 5100) {
-        filteredCategories.vehicleCat.push(item);
-      } else if (item.id >= 5100 && item.id < 5200) {
-        filteredCategories.propertyCat.push(item);
-      } else if (item.id >= 5200 && item.id < 5300) {
-        filteredCategories.servicesCat.push(item);
-      } else if (item.id >= 6500 && item.id < 6600) {
-        filteredCategories.dealsCat.push(item);
-      }
-    });
-  }
-  const { pathname } = useLocation();
-  const handleSearch = useDebouncedCallback((query) => {
-    if (query) {
-      setSearchParams({
-        q: query,
-      });
-      if (!pathname.includes("product")) {
-        navigate(`${Approutes.product.initial}/?q=${query}`);
-      }
-    } else {
-      // delete the query from the params
-      setSearchParams({
-        q: "",
-      });
-    }
-  }, 500);
+	if (Array.isArray(data)) {
+		data?.forEach((item) => {
+			if (item.id >= 10 && item.id < 100) {
+				filteredCategories.allCat.push(item);
+			} else if (item.id >= 5000 && item.id < 5100) {
+				filteredCategories.vehicleCat.push(item);
+			} else if (item.id >= 5100 && item.id < 5200) {
+				filteredCategories.propertyCat.push(item);
+			} else if (item.id >= 5200 && item.id < 5300) {
+				filteredCategories.servicesCat.push(item);
+			} else if (item.id >= 6500 && item.id < 6600) {
+				filteredCategories.dealsCat.push(item);
+			}
+		});
+	}
+	const { pathname } = useLocation();
+
+	const handleSearch = useDebouncedCallback((query) => {
+		if (query) {
+			setSearchParams({
+				q: query,
+			});
+			if (!pathname !== '/product') {
+				navigate(`${Approutes.product.initial}/?q=${query}`);
+			}
+		} else {
+			// delete the query from the params
+			setSearchParams({
+				q: '',
+			});
+		}
+	}, 500);
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -111,20 +103,20 @@ const Navbar = () => {
               </NavLink>
             </div>
 
-            {/* <!-- Search input on desktop screen --> */}
-            <div className="items-center justify-between hidden lg:flex">
-              <div className="w-full px-10 mx-auto ">
-                <div className="relative ">
-                  <input
-                    title="Search for items here."
-                    type="text"
-                    className="w-full lg:w-[32rem] xl:w-[40rem] py-2 pl-4 pr-[12rem] text-black bg-white border border-transparent rounded-3xl  focus:border-secondary outline-none focus:ring focus:ring-opacity-10 focus:ring-secondary"
-                    placeholder="Searching for?....."
-                    defaultValue={searchParams.get("q")}
-                    onChange={(e) => {
-                      handleSearch(e.target.value);
-                    }}
-                  />
+						{/* <!-- Search input on desktop screen --> */}
+						<div className="items-center justify-between hidden lg:flex">
+							<div className="w-full px-10 mx-auto ">
+								<div className="relative ">
+									<input
+										title="Search for items here."
+										type="text"
+										className="w-full lg:w-[32rem] xl:w-[40rem] py-2 pl-4 pr-[12rem] text-black bg-white border border-transparent rounded-3xl  focus:border-secondary outline-none focus:ring focus:ring-opacity-10 focus:ring-secondary"
+										placeholder="Searching for?....."
+										defaultValue={searchParams.get('q')}
+										onChange={(e) => {
+											handleSearch(e.target.value);
+										}}
+									/>
 
                   <span className="absolute inset-y-0 right-0 flex items-center pr-3">
                     <span className="mr-10 border-l-4 border-l-primary">
@@ -139,33 +131,33 @@ const Navbar = () => {
               </div>
             </div>
 
-            {/* top nav items */}
-            <div className="flex items-center gap-2 lg:gap-3">
-              <Link to={Approutes.profile.saved}>
-                <div
-                  className="flex flex-col items-center text-white cursor-pointer max-md:hidden relative"
-                  title="Saved items"
-                >
-                  <GoBookmark size={25} />
-                  <span className="text-xs sm:text-sm">Saved</span>
-                  {isLogin && saves?.saves.length > 0 && (
-                    <span className="absolute top-[-7px] rounded-full px-1 bg-secondary/90 right-0 font-semibold text-sm text-black">
-                      {saves?.saves.length}
-                    </span>
-                  )}
-                </div>
-              </Link>
-              {isLogin && (
-                <Link to={Approutes.profile.notifications}>
-                  <div
-                    className="flex flex-col items-center text-white cursor-pointer "
-                    title="My Notifications"
-                  >
-                    <AiOutlineBell size={25} />
-                    <span className="text-xs sm:text-sm">Notifications</span>
-                  </div>
-                </Link>
-              )}
+						{/* top nav items */}
+						<div className="flex items-center gap-2 lg:gap-3">
+							<Link to={Approutes.profile.saved}>
+								<div
+									className="relative flex flex-col items-center text-white cursor-pointer max-md:hidden"
+									title="Saved items"
+								>
+									<GoBookmark size={25} />
+									<span className="text-xs sm:text-sm">Saved</span>
+									{isLogin && saves?.saves.length > 0 && (
+										<span className="absolute top-[-7px] rounded-full px-1 bg-secondary/90 right-0 font-semibold text-sm text-black">
+											{saves?.saves.length}
+										</span>
+									)}
+								</div>
+							</Link>
+							{isLogin && (
+								<Link to={Approutes.profile.notifications}>
+									<div
+										className="flex flex-col items-center text-white cursor-pointer "
+										title="My Notifications"
+									>
+										<AiOutlineBell size={25} />
+										<span className="text-xs sm:text-sm">Notifications</span>
+									</div>
+								</Link>
+							)}
 
               {/* post ad dropdown */}
               <div className="dropdown ">
@@ -381,6 +373,33 @@ const Navbar = () => {
                   >
                     <VscMenu size={28} />
                   </button>
+							{/* mobile categories/menu dropdown */}
+							{pathname === '/' ? (
+								<div className="dropdown dropdown-end">
+									<button className="flex flex-col gap-0 px-4 py-0 capitalize bg-white border-none max-sm:text-xs lg:hidden btn btn-sm text-primary hover:bg-white">
+										Categories
+									</button>
+									<ul
+										tabIndex={0}
+										className={`dropdown-content min-h-fit w-fit z-[10] px-4 py-6 bg-white shadow-md rounded-md`}
+									>
+										<h3 className="font-semibold max-lg:text-xl whitespace-nowrap">Categories</h3>
+										<ul className="flex flex-col menu max-h-full w-full z-[10] py-4 ">
+											{filteredCategories?.allCat?.map((category) => (
+												<NavLink to={`${Approutes.product.category}/${btoa(category.id)}`} key={category.id}>
+													<li className="text-lg capitalize max-sm:text-base lg:pr-12 hover:underline whitespace-nowrap">
+														{category.name}
+													</li>
+												</NavLink>
+											))}
+										</ul>
+									</ul>
+								</div>
+							) : (
+								<>
+									<button onClick={() => setNav(!nav)} className="ml-2 text-white cursor-pointer lg:hidden ">
+										<VscMenu size={28} />
+									</button>
 
                   <div
                     className={
@@ -549,19 +568,19 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* <!-- Mobile search input --> */}
-          <div className="flex items-center w-full mt-2 lg:hidden px-1">
-            <div className="relative w-full">
-              <input
-                title="Search for items here."
-                type="text"
-                className="w-full py-2 pl-4 pr-[12rem] text-black bg-white border border-transparent rounded-3xl  focus:border-secondary outline-none focus:ring focus:ring-opacity-10 focus:ring-secondary"
-                placeholder="Searching for?....."
-                defaultValue={searchParams.get("q")}
-                onChange={(e) => {
-                  handleSearch(e.target.value);
-                }}
-              />
+					{/* <!-- Mobile search input --> */}
+					<div className="flex items-center w-full px-1 mt-2 lg:hidden">
+						<div className="relative w-full">
+							<input
+								title="Search for items here."
+								type="text"
+								className="w-full py-2 pl-4 pr-[12rem] text-black bg-white border border-transparent rounded-3xl  focus:border-secondary outline-none focus:ring focus:ring-opacity-10 focus:ring-secondary"
+								placeholder="Searching for?....."
+								defaultValue={searchParams.get('q')}
+								onChange={(e) => {
+									handleSearch(e.target.value);
+								}}
+							/>
 
               <span className="absolute inset-y-0 right-0 flex items-center pr-3">
                 <span className="mr-10 border-l-4 border-l-primary">
@@ -581,7 +600,7 @@ const Navbar = () => {
               {pathname === "/" ? (
                 // dropdown for categories
                 <div className="dropdown ">
-                  <button className="flex flex-col gap-0 mr-16 text-sm capitalize bg-white border-none max-lg:hidden btn btn-sm hover:bg-white text-primary px-5 cat-btn">
+                  <button className="flex flex-col gap-0 px-5 mr-16 text-sm capitalize bg-white border-none max-lg:hidden btn btn-sm hover:bg-white text-primary cat-btn">
                     Categories
                   </button>
 
@@ -683,6 +702,69 @@ const Navbar = () => {
                         </div>
                       </NavLink>
                       {/* <NavLink to={'#'}>
+									<ul
+										tabIndex={0}
+										className={`dropdown-content transform -translate-x-[1%] min-h-fit w-fit  z-[10] px-4 py-6 bg-white shadow-md rounded-md`}
+									>
+										<h4 className="font-semibold whitespace-nowrap">Categories</h4>
+										<ul className="flex flex-col menu max-h-full w-full z-[10] py-4 ">
+											{filteredCategories?.allCat?.map((category) => (
+												<NavLink to={`${Approutes.product.category}/${btoa(category.id)}`} key={category.id}>
+													<li className="text-lg capitalize max-sm:text-base lg:pr-12 hover:underline whitespace-nowrap">
+														{category.name}
+													</li>
+												</NavLink>
+											))}
+										</ul>
+									</ul>
+								</div>
+							) : (
+								//dropdown for menu
+								<div className="dropdown">
+									<div tabIndex={0} className="mr-16 text-white cursor-pointer max-lg:hidden">
+										<VscMenu size={30} />
+									</div>
+									<ul
+										tabIndex={0}
+										className={`dropdown-content transform -translate-x-[5%] min-h-fit w-[20rem]  z-[10] p-4 bg-white shadow-md rounded-2xl`}
+									>
+										<ul className="flex flex-col gap-[0.4rem] menu max-h-full w-full z-[10] ">
+											<NavLink to={Approutes.home}>
+												<li className="text-lg capitalize max-sm:text-base lg:pr-12 hover:underline whitespace-nowrap">
+													HOME
+												</li>
+											</NavLink>
+											<NavLink to={Approutes.dashboard.initial}>
+												<div className="flex items-center hover:underline">
+													<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Dashboard</li>
+													<SlArrowRight size={20} className="ml-auto text-black " />
+												</div>
+											</NavLink>
+											<NavLink to={Approutes.profile.details}>
+												<div className="flex items-center hover:underline">
+													<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">My Details</li>
+													<SlArrowRight size={20} className="ml-auto text-black " />
+												</div>
+											</NavLink>
+											<NavLink to={Approutes.profile.messages}>
+												<div className="flex items-center hover:underline">
+													<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Messages</li>
+													<SlArrowRight size={20} className="ml-auto text-black " />
+												</div>
+											</NavLink>
+											<NavLink to={'#'}>
+												<div className="flex items-center hover:underline">
+													<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">My Shop</li>
+													<SlArrowRight size={20} className="ml-auto text-black " />
+												</div>
+											</NavLink>
+											<NavLink to={'#'}>
+												<div className="flex items-center hover:underline">
+													<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Grab</li>
+													<SlArrowRight size={20} className="ml-auto text-black " />
+												</div>
+											</NavLink>
+											{/* <NavLink to={'#'}>
 												<div className="flex items-center hover:underline">
 													<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">My Transactions</li>
 													<SlArrowRight size={20} className="ml-auto text-black " />
@@ -852,50 +934,44 @@ const Navbar = () => {
 
                 <span className="border border-r-4 border-white h-[2rem]" />
 
-                <li className="dropdown dropdown-end dropdown-hover">
-                  <NavLink
-                    to={generateCategoryUrl("Deals")}
+                <li className="">
+                  <Link
+                    to={Approutes.underConstruction}
                     tabIndex={0}
                     className={listStyles}
                   >
                     DEALS
-                  </NavLink>
+                  </Link>
                   <NavLink
-                    to={generateCategoryUrl("Deals")}
+                    to={Approutes.underConstruction}
                     className={mobileListStyles}
                   >
                     <FaRegHandshake size={25} />
                   </NavLink>
-                  {filteredCategories?.dealsCat && (
-                    <Dropdown
-                      category={"DEALS"}
-                      subCategories={filteredCategories?.dealsCat}
-                    />
-                  )}
+                  {/* {filteredCategories?.dealsCat && (
+										<Dropdown category={'DEALS'} subCategories={filteredCategories?.dealsCat} />
+									)} */}
                 </li>
 
                 <span className="border border-r-4 border-white h-[2rem]" />
 
-                <li className="dropdown dropdown-end dropdown-hover mr-4">
-                  <NavLink
-                    to={generateCategoryUrl("Requests")}
+                <li className="mr-4">
+                  <Link
+                    to={Approutes.underConstruction}
                     tabIndex={0}
                     className={listStyles}
                   >
                     REQUESTS
-                  </NavLink>
+                  </Link>
                   <NavLink
-                    to={generateCategoryUrl("Deals")}
+                    to={Approutes.underConstruction}
                     className={mobileListStyles}
                   >
                     <VscGitPullRequestGoToChanges size={25} />
                   </NavLink>
-                  {filteredCategories?.dealsCat && (
-                    <Dropdown
-                      category={"REQUESTS"}
-                      subCategories={filteredCategories?.dealsCat}
-                    />
-                  )}
+                  {/* {filteredCategories?.dealsCat && (
+										<Dropdown category={'REQUESTS'} subCategories={filteredCategories?.dealsCat} />
+									)} */}
                 </li>
               </ul>
             </div>
