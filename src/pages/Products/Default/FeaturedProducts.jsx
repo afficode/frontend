@@ -14,7 +14,6 @@ import { NegotiableIcon } from "../../../ui";
 import { GrabIcon } from "../../../ui";
 const FeaturedProducts = ({ product }) => {
   const { isLogin, user } = useAuth();
-  console.log(import.meta.env.VITE_TESTING);
   return (
     <>
       {product.map((ad, index) => (
