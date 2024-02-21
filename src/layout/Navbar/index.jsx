@@ -585,10 +585,12 @@ const Navbar = () => {
 							{/* bottom nav lists */}
 							<ul className="flex items-center justify-between w-full">
 								<li className={`${listStyles}`} title="Click to set up a shop">
-									SET UP A SHOP
+									<Link to={Approutes.underConstruction}>SET UP A SHOP</Link>
 								</li>
 								<li className={mobileListStyles} title="Click to set up a shop">
-									<BsShop size={25} />
+									<Link to={Approutes.underConstruction}>
+										<BsShop size={25} />
+									</Link>
 								</li>
 
 								<span className="border border-r-4 border-white h-[2rem]" />

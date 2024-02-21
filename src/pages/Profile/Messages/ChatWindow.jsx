@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { RedCar } from '../../../assets/images';
+import { RedCar, noimage } from '../../../assets/images';
 import Message from './Message';
 import MessageInput from './MessageInput';
 // import { io } from 'socket.io-client';
@@ -39,7 +39,13 @@ const ChatWindow = ({ chat_id, messageData, chat_data, title }) => {
 				<Link>
 					<div className="flex gap-2 ">
 						{/* data?.image ? data?.image[0].path :  */}
-						<img src={RedCar} alt={'/'} className="w-[3rem] h-[3rem]  object-fit rounded-full " />
+						<img
+							src={
+								data?.image[0].filename.startsWith('vehicles') ? noimage : data?.image[0].path || noimage
+							}
+							alt={'/'}
+							className="w-[3rem] h-[3rem]  object-fit rounded-full "
+						/>
 						<div className="py-2 ">
 							<h6 className="font-medium capitalize">{data?.title ? data.title : title}</h6>
 						</div>
