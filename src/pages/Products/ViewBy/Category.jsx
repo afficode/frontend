@@ -90,7 +90,7 @@ const Category = () => {
             <NotFound />
           </>
         )}
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2 ">
+        <div className="flex flex-wrap items-center justify-evenly gap-2 gap-y-4 ">
           {isLoading ? (
             <>
               {Array(8)

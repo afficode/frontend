@@ -60,52 +60,62 @@ const Login = () => {
         // 	position: 'top-center',
         // });
 
-				notify('Welcome to Affi. \n\nYour world of endless possibilities', 'success');
-				// if (window.location.pathname === getRedirectLink()) {
-				//   return navigate(Approutes.welcome);
-				// }
-				return navigate(getRedirectLink() || Approutes.welcome, {
-					replace: true,
-				});
-			} else {
-				// toast.error(submit.message);
-				notify(submit.message, 'error');
-			}
-			setIsLoading(false);
-		}, 3000);
-	};
-	return (
-		<div className="w-full ">
-			{isLoading ? (
-				<div className="mt-4 lg:mt-20">
-					<SpinnerSkeleton
-						heading={'You are been Logged In...'}
-						body={'Do you know we provide Affiliate Marketing. You can also open a shop with us 😊'}
-						type={'spin'}
-						color={'#2686CE'}
-						height={250}
-						width={250}
-					/>
-				</div>
-			) : (
-				<>
-					<div className="w-[90%] mx-auto">
-						{' '}
-						<h2 className="my-4 text-xl lg:text-4xl">Sign In</h2>
-						<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-							{(formik) => (
-								<Form>
-									<div className="form-control">
-										<Input
-											className={inputClass}
-											type="email"
-											name="email"
-											id="email"
-											placeholder="email@email.com"
-											// autoComplete="off"
-											{...formik.getFieldProps('email')}
-										/>
-									</div>
+        notify(
+          "Welcome to Affi. \n\nYour world of endless possibilities",
+          "success"
+        );
+        console.log(window.location);
+        if (window.location === getRedirectLink()) {
+          return navigate(Approutes.welcome);
+        }
+        return navigate(getRedirectLink() || Approutes.welcome, {
+          replace: true,
+        });
+      } else {
+        // toast.error(submit.message);
+        notify(submit.message, "error");
+      }
+      setIsLoading(false);
+    }, 3000);
+  };
+  return (
+    <div className="w-full ">
+      {isLoading ? (
+        <div className="mt-4 lg:mt-20">
+          <SpinnerSkeleton
+            heading={"You are been Logged In..."}
+            body={
+              "Do you know we provide Affiliate Marketing. You can also open a shop with us 😊"
+            }
+            type={"spin"}
+            color={"#2686CE"}
+            height={250}
+            width={250}
+          />
+        </div>
+      ) : (
+        <>
+          <div className="w-[90%] mx-auto">
+            {" "}
+            <h2 className="text-xl lg:text-4xl my-4">Sign In</h2>
+            <Formik
+              initialValues={initialValues}
+              validationSchema={validationSchema}
+              onSubmit={onSubmit}
+            >
+              {(formik) => (
+                <Form>
+                  <div className="form-control">
+                    <Input
+                      className={inputClass}
+                      type="email"
+                      name="email"
+                      id="email"
+                      placeholder="email@email.com"
+                      // autoComplete="off"
+                      {...formik.getFieldProps("email")}
+                    />
+                  </div>
 
                   <div className="form-control">
                     <Input
@@ -118,34 +128,41 @@ const Login = () => {
                     />
                   </div>
 
-									<div className=" form-control">
-										<FlowbiteButton
-											type="submit"
-											aria-disabled="true"
-											className={` text-white text-normal lg:text-lg border-0 bg-primary btn-md lg:btn-lg hover:bg-primary/80 ${
-												!formik.isValid || !formik.dirty ? 'cursor-not-allowed' : 'cursor-pointer'
-											}`}
-											disabled={!formik.isValid || !formik.dirty ? 'disabled' : ''}
-										>
-											{formik.isSubmitting ? (
-												<>
-													<Spinner color={'secondary'} /> &emsp;{' '}
-													<span className="my-auto text-xl">Submitting Data...</span>{' '}
-												</>
-											) : (
-												<span className="flex w-full text-lg lg:text-2xl">
-													Login &nbsp; <MdLogin className="my-auto text-lg lg:text-2xl" />
-												</span>
-											)}
-										</FlowbiteButton>
-									</div>
-								</Form>
-							)}
-						</Formik>
-						<div className="w-full my-2 font-bold text-center lg:my-8 hover:underline text-primary text-md lg:text-2xl">
-							<Link to={Approutes.forgotPassword}>Forgot your Password?</Link>
-						</div>
-					</div>
+                  <div className=" form-control">
+                    <FlowbiteButton
+                      type="submit"
+                      aria-disabled="true"
+                      className={` text-white text-normal lg:text-lg border-0 bg-primary btn-md lg:btn-lg hover:bg-primary/80 ${
+                        !formik.isValid || !formik.dirty
+                          ? "cursor-not-allowed"
+                          : "cursor-pointer"
+                      }`}
+                      disabled={
+                        !formik.isValid || !formik.dirty ? "disabled" : ""
+                      }
+                    >
+                      {formik.isSubmitting ? (
+                        <>
+                          <Spinner color={"secondary"} /> &emsp;{" "}
+                          <span className="my-auto text-xl">
+                            Submitting Data...
+                          </span>{" "}
+                        </>
+                      ) : (
+                        <span className="flex w-full text-lg lg:text-2xl">
+                          Login &nbsp;{" "}
+                          <MdLogin className="my-auto text-lg lg:text-2xl" />
+                        </span>
+                      )}
+                    </FlowbiteButton>
+                  </div>
+                </Form>
+              )}
+            </Formik>
+            <div className="w-full my-2 font-bold text-center lg:my-8 hover:underline text-primary text-md lg:text-2xl">
+              <Link to={Approutes.forgotPassword}>Forgot your Password?</Link>
+            </div>
+          </div>
 
           <div className="w-[80%] mx-auto my-4 lg:my-8 p-[0.1rem] bg-black"></div>
 
@@ -154,25 +171,31 @@ const Login = () => {
               Or Connect with:
             </p>
 
-						<Button className="mt-6 w-full px-4 py-[.7rem] text-white bg-[#0F8EEF] flex items-center hover:brightness-90">
-							<img src={Facebook} alt="apple logo" className="mr-auto" />{' '}
-							<span className="w-full font-semibold text-center">Continue with Facebook</span>
-						</Button>
+            <Button className="mt-6 w-full px-4 py-[.7rem] text-white bg-[#0F8EEF] flex items-center hover:brightness-90">
+              <img src={Facebook} alt="apple logo" className="mr-auto" />{" "}
+              <span className="w-full font-semibold text-center">
+                Continue with Facebook
+              </span>
+            </Button>
 
-						<Button className="mt-6 w-full px-4 py-[.7rem] text-white bg-black flex items-center hover:brightness-90">
-							<img src={Apple} alt="apple logo" className="mr-auto" />{' '}
-							<span className="w-full font-semibold text-center">Continue with Apple</span>
-						</Button>
+            <Button className="mt-6 w-full px-4 py-[.7rem] text-white bg-black flex items-center hover:brightness-90">
+              <img src={Apple} alt="apple logo" className="mr-auto" />{" "}
+              <span className="w-full font-semibold text-center">
+                Continue with Apple
+              </span>
+            </Button>
 
-						<Button className="mt-6 w-full px-4 py-[.7rem] border border-black text-black bg-white flex items-center hover:brightness-90">
-							<img src={Google} alt="apple logo" className="mr-auto" />{' '}
-							<span className="w-full font-semibold text-center">Continue with Google</span>
-						</Button>
-					</div>
-				</>
-			)}
-		</div>
-	);
+            <Button className="mt-6 w-full px-4 py-[.7rem] border border-black text-black bg-white flex items-center hover:brightness-90">
+              <img src={Google} alt="apple logo" className="mr-auto" />{" "}
+              <span className="w-full font-semibold text-center">
+                Continue with Google
+              </span>
+            </Button>
+          </div>
+        </>
+      )}
+    </div>
+  );
 };
 
 export default Login;
