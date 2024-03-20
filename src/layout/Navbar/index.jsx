@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation, useSearchParams, useNavigate } from 'react-router-dom';
 import { Approutes } from '../../constants/routes';
 import { Dropdown } from '../../ui';
-import { AffiLogo } from '../../assets/images';
+import { AffiLogo, BoonfuLogo } from '../../assets/images';
 import { useCategories } from '../../hooks';
 import useAuth from '../../context/UserContext';
 
@@ -99,7 +99,7 @@ const Navbar = () => {
 						{/* logo */}
 						<div className="flex items-center bg-white rounded-full p-[2px]">
 							<NavLink to={'/'}>
-								<img src={AffiLogo} className="w-9 h-9" alt="Boonfu.ng" />
+								<img src={BoonfuLogo} className="h-8" alt="Boonfu.ng" />
 							</NavLink>
 						</div>
 
