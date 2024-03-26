@@ -1,4 +1,3 @@
-
 export const Approutes = {
 	auth: {
 		initial: '/auth',
@@ -31,6 +30,15 @@ export const Approutes = {
 	aboutUs: '/about-us',
 	contactUs: '/contact-us',
 	forgotPassword: '/forgot-password',
+	grab: {
+		initial: '/grabber',
+		register: '/grabber/register',
+		home: '/grabber/home',
+		profile: '/grabber/profile',
+		dashboard: '/grabber/dashboard',
+		products: '/grabber/products',
+		settings: '/grabber/settings',
+	},
 	home: '/',
 	logout: '/logout',
 	playground: '/playground',

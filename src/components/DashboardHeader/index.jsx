@@ -5,15 +5,34 @@ import MobileSidebar from '../../layout/MobileSidebar';
 import { useState } from 'react';
 import { Approutes } from '../../constants';
 import { Link } from 'react-router-dom';
+import { Coin } from '../../assets/svgs';
+import { Button, Modal } from '../../ui';
 
 const DashboardHeader = () => {
 	const [showSidebar, setShowSidebar] = useState(false);
+	const [isOpen, setIsOpen] = useState(false);
 
 	return (
 		<div className="flex justify-between py-2 border-b border-black/30">
 			<h3>Dashboard</h3>
 
-			<div className="flex gap-2 sm:gap-4 items-center">
+			<div className="flex items-center gap-2 sm:gap-4">
+				<button className="flex items-center " onClick={() => setIsOpen(true)}>
+					<img src={Coin} alt="/" className="w-16" />
+					<b>10x</b>
+				</button>
+
+				<Modal isOpen={isOpen} setIsOpen={setIsOpen}>
+					<div className="space-y-4 text-center">
+						<h6>
+							You currently have <b>10x</b> token
+						</h6>
+						<Button variant={'secondary'} size={'small'}>
+							Buy more
+						</Button>
+					</div>
+				</Modal>
+
 				<Link to={Approutes.profile.messages}>
 					<div className="relative">
 						<BiEnvelope size={28} />
