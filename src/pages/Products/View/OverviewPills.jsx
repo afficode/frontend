@@ -18,7 +18,7 @@ const OverviewPills = ({ overview, ad }) => {
           <>
             {overview?.value
               .split(" ")
-              .map((val) => val[0].toUpperCase() + val.substring(1))
+              .map((val) => val[0].toUpperCase() +  val.substring(1))
               .join(" ")}
           </>
         ) : (
