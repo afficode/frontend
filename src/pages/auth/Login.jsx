@@ -64,7 +64,7 @@ const Login = () => {
           "Welcome to Affi. \n\nYour world of endless possibilities",
           "success"
         );
-        console.log(window.location);
+
         if (window.location === getRedirectLink()) {
           return navigate(Approutes.welcome);
         }

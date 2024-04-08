@@ -9,7 +9,6 @@ import { numberWithCommas } from "../../../utils/dataManipulations";
 import { formatDistance } from "date-fns";
 import SaveProduct from "./SaveProduct";
 import useAuth from "../../../context/UserContext";
-import { FaHandshake, FaHandshakeSlash } from "react-icons/fa6";
 import { NegotiableIcon } from "../../../ui";
 import { GrabIcon } from "../../../ui";
 const FeaturedProducts = ({ product }) => {
@@ -29,16 +28,18 @@ const FeaturedProducts = ({ product }) => {
                     src={img.path}
                     alt={img.filename}
                     key={index * 3}
-                    className="rounded-t-sm rounded-b-none "
+                    className="rounded-t-sm rounded-b-none h-full w-full "
                   />
                 ))}
               </Carousel>
             ) : (
-              <img
-                src={noimage}
-                alt="no image"
-                className="h-[120px] md:h-[230px] rounded-none"
-              />
+              <div className="h-[120px] md:h-[230px] rounded-none">
+                <img
+                  src={noimage}
+                  alt="no image"
+                  className="h-full w-full mx-auto rounded-none"
+                />
+              </div>
             )}
             {((isLogin && parseInt(ad?.owner) !== parseInt(user?.id)) ||
               !isLogin) && (
