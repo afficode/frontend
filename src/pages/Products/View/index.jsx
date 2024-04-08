@@ -243,6 +243,7 @@ const index = () => {
         <div className="flex flex-col items-start justify-start w-full gap-2 tracking-tighter lg:tracking-normal line-clamp-1">
           <h2 className="text-xl xl:2xl">Description</h2>
           <p className="bg-white p-4 min-h-[100px] text-justify text-lg border-t-4 border-t-primary whitespace-pre-line w-full">
+
             {result?.data?.description}
           </p>
         </div>
