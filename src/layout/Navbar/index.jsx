@@ -99,7 +99,7 @@ const Navbar = () => {
 						{/* logo */}
 						<div className="flex items-center bg-white rounded-full p-[2px]">
 							<NavLink to={'/'}>
-								<img src={BoonfuLogo} className="h-8" alt="Boonfu.ng" />
+								<img src={BoonfuLogo} className="w-[2.9rem]" alt="Boonfu.ng" />
 							</NavLink>
 						</div>
 
@@ -248,7 +248,7 @@ const Navbar = () => {
 														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">My Shop</li>
 													</div>
 												</NavLink>
-												<NavLink to={'#'}>
+												<NavLink to={Approutes.grab.initial}>
 													<div className="flex items-center hover:underline">
 														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Grab</li>
 													</div>
@@ -366,7 +366,7 @@ const Navbar = () => {
 														<SlArrowRight size={20} className="ml-auto text-black " />
 													</div>
 												</NavLink>
-												<NavLink to={'#'}>
+												<NavLink to={Approutes.grab.initial}>
 													<div className="flex items-center hover:underline">
 														<li className="text-base whitespace-nowrap ">Grab</li>
 														<SlArrowRight size={20} className="ml-auto text-black " />
@@ -521,7 +521,7 @@ const Navbar = () => {
 													<SlArrowRight size={20} className="ml-auto text-black " />
 												</div>
 											</NavLink>
-											<NavLink to={'#'}>
+											<NavLink to={Approutes.grab.initial}>
 												<div className="flex items-center hover:underline">
 													<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Grab</li>
 													<SlArrowRight size={20} className="ml-auto text-black " />

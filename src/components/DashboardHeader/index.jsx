@@ -5,7 +5,7 @@ import MobileSidebar from '../../layout/MobileSidebar';
 import { useState } from 'react';
 import { Approutes } from '../../constants';
 import { Link } from 'react-router-dom';
-import { Coin } from '../../assets/svgs';
+import { Coin } from '../../assets/images';
 import { Button, Modal } from '../../ui';
 
 const DashboardHeader = () => {
@@ -18,7 +18,7 @@ const DashboardHeader = () => {
 
 			<div className="flex items-center gap-2 sm:gap-4">
 				<button className="flex items-center " onClick={() => setIsOpen(true)}>
-					<img src={Coin} alt="/" className="w-16" />
+					<img src={Coin} alt="/" className="w-[1.8rem] mx-2" />
 					<b>10x</b>
 				</button>
 
@@ -27,6 +27,10 @@ const DashboardHeader = () => {
 						<h6>
 							You currently have <b>10x</b> token
 						</h6>
+						<div>
+							To buy more token, click the button below. <br />
+							<b> Note 1 token = 1$</b>
+						</div>
 						<Button variant={'secondary'} size={'small'}>
 							Buy more
 						</Button>

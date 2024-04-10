@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import { ScrollToTop, toSelectOptions } from '../../../utils';
 import { FacebookBlue, Instagram, Tiktok, Twitter, Whatsapp } from '../../../assets/svgs';
 import { Link } from 'react-router-dom';
+import { Approutes } from '../../../constants';
 
 const GrabRegister = () => {
 	const { data: states } = useStates();
@@ -278,7 +279,10 @@ const GrabRegister = () => {
 					<div className="py-8 space-y-4">
 						<Button variant={'primary'}>Create a Grabber Account in Seconds.</Button>
 						<div>
-							Already have a Grabber Account? <Link className="text-primary">Login Now</Link>
+							Already have a Grabber Account?{' '}
+							<Link to={Approutes.grab.profile} className="text-primary">
+								Login Now
+							</Link>
 						</div>
 					</div>
 				</form>

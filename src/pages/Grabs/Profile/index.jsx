@@ -13,13 +13,13 @@ import {
 import { ManSmiling, noimage } from '../../../assets/images';
 import { HiOutlineStar, HiStar } from 'react-icons/hi';
 import { Link } from 'react-router-dom';
+import { ScrollToTop } from '../../../utils';
+import GrabHeader from '../GrabHeader';
 
 const GrabProfile = () => {
 	return (
 		<div>
-			<div className="flex justify-between py-2 border-b border-black/30">
-				<h3 className="uppercase">GRABBER’S PROFILE</h3>
-			</div>
+			<GrabHeader text="GRABBER’S PROFILE" />
 			<Button
 				className={'flex items-center gap-1 text-primary ml-auto my-4'}
 				variant={'grey'}
@@ -128,6 +128,7 @@ const GrabProfile = () => {
 					</Button>
 				</div>
 			</div>
+			<ScrollToTop />
 		</div>
 	);
 };

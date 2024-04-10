@@ -4,7 +4,7 @@ import { Button } from '../../ui';
 
 const GrabSidebar = () => {
 	return (
-		<aside className="w-[15rem] h-[83vh]  bg-[#D9D9D9] rounded-[2.5rem] flex flex-col items-center text-center max-lg:hidden">
+		<aside className="w-[15rem] h-[83vh]  bg-[#D9D9D9] rounded-[2.5rem] flex flex-col items-center text-center max-lg:hidden ">
 			<nav className="flex flex-col justify-between flex-1 w-full px-4 my-12">
 				<ul className="flex flex-col gap-1 sidebar-list">
 					{navList.map((navItem) => (

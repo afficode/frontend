@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '../../../ui';
-import { Coin } from '../../../assets/svgs';
+import { Coin, GrabIcon, InspectionTick, New } from '../../../assets/svgs';
 import { MdArrowDropDown } from 'react-icons/md';
 import { BiDownArrow, BiSolidDownArrow } from 'react-icons/bi';
 import { NigFlag } from '../../../assets/images';
+import { GrabMobileSidebar } from '../../../layout';
+import { IoIosMenu } from 'react-icons/io';
 
 const GrabDashboard = () => {
+	const [showSidebar, setShowSidebar] = useState(false);
 	return (
-		<section>
+		<section className="w-full">
 			<div className="bg-primary ">
 				<div className="pt-2 pb-4 px-4 mb-4 text-white">
 					<button className="flex items-center mx-auto gap-2 ">
@@ -16,7 +19,12 @@ const GrabDashboard = () => {
 						<BiSolidDownArrow size={12} />
 					</button>
 
-					<h4>Hi, Akindele!</h4>
+					<div className="flex justify-between items-center">
+						<h4>Hi, Akindele!</h4>
+						<button onClick={() => setShowSidebar(!showSidebar)} className=" lg:hidden">
+							<IoIosMenu size={28} />
+						</button>
+					</div>
 				</div>
 
 				<div className="flex max-lg:flex-col justify-between divide-x-2 divide-white ">
@@ -101,7 +109,7 @@ const GrabDashboard = () => {
 			<div className="space-y-4 my-8">
 				<h4>Grab Activities Chart</h4>
 
-				<div className=" mt-4a overflow-x-auto border border-black/40 max-h-96 bg-white">
+				<div className=" mt-4 overflow-x-auto border border-black/40 max-h-96 bg-white">
 					<table className="table table-pin-rows ">
 						<thead className="text-sm font-medium border-none">
 							<tr className="bg-gray-200 text-black">
@@ -189,13 +197,44 @@ const GrabDashboard = () => {
 
 			{/* recent activities */}
 
-			<div>
+			<div className="flex flex-col space-y-2 w-fit my-6">
 				<h4>Recent Activities</h4>
 
-				<div className="bg-gray-200 p-4 rounded-lg">
-					<ul className="flex flex-col"></ul>
+				<div className="bg-gray-200 py-6 px-4 rounded-lg w-fit ">
+					<ul className="flex flex-col gap-4">
+						<li className="flex items-start gap-3">
+							<img src={GrabIcon} className="w-[2.5rem]" alt="" />
+							<div>
+								<p className="p-lg">5 Items grabbed</p>
+								<span className="text-sm font-light">06/06/2024</span>
+							</div>
+						</li>
+						<li className="flex items-start gap-3">
+							<img src={GrabIcon} className="w-[2.5rem]" alt="" />
+							<div>
+								<p className="p-lg">2 purchases from link</p>
+								<span className="text-sm font-light">07/06/2024</span>
+							</div>
+						</li>
+						<li className="flex items-start gap-3">
+							<img src={InspectionTick} className="w-[2.5rem]" alt="" />
+							<div>
+								<p className="p-lg">4 Inspections booked</p>
+								<span className="text-sm font-light">17/07/2024</span>
+							</div>
+						</li>
+						<li className="flex items-start gap-3">
+							<img src={New} className="w-[2.5rem]" alt="" />
+							<div>
+								<p className="p-lg">New listing available.</p>
+								<span className="text-sm font-light">17/07/2024</span>
+							</div>
+						</li>
+					</ul>
 				</div>
 			</div>
+
+			<GrabMobileSidebar sidebar={showSidebar} setSidebar={setShowSidebar} />
 		</section>
 	);
 };

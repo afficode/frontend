@@ -1,6 +1,8 @@
 export { default as AffiLogo } from './affiLogo.png';
-export { default as BoonfuLogo } from './boonfu.png';
+export { default as BoonfuLogo } from './boonfuLogo.png';
 export { default as Car } from './car.png';
+export { default as CarBlack } from './carBlack.png';
+export { default as Coin } from './coin2.png';
 export { default as Furniture } from './furniture.png';
 export { default as Gown } from './gown.png';
 export { default as HairDryer } from './hairDryer.png';
