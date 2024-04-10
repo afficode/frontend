@@ -68,7 +68,7 @@ const index = () => {
 					<div className="w-full my-2 ml-2">
 						<div className="flex items-center justify-between w-full my-2 font-bold uppercase text-md md:text-2xl xl:text-3xl">
 							<span className="">{result.data?.title}</span>
-							<span className=" flex items-center gap-2 lg:gap-8 my-auto mr-4 lg:mr-0">
+							<span className="flex items-center gap-2 my-auto mr-4  lg:gap-8 lg:mr-0">
 								<NegotiableIcon negotiable={result.data?.negotiable} />
 
 								{((isLogin && parseInt(result.data?.owner) !== parseInt(user?.id)) || !isLogin) && (
@@ -117,7 +117,6 @@ const index = () => {
 							) : (
 								<img src={noimage} alt="no image" className="rounded-sm " />
 							)}
-
 							<div className="absolute bottom-0 flex w-full h-10 py-2 pl-6 text-white rounded-none bg-black/50">
 								<span className="flex px-2 my-auto border-2 border-white">
 									<FaCamera className="mt-1 text-sm" />
@@ -127,7 +126,6 @@ const index = () => {
 						</div>
 					</div>
 				</main>
-
 				<aside className="w-full md:w-[40%] xl:w-[30%] border-2 border-gray-400 p-2 lg:p-4">
 					<h2 className="w-full text-lg font-bold md:text-xl 2xl:text-3xl">{result.data?.firstname}</h2>
 					<p className="text-lg">
@@ -208,16 +206,13 @@ const index = () => {
 					<ChatForm ad_id={result?.data?.id} owner={result?.data?.owner} active={result?.data?.active} />
 				</aside>
 			</section>
-
 			<section className="flex flex-col p-2 my-2 bg-gray-200 xl:p-6 xl:my-4">
 				<div className="flex flex-col items-start justify-start w-full gap-2 tracking-tighter lg:tracking-normal line-clamp-1">
 					<h2 className="text-xl xl:2xl">Description</h2>
-
-					<p className="bg-white p-4 min-h-[100px] text-justify text-lg border-t-4 border-t-primary whitespace-pre-line">
+					<p className="bg-white p-4 min-h-[100px] text-justify text-lg border-t-4 border-t-primary whitespace-pre-line w-full">
 						{result?.data?.description}
 					</p>
 				</div>
-
 				<div className="flex flex-col items-start justify-start w-full gap-2 my-2">
 					<h2 className="text-xl tracking-tighter lg:tracking-normal">Overview</h2>
 
@@ -228,7 +223,6 @@ const index = () => {
 					</div>
 				</div>
 			</section>
-
 			<ScrollToTop />
 		</section>
 	);

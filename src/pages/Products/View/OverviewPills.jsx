@@ -1,5 +1,3 @@
-import React from 'react';
-
 const OverviewPills = ({ overview, ad }) => {
 	return (
 		<div className="flex items-center justify-start p-2 text-black bg-white border border-l-4 border-l-primary ">
