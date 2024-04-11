@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getToken } from '../../utils';
+import { ScrollToTop, getToken } from '../../utils';
 import { backendLink } from '../../constants';
 // import { notifyError, notifySuccess, notifyInfo } from '../../ui';
 import { api } from '../../utils/axios';
@@ -65,6 +65,7 @@ const Logout = () => {
 				height={250}
 				width={250}
 			/>
+			<ScrollToTop />
 		</div>
 	);
 };

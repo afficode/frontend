@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { RedCar } from '../../../assets/images';
+import { RedCar, noimage } from '../../../assets/images';
 import Message from './Message';
 import MessageInput from './MessageInput';
 // import { io } from 'socket.io-client';
@@ -25,6 +25,8 @@ const ChatWindow = ({ chat_id, messageData, chat_data, title }) => {
 	// 		token: token,
 	// 	},
 	// });
+
+	// ref to scroll to latest message
 	const latestMessageRef = useRef(null);
 	useLayoutEffect(() => {
 		if (latestMessageRef.current) {
@@ -35,22 +37,25 @@ const ChatWindow = ({ chat_id, messageData, chat_data, title }) => {
 	return (
 		<div className="bg-primary min-w-[380px] sm:w-full h-[calc(100vh-15rem)] overflow-x-auto rounded-xl pt-1 pb-4 px-1 flex flex-col justify-between ">
 			{/* chat window header  */}
-			<div className="flex justify-between w-full px-1 py-1 bg-gray-100 sm:py-2 rounded-xl shadow-lg">
+			<div className="flex justify-between w-full px-1 py-1 bg-gray-100 shadow-lg sm:py-2 rounded-xl">
 				<Link>
 					<div className="flex gap-2 ">
-						{/* data?.image ? data?.image[0].path :  */}
-						<img src={RedCar} alt={'/'} className="w-[3rem] h-[3rem]  object-fit rounded-full " />
+						<img
+							src={
+								data?.image[0].filename.startsWith('vehicles') ? noimage : data?.image[0].path || noimage
+							}
+							alt={'/'}
+							className="w-[3rem] h-[3rem]  object-fit rounded-full "
+						/>
 						<div className="py-2 ">
 							<h6 className="font-medium capitalize">{data?.title ? data.title : title}</h6>
 						</div>
 					</div>
 				</Link>
-
-				<div></div>
 			</div>
 
 			{/* chat window */}
-			<div className="flex flex-col py-3 pr-3 overflow-y-auto scrollbar-thin scrollbar-track-white scrollbar-thumb-rounded-md scrollbar-thumb-secondary scrollbar-track-rounded-md overflow-x-hidden ">
+			<div className="flex flex-col py-3 pr-3 overflow-x-hidden overflow-y-auto scrollbar-thin scrollbar-track-white scrollbar-thumb-rounded-md scrollbar-thumb-secondary scrollbar-track-rounded-md ">
 				{messageData?.messages.map((message, i) => (
 					<div
 						key={i}
