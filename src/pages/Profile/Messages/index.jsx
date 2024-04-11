@@ -1,26 +1,25 @@
-import { useState, useMemo } from 'react';
-import { noimage } from '../../../assets/images';
+import { useState } from 'react';
+import { RedCar, Suzuki } from '../../../assets/images';
 import { useChats, useMessages } from '../../../hooks';
 import ChatWindow from './ChatWindow';
 import useAuth from '../../../context/UserContext';
 
 const Messages = () => {
-	// fetch chats
 	const { data: chatData, error, loading } = useChats();
 
 	const { user } = useAuth();
 
-	// id to fetch for a particular chat messages
 	const [chatId, setChatId] = useState(null);
 
-	// fetch messages
+	// useEffect(() => {
+	// 	setChatId(chatData?.chats[0].chat_id);
+	// }, []);
+
 	const { data: messageData } = useMessages(chatId ? chatId : chatData?.chats[0].chat_id);
 
-	const sortedChats = useMemo(() =>
-		chatData?.chats.sort((a, b) => {
-			return new Date(b.chat_updated_on) - new Date(a.chat_updated_on);
-		})
-	);
+	const sortedChats = chatData?.chats.sort((a, b) => {
+		return new Date(b.chat_updated_on) - new Date(a.chat_updated_on);
+	});
 
 	// console.log(sortedChats);
 
@@ -43,20 +42,17 @@ const Messages = () => {
 							<div className="w-full ">
 								<div className="flex w-full gap-2 ">
 									<img
-										src={
-											ad?.image[0].filename.startsWith('vehicles') ? noimage : ad?.image[0].path || noimage
-										}
-										alt={ad?.image[0].filename}
-										className="w-[5rem] h-[5.5rem] object-fit rounded-l-lg rounded-b-lg"
+										src={RedCar}
+										alt={ad.image[0].filename}
+										className="w-[5rem] h-full object-fit rounded-l-lg rounded-b-lg"
 									/>
-									{/* name, ad, last msg  */}
 									<div className="w-[calc(100%-5rem)] py-2">
 										<h6 className="text-base font-medium">
 											{ad.user_a != user.id ? ad.user_a_name : ad.user_b_name}
 										</h6>
-										<h6 className="font-medium capitalize truncate">{ad.title}</h6>
+										<h6 className="font-medium truncate capitalize">{ad.title}</h6>
 										<div className="flex items-center gap-1">
-											{ad.read_status === 1 && <span className="p-1 rounded-full bg-primary" />}
+											{ad.read_status !== 1 && <span className=" p-1  bg-primary rounded-full" />}
 											<p className="text-sm truncate">
 												<span className="italic">{user.id === ad.sender ? 'You:' : ''}</span> {ad.last_message}
 											</p>

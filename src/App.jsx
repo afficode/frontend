@@ -30,15 +30,6 @@ import {
 	UpdateAd,
 	PostDecision,
 	PostSuccess,
-	Grabs,
-	GrabRegister,
-	GrabHome,
-	GrabProfile,
-	GrabDashboard,
-	GrabProducts,
-	GrabSettings,
-	GrabProduct,
-	GrabFlyer,
 } from './pages';
 import { AppLayout, DashboardLayout } from './layout';
 import { Approutes } from './constants';
@@ -47,7 +38,6 @@ import { RequireAuth } from './components';
 import useAuth from './context/UserContext';
 import 'react-toastify/dist/ReactToastify.css';
 import UnderConstruction from './pages/UnderConstruction';
-import GrabLayout from './layout/GrabLayout';
 
 function App() {
 	const { isLogin } = useAuth();
@@ -56,7 +46,6 @@ function App() {
 			<Routes>
 				{/* Playground page for developers */}
 				<Route path={Approutes.playground} element={<Playground />} />
-				<Route path={Approutes.grab.flyer} element={<GrabFlyer />} />
 
 				{/* Use NavBar and Footer layout  */}
 				<Route element={<AppLayout />}>
@@ -91,16 +80,6 @@ function App() {
 							<Route path={Approutes.dashboard.privacyPolicy} element={<PrivacyPolicy />} />
 							<Route path={Approutes.dashboard.help} element={<Help />} />
 						</Route>
-						<Route element={<GrabLayout />}>
-							<Route path={Approutes.grab.profile} element={<GrabProfile />} />
-							<Route path={Approutes.grab.dashboard} element={<GrabDashboard />} />
-							<Route path={Approutes.grab.products} element={<GrabProducts />} />
-							<Route path={Approutes.grab.settings} element={<GrabSettings />} />
-						</Route>
-						<Route path={Approutes.grab.initial} element={<Grabs />} />
-						<Route path={Approutes.grab.register} element={<GrabRegister />} />
-						<Route path={Approutes.grab.home} element={<GrabHome />} />
-						<Route path={Approutes.grab.product} element={<GrabProduct />} />
 						<Route path={Approutes.welcome} element={<Welcome />} />
 						<Route path={`${Approutes.postDecision}`} element={<PostDecision />} />
 						<Route path={`${Approutes.postAd}/:categoryId`} element={<PostAd />} />

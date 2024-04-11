@@ -10,7 +10,6 @@ import * as Yup from 'yup';
 // import { Field, Form, Formik, useFormik } from "formik";
 import { ToggleSwitch } from 'flowbite-react';
 import { useNotify } from '../../hooks';
-import GrabSettings from '../Grabs/Settings';
 
 const Playground = () => {
 	const [loading, setLoading] = useState(false);
@@ -95,8 +94,6 @@ const Playground = () => {
 		<div className="w-full max-w-5xl mx-auto">
 			<div className="w-full text-black ">
 				<h1 className="my-4 text-center ">Playground</h1>
-
-				{/* <GrabSettings /> */}
 
 				<div className="p-6 space-y-12">
 					<div className="text-center py-6">

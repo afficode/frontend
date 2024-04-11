@@ -1,14 +1,5 @@
 export { default as AboutUs } from './AboutUs';
 export { default as ContactUs } from './ContactUs';
-export { default as GrabFlyer } from './Grabs/Flyer';
-export { default as Grabs } from './Grabs';
-export { default as GrabRegister } from './Grabs/Register';
-export { default as GrabHome } from './Grabs/Home';
-export { default as GrabProfile } from './Grabs/Profile';
-export { default as GrabProducts } from './Grabs/Products';
-export { default as GrabProduct } from './Grabs/Product';
-export { default as GrabDashboard } from './Grabs/Dashboard';
-export { default as GrabSettings } from './Grabs/Settings';
 export { default as Home } from './Home';
 export { default as Playground } from './Playground';
 export { default as PostAd } from './PostAd';
