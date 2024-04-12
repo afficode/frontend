@@ -64,10 +64,9 @@ const Login = () => {
           "Welcome to Affi. \n\nYour world of endless possibilities",
           "success"
         );
-
-        if (window.location === getRedirectLink()) {
-          return navigate(Approutes.welcome);
-        }
+        // if (window.location.pathname === getRedirectLink()) {
+        //   return navigate(Approutes.welcome);
+        // }
         return navigate(getRedirectLink() || Approutes.welcome, {
           replace: true,
         });
@@ -97,7 +96,7 @@ const Login = () => {
         <>
           <div className="w-[90%] mx-auto">
             {" "}
-            <h2 className="text-xl lg:text-4xl my-4">Sign In</h2>
+            <h2 className="my-4 text-xl lg:text-4xl">Sign In</h2>
             <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}

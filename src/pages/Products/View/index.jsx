@@ -25,8 +25,8 @@ import ContactAdmin from "./ContactAdmin";
 import { Alert } from "flowbite-react";
 import SaveProduct from "../Default/SaveProduct";
 import { getSaves } from "../../../hooks/useSaves";
-import { NegotiableIcon } from "../../../ui";
-import { useNotify } from "../../../hooks";
+import { FaHandshake, FaHandshakeSlash } from "react-icons/fa6";
+import { GrabIcon, NegotiableIcon } from "../../../ui";
 
 const index = () => {
   const { id } = useParams();
@@ -36,7 +36,7 @@ const index = () => {
   const { isLogin, user } = useAuth();
   const { data: result, isLoading } = fetchProduct(decodeProductId(id));
   const { data, isLoading: saveLoading } = getSaves();
-  const notify = useNotify();
+
   useEffect(() => {
     if (result?.data) {
       setItems(() => [
@@ -51,7 +51,7 @@ const index = () => {
     <ViewProduct />
   ) : (
     <section className="w-full p-2 lg:p-4">
-      {result?.data.active === "0" && user.id === result?.data.owner && (
+      {result?.data.active === "0" && (
         <div className="w-[90%] lg:w-[70%] my-3 mx-auto">
           <Alert
             additionalContent={<ContactAdmin />}
@@ -78,13 +78,17 @@ const index = () => {
           <div className="w-full my-2 ml-2">
             <div className="flex items-center justify-between w-full my-2 font-bold uppercase text-md md:text-2xl xl:text-3xl">
               <span className="">{result.data?.title}</span>
-              <span className=" flex items-center gap-2 lg:gap-8 my-auto mr-4 lg:mr-0">
+              <span className=" flex items-center gap-2 lg: gap-8 my-auto">
                 <NegotiableIcon negotiable={result.data?.negotiable} />
 
                 {((isLogin &&
                   parseInt(result.data?.owner) !== parseInt(user?.id)) ||
                   !isLogin) && (
                   <>
+                    <GrabIcon
+                      className="text-green-400 cursor-pointer tooltip tooltip-success tooltip-bottom"
+                      data-tip="Grab Product"
+                    />
                     <SaveProduct ads_id={decodeProductId(id)} />
                   </>
                 )}
@@ -157,49 +161,41 @@ const index = () => {
               }
             )}
           </p>
-
           <hr className="h-px my-2 bg-gray-700 border-black border-1" />
           <div className="w-full text-lg tracking-tighter lg:text-xl">
             <p className="w-full">Contact {result.data?.firstname} </p>
-            {result?.data?.contact_type.includes("phone") && (
-              <div className="flex items-center justify-between">
-                <p className="my-2 text-xl lg:text-2xl ">
-                  <span className="text-xl font-bold">
-                    {revealNumber
-                      ? result.data?.number
-                      : `${result.data?.number.substring(0, 3)}XXXXXXXX`}
-                  </span>
-                </p>
+            <div className="flex items-center justify-between">
+              <p className="my-2 text-xl lg:text-2xl ">
+                <span className="text-xl font-bold">
+                  {revealNumber
+                    ? result.data?.number
+                    : `${result.data?.number.substring(0, 3)}XXXXXXXX`}
+                </span>
+              </p>
 
-                <button
-                  className="font-bold text-black bg-white rounded-none btn btn-sm hover:bg-primary hover:text-white hover:border-0 hover:rounded-sm "
-                  onClick={() => {
-                    if (
-                      isLogin &&
-                      result?.data?.contact_type.includes("phone")
-                    ) {
-                      setRevealNumber(!revealNumber);
-                    } else {
-                      toast.warn("Please login to reveal phone number");
-                    }
-                  }}
-                >
-                  {!revealNumber ? (
-                    <span className="flex items-center justify-center">
-                      <IoEye /> &nbsp; Reveal{" "}
-                    </span>
-                  ) : (
-                    <span className="flex items-center justify-center">
-                      <IoEyeOff /> &nbsp; Hide
-                    </span>
-                  )}
-                </button>
-              </div>
-            )}
+              <button
+                className="font-bold text-black bg-white rounded-none btn btn-sm hover:bg-primary hover:text-white hover:border-0 hover:rounded-sm "
+                onClick={() => {
+                  isLogin && result?.data?.contact_type.includes("phone")
+                    ? setRevealNumber(!revealNumber)
+                    : toast.warn("Please login to reveal phone number");
+                }}
+              >
+                {!revealNumber ? (
+                  <span className="flex items-center justify-center">
+                    <IoEye /> &nbsp; Reveal{" "}
+                  </span>
+                ) : (
+                  <span className="flex items-center justify-center">
+                    <IoEyeOff /> &nbsp; Hide
+                  </span>
+                )}
+              </button>
+            </div>
             {result?.data?.contact_type.includes("email") && (
               <div className="flex items-center justify-between w-full">
                 <p
-                  className={`my-2 w-full overflow-x-scroll ${
+                  className={`my-2 w-full overflow-scroll ${
                     revealEmail ? "tooltip tooltip-primary" : ""
                   }`}
                   data-tip={revealEmail ? result.data?.email : ""}
@@ -242,8 +238,15 @@ const index = () => {
       <section className="flex flex-col p-2 my-2 bg-gray-200 xl:p-6 xl:my-4">
         <div className="flex flex-col items-start justify-start w-full gap-2 tracking-tighter lg:tracking-normal line-clamp-1">
           <h2 className="text-xl xl:2xl">Description</h2>
-          <p className="bg-white p-4 min-h-[100px] text-justify text-lg border-t-4 border-t-primary whitespace-pre-line w-full">
-            {result?.data?.description}
+          <p className="bg-white p-4 min-h-[100px] text-justify text-lg border-t-4 border-t-primary whitespace-pre-line">
+            {result?.data?.description} Lorem ipsum dolor sit amet consectetur
+            adipisicing elit. Odit, minus quibusdam. Soluta vero doloribus iste
+            sint sunt minima praesentium, asperiores, facere dolorum eaque
+            voluptate fugiat molestias? Provident harum nostrum omnis! Lorem
+            ipsum, dolor sit amet consectetur adipisicing elit. Dolorem veniam
+            molestiae, perspiciatis modi facilis labore soluta ipsa eveniet
+            mollitia, molestias quod rem non culpa hic laborum minima. Soluta,
+            ducimus vero?
           </p>
         </div>
         <div className="flex flex-col items-start justify-start w-full gap-2 my-2">
