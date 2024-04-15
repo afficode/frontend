@@ -9,10 +9,17 @@ import { FaSadTear } from "react-icons/fa";
 import { fetchFeedbacks } from "../../../hooks";
 import { clearLocalStorage, setRedirectLink } from "../../../utils";
 import { Approutes } from "../../../constants";
+import { useEffect, useState } from "react";
 
 const Feedback = ({ ad_id }) => {
+  const [enable, setEnable] = useState(false);
   const { isLogin } = useAuth();
-  const { data: response, isLoading, isError, error } = fetchFeedbacks(ad_id);
+  const {
+    data: response,
+    isLoading,
+    isError,
+    error,
+  } = fetchFeedbacks(ad_id, enable);
   if (isError) {
     // redirect the user to login page
     console.log(error?.response?.status);
@@ -22,6 +29,14 @@ const Feedback = ({ ad_id }) => {
       return window.location.assign(Approutes.auth.initial);
     }
   }
+
+  useEffect(() => {
+    if (isLogin) {
+      setEnable(true);
+    } else {
+      setEnable(false);
+    }
+  });
 
   return (
     <section className="w-full">

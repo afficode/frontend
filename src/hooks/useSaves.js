@@ -2,10 +2,12 @@ import { useQuery, useMutation } from "react-query";
 import { privateAxios } from "../utils";
 import { backendLink } from "../constants";
 
-export const getSaves =  () => {
+export const getSaves =  (enable = false ) => {
     const getSaved = () => privateAxios.get(`${backendLink}ads/saves`).then((res) => res?.data);
 
-    return useQuery("saved", getSaved);
+    return useQuery("saved", getSaved, {
+        enabled: enable
+    });
 }
 
 export const saveAd = () => {
