@@ -11,6 +11,7 @@ import { Dropdown } from "../../ui";
 import { AffiLogo } from "../../assets/images";
 import { useCategories } from "../../hooks";
 import useAuth from "../../context/UserContext";
+import useMessageContext from "../../context/MessageContext";
 
 // icons
 import { HiSearch, HiOutlineSpeakerphone } from "react-icons/hi";
@@ -29,11 +30,13 @@ import { getSaves } from "../../hooks/useSaves";
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
+  const [enable, setEnable] = useState(false);
   const navigate = useNavigate();
   const navRef = useRef();
   let [searchParams, setSearchParams] = useSearchParams();
   const { isLogin, user } = useAuth();
-  const { data: saves } = getSaves() || [];
+  const { data: saves, error } = getSaves(enable) || [];
+  const { unread } = useMessageContext();
 
   // fetch categories
   const { data } = useCategories();
@@ -48,6 +51,12 @@ const Navbar = () => {
     servicesCat: [],
     dealsCat: [],
   };
+  if (isLogin && error) {
+    const { status } = error?.response;
+    if (status === 401) {
+      return window.location.assign(Approutes.auth.initial);
+    }
+  }
 
   if (Array.isArray(data)) {
     data?.forEach((item) => {
@@ -88,13 +97,18 @@ const Navbar = () => {
         setNav(false);
       }
     };
+    if (isLogin) {
+      setEnable(true);
+    } else {
+      setEnable(false);
+    }
 
     document.addEventListener("mousedown", handleClickOutside);
 
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [setNav]);
+  }, [setNav, isLogin]);
 
   return (
     <header className="fixed top-0 z-50 w-full bg-primary">
@@ -215,9 +229,15 @@ const Navbar = () => {
                 <>
                   <Link to={Approutes.profile.messages}>
                     <div
-                      className="flex flex-col items-center text-white cursor-pointer max-md:hidden"
+                      className="flex flex-col items-center text-white cursor-pointer max-md:hidden relative"
                       title="My messages"
                     >
+                      {" "}
+                      {isLogin && unread > 0 && (
+                        <span className="absolute top-[-5px] rounded-full px-1 bg-secondary/90 right-[7px] font-semibold text-sm text-black">
+                          {unread}
+                        </span>
+                      )}
                       <BiEnvelope size={25} />
                       <span className="text-xs sm:text-sm whitespace-nowrap">
                         Messages

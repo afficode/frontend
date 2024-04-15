@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { backendLink } from '../constants';
 import { api, privateAxios } from '../utils/axios';
-import { socket } from '../utils/socket';
 import { useMutation } from 'react-query';
 
 export const RegistrationHook = async (values, setSubmitting, endpoint) => {
@@ -26,11 +25,6 @@ export const LoginHook = async (values, setSubmitting) => {
 		.then(({ data }) => {
 			if (data.success) {
 				userUpdate = data;
-
-				socket.emit('setup', data.user.id, (response) => {
-					console.log(response.connected);
-				});
-				
 			}
 		})
 		.catch(({ response }) => {

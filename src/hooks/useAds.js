@@ -39,8 +39,10 @@ export const useFeedback = (endpoint) => {
 	return useMutation(['createFeedback'], createFeedback);
 }
 
-export const fetchFeedbacks = (ads_id) => {
+export const fetchFeedbacks = (ads_id, enable = false) => {
 	const getFeedbacks = () => privateAxios.get(`ads/feedback/${ads_id}`);
 
-	return useQuery(["feedbacks", ads_id], getFeedbacks)
+	return useQuery(["feedbacks", ads_id], getFeedbacks, {
+		enabled: enable
+	})
 }
