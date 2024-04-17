@@ -3,7 +3,6 @@ import { noimage } from '../../../assets/images';
 import { useChats, useMessages } from '../../../hooks';
 import ChatWindow from './ChatWindow';
 import useAuth from '../../../context/UserContext';
-import { socket } from '../../../utils/socket';
 
 const Messages = () => {
 	// fetch chats
@@ -22,19 +21,8 @@ const Messages = () => {
 			return new Date(b.chat_updated_on) - new Date(a.chat_updated_on);
 		})
 	);
-	// console.log(sortedChats);
-	//Socket io integration
-	const [messages, setMessages] = useState([]);
 
-	socket.on(
-		'message',
-		(message) => {
-			setMessages([...messages, message]);
-		},
-		(acknowledgement) => {
-			console.log(acknowledgement);
-		}
-	);
+	// console.log(sortedChats);
 
 	return (
 		<div className="max-w-[1224px] my-6 mx-auto px-2 overflow-x-auto scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-400">

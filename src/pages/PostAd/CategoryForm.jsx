@@ -68,6 +68,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { encodeProductId } from '../../utils/dataManipulations';
 
 const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
+	const [stateId, setStateId] = useState(null);
+	const [selectedCarMake, setSelectedCarMake] = useState(null);
 	const [selectedHealthCategory, setSelectedHealthCategory] = useState(null);
 	const [selectedFashionCategory, setSelectedFashionCategory] = useState(null);
 	const [selectedSoftwareCategory, setSelectedSoftwareCategory] = useState(null);
@@ -82,6 +84,8 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 	const [selectedPropertyCategory, setSelectedPropertyCategory] = useState(null);
 	const [selectedServicesCategory, setSelectedServicesCategory] = useState(null);
 	const [selectedTradesmanCategory, setSelectedTradesmanCategory] = useState(null);
+
+	// console.log(selectedVehicleCategory);
 
 	// if other option is selected
 	const [otherMake, setOtherMake] = useState(false);
@@ -103,13 +107,11 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 	const [otherScent, setOtherScent] = useState(false);
 	const [otherFurnitureFor, setOtherFurnitureFor] = useState(false);
 
-	const [formValues, setFormValues] = useState({ state_id: '', make: '' });
-
 	const { data: cat } = useCategories();
 	const filteredCat = cat?.filter((item) => item.id >= 50 && item.id <= 63);
 	const { data: subCat } = useSubCategories(categoryId);
 	const { data: states } = useStates();
-	const { data: lga } = useLga(formValues.state_id);
+	const { data: lga } = useLga(stateId);
 
 	const categoriesOptions = toSelectOptions(filteredCat, 'category', 'Choose from list');
 	const subCategoriesOptions = toSelectOptions(subCat, 'subcategory', 'Choose from list');
@@ -121,7 +123,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 	// vehicle category
 	const carMakeOptions = toSelectOptions(carMake, 'carMake', 'Select your car make');
 	const carModelOptions = toSelectOptions(
-		carModels(formValues.make),
+		carModels(selectedCarMake),
 		'carModel',
 		'Select your car model'
 	);
@@ -3867,99 +3869,162 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			validationSchema={validationSchema[categoryName]}
 		>
 			{(formik) => {
+				// console.log(formik.handleReset);
 				useEffect(() => {
-					setFormValues({
-						state_id: formik.values.state_id,
-						make: formik.values.make,
-					});
+					setStateId(() => formik.values.state_id);
+				}, [formik.values.state_id]);
+				useEffect(() => {
+					setSelectedCarMake(() => formik.values.make);
+				}, [formik.values.make]);
+				if (pathname === '/post-ad/50') {
+					useEffect(() => {
+						setSelectedVehicleCategory(() => formik.values.category);
+					}, [formik.values.category]);
+				} else if (pathname === '/post-ad/51') {
+					useEffect(() => {
+						setSelectedPropertyCategory(() => formik.values.category);
+					}, [formik.values.category]);
+				} else if (pathname === '/post-ad/52') {
+					useEffect(() => {
+						setSelectedServicesCategory(() => formik.values.category);
+					}, [formik.values.category]);
+				} else if (pathname === '/post-ad/53') {
+					useEffect(() => {
+						setSelectedAgricultureCategory(() => formik.values.category);
+					}, [formik.values.category]);
+				} else if (pathname === '/post-ad/54') {
+					useEffect(() => {
+						setSelectedElectronicsCategory(() => formik.values.category);
+					}, [formik.values.category]);
+				} else if (pathname === '/post-ad/56') {
+					useEffect(() => {
+						setSelectedHealthCategory(() => formik.values.category);
+					}, [formik.values.category]);
+				} else if (pathname === '/post-ad/55') {
+					useEffect(() => {
+						setSelectedFashionCategory(() => formik.values.category);
+					}, [formik.values.category]);
+				} else if (pathname === '/post-ad/57') {
+					useEffect(() => {
+						setSelectedHomeCategory(() => formik.values.category);
+					}, [formik.values.category]);
+				} else if (pathname === '/post-ad/58') {
+					useEffect(() => {
+						setSelectedTradesmanCategory(() => formik.values.category);
+					}, [formik.values.category]);
+				} else if (pathname === '/post-ad/59') {
+					useEffect(() => {
+						setSelectedSoftwareCategory(() => formik.values.category);
+					}, [formik.values.category]);
+				} else if (pathname === '/post-ad/60') {
+					useEffect(() => {
+						setSelectedPetCategory(() => formik.values.category);
+					}, [formik.values.category]);
+				} else if (pathname === '/post-ad/61') {
+					useEffect(() => {
+						setSelectedBabiesCategory(() => formik.values.category);
+					}, [formik.values.category]);
+				} else if (pathname === '/post-ad/62') {
+					useEffect(() => {
+						setSelectedSportsCategory(() => formik.values.category);
+					}, [formik.values.category]);
+				} else if (pathname === '/post-ad/63') {
+					useEffect(() => {
+						setSelectedMotorbikeCategory(() => formik.values.category);
+					}, [formik.values.category]);
+				}
 
+				// check if other option is selected
+				useEffect(() => {
 					if (formik.values.make === 'other') {
 						setOtherMake(true);
 					}
+				}, [formik.values.make]);
+				useEffect(() => {
 					if (formik.values.brand === 'other') {
 						setOtherBrand(true);
 					}
+				}, [formik.values.brand]);
+				useEffect(() => {
 					if (formik.values.type === 'other') {
 						setOtherType(true);
 					}
+				}, [formik.values.type]);
+				useEffect(() => {
 					if (formik.values.material === 'other') {
 						setOtherMaterial(true);
 					}
+				}, [formik.values.material]);
+				useEffect(() => {
 					if (formik.values.size === 'other') {
 						setOtherSize(true);
 					}
+				}, [formik.values.size]);
+				useEffect(() => {
 					if (formik.values.formulation === 'other') {
 						setOtherFormulation(true);
 					}
+				}, [formik.values.formulation]);
+				useEffect(() => {
 					if (formik.values.breed === 'other') {
 						setOtherBreed(true);
 					}
+				}, [formik.values.breed]);
+				useEffect(() => {
 					if (formik.values.platform === 'other') {
 						setOtherPlatform(true);
 					}
+				}, [formik.values.platform]);
+				useEffect(() => {
 					if (formik.values.format === 'other') {
 						setOtherFormat(true);
 					}
+				}, [formik.values.format]);
+				useEffect(() => {
 					if (formik.values.game_genre === 'other') {
 						setOtherGenre(true);
 					}
+				}, [formik.values.game_genre]);
+				useEffect(() => {
 					if (formik.values.color === 'other') {
 						setOtherColor(true);
 					}
+				}, [formik.values.color]);
+				useEffect(() => {
 					if (formik.values.expertise === 'other') {
 						setOtherExpertise(true);
 					}
+				}, [formik.values.expertise]);
+				useEffect(() => {
 					if (formik.values.room_bathroom === 'other') {
 						setOtherRoom(true);
 					}
+				}, [formik.values.room_bathroom]);
+				useEffect(() => {
 					if (formik.values.property_use === 'other') {
 						setOtherUse(true);
 					}
+				}, [formik.values.property_use]);
+				useEffect(() => {
 					if (formik.values.ad_condition === 'other') {
 						setOtherCondition(true);
 					}
+				}, [formik.values.ad_condition]);
+				useEffect(() => {
 					if (formik.values.processor === 'other') {
 						setOtherProcessor(true);
 					}
+				}, [formik.values.processor]);
+				useEffect(() => {
 					if (formik.values.scent_type === 'other') {
 						setOtherScent(true);
 					}
+				}, [formik.values.scent_type]);
+				useEffect(() => {
 					if (formik.values.furniture_for === 'other') {
 						setOtherFurnitureFor(true);
 					}
-				}, [formik.values]);
-
-				useEffect(() => {
-					if (pathname === '/post-ad/50') {
-						setSelectedVehicleCategory(() => formik.values.category);
-					} else if (pathname === '/post-ad/51') {
-						setSelectedPropertyCategory(() => formik.values.category);
-					} else if (pathname === '/post-ad/52') {
-						setSelectedServicesCategory(() => formik.values.category);
-					} else if (pathname === '/post-ad/53') {
-						setSelectedAgricultureCategory(() => formik.values.category);
-					} else if (pathname === '/post-ad/54') {
-						setSelectedElectronicsCategory(() => formik.values.category);
-					} else if (pathname === '/post-ad/56') {
-						setSelectedHealthCategory(() => formik.values.category);
-					} else if (pathname === '/post-ad/55') {
-						setSelectedFashionCategory(() => formik.values.category);
-					} else if (pathname === '/post-ad/57') {
-						setSelectedHomeCategory(() => formik.values.category);
-					} else if (pathname === '/post-ad/58') {
-						setSelectedTradesmanCategory(() => formik.values.category);
-					} else if (pathname === '/post-ad/59') {
-						setSelectedSoftwareCategory(() => formik.values.category);
-					} else if (pathname === '/post-ad/60') {
-						setSelectedPetCategory(() => formik.values.category);
-					} else if (pathname === '/post-ad/61') {
-						setSelectedBabiesCategory(() => formik.values.category);
-					} else if (pathname === '/post-ad/62') {
-						setSelectedSportsCategory(() => formik.values.category);
-					} else if (pathname === '/post-ad/63') {
-						setSelectedMotorbikeCategory(() => formik.values.category);
-					}
-				}, [formik.values.category]);
+				}, [formik.values.furniture_for]);
 
 				return (
 					<Form>
@@ -3982,12 +4047,3 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 };
 
 export default CategoryForm;
-
-// const vehicles = [];
-
-// const agriculture = [];
-
-// const categoryField = {
-// 	vehicles,
-// 	argriculture,
-// };
