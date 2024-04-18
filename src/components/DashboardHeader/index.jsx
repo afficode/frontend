@@ -7,10 +7,14 @@ import { Approutes } from '../../constants';
 import { Link } from 'react-router-dom';
 import { Coin } from '../../assets/images';
 import { Button, Modal } from '../../ui';
+import useMessageContext from '../../context/MessageContext';
+import useAuth from '../../context/UserContext';
 
 const DashboardHeader = () => {
 	const [showSidebar, setShowSidebar] = useState(false);
 	const [isOpen, setIsOpen] = useState(false);
+	const { unread } = useMessageContext();
+	const { isLogin } = useAuth();
 
 	return (
 		<div className="flex justify-between py-2 border-b border-black/30">
@@ -40,9 +44,11 @@ const DashboardHeader = () => {
 				<Link to={Approutes.profile.messages}>
 					<div className="relative">
 						<BiEnvelope size={28} />
-						<span className="py-[.5] px-1 bg-primary text-white text-center text-xs font-medium rounded-full absolute right-[-10%] top-0">
-							4
-						</span>
+						{isLogin && unread > 0 && (
+							<span className="py-[.5] px-1 bg-primary text-white text-center text-xs font-medium rounded-full absolute right-[-10%] top-0">
+								{unread}
+							</span>
+						)}
 					</div>
 				</Link>
 
