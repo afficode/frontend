@@ -2,7 +2,7 @@ import { BoonfuLogo, CarBlack } from '../../../assets/images';
 import { ArrowDown, Location, Web } from '../../../assets/svgs';
 import { Link } from 'react-router-dom';
 import { Button } from '../../../ui';
-import { useCallback, useRef } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { toPng } from 'html-to-image';
 import { ScrollToTop } from '../../../utils';
 import { useNotify } from '../../../hooks';
@@ -10,23 +10,37 @@ import { useNotify } from '../../../hooks';
 const GrabFlyer = () => {
 	const contentRef = useRef(null);
 	const notify = useNotify();
+	const [isLoading, setIsLoading] = useState(false);
 
 	const handlePrint = useCallback(() => {
+		setIsLoading(true);
+
 		if (contentRef.current === null) {
 			return;
 		}
+		notify(
+			"Note: Mozilla Firefox browser doesn't generate flyer well. Please use Chromium browsers like Edge, Chrome, Brave etc.",
+			'Info',
+			{ timeout: 4000 }
+		);
 
-		toPng(contentRef.current, { cacheBust: true })
-			.then((dataUrl) => {
-				const link = document.createElement('a');
-				link.download = 'my-image-name.png';
-				link.href = dataUrl;
-				link.click();
-			})
-			.catch((err) => {
-				console.log(err);
-				notify('An error occured while trying to print', 'error');
-			});
+		const timeout = setTimeout(() => {
+			toPng(contentRef.current, { cacheBust: true })
+				.then((dataUrl) => {
+					const link = document.createElement('a');
+					link.download = 'my-image-name.png';
+					link.href = dataUrl;
+					link.click();
+					setIsLoading(false);
+				})
+				.catch((err) => {
+					console.log(err);
+					notify('An error occured while trying to print', 'error');
+					setIsLoading(false);
+				});
+		}, 4000);
+
+		return () => clearTimeout(timeout);
 	}, [contentRef]);
 
 	return (
@@ -102,7 +116,7 @@ const GrabFlyer = () => {
 			</div>
 
 			<div className="w-full mt-12 text-center">
-				<Button variant={'primary'} onClick={handlePrint}>
+				<Button variant={'primary'} onClick={handlePrint} disabled={isLoading}>
 					Print
 				</Button>
 			</div>
