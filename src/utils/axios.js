@@ -48,13 +48,13 @@ privateAxios.interceptors.response.use(
 				return axios(originalRequest);
 			} catch (error) {
 				setRedirectLink(window.location.pathname);
-				return window.location.assign(Approutes.auth.initial)
-				return Promise.reject(error);
+				return window.location.assign(Approutes.auth.initial);
+				// return Promise.reject(error);
 			}
 		}
-		console.log("Axios", error)
-		return window.location.assign(Approutes.auth.initial)
-		//return Promise.reject(error);
+		console.log('Axios', error);
+		// return window.location.assign(Approutes.auth.initial);
+		return Promise.reject(error);
 	}
 );
 
