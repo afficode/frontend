@@ -6,9 +6,10 @@ import { useState } from 'react';
 import { Approutes } from '../../constants';
 import { Link } from 'react-router-dom';
 import { Coin } from '../../assets/images';
-import { Button, Modal } from '../../ui';
+import { Modal } from '../../ui';
 import useMessageContext from '../../context/MessageContext';
 import useAuth from '../../context/UserContext';
+import TokenPurchase from '../Token';
 
 const DashboardHeader = () => {
 	const [showSidebar, setShowSidebar] = useState(false);
@@ -27,18 +28,7 @@ const DashboardHeader = () => {
 				</button>
 
 				<Modal isOpen={isOpen} setIsOpen={setIsOpen}>
-					<div className="space-y-4 text-center">
-						<h6>
-							You currently have <b>10x</b> token
-						</h6>
-						<div>
-							To buy more token, click the button below. <br />
-							<b> Note 1 token = 1$</b>
-						</div>
-						<Button variant={'secondary'} size={'small'}>
-							Buy more
-						</Button>
-					</div>
+					<TokenPurchase />
 				</Modal>
 
 				<Link to={Approutes.profile.messages}>

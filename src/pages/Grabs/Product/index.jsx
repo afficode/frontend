@@ -238,7 +238,7 @@ const GrabProduct = () => {
 			</div>
 
 			<div className="flex gap-6 my-8 max-sm:flex-col">
-				<Link to={Approutes.grab.flyer} className="flex-1">
+				<Link to={Approutes.grab.flyer} target="_blank" className="flex-1">
 					<Button className={'bg-[#047F73] text-white px-8 py-[.75rem] w-full  font-semibold text-xl'}>
 						Generate Post Now
 					</Button>
