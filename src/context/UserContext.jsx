@@ -5,6 +5,7 @@ import { getReducerInitialState } from '../utils';
 const UserContext = createContext(initialState);
 
 export const UserProvider = ({ children }) => {
+	//checks the local storage for the initial state
 	var defaultState;
 	if (getReducerInitialState() !== null) {
 		defaultState = getReducerInitialState();

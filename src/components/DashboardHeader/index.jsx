@@ -10,12 +10,14 @@ import { Modal } from '../../ui';
 import useMessageContext from '../../context/MessageContext';
 import useAuth from '../../context/UserContext';
 import TokenPurchase from '../Token';
+import useTokenContext from '../../context/TokenContext';
 
 const DashboardHeader = () => {
 	const [showSidebar, setShowSidebar] = useState(false);
 	const [isOpen, setIsOpen] = useState(false);
 	const { unread } = useMessageContext();
 	const { isLogin } = useAuth();
+	const { token } = useTokenContext();
 
 	return (
 		<div className="flex justify-between py-2 border-b border-black/30">
@@ -24,7 +26,7 @@ const DashboardHeader = () => {
 			<div className="flex items-center gap-2 sm:gap-4">
 				<button className="flex items-center " onClick={() => setIsOpen(true)}>
 					<img src={Coin} alt="/" className="w-[1.8rem] mx-2" />
-					<b>10x</b>
+					<b>{token && token}</b>
 				</button>
 
 				<Modal isOpen={isOpen} setIsOpen={setIsOpen}>
