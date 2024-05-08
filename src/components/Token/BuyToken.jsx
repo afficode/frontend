@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Button, InputGroup } from '../../ui';
 import { privateAxios } from '../../utils';
+import { Approutes, frontendLink } from '../../constants';
+
 
 const BuyToken = () => {
 	const [formData, setFormData] = useState({
@@ -23,6 +25,7 @@ const BuyToken = () => {
 				...formData,
 				amount: parseInt(formData.amount),
 			});
+
 			const data = res?.data;
 			window.location.replace(data.url);
 		} catch (error) {
