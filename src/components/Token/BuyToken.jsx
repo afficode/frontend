@@ -3,6 +3,7 @@ import { Button, InputGroup } from '../../ui';
 import { privateAxios } from '../../utils';
 import { Approutes, frontendLink } from '../../constants';
 
+
 const BuyToken = () => {
 	const [formData, setFormData] = useState({
 		amount: '',
@@ -12,7 +13,7 @@ const BuyToken = () => {
 		const { name, value } = e.target;
 		setFormData({
 			...formData,
-			[name]: parseInt(value),
+			[name]: value,
 		});
 	};
 
@@ -20,7 +21,11 @@ const BuyToken = () => {
 		e.preventDefault();
 
 		try {
-			const res = await privateAxios.post('/token/purchase', formData);
+			const res = await privateAxios.post('/token/purchase', {
+				...formData,
+				amount: parseInt(formData.amount),
+			});
+
 			const data = res?.data;
 			window.location.replace(data.url);
 		} catch (error) {

@@ -1,17 +1,24 @@
 import React, { useEffect } from 'react';
 import { privateAxios, toMoney } from '../../utils';
 import { Button } from '../../ui';
-import { backendLink } from '../../constants';
+import useTokenContext from '../../context/TokenContext';
 
 const TokenInfo = ({ setStage }) => {
+	const { token, updateToken } = useTokenContext();
+	console.log(token);
+
+
 	useEffect(() => {
 		fetchData();
 	}, []);
 
 	const fetchData = async () => {
 		try {
-			const res = await privateAxios.get(`${backendLink}token/total_coin`);
-			console.log(res.data);
+
+			const res = await privateAxios.get('/token/total_coin');
+			const data = res?.data;
+			updateToken(data.coin.token);
+
 		} catch (error) {
 			console.log(error);
 		}
@@ -20,7 +27,7 @@ const TokenInfo = ({ setStage }) => {
 	return (
 		<div className="space-y-4 text-center">
 			<h4>
-				You currently have <b>10x</b> token
+				You currently have <b>{token}</b> token
 			</h4>
 			<h6>
 				To buy more token, click the button below. <br />
