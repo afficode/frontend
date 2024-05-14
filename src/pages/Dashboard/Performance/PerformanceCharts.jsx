@@ -5,7 +5,10 @@ import { Link } from 'react-router-dom';
 import { Approutes } from '../../../constants';
 import { encodeProductId } from '../../../utils/dataManipulations';
 import { FaEdit, FaTrash } from 'react-icons/fa';
-import { MdEditNote } from 'react-icons/md';
+// import { MdEditNote } from 'react-icons/md';
+import { deleteImages, privateAxios } from '../../../utils';
+import { useNotify } from '../../../hooks';
+import { useQueryClient } from 'react-query';
 
 const PerformanceCharts = ({ adsData }) => {
 	const [chartData, setChartData] = useState([
@@ -39,6 +42,8 @@ const PerformanceCharts = ({ adsData }) => {
 			account_interaction: 170,
 		},
 	]);
+
+	const queryClient = useQueryClient();
 
 	const barColors = ['#2686CE', '#047F73', '#EBBA16', '#B50444', '#FFB6B6', '#da4848', '#3929ca'];
 
@@ -88,6 +93,34 @@ const PerformanceCharts = ({ adsData }) => {
 		],
 	};
 
+	const notify = useNotify();
+
+	const handleDelete = (id, images = []) => {
+		// console.log(id);
+		privateAxios
+			.delete(`/ads/${id}`)
+			.then(async (res) => {
+				// console.log(res);
+				try {
+					if (images?.length > 0) {
+						const filteredImages = images.map((image) => {
+							return image.filename.slice(0, image.filename.lastIndexOf('.'));
+						});
+
+						for (let i = 0; i < filteredImages.length; i++) {
+							await deleteImages(filteredImages[i]);
+						}
+					}
+				} catch (error) {
+					console.log(error);
+				}
+				queryClient.invalidateQueries({ queryKey: ['getUserAds'] });
+				notify(res?.data.message, 'success');
+			})
+
+			.catch((err) => console.log(err));
+	};
+
 	return (
 		<div className="flex flex-col gap-6 my-6">
 			{/* priducts table  */}
@@ -95,7 +128,7 @@ const PerformanceCharts = ({ adsData }) => {
 				<h4>Products Activities Chart</h4>
 				<p>Monitor this chart regularly to make informed decisions</p>
 
-				<div className=" mt-4 overflow-x-auto border border-black/40 h-96 bg-white">
+				<div className="mt-4 overflow-x-auto bg-white border border-black/40 h-96">
 					<table className="table table-pin-rows ">
 						<thead className="text-sm font-medium text-white ">
 							<tr className="bg-primary">
@@ -128,7 +161,7 @@ const PerformanceCharts = ({ adsData }) => {
 											<td className="text-center text-primary">[ {ad.views} ]</td>
 											<td className="text-center text-primary">[ {ad.chats} ]</td>
 											<td className="text-center text-primary">[ 0 ]</td>
-											<td className="text-center text-gray-600 flex gap-x-2 justify-center">
+											<td className="flex justify-center text-center text-gray-600 gap-x-2">
 												<span className="hover:text-primary ">
 													<Link to={`${Approutes.updateAd}/${ad.id}`} target="_blank" rel="noopener noreferrer">
 														<FaEdit />
@@ -136,9 +169,7 @@ const PerformanceCharts = ({ adsData }) => {
 												</span>{' '}
 												|
 												<span className="text-red-600 ">
-													<Link to={`${Approutes.updateAd}/${ad.id}`} target="_blank" rel="noopener noreferrer">
-														<FaTrash />
-													</Link>
+													<FaTrash className="cursor-pointer" onClick={() => handleDelete(ad?.id, ad?.images)} />
 												</span>
 											</td>
 										</tr>

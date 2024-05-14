@@ -5,7 +5,6 @@ import useTokenContext from '../../context/TokenContext';
 
 const TokenInfo = ({ setStage }) => {
 	const { token, updateToken } = useTokenContext();
-	console.log(token);
 
 	useEffect(() => {
 		fetchData();
