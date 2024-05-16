@@ -25,7 +25,6 @@ const BuyToken = () => {
 				...formData,
 				amount: parseInt(formData.amount),
 			});
-
 			const data = res?.data;
 			window.location.replace(data.url);
 		} catch (error) {

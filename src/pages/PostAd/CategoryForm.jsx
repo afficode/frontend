@@ -11,7 +11,7 @@ import {
 	useNotify,
 	useCategories,
 } from '../../hooks';
-import { deleteImages, toOptions, toSelectOptions, uploadImage } from '../../utils';
+import { deleteImages, priceToToken, toOptions, toSelectOptions, uploadImage } from '../../utils';
 import {
 	agricultureTypes,
 	babiesBrands,
@@ -66,6 +66,7 @@ import {
 } from '../../constants';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { encodeProductId } from '../../utils/dataManipulations';
+import useTokenContext from '../../context/TokenContext';
 
 const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 	const [selectedHealthCategory, setSelectedHealthCategory] = useState(null);
@@ -491,7 +492,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				],
 			},
 			{
-				control: 'input',
+				control: 'price',
 				label: 'Price',
 				name: 'price',
 				type: 'number',
@@ -803,7 +804,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				placeholder: 'Select date available',
 			},
 			{
-				control: 'input',
+				control: 'price',
 				label: 'Price',
 				name: 'price',
 				type: 'number',
@@ -1020,7 +1021,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				],
 			},
 			{
-				control: 'input',
+				control: 'price',
 				label: 'Price',
 				name: 'price',
 				type: 'number',
@@ -1161,7 +1162,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				placeholder: 'Enter colour',
 			},
 			{
-				control: 'input',
+				control: 'price',
 				label: 'Price',
 				name: 'price',
 				type: 'number',
@@ -1449,7 +1450,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			},
 
 			{
-				control: 'input',
+				control: 'price',
 				label: 'Price',
 				name: 'price',
 				type: 'number',
@@ -1653,7 +1654,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				],
 			},
 			{
-				control: 'input',
+				control: 'price',
 				label: 'Price',
 				name: 'price',
 				type: 'number',
@@ -1856,7 +1857,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				required: true,
 			},
 			{
-				control: 'input',
+				control: 'price',
 				label: 'Price',
 				name: 'price',
 				type: 'number',
@@ -2034,7 +2035,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				placeholder: 'Enter colour',
 			},
 			{
-				control: 'input',
+				control: 'price',
 				label: 'Price',
 				name: 'price',
 				type: 'number',
@@ -2221,7 +2222,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				],
 			},
 			{
-				control: 'input',
+				control: 'price',
 				label: 'Price',
 				name: 'price',
 				type: 'number',
@@ -2398,7 +2399,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				],
 			},
 			{
-				control: 'input',
+				control: 'price',
 				label: 'Price',
 				name: 'price',
 				type: 'number',
@@ -2560,7 +2561,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			},
 
 			{
-				control: 'input',
+				control: 'price',
 				label: 'Price',
 				name: 'price',
 				type: 'number',
@@ -2568,7 +2569,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				required: true,
 			},
 			['6002', '6003'].includes(selectedPetCategory) && {
-				control: 'input',
+				control: 'price',
 				label: 'Bulk price',
 				name: 'bulk_price',
 				type: 'number',
@@ -2744,7 +2745,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				options: babiesSizeOptions,
 			},
 			{
-				control: 'input',
+				control: 'price',
 				label: 'Price',
 				name: 'price',
 				type: 'number',
@@ -2752,7 +2753,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				required: true,
 			},
 			{
-				control: 'input',
+				control: 'price',
 				label: 'Bulk Price',
 				name: 'bulk_price',
 				type: 'number',
@@ -2909,7 +2910,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				],
 			},
 			{
-				control: 'input',
+				control: 'price',
 				label: 'Price',
 				name: 'price',
 				type: 'number',
@@ -3111,7 +3112,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			// 	placeholder: '1200cc',
 			// },
 			{
-				control: 'input',
+				control: 'price',
 				label: 'Price',
 				name: 'price',
 				type: 'number',
@@ -3365,7 +3366,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				placeholder: 'example; broken legs, rusted handles etc.',
 			},
 			{
-				control: 'input',
+				control: 'price',
 				label: 'Price',
 				name: 'price',
 				type: 'number',
@@ -3858,6 +3859,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 	};
 
 	const { pathname } = useLocation();
+	const { token } = useTokenContext();
 
 	return (
 		<Formik
@@ -3867,6 +3869,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			validationSchema={validationSchema[categoryName]}
 		>
 			{(formik) => {
+				let adToken = priceToToken(formik.values.price);
 				useEffect(() => {
 					setFormValues({
 						state_id: formik.values.state_id,
@@ -3970,6 +3973,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 							loading={formik.isSubmitting}
 							variant="primary"
 							size="full"
+							disabled={token < adToken}
 							className={'mt-10 text-lg font-bold rounded-md'}
 						>
 							Post My Ad
