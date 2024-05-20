@@ -3,6 +3,7 @@ import { Button, InputGroup } from '../../ui';
 import { privateAxios } from '../../utils';
 import { Approutes, frontendLink } from '../../constants';
 
+
 const BuyToken = () => {
 	const [formData, setFormData] = useState({
 		amount: '',
