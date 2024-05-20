@@ -14,14 +14,29 @@ const PriceInput = (props) => {
 	const { values } = useFormikContext();
 	const [priceFocus, setPriceFocus] = useState(false);
 	const { token, updateToken } = useTokenContext();
+	const [prevToken, setPrevToken] = useState(0);
 
 	useEffect(() => {
+		console.log(prevToken, '  ', priceToToken(values.price));
+
 		if (values.price != '' && values.price != null && values.price != undefined) {
-			updateToken(token - priceToToken(values.price));
+			if (prevToken > priceToToken(values.price)) {
+				updateToken(token - priceToToken(values.price));
+				setPrevToken(priceToToken(values.price));
+			} else if (prevToken < priceToToken(values.price)) {
+				updateToken(token + priceToToken(values.price));
+				setPrevToken(priceToToken(values.price));
+			}
 		} else {
 			updateToken(token);
 		}
 	}, [values.price]);
+
+	// const handleChange = (e) => {
+	// 	console.log(e.target.value);
+
+	// 	console.log(values.price);
+	// };
 
 	return (
 		<div className={className ? '' : 'formControlClass'}>

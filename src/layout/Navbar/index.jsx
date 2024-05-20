@@ -3,7 +3,7 @@ import { Link, NavLink, useLocation, useSearchParams, useNavigate } from 'react-
 import { Approutes } from '../../constants/routes';
 import { Dropdown } from '../../ui';
 import { BoonfuLogo } from '../../assets/images';
-import { useCategories } from '../../hooks';
+import { useCategories, useStates } from '../../hooks';
 import useAuth from '../../context/UserContext';
 import useMessageContext from '../../context/MessageContext';
 
@@ -21,6 +21,7 @@ import { MdMiscellaneousServices } from 'react-icons/md';
 import { FaCarSide, FaBuilding, FaRegHandshake } from 'react-icons/fa';
 import { useDebouncedCallback } from 'use-debounce';
 import { getSaves } from '../../hooks/useSaves';
+import { toSelectOptions } from '../../utils';
 
 const Navbar = () => {
 	const [nav, setNav] = useState(false);
@@ -69,21 +70,30 @@ const Navbar = () => {
 	}
 	const { pathname } = useLocation();
 
-	const handleSearch = useDebouncedCallback((query) => {
-		if (query) {
+	const handleSearch = useDebouncedCallback((query, stateId) => {
+		// console.log(stateId);
+		if (query || stateId) {
 			setSearchParams({
-				q: query,
+				q: query || '',
+				state_id: stateId || '',
 			});
 			if (!pathname !== '/product') {
-				navigate(`${Approutes.product.initial}/?q=${query}`);
+				navigate(`${Approutes.product.initial}/?q=${query}&state_id=${stateId}`);
 			}
 		} else {
 			// delete the query from the params
 			setSearchParams({
 				q: '',
+				state_id: '',
 			});
 		}
 	}, 500);
+
+	const { data: states } = useStates();
+	// console.log(states);
+	const statesOptions = toSelectOptions(states, 'states', 'All');
+
+	// console.log(statesOptions)
 
 	useEffect(() => {
 		const handleClickOutside = (e) => {
@@ -120,27 +130,49 @@ const Navbar = () => {
 						{/* <!-- Search input on desktop screen --> */}
 						<div className="items-center justify-between hidden lg:flex">
 							<div className="w-full px-10 mx-auto ">
-								<div className="relative ">
+								<div className="relative">
 									<input
 										title="Search for items here."
 										type="text"
 										className="w-full lg:w-[32rem] xl:w-[40rem] py-2 pl-4 pr-[12rem] text-black bg-white border border-transparent rounded-3xl  focus:border-secondary outline-none focus:ring focus:ring-opacity-10 focus:ring-secondary"
 										placeholder="Searching for?....."
-										defaultValue={searchParams.get('q')}
+										defaultValue={searchParams.get('q') || ''}
 										onChange={(e) => {
-											handleSearch(e.target.value);
+											const query = e.target.value;
+											const stateId = searchParams.get('state_id') || '';
+											handleSearch(query, stateId);
 										}}
 									/>
 
-									<span className="absolute inset-y-0 right-0 flex items-center pr-3">
-										<span className="mr-10 border-l-4 border-l-primary">
-											<span className="ml-4 text-sm lg:text-base">Nigeria</span>
-										</span>
+									<div className="absolute inset-y-0 right-0 flex items-center pr-3">
+										<div className=" border-l-4 border-l-primary">
+											<select
+												type="select"
+												className="text-xs w-[10rem] h-6 border-transparent outline-none focus:border-none focus:ring focus:ring-transparent"
+												defaultValue={searchParams.get('state_id') || ''}
+												// onSelect={(e) => {
+												// 	const query = searchParams.get('q');
+												// 	const stateId = e.target.value;
+												// 	handleSearch(query, stateId);
+												// }}
+												onChange={(e) => {
+													const query = searchParams.get('q') || '';
+													const stateId = e.target.value;
+													handleSearch(query, stateId);
+												}}
+											>
+												{statesOptions.map((option) => (
+													<option value={option.value} key={option.value}>
+														{option.key}
+													</option>
+												))}
+											</select>
+										</div>
 
-										<span className="bg-primary p-[0.4rem] rounded-xl">
+										<button className="bg-primary p-[0.4rem] rounded-xl">
 											<HiSearch size={23} className="text-white" />
-										</span>
-									</span>
+										</button>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -451,7 +483,7 @@ const Navbar = () => {
 
 					{/* <!-- Mobile search input --> */}
 					<div className="flex items-center w-full px-1 mt-2 lg:hidden">
-						<div className="relative w-full">
+						<form className="relative w-full">
 							<input
 								title="Search for items here."
 								type="text"
@@ -462,22 +494,32 @@ const Navbar = () => {
 									handleSearch(e.target.value);
 								}}
 							/>
+							<div className="absolute inset-y-0 right-0 flex items-center pr-3">
+								<div className=" border-l-4 border-l-primary">
+									<select
+										type="select"
+										className="text-xs w-[10rem] h-6 border-transparent outline-none focus:border-none focus:ring focus:ring-transparent"
+										defaultValue={searchParams.get('stateId')}
+										onChange={(e) => setStateId(e.target.value)}
+									>
+										{statesOptions.map((option) => (
+											<option value={option.value} key={option.value}>
+												{option.key}
+											</option>
+										))}
+									</select>
+								</div>
 
-							<span className="absolute inset-y-0 right-0 flex items-center pr-3">
-								<span className="mr-10 border-l-4 border-l-primary">
-									<span className="ml-4 text-sm">Nigeria</span>
-								</span>
-
-								<span className="bg-primary p-[0.4rem] rounded-xl">
+								<button className="bg-primary p-[0.4rem] rounded-xl">
 									<HiSearch size={23} className="text-white" />
-								</span>
-							</span>
-						</div>
+								</button>
+							</div>
+						</form>
 					</div>
 
 					{/* bottom nav  */}
 					<div className="mt-2 border-y-2 border-y-white ">
-						<div className="max-w-[1380px] mx-auto px-2 relative flex items-center justify-between w-full  whitespace-nowrap  ">
+						<div className="max-w-[1380px] mx-auto px-2 relative flex items-center justify-between w-full  whitespace-nowrap">
 							{pathname === '/' ? (
 								// dropdown for categories
 								<div className="dropdown ">
