@@ -34,7 +34,7 @@ const Products = () => {
 	const { isLoading, error, data } = useProduct({
 		page: searchParams.get('page'),
 		q: searchParams.get('q') || null,
-		state_id: searchParams.get('state_id'),
+		state_id: searchParams.get('state_id') || null,
 	});
 	// const [saved, setSaved] = useState([]);
 	const { data: savedAds, isLoading: saveLoading } = getSaves();
@@ -42,11 +42,13 @@ const Products = () => {
 	useEffect(() => {
 		// when product change, we update the featured product immediately
 		if (data) {
-			// console.log(data);
+			console.log(data);
 			setProduct((prev) => ({ ...data }));
 			if (data.ads.length > 0) {
 				// TODO: Revisit this after discussing with Mr Lawal the criteria for the Featured.
 				setFeatured((prev) => [...data?.ads?.slice(0, 8)]);
+			} else {
+				setFeatured((prev) => []);
 			}
 		}
 

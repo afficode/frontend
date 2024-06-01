@@ -39,6 +39,7 @@ import {
 	GrabSettings,
 	GrabProduct,
 	GrabFlyer,
+	GrabbedProduct,
 } from './pages';
 import { AppLayout, DashboardLayout } from './layout';
 import { Approutes } from './constants';
@@ -101,6 +102,7 @@ function App() {
 						<Route path={Approutes.grab.register} element={<GrabRegister />} />
 						<Route path={Approutes.grab.home} element={<GrabHome />} />
 						<Route path={Approutes.grab.product} element={<GrabProduct />} />
+						<Route path={Approutes.grab.grabbedProduct} element={<GrabbedProduct />} />
 						<Route path={Approutes.welcome} element={<Welcome />} />
 						<Route path={`${Approutes.postDecision}`} element={<PostDecision />} />
 						<Route path={`${Approutes.postAd}/:categoryId`} element={<PostAd />} />

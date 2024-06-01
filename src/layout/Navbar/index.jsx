@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation, useSearchParams, useNavigate } from 'react-router-dom';
 import { Approutes } from '../../constants/routes';
-import { Dropdown } from '../../ui';
+import { Dropdown, Modal } from '../../ui';
 import { BoonfuLogo } from '../../assets/images';
 import { useCategories, useStates } from '../../hooks';
 import useAuth from '../../context/UserContext';
@@ -10,7 +10,7 @@ import useMessageContext from '../../context/MessageContext';
 // icons
 import { HiSearch, HiOutlineSpeakerphone } from 'react-icons/hi';
 import { SlArrowRight } from 'react-icons/sl';
-import { AiOutlineBell } from 'react-icons/ai';
+import { IoWalletOutline } from 'react-icons/io5';
 import { BiEnvelope } from 'react-icons/bi';
 import { GoBookmark } from 'react-icons/go';
 import { IoMdClose } from 'react-icons/io';
@@ -22,6 +22,7 @@ import { FaCarSide, FaBuilding, FaRegHandshake } from 'react-icons/fa';
 import { useDebouncedCallback } from 'use-debounce';
 import { getSaves } from '../../hooks/useSaves';
 import { toSelectOptions } from '../../utils';
+import { AccountHistory } from '../../components';
 
 const Navbar = () => {
 	const [nav, setNav] = useState(false);
@@ -35,8 +36,6 @@ const Navbar = () => {
 
 	// fetch categories
 	const { data } = useCategories();
-
-	// console.log(data);
 
 	// filter categories
 	const filteredCategories = {
@@ -90,10 +89,7 @@ const Navbar = () => {
 	}, 500);
 
 	const { data: states } = useStates();
-	// console.log(states);
 	const statesOptions = toSelectOptions(states, 'states', 'All');
-
-	// console.log(statesOptions)
 
 	useEffect(() => {
 		const handleClickOutside = (e) => {
@@ -114,6 +110,7 @@ const Navbar = () => {
 		};
 	}, [setNav, isLogin]);
 
+	const [walletOpen, setWalletOpen] = useState(false);
 	return (
 		<header className="fixed top-0 z-50 w-full bg-primary">
 			<nav className="relative ">
@@ -145,16 +142,11 @@ const Navbar = () => {
 									/>
 
 									<div className="absolute inset-y-0 right-0 flex items-center pr-3">
-										<div className=" border-l-4 border-l-primary">
+										<div className="border-l-4 border-l-primary">
 											<select
 												type="select"
 												className="text-xs w-[10rem] h-6 border-transparent outline-none focus:border-none focus:ring focus:ring-transparent"
 												defaultValue={searchParams.get('state_id') || ''}
-												// onSelect={(e) => {
-												// 	const query = searchParams.get('q');
-												// 	const stateId = e.target.value;
-												// 	handleSearch(query, stateId);
-												// }}
 												onChange={(e) => {
 													const query = searchParams.get('q') || '';
 													const stateId = e.target.value;
@@ -179,6 +171,38 @@ const Navbar = () => {
 
 						{/* top nav items */}
 						<div className="flex items-center gap-2 lg:gap-3">
+							{isLogin && (
+								// <Link to={Approutes.profile.notifications}>
+								// 	<div
+								// 		className="flex flex-col items-center text-white cursor-pointer "
+								// 		title="My Notifications"
+								// 	>
+								// 		<AiOutlineBell size={25} />
+								// 		<span className="text-xs sm:text-sm">Notifications</span>
+								// 	</div>
+								// </Link>
+								// <div className="max-h-screen dropdown">
+								<>
+									<button
+										tabIndex={0}
+										className="flex flex-col items-center px-2 py-1 bg-white border-4 rounded-md cursor-pointer border-secondary text-primary"
+										title="My Wallet"
+										onClick={() => setWalletOpen(!walletOpen)}
+									>
+										<IoWalletOutline size={25} />
+										<span className="text-xs sm:text-sm">Wallet</span>
+									</button>
+									<Modal modalHeader={false} isOpen={walletOpen} setIsOpen={setWalletOpen}>
+										<AccountHistory />
+									</Modal>
+								</>
+
+								// 	{/* <AccountHistory
+								// 		tabIndex={0}
+								// 		className={`dropdown-content transform -translate-x-2/3 h-fit min-w-[300px]  z-[10] py-1 rounded-xl bg-white shadow-md overflow-y-auto`}
+								// 	/>
+								// </div> */}
+							)}
 							<Link to={Approutes.profile.saved}>
 								<div
 									className="relative flex flex-col items-center text-white cursor-pointer max-md:hidden"
@@ -193,17 +217,6 @@ const Navbar = () => {
 									)}
 								</div>
 							</Link>
-							{isLogin && (
-								<Link to={Approutes.profile.notifications}>
-									<div
-										className="flex flex-col items-center text-white cursor-pointer "
-										title="My Notifications"
-									>
-										<AiOutlineBell size={25} />
-										<span className="text-xs sm:text-sm">Notifications</span>
-									</div>
-								</Link>
-							)}
 
 							{/* post ad dropdown */}
 							<div className="dropdown ">
@@ -495,7 +508,7 @@ const Navbar = () => {
 								}}
 							/>
 							<div className="absolute inset-y-0 right-0 flex items-center pr-3">
-								<div className=" border-l-4 border-l-primary">
+								<div className="border-l-4 border-l-primary">
 									<select
 										type="select"
 										className="text-xs w-[10rem] h-6 border-transparent outline-none focus:border-none focus:ring focus:ring-transparent"

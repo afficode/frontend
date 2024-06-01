@@ -47,7 +47,8 @@ h6 {
 	@apply max-sm:text-base;
 }
 
-p {
+p,
+li {
 	@apply text-base;
 	@apply max-sm:text-sm !important;
 }
@@ -56,6 +57,7 @@ p {
 	@apply text-lg;
 	@apply max-sm:text-base !important;
 	@apply leading-6 !important;
+	@apply -tracking-normal !important;
 }
 
 /* buttons  */
