@@ -1,30 +1,27 @@
-import { Field, ErrorMessage } from 'formik';
+import { Field, useFormikContext, ErrorMessage } from 'formik';
 import TextError from './TextError';
+import useTokenContext from '../../context/TokenContext';
+import { useEffect, useState } from 'react';
+import { Coin } from '../../assets/images';
+import { Modal } from '../../ui';
+import TokenPurchase from '../Token';
+import { priceToToken } from '../../utils';
 
 const PriceInput = (props) => {
 	const { label, name, required, type, className, ...rest } = props;
-	// const [isOpen, setIsOpen] = useState(false);
-	// const [touched, setTouched] = useState(false);
-	// const { values } = useFormikContext();
-	// const [priceFocus, setPriceFocus] = useState(false);
-	// const { token, updateToken } = useTokenContext();
-	// const [prevToken, setPrevToken] = useState(0);
+	const [isOpen, setIsOpen] = useState(false);
+	const [touched, setTouched] = useState(false);
+	const { values } = useFormikContext();
+	const [priceFocus, setPriceFocus] = useState(false);
+	const { token, updateToken } = useTokenContext();
 
-	// useEffect(() => {
-	// 	console.log(prevToken, '  ', priceToToken(values.price));
-
-	// 	if (values.price != '' && values.price != null && values.price != undefined) {
-	// 		if (prevToken > priceToToken(values.price)) {
-	// 			updateToken(token - priceToToken(values.price));
-	// 			setPrevToken(priceToToken(values.price));
-	// 		} else if (prevToken < priceToToken(values.price)) {
-	// 			updateToken(token + priceToToken(values.price));
-	// 			setPrevToken(priceToToken(values.price));
-	// 		}
-	// 	} else {
-	// 		updateToken(token);
-	// 	}
-	// }, [values.price]);
+	useEffect(() => {
+		if (values.price != '' && values.price != null && values.price != undefined) {
+			updateToken(token - priceToToken(values.price));
+		} else {
+			updateToken(token);
+		}
+	}, [values.price]);
 
 	return (
 		<div className={className ? '' : 'formControlClass'}>
@@ -50,13 +47,13 @@ const PriceInput = (props) => {
 				}}
 				className={className}
 				{...rest}
-				// onFocus={() => setTouched(true)}
-				// onBlur={() => setTouched(false)}
+				onFocus={() => setTouched(true)}
+				onBlur={() => setTouched(false)}
 				autoComplete="off"
 			/>
 			<ErrorMessage name={name} component={TextError} />
 
-			{/* {(touched || priceFocus) && (
+			{(touched || priceFocus) && (
 				<div
 					className="bg-[#E7E7E7] border border-secondary p-2"
 					onMouseEnter={() => setPriceFocus(true)}
@@ -141,7 +138,7 @@ const PriceInput = (props) => {
 						</table>
 					</div>
 				</div>
-			)} */}
+			)}
 		</div>
 	);
 };

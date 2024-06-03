@@ -7,6 +7,7 @@ import DatePicker from './DatePicker';
 import ImageInput from './ImageInput';
 import Toggle from './Toggle';
 import UrgentField from './UrgentField';
+import PriceInput from './PriceInput';
 
 const FormControl = (props) => {
 	const { control, ...rest } = props;
@@ -14,6 +15,8 @@ const FormControl = (props) => {
 	switch (control) {
 		case 'input':
 			return <Input {...rest} />;
+		case 'price':
+			return <PriceInput {...rest} />;
 
 		case 'textarea':
 			return <TextArea {...rest} />;

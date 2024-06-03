@@ -5,8 +5,6 @@ import useTokenContext from '../../context/TokenContext';
 
 const TokenInfo = ({ setStage }) => {
 	const { token, updateToken } = useTokenContext();
-	console.log(token);
-
 
 	useEffect(() => {
 		fetchData();
@@ -14,11 +12,9 @@ const TokenInfo = ({ setStage }) => {
 
 	const fetchData = async () => {
 		try {
-
 			const res = await privateAxios.get('/token/total_coin');
 			const data = res?.data;
 			updateToken(data.coin.token);
-
 		} catch (error) {
 			console.log(error);
 		}
