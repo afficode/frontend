@@ -212,3 +212,45 @@ input[type='number']::-webkit-outer-spin-button {
 	bottom: 0;
 	background-color: rgba(0, 0, 0, 0.3);
 }
+
+/* .grab-bg {
+	background-image: url(assets/images/grabRegisterBackground.png);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 100%;
+} */
+@media screen and (min-width: 768px) {
+	.grab-bg {
+		background-image: url(assets/images/grabRegisterBackground.png);
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: 100%;
+	}
+}
+
+@media screen and (min-width: 1024px) {
+	.grab-home {
+		background-image: url(assets/images/grabHomeBackground.png);
+		background-position: top;
+		background-repeat: no-repeat;
+		background-size: 60%;
+	}
+}
+
+/* @media screen and (max-width: 1024px) {
+	.grab-home {
+		background-image: url(assets/images/grabHomeBackground.png);
+		background-position: top;
+		background-repeat: no-repeat;
+		background-size: 100%;
+	}
+} */
+
+.flyer-bg {
+	background-image: url(assets/images/flyerBackground.png);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-color: rgba(255, 255, 255, 0.76);
+	background-blend-mode: overlay;
+}

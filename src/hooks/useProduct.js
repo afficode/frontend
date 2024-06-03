@@ -17,6 +17,8 @@ export const fetchProduct = (ad_id) => {
 
 	return useQuery(['fetch-product', ad_id], fetchSingleProduct, {
 		refetchInterval: 180000,
+		refetchIntervalInBackground: false,
+		refetchOnWindowFocus: false,
 	});
 }
 
@@ -25,5 +27,7 @@ export const fetchCategorySummary = (cat_id)  => {
 	
 	return useQuery(['fetchCatSummary', cat_id], fetchCatSummary, {
 		refetchInterval: 5000,
+		refetchIntervalInBackground: false,
+		refetchOnWindowFocus: false,
 	})
 }

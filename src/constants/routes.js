@@ -31,12 +31,24 @@ export const Approutes = {
 	aboutUs: '/about-us',
 	contactUs: '/contact-us',
 	forgotPassword: '/forgot-password',
+	grab: {
+		initial: '/grabber',
+		register: '/grabber/register',
+		home: '/grabber/home',
+		profile: '/grabber/profile',
+		dashboard: '/grabber/dashboard',
+		products: '/grabber/products',
+		product: '/grabber/product',
+		settings: '/grabber/settings',
+		flyer: '/grabber/flyer',
+	},
 	home: '/',
 	logout: '/logout',
 	playground: '/playground',
 	postAd: '/post-ad',
 	postDecision: '/post-decision',
 	postSuccess: '/post-success',
+	tokenSuccess: '/purchase-successful',
 	updateAd: '/update-ad',
 	underConstruction: '/under-construction',
 	welcome: '/welcome',
@@ -49,5 +61,8 @@ export const backendLink =
 		? 'https://4000-afficode-backend-cch37ds4fkj.ws-eu108.gitpod.io/'
 		: import.meta.env.VITE_TESTING == 'sam'
 		? 'http://localhost:4000/'
-		: 'http://109.237.25.252:4000/';
+		: 'https://backend-boonfu-staging-968fe07646b1.herokuapp.com/';
+// : 'http://109.237.25.252:4000/';
 //console.log(process.env.VITE_TESTING)
+
+export const frontendLink = 'http://localhost:5173/';

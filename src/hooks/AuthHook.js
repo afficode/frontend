@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { backendLink } from '../constants';
 import { api, privateAxios } from '../utils/axios';
-import { socket } from '../utils/socket';
 import { useMutation } from 'react-query';
 
 export const RegistrationHook = async (values, setSubmitting, endpoint) => {

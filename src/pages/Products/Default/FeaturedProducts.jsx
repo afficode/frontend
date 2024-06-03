@@ -9,7 +9,6 @@ import { numberWithCommas } from "../../../utils/dataManipulations";
 import { formatDistance } from "date-fns";
 import SaveProduct from "./SaveProduct";
 import useAuth from "../../../context/UserContext";
-import { FaHandshake, FaHandshakeSlash } from "react-icons/fa6";
 import { NegotiableIcon } from "../../../ui";
 import { GrabIcon } from "../../../ui";
 const FeaturedProducts = ({ product }) => {
@@ -29,48 +28,50 @@ const FeaturedProducts = ({ product }) => {
                     src={img.path}
                     alt={img.filename}
                     key={index * 3}
-                    className="rounded-t-sm rounded-b-none "
+                    className="w-full h-full rounded-t-sm rounded-b-none "
                   />
                 ))}
               </Carousel>
             ) : (
-              <img
-                src={noimage}
-                alt="no image"
-                className="h-[120px] md:h-[230px] rounded-none"
-              />
+              <div className="h-[120px] md:h-[230px] rounded-none">
+                <img
+                  src={noimage}
+                  alt="no image"
+                  className="w-full h-full mx-auto rounded-none"
+                />
+              </div>
             )}
             {((isLogin && parseInt(ad?.owner) !== parseInt(user?.id)) ||
               !isLogin) && (
               <SaveProduct
                 ads_id={ad.id}
-                className="absolute h-12 top-4 right-4 bg-gray-200 hover:bg-white p-1 px-2 rounded shadow-2xl w-10"
+                className="absolute w-10 h-12 p-1 px-2 bg-gray-200 rounded shadow-2xl top-4 right-4 hover:bg-white"
               />
             )}
-            <div className="w-full bg-black/50 h-10 absolute bottom-0 text-white pl-2 pt-2 flex rounded-none">
+            <div className="absolute bottom-0 flex w-full h-10 pt-2 pl-2 text-white rounded-none bg-black/50">
               <FaCamera className="my-auto text-lg" />
-              &emsp; <span className="my-auto"> {ad.images.length}</span>
+              &emsp; <span className="my-auto"> {ad?.images.length}</span>
             </div>
           </div>
           <Link
             to={`/product/${encodeProductId(ad.id)}`}
-            className="p-2 tooltip tooltip-secondary w-full tracking-tighter line-clamp-1 hover:bg-gray-200"
+            className="w-full p-2 tracking-tighter tooltip tooltip-secondary line-clamp-1 hover:bg-gray-200"
           >
-            <p className="text-xl font-semibold overflow-hidden h-6 lg:h-8 flex items-start justify-start uppercase ">
+            <p className="flex items-start justify-start h-6 overflow-hidden text-xl font-semibold uppercase lg:h-8 ">
               {ad.title.toString().trimEnd().trim()}{" "}
             </p>
             <div className="block w-full mt-1 text-start text-ellipsis flex-nowrap line-clamp-1">
-              <FaMapMarkerAlt className="mb-1 inline-block" />
-              <span className="text-xs md:text-md lg:text-lg tracking-tighter line-clamp-1 inline">
+              <FaMapMarkerAlt className="inline-block mb-1" />
+              <span className="inline text-xs tracking-tighter md:text-md lg:text-lg line-clamp-1">
                 {ad.location}
               </span>
             </div>
-            <p className="  mt-4 flex justify-between tracking-tighter line-clamp-1 ">
+            <p className="flex justify-between mt-4 tracking-tighter  line-clamp-1">
               <span className="flex">
                 <TbCurrencyNaira className="mt-1" />
                 {numberWithCommas(ad.price)}
               </span>
-              <span className="flex justify-around my-auto text-xl font-bold gap-2">
+              <span className="flex justify-around gap-2 my-auto text-xl font-bold">
                 <NegotiableIcon negotiable={ad?.negotiable} />
                 {((isLogin && parseInt(ad?.owner) !== parseInt(user?.id)) ||
                   !isLogin) && <GrabIcon className="text-secondary" />}

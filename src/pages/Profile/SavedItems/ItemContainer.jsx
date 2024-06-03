@@ -106,11 +106,11 @@ const ItemContainer = ({
               </div>
 
               <div className="flex items-center gap-2 sm:gap-4 mt-2 sm:mt-4">
-                {specifications.map((spec) => (
+                {specifications.map((spec, index) => (
                   <>
                     {spec !== null && (
                       <span
-                        key={spec}
+                        key={index * 3}
                         className="capitalize px-3 py-1 md:px-6 md:py-2 bg-white max-sm:text-xs max-md:text-sm max-sm:font-medium"
                       >
                         {spec}

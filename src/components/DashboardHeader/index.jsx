@@ -5,21 +5,43 @@ import MobileSidebar from '../../layout/MobileSidebar';
 import { useState } from 'react';
 import { Approutes } from '../../constants';
 import { Link } from 'react-router-dom';
+import { Coin } from '../../assets/images';
+import { Modal } from '../../ui';
+import useMessageContext from '../../context/MessageContext';
+import useAuth from '../../context/UserContext';
+import TokenPurchase from '../Token';
+import useTokenContext from '../../context/TokenContext';
+
 
 const DashboardHeader = () => {
 	const [showSidebar, setShowSidebar] = useState(false);
+	const [isOpen, setIsOpen] = useState(false);
+	const { unread } = useMessageContext();
+	const { isLogin } = useAuth();
+	const { token } = useTokenContext();
 
 	return (
 		<div className="flex justify-between py-2 border-b border-black/30">
 			<h3>Dashboard</h3>
 
-			<div className="flex gap-2 sm:gap-4 items-center">
+			<div className="flex items-center gap-2 sm:gap-4">
+				<button className="flex items-center " onClick={() => setIsOpen(true)}>
+					<img src={Coin} alt="/" className="w-[1.8rem] mx-2" />
+					<b>{token && token}</b>
+				</button>
+
+				<Modal isOpen={isOpen} setIsOpen={setIsOpen}>
+					<TokenPurchase />
+				</Modal>
+
 				<Link to={Approutes.profile.messages}>
 					<div className="relative">
 						<BiEnvelope size={28} />
-						<span className="py-[.5] px-1 bg-primary text-white text-center text-xs font-medium rounded-full absolute right-[-10%] top-0">
-							4
-						</span>
+						{isLogin && unread > 0 && (
+							<span className="py-[.5] px-1 bg-primary text-white text-center text-xs font-medium rounded-full absolute right-[-10%] top-0">
+								{unread}
+							</span>
+						)}
 					</div>
 				</Link>
 

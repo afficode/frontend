@@ -15,11 +15,13 @@ import useAuth from "../../context/UserContext";
 import { SpinnerSkeleton, Spinner } from "../../components";
 import { getRedirectLink } from "../../utils";
 import { useNotify } from "../../hooks";
+import useTokenContext from "../../context/TokenContext";
 
 const Login = () => {
   const { login } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const { updateToken } = useTokenContext();
 
   const initialValues = {
     email: "",
@@ -44,35 +46,15 @@ const Login = () => {
     setTimeout(async () => {
       const submit = await LoginHook(values, setSubmitting);
       if (submit?.success) {
-        // the login from the useAuth tied to a context hook, will update localstorge and set user to Login
+        // the login from the useAuth tied to a context hook, will update localStorage and set user to Login
         login(submit);
-        // toast.success('Welcome to Affi. \n\nYour world of endless possibilities', {
-        // 	style: {
-        // 		border: '4px solid #FAC213',
-        // 		padding: '14px',
-        // 		background: '#2686CE',
-        // 		color: '#fff',
-        // 	},
-        // 	iconTheme: {
-        // 		primary: '#2686CE',
-        // 		secondary: '#EBBA16',
-        // 	},
-        // 	position: 'top-center',
-        // });
-
-        notify(
-          "Welcome to Affi. \n\nYour world of endless possibilities",
-          "success"
-        );
-        console.log(window.location);
-        if (window.location === getRedirectLink()) {
-          return navigate(Approutes.welcome);
-        }
-        return navigate(getRedirectLink() || Approutes.welcome, {
+        updateToken(submit?.coin);
+        notify("Welcome to Boonfu, This is HELPFUL", "success");
+        navigate(getRedirectLink() || Approutes.home, {
           replace: true,
         });
+        // return window.location.reload();
       } else {
-        // toast.error(submit.message);
         notify(submit.message, "error");
       }
       setIsLoading(false);
@@ -83,10 +65,8 @@ const Login = () => {
       {isLoading ? (
         <div className="mt-4 lg:mt-20">
           <SpinnerSkeleton
-            heading={"You are been Logged In..."}
-            body={
-              "Do you know we provide Affiliate Marketing. You can also open a shop with us 😊"
-            }
+            heading={"You’re being logged on."}
+            body={"...learn more about the Grab system too 😊."}
             type={"spin"}
             color={"#2686CE"}
             height={250}
@@ -97,7 +77,7 @@ const Login = () => {
         <>
           <div className="w-[90%] mx-auto">
             {" "}
-            <h2 className="text-xl lg:text-4xl my-4">Sign In</h2>
+            <h2 className="my-4 text-xl lg:text-4xl">Sign In</h2>
             <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}

@@ -27,6 +27,8 @@ import SaveProduct from "../Default/SaveProduct";
 import { getSaves } from "../../../hooks/useSaves";
 import { NegotiableIcon } from "../../../ui";
 import { useNotify } from "../../../hooks";
+import { FaHandshake, FaHandshakeSlash } from "react-icons/fa6";
+import { GrabIcon, NegotiableIcon } from "../../../ui";
 
 const index = () => {
   const { id } = useParams();
