@@ -7,38 +7,23 @@ import { CarBlack } from '../../../assets/images';
 import { FaCamera } from 'react-icons/fa';
 import OverviewPills from '../../Products/View/OverviewPills';
 import { ScrollToTop } from '../../../utils';
-import GrabHeader from '../GrabHeader';
-import { Approutes } from '../../../constants';
 import { Button } from '../../../ui';
-import { Chat, Download, Share } from '../../../assets/svgs';
-import { useNotify } from '../../../hooks';
+import { BankTransfer, Paypal, Visa } from '../../../assets/svgs';
+import { FormControl } from '../../../components';
+import { Form, Formik } from 'formik';
 
-const GrabProduct = () => {
-	let grabLink = 'boonfu.com/bf1346/201344';
-	const notify = useNotify();
-	const [copied, setCopied] = useState(false);
-
-	const handleCopy = () => {
-		navigator.clipboard
-			.writeText(grabLink)
-			.then(() => {
-				notify('Link copied to clipboard', 'success');
-				setCopied(true);
-			})
-			.catch((err) => {
-				console.log(err);
-				notify('Failed to copy link', 'error');
-			});
-	};
+const GrabbedProduct = () => {
 	return (
 		<section className="w-full p-4 lg:p-8">
-			<GrabHeader size="h2" text="Grabbed Item preview" />
+			<div className="flex flex-col gap-4 p-4 rounded-xl bg-primary">
+				<h4 className="text-white">Welcome to: 5-BEDROOM DUPLEX, LAGOS - Page</h4>
+				<h5 className="flex justify-center p-2 bg-white">
+					You were directed here by: <span className="px-2 text-primary"> BF1346</span>{' '}
+				</h5>
+			</div>
 
 			<div className="flex flex-col w-full h-full gap-2 mt-6 md:flex-row md:gap-8 line-clamp-1">
 				<div className="w-full md:w-[60%]  xl:w-[70%] flex flex-col">
-					<div className="w-full p-3 space-y-3 text-center text-white bg-red-500 whitespace-nowrap">
-						<h4>Commission : #200,000.00</h4>
-					</div>
 					<div className="w-full my-2 ml-2">
 						<div className="flex items-center justify-between w-full my-2 font-bold uppercase ">
 							<h3 className="">2021 Toyota Camry, BLACK </h3>
@@ -95,68 +80,102 @@ const GrabProduct = () => {
 				</div>
 
 				<aside className="w-full h-[550px] md:w-[40%] xl:w-[30%] border-2 border-gray-400 p-2 lg:p-4 flex flex-col justify-between">
+					<p className="pb-2 border-b border-black/40 border-1">
+						NOTE:{' '}
+						<span className="italic text-primary">
+							This Item does not deliver outside of seller’s state.
+						</span>
+					</p>
+					{/* <hr className="h-px my-2 border-black/40 border-1" /> */}
+					<div className="pb-4 space-y-4 border-b border-black/40 border-1">
+						<div className="p-3 font-semibold text-center bg-gray-300 rounded-lg">
+							Ready to Buy Item Now?
+						</div>
+
+						<div>
+							<p className="font-semibold">Select delivery option:</p>
+
+							<Formik initialValues={{ delivery_option: ' ' }}>
+								{(formik) => {
+									return (
+										<Form>
+											<FormControl
+												control="checkbox"
+												// label="Delivery Option"
+												name="delivery_option"
+												options={[
+													{ key: 'Pickup', value: 'pickup' },
+													{ key: 'Delivery', value: 'delivery' },
+												]}
+											/>
+										</Form>
+									);
+								}}
+							</Formik>
+						</div>
+						<Button
+							variant={'primary'}
+							size={'full'}
+							className={'flex items-center justify-center gap-4 rounded-3xl'}
+						>
+							Place Order
+						</Button>
+					</div>
+
 					<div className="">
-						<h6 className="w-full text-lg font-bold text-center md:text-xl 2xl:text-3xl">
-							Product ID:201344
-						</h6>
-
-						<hr className="h-px my-2 border-black/40 border-1" />
-
-						<div className="w-full tracking-tighter">
-							<div className="flex justify-between">
-								<p className="p-lg">Date Posted </p>
-								<p className="p-lg">22.04.2024 </p>
-							</div>
-							<div className="flex justify-between">
-								<p className="p-lg">Category </p>
-								<p className="p-lg">Cars & Vehicles </p>
-							</div>
+						<h6 className="my-2 font-bold ">Buy with confidence</h6>
+						<p className="pb-2">
+							Payments made on Boonfu.com is secured with strict SSL encryption and data protection
+							protocols
+						</p>
+						<div className="flex items-center pt-1 border-t border-black/40 border-1">
+							Payments:{' '}
+							<span className="flex items-center gap-3">
+								{' '}
+								<img src={Visa} alt="/" />
+								<img src={Paypal} alt="/" />
+								<img src={BankTransfer} alt="/" />
+							</span>
+						</div>
+					</div>
+				</aside>
+				{/* <aside className="w-full h-[550px] md:w-[40%] xl:w-[30%] border-2 border-gray-400 p-2 lg:p-4 flex flex-col justify-between">
+					<div className="flex flex-col gap-4">
+						<Button
+							variant={'secondary'}
+							size={'full'}
+							className={'flex items-center justify-center gap-4 rounded-xl font-semibold'}
+						>
+							Seller’s contact
+							<img src={Info} alt="/" className="w-4" />
+						</Button>
+						<Button
+							variant={'primary'}
+							size={'full'}
+							className={'flex items-center justify-center gap-4 rounded-xl'}
+						>
+							Schedule inspection
+						</Button>
+						<div className="flex items-center justify-between p-3 border rounded-xl border-primary">
+							<h6 className="font-semibold">Inspection reports</h6>
+							<Link>
+								<span className="flex items-center gap-2 underline text-primary">
+									see <img src={SingleArrowRight} className="w-[0.5rem]" alt="/" />
+								</span>
+							</Link>
 						</div>
 					</div>
 
 					<div>
-						<div className="mb-6">
-							<p className="p-lg">Grab Link</p>
-
-							<div className="flex items-center justify-between">
-								<p className="text-primary">{grabLink}</p>
-								<div>
-									{copied ? (
-										<IoCopy className="cursor-pointer" size={20} />
-									) : (
-										<IoCopyOutline onClick={handleCopy} className="cursor-pointer" size={20} />
-									)}
-								</div>
-							</div>
-						</div>
-						<div className="flex flex-col gap-4">
-							<Button
-								variant={'primary'}
-								size={'full'}
-								className={'flex items-center justify-center gap-4 rounded-xl'}
-							>
-								<img src={Chat} alt="/" className="w-8" />
-								Chat Boonfu
-							</Button>
-							<Button
-								variant={'primary'}
-								size={'full'}
-								className={'flex items-center justify-center gap-4 rounded-xl'}
-							>
-								<img src={Share} alt="/" className="w-8" />
-								Share Now
-							</Button>
-							<Button
-								variant={'primary'}
-								size={'full'}
-								className={'flex items-center justify-center gap-4 rounded-xl'}
-							>
-								<img src={Download} alt="/" className="w-8" />
-								Download images{' '}
-							</Button>
-						</div>
+						<h6 className="my-2 font-bold text-center">Keeping Safe</h6>
+						<ol className="list-[lower-roman] pl-4">
+							<li> Carryout inspection by yourself and ensure to go along with a technician</li>
+							<li> Thoroughly check all documents and verify authenticity before payment</li>
+							<li> Do not inspect/pay in a public place, office or seller’s home is advised!.</li>
+							<li> Do not commit funds in advance for vehicle you have not inspected.</li>
+						</ol>
 					</div>
-				</aside>
+				</aside> */}
 			</div>
 
 			{/* description and overview */}
@@ -186,26 +205,12 @@ const GrabProduct = () => {
 				</div>
 			</div>
 
-			{/* bottom buttons  */}
-			<div className="flex gap-6 my-8 max-sm:flex-col">
-				<Link to={Approutes.grab.flyer} target="_blank" className="flex-1">
-					<Button className={'bg-[#047F73] text-white px-8 py-[.75rem] w-full  font-semibold text-xl'}>
-						Generate Post Now
-					</Button>
-				</Link>
-				<Link to={Approutes.grab.products} className="flex-1">
-					<Button variant={'grey'} className={' w-full h-full font-semibold text-xl'}>
-						Close
-					</Button>
-				</Link>
-			</div>
-
 			<ScrollToTop />
 		</section>
 	);
 };
 
-export default GrabProduct;
+export default GrabbedProduct;
 
 const overview = [
 	{

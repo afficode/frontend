@@ -7,6 +7,7 @@ export { default as GrabHome } from './Grabs/Home';
 export { default as GrabProfile } from './Grabs/Profile';
 export { default as GrabProducts } from './Grabs/Products';
 export { default as GrabProduct } from './Grabs/Product';
+export { default as GrabbedProduct } from './Grabs/GrabbedProduct';
 export { default as GrabDashboard } from './Grabs/Dashboard';
 export { default as GrabSettings } from './Grabs/Settings';
 export { default as Home } from './Home';

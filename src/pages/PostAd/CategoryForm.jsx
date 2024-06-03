@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import { FormControl } from '../../components';
-import { Button } from '../../ui';
+import { FormControl, TermsAndCondition } from '../../components';
+import { Button, Modal } from '../../ui';
 import {
 	useSubCategories,
 	useStates,
@@ -491,14 +491,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 					// { key: 'Unpainted', value: 'unpainted' },
 				],
 			},
-			{
-				control: 'price',
-				label: 'Price',
-				name: 'price',
-				type: 'number',
-				placeholder: '₦0.00',
-				required: true,
-			},
+
 			{
 				control: 'toggle',
 				label: 'Negotiable',
@@ -634,6 +627,14 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				control: 'urgent',
 				label: 'Label as Urgent:',
 				name: 'urgent',
+			},
+			{
+				control: 'price',
+				label: 'Price',
+				name: 'price',
+				type: 'number',
+				placeholder: '₦0.00',
+				required: true,
 			},
 		],
 		properties: [
@@ -804,14 +805,6 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				placeholder: 'Select date available',
 			},
 			{
-				control: 'price',
-				label: 'Price',
-				name: 'price',
-				type: 'number',
-				placeholder: '₦0.00',
-				required: true,
-			},
-			{
 				control: 'toggle',
 				label: 'Negotiable',
 				name: 'negotiable',
@@ -831,6 +824,14 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				control: 'urgent',
 				label: 'Label as Urgent:',
 				name: 'urgent',
+			},
+			{
+				control: 'price',
+				label: 'Price',
+				name: 'price',
+				type: 'number',
+				placeholder: '₦0.00',
+				required: true,
 			},
 		],
 		services: [
@@ -1021,14 +1022,6 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				],
 			},
 			{
-				control: 'price',
-				label: 'Price',
-				name: 'price',
-				type: 'number',
-				placeholder: '₦0.00',
-				required: true,
-			},
-			{
 				control: 'toggle',
 				label: 'Negotiable',
 				name: 'negotiable',
@@ -1048,6 +1041,14 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				control: 'urgent',
 				label: 'Label as Urgent:',
 				name: 'urgent',
+			},
+			{
+				control: 'price',
+				label: 'Price',
+				name: 'price',
+				type: 'number',
+				placeholder: '₦0.00',
+				required: true,
 			},
 		],
 		agriculture: [
@@ -1161,14 +1162,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				type: 'text',
 				placeholder: 'Enter colour',
 			},
-			{
-				control: 'price',
-				label: 'Price',
-				name: 'price',
-				type: 'number',
-				placeholder: '₦0.00',
-				required: true,
-			},
+
 			{
 				control: 'toggle',
 				label: 'Negotiable',
@@ -1189,6 +1183,14 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				control: 'urgent',
 				label: 'Label as Urgent:',
 				name: 'urgent',
+			},
+			{
+				control: 'price',
+				label: 'Price',
+				name: 'price',
+				type: 'number',
+				placeholder: '₦0.00',
+				required: true,
 			},
 		],
 		electronics: [
@@ -1448,15 +1450,6 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				type: 'text',
 				placeholder: 'Enter colour',
 			},
-
-			{
-				control: 'price',
-				label: 'Price',
-				name: 'price',
-				type: 'number',
-				placeholder: '₦0.00',
-				required: true,
-			},
 			{
 				control: 'toggle',
 				label: 'Negotiable',
@@ -1477,6 +1470,14 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				control: 'urgent',
 				label: 'Label as Urgent:',
 				name: 'urgent',
+			},
+			{
+				control: 'price',
+				label: 'Price',
+				name: 'price',
+				type: 'number',
+				placeholder: '₦0.00',
+				required: true,
 			},
 		],
 		fashion: [
@@ -1653,14 +1654,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 					{ key: 'Analog % Digital', value: 'analog and digital' },
 				],
 			},
-			{
-				control: 'price',
-				label: 'Price',
-				name: 'price',
-				type: 'number',
-				placeholder: '₦0.00',
-				required: true,
-			},
+
 			{
 				control: 'toggle',
 				label: 'Negotiable',
@@ -1681,6 +1675,14 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				control: 'urgent',
 				label: 'Label as Urgent:',
 				name: 'urgent',
+			},
+			{
+				control: 'price',
+				label: 'Price',
+				name: 'price',
+				type: 'number',
+				placeholder: '₦0.00',
+				required: true,
 			},
 		],
 		health: [
@@ -1857,14 +1859,6 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				required: true,
 			},
 			{
-				control: 'price',
-				label: 'Price',
-				name: 'price',
-				type: 'number',
-				placeholder: '₦0.00',
-				required: true,
-			},
-			{
 				control: 'toggle',
 				label: 'Negotiable',
 				name: 'negotiable',
@@ -1884,6 +1878,14 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				control: 'urgent',
 				label: 'Label as Urgent:',
 				name: 'urgent',
+			},
+			{
+				control: 'price',
+				label: 'Price',
+				name: 'price',
+				type: 'number',
+				placeholder: '₦0.00',
+				required: true,
 			},
 		],
 		home: [
@@ -2035,14 +2037,6 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				placeholder: 'Enter colour',
 			},
 			{
-				control: 'price',
-				label: 'Price',
-				name: 'price',
-				type: 'number',
-				placeholder: '₦0.00',
-				required: true,
-			},
-			{
 				control: 'toggle',
 				label: 'Negotiable',
 				name: 'negotiable',
@@ -2062,6 +2056,15 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				control: 'urgent',
 				label: 'Label as Urgent:',
 				name: 'urgent',
+			},
+
+			{
+				control: 'price',
+				label: 'Price',
+				name: 'price',
+				type: 'number',
+				placeholder: '₦0.00',
+				required: true,
 			},
 		],
 		tradesman: [
@@ -2221,14 +2224,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 					{ key: 'No', value: 'no' },
 				],
 			},
-			{
-				control: 'price',
-				label: 'Price',
-				name: 'price',
-				type: 'number',
-				placeholder: '₦0.00',
-				required: true,
-			},
+
 			{
 				control: 'toggle',
 				label: 'Negotiable',
@@ -2249,6 +2245,14 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				control: 'urgent',
 				label: 'Label as Urgent:',
 				name: 'urgent',
+			},
+			{
+				control: 'price',
+				label: 'Price',
+				name: 'price',
+				type: 'number',
+				placeholder: '₦0.00',
+				required: true,
 			},
 		],
 		software: [
@@ -2398,14 +2402,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 					{ key: 'Teenager', value: 'Teenager' },
 				],
 			},
-			{
-				control: 'price',
-				label: 'Price',
-				name: 'price',
-				type: 'number',
-				placeholder: '₦0.00',
-				required: true,
-			},
+
 			{
 				control: 'toggle',
 				label: 'Negotiable?',
@@ -2426,6 +2423,14 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				control: 'urgent',
 				label: 'Label as Urgent:',
 				name: 'urgent',
+			},
+			{
+				control: 'price',
+				label: 'Price',
+				name: 'price',
+				type: 'number',
+				placeholder: '₦0.00',
+				required: true,
 			},
 		],
 		pet: [
@@ -2560,14 +2565,6 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				],
 			},
 
-			{
-				control: 'price',
-				label: 'Price',
-				name: 'price',
-				type: 'number',
-				placeholder: '₦0.00',
-				required: true,
-			},
 			['6002', '6003'].includes(selectedPetCategory) && {
 				control: 'price',
 				label: 'Bulk price',
@@ -2595,6 +2592,15 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				control: 'urgent',
 				label: 'Label as Urgent:',
 				name: 'urgent',
+			},
+
+			{
+				control: 'price',
+				label: 'Price',
+				name: 'price',
+				type: 'number',
+				placeholder: '₦0.00',
+				required: true,
 			},
 		],
 		babies: [
@@ -2744,14 +2750,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				name: 'size',
 				options: babiesSizeOptions,
 			},
-			{
-				control: 'price',
-				label: 'Price',
-				name: 'price',
-				type: 'number',
-				placeholder: '₦0.00',
-				required: true,
-			},
+
 			{
 				control: 'price',
 				label: 'Bulk Price',
@@ -2774,6 +2773,14 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				control: 'urgent',
 				label: 'Label as Urgent:',
 				name: 'urgent',
+			},
+			{
+				control: 'price',
+				label: 'Price',
+				name: 'price',
+				type: 'number',
+				placeholder: '₦0.00',
+				required: true,
 			},
 		],
 		sports: [
@@ -2909,14 +2916,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 					{ key: 'Other', value: 'other' },
 				],
 			},
-			{
-				control: 'price',
-				label: 'Price',
-				name: 'price',
-				type: 'number',
-				placeholder: '₦0.00',
-				required: true,
-			},
+
 			{
 				control: 'toggle',
 				label: 'Negotiable',
@@ -2937,6 +2937,14 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				control: 'urgent',
 				label: 'Label as Urgent:',
 				name: 'urgent',
+			},
+			{
+				control: 'price',
+				label: 'Price',
+				name: 'price',
+				type: 'number',
+				placeholder: '₦0.00',
+				required: true,
 			},
 		],
 		motorbike: [
@@ -3111,14 +3119,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			// 	name: 'engine_size',
 			// 	placeholder: '1200cc',
 			// },
-			{
-				control: 'price',
-				label: 'Price',
-				name: 'price',
-				type: 'number',
-				placeholder: '₦0.00',
-				required: true,
-			},
+
 			{
 				control: 'toggle',
 				label: 'Negotiable',
@@ -3140,6 +3141,14 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				control: 'urgent',
 				label: 'Label as Urgent:',
 				name: 'urgent',
+			},
+			{
+				control: 'price',
+				label: 'Price',
+				name: 'price',
+				type: 'number',
+				placeholder: '₦0.00',
+				required: true,
 			},
 		],
 		requests: [
@@ -3231,21 +3240,6 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			},
 
 			{
-				control: 'input',
-				label: 'Price Offering?',
-				name: 'min_price',
-				type: 'number',
-				placeholder: '₦ min',
-				required: true,
-			},
-			{
-				control: 'input',
-				name: 'max_price',
-				type: 'number',
-				placeholder: '₦ max',
-				required: true,
-			},
-			{
 				control: 'toggle',
 				label: 'Negotiable?',
 				name: 'negotiable	',
@@ -3265,6 +3259,21 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				control: 'urgent',
 				label: 'Label as Urgent:',
 				name: 'urgent',
+			},
+			{
+				control: 'input',
+				label: 'Price Offering?',
+				name: 'min_price',
+				type: 'number',
+				placeholder: '₦ min',
+				required: true,
+			},
+			{
+				control: 'input',
+				name: 'max_price',
+				type: 'number',
+				placeholder: '₦ max',
+				required: true,
 			},
 		],
 		deals: [
@@ -3365,14 +3374,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				type: 'text',
 				placeholder: 'example; broken legs, rusted handles etc.',
 			},
-			{
-				control: 'price',
-				label: 'Price',
-				name: 'price',
-				type: 'number',
-				placeholder: '₦0.00',
-				required: true,
-			},
+
 			{
 				control: 'toggle',
 				label: 'Negotiable?',
@@ -3394,10 +3396,16 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				label: 'Label as Urgent:',
 				name: 'urgent',
 			},
+			{
+				control: 'price',
+				label: 'Price',
+				name: 'price',
+				type: 'number',
+				placeholder: '₦0.00',
+				required: true,
+			},
 		],
 	};
-
-	const fields = categoryFields[categoryName] || [];
 
 	const validationSchema = {
 		vehicles: Yup.object().shape({
@@ -3771,6 +3779,9 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 		}),
 	};
 
+	const fields = categoryFields[categoryName] || [];
+
+	//rendering form fields based on category
 	const renderFields =
 		fields &&
 		fields?.map((field, index) => (
@@ -3861,6 +3872,22 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 	const { pathname } = useLocation();
 	const { token } = useTokenContext();
 
+	//to scroll into terms and condition document
+	const [isOpen, setIsOpen] = useState(false);
+	const termsRef = useRef(null);
+	const rulesRef = useRef(null);
+	const privacyRef = useRef(null);
+
+	const handleScrollTo = (ref) => {
+		if (!isOpen) {
+			setIsOpen(true);
+			setTimeout(() => {
+				ref.current.scrollIntoView({ behavior: 'smooth' });
+			}, 1000); // Add a delay to ensure the component is rendered before scrolling
+		} else {
+			ref.current.scrollIntoView({ behavior: 'smooth' });
+		}
+	};
 	return (
 		<Formik
 			enableReinitialize={true}
@@ -3978,6 +4005,31 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 						>
 							Post My Ad
 						</Button>
+						<p className="mt-4 text-center">
+							By selecting Post My Ad you agree you’ve read and accepted our{' '}
+							<button className="text-primary" onClick={() => handleScrollTo(termsRef)}>
+								Terms of Use
+							</button>{' '}
+							and{' '}
+							<button className="text-primary" onClick={() => handleScrollTo(rulesRef)}>
+								Posting Rules
+							</button>
+							. Please see our{' '}
+							<button className="text-primary" onClick={() => handleScrollTo(privacyRef)}>
+								Privacy Notice
+							</button>{' '}
+							for information regarding the processing of your provided data.{' '}
+						</p>
+
+						<Modal isOpen={isOpen} setIsOpen={setIsOpen} headerText="Terms of Service">
+							<TermsAndCondition
+								rulesRef={rulesRef}
+								termsRef={termsRef}
+								privacyRef={privacyRef}
+								setIsOpen={setIsOpen}
+								isOpen={isOpen}
+							/>
+						</Modal>
 					</Form>
 				);
 			}}

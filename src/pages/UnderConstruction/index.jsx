@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '../../ui';
 import { Approutes } from '../../constants';
 import { IoIosArrowRoundBack } from 'react-icons/io';
+import { ScrollToTop } from '../../utils';
 
 const UnderConstruction = () => {
 	const navigate = useNavigate();
@@ -32,6 +33,7 @@ const UnderConstruction = () => {
 					</Link>
 				</div>
 			</div>
+			<ScrollToTop />
 		</section>
 	);
 };
