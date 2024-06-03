@@ -1,26 +1,28 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation, useSearchParams, useNavigate } from 'react-router-dom';
 import { Approutes } from '../../constants/routes';
-import { Dropdown } from '../../ui';
+import { Dropdown, Modal } from '../../ui';
 import { BoonfuLogo } from '../../assets/images';
-import { useCategories } from '../../hooks';
+import { useCategories, useStates } from '../../hooks';
 import useAuth from '../../context/UserContext';
 import useMessageContext from '../../context/MessageContext';
 
 // icons
-import { HiSearch, HiOutlineSpeakerphone } from "react-icons/hi";
-import { SlArrowRight } from "react-icons/sl";
-import { AiOutlineBell } from "react-icons/ai";
-import { BiEnvelope } from "react-icons/bi";
-import { GoBookmark } from "react-icons/go";
-import { IoMdClose } from "react-icons/io";
-import { VscGitPullRequestGoToChanges, VscMenu } from "react-icons/vsc";
-import { CgProfile } from "react-icons/cg";
-import { BsShop } from "react-icons/bs";
-import { MdMiscellaneousServices } from "react-icons/md";
-import { FaCarSide, FaBuilding, FaRegHandshake } from "react-icons/fa";
-import { useDebouncedCallback } from "use-debounce";
-import { getSaves } from "../../hooks/useSaves";
+import { HiSearch, HiOutlineSpeakerphone } from 'react-icons/hi';
+import { SlArrowRight } from 'react-icons/sl';
+import { IoWalletOutline } from 'react-icons/io5';
+import { BiEnvelope } from 'react-icons/bi';
+import { GoBookmark } from 'react-icons/go';
+import { IoMdClose } from 'react-icons/io';
+import { VscGitPullRequestGoToChanges, VscMenu } from 'react-icons/vsc';
+import { CgProfile } from 'react-icons/cg';
+import { BsShop } from 'react-icons/bs';
+import { MdMiscellaneousServices } from 'react-icons/md';
+import { FaCarSide, FaBuilding, FaRegHandshake } from 'react-icons/fa';
+import { useDebouncedCallback } from 'use-debounce';
+import { getSaves } from '../../hooks/useSaves';
+import { toSelectOptions } from '../../utils';
+import { AccountHistory } from '../../components';
 
 const Navbar = () => {
 	const [nav, setNav] = useState(false);
@@ -34,8 +36,6 @@ const Navbar = () => {
 
   // fetch categories
   const { data } = useCategories();
-
-  // console.log(data);
 
 	// filter categories
 	const filteredCategories = {
@@ -69,21 +69,27 @@ const Navbar = () => {
   }
   const { pathname } = useLocation();
 
-  const handleSearch = useDebouncedCallback((query) => {
-    if (query) {
-      setSearchParams({
-        q: query,
-      });
-      if (!pathname !== "/product") {
-        navigate(`${Approutes.product.initial}/?q=${query}`);
-      }
-    } else {
-      // delete the query from the params
-      setSearchParams({
-        q: "",
-      });
-    }
-  }, 500);
+	const handleSearch = useDebouncedCallback((query, stateId) => {
+		// console.log(stateId);
+		if (query || stateId) {
+			setSearchParams({
+				q: query || '',
+				state_id: stateId || '',
+			});
+			if (!pathname !== '/product') {
+				navigate(`${Approutes.product.initial}/?q=${query}&state_id=${stateId}`);
+			}
+		} else {
+			// delete the query from the params
+			setSearchParams({
+				q: '',
+				state_id: '',
+			});
+		}
+	}, 500);
+
+	const { data: states } = useStates();
+	const statesOptions = toSelectOptions(states, 'states', 'All');
 
 	useEffect(() => {
 		const handleClickOutside = (e) => {
@@ -104,6 +110,7 @@ const Navbar = () => {
 		};
 	}, [setNav, isLogin]);
 
+	const [walletOpen, setWalletOpen] = useState(false);
 	return (
 		<header className="fixed top-0 z-50 w-full bg-primary">
 			<nav className="relative ">
@@ -117,61 +124,99 @@ const Navbar = () => {
 							</NavLink>
 						</div>
 
-            {/* <!-- Search input on desktop screen --> */}
-            <div className="items-center justify-between hidden lg:flex">
-              <div className="w-full px-10 mx-auto ">
-                <div className="relative ">
-                  <input
-                    title="Search for items here."
-                    type="text"
-                    className="w-full lg:w-[32rem] xl:w-[40rem] py-2 pl-4 pr-[12rem] text-black bg-white border border-transparent rounded-3xl  focus:border-secondary outline-none focus:ring focus:ring-opacity-10 focus:ring-secondary"
-                    placeholder="Searching for?....."
-                    defaultValue={searchParams.get("q")}
-                    onChange={(e) => {
-                      handleSearch(e.target.value);
-                    }}
-                  />
+						{/* <!-- Search input on desktop screen --> */}
+						<div className="items-center justify-between hidden lg:flex">
+							<div className="w-full px-10 mx-auto ">
+								<div className="relative">
+									<input
+										title="Search for items here."
+										type="text"
+										className="w-full lg:w-[32rem] xl:w-[40rem] py-2 pl-4 pr-[12rem] text-black bg-white border border-transparent rounded-3xl  focus:border-secondary outline-none focus:ring focus:ring-opacity-10 focus:ring-secondary"
+										placeholder="Searching for?....."
+										defaultValue={searchParams.get('q') || ''}
+										onChange={(e) => {
+											const query = e.target.value;
+											const stateId = searchParams.get('state_id') || '';
+											handleSearch(query, stateId);
+										}}
+									/>
 
-                  <span className="absolute inset-y-0 right-0 flex items-center pr-3">
-                    <span className="mr-10 border-l-4 border-l-primary">
-                      <span className="ml-4 text-sm lg:text-base">Nigeria</span>
-                    </span>
+									<div className="absolute inset-y-0 right-0 flex items-center pr-3">
+										<div className="border-l-4 border-l-primary">
+											<select
+												type="select"
+												className="text-xs w-[10rem] h-6 border-transparent outline-none focus:border-none focus:ring focus:ring-transparent"
+												defaultValue={searchParams.get('state_id') || ''}
+												onChange={(e) => {
+													const query = searchParams.get('q') || '';
+													const stateId = e.target.value;
+													handleSearch(query, stateId);
+												}}
+											>
+												{statesOptions.map((option) => (
+													<option value={option.value} key={option.value}>
+														{option.key}
+													</option>
+												))}
+											</select>
+										</div>
 
-                    <span className="bg-primary p-[0.4rem] rounded-xl">
-                      <HiSearch size={23} className="text-white" />
-                    </span>
-                  </span>
-                </div>
-              </div>
-            </div>
+										<button className="bg-primary p-[0.4rem] rounded-xl">
+											<HiSearch size={23} className="text-white" />
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
 
-            {/* top nav items */}
-            <div className="flex items-center gap-2 lg:gap-3">
-              <Link to={Approutes.profile.saved}>
-                <div
-                  className="relative flex flex-col items-center text-white cursor-pointer max-md:hidden"
-                  title="Saved items"
-                >
-                  <GoBookmark size={25} />
-                  <span className="text-xs sm:text-sm">Saved</span>
-                  {isLogin && saves?.saves.length > 0 && (
-                    <span className="absolute top-[-7px] rounded-full px-1 bg-secondary/90 right-0 font-semibold text-sm text-black">
-                      {saves?.saves.length}
-                    </span>
-                  )}
-                </div>
-              </Link>
-              {isLogin && (
-                <Link to={Approutes.profile.notifications}>
-                  <div
-                    className="flex flex-col items-center text-white cursor-pointer "
-                    title="My Notifications"
-                  >
-                    <AiOutlineBell size={25} />
-                    <span className="text-xs sm:text-sm">Notifications</span>
-                  </div>
-                </Link>
-              )}
+						{/* top nav items */}
+						<div className="flex items-center gap-2 lg:gap-3">
+							{isLogin && (
+								// <Link to={Approutes.profile.notifications}>
+								// 	<div
+								// 		className="flex flex-col items-center text-white cursor-pointer "
+								// 		title="My Notifications"
+								// 	>
+								// 		<AiOutlineBell size={25} />
+								// 		<span className="text-xs sm:text-sm">Notifications</span>
+								// 	</div>
+								// </Link>
+								// <div className="max-h-screen dropdown">
+								<>
+									<button
+										tabIndex={0}
+										className="flex flex-col items-center px-2 py-1 bg-white border-4 rounded-md cursor-pointer border-secondary text-primary"
+										title="My Wallet"
+										onClick={() => setWalletOpen(!walletOpen)}
+									>
+										<IoWalletOutline size={25} />
+										<span className="text-xs sm:text-sm">Wallet</span>
+									</button>
+									<Modal modalHeader={false} isOpen={walletOpen} setIsOpen={setWalletOpen}>
+										<AccountHistory />
+									</Modal>
+								</>
+
+								// 	{/* <AccountHistory
+								// 		tabIndex={0}
+								// 		className={`dropdown-content transform -translate-x-2/3 h-fit min-w-[300px]  z-[10] py-1 rounded-xl bg-white shadow-md overflow-y-auto`}
+								// 	/>
+								// </div> */}
+							)}
+							<Link to={Approutes.profile.saved}>
+								<div
+									className="relative flex flex-col items-center text-white cursor-pointer max-md:hidden"
+									title="Saved items"
+								>
+									<GoBookmark size={25} />
+									<span className="text-xs sm:text-sm">Saved</span>
+									{isLogin && saves?.saves.length > 0 && (
+										<span className="absolute top-[-7px] rounded-full px-1 bg-secondary/90 right-0 font-semibold text-sm text-black">
+											{saves?.saves.length}
+										</span>
+									)}
+								</div>
+							</Link>
 
               {/* post ad dropdown */}
               <div className="dropdown ">
@@ -512,41 +557,51 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* <!-- Mobile search input --> */}
-          <div className="flex items-center w-full px-1 mt-2 lg:hidden">
-            <div className="relative w-full">
-              <input
-                title="Search for items here."
-                type="text"
-                className="w-full py-2 pl-4 pr-[12rem] text-black bg-white border border-transparent rounded-3xl  focus:border-secondary outline-none focus:ring focus:ring-opacity-10 focus:ring-secondary"
-                placeholder="Searching for?....."
-                defaultValue={searchParams.get("q")}
-                onChange={(e) => {
-                  handleSearch(e.target.value);
-                }}
-              />
+					{/* <!-- Mobile search input --> */}
+					<div className="flex items-center w-full px-1 mt-2 lg:hidden">
+						<form className="relative w-full">
+							<input
+								title="Search for items here."
+								type="text"
+								className="w-full py-2 pl-4 pr-[12rem] text-black bg-white border border-transparent rounded-3xl  focus:border-secondary outline-none focus:ring focus:ring-opacity-10 focus:ring-secondary"
+								placeholder="Searching for?....."
+								defaultValue={searchParams.get('q')}
+								onChange={(e) => {
+									handleSearch(e.target.value);
+								}}
+							/>
+							<div className="absolute inset-y-0 right-0 flex items-center pr-3">
+								<div className="border-l-4 border-l-primary">
+									<select
+										type="select"
+										className="text-xs w-[10rem] h-6 border-transparent outline-none focus:border-none focus:ring focus:ring-transparent"
+										defaultValue={searchParams.get('stateId')}
+										onChange={(e) => setStateId(e.target.value)}
+									>
+										{statesOptions.map((option) => (
+											<option value={option.value} key={option.value}>
+												{option.key}
+											</option>
+										))}
+									</select>
+								</div>
 
-              <span className="absolute inset-y-0 right-0 flex items-center pr-3">
-                <span className="mr-10 border-l-4 border-l-primary">
-                  <span className="ml-4 text-sm">Nigeria</span>
-                </span>
+								<button className="bg-primary p-[0.4rem] rounded-xl">
+									<HiSearch size={23} className="text-white" />
+								</button>
+							</div>
+						</form>
+					</div>
 
-                <span className="bg-primary p-[0.4rem] rounded-xl">
-                  <HiSearch size={23} className="text-white" />
-                </span>
-              </span>
-            </div>
-          </div>
-
-          {/* bottom nav  */}
-          <div className="mt-2 border-y-2 border-y-white ">
-            <div className="max-w-[1380px] mx-auto px-2 relative flex items-center justify-between w-full  whitespace-nowrap  ">
-              {pathname === "/" ? (
-                // dropdown for categories
-                <div className="dropdown ">
-                  <button className="flex flex-col gap-0 px-5 mr-16 text-sm capitalize bg-white border-none max-lg:hidden btn btn-sm hover:bg-white text-primary cat-btn">
-                    Categories
-                  </button>
+					{/* bottom nav  */}
+					<div className="mt-2 border-y-2 border-y-white ">
+						<div className="max-w-[1380px] mx-auto px-2 relative flex items-center justify-between w-full  whitespace-nowrap">
+							{pathname === '/' ? (
+								// dropdown for categories
+								<div className="dropdown ">
+									<button className="flex flex-col gap-0 px-5 mr-16 text-sm capitalize bg-white border-none max-lg:hidden btn btn-sm hover:bg-white text-primary cat-btn">
+										Categories
+									</button>
 
 									<ul
 										tabIndex={0}

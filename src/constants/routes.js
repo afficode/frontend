@@ -39,6 +39,7 @@ export const Approutes = {
 		dashboard: '/grabber/dashboard',
 		products: '/grabber/products',
 		product: '/grabber/product',
+		grabbedProduct: '/grabber/grabbed-product',
 		settings: '/grabber/settings',
 		flyer: '/grabber/flyer',
 	},

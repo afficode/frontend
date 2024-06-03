@@ -12,14 +12,14 @@ const GrabDashboard = () => {
 	return (
 		<section className="w-full">
 			<div className="bg-primary ">
-				<div className="pt-2 pb-4 px-4 mb-4 text-white">
-					<button className="flex items-center mx-auto gap-2 ">
+				<div className="px-4 pt-2 pb-4 mb-4 text-white">
+					<button className="flex items-center gap-2 mx-auto ">
 						<img src={NigFlag} alt="nigeria flag" className="w-4" />
 						<span>NG Naira</span>
 						<BiSolidDownArrow size={12} />
 					</button>
 
-					<div className="flex justify-between items-center">
+					<div className="flex items-center justify-between">
 						<h4>Hi, Akindele!</h4>
 						<button onClick={() => setShowSidebar(!showSidebar)} className=" lg:hidden">
 							<IoIosMenu size={28} />
@@ -27,9 +27,9 @@ const GrabDashboard = () => {
 					</div>
 				</div>
 
-				<div className="flex max-lg:flex-col justify-between divide-x-2 divide-white ">
+				<div className="flex justify-between divide-x-2 divide-white max-lg:flex-col ">
 					<div className="flex-1 ">
-						<div className="flex items-center justify-between gap-1 bg-black/30 h-14 p-2">
+						<div className="flex items-center justify-between gap-1 p-2 bg-black/30 h-14">
 							<Button
 								variant={'plain'}
 								className={'rounded-xl text-primary font-semibold max-sm:text-sm whitespace-nowrap'}
@@ -47,8 +47,8 @@ const GrabDashboard = () => {
 						</div>
 
 						<div className="lg:mt-[4.22rem] mt-6 pb-3 flex flex-col px-4">
-							<span className="text-white/70 mb-2">Total earning</span>
-							<span className="text-lg sm:text-xl font-semibold  text-white">
+							<span className="mb-2 text-white/70">Total Balance</span>
+							<span className="text-lg font-semibold text-white sm:text-xl">
 								₦ 2,300,000<span className="text-sm">.00</span>
 							</span>
 						</div>
@@ -62,7 +62,7 @@ const GrabDashboard = () => {
 					</div>
 
 					<div className="flex-1">
-						<div className="bg-black/30 h-14 flex items-center justify-center">
+						<div className="flex items-center justify-center bg-black/30 h-14">
 							<h6 className="text-white">Coin Wallet</h6>
 						</div>
 
@@ -70,13 +70,13 @@ const GrabDashboard = () => {
 
 						<div className="flex justify-between px-8">
 							<div className="flex flex-col items-center">
-								<span className="text-white/70 mb-2 ">Total coin(s)</span>
-								<span className="text-lg sm:text-xl font-semibold text-white">0.50</span>
+								<span className="mb-2 text-white/70 ">Total coin(s)</span>
+								<span className="text-lg font-semibold text-white sm:text-xl">0.50</span>
 							</div>
 
 							<div className="flex flex-col items-center">
-								<span className="text-white/70 mb-2 ">Usable coin(s)</span>
-								<span className="text-lg sm:text-xl font-semibold text-white">0.00</span>
+								<span className="mb-2 text-white/70 ">Usable coin(s)</span>
+								<span className="text-lg font-semibold text-white sm:text-xl">0.00</span>
 							</div>
 						</div>
 
@@ -89,16 +89,16 @@ const GrabDashboard = () => {
 				</div>
 			</div>
 
-			<div className="flex items-center justify-between gap-6 flex-wrap bg-gray-300 my-8 p-4 rounded-xl">
-				<div className="bg-red-500 p-4 flex-1 text-center whitespace-nowrap space-y-3 text-white">
+			<div className="flex flex-wrap items-center justify-between gap-6 p-4 my-8 bg-gray-300 rounded-xl">
+				<div className="flex-1 p-4 space-y-3 text-center text-white bg-red-500 whitespace-nowrap">
 					<h4>Total Grabs</h4>
 					<h4>[200]</h4>
 				</div>
-				<div className="bg-secondary p-4 flex-1 text-center whitespace-nowrap space-y-3">
+				<div className="flex-1 p-4 space-y-3 text-center bg-secondary whitespace-nowrap">
 					<h4>Sales from link</h4>
 					<h4>[20]</h4>
 				</div>
-				<div className="bg-green-400 p-4 flex-1 text-center whitespace-nowrap space-y-3 text-white">
+				<div className="flex-1 p-4 space-y-3 text-center text-white bg-green-400 whitespace-nowrap">
 					<h4>Pageviews via link</h4>
 					<h4>[1,200]</h4>
 				</div>
@@ -106,13 +106,13 @@ const GrabDashboard = () => {
 
 			{/* Grabs by category chart here  */}
 
-			<div className="space-y-4 my-8">
+			<div className="my-8 space-y-4">
 				<h4>Grab Activities Chart</h4>
 
-				<div className=" mt-4 overflow-x-auto border border-black/40 max-h-96 bg-white">
+				<div className="mt-4 overflow-x-auto bg-white border  border-black/40 max-h-96">
 					<table className="table table-pin-rows ">
 						<thead className="text-sm font-medium border-none">
-							<tr className="bg-gray-200 text-black">
+							<tr className="text-black bg-gray-200">
 								<th>Product(s)</th>
 								<th className="text-center">Grabbed date</th>
 								<th className="text-center">Status</th>
@@ -149,16 +149,16 @@ const GrabDashboard = () => {
 				</div>
 			</div>
 
-			<div className="space-y-4 my-8">
+			<div className="my-8 space-y-4">
 				<div>
 					<h4>Grab Activities Summary</h4>
 					<p>Monitor this chat regularly to make informed decisions</p>
 				</div>
 
-				<div className=" mt-4a overflow-x-auto border border-black/40 max-h-96 bg-white">
+				<div className="overflow-x-auto bg-white border  mt-4a border-black/40 max-h-96">
 					<table className="table table-pin-rows ">
 						<thead className="text-sm font-medium border-none">
-							<tr className="bg-gray-200 text-black">
+							<tr className="text-black bg-gray-200">
 								<th>Categories</th>
 								<th className="text-center">Grabs</th>
 								<th className="text-center">Active</th>
@@ -197,10 +197,10 @@ const GrabDashboard = () => {
 
 			{/* recent activities */}
 
-			<div className="flex flex-col space-y-2 w-fit my-6">
+			<div className="flex flex-col my-6 space-y-2 w-fit">
 				<h4>Recent Activities</h4>
 
-				<div className="bg-gray-200 py-6 px-4 rounded-lg w-fit ">
+				<div className="px-4 py-6 bg-gray-200 rounded-lg w-fit ">
 					<ul className="flex flex-col gap-4">
 						<li className="flex items-start gap-3">
 							<img src={GrabIcon} className="w-[2.5rem]" alt="" />

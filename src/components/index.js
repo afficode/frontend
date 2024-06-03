@@ -1,3 +1,4 @@
+export { default as AccountHistory } from './AccountHistory';
 export { default as Banner } from './Banner';
 export { default as TokenPurchase } from './Token';
 export { default as Success } from './Token/Success';
@@ -7,5 +8,6 @@ export { default as FormControl } from './FormComponents/FormControl';
 export { default as RequireAuth } from './RequireAuth';
 export { default as SpinnerSkeleton } from './SpinnersUi';
 export { default as Spinner } from './Spinners';
+export { default as TermsAndCondition } from './TermsAndCondition';
 export { default as ProductSkeleton } from './Skeleton/ProductSkeleton';
 export { default as Timeline } from './TimelineComponent';
