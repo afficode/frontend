@@ -35,7 +35,7 @@ const index = () => {
   const [revealEmail, setRevealEmail] = useState(false);
   const { isLogin, user } = useAuth();
   const { data: result, isLoading } = fetchProduct(decodeProductId(id));
-  const { data, isLoading: saveLoading } = getSaves();
+  //const { data, isLoading: saveLoading } = getSaves();
 
   useEffect(() => {
     if (result?.data) {
@@ -45,16 +45,21 @@ const index = () => {
         { name: result?.data?.title },
       ]);
     }
-  }, [isLoading, saveLoading]);
+  }, [isLoading]);
 
   return isLoading ? (
     <ViewProduct />
   ) : (
     <section className="w-full p-2 lg:p-4">
-      {result?.data.active === "0" && (
+      {result?.data.active === "0" && result?.data?.owner === user?.id && (
         <div className="w-[90%] lg:w-[70%] my-3 mx-auto">
           <Alert
-            additionalContent={<ContactAdmin />}
+            additionalContent={
+              <ContactAdmin
+                ads_id={decodeProductId(id)}
+                images={result.data?.images}
+              />
+            }
             color="warning"
             icon={HiInformationCircle}
           >
@@ -78,7 +83,7 @@ const index = () => {
           <div className="w-full my-2 ml-2">
             <div className="flex items-center justify-between w-full my-2 font-bold uppercase text-md md:text-2xl xl:text-3xl">
               <span className="">{result.data?.title}</span>
-              <span className=" flex items-center gap-2 lg: gap-8 my-auto">
+              <span className=" flex items-center gap-2 lg:gap-8 my-auto">
                 <NegotiableIcon negotiable={result.data?.negotiable} />
 
                 {((isLogin &&
@@ -239,14 +244,7 @@ const index = () => {
         <div className="flex flex-col items-start justify-start w-full gap-2 tracking-tighter lg:tracking-normal line-clamp-1">
           <h2 className="text-xl xl:2xl">Description</h2>
           <p className="bg-white p-4 min-h-[100px] text-justify text-lg border-t-4 border-t-primary whitespace-pre-line">
-            {result?.data?.description} Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Odit, minus quibusdam. Soluta vero doloribus iste
-            sint sunt minima praesentium, asperiores, facere dolorum eaque
-            voluptate fugiat molestias? Provident harum nostrum omnis! Lorem
-            ipsum, dolor sit amet consectetur adipisicing elit. Dolorem veniam
-            molestiae, perspiciatis modi facilis labore soluta ipsa eveniet
-            mollitia, molestias quod rem non culpa hic laborum minima. Soluta,
-            ducimus vero?
+            {result?.data?.description}
           </p>
         </div>
         <div className="flex flex-col items-start justify-start w-full gap-2 my-2">
