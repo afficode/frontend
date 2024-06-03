@@ -61,7 +61,9 @@ export const backendLink =
 	import.meta.env.VITE_TESTING == 'gitpod'
 		? 'https://4000-afficode-backend-cch37ds4fkj.ws-eu108.gitpod.io/'
 		: import.meta.env.VITE_TESTING == 'sam'
-		? 'http://localhost:4000/'
+		? 'http://localhost:4000/' 
+		: import.meta.env.VITE_TESTING == 'staging_prod'
+		? 'http://89.107.60.191:4000/'
 		: 'https://backend-boonfu-staging-968fe07646b1.herokuapp.com/';
 // : 'http://109.237.25.252:4000/';
 //console.log(process.env.VITE_TESTING)
