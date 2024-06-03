@@ -42,17 +42,16 @@ privateAxios.interceptors.response.use(
 						Accept: 'application/json',
 					},
 				});
-				const { token } = response.data;
+				const { token } = response?.data;				
 				setToken(token);
 				originalRequest.headers.Authorization = `Bearer ${token}`;
-				return axios(originalRequest);
+				return await axios(originalRequest);
 			} catch (error) {
 				setRedirectLink(window.location.pathname);
 				return window.location.assign(Approutes.auth.initial);
 				// return Promise.reject(error);
 			}
 		}
-		console.log('Axios', error);
 		// return window.location.assign(Approutes.auth.initial);
 		return Promise.reject(error);
 	}

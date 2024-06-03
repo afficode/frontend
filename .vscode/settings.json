@@ -6,5 +6,6 @@
         "flowbite",
         "Formik",
         "mytheme"
-    ]
+    ],
+    "DockerRun.DisableDockerrc": true
 }

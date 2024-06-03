@@ -10,3 +10,4 @@ export { default as SpinnerSkeleton } from './SpinnersUi';
 export { default as Spinner } from './Spinners';
 export { default as TermsAndCondition } from './TermsAndCondition';
 export { default as ProductSkeleton } from './Skeleton/ProductSkeleton';
+export { default as Timeline } from './TimelineComponent';

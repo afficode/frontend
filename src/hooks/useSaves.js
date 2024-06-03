@@ -6,7 +6,10 @@ export const getSaves =  (enable = false ) => {
     const getSaved = () => privateAxios.get(`${backendLink}ads/saves`).then((res) => res?.data);
 
     return useQuery("saved", getSaved, {
-        enabled: enable
+        enabled: enable,
+        refetchInterval: false,
+        refetchIntervalInBackground: false,
+		refetchOnWindowFocus: false,
     });
 }
 
