@@ -113,12 +113,12 @@ const ChatForm = ({ ad_id, owner, active }) => {
         {({ isSubmitting }) => (
           <Form>
             <Field
-              disabled={chatId !== null || blocked || user?.id === owner}
+              disabled={!isLogin || chatId !== null || blocked || user?.id === owner}
               as="textarea"
               name="message"
               id="message"
-              className={`border-2 w-full border-gray-200 p-4 focus:outline-none focus:bg-white focus:border-primary tracking-tighter line-clamp-1 ${
-                chatId !== null && "bg-gray-300 cursor-not-allowed"
+              className={`border-2 w-full border-gray-200 p-4 focus:outline-none focus:bg-white focus:border-primary tracking-tighter line-clamp-1 ${!isLogin && "bg-gray-100 cursor-not-allowed"} ${
+                (chatId !== null) && "bg-gray-300 cursor-not-allowed"
               }`}
               placeholder={
                 chatId !== null
@@ -127,6 +127,7 @@ const ChatForm = ({ ad_id, owner, active }) => {
               }
               cols={20}
               rows={5}
+              
             />
             <Input
               disabled={chatId !== null || blocked || user?.id === owner}
@@ -137,7 +138,7 @@ const ChatForm = ({ ad_id, owner, active }) => {
                   ? "Disabled... Please continue chat in the message section"
                   : "Your number here"
               }
-              className={`border-2 border-gray-200 w-full p-2 focus:outline-none focus:bg-white focus:border-primary ${
+              className={`border-2 border-gray-200 w-full p-2 focus:outline-none focus:bg-white focus:border-primary ${!isLogin && "bg-gray-100 cursor-not-allowed"} ${
                 chatId !== null && "bg-gray-300 cursor-not-allowed"
               }`}
             />
@@ -221,7 +222,7 @@ const ChatForm = ({ ad_id, owner, active }) => {
         modalHeader={true}
         children={<ReportAd ad_id={ad_id} />}
         headerText={"Feedback / Abuse"}
-        className="w-full p-2 my-2 text-lg tracking-tighter text-white bg-slate-600 hover:bg-slate-500 line-clamp-1"
+        className={`w-full p-2 my-2 text-lg tracking-tighter text-white bg-slate-600 hover:bg-slate-500 line-clamp-1 ${!isLogin && "cursor-not-allowed"}`}
         disabled={!isLogin || blocked || user?.id === owner}
         type="button"
         buttonChild={

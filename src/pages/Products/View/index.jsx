@@ -16,7 +16,6 @@ import {
   decodeProductId,
   convertKeyToName,
 } from "../../../utils/dataManipulations";
-import { toast } from "react-toastify";
 import OverviewPills from "./OverviewPills";
 import { formatDistance } from "date-fns";
 import { ScrollToTop } from "../../../utils";
@@ -172,7 +171,7 @@ const index = () => {
                 </p>
 
                 <button
-                  className="font-bold text-black bg-white rounded-none btn btn-sm hover:bg-primary hover:text-white hover:border-0 hover:rounded-sm "
+                  className={`font-bold text-black bg-white rounded-none btn btn-sm hover:bg-primary hover:text-white hover:border-0 hover:rounded-sm ${!isLogin && "bg-gray-100 cursor-not-allowed"}`}
                   onClick={() => {
                     if (
                       isLogin &&
@@ -180,7 +179,7 @@ const index = () => {
                     ) {
                       setRevealNumber(!revealNumber);
                     } else {
-                      toast.warn("Please login to reveal phone number");
+                      notify("Please login to reveal phone number")
                     }
                   }}
                 >
@@ -212,11 +211,11 @@ const index = () => {
                 </p>
 
                 <button
-                  className="font-bold text-black bg-white rounded-none btn btn-sm hover:bg-primary hover:text-white hover:border-0 hover:rounded-sm "
+                  className={`font-bold text-black bg-white rounded-none btn btn-sm hover:bg-primary hover:text-white hover:border-0 hover:rounded-sm ${!isLogin && "bg-gray-100 cursor-not-allowed"} `}
                   onClick={() => {
                     isLogin && result?.data?.contact_type.includes("email")
                       ? setRevealEmail(!revealEmail)
-                      : toast.warn("Please login to reveal Ads owner email");
+                      : notify("Please login to reveal Ads owner email");
                   }}
                 >
                   {!revealEmail ? (
@@ -242,7 +241,7 @@ const index = () => {
       <section className="flex flex-col p-2 my-2 bg-gray-200 xl:p-6 xl:my-4">
         <div className="flex flex-col items-start justify-start w-full gap-2 tracking-tighter lg:tracking-normal line-clamp-1">
           <h2 className="text-xl xl:2xl">Description</h2>
-          <p className="bg-white p-4 min-h-[100px] text-justify text-lg border-t-4 border-t-primary whitespace-pre-line">
+          <p className="bg-white p-4 min-h-[100px] text-justify text-lg border-t-4 border-t-primary whitespace-pre-line w-full">
             {result?.data?.description}
           </p>
         </div>
