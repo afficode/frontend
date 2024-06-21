@@ -22,7 +22,7 @@ import { FaCarSide, FaBuilding, FaRegHandshake } from 'react-icons/fa';
 import { useDebouncedCallback } from 'use-debounce';
 import { getSaves } from '../../hooks/useSaves';
 import { toSelectOptions } from '../../utils';
-import { AccountHistory } from '../../components';
+// import { AccountHistory } from '../../components';
 
 const Navbar = () => {
 	const [nav, setNav] = useState(false);
@@ -110,7 +110,6 @@ const Navbar = () => {
 		};
 	}, [setNav, isLogin]);
 
-	const [walletOpen, setWalletOpen] = useState(false);
 	return (
 		<header className="fixed top-0 z-50 w-full bg-primary">
 			<nav className="relative ">
@@ -183,18 +182,16 @@ const Navbar = () => {
 								// </Link>
 								// <div className="max-h-screen dropdown">
 								<>
-									<button
-										tabIndex={0}
-										className="flex flex-col items-center px-2 py-1 bg-white border-4 rounded-md cursor-pointer border-secondary text-primary"
-										title="My Wallet"
-										onClick={() => setWalletOpen(!walletOpen)}
-									>
-										<IoWalletOutline size={25} />
-										<span className="text-xs sm:text-sm">Wallet</span>
-									</button>
-									<Modal modalHeader={false} isOpen={walletOpen} setIsOpen={setWalletOpen}>
-										<AccountHistory />
-									</Modal>
+									<Link to={Approutes.grab.dashboard}>
+										<button
+											tabIndex={0}
+											className="flex flex-col items-center px-2 py-1 bg-white outline outline-4 rounded-md cursor-pointer outline-secondary text-primary"
+											title="My Wallet"
+										>
+											<IoWalletOutline size={25} />
+											<span className="text-xs sm:text-sm">Wallet</span>
+										</button>
+									</Link>
 								</>
 
 								// 	{/* <AccountHistory

@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
-import { Button } from '../../../ui';
-import { Coin, GrabIcon, InspectionTick, New } from '../../../assets/svgs';
+import { useState } from 'react';
+import { Button, Modal } from '../../../ui';
+import { GrabIcon, InspectionTick, New } from '../../../assets/svgs';
 import { MdArrowDropDown } from 'react-icons/md';
 import { BiDownArrow, BiSolidDownArrow } from 'react-icons/bi';
-import { NigFlag } from '../../../assets/images';
+import { Coin, NigFlag } from '../../../assets/images';
 import { GrabMobileSidebar } from '../../../layout';
 import { IoIosMenu } from 'react-icons/io';
+import { AccountHistory } from '../../../components';
+import { ScrollToTop } from '../../../utils';
 
 const GrabDashboard = () => {
 	const [showSidebar, setShowSidebar] = useState(false);
+	const [walletOpen, setWalletOpen] = useState(false);
+
 	return (
 		<section className="w-full">
 			<div className="bg-primary ">
@@ -41,9 +45,13 @@ const GrabDashboard = () => {
 								variant={'grey'}
 								className={'rounded-xl font-semibold max-sm:text-sm whitespace-nowrap'}
 								size={'full'}
+								onClick={() => setWalletOpen(!walletOpen)}
 							>
 								Account History
 							</Button>
+							<Modal modalHeader={false} isOpen={walletOpen} setIsOpen={setWalletOpen}>
+								<AccountHistory />
+							</Modal>
 						</div>
 
 						<div className="lg:mt-[4.22rem] mt-6 pb-3 flex flex-col px-4">
@@ -66,7 +74,7 @@ const GrabDashboard = () => {
 							<h6 className="text-white">Coin Wallet</h6>
 						</div>
 
-						<img src={Coin} className="w-32 pt-2 mx-auto" alt="/" />
+						<img src={Coin} className="w-16 pt-2 mx-auto" alt="/" />
 
 						<div className="flex justify-between px-8">
 							<div className="flex flex-col items-center">
@@ -235,6 +243,7 @@ const GrabDashboard = () => {
 			</div>
 
 			<GrabMobileSidebar sidebar={showSidebar} setSidebar={setShowSidebar} />
+			<ScrollToTop />
 		</section>
 	);
 };
