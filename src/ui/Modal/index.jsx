@@ -1,9 +1,15 @@
-import { useEffect } from 'react';
-import { useRef } from 'react';
-import { ImCancelCircle } from 'react-icons/im';
+import { useEffect } from "react";
+import { useRef } from "react";
+import { ImCancelCircle } from "react-icons/im";
 
-const Modal = ({ isOpen, setIsOpen, modalHeader = true, children, headerText }) => {
-	const modalRef = useRef();
+const Modal = ({
+  isOpen,
+  setIsOpen,
+  modalHeader = true,
+  children,
+  headerText,
+}) => {
+  const modalRef = useRef();
 
 	useEffect(() => {
 		const handleClickOutside = (e) => {
@@ -16,10 +22,10 @@ const Modal = ({ isOpen, setIsOpen, modalHeader = true, children, headerText }) 
 			document.addEventListener('mousedown', handleClickOutside);
 		}
 
-		return () => {
-			document.removeEventListener('mousedown', handleClickOutside);
-		};
-	}, [isOpen, setIsOpen]);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen, setIsOpen]);
 
 	return (
 		<div

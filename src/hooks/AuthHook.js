@@ -24,10 +24,11 @@ export const LoginHook = async (values, setSubmitting) => {
 		.post(`auth/login`, values)
 		.then(({ data }) => {
 			if (data.success) {
-				userUpdate = data;
+				userUpdate = data;				
 			}
 		})
 		.catch(({ response }) => {
+			console.log(response)
 			userUpdate = { success: false, ...response.data };
 		});
 	return userUpdate;
