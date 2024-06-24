@@ -1,12 +1,6 @@
 import { useState } from 'react';
-import { Button, Modal } from '../../../ui';
 import { GrabIcon, InspectionTick, New } from '../../../assets/svgs';
-import { MdArrowDropDown } from 'react-icons/md';
-import { BiDownArrow, BiSolidDownArrow } from 'react-icons/bi';
-import { Coin, NigFlag } from '../../../assets/images';
 import { GrabMobileSidebar } from '../../../layout';
-import { IoIosMenu } from 'react-icons/io';
-import { AccountHistory } from '../../../components';
 import { ScrollToTop } from '../../../utils';
 
 const GrabDashboard = () => {
