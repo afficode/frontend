@@ -1,94 +1,13 @@
-import React, { useState } from 'react';
-import { Button } from '../../../ui';
-import { Coin, GrabIcon, InspectionTick, New } from '../../../assets/svgs';
-import { MdArrowDropDown } from 'react-icons/md';
-import { BiDownArrow, BiSolidDownArrow } from 'react-icons/bi';
-import { NigFlag } from '../../../assets/images';
+import { useState } from 'react';
+import { GrabIcon, InspectionTick, New } from '../../../assets/svgs';
 import { GrabMobileSidebar } from '../../../layout';
-import { IoIosMenu } from 'react-icons/io';
+import { ScrollToTop } from '../../../utils';
 
 const GrabDashboard = () => {
 	const [showSidebar, setShowSidebar] = useState(false);
+
 	return (
 		<section className="w-full">
-			<div className="bg-primary ">
-				<div className="px-4 pt-2 pb-4 mb-4 text-white">
-					<button className="flex items-center gap-2 mx-auto ">
-						<img src={NigFlag} alt="nigeria flag" className="w-4" />
-						<span>NG Naira</span>
-						<BiSolidDownArrow size={12} />
-					</button>
-
-					<div className="flex items-center justify-between">
-						<h4>Hi, Akindele!</h4>
-						<button onClick={() => setShowSidebar(!showSidebar)} className=" lg:hidden">
-							<IoIosMenu size={28} />
-						</button>
-					</div>
-				</div>
-
-				<div className="flex justify-between divide-x-2 divide-white max-lg:flex-col ">
-					<div className="flex-1 ">
-						<div className="flex items-center justify-between gap-1 p-2 bg-black/30 h-14">
-							<Button
-								variant={'plain'}
-								className={'rounded-xl text-primary font-semibold max-sm:text-sm whitespace-nowrap'}
-								size={'full'}
-							>
-								Account
-							</Button>
-							<Button
-								variant={'grey'}
-								className={'rounded-xl font-semibold max-sm:text-sm whitespace-nowrap'}
-								size={'full'}
-							>
-								Account History
-							</Button>
-						</div>
-
-						<div className="lg:mt-[4.22rem] mt-6 pb-3 flex flex-col px-4">
-							<span className="mb-2 text-white/70">Total Balance</span>
-							<span className="text-lg font-semibold text-white sm:text-xl">
-								₦ 2,300,000<span className="text-sm">.00</span>
-							</span>
-						</div>
-
-						<div className="flex items-center gap-4 px-4 my-6">
-							<Button className={'bg-green-400 text-white px-6 py-2'}>Withdraw</Button>
-							<Button variant={'secondary'} size={'small'} className={'border-none'}>
-								Deposit
-							</Button>
-						</div>
-					</div>
-
-					<div className="flex-1">
-						<div className="flex items-center justify-center bg-black/30 h-14">
-							<h6 className="text-white">Coin Wallet</h6>
-						</div>
-
-						<img src={Coin} className="w-32 pt-2 mx-auto" alt="/" />
-
-						<div className="flex justify-between px-8">
-							<div className="flex flex-col items-center">
-								<span className="mb-2 text-white/70 ">Total coin(s)</span>
-								<span className="text-lg font-semibold text-white sm:text-xl">0.50</span>
-							</div>
-
-							<div className="flex flex-col items-center">
-								<span className="mb-2 text-white/70 ">Usable coin(s)</span>
-								<span className="text-lg font-semibold text-white sm:text-xl">0.00</span>
-							</div>
-						</div>
-
-						<div className="text-center mt-[2.25rem] max-lg:mb-6">
-							<Button variant={'secondary'} size={'small'} className={'border-none '}>
-								Top Up
-							</Button>
-						</div>
-					</div>
-				</div>
-			</div>
-
 			<div className="flex flex-wrap items-center justify-between gap-6 p-4 my-8 bg-gray-300 rounded-xl">
 				<div className="flex-1 p-4 space-y-3 text-center text-white bg-red-500 whitespace-nowrap">
 					<h4>Total Grabs</h4>
@@ -109,7 +28,7 @@ const GrabDashboard = () => {
 			<div className="my-8 space-y-4">
 				<h4>Grab Activities Chart</h4>
 
-				<div className="mt-4 overflow-x-auto bg-white border  border-black/40 max-h-96">
+				<div className="mt-4 overflow-x-auto bg-white border border-black/40 max-h-96">
 					<table className="table table-pin-rows ">
 						<thead className="text-sm font-medium border-none">
 							<tr className="text-black bg-gray-200">
@@ -155,7 +74,7 @@ const GrabDashboard = () => {
 					<p>Monitor this chat regularly to make informed decisions</p>
 				</div>
 
-				<div className="overflow-x-auto bg-white border  mt-4a border-black/40 max-h-96">
+				<div className="overflow-x-auto bg-white border mt-4a border-black/40 max-h-96">
 					<table className="table table-pin-rows ">
 						<thead className="text-sm font-medium border-none">
 							<tr className="text-black bg-gray-200">
@@ -235,6 +154,7 @@ const GrabDashboard = () => {
 			</div>
 
 			<GrabMobileSidebar sidebar={showSidebar} setSidebar={setShowSidebar} />
+			<ScrollToTop />
 		</section>
 	);
 };

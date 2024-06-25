@@ -280,7 +280,7 @@ const GrabRegister = () => {
 						<Button variant={'primary'}>Create a Grabber Account in Seconds.</Button>
 						<div>
 							Already have a Grabber Account?{' '}
-							<Link to={Approutes.grab.profile} className="text-primary">
+							<Link to={Approutes.grab.home} className="text-primary">
 								Login Now
 							</Link>
 						</div>
