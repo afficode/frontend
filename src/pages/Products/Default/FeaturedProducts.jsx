@@ -13,6 +13,7 @@ import { NegotiableIcon } from "../../../ui";
 import { GrabIcon } from "../../../ui";
 const FeaturedProducts = ({ product }) => {
   const { isLogin, user } = useAuth();
+  console.log(product)
   return (
     <>
       {product.map((ad, index) => (
@@ -28,7 +29,7 @@ const FeaturedProducts = ({ product }) => {
                     src={img.path}
                     alt={img.filename}
                     key={index * 3}
-                    className="w-full h-full rounded-t-sm rounded-b-none "
+                    className="w-full h-full  rounded-b-none "
                   />
                 ))}
               </Carousel>
@@ -41,6 +42,12 @@ const FeaturedProducts = ({ product }) => {
                 />
               </div>
             )}
+            {(ad.feature !== '0' && ad.feature !== '3') && (
+              <div className={`w-[70%] absolute top-5 ${ad.feature === '1' ? "bg-secondary" : "bg-primary"} border-2 border-gray-500 border-l-0 p-1 text-center uppercase text-white rounded-r-sm font-semibold`}>
+              Spotlight
+            </div>
+            )}
+            
             {((isLogin && parseInt(ad?.owner) !== parseInt(user?.id)) ||
               !isLogin) && (
               <SaveProduct
@@ -60,11 +67,11 @@ const FeaturedProducts = ({ product }) => {
             <p className="flex items-start justify-start h-6 overflow-hidden text-xl font-semibold uppercase lg:h-8 ">
               {ad.title.toString().trimEnd().trim()}{" "}
             </p>
-            <div className="block w-full mt-1 text-start text-ellipsis flex-nowrap line-clamp-1">
-              <FaMapMarkerAlt className="inline-block mb-1" />
-              <span className="inline text-xs tracking-tighter md:text-md lg:text-lg line-clamp-1">
+            <div className="flex items-center justify-start w-full mt-1 text-start text-ellipsis flex-nowrap line-clamp-1">
+              <FaMapMarkerAlt className="inline-block mr-1" />
+              <p className="text-xs tracking-tighter md:text-md lg:text-lg line-clamp-1">
                 {ad.location}
-              </span>
+              </p>
             </div>
             <p className="flex justify-between mt-4 tracking-tighter  line-clamp-1">
               <span className="flex">
