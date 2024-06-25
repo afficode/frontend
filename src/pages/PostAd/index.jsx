@@ -24,6 +24,7 @@ const PostAd = () => {
 			price: '',
 			negotiable: false,
 			urgent: false,
+			feature: '',
 		},
 		51: {
 			category: '',
@@ -36,6 +37,7 @@ const PostAd = () => {
 			contact_type: [],
 			negotiable: false,
 			urgent: false,
+			feature: '',
 		},
 		52: {
 			category: '',
@@ -48,6 +50,7 @@ const PostAd = () => {
 			negotiable: false,
 			contact_type: [],
 			urgent: false,
+			feature: '',
 		},
 		53: {
 			category: '',
@@ -60,6 +63,7 @@ const PostAd = () => {
 			negotiable: false,
 			contact_type: [],
 			urgent: false,
+			feature: '',
 		},
 		54: {
 			category: '',
@@ -72,6 +76,7 @@ const PostAd = () => {
 			negotiable: false,
 			contact_type: [],
 			urgent: false,
+			feature: '',
 		},
 		55: {
 			category: '',
@@ -84,6 +89,7 @@ const PostAd = () => {
 			negotiable: false,
 			contact_type: [],
 			urgent: false,
+			feature: '',
 		},
 		56: {
 			category: '',
@@ -96,6 +102,7 @@ const PostAd = () => {
 			negotiable: false,
 			contact_type: [],
 			urgent: false,
+			feature: '',
 		},
 		57: {
 			category: '',
@@ -108,6 +115,7 @@ const PostAd = () => {
 			negotiable: false,
 			contact_type: [],
 			urgent: false,
+			feature: '',
 		},
 		58: {
 			category: '',
@@ -120,6 +128,7 @@ const PostAd = () => {
 			negotiable: false,
 			contact_type: [],
 			urgent: false,
+			feature: '',
 		},
 		59: {
 			category: '',
@@ -132,6 +141,7 @@ const PostAd = () => {
 			negotiable: false,
 			contact_type: [],
 			urgent: false,
+			feature: '',
 		},
 		60: {
 			category: '',
@@ -144,6 +154,7 @@ const PostAd = () => {
 			negotiable: false,
 			contact_type: [],
 			urgent: false,
+			feature: '',
 		},
 		61: {
 			category: '',
@@ -156,6 +167,7 @@ const PostAd = () => {
 			negotiable: false,
 			contact_type: [],
 			urgent: false,
+			feature: '',
 		},
 		62: {
 			category: '',
@@ -168,6 +180,7 @@ const PostAd = () => {
 			negotiable: false,
 			contact_type: [],
 			urgent: false,
+			feature: '',
 		},
 		63: {
 			category: '',
@@ -180,6 +193,7 @@ const PostAd = () => {
 			negotiable: false,
 			contact_type: [],
 			urgent: false,
+			feature: '',
 		},
 		64: {
 			category: '',
@@ -192,6 +206,7 @@ const PostAd = () => {
 			negotiable: false,
 			contact_type: [],
 			urgent: false,
+			feature: '',
 		},
 		65: {
 			category: '',
@@ -204,6 +219,7 @@ const PostAd = () => {
 			negotiable: false,
 			contact_type: [],
 			urgent: false,
+			feature: '',
 		},
 	};
 

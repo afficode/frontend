@@ -7,12 +7,24 @@ import { CarBlack } from '../../../assets/images';
 import { FaCamera } from 'react-icons/fa';
 import OverviewPills from '../../Products/View/OverviewPills';
 import { ScrollToTop } from '../../../utils';
-import { Button } from '../../../ui';
-import { BankTransfer, Paypal, Visa } from '../../../assets/svgs';
+import { Button, InputGroup } from '../../../ui';
+import {
+	BankTransfer,
+	Info,
+	InfoYellow,
+	Paypal,
+	SingleArrowRight,
+	Visa,
+} from '../../../assets/svgs';
 import { FormControl } from '../../../components';
 import { Form, Formik } from 'formik';
 
 const GrabbedProduct = () => {
+	const [formData, setFormData] = useState({
+		delivery_option: '',
+	});
+
+	const isGeneral = false;
 	return (
 		<section className="w-full p-4 lg:p-8">
 			<div className="flex flex-col gap-4 p-4 rounded-xl bg-primary">
@@ -79,103 +91,132 @@ const GrabbedProduct = () => {
 					</div>
 				</div>
 
-				<aside className="w-full h-[550px] md:w-[40%] xl:w-[30%] border-2 border-gray-400 p-2 lg:p-4 flex flex-col justify-between">
-					<p className="pb-2 border-b border-black/40 border-1">
-						NOTE:{' '}
-						<span className="italic text-primary">
-							This Item does not deliver outside of seller’s state.
-						</span>
-					</p>
-					{/* <hr className="h-px my-2 border-black/40 border-1" /> */}
-					<div className="pb-4 space-y-4 border-b border-black/40 border-1">
-						<div className="p-3 font-semibold text-center bg-gray-300 rounded-lg">
-							Ready to Buy Item Now?
+				{isGeneral ? (
+					<aside className="w-full  md:w-[40%] xl:w-[30%] border-2 border-gray-400 p-2 lg:p-4 flex flex-col justify-between">
+						<p className="pb-2 border-b border-black/40 border-1">
+							NOTE:{' '}
+							<span className="italic text-primary">
+								This Item does not deliver outside of seller’s state.
+							</span>
+						</p>
+						{/* <hr className="h-px my-2 border-black/40 border-1" /> */}
+						<div className="pb-4 space-y-4 border-b border-black/40 border-1">
+							<div className="p-3 font-semibold text-center bg-gray-300 rounded-lg">
+								Ready to Buy Item Now?
+							</div>
+
+							<div>
+								<p className="font-semibold">Select delivery option:</p>
+
+								<form className="mt-1">
+									<div className="space-x-4 flex items-center">
+										<input
+											type="radio"
+											name={'delivery'}
+											value={'delivery'}
+											checked={formData.delivery_option === 'delivery'}
+											onChange={(e) => setFormData({ ...formData, delivery_option: e.target.value })}
+											className={``}
+										/>
+										<label htmlFor={'delivery'} className="flex items-center gap-2">
+											Boonfu Delivery <img src={InfoYellow} alt="/" className="w-4" />
+										</label>
+									</div>
+
+									<div className="space-x-4 flex items-center">
+										<input
+											type="radio"
+											name={'pickup'}
+											value={'pickup'}
+											checked={formData.delivery_option === 'pickup'}
+											onChange={(e) => setFormData({ ...formData, delivery_option: e.target.value })}
+											className={``}
+										/>
+										<label htmlFor={'pickup'} className="flex items-center gap-2">
+											Pick up by self <img src={InfoYellow} alt="/" className="w-4" />
+										</label>
+									</div>
+
+									<button className="text-black underline font-medium mt-2">
+										T & C’s apply, please read!
+									</button>
+
+									<div className="space-y-3 mb-2">
+										<Button
+											variant={'primary'}
+											size={'full'}
+											className={'flex items-center justify-center gap-4 rounded-3xl mt-4'}
+										>
+											Place Order
+										</Button>
+										<Button
+											variant={'primary'}
+											size={'full'}
+											className={'flex items-center justify-center gap-4 rounded-3xl mt-4'}
+										>
+											Inquire about Item
+										</Button>
+									</div>
+								</form>
+							</div>
+						</div>
+
+						<div className="">
+							<h6 className="my-2 font-bold ">Buy with confidence</h6>
+							<p className="pb-2">
+								Payments made on Boonfu.com is secured with strict SSL encryption and data protection
+								protocols
+							</p>
+							<div className="flex items-center pt-1 border-t border-black/40 border-1">
+								Payments:{' '}
+								<span className="flex items-center gap-3">
+									{' '}
+									<img src={Visa} alt="/" />
+									<img src={Paypal} alt="/" />
+									<img src={BankTransfer} alt="/" />
+								</span>
+							</div>
+						</div>
+					</aside>
+				) : (
+					<aside className="w-full self-end h-[550px] md:w-[40%] xl:w-[30%] border-2 border-gray-400 px-2 py-4 lg:p-4 flex flex-col justify-between">
+						<div className="flex flex-col gap-4">
+							<Button
+								variant={'secondary'}
+								size={'full'}
+								className={'flex items-center justify-center gap-4 rounded-xl font-semibold'}
+							>
+								Seller’s contact
+								<img src={Info} alt="/" className="w-4" />
+							</Button>
+							<Button
+								variant={'primary'}
+								size={'full'}
+								className={'flex items-center justify-center gap-4 rounded-xl'}
+							>
+								Schedule inspection
+							</Button>
+							<div className="flex items-center justify-between p-3 border rounded-xl border-primary">
+								<h6 className="font-semibold">Inspection reports</h6>
+								<Link>
+									<span className="flex items-center gap-2 underline text-primary">
+										see <img src={SingleArrowRight} className="w-[0.5rem]" alt="/" />
+									</span>
+								</Link>
+							</div>
 						</div>
 
 						<div>
-							<p className="font-semibold">Select delivery option:</p>
-
-							<Formik initialValues={{ delivery_option: ' ' }}>
-								{(formik) => {
-									return (
-										<Form>
-											<FormControl
-												control="checkbox"
-												// label="Delivery Option"
-												name="delivery_option"
-												options={[
-													{ key: 'Pickup', value: 'pickup' },
-													{ key: 'Delivery', value: 'delivery' },
-												]}
-											/>
-										</Form>
-									);
-								}}
-							</Formik>
+							<h6 className="my-2 font-bold text-center">Keeping Safe</h6>
+							<ol className="list-[lower-roman] pl-4">
+								<li> Carryout inspection by yourself and ensure to go along with a technician</li>
+								<li> Thoroughly check all documents and verify authenticity before payment</li>
+								<li> Do not inspect/pay in a public place, office or seller’s home is advised!.</li>
+								<li> Do not commit funds in advance for vehicle you have not inspected.</li>
+							</ol>
 						</div>
-						<Button
-							variant={'primary'}
-							size={'full'}
-							className={'flex items-center justify-center gap-4 rounded-3xl'}
-						>
-							Place Order
-						</Button>
-					</div>
-
-					<div className="">
-						<h6 className="my-2 font-bold ">Buy with confidence</h6>
-						<p className="pb-2">
-							Payments made on Boonfu.com is secured with strict SSL encryption and data protection
-							protocols
-						</p>
-						<div className="flex items-center pt-1 border-t border-black/40 border-1">
-							Payments:{' '}
-							<span className="flex items-center gap-3">
-								{' '}
-								<img src={Visa} alt="/" />
-								<img src={Paypal} alt="/" />
-								<img src={BankTransfer} alt="/" />
-							</span>
-						</div>
-					</div>
-				</aside>
-				{/* <aside className="w-full h-[550px] md:w-[40%] xl:w-[30%] border-2 border-gray-400 p-2 lg:p-4 flex flex-col justify-between">
-					<div className="flex flex-col gap-4">
-						<Button
-							variant={'secondary'}
-							size={'full'}
-							className={'flex items-center justify-center gap-4 rounded-xl font-semibold'}
-						>
-							Seller’s contact
-							<img src={Info} alt="/" className="w-4" />
-						</Button>
-						<Button
-							variant={'primary'}
-							size={'full'}
-							className={'flex items-center justify-center gap-4 rounded-xl'}
-						>
-							Schedule inspection
-						</Button>
-						<div className="flex items-center justify-between p-3 border rounded-xl border-primary">
-							<h6 className="font-semibold">Inspection reports</h6>
-							<Link>
-								<span className="flex items-center gap-2 underline text-primary">
-									see <img src={SingleArrowRight} className="w-[0.5rem]" alt="/" />
-								</span>
-							</Link>
-						</div>
-					</div>
-
-					<div>
-						<h6 className="my-2 font-bold text-center">Keeping Safe</h6>
-						<ol className="list-[lower-roman] pl-4">
-							<li> Carryout inspection by yourself and ensure to go along with a technician</li>
-							<li> Thoroughly check all documents and verify authenticity before payment</li>
-							<li> Do not inspect/pay in a public place, office or seller’s home is advised!.</li>
-							<li> Do not commit funds in advance for vehicle you have not inspected.</li>
-						</ol>
-					</div>
-				</aside> */}
+					</aside>
+				)}
 			</div>
 
 			{/* description and overview */}
@@ -257,4 +298,9 @@ const overview = [
 		name: 'engine size',
 		value: ['1.8L'],
 	},
+];
+
+const optionLists = [
+	{ key: 'Boonfu Delivery', value: 'delivery' },
+	{ key: 'Pickup', value: 'pickup' },
 ];

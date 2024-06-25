@@ -20,15 +20,15 @@ const GrabProfile = () => {
 	return (
 		<div>
 			<GrabHeader text="GRABBER’S PROFILE" />
-			<Button
+			{/* <Button
 				className={'flex items-center gap-1 text-primary ml-auto my-4'}
 				variant={'grey'}
 				size={'small'}
 			>
 				<img src={EditPencil} className="w-3" alt="" /> <b> Edit..</b>
-			</Button>
+			</Button> */}
 
-			<div className="flex flex-col gap-6">
+			<div className="flex flex-col gap-6 mt-8">
 				<div className="md:w-[500px] w-full rounded-2xl border-4 border-gray-400 flex flex-col items-center mx-auto p-4">
 					<img
 						src={ManSmiling}
@@ -68,7 +68,7 @@ const GrabProfile = () => {
 					</div>
 
 					<div>
-						<div className="my-8 flex gap-2 items-center">
+						<div className="flex items-center gap-2 my-8">
 							<p className="p-lg">Grab ID:</p>
 							<p className="text-primary p-lg">KKelvin.is.ng</p>
 						</div>
@@ -89,7 +89,7 @@ const GrabProfile = () => {
 					</p>
 				</div>
 
-				<div className="mx-auto md:w-[500px] w-full flex flex-col items-start">
+				{/* <div className="mx-auto md:w-[500px] w-full flex flex-col items-start">
 					<h4 className="">Grab Interest(s)</h4>
 
 					<ul className="my-4">
@@ -111,8 +111,8 @@ const GrabProfile = () => {
 						</li>
 					</ul>
 
-					<button className="flex items-center gap-2  mb-4">
-						<div className="w-6 h-6 text-2xl flex justify-center items-center text-primary border border-gray-400">
+					<button className="flex items-center gap-2 mb-4">
+						<div className="flex items-center justify-center w-6 h-6 text-2xl border border-gray-400 text-primary">
 							<span>+</span>
 						</div>
 						<div>Add more</div>
@@ -126,7 +126,7 @@ const GrabProfile = () => {
 					<Button variant={'plain'} className={'border-2 border-black/50 shadow-none '}>
 						Connect
 					</Button>
-				</div>
+				</div> */}
 			</div>
 			<ScrollToTop />
 		</div>

@@ -101,6 +101,33 @@ const InputGroup = ({
 					</label>
 					{errorMsg && <TextError>{errorMsg}</TextError>}
 				</>
+			) : type === 'radio' ? (
+				<>
+					<label htmlFor={name}>
+						{children}
+						{optionLists.map((option) => {
+							return (
+								<div key={option.value} className="inline-block items-center pr-8 space-x-2">
+									<input
+										type="radio"
+										name={option.value}
+										id={option.value}
+										className={` ${className ? className : ''}`}
+										onBlur={(e) => {
+											if (typeof onChange === 'function') onBlur(e);
+										}}
+										onChange={(e) => {
+											if (typeof onChange === 'function') onChange(e);
+										}}
+										{...rest}
+									/>
+									<label htmlFor={option.value}>{option.key}</label>
+								</div>
+							);
+						})}
+					</label>
+					{errorMsg && <TextError>{errorMsg}</TextError>}
+				</>
 			) : (
 				<>
 					<input

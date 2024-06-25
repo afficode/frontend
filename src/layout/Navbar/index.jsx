@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation, useSearchParams, useNavigate } from 'react-router-dom';
 import { Approutes } from '../../constants/routes';
-import { Dropdown, Modal } from '../../ui';
+import { CategoryDropdown, WalletDropdown } from '../../ui';
 import { BoonfuLogo } from '../../assets/images';
 import { useCategories, useStates } from '../../hooks';
 import useAuth from '../../context/UserContext';
@@ -22,7 +22,7 @@ import { FaCarSide, FaBuilding, FaRegHandshake } from 'react-icons/fa';
 import { useDebouncedCallback } from 'use-debounce';
 import { getSaves } from '../../hooks/useSaves';
 import { toSelectOptions } from '../../utils';
-import { AccountHistory } from '../../components';
+// import { AccountHistory } from '../../components';
 
 const Navbar = () => {
 	const [nav, setNav] = useState(false);
@@ -110,7 +110,6 @@ const Navbar = () => {
 		};
 	}, [setNav, isLogin]);
 
-	const [walletOpen, setWalletOpen] = useState(false);
 	return (
 		<header className="fixed top-0 z-50 w-full bg-primary">
 			<nav className="relative ">
@@ -183,18 +182,17 @@ const Navbar = () => {
 								// </Link>
 								// <div className="max-h-screen dropdown">
 								<>
-									<button
-										tabIndex={0}
-										className="flex flex-col items-center px-2 py-1 bg-white border-4 rounded-md cursor-pointer border-secondary text-primary"
-										title="My Wallet"
-										onClick={() => setWalletOpen(!walletOpen)}
-									>
-										<IoWalletOutline size={25} />
-										<span className="text-xs sm:text-sm">Wallet</span>
-									</button>
-									<Modal modalHeader={false} isOpen={walletOpen} setIsOpen={setWalletOpen}>
-										<AccountHistory />
-									</Modal>
+									<div className="dropdown">
+										<button
+											tabIndex={0}
+											className="flex flex-col items-center px-2 py-1 bg-white rounded-md cursor-pointer outline outline-4 outline-secondary text-primary"
+											title="My Wallet"
+										>
+											<IoWalletOutline size={25} />
+											<span className="text-xs sm:text-sm">Wallet</span>
+										</button>
+										<WalletDropdown />
+									</div>
 								</>
 
 								// 	{/* <AccountHistory
@@ -763,6 +761,7 @@ const Navbar = () => {
 
                 <span className="border border-r-4 border-white h-[2rem]" />
 
+<<<<<<< HEAD
                 <li className="dropdown dropdown-hover">
                   <a
                     href={`${Approutes.product.category}/${btoa(50)}`}
@@ -784,9 +783,26 @@ const Navbar = () => {
                     />
                   )}
                 </li>
+=======
+								<li className="dropdown dropdown-hover">
+									<a href={`${Approutes.product.category}/${btoa(50)}`} tabIndex={0} className={listStyles}>
+										CARS & VEHICLES
+									</a>
+									<a href={`${Approutes.product.category}/${btoa(50)}`} className={mobileListStyles}>
+										<FaCarSide size={25} />
+									</a>
+									{filteredCategories?.vehicleCat && (
+										<CategoryDropdown
+											category={'CARS & VEHICLES'}
+											subCategories={filteredCategories?.vehicleCat}
+										/>
+									)}
+								</li>
+>>>>>>> f9f2a165c5bea7fea9edaff1f82ac38a330fd17f
 
                 <span className="border border-r-4 border-white h-[2rem]" />
 
+<<<<<<< HEAD
                 <li className="dropdown dropdown-hover">
                   <a
                     href={`${Approutes.product.category}/${btoa(51)}`}
@@ -808,9 +824,23 @@ const Navbar = () => {
                     />
                   )}
                 </li>
+=======
+								<li className="dropdown dropdown-hover">
+									<a href={`${Approutes.product.category}/${btoa(51)}`} tabIndex={0} className={listStyles}>
+										PROPERTY
+									</a>
+									<a href={`${Approutes.product.category}/${btoa(51)}`} className={mobileListStyles}>
+										<FaBuilding size={25} />
+									</a>
+									{filteredCategories?.propertyCat && (
+										<CategoryDropdown category={'PROPERTY'} subCategories={filteredCategories?.propertyCat} />
+									)}
+								</li>
+>>>>>>> f9f2a165c5bea7fea9edaff1f82ac38a330fd17f
 
                 <span className="border border-r-4 border-white h-[2rem]" />
 
+<<<<<<< HEAD
                 <li className="dropdown dropdown-hover ">
                   <a
                     href={`${Approutes.product.category}/${btoa(52)}`}
@@ -832,9 +862,23 @@ const Navbar = () => {
                     />
                   )}
                 </li>
+=======
+								<li className="dropdown dropdown-hover ">
+									<a href={`${Approutes.product.category}/${btoa(52)}`} tabIndex={0} className={listStyles}>
+										SERVICES
+									</a>
+									<a href={`${Approutes.product.category}/${btoa(52)}`} className={mobileListStyles}>
+										<MdMiscellaneousServices size={25} />
+									</a>
+									{filteredCategories?.servicesCat && (
+										<CategoryDropdown category={'SERVICES'} subCategories={filteredCategories?.servicesCat} />
+									)}
+								</li>
+>>>>>>> f9f2a165c5bea7fea9edaff1f82ac38a330fd17f
 
                 <span className="border border-r-4 border-white h-[2rem]" />
 
+<<<<<<< HEAD
                 <li className="">
                   <Link
                     to={Approutes.underConstruction}
@@ -851,11 +895,23 @@ const Navbar = () => {
                   </NavLink>
                   {/* {filteredCategories?.dealsCat && (
 										<Dropdown category={'DEALS'} subCategories={filteredCategories?.dealsCat} />
+=======
+								<li className="">
+									<Link to={Approutes.underConstruction} tabIndex={0} className={listStyles}>
+										DEALS
+									</Link>
+									<NavLink to={Approutes.underConstruction} className={mobileListStyles}>
+										<FaRegHandshake size={25} />
+									</NavLink>
+									{/* {filteredCategories?.dealsCat && (
+										<CategoryDropdown category={'DEALS'} subCategories={filteredCategories?.dealsCat} />
+>>>>>>> f9f2a165c5bea7fea9edaff1f82ac38a330fd17f
 									)} */}
                 </li>
 
                 <span className="border border-r-4 border-white h-[2rem]" />
 
+<<<<<<< HEAD
                 <li className="mr-4">
                   <Link
                     to={Approutes.underConstruction}
@@ -872,6 +928,17 @@ const Navbar = () => {
                   </NavLink>
                   {/* {filteredCategories?.dealsCat && (
 										<Dropdown category={'REQUESTS'} subCategories={filteredCategories?.dealsCat} />
+=======
+								<li className="mr-4">
+									<Link to={Approutes.underConstruction} tabIndex={0} className={listStyles}>
+										REQUESTS
+									</Link>
+									<NavLink to={Approutes.underConstruction} className={mobileListStyles}>
+										<VscGitPullRequestGoToChanges size={25} />
+									</NavLink>
+									{/* {filteredCategories?.dealsCat && (
+										<CategoryDropdown category={'REQUESTS'} subCategories={filteredCategories?.dealsCat} />
+>>>>>>> f9f2a165c5bea7fea9edaff1f82ac38a330fd17f
 									)} */}
                 </li>
               </ul>

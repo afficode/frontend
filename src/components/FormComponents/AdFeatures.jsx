@@ -1,0 +1,170 @@
+import React from 'react';
+import { Coin } from '../../assets/images';
+import { InfoYellow } from '../../assets/svgs';
+import { Field } from 'formik';
+
+const AdFeatures = (props) => {
+	const { name, ...rest } = props;
+	return (
+		<div className="bg-white py-8 my-4">
+			<div className="flex flex-col items-center py-2">
+				<h3>Select Suitable Posting package for your ad.</h3>
+				<h6>
+					( You have to select <b>ONLY ONE</b> option )
+				</h6>
+			</div>
+			<hr className="border-black" />
+
+			{/* other posting package */}
+			<div className="overflow-auto px-3 py-8">
+				<table className="table-fixed border-collapse border-spacing-0 min-w-[600px] w-full posting-package-table">
+					<tbody>
+						{/* {featureList?.map((option) => {
+							return ( */}
+						<Field name={name}>
+							{({ field }) => {
+								// console.log(field);
+								return featureList?.map((option) => {
+									return (
+										<tr key={option.value} className="flex">
+											<td className="flex items-center gap-4">
+												<input
+													{...field}
+													{...rest}
+													type="radio"
+													id={option.value}
+													value={option.value}
+													checked={field.value === option.value}
+												/>
+												<label
+													htmlFor={option.value}
+													className={`${option.color} uppercase flex justify-center w-[10rem] py-1`}
+												>
+													{option.key}
+												</label>
+											</td>
+											<td className="flex-1">{option.info}</td>
+											<td className="flex justify-end items-end">
+												{/* onClick={() => setTokenModal(true)} */}
+												<div className="flex items-center ">
+													<img src={Coin} alt="/" className="w-[1.8rem] mx-2" />
+													<b className="w-8">{option.coin}</b>
+												</div>
+
+												{/* <Modal isOpen={tokenModal} setIsOpen={setTokenModal}>
+																<TokenPurchase />
+															</Modal> */}
+											</td>
+										</tr>
+									);
+								});
+							}}
+						</Field>
+						{/* // })} */}
+					</tbody>
+				</table>
+			</div>
+
+			<h3 className="text-center">OR</h3>
+
+			{/* grab feature */}
+			<div className="space-y-6 p-8 ">
+				<div className="space-y-2">
+					<div className="flex items-center gap-2 ">
+						<h4 className="text-primary ">Use “Grab Feature” ? </h4>
+
+						<div className="dropdown dropdown-top ">
+							<img tabIndex={0} src={InfoYellow} className="w-4 cursor-pointer" alt="/" />
+							<div
+								tabIndex={0}
+								className="dropdown-content transform translate-y-[100%] translate-x-[-80%] sm:translate-x-[-50%] lg:translate-x-[8%] bg-secondary border-4 p-4 w-screen max-w-[320px] sm:max-w-[600px]"
+							>
+								<div className="space-y-2">
+									<h4>Grab Feature</h4>
+									<p>
+										This is Boonfu’s affiliate marketing system whereby our “Grabbers” pick your item/product
+										for massive offline and other channels marketing.
+									</p>
+									<p>
+										{' '}
+										Your Item with “Grab feature” is open to about a thousand (1000+) grabbers to market for
+										you, this means your item won’t be seating on our website BUT rather gains massive reach
+										to guarranttee <b>“Almost Instant Sale”</b>.
+									</p>
+									<p>You may want to try this feature out too.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div className="flex max-sm:flex-col md:items-center gap-6 ">
+						<Field name={name}>
+							{({ field }) => {
+								return grabOptions.map((option) => {
+									return (
+										<div key={option.value} className="space-x-4 flex items-center">
+											<input
+												{...field}
+												{...rest}
+												type="radio"
+												id={option.value}
+												value={option.value}
+												checked={option.value === field.value}
+												className={``}
+											/>
+											<label htmlFor={option.value}>{option.key}</label>
+										</div>
+									);
+								});
+							}}
+						</Field>
+
+						<div className=" bg-secondary border-4 p-4 max-w-[22rem] md:ml-[12rem]">
+							Using the grab feature? Please read the terms and condition
+						</div>
+					</div>
+				</div>
+
+				<div className="">
+					<h6 className="font-semibold">Grabber’s commision. (in coin)</h6>
+					<div className="bg-gray-300 p-2 border border-black max-w-[15rem]">
+						<span className="flex items-center space-x-2">
+							<img src={Coin} alt="/" className="w-[1.8rem] mx-2" />{' '}
+							<span className="text-xl font-semibold text-[#333]">10</span>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
+};
+
+export default AdFeatures;
+
+const featureList = [
+	{
+		key: 'Basic',
+		value: '0',
+		coin: '3.5',
+		color: 'bg-secondary text-black',
+		info: 'Your Ad appears as PRIORITY AD',
+	},
+	{
+		key: 'Feature Ad',
+		value: '1',
+		coin: '5',
+		color: 'bg-primary text-white',
+		info: 'This indicates  that your ad is to be sold quickly and distressed',
+	},
+	{
+		key: 'Spotlight',
+		value: '2',
+		coin: '7',
+		color: 'bg-green-600 text-white',
+		info: 'Your Ad appears as PRIORITY AD + GRAB ENABLED',
+	},
+];
+const grabOptions = [
+	{ key: 'Yes', value: '3' },
+	{ key: 'No', value: '-1' },
+];

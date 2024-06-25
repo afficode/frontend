@@ -257,6 +257,7 @@ input[type='number']::-webkit-outer-spin-button {
 	background-blend-mode: overlay;
 }
 
+<<<<<<< HEAD
 .box {
 	width: 200px; height: 300px;
 	position: relative;
@@ -306,3 +307,10 @@ input[type='number']::-webkit-outer-spin-button {
 	border-bottom: 3px solid transparent;
 	border-top: 3px solid #79A70A;
   }
+=======
+.posting-package-table > tr,
+td {
+	padding: 0.5rem 1rem;
+	vertical-align: top;
+}
+>>>>>>> f9f2a165c5bea7fea9edaff1f82ac38a330fd17f
