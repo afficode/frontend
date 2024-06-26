@@ -87,10 +87,12 @@ export const MessageProvider = ({ children }) => {
   useEffect(() => {
     if (isLogin && !socket.active) {
       socket.connect();
+      // connecting socket
     }
 
     socket.on("receive_message", (data) => {
       let unreadMessages = 0;
+      console.log("Receive message", data)
       const chats = data?.sort((a, b) => {
         return new Date(b.chat_updated_on) - new Date(a.chat_updated_on);
       });
@@ -107,12 +109,13 @@ export const MessageProvider = ({ children }) => {
     });
 
     socket.on("error", (error) => {
-      //console.error("Socket connection error:");
+      console.error("Socket connection error:");
       // Handle the error (e.g., display a message to the user)
     });
 
     socket.on("connect_error", (error) => {
-      //console.error("Socket connection error:", error?.message);
+      console.error("Socket connection error:", error?.message);
+      console.log(error)
       // Handle the error (e.g., display a message to the user)
     });
 
