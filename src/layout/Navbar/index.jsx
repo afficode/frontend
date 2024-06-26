@@ -761,29 +761,6 @@ const Navbar = () => {
 
                 <span className="border border-r-4 border-white h-[2rem]" />
 
-<<<<<<< HEAD
-                <li className="dropdown dropdown-hover">
-                  <a
-                    href={`${Approutes.product.category}/${btoa(50)}`}
-                    tabIndex={0}
-                    className={listStyles}
-                  >
-                    CARS & VEHICLES
-                  </a>
-                  <a
-                    href={`${Approutes.product.category}/${btoa(50)}`}
-                    className={mobileListStyles}
-                  >
-                    <FaCarSide size={25} />
-                  </a>
-                  {filteredCategories?.vehicleCat && (
-                    <Dropdown
-                      category={"CARS & VEHICLES"}
-                      subCategories={filteredCategories?.vehicleCat}
-                    />
-                  )}
-                </li>
-=======
 								<li className="dropdown dropdown-hover">
 									<a href={`${Approutes.product.category}/${btoa(50)}`} tabIndex={0} className={listStyles}>
 										CARS & VEHICLES
@@ -798,33 +775,9 @@ const Navbar = () => {
 										/>
 									)}
 								</li>
->>>>>>> f9f2a165c5bea7fea9edaff1f82ac38a330fd17f
 
                 <span className="border border-r-4 border-white h-[2rem]" />
 
-<<<<<<< HEAD
-                <li className="dropdown dropdown-hover">
-                  <a
-                    href={`${Approutes.product.category}/${btoa(51)}`}
-                    tabIndex={0}
-                    className={listStyles}
-                  >
-                    PROPERTY
-                  </a>
-                  <a
-                    href={`${Approutes.product.category}/${btoa(51)}`}
-                    className={mobileListStyles}
-                  >
-                    <FaBuilding size={25} />
-                  </a>
-                  {filteredCategories?.propertyCat && (
-                    <Dropdown
-                      category={"PROPERTY"}
-                      subCategories={filteredCategories?.propertyCat}
-                    />
-                  )}
-                </li>
-=======
 								<li className="dropdown dropdown-hover">
 									<a href={`${Approutes.product.category}/${btoa(51)}`} tabIndex={0} className={listStyles}>
 										PROPERTY
@@ -836,33 +789,9 @@ const Navbar = () => {
 										<CategoryDropdown category={'PROPERTY'} subCategories={filteredCategories?.propertyCat} />
 									)}
 								</li>
->>>>>>> f9f2a165c5bea7fea9edaff1f82ac38a330fd17f
 
                 <span className="border border-r-4 border-white h-[2rem]" />
 
-<<<<<<< HEAD
-                <li className="dropdown dropdown-hover ">
-                  <a
-                    href={`${Approutes.product.category}/${btoa(52)}`}
-                    tabIndex={0}
-                    className={listStyles}
-                  >
-                    SERVICES
-                  </a>
-                  <a
-                    href={`${Approutes.product.category}/${btoa(52)}`}
-                    className={mobileListStyles}
-                  >
-                    <MdMiscellaneousServices size={25} />
-                  </a>
-                  {filteredCategories?.servicesCat && (
-                    <Dropdown
-                      category={"SERVICES"}
-                      subCategories={filteredCategories?.servicesCat}
-                    />
-                  )}
-                </li>
-=======
 								<li className="dropdown dropdown-hover ">
 									<a href={`${Approutes.product.category}/${btoa(52)}`} tabIndex={0} className={listStyles}>
 										SERVICES
@@ -874,28 +803,9 @@ const Navbar = () => {
 										<CategoryDropdown category={'SERVICES'} subCategories={filteredCategories?.servicesCat} />
 									)}
 								</li>
->>>>>>> f9f2a165c5bea7fea9edaff1f82ac38a330fd17f
 
                 <span className="border border-r-4 border-white h-[2rem]" />
 
-<<<<<<< HEAD
-                <li className="">
-                  <Link
-                    to={Approutes.underConstruction}
-                    tabIndex={0}
-                    className={listStyles}
-                  >
-                    DEALS
-                  </Link>
-                  <NavLink
-                    to={Approutes.underConstruction}
-                    className={mobileListStyles}
-                  >
-                    <FaRegHandshake size={25} />
-                  </NavLink>
-                  {/* {filteredCategories?.dealsCat && (
-										<Dropdown category={'DEALS'} subCategories={filteredCategories?.dealsCat} />
-=======
 								<li className="">
 									<Link to={Approutes.underConstruction} tabIndex={0} className={listStyles}>
 										DEALS
@@ -905,30 +815,11 @@ const Navbar = () => {
 									</NavLink>
 									{/* {filteredCategories?.dealsCat && (
 										<CategoryDropdown category={'DEALS'} subCategories={filteredCategories?.dealsCat} />
->>>>>>> f9f2a165c5bea7fea9edaff1f82ac38a330fd17f
 									)} */}
                 </li>
 
                 <span className="border border-r-4 border-white h-[2rem]" />
 
-<<<<<<< HEAD
-                <li className="mr-4">
-                  <Link
-                    to={Approutes.underConstruction}
-                    tabIndex={0}
-                    className={listStyles}
-                  >
-                    REQUESTS
-                  </Link>
-                  <NavLink
-                    to={Approutes.underConstruction}
-                    className={mobileListStyles}
-                  >
-                    <VscGitPullRequestGoToChanges size={25} />
-                  </NavLink>
-                  {/* {filteredCategories?.dealsCat && (
-										<Dropdown category={'REQUESTS'} subCategories={filteredCategories?.dealsCat} />
-=======
 								<li className="mr-4">
 									<Link to={Approutes.underConstruction} tabIndex={0} className={listStyles}>
 										REQUESTS
@@ -938,7 +829,6 @@ const Navbar = () => {
 									</NavLink>
 									{/* {filteredCategories?.dealsCat && (
 										<CategoryDropdown category={'REQUESTS'} subCategories={filteredCategories?.dealsCat} />
->>>>>>> f9f2a165c5bea7fea9edaff1f82ac38a330fd17f
 									)} */}
                 </li>
               </ul>

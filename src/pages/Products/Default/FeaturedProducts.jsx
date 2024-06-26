@@ -11,9 +11,9 @@ import SaveProduct from "./SaveProduct";
 import useAuth from "../../../context/UserContext";
 import { NegotiableIcon } from "../../../ui";
 import { GrabIcon } from "../../../ui";
+import Feature from "./Feature";
 const FeaturedProducts = ({ product }) => {
   const { isLogin, user } = useAuth();
-  console.log(product)
   return (
     <>
       {product.map((ad, index) => (
@@ -42,10 +42,8 @@ const FeaturedProducts = ({ product }) => {
                 />
               </div>
             )}
-            {(ad.feature !== '0' && ad.feature !== '3') && (
-              <div className={`w-[70%] absolute top-5 ${ad.feature === '1' ? "bg-secondary" : "bg-primary"} border-2 border-gray-500 border-l-0 p-1 text-center uppercase text-white rounded-r-sm font-semibold`}>
-              Spotlight
-            </div>
+            {(ad?.feature !== '0' && ad?.feature !== '3') && (
+              <Feature feature={ad?.feature} />
             )}
             
             {((isLogin && parseInt(ad?.owner) !== parseInt(user?.id)) ||
