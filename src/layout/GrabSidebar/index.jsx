@@ -1,8 +1,29 @@
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { Approutes } from '../../constants';
 import { Button } from '../../ui';
+import { privateAxios } from '../../utils';
+import { useNotify } from '../../hooks';
 
 const GrabSidebar = () => {
+	const navigate = useNavigate();
+	const notify = useNotify();
+
+	const handleDeactivateGrabber = async () => {
+		try {
+			const response = await privateAxios.delete('/grab/remove_grabber_account');
+			console.log('Account deactivation successful!', response.data);
+			notify('Your account has been deactivated.', 'success');
+
+			// Redirect to the home page or any other page
+			setTimeout(() => {
+				navigate(Approutes.logout);
+			}, 2000);
+		} catch (error) {
+			console.error('Account deactivation error:', error);
+			notify('There was an error deactivating your account. Please try again.', 'error');
+		}
+	};
+
 	return (
 		<aside className="w-[15rem] h-[83vh]  bg-[#D9D9D9] rounded-[2.5rem] flex flex-col items-center text-center max-lg:hidden ">
 			<nav className="flex flex-col justify-between flex-1 w-full px-4 my-12">
@@ -20,7 +41,13 @@ const GrabSidebar = () => {
 							Log Out
 						</Button>
 					</Link>
-					<Button variant="plain" size="small" className="font-medium" title="Deactivate your account">
+					<Button
+						onClick={handleDeactivateGrabber}
+						variant="plain"
+						size="small"
+						className="font-medium"
+						title="Deactivate your account"
+					>
 						Deactivate Account{' '}
 					</Button>
 				</ul>

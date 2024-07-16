@@ -1,3 +1,4 @@
+export { default as AboutBg } from './aboutBg.png';
 export { default as AffiLogo } from './affiLogo.png';
 export { default as BoonfuLogo } from './boonfuLogo.png';
 export { default as Car } from './car.png';

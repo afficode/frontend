@@ -52,6 +52,8 @@ import GrabLayout from './layout/GrabLayout';
 
 function App() {
 	const { isLogin } = useAuth();
+	const { user } = useAuth();
+	// console.log(user.grabberActive);
 	return (
 		<BrowserRouter>
 			<Routes>
@@ -93,15 +95,48 @@ function App() {
 							<Route path={Approutes.dashboard.help} element={<Help />} />
 						</Route>
 						<Route element={<GrabLayout />}>
+							<Route
+								path={Approutes.grab.profile}
+								element={user?.grabberActive ? <GrabProfile /> : <Navigate to={Approutes.grab.initial} />}
+							/>
+							<Route path={Approutes.grab.dashboard} element={<GrabDashboard />} />
+							<Route
+								path={Approutes.grab.products}
+								element={user?.grabberActive ? <GrabProducts /> : <Navigate to={Approutes.grab.initial} />}
+							/>
+							<Route
+								path={Approutes.grab.settings}
+								element={user?.grabberActive ? <GrabSettings /> : <Navigate to={Approutes.grab.initial} />}
+							/>
+						</Route>
+						<Route
+							path={Approutes.grab.initial}
+							element={user?.grabberActive ? <Navigate to={Approutes.grab.home} /> : <Grabs />}
+						/>
+						<Route
+							path={Approutes.grab.register}
+							element={user?.grabberActive ? <Navigate to={Approutes.grab.home} /> : <GrabRegister />}
+						/>
+						<Route
+							path={Approutes.grab.home}
+							element={user?.grabberActive ? <GrabHome /> : <Navigate to={Approutes.grab.initial} />}
+						/>
+						<Route
+							path={Approutes.grab.product}
+							element={user?.grabberActive ? <GrabProduct /> : <Navigate to={Approutes.grab.initial} />}
+						/>
+						<Route path={Approutes.grab.register} element={<GrabRegister />} />
+
+						{/* <Route element={<GrabLayout />}>
 							<Route path={Approutes.grab.profile} element={<GrabProfile />} />
 							<Route path={Approutes.grab.dashboard} element={<GrabDashboard />} />
 							<Route path={Approutes.grab.products} element={<GrabProducts />} />
 							<Route path={Approutes.grab.settings} element={<GrabSettings />} />
 						</Route>
 						<Route path={Approutes.grab.initial} element={<Grabs />} />
-						<Route path={Approutes.grab.register} element={<GrabRegister />} />
+						<Route path={Approutes.grab.register} element={ <GrabRegister />} />
 						<Route path={Approutes.grab.home} element={<GrabHome />} />
-						<Route path={Approutes.grab.product} element={<GrabProduct />} />
+						<Route path={Approutes.grab.product} element={<GrabProduct />} /> */}
 						<Route path={Approutes.grab.grabbedProduct} element={<GrabbedProduct />} />
 						<Route path={Approutes.welcome} element={<Welcome />} />
 						<Route path={`${Approutes.postDecision}`} element={<PostDecision />} />

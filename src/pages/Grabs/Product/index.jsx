@@ -94,7 +94,7 @@ const GrabProduct = () => {
 					</div>
 				</div>
 
-				<aside className="w-full h-[550px] md:w-[40%] xl:w-[30%] border-2 border-gray-400 p-2 lg:p-4 flex flex-col justify-between">
+				<aside className="w-full h-[350px] md:w-[40%] xl:w-[30%] border-2 border-gray-400 p-2 lg:p-4 flex flex-col justify-between">
 					<div className="">
 						<h6 className="w-full text-lg font-bold text-center md:text-xl 2xl:text-3xl">
 							Product ID:201344
@@ -103,18 +103,19 @@ const GrabProduct = () => {
 						<hr className="h-px my-2 border-black/40 border-1" />
 
 						<div className="w-full tracking-tighter">
-							<div className="flex justify-between">
+							{/* <div className="flex justify-between">
 								<p className="p-lg">Date Posted </p>
 								<p className="p-lg">22.04.2024 </p>
-							</div>
+							</div> */}
 							<div className="flex justify-between">
 								<p className="p-lg">Category </p>
-								<p className="p-lg">Cars & Vehicles </p>
+								<p className="font-semibold p-lg text-primary">Cars & Vehicles </p>
 							</div>
 						</div>
 					</div>
 
 					<div>
+						<hr className="h-px my-2 border-black/40 border-1" />
 						<div className="mb-6">
 							<p className="p-lg">Grab Link</p>
 
@@ -130,7 +131,7 @@ const GrabProduct = () => {
 							</div>
 						</div>
 						<div className="flex flex-col gap-4">
-							<Button
+							{/* <Button
 								variant={'primary'}
 								size={'full'}
 								className={'flex items-center justify-center gap-4 rounded-xl'}
@@ -145,7 +146,7 @@ const GrabProduct = () => {
 							>
 								<img src={Share} alt="/" className="w-8" />
 								Share Now
-							</Button>
+							</Button> */}
 							<Button
 								variant={'primary'}
 								size={'full'}

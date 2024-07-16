@@ -262,3 +262,10 @@ td {
 	padding: 0.5rem 1rem;
 	vertical-align: top;
 }
+
+.about {
+	background-image: url(assets/images/aboutBg.png);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}

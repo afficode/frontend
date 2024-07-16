@@ -1,3 +1,4 @@
+import { BiArrowBack } from 'react-icons/bi';
 import { ArrowDownWhite } from '../../assets/svgs';
 import { Button } from '../../ui';
 
@@ -11,7 +12,10 @@ const AccountHistory = ({ className }) => {
 				</Button>
 			</div>
 
-			<h4 className="py-4 text-center">Account History</h4>
+			<div className="flex items-center">
+				<BiArrowBack />
+				<h4 className="py-4 text-center">Account History</h4>
+			</div>
 
 			<div>
 				<div className="flex items-center justify-between px-6 py-2 bg-primary">
