@@ -19,6 +19,7 @@ import { TbCurrencyNaira } from 'react-icons/tb';
 import { encodeProductId, numberWithCommas } from '../../../utils/dataManipulations';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import { formatDistance } from 'date-fns';
+import Feature from '../../Products/Default/Feature';
 
 const RowContainer = ({ title, link }) => {
 	const product = useProduct();
@@ -47,14 +48,20 @@ const RowContainer = ({ title, link }) => {
 
 export default RowContainer;
 
-const CardDetails = ({ id, title, location, images, created_at, price }) => {
+const CardDetails = ({ id, title, location, images, created_at, price, feature }) => {
 	const img = images[0]?.path || noimage;
 	return (
 		<Link
 			to={`${Approutes.product.initial}/${encodeProductId(id)}`}
 			className=" w-[18rem] sm:max-w-[25rem] h-[22rem] border border-black/25 shadow-sm cursor-pointer hover:shadow-lg transition-all  ease-in-out"
 		>
+			<div className="relative ml-0.5">
+				{(feature !== '0' && feature !== '3') && (
+					<Feature feature={feature} />
+				)}
+			</div>
 			<img className=" min-w-full h-[70%] object-cover" src={img} alt="/" />
+
 			<div className="px-2 py-2">
 				<span className="flex justify-between font-semibold tracking-tighter">
 					<p className="p-lg uppercase line-clamp-1 truncate">{title}</p>
