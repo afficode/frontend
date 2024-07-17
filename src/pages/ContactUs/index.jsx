@@ -1,5 +1,10 @@
 import { Link } from 'react-router-dom';
 import { ScrollToTop } from '../../utils';
+import { api } from '../../utils';
+import { useState } from 'react';
+import { Button } from '../../ui';
+import { useNotify } from '../../hooks';
+import secureLocalStorage from 'react-secure-storage';
 
 // icons
 import { BiEnvelope } from 'react-icons/bi';
@@ -8,6 +13,57 @@ import { FiPhone } from 'react-icons/fi';
 import { MdOutlineSupportAgent } from 'react-icons/md';
 
 const ContactUs = () => {
+	const [loading, setLoading] = useState(false);
+	const [formData, setFormData] = useState({
+		firstname: '',
+		lastname: '',
+		email: '',
+		message: '',
+	});
+	const notify = useNotify();
+
+	const handleChange = (e) => {
+		setFormData({ ...formData, [e.target.name]: e.target.value });
+	};
+
+	const removeLocalStorageItem = (key, delay) => {
+		setTimeout(() => {
+			secureLocalStorage.removeItem(key);
+		}, delay);
+	};
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		// console.log(formData);
+		setLoading(true);
+
+		if (secureLocalStorage.getItem('contact_us')) {
+			notify('You have already sent a message. Please wait for a response.', 'error');
+			setLoading(false);
+			return;
+		}
+
+		try {
+			const res = await api.post('/api/contact_us', formData);
+			// console.log(res.data);
+			secureLocalStorage.setItem('contact_us', res.data);
+			removeLocalStorageItem('contact_us', 1800000);
+			setLoading(false);
+			notify(res.data.message, 'success');
+			setFormData({
+				firstname: '',
+				lastname: '',
+				email: '',
+				message: '',
+			});
+		} catch (error) {
+			console.log(error);
+			secureLocalStorage.removeItem('contact_us');
+			setLoading(false);
+			notify('An error occured try again', 'error');
+		}
+	};
+
 	return (
 		<section>
 			<div className="bg-primary py-12 px-4 sm:px-[4rem] m-2 rounded-md text-center text-white">
@@ -76,14 +132,17 @@ const ContactUs = () => {
 				</div>
 
 				<div className="p-4 ">
-					<form>
+					<form onSubmit={handleSubmit}>
 						<div className="gap-4 md:items-center md:flex">
 							<div className="flex-1">
 								<label className="block mb-2 text-base font-normal text-black">First Name</label>
 								<input
 									type="text"
 									placeholder="Gideon "
+									name="firstname"
 									className="block w-full px-5 py-2.5 mt-2 text-black placeholder-black/50 bg-white border border-black/50 rounded-lg focus:border-primary focus:ring-primary focus:outline-none focus:ring focus:ring-opacity-40"
+									value={formData?.firstname}
+									onChange={handleChange}
 								/>
 							</div>
 
@@ -91,8 +150,11 @@ const ContactUs = () => {
 								<label className="block mb-2 text-base font-normal text-black">Last Name</label>
 								<input
 									type="text"
+									name="lastname"
 									placeholder="Smith"
 									className="block w-full px-5 py-2.5 mt-2 text-black placeholder-black/50 bg-white border border-black/50 rounded-lg focus:border-primary focus:ring-primary focus:outline-none focus:ring focus:ring-opacity-40"
+									value={formData?.lastname}
+									onChange={handleChange}
 								/>
 							</div>
 						</div>
@@ -101,23 +163,38 @@ const ContactUs = () => {
 							<label className="block mb-2 text-base font-normal text-black">Email address</label>
 							<input
 								type="email"
+								name="email"
 								placeholder="gideonsmith@example.com"
 								className="block w-full px-5 py-2.5 mt-2 text-black placeholder-black/50 bg-white border border-black/50 rounded-lg focus:border-primary focus:ring-primary focus:outline-none focus:ring focus:ring-opacity-40"
+								value={formData?.email}
+								onChange={handleChange}
 							/>
 						</div>
 
 						<div className="w-full mt-4">
 							<label className="block mb-2 text-base font-normal text-black">Message</label>
 							<textarea
+								name="message"
 								className="md:h-56 h-32 block w-full px-5 py-2.5 mt-2 text-black placeholder-black/50 bg-white border border-black/50 rounded-lg focus:border-primary focus:ring-primary focus:outline-none focus:ring focus:ring-opacity-40"
 								placeholder="Message"
+								value={formData?.message}
+								onChange={handleChange}
 							></textarea>
 						</div>
 
 						<div className="max-sm:text-center">
-							<button className="px-6 py-3 mt-4 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform border-none rounded-lg btn bg-primary hover:bg-primary/80 focus:outline-none">
+							{/* <button className="px-6 py-3 mt-4 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform border-none rounded-lg btn bg-primary hover:bg-primary/80 focus:outline-none">
 								Send message <BiEnvelope size={20} />
-							</button>
+							</button> */}
+							<Button
+								variant={'primary'}
+								size={'small'}
+								loading={loading}
+								disabled={loading}
+								className={'flex items-center gap-2 p-2 rounded-md'}
+							>
+								Send message <BiEnvelope size={20} />
+							</Button>
 						</div>
 					</form>
 				</div>

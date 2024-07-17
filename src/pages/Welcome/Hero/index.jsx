@@ -52,7 +52,7 @@ const Hero = () => {
 				</div>
 
 				<div className={firstTimer ? 'dropdown dropdown-top dropdown-hover' : ''}>
-					<Link to={user?.grabber_id ? Approutes.grab.dashboard : Approutes.grab.register}>
+					<Link to={Approutes.grab.home}>
 						<button className="btn w-[15rem] text-lg rounded-xl shadow-lg capitalize text-white hover:bg-opacity-95 border-white grab-btn">
 							I am a Grabber
 						</button>

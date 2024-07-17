@@ -28,8 +28,8 @@ const GrabProfile = () => {
 				<img src={EditPencil} className="w-3" alt="" /> <b> Edit..</b>
 			</Button> */}
 
-			<div className="flex flex-col gap-6 mt-8">
-				<div className="md:w-[500px] w-full rounded-2xl border-4 border-gray-400 flex flex-col items-center mx-auto p-4">
+			<div className="flex max-lg:flex-col gap-6 mt-8">
+				<div className=" w-full rounded-2xl border-4 border-gray-400 flex flex-col items-center mx-auto p-4">
 					<img
 						src={ManSmiling}
 						className="w-[150px] h-[150px] md:w-[200px]  rounded-full md:h-[200px] border-2 border-primary"
@@ -77,9 +77,9 @@ const GrabProfile = () => {
 					</div>
 				</div>
 
-				<div className="md:w-[500px] w-full rounded-2xl border-4 border-gray-400 flex flex-col items-center mx-auto p-4">
+				<div className=" w-full rounded-2xl border-4 border-gray-400 flex flex-col items-center mx-auto p-4">
 					<h4>About Me</h4>
-					<p className="text-center">
+					<p className=" text-justify">
 						I have Bachelors in marketing with five (5) years of cognitive experience. i have performed
 						greatly in this space, on and offline. My approach to marketing is un-matched, as i combine
 						alot of parameters to achieving my goals. What is important to me is goals set and met. I

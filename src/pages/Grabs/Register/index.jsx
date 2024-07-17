@@ -1,77 +1,117 @@
-import { useStates } from '../../../hooks';
+import { useNotify, useStates } from '../../../hooks';
 import { Button, InputGroup } from '../../../ui';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { ScrollToTop, toSelectOptions } from '../../../utils';
+import { ScrollToTop, api, privateAxios, toSelectOptions } from '../../../utils';
 import { FacebookBlue, Instagram, Tiktok, Twitter, Whatsapp } from '../../../assets/svgs';
-import { Link } from 'react-router-dom';
+import { useDebouncedCallback } from 'use-debounce';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Approutes } from '../../../constants';
 
 const GrabRegister = () => {
 	const { data: states } = useStates();
 	const statesOptions = toSelectOptions(states, 'states', 'Select your state');
+	const [isDisplayNameTaken, setIsDisplayNameTaken] = useState(false);
+
+	const navigate = useNavigate();
+	const notify = useNotify();
+
+	const checkDisplayName = async (displayName) => {
+		try {
+			const response = await privateAxios.get(`/grab/verify_display_name/${displayName}`);
+			return response.data.success;
+		} catch (error) {
+			console.error('Error checking display name', error);
+			return false;
+		}
+	};
+
+	const handleDisplayName = useDebouncedCallback(async (displayName) => {
+		const taken = await checkDisplayName(displayName);
+		console.log(taken);
+		setIsDisplayNameTaken(taken);
+	}, 100);
 
 	const initialValues = {
 		display_name: '',
-		location: '',
-		phone: '',
-		dob: '',
-		gender: '',
-		social: {
-			twitter: '',
-			facebook: '',
-			whatsapp: '',
-			instagram: '',
-			tiktok: '',
-		},
-		email_address: '',
-		password: '',
+		current_location: '',
+		bio: '',
+		x_page: '',
+		facebook: '',
+		whatsapp: '',
+		instagram: '',
+		tiktok: '',
 	};
 
 	const validationSchema = Yup.object({
-		display_name: Yup.string().required('Required'),
-		location: Yup.string().required('Required'),
-		phone: Yup.number().required('Required'),
-		dob: Yup.string().required('Required'),
-		gender: Yup.string().required('Required'),
-		social: {
-			twitter: Yup.string().required('Required'),
-			facebook: Yup.string().required('Required'),
-			whatsapp: Yup.number().required('Required'),
-			instagram: Yup.string().required('Required'),
-			tiktok: Yup.string().required('Required'),
-		},
-		email_address: Yup.string().required('Required').email('Invalid email address'),
+		display_name: Yup.string()
+			.required('Required')
+			.test('checkDisplayName', 'Display name is already taken', function () {
+				return isDisplayNameTaken;
+			}),
+		current_location: Yup.string().required('Required'),
+		bio: Yup.string().required('Required'),
+		x_page: Yup.string().required('Required'),
+		facebook: Yup.string().required('Required'),
+		whatsapp: Yup.string().required('Required'),
+		instagram: Yup.string().required('Required'),
+		tiktok: Yup.string().required('Required'),
 	});
-
-	const handleSubmit = (values) => {
-		console.log(values);
-	};
 
 	const formik = useFormik({
 		initialValues,
-		onSubmit: handleSubmit,
 		validationSchema,
+		onSubmit: async (values, { setSubmitting, resetForm }) => {
+			try {
+				setSubmitting(true);
+				// Submit the form data to the backend endpoint
+				const response = await privateAxios.post('/grab/become_grabber', values);
+				console.log('Form submission successful!', response.data);
+				notify('You are now a grabber!', 'success');
+				resetForm();
+
+				// Delay navigation after form submission
+				setTimeout(() => {
+					navigate(Approutes.logout); // Navigate to home route after timeout
+				}, 2000); // Adjust timeout delay as needed (2000 milliseconds = 2 seconds)
+			} catch (error) {
+				console.error('Form submission error:', error);
+				notify('Something went wrong, check the links and try again', 'error');
+			} finally {
+				// Ensure to set submitting state to false after submission attempt
+				setSubmitting(false);
+			}
+		},
 	});
 
-	console.log(formik);
+	const handleChange = (e) => {
+		formik.handleChange(e);
+		if (e.target.name === 'display_name') {
+			handleDisplayName(e.target.value);
+		}
+	};
 
 	return (
 		<section className="text-center ">
 			<h3 className="py-6">Creating your Grabber’s Account</h3>
 
 			<div className="max-w-[1024px] rounded-lg mx-auto h-full mb-12 grab-bg py-8 pr-6">
-				<form className=" bg-white max-w-[500px] ml-auto h-fit p-6 rounded-lg">
-					<div className="flex md:gap-4 md:justify-between md:items-center max-md:flex-col max-md:items-start">
-						<label htmlFor="display_name" className="font-semibold">
+				<form
+					onSubmit={formik.handleSubmit}
+					className=" bg-white max-w-[500px] ml-auto h-fit p-6 rounded-lg"
+				>
+					<div className="flex  md:gap-4 md:justify-between  max-md:flex-col max-md:items-start">
+						<label htmlFor="display_name" className="font-semibold mt-4">
 							Display Name
 						</label>
 						<InputGroup
 							name="display_name"
 							type="text"
+							placeholder="Enter a display name"
 							className="w-[250px]"
 							value={formik.values.display_name}
-							onChange={formik.handleChange}
+							onChange={handleChange}
 							onBlur={formik.handleBlur}
 							errorMsg={
 								formik.touched.display_name && formik.errors.display_name
@@ -81,94 +121,58 @@ const GrabRegister = () => {
 						/>
 					</div>
 
-					<div className="flex items-center justify-between w-full max-md:flex-col max-md:items-start ">
-						<label htmlFor="location" className="font-semibold">
+					<div className="flex  justify-between w-full max-md:flex-col max-md:items-start ">
+						<label htmlFor="current_location" className="font-semibold mt-4">
 							Location
 						</label>
 						<InputGroup
-							name="location"
+							name="current_location"
 							type="select"
 							className="w-[250px]"
 							optionLists={statesOptions}
-							value={formik.values.location}
+							value={formik.values.current_location}
 							onChange={formik.handleChange}
 							onBlur={formik.handleBlur}
-							errorMsg={formik.touched.location && formik.errors.location ? formik.errors.location : null}
+							errorMsg={
+								formik.touched.current_location && formik.errors.current_location
+									? formik.errors.current_location
+									: null
+							}
 						/>
 					</div>
-
-					<div className="flex items-center justify-between w-full max-md:flex-col max-md:items-start ">
-						<label htmlFor="phone" className="font-semibold">
-							Phone Number
+					<div className="flex  justify-between w-full max-md:flex-col max-md:items-start ">
+						<label htmlFor="bio" className="font-semibold mt-4">
+							Bio
 						</label>
 						<InputGroup
-							name="phone"
-							type="number"
+							name="bio"
+							type="textarea"
 							className="w-[250px]"
-							value={formik.values.phone}
+							value={formik.values.bio}
 							onChange={formik.handleChange}
 							onBlur={formik.handleBlur}
-							errorMsg={formik.touched.phone && formik.errors.phone ? formik.errors.phone : null}
-						/>
-					</div>
-
-					<div className="flex items-center justify-between w-full max-md:flex-col max-md:items-start ">
-						<label htmlFor="dob" className="font-semibold">
-							Date of Birth
-						</label>
-						<InputGroup
-							name="dob"
-							type="date"
-							className="w-[250px]"
-							value={formik.values.dob}
-							onChange={formik.handleChange}
-							onBlur={formik.handleBlur}
-							errorMsg={formik.touched.dob && formik.errors.dob ? formik.errors.dob : null}
-						/>
-					</div>
-
-					<div className="flex items-center justify-between w-full max-md:flex-col max-md:items-start ">
-						<label htmlFor="gender" className="font-semibold">
-							Gender
-						</label>
-						<InputGroup
-							name="gender"
-							type="select"
-							className="w-[250px]"
-							optionLists={[
-								{ key: 'Select your gender', value: '' },
-								{ key: 'Male', value: 'male' },
-								{ key: 'Female', value: 'female' },
-							]}
-							value={formik.values.gender}
-							onChange={formik.handleChange}
-							onBlur={formik.handleBlur}
-							errorMsg={formik.touched.gender && formik.errors.gender ? formik.errors.gender : null}
+							errorMsg={formik.touched.bio && formik.errors.bio ? formik.errors.bio : null}
 						/>
 					</div>
 
 					<div className="flex flex-col">
 						<label className="font-semibold text-left">Social Media Handles:</label>
-						<div className="flex items-center gap-4 md:justify-between ">
-							<label className="md:pr-8 md:ml-auto" htmlFor="twitter">
+						<div className="flex  gap-4 md:justify-between ">
+							<label className="md:pr-8 md:ml-auto" htmlFor="x_page">
 								<img src={Twitter} alt="/" className="w-8" />
 							</label>
 							<InputGroup
-								name="twitter"
+								name="x_page"
 								type="text"
 								className="w-[250px]"
-								value={formik.values.social.twitter}
+								value={formik.values.x_page}
 								onChange={formik.handleChange}
 								onBlur={formik.handleBlur}
-								errorMsg={
-									formik.touched.social?.twitter && formik.errors.social?.twitter
-										? formik.errors.social?.twitter
-										: null
-								}
+								errorMsg={formik.touched.x_page && formik.errors.x_page ? formik.errors.x_page : null}
 							/>
 						</div>
 
-						<div className="flex items-center gap-4 md:justify-between ">
+						<div className="flex  gap-4 md:justify-between ">
 							<label className="md:pr-8 md:ml-auto" htmlFor="facebook">
 								<img src={FacebookBlue} alt="/" className="w-8" />
 							</label>
@@ -176,35 +180,27 @@ const GrabRegister = () => {
 								name="facebook"
 								type="text"
 								className="w-[250px]"
-								value={formik.values.social?.facebook}
+								value={formik.values.facebook}
 								onChange={formik.handleChange}
 								onBlur={formik.handleBlur}
-								errorMsg={
-									formik.touched.social?.facebook && formik.errors.social?.facebook
-										? formik.errors.social?.facebook
-										: null
-								}
+								errorMsg={formik.touched.facebook && formik.errors.facebook ? formik.errors.facebook : null}
 							/>
 						</div>
-						<div className="flex items-center gap-4 md:justify-between ">
+						<div className="flex  gap-4 md:justify-between ">
 							<label className="md:pr-8 md:ml-auto" htmlFor="whatsapp">
 								<img src={Whatsapp} alt="/" className="w-8" />
 							</label>
 							<InputGroup
 								name="whatsapp"
-								type="number"
+								type="text"
 								className="w-[250px]"
-								value={formik.values.social?.whatsapp}
+								value={formik.values.whatsapp}
 								onChange={formik.handleChange}
 								onBlur={formik.handleBlur}
-								errorMsg={
-									formik.touched.social?.whatsapp && formik.errors.social?.whatsapp
-										? formik.errors.social?.whatsapp
-										: null
-								}
+								errorMsg={formik.touched.whatsapp && formik.errors.whatsapp ? formik.errors.whatsapp : null}
 							/>
 						</div>
-						<div className="flex items-center gap-4 md:justify-between ">
+						<div className="flex  gap-4 md:justify-between ">
 							<label className="md:pr-8 md:ml-auto" htmlFor="instagram">
 								<img src={Instagram} alt="/" className="w-8" />
 							</label>
@@ -212,17 +208,15 @@ const GrabRegister = () => {
 								name="instagram"
 								type="text"
 								className="w-[250px]"
-								value={formik.values.social?.instagram}
+								value={formik.values.instagram}
 								onChange={formik.handleChange}
 								onBlur={formik.handleBlur}
 								errorMsg={
-									formik.touched.social?.instagram && formik.errors.social?.instagram
-										? formik.errors.social?.instagram
-										: null
+									formik.touched.instagram && formik.errors.instagram ? formik.errors.instagram : null
 								}
 							/>
 						</div>
-						<div className="flex items-center gap-4 mb-4 md:justify-between ">
+						<div className="flex  gap-4 mb-4 md:justify-between ">
 							<label className="md:pr-8 md:ml-auto" htmlFor="tiktok">
 								<img src={Tiktok} alt="/" className="w-8" />
 							</label>
@@ -230,60 +224,23 @@ const GrabRegister = () => {
 								name="tiktok"
 								type="text"
 								className="w-[250px]"
-								value={formik.values.social?.tiktok}
+								value={formik.values.tiktok}
 								onChange={formik.handleChange}
 								onBlur={formik.handleBlur}
-								errorMsg={
-									formik.touched.social?.tiktok && formik.errors.social?.tiktok
-										? formik.errors.social?.tiktok
-										: null
-								}
+								errorMsg={formik.touched.tiktok && formik.errors.tiktok ? formik.errors.tiktok : null}
 							/>
 						</div>
 					</div>
 
-					<div className="flex items-center md:gap-4 md:justify-between max-md:flex-col max-md:items-start">
-						<label htmlFor="email_address" className="font-semibold">
-							Email Address
-						</label>
-						<InputGroup
-							name="email_address"
-							type="email"
-							className="w-[250px]"
-							value={formik.values.email_address}
-							onChange={formik.handleChange}
-							onBlur={formik.handleBlur}
-							errorMsg={
-								formik.touched.email_address && formik.errors.email_address
-									? formik.errors.email_address
-									: null
-							}
-						/>
-					</div>
-
-					<div className="flex items-center md:gap-4 md:justify-between max-md:flex-col max-md:items-start">
-						<label htmlFor="password" className="font-semibold">
-							Password{' '}
-						</label>
-						<InputGroup
-							name="password"
-							type="password"
-							className="w-[250px]"
-							value={formik.values.password}
-							onChange={formik.handleChange}
-							onBlur={formik.handleBlur}
-							errorMsg={formik.touched.password && formik.errors.password ? formik.errors.password : null}
-						/>
-					</div>
-
 					<div className="py-8 space-y-4">
-						<Button variant={'primary'}>Create a Grabber Account in Seconds.</Button>
-						<div>
-							Already have a Grabber Account?{' '}
-							<Link to={Approutes.grab.home} className="text-primary">
-								Login Now
-							</Link>
-						</div>
+						<Button
+							type="submit"
+							variant={'primary'}
+							loading={formik.isSubmitting}
+							disabled={formik.isSubmitting || !(formik.isValid && formik.dirty)}
+						>
+							Create a Grabber Account in Seconds.
+						</Button>
 					</div>
 				</form>
 			</div>

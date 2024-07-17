@@ -85,7 +85,10 @@ const GrabberHome = () => {
 				</div>
 
 				<div className="flex flex-col gap-3">
-					<Link className="ml-auto text-white transition-all hover:underline">
+					<Link
+						to={Approutes.grab.products}
+						className="ml-auto text-white transition-all hover:underline"
+					>
 						<button className="flex items-center gap-2 ">
 							<span>Load Grabable Products</span>
 							<img src={ArrowRight} className="w-4" alt="/" />
