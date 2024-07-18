@@ -1,3 +1,4 @@
+export { default as Advertise } from './advertise.svg';
 export { default as Apple } from './appleLogo.svg';
 export { default as ArrowRight } from './arrowRight.svg';
 export { default as ArrowDown } from './arrowDown.svg';
@@ -22,6 +23,7 @@ export { default as Google } from './google.svg';
 export { default as Info } from './info.svg';
 export { default as InfoYellow } from './infoYellow.svg';
 export { default as InspectionTick } from './inspectionTick.svg';
+export { default as JoinUs } from './joinUs.svg';
 export { default as ListArrow } from './listArrow.svg';
 export { default as Instagram } from './instagram.svg';
 export { default as SingleArrowRight } from './singleArrowRight.svg';

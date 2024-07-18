@@ -11,7 +11,7 @@ import {
 	useNotify,
 	useCategories,
 } from '../../hooks';
-import { deleteImages, priceToToken, toOptions, toSelectOptions, uploadImage } from '../../utils';
+import { deleteImages, toOptions, toSelectOptions, uploadImage } from '../../utils';
 import {
 	agricultureTypes,
 	babiesBrands,
@@ -66,10 +66,7 @@ import {
 } from '../../constants';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { encodeProductId } from '../../utils/dataManipulations';
-import useTokenContext from '../../context/TokenContext';
-import { InfoYellow } from '../../assets/svgs';
 import { Coin } from '../../assets/images';
-import AdFeatures from '../../components/FormComponents/AdFeatures';
 
 const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 	const [selectedHealthCategory, setSelectedHealthCategory] = useState(null);

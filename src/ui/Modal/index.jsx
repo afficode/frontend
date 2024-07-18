@@ -1,15 +1,18 @@
-import { useEffect } from "react";
-import { useRef } from "react";
-import { ImCancelCircle } from "react-icons/im";
+import { useEffect } from 'react';
+import { useRef } from 'react';
+import { ImCancelCircle } from 'react-icons/im';
 
 const Modal = ({
-  isOpen,
-  setIsOpen,
-  modalHeader = true,
-  children,
-  headerText,
+	isOpen,
+	setIsOpen,
+	modalHeader = true,
+	children,
+	headerText,
+	headerStye,
+	headerSize,
+	className,
 }) => {
-  const modalRef = useRef();
+	const modalRef = useRef();
 
 	useEffect(() => {
 		const handleClickOutside = (e) => {
@@ -22,10 +25,10 @@ const Modal = ({
 			document.addEventListener('mousedown', handleClickOutside);
 		}
 
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [isOpen, setIsOpen]);
+		return () => {
+			document.removeEventListener('mousedown', handleClickOutside);
+		};
+	}, [isOpen, setIsOpen]);
 
 	return (
 		<div
@@ -39,11 +42,17 @@ const Modal = ({
 				ref={modalRef}
 				className={` px-6 py-4 overflow-auto max-h-[90%] rounded-lg bg-[#fff] w-[95%] lg:w-[70%] md:w-[60%] xl:w-[80%] transform ${
 					isOpen ? 'scale-100' : 'scale-0 '
-				} transition-transform duration-300 ease-in-out`}
+				} transition-transform duration-300 ease-in-out ${className}`}
 			>
 				{modalHeader && (
 					<div className={`flex justify-between items-center pb-6`}>
-						<h3 className="text-center text-black uppercase">{headerText}</h3>
+						{headerSize === 'small' ? (
+							<h4 className={` text-center text-black uppercase ${headerStye}`}>{headerText}</h4>
+						) : headerSize === 'text' ? (
+							<p className={`text-black ${headerStye}`}>{headerText}</p>
+						) : (
+							<h3 className={` text-center text-black uppercase ${headerStye}`}>{headerText}</h3>
+						)}
 						<div className="cursor-pointer modal-close" onClick={() => setIsOpen(false)}>
 							<ImCancelCircle size={25} />
 						</div>
