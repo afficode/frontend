@@ -1,6 +1,6 @@
 import { createContext, useContext, useReducer } from 'react';
 import userReducer, { initialState, userReducerOptions } from '../reducers/userReducer';
-import { getReducerInitialState } from '../utils';
+import { getReducerInitialState, getUserFromLocalStorage } from '../utils';
 
 const UserContext = createContext(initialState);
 
@@ -33,7 +33,7 @@ export const UserProvider = ({ children }) => {
 	};
 
 	const values = {
-		user: state?.user,
+		user: getUserFromLocalStorage(),
 		login,
 		logout,
 		updateUserInfo,

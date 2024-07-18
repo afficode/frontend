@@ -17,11 +17,12 @@ import { FaEnvelope } from "react-icons/fa";
 import { FaMicrochip } from "react-icons/fa6";
 import { BiSolidMessageRoundedDetail } from "react-icons/bi";
 
-const ChatForm = ({ ad_id, owner, active }) => {
+const ChatForm = ({ ad_id, owner, active, feature }) => {
   const { isLogin, user } = useAuth();
   const navigate = useNavigate();
+  
   // Modal
-  const [isOpen, setIsOpen] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
   const [blocked, setBlocked] = useState(active === "0");
   const [chatId, setChatId] = useState(null);
   const notify = useNotify();
@@ -184,6 +185,8 @@ const ChatForm = ({ ad_id, owner, active }) => {
                 </Button>
               </div>
             )}
+
+            { feature == '3' && (
             <Button
               variant="secondary"
               size={"full"}
@@ -195,7 +198,7 @@ const ChatForm = ({ ad_id, owner, active }) => {
                 Grab Item
                 <FaMicrochip className="my-auto" />
               </span>{" "}
-            </Button>
+            </Button> )}
 
             {/* <Button
             size={"full"}
