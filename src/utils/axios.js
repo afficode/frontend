@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { getRefreshToken, getToken, setRedirectLink, setToken } from './localstorage';
+import { getRefreshToken, getToken, setRedirectLink, setToken, setUser } from './localstorage';
 import { Approutes, backendLink } from '../constants';
-import { Navigate } from 'react-router-dom';
+import { setUpUser, initialState } from '../reducers/userReducer';
 
 export const api = axios.create({
 	baseURL: backendLink,
@@ -42,8 +42,11 @@ privateAxios.interceptors.response.use(
 						Accept: 'application/json',
 					},
 				});
-				const { token } = response?.data;				
+				const { token, user } = response?.data;	
+				setUpUser(user, initialState)		
 				setToken(token);
+				console.log("Refresh Token done", response?.data)
+				
 				originalRequest.headers.Authorization = `Bearer ${token}`;
 				return await axios(originalRequest);
 			} catch (error) {

@@ -233,6 +233,7 @@ const index = () => {
           </div>
           <ChatForm
             ad_id={result?.data?.id}
+            feature={result?.data?.feature}
             owner={result?.data?.owner}
             active={result?.data?.active}
           />
