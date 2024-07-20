@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { IoIosMenu } from 'react-icons/io';
 import { GrabMobileSidebar } from '../../../layout';
-import useAuth from '../../../context/UserContext';
+// import useAuth from '../../../context/UserContext';
 
 const GrabHeader = ({ text, size }) => {
 	const [showSidebar, setShowSidebar] = useState(false);
-	const { user } = useAuth();
-	console.log(user);
+	// const { user } = useAuth();
+	// console.log(user);
 
 	return (
 		<div className="flex justify-between py-2 border-b border-black/30 ">

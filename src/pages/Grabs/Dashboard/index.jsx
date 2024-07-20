@@ -2,12 +2,17 @@ import { useState } from 'react';
 import { GrabIcon, InspectionTick, New } from '../../../assets/svgs';
 import { GrabMobileSidebar } from '../../../layout';
 import { ScrollToTop } from '../../../utils';
+import GrabHeader from '../GrabHeader';
 
 const GrabDashboard = () => {
 	const [showSidebar, setShowSidebar] = useState(false);
 
 	return (
 		<section className="w-full">
+			<div className="lg:hidden">
+				<GrabHeader text={"Grabber's Dashboard"} />
+			</div>
+
 			<div className="flex flex-wrap items-center justify-between gap-6 p-4 my-8 bg-gray-300 rounded-xl">
 				<div className="flex-1 p-4 space-y-3 text-center text-white bg-red-500 whitespace-nowrap">
 					<h4>Total Grabs</h4>

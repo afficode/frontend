@@ -11,8 +11,11 @@ import { Button } from '../../../ui';
 import { Gown, Rolex, Sneakers } from '../../../assets/images';
 import { Approutes } from '../../../constants';
 import { ScrollToTop } from '../../../utils';
+import useAuth from '../../../context/UserContext';
 
 const GrabberHome = () => {
+	const { user } = useAuth();
+
 	return (
 		<section className="min-h-screen text-center max-w-[1024px] space-y-6 mx-auto mb-16">
 			<h2 className="py-4 uppercase">Grabber</h2>
@@ -30,7 +33,7 @@ const GrabberHome = () => {
 			</div>
 
 			<h2 className="px-4 text-left">
-				<b>Welcome, Fola!</b>
+				<b>Welcome, {user?.firstname}!</b>
 			</h2>
 
 			<div className="p-6 space-y-4 bg-gray-300 rounded-lg">

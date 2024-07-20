@@ -50,35 +50,43 @@ const Footer = () => {
 					</div>
 
 					{/* footer lists  */}
-					<ul className="flex flex-wrap items-center justify-between w-full max-md:grid max-md:grid-cols-3 max-sm:grid-cols-2 md:divide-x-8 md:divide-white max-md:justify-center">
-						<Link to={Approutes.aboutUs}>
-							<li className={`${listStyles} md:pl-0 `}>About US</li>
-						</Link>
-						<Link to={'/'}>
-							<li className={listStyles}>Agency Resources</li>
-						</Link>
-						<Link to={'/'}>
-							<li className={listStyles}>Terms of Use</li>
-						</Link>
-						<Link to={'/'}>
-							<li className={listStyles}>Broker Resources</li>
-						</Link>
-						<Link to={'/'}>
+					<div className="grid grid-cols-2 lg:grid-cols-5 gap-6">
+						<ul className="flex flex-col ">
+							<h6 className="px-2 md:px-8 text-2xl opacity-[.7] font-normal whitespace-nowrap mb-3">
+								About US
+							</h6>
+							<li className={listStyles}>About Boonfu</li>
+							<li className={listStyles}>Advertise With Us</li>
+							<li className={listStyles}>Jobs</li>
+							<li className={listStyles}>Media</li>
 							<li className={listStyles}>Privacy Policy</li>
-						</Link>
-						<Link to={'/'}>
-							<li className={listStyles}>Media Coverage</li>
-						</Link>
-						<Link to={'/'}>
-							<li className={listStyles}>Mobile</li>
-						</Link>
-					</ul>
+							<li className={listStyles}>Terms & Conditions</li>
+						</ul>
+						<div className="w-2 h-7 bg-white mx-auto max-lg:hidden"></div>
+						<ul className="flex flex-col ">
+							<h6 className="px-2 md:px-8 text-2xl opacity-[.7] font-normal whitespace-nowrap mb-3">
+								Help & Support
+							</h6>
+							<li className={listStyles}>Contact Us</li>
+							<li className={listStyles}>FAQs</li>
+							<li className={listStyles}>Safety Guides</li>
+						</ul>
+						<div className="w-2 h-7 bg-white mx-auto max-lg:hidden"></div>
+						<ul className="flex flex-col ">
+							<h6 className="px-2 md:px-8 text-2xl opacity-[.7] font-normal whitespace-nowrap mb-3">
+								Boonfu Extra
+							</h6>
+							<li className={listStyles}>Grab System</li>
+							<li className={listStyles}>Logistics Services</li>
+							<li className={listStyles}>My Shop</li>
+						</ul>
+					</div>
 
 					{/* copyright */}
 					<p className="text-center md:text-start">
-						&copy; Copyright 2023{' '}
+						&copy; Copyright 2024{' '}
 						<b>
-							<Link to={'/'}>Boonfu</Link>
+							<Link to={'/'}>Boonfu.ng</Link>
 						</b>
 						. All rights reserved.
 					</p>

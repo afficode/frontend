@@ -42,7 +42,7 @@ const Products = () => {
 	useEffect(() => {
 		// when product change, we update the featured product immediately
 		if (data) {
-			console.log(data);
+			// console.log(data);
 			setProduct((prev) => ({ ...data }));
 			if (data.ads.length > 0) {
 				// TODO: Revisit this after discussing with Mr Lawal the criteria for the Featured.

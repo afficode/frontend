@@ -19,6 +19,7 @@ const GrabSettings = () => {
 
 	const notify = useNotify();
 	const { user } = useAuth();
+	// console.log(user);
 
 	const checkDisplayName = async (displayName) => {
 		try {
@@ -32,21 +33,21 @@ const GrabSettings = () => {
 
 	const handleDisplayName = useDebouncedCallback(async (displayName) => {
 		const taken = await checkDisplayName(displayName);
-		console.log(taken);
+		// console.log(taken);
 		setIsDisplayNameTaken(taken);
 	}, 100);
 
 	const [selectedDisplayName, setSelectedDislayName] = useState(null);
 
 	const initialValues = {
-		display_name: user?.display_name,
-		current_location: user?.current_location,
-		bio: user?.bio,
-		x_page: user?.x_page,
-		facebook: user?.facebook,
-		whatsapp: user?.whatsapp,
-		instagram: user?.instagram,
-		tiktok: user?.tiktok,
+		display_name: user?.grabber.display_name,
+		current_location: user?.grabber.current_location_id,
+		bio: user?.grabber.bio,
+		x_page: user?.grabber.social_media.x_page,
+		facebook: user?.grabber.social_media.facebook,
+		whatsapp: user?.grabber.social_media.whatsapp,
+		instagram: user?.grabber.social_media.instagram,
+		tiktok: user?.grabber.social_media.tiktok,
 	};
 
 	// const validationSchema =
@@ -75,7 +76,7 @@ const GrabSettings = () => {
 				setSubmitting(true);
 				// Submit the form data to the backend endpoint
 				const response = await privateAxios.put('/grab/update_grabbers_data', values);
-				console.log('Form submission successful!', response.data);
+				// console.log('Form submission successful!', response.data);
 				notify('Your grabber account has been updated!', 'success');
 				resetForm();
 
@@ -140,7 +141,13 @@ const GrabSettings = () => {
 					<button onClick={() => setEditModal(true)}>
 						<img src={EditPencil} className="w-4" alt="/" />
 					</button>
-					<Modal isOpen={editModal} setIsOpen={setEditModal}>
+					<Modal
+						isOpen={editModal}
+						setIsOpen={setEditModal}
+						headerText={`Your Grabber Id: ${user.grabber.id}`}
+						headerSize={'text'}
+						headerStye={'text-lg font-semibold'}
+					>
 						<form onSubmit={formik.handleSubmit} className=" bg-gray-300 mx-auto  p-6 rounded-lg">
 							<div className="flex  md:gap-4 md:justify-between  max-md:flex-col max-md:items-start">
 								<label htmlFor="display_name" className="font-semibold mt-4">
@@ -198,7 +205,7 @@ const GrabSettings = () => {
 							<div className="flex flex-col">
 								<label className="font-semibold text-left">Social Media Handles:</label>
 								<div className="flex  gap-4 md:justify-between ">
-									<label className="md:pr-8 md:ml-auto" htmlFor="x_page">
+									<label className="md:pr-8 md:ml-auto  mt-3" htmlFor="x_page">
 										<img src={Twitter} alt="/" className="w-8" />
 									</label>
 									<InputGroup
@@ -213,7 +220,7 @@ const GrabSettings = () => {
 								</div>
 
 								<div className="flex  gap-4 md:justify-between ">
-									<label className="md:pr-8 md:ml-auto" htmlFor="facebook">
+									<label className="md:pr-8 md:ml-auto  mt-3" htmlFor="facebook">
 										<img src={FacebookBlue} alt="/" className="w-8" />
 									</label>
 									<InputGroup
@@ -229,7 +236,7 @@ const GrabSettings = () => {
 									/>
 								</div>
 								<div className="flex  gap-4 md:justify-between ">
-									<label className="md:pr-8 md:ml-auto" htmlFor="whatsapp">
+									<label className="md:pr-8 md:ml-auto  mt-3" htmlFor="whatsapp">
 										<img src={Whatsapp} alt="/" className="w-8" />
 									</label>
 									<InputGroup
@@ -245,7 +252,7 @@ const GrabSettings = () => {
 									/>
 								</div>
 								<div className="flex  gap-4 md:justify-between ">
-									<label className="md:pr-8 md:ml-auto" htmlFor="instagram">
+									<label className="md:pr-8 md:ml-auto  mt-3" htmlFor="instagram">
 										<img src={Instagram} alt="/" className="w-8" />
 									</label>
 									<InputGroup
@@ -261,7 +268,7 @@ const GrabSettings = () => {
 									/>
 								</div>
 								<div className="flex  gap-4 mb-4 md:justify-between ">
-									<label className="md:pr-8 md:ml-auto" htmlFor="tiktok">
+									<label className="md:pr-8 md:ml-auto  mt-3" htmlFor="tiktok">
 										<img src={Tiktok} alt="/" className="w-8" />
 									</label>
 									<InputGroup
