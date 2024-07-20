@@ -17,7 +17,7 @@ const Security = () => {
 			login_notification: false,
 		},
 		onSubmit: (values) => {
-			console.log(values);
+			// console.log(values);
 		},
 	});
 

@@ -37,7 +37,7 @@ const Profile = () => {
 	});
 
 	const handleSave = (values) => {
-		console.log(values);
+		// console.log(values);
 		setToggleEdit(() => ({
 			about: true,
 			bio: true,

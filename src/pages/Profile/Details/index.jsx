@@ -27,7 +27,7 @@ const Details = () => {
 	});
 
 	const handleSave = (values) => {
-		console.log(values);
+		// console.log(values);
 		setToggleEdit(() => ({
 			contact: true,
 			business: true,

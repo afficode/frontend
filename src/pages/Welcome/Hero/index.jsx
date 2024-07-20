@@ -8,7 +8,7 @@ import { Approutes } from '../../../constants';
 const Hero = () => {
 	const firstTimer = true;
 	const { user } = useAuth();
-	console.log(user);
+	// console.log(user);
 
 	return (
 		<section className="flex flex-col gap-12 px-2 py-12 my-2 rounded-md bg-primary sm:px-8">

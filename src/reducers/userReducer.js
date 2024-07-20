@@ -24,12 +24,12 @@ export const userReducerOptions = {
 	REFRESH_TOKEN: 'sfiurf',
 	USER: 'bs',
 	INITIAL_STATE: '_tye',
-	REDIRECT_LINK: '_plyvw'
+	REDIRECT_LINK: '_plyvw',
 };
 
 export const setUpUser = (payload, state) => {
 	let userData = { ...state, ...payload?.user };
-	console.log(userData)
+	// console.log(userData)
 	if (payload?.user?.verified === '1') {
 		userData = {
 			...userData,
@@ -65,12 +65,13 @@ export const setUpUser = (payload, state) => {
 			...userData,
 			grabberActive: false,
 		};
-	} 
-	
-	if(payload?.user?.grabber?.isActive === '1') {
+	}
+
+	if (payload?.user?.grabber?.isActive === '1') {
 		userData = {
-			...userData, grabberActive: true
-		}
+			...userData,
+			grabberActive: true,
+		};
 	}
 	return userData;
 };
@@ -80,7 +81,7 @@ const userReducer = (state, action) => {
 	switch (type) {
 		case userReducerOptions.LOGIN_USER:
 			const userStatus = setUpUser(payload, state);
-			console.log("reducer login", userStatus)
+			// console.log("reducer login", userStatus)
 			setUser(userStatus);
 			payload?.token && setToken(payload?.token);
 			payload?.refreshToken && setRefreshToken(payload?.refreshToken);
