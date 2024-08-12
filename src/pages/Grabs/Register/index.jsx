@@ -94,11 +94,12 @@ const GrabRegister = () => {
 							display_name: checkGrabber?.user.display_name,
 							current_location: checkGrabber?.user.current_location,
 							bio: checkGrabber?.user.bio,
-							x_page: checkGrabber?.user.x_page,
-							facebook: checkGrabber?.user.facebook,
-							whatsapp: checkGrabber?.user.whatsapp,
-							instagram: checkGrabber?.user.instagram,
-							tiktok: checkGrabber?.user.tiktok,
+							// if social media handle is empty, set it to empty string not NULL
+							x_page: checkGrabber?.user.x_page ?? '',
+							facebook: checkGrabber?.user.facebook ?? '',
+							whatsapp: checkGrabber?.user.whatsapp ?? '',
+							instagram: checkGrabber?.user.instagram ?? '',
+							tiktok: checkGrabber?.user.tiktok ?? '',
 					  });
 				// Submit the form data to the backend endpoint
 				const response = await privateAxios.post('/grab/become_grabber', formValues);
