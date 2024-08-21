@@ -4,8 +4,8 @@ import { Button } from '../../ui';
 
 const TermsAndCondition = ({ setIsOpen, isOpen, rulesRef, termsRef, privacyRef }) => {
 	return (
-		<div className="space-y-4 text-justify">
-			<h4 ref={termsRef}>Introduction</h4>
+		<div ref={termsRef} className="space-y-4 text-justify">
+			<h4>Introduction</h4>
 			<p className={textStyles}>
 				Welcome to Boonfu. By accessing www.boonfu.ng and its related websites, services, applications
 				or tools (also known as &quot;Boonfu&quot;) you are agreeing to make sure that Boonfu works for

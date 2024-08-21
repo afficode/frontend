@@ -1,10 +1,31 @@
 import { Link } from 'react-router-dom';
 import { Approutes } from '../../constants';
+import { useRef, useState } from 'react';
+import { TermsAndCondition } from '../../components';
+import { Modal } from '../../ui';
 
 // icons
 import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
 
 const Footer = () => {
+	const ref = useRef(null);
+
+	//to scroll into terms and condition document
+	const [isOpen, setIsOpen] = useState(false);
+	const termsRef = useRef(null);
+	const rulesRef = useRef(null);
+	const privacyRef = useRef(null);
+
+	const handleScrollTo = (ref) => {
+		if (!isOpen) {
+			setIsOpen(true);
+			setTimeout(() => {
+				ref.current.scrollIntoView({ behavior: 'smooth' });
+			}, 1000); // Add a delay to ensure the component is rendered before scrolling
+		} else {
+			ref.current.scrollIntoView({ behavior: 'smooth' });
+		}
+	};
 	return (
 		<footer className="bg-primary mt-16">
 			<section className=" w-full px-[1.5rem] lg:px-[4rem] max-w-[1380px] mx-auto">
@@ -55,30 +76,56 @@ const Footer = () => {
 							<h6 className="px-2 md:px-8 text-2xl opacity-[.7] font-normal whitespace-nowrap mb-3">
 								About US
 							</h6>
-							<li className={listStyles}>About Boonfu</li>
-							<li className={listStyles}>Advertise With Us</li>
-							<li className={listStyles}>Jobs</li>
-							<li className={listStyles}>Media</li>
-							<li className={listStyles}>Privacy Policy</li>
-							<li className={listStyles}>Terms & Conditions</li>
+							<Link to={`${Approutes.aboutUs}#about-us`}>
+								<li className={listStyles}>About Boonfu</li>
+							</Link>
+							<Link to={`${Approutes.aboutUs}#advertise`}>
+								<li className={listStyles}>Advertise With Us</li>
+							</Link>
+							<Link to={`${Approutes.aboutUs}#jobs`}>
+								<li className={listStyles}>Jobs</li>
+							</Link>
+
+							<Link to={Approutes.media}>
+								<li className={listStyles}>Media</li>
+							</Link>
+							<li onClick={() => handleScrollTo(privacyRef)} className={listStyles}>
+								Privacy Policy
+							</li>
+							<li onClick={() => handleScrollTo(termsRef)} className={listStyles}>
+								Terms & Conditions
+							</li>
 						</ul>
+
 						<div className="w-2 h-7 bg-white mx-auto max-lg:hidden"></div>
 						<ul className="flex flex-col ">
 							<h6 className="px-2 md:px-8 text-2xl opacity-[.7] font-normal whitespace-nowrap mb-3">
 								Help & Support
 							</h6>
-							<li className={listStyles}>Contact Us</li>
-							<li className={listStyles}>FAQs</li>
-							<li className={listStyles}>Safety Guides</li>
+							<Link to={Approutes.contactUs}>
+								<li className={listStyles}>Contact Us</li>
+							</Link>
+							<Link to={Approutes.underConstruction}>
+								<li className={listStyles}>FAQs</li>
+							</Link>
+							<Link to={Approutes.underConstruction}>
+								<li className={listStyles}>Safety Guides</li>
+							</Link>
 						</ul>
 						<div className="w-2 h-7 bg-white mx-auto max-lg:hidden"></div>
 						<ul className="flex flex-col ">
 							<h6 className="px-2 md:px-8 text-2xl opacity-[.7] font-normal whitespace-nowrap mb-3">
 								Boonfu Extra
 							</h6>
-							<li className={listStyles}>Grab System</li>
-							<li className={listStyles}>Logistics Services</li>
-							<li className={listStyles}>My Shop</li>
+							<Link to={Approutes.grab.home}>
+								<li className={listStyles}>Grab System</li>
+							</Link>
+							<Link to={Approutes.underConstruction}>
+								<li className={listStyles}>Logistics Services</li>
+							</Link>
+							<Link to={Approutes.underConstruction}>
+								<li className={listStyles}>My Shop</li>
+							</Link>
 						</ul>
 					</div>
 
@@ -91,6 +138,16 @@ const Footer = () => {
 						. All rights reserved.
 					</p>
 				</div>
+				{/* terms and condition modal */}
+				<Modal isOpen={isOpen} setIsOpen={setIsOpen} headerText="Terms of Service">
+					<TermsAndCondition
+						rulesRef={rulesRef}
+						termsRef={termsRef}
+						privacyRef={privacyRef}
+						setIsOpen={setIsOpen}
+						isOpen={isOpen}
+					/>
+				</Modal>
 			</section>
 		</footer>
 	);

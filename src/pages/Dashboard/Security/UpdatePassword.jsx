@@ -40,7 +40,7 @@ const UpdatePassword = ({ setIsOpen }) => {
 				setIsOpen(false);
 			},
 			onError: (error) => {
-				// console.log(error);
+				// notify(error?.response?.data?.message, 'error');
 				if (error.response.data.errorCode === 422) {
 					notify('Session timeout, Login again', 'error');
 					navigate(Approutes.auth.initial);

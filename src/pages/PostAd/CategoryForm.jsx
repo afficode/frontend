@@ -3913,8 +3913,8 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				images.push(data);
 			}
 		} catch (error) {
-			console.log(error);
-			notify('Error uploading your images.', 'error');
+			notify(error?.response?.data?.message, 'error');
+			// notify('Error uploading your images.', 'error');
 			setSubmitting(false);
 			return;
 		}
@@ -3957,7 +3957,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 						await deleteImages(filteredImages[i]);
 					}
 				} catch (error) {
-					console.log(error);
+					notify(error?.response?.data?.message, 'error');
 				}
 
 				setPaymentWindow(false);
@@ -3968,7 +3968,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			},
 		});
 
-		console.log('Form data', formData);
+		// console.log('Form data', formData);
 		// console.log('Saved data', JSON.parse(JSON.stringify(values)));
 	};
 

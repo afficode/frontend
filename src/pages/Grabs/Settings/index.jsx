@@ -111,7 +111,7 @@ const GrabSettings = () => {
 				// console.log(values);
 				// Submit the form data to the backend endpoint
 				const response = await privateAxios.put('/grab/setting', values);
-				console.log('Settings saved successfully!', response.data);
+				// console.log('Settings saved successfully!', response.data);
 				notify('Settings saved successfully!', 'success');
 			} catch (error) {
 				console.error('Form submission error:', error);

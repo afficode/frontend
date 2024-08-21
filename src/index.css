@@ -278,3 +278,10 @@ td {
 	background-repeat: no-repeat;
 	background-size: cover;
 }
+
+.media {
+	background-image: url(assets/images/mediaBg.png);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}

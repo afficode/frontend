@@ -23,8 +23,7 @@ const GrabRegister = () => {
 		const fetchGrabberStatus = async () => {
 			try {
 				const res = await privateAxios.get('/grab/account_exist');
-				// console.log(res.data.user);
-				setCheckGrabber(res.data);
+				setCheckGrabber(res.data.message === 'Account Exist' ? res.data : null);
 			} catch (error) {
 				console.error(error);
 			}
@@ -32,10 +31,6 @@ const GrabRegister = () => {
 
 		fetchGrabberStatus();
 	}, []);
-
-	// if (checkGrabber?.message === 'Account Exist') {
-	// 	notify('You were once a grabber. You can proceed to Re-activate your account', 'info');
-	// }
 
 	const checkDisplayName = async (displayName) => {
 		try {
@@ -49,19 +44,18 @@ const GrabRegister = () => {
 
 	const handleDisplayName = useDebouncedCallback(async (displayName) => {
 		const taken = await checkDisplayName(displayName);
-		// console.log(taken);
 		setIsDisplayNameTaken(taken);
 	}, 100);
 
 	const initialValues = {
-		display_name: '',
-		current_location: '',
-		bio: '',
-		x_page: '',
-		facebook: '',
-		whatsapp: '',
-		instagram: '',
-		tiktok: '',
+		display_name: checkGrabber?.user?.display_name ?? '',
+		current_location: checkGrabber?.user?.current_location ?? '',
+		bio: checkGrabber?.user?.bio ?? '',
+		x_page: checkGrabber?.user?.x_page ?? '',
+		facebook: checkGrabber?.user?.facebook ?? '',
+		whatsapp: checkGrabber?.user?.whatsapp ?? '',
+		instagram: checkGrabber?.user?.instagram ?? '',
+		tiktok: checkGrabber?.user?.tiktok ?? '',
 	};
 
 	const validationSchema = Yup.object({
@@ -72,11 +66,11 @@ const GrabRegister = () => {
 			}),
 		current_location: Yup.string().required('Required'),
 		bio: Yup.string().required('Required'),
-		x_page: Yup.string().required('Required'),
-		facebook: Yup.string().required('Required'),
-		whatsapp: Yup.string().required('Required'),
-		instagram: Yup.string().required('Required'),
-		tiktok: Yup.string().required('Required'),
+		x_page: Yup.string(),
+		facebook: Yup.string(),
+		whatsapp: Yup.string(),
+		instagram: Yup.string(),
+		tiktok: Yup.string(),
 	});
 
 	const formik = useFormik({
@@ -91,19 +85,24 @@ const GrabRegister = () => {
 					? (formValues = values)
 					: (formValues = {
 							...values,
-							display_name: checkGrabber?.user.display_name,
-							current_location: checkGrabber?.user.current_location,
-							bio: checkGrabber?.user.bio,
+							display_name: checkGrabber?.user?.display_name,
+							current_location: checkGrabber?.user?.current_location,
+							bio: checkGrabber?.user?.bio,
 							// if social media handle is empty, set it to empty string not NULL
-							x_page: checkGrabber?.user.x_page ?? '',
-							facebook: checkGrabber?.user.facebook ?? '',
-							whatsapp: checkGrabber?.user.whatsapp ?? '',
-							instagram: checkGrabber?.user.instagram ?? '',
-							tiktok: checkGrabber?.user.tiktok ?? '',
+							x_page: checkGrabber?.user?.x_page ?? '',
+							facebook: checkGrabber?.user?.facebook ?? '',
+							whatsapp: checkGrabber?.user?.whatsapp ?? '',
+							instagram: checkGrabber?.user?.instagram ?? '',
+							tiktok: checkGrabber?.user?.tiktok ?? '',
 					  });
+
+				const filteredFormValues = Object.fromEntries(
+					Object.entries(formValues).filter(
+						([key, value]) => value !== null && value !== undefined && value !== ''
+					)
+				);
 				// Submit the form data to the backend endpoint
-				const response = await privateAxios.post('/grab/become_grabber', formValues);
-				// console.log('Form submission successful!', response.data);
+				const response = await privateAxios.post('/grab/become_grabber', filteredFormValues);
 				notify('You are now a grabber!', 'success');
 				resetForm();
 
@@ -112,8 +111,8 @@ const GrabRegister = () => {
 					navigate(Approutes.logout); // Navigate to home route after timeout
 				}, 2000); // Adjust timeout delay as needed (2000 milliseconds = 2 seconds)
 			} catch (error) {
-				console.error('Form submission error:', error);
-				notify('Something went wrong, check the links and try again', 'error');
+				// console.error('Form submission error:', error);
+				notify(error.response.data.message, 'error');
 			} finally {
 				// Ensure to set submitting state to false after submission attempt
 				setSubmitting(false);
@@ -306,7 +305,7 @@ const GrabRegister = () => {
 								type="text"
 								placeholder="Enter a display name"
 								className="w-[250px]"
-								value={formik.values.display_name}
+								value={formik?.values?.display_name ?? ''}
 								onChange={handleChange}
 								onBlur={formik.handleBlur}
 								errorMsg={
@@ -326,7 +325,7 @@ const GrabRegister = () => {
 								type="select"
 								className="w-[250px]"
 								optionLists={statesOptions}
-								value={formik.values.current_location}
+								value={formik?.values?.current_location ?? ''}
 								onChange={formik.handleChange}
 								onBlur={formik.handleBlur}
 								errorMsg={
@@ -344,7 +343,7 @@ const GrabRegister = () => {
 								name="bio"
 								type="textarea"
 								className="w-[250px]"
-								value={formik.values.bio}
+								value={formik?.values?.bio ?? ''}
 								onChange={formik.handleChange}
 								onBlur={formik.handleBlur}
 								errorMsg={formik.touched.bio && formik.errors.bio ? formik.errors.bio : null}
@@ -361,7 +360,7 @@ const GrabRegister = () => {
 									name="x_page"
 									type="text"
 									className="w-[250px]"
-									value={formik.values.x_page}
+									value={formik?.values?.x_page ?? ''}
 									onChange={formik.handleChange}
 									onBlur={formik.handleBlur}
 									errorMsg={formik.touched.x_page && formik.errors.x_page ? formik.errors.x_page : null}
@@ -376,7 +375,7 @@ const GrabRegister = () => {
 									name="facebook"
 									type="text"
 									className="w-[250px]"
-									value={formik.values.facebook}
+									value={formik?.values?.facebook ?? ''}
 									onChange={formik.handleChange}
 									onBlur={formik.handleBlur}
 									errorMsg={
@@ -392,7 +391,7 @@ const GrabRegister = () => {
 									name="whatsapp"
 									type="text"
 									className="w-[250px]"
-									value={formik.values.whatsapp}
+									value={formik?.values?.whatsapp ?? ''}
 									onChange={formik.handleChange}
 									onBlur={formik.handleBlur}
 									errorMsg={
@@ -408,7 +407,7 @@ const GrabRegister = () => {
 									name="instagram"
 									type="text"
 									className="w-[250px]"
-									value={formik.values.instagram}
+									value={formik?.values?.instagram ?? ''}
 									onChange={formik.handleChange}
 									onBlur={formik.handleBlur}
 									errorMsg={
@@ -424,7 +423,7 @@ const GrabRegister = () => {
 									name="tiktok"
 									type="text"
 									className="w-[250px]"
-									value={formik.values.tiktok}
+									value={formik?.values?.tiktok ?? ''}
 									onChange={formik.handleChange}
 									onBlur={formik.handleBlur}
 									errorMsg={formik.touched.tiktok && formik.errors.tiktok ? formik.errors.tiktok : null}
@@ -437,7 +436,7 @@ const GrabRegister = () => {
 								type="submit"
 								variant={'primary'}
 								loading={formik.isSubmitting}
-								disabled={formik.isSubmitting || !(formik.isValid && formik.dirty)}
+								disabled={formik.isSubmitting || !formik.isValid}
 							>
 								Create a Grabber Account in Seconds.
 							</Button>

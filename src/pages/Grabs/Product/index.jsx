@@ -26,7 +26,7 @@ const GrabProduct = () => {
 				setCopied(true);
 			})
 			.catch((err) => {
-				console.log(err);
+				// console.log(err);
 				notify('Failed to copy link', 'error');
 			});
 	};

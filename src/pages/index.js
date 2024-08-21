@@ -1,4 +1,5 @@
 export { default as AboutUs } from './AboutUs';
+export { default as BoonfuMedia } from './BoonfuMedia';
 export { default as ContactUs } from './ContactUs';
 export { default as GrabFlyer } from './Grabs/Flyer';
 export { default as Grabs } from './Grabs';

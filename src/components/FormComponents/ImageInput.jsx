@@ -26,7 +26,7 @@ const ImageInput = (props) => {
 				await deleteImages(filteredImages[i]);
 			}
 		} catch (error) {
-			console.log(error);
+			notify(error?.response?.data?.message, 'error');
 		}
 
 		setEditMode(false);

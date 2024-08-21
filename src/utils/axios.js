@@ -42,11 +42,11 @@ privateAxios.interceptors.response.use(
 						Accept: 'application/json',
 					},
 				});
-				const { token, user } = response?.data;	
-				setUpUser(user, initialState)		
+				const { token, user } = response?.data;
+				setUpUser(user, initialState);
 				setToken(token);
-				console.log("Refresh Token done", response?.data)
-				
+				// console.log("Refresh Token done", response?.data)
+
 				originalRequest.headers.Authorization = `Bearer ${token}`;
 				return await axios(originalRequest);
 			} catch (error) {

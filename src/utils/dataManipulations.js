@@ -169,6 +169,6 @@ export const manipulateFilterForm = (values, category_id) => {
 	filteredValue = filteredValue?.price
 		? { ...filteredValue, price: manipulatePrice(filteredValue.price, category_id) }
 		: filteredValue;
-	console.log(filteredValue);
+	// console.log(filteredValue);
 	return filteredValue;
 };

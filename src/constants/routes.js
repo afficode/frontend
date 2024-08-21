@@ -1,4 +1,3 @@
-
 export const Approutes = {
 	auth: {
 		initial: '/auth',
@@ -45,6 +44,7 @@ export const Approutes = {
 	},
 	home: '/',
 	logout: '/logout',
+	media: '/boonfu-media',
 	playground: '/playground',
 	postAd: '/post-ad',
 	postDecision: '/post-decision',
@@ -61,7 +61,7 @@ export const backendLink =
 	import.meta.env.VITE_TESTING == 'gitpod'
 		? 'https://4000-afficode-backend-cch37ds4fkj.ws-eu108.gitpod.io/'
 		: import.meta.env.VITE_TESTING == 'sam'
-		? 'http://localhost:4000/' 
+		? 'http://localhost:4000/'
 		: import.meta.env.VITE_TESTING == 'staging_prod'
 		? 'http://89.107.60.191:4000/'
 		: 'https://backend-boonfu-staging-968fe07646b1.herokuapp.com/';

@@ -3827,8 +3827,8 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				images = [...adImages];
 			}
 		} catch (error) {
-			console.log(error);
-			notify('Error uploading your images.', 'error');
+			notify(error?.response?.data?.message, 'error');
+			// notify('Error uploading your images.', 'error');
 			setSubmitting(false);
 			return;
 		}
@@ -3869,7 +3869,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 						await deleteImages(filteredImages[i]);
 					}
 				} catch (error) {
-					console.log(error);
+					notify(error?.response?.data?.message, 'error');
 				}
 
 				notify(error?.response.data.message, 'error', {
