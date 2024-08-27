@@ -57,7 +57,7 @@ const ContactUs = () => {
 				message: '',
 			});
 		} catch (error) {
-			console.log(error);
+			notify(error?.response?.data?.message, 'error');
 			secureLocalStorage.removeItem('contact_us');
 			setLoading(false);
 			notify('An error occured try again', 'error');

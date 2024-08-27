@@ -112,13 +112,13 @@ const PerformanceCharts = ({ adsData }) => {
 						}
 					}
 				} catch (error) {
-					console.log(error);
+					notify(error?.response?.data?.message, 'error');
 				}
 				queryClient.invalidateQueries({ queryKey: ['getUserAds'] });
 				notify(res?.data.message, 'success');
 			})
 
-			.catch((err) => console.log(err));
+			.catch((error) => console.log(err));
 	};
 
 	return (

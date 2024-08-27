@@ -2,14 +2,16 @@ import { useState } from 'react';
 import { Button, InputGroup } from '../../ui';
 import { privateAxios } from '../../utils';
 import { Approutes, frontendLink } from '../../constants';
-
+import { useNotify } from '../../hooks';
 
 const BuyToken = () => {
 	const [formData, setFormData] = useState({
 		amount: '',
 	});
 
-	const handleChnage = (e) => {
+	const notify = useNotify();
+
+	const handleChange = (e) => {
 		const { name, value } = e.target;
 		setFormData({
 			...formData,
@@ -28,7 +30,7 @@ const BuyToken = () => {
 			const data = res?.data;
 			window.location.replace(data.url);
 		} catch (error) {
-			console.log(error);
+			notify(error?.response?.data?.message, 'error');
 		}
 	};
 
@@ -43,7 +45,7 @@ const BuyToken = () => {
 					type={'number'}
 					placeholder={'₦000'}
 					value={formData.amount}
-					onChange={handleChnage}
+					onChange={handleChange}
 				/>
 
 				<Button

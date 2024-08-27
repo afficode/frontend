@@ -1,10 +1,20 @@
-import { Car, Spa, SportCar } from '../../assets/images';
+import { useEffect } from 'react';
 import { Advertise, JoinUs } from '../../assets/svgs';
-import { Card } from '../../components';
-import { Button } from '../../ui';
 import { ScrollToTop } from '../../utils';
+import { useLocation } from 'react-router-dom';
 
 const AboutUs = () => {
+	const { hash } = useLocation();
+
+	useEffect(() => {
+		if (hash) {
+			const element = document.querySelector(hash);
+			if (element) {
+				element.scrollIntoView({ behavior: 'smooth' });
+			}
+		}
+	}, [hash]);
+
 	return (
 		<section className="w-full mb-12">
 			<div className="pt-1">
@@ -14,7 +24,7 @@ const AboutUs = () => {
 			</div>
 
 			{/* our story */}
-			<div className={`${sectionStyles} flex flex-col gap-4`}>
+			<div id="about-us" className={`${sectionStyles} scroll-mt-[92px] flex flex-col gap-4`}>
 				<h3 className="text-primary">About Boonfu</h3>
 
 				<p>
@@ -45,7 +55,7 @@ const AboutUs = () => {
 			</div>
 
 			<div
-				className={`${sectionStyles} flex justify-center gap-24 max-md:flex-col max-md:items-center`}
+				className={`${sectionStyles}  flex justify-center gap-24 max-md:flex-col max-md:items-center`}
 			>
 				<div className="flex items-center gap-8 p-6 bg-gray-300 shadow-xl">
 					<img src={Advertise} className="w-[6rem]" alt="/" />
@@ -57,8 +67,8 @@ const AboutUs = () => {
 				</div>
 			</div>
 
-			{/* our vision and misson */}
-			<div className={`${sectionStyles} flex flex-col gap-4`}>
+			{/* our vision and mission */}
+			<div id="advertise" className={`${sectionStyles} scroll-mt-[92px] flex flex-col gap-4`}>
 				<h3 className="text-primary">How Advertise with us works!</h3>
 				<p>
 					Explore how Boonfu.ng Marketplace can help you achieve your advertising objectives and connect
@@ -160,7 +170,7 @@ const AboutUs = () => {
 			</div> */}
 
 			{/* why choose us */}
-			<div className={`${sectionStyles} flex flex-col gap-4`}>
+			<div id="jobs" className={`${sectionStyles} scroll-mt-[92px] flex flex-col gap-4`}>
 				<h3 className="text-primary">Join us / Jobs</h3>
 				<h6 className="font-bold ">Find Your Next Tech Career </h6>
 				<p>

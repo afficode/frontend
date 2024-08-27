@@ -40,7 +40,6 @@ const ReverifyEmail = ({ endpoint }) => {
 							<Input
 								type="email"
 								name="email"
-								id="email"
 								placeholder="email@email.com"
 								className="input input-bordered border-black w-full bg-gray-100 text-black text-lg lg:text-xl rounded-none my-2 input-md"
 								{...formik.getFieldProps('email')}

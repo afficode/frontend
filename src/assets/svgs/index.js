@@ -24,6 +24,7 @@ export { default as Info } from './info.svg';
 export { default as InfoYellow } from './infoYellow.svg';
 export { default as InspectionTick } from './inspectionTick.svg';
 export { default as JoinUs } from './joinUs.svg';
+export { default as Linkdin } from './linkdin.svg';
 export { default as ListArrow } from './listArrow.svg';
 export { default as Instagram } from './instagram.svg';
 export { default as SingleArrowRight } from './singleArrowRight.svg';

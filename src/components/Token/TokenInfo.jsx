@@ -2,9 +2,12 @@ import React, { useEffect } from 'react';
 import { privateAxios, toMoney } from '../../utils';
 import { Button } from '../../ui';
 import useTokenContext from '../../context/TokenContext';
+import { useNotify } from '../../hooks';
 
 const TokenInfo = ({ setStage }) => {
 	const { token, updateToken } = useTokenContext();
+
+	const notify = useNotify();
 
 	useEffect(() => {
 		fetchData();
@@ -16,7 +19,7 @@ const TokenInfo = ({ setStage }) => {
 			const data = res?.data;
 			updateToken(data.coin.token);
 		} catch (error) {
-			console.log(error);
+			notify(error?.response?.data?.message, 'error');
 		}
 	};
 

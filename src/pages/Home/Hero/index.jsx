@@ -11,12 +11,14 @@ const Hero = () => {
 					))}
 				</div>
 				<div className="max-w-[30rem] mx-auto mt-6 lg:mt-[-3rem]">
-					<button
-						onClick={Approutes.underConstruction}
-						className="w-full text-lg capitalize border-none btn text-white hover:bg-secondary hover:border-black/50 hover:border-solid bg-secondary rounded-3xl sm:text-xl "
-					>
-						Set up a Shop Today!
-					</button>
+					<Link to={Approutes.underConstruction}>
+						<button
+							// onClick={Approutes.underConstruction}
+							className="w-full text-lg capitalize border-none btn text-white hover:bg-secondary hover:border-black/50 hover:border-solid bg-secondary rounded-3xl sm:text-xl "
+						>
+							Set up a Shop Today!
+						</button>
+					</Link>
 				</div>
 			</div>
 		</section>

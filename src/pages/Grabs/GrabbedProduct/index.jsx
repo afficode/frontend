@@ -52,7 +52,7 @@ const GrabbedProduct = () => {
 
 	const handleQuoteSubmit = (e) => {
 		e.preventDefault();
-		console.log(quoteFormData);
+		// console.log(quoteFormData);
 	};
 
 	const handleInspectionChange = (e) => {
@@ -62,7 +62,7 @@ const GrabbedProduct = () => {
 
 	const handleInspectionSubmit = (e) => {
 		e.preventDefault();
-		console.log(inspectionData);
+		inspectionData;
 	};
 
 	const isGeneral = false;
