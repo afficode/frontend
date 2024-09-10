@@ -1,13 +1,11 @@
-import { Car, Mastercard, MastercardLogo, Paypal, Visa, VisaLogo } from '../../assets/images';
+import { Car } from '../../assets/images';
 import { useStates } from '../../hooks';
 import { Button, InputGroup } from '../../ui';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { formatCardNumber, formatCurrency, toSelectOptions } from '../../utils';
-import { Cancel, EditPencilBlack } from '../../assets/svgs';
+import { formatCurrency, toSelectOptions } from '../../utils';
+import { EditPencilBlack } from '../../assets/svgs';
 import { useState } from 'react';
-import { HiOutlineSignal } from 'react-icons/hi2';
-import { set } from 'date-fns';
 import PaymentOption from './PaymentOption';
 
 const Checkout = () => {

@@ -8,7 +8,7 @@ export { default as Furniture } from './furniture.png';
 export { default as Gown } from './gown.png';
 export { default as HairDryer } from './hairDryer.png';
 export { default as House } from './house.png';
-export { default as InspectionImage } from './InspectionImage.png';
+export { default as InspectionImage } from './inspectionImage.png';
 export { default as KitchenTools } from './kitchenTools.png';
 export { default as ManSmiling } from './manSmiling.png';
 export { default as Mastercard } from './mastercard.png';
