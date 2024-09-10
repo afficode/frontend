@@ -28,12 +28,15 @@ export const Approutes = {
 		viewCategoryId: '/product/category/:id',
 	},
 	aboutUs: '/about-us',
+
 	contactUs: '/contact-us',
 	forgotPassword: '/forgot-password',
 	grab: {
+		checkout: '/grabber/checkout',
 		initial: '/grabber',
 		register: '/grabber/register',
 		home: '/grabber/home',
+		inspectionLog: '/grabber/inspection-log',
 		profile: '/grabber/profile',
 		dashboard: '/grabber/dashboard',
 		products: '/grabber/products',

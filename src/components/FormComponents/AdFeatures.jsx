@@ -151,7 +151,7 @@ const AdFeatures = (props) => {
 					className="bg-red-600 text-white text-center font-semibold"
 					onClick={() => setShowGrab(!showGrab)}
 				>
-					{showGrab ? 'Need to sell?' : 'Need to sell Urgently?'}
+					{showGrab ? 'Back' : 'Need to sell Urgently?'}
 				</Button>
 			</div>
 		</div>

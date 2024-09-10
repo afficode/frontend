@@ -41,6 +41,8 @@ import {
 	GrabFlyer,
 	GrabbedProduct,
 	BoonfuMedia,
+	Checkout,
+	InspectionLog,
 } from './pages';
 import { AppLayout, DashboardLayout } from './layout';
 import { Approutes } from './constants';
@@ -140,12 +142,14 @@ function App() {
 						<Route path={Approutes.grab.home} element={<GrabHome />} />
 						<Route path={Approutes.grab.product} element={<GrabProduct />} /> */}
 						<Route path={Approutes.grab.grabbedProduct} element={<GrabbedProduct />} />
+						<Route path={Approutes.grab.inspectionLog} element={<InspectionLog />} />
 						<Route path={Approutes.welcome} element={<Welcome />} />
 						<Route path={`${Approutes.postDecision}`} element={<PostDecision />} />
 						<Route path={`${Approutes.postAd}/:categoryId`} element={<PostAd />} />
 						<Route path={`${Approutes.updateAd}/:adId`} element={<UpdateAd />} />
 						<Route path={`${Approutes.postSuccess}/:adId`} element={<PostSuccess />} />
 						<Route path={Approutes.tokenSuccess} element={<Success />} />
+						<Route path={Approutes.grab.checkout} element={<Checkout />} />
 
 						{/* profile layout  */}
 						<Route element={<ProfileLayout />}>

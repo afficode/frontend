@@ -35,6 +35,19 @@ export const numberWithCommas = (x) => {
 	return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
 
+export const formatCurrency = (x) => {
+	if (!x) return '';
+
+	// Convert the value to a number first
+	const numericValue = parseFloat(x);
+
+	// If the conversion fails, return the original value
+	if (isNaN(numericValue)) return x;
+	const parts = numericValue.toFixed(2).split('.');
+	parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	return parts.join('.');
+};
+
 export const convertKeyToName = (ad) => {
 	const keys = [
 		'year',
@@ -171,4 +184,9 @@ export const manipulateFilterForm = (values, category_id) => {
 		: filteredValue;
 	// console.log(filteredValue);
 	return filteredValue;
+};
+
+export const formatCardNumber = (cardNumber, spacing = 4) => {
+	const regex = new RegExp(`(\\d{${spacing}})(?=\\d)`, 'g');
+	return cardNumber.replace(regex, `$1 `);
 };

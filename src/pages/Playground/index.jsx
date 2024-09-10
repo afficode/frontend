@@ -9,8 +9,6 @@ import * as Yup from 'yup';
 // import { FormControl } from "../../components";
 // import { Field, Form, Formik, useFormik } from "formik";
 import { ToggleSwitch } from 'flowbite-react';
-import { useNotify } from '../../hooks';
-import GrabSettings from '../Grabs/Settings';
 
 const Playground = () => {
 	const [loading, setLoading] = useState(false);

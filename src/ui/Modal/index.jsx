@@ -11,6 +11,7 @@ const Modal = ({
 	headerStye,
 	headerSize,
 	className,
+	padding = true,
 }) => {
 	const modalRef = useRef();
 
@@ -32,7 +33,7 @@ const Modal = ({
 
 	return (
 		<div
-			className={`fixed inset-0 z-[100000] bg-primary/50 h-full w-full flex items-center justify-center 
+			className={`fixed inset-0 z-[200010] bg-primary/50 h-full w-full flex items-center justify-center 
       ${
 							isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none '
 						} transition-opacity duration-300 ease-in-out
@@ -40,7 +41,9 @@ const Modal = ({
 		>
 			<div
 				ref={modalRef}
-				className={` px-6 py-4 overflow-auto max-h-[90%] rounded-lg bg-[#fff] w-[95%] lg:w-[70%] md:w-[60%] xl:w-[80%] transform ${
+				className={` ${
+					padding && 'px-5'
+				} py-4 overflow-auto max-h-[90%] rounded-lg bg-[#fff] w-[95%] lg:w-[70%] md:w-[60%] xl:w-[80%] transform ${
 					isOpen ? 'scale-100' : 'scale-0 '
 				} transition-transform duration-300 ease-in-out ${className}`}
 			>

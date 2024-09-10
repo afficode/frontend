@@ -22,9 +22,9 @@ const WalletDropdown = () => {
 
 				<div className="flex items-center justify-between mt-2">
 					<h4>Hi, Akindele!</h4>
-					<button onClick={() => setShowSidebar(!showSidebar)} className=" lg:hidden">
+					{/* <button onClick={() => setShowSidebar(!showSidebar)} className=" lg:hidden">
 						<IoIosMenu size={28} />
-					</button>
+					</button> */}
 				</div>
 			</div>
 
@@ -48,8 +48,14 @@ const WalletDropdown = () => {
 						>
 							Account History
 						</Button>
-						<Modal modalHeader={false} isOpen={walletOpen} setIsOpen={setWalletOpen}>
-							<AccountHistory />
+						<Modal
+							modalHeader={false}
+							isOpen={walletOpen}
+							setIsOpen={setWalletOpen}
+							padding={false}
+							className={'px-0'}
+						>
+							<AccountHistory className={''} isOpen={walletOpen} setIsOpen={setWalletOpen} />
 						</Modal>
 					</div>
 
