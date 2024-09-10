@@ -27,7 +27,7 @@ export { default as Info } from './info.svg';
 export { default as InfoYellow } from './infoYellow.svg';
 export { default as InspectionTick } from './inspectionTick.svg';
 export { default as Inspector } from './inspector.svg';
-export { default as InspectionCalender } from './InspectionCalender.svg';
+export { default as InspectionCalender } from './inspectionCalender.svg';
 export { default as JoinUs } from './joinUs.svg';
 export { default as Linkdin } from './linkdin.svg';
 export { default as ListArrow } from './listArrow.svg';
