@@ -1,4 +1,5 @@
 export * from './axios';
+export * from './dataManipulations';
 export * from './generateUrl';
 export * from './imageUpload';
 export * from './localstorage';

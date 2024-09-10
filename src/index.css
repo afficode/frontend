@@ -94,7 +94,15 @@ li {
 .formControlClass {
 	@apply my-2 form-control;
 }
-
+.customAmountInput {
+	@apply text-right !pl-12 !pr-8 !w-full !rounded-xl !border !border-secondary focus:!outline-none focus:!ring-0 !outline-none focus:!border-primary;
+}
+.customSelectInput {
+	@apply !w-full !rounded-xl !border !border-secondary focus:!outline-none focus:!ring-0 !outline-none focus:!border-primary;
+}
+.customCardInput {
+	@apply font-semibold !px-0 !pb-1 !border-x-0 !border-t-0 !border-b-[1px] !border-black focus:!outline-none focus:!ring-0 !outline-none focus:!border-primary;
+}
 .formControlClass > input,
 select {
 	@apply w-full my-2 text-base text-black bg-white rounded-none focus:border-primary placeholder-black/40 input-md;

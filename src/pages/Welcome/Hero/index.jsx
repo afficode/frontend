@@ -30,7 +30,7 @@ const Hero = () => {
 						tabIndex={0}
 						className={
 							firstTimer
-								? `dropdown-content transform -translate-x-[18%] min-h-fit w-[22rem]  z-50 p-6 bg-white shadow-md rounded-3xl`
+								? `dropdown-content transform -translate-x-[18%] min-h-fit w-[22rem]  z-[200000] p-6 bg-white shadow-md rounded-3xl`
 								: 'hidden'
 						}
 					>
@@ -62,7 +62,7 @@ const Hero = () => {
 						tabIndex={0}
 						className={
 							firstTimer
-								? `dropdown-content transform -translate-x-[18%] min-h-fit w-[22rem]  z-50 p-6 bg-white shadow-md rounded-3xl`
+								? `dropdown-content transform -translate-x-[18%] min-h-fit w-[22rem]  z-[200000] p-6 bg-white shadow-md rounded-3xl`
 								: 'hidden'
 						}
 					>
@@ -98,7 +98,7 @@ const Hero = () => {
 						tabIndex={0}
 						className={
 							firstTimer
-								? `dropdown-content transform -translate-x-[18%] min-h-fit w-[22rem]  z-50 p-6 bg-white shadow-md rounded-3xl`
+								? `dropdown-content transform -translate-x-[18%] min-h-fit w-[22rem]  z-[200000] p-6 bg-white shadow-md rounded-3xl`
 								: 'hidden'
 						}
 					>
