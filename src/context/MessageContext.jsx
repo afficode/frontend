@@ -115,7 +115,7 @@ export const MessageProvider = ({ children }) => {
 
 		socket.on('connect_error', (error) => {
 			console.error('Socket connection error:', error?.message);
-			notify(error?.response?.data?.message, 'error');
+			// notify(error?.response?.data?.message, 'error');
 			// Handle the error (e.g., display a message to the user)
 		});
 

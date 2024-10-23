@@ -2,9 +2,17 @@ import { useState } from 'react';
 import { InspectionImage } from '../../../assets/images';
 import { GrabIcon, InspectionCalender, Location } from '../../../assets/svgs';
 import { Button, Modal } from '../../../ui';
+import { InspectorCard } from '../../../components';
+import { useGetSchedules } from '../../../hooks';
 
 const InspectionLog = () => {
 	const [inspectionModal, setInspectionModal] = useState(false);
+	const { data } = useGetSchedules();
+
+	console.log(data?.schedules);
+
+	// const {data: ad} = useFetchProduct();
+
 	return (
 		<section>
 			<div className="space-y-8 p-6 sm:px-16">
@@ -18,6 +26,67 @@ const InspectionLog = () => {
 			</div>
 
 			<Modal
+				isOpen={inspectionModal}
+				setIsOpen={setInspectionModal}
+				padding={false}
+				className={'max-w-fit px-4'}
+			>
+				<InspectorCard />
+			</Modal>
+		</section>
+	);
+};
+
+export default InspectionLog;
+
+const InspectionCard = ({ image, message, date, time, name, onClick }) => {
+	return (
+		<div
+			onClick={onClick}
+			className="flex max-sm:flex-col gap-4 p-4 bg-gray-300 max-w-full h-fit md:h-[270px] mx-auto cursor-pointer"
+		>
+			<div className="h-full ">
+				<img src={InspectionImage} alt="/" className="object-cover w-full h-full rounded-xl" />
+			</div>
+
+			<div className="md:h-[240px] md:flex-1">
+				<h4 className="uppercase text-start">BLUE, TOYOTA COROLLA 2020</h4>
+
+				<div className="flex md:items-center justify-between max-md:flex-col">
+					<div className="h-full flex flex-col items-start justify-between gap-6  md:gap-28">
+						<div className="space-y-1">
+							<p className="flex gap-2">
+								<img src={Location} alt="/" className="w-3" />
+								Ikeja, Lagos
+							</p>
+							<div className="bg-white p-1 rounded-lg max-sm:text-sm ">Foreign Used</div>
+						</div>
+
+						<div className="flex gap-4 items-center max-md:my-2 mt-auto">
+							<p className="flex items-center gap-2 ">
+								<img src={GrabIcon} alt="/" className="w-5" /> 21-times
+							</p>
+							<p className="flex items-center gap-2 ">
+								<img src={InspectionCalender} alt="/" className="w-5" /> 4
+							</p>
+						</div>
+					</div>
+					{/* <div className="md:ml-auto flex flex-col gap-2">
+						<Button variant={'primary'} size={'large'} className={'rounded-2xl font-semibold'}>
+							Active
+						</Button>
+						<Button variant={'grey'} size={'large'} className={'rounded-2xl font-semibold'}>
+							Close
+						</Button>
+					</div> */}
+				</div>
+			</div>
+		</div>
+	);
+};
+
+{
+	/* <Modal
 				isOpen={inspectionModal}
 				setIsOpen={setInspectionModal}
 				headerSize={'small'}
@@ -58,55 +127,5 @@ const InspectionLog = () => {
 						</div>
 					</div>
 				</div>
-			</Modal>
-		</section>
-	);
-};
-
-export default InspectionLog;
-
-const InspectionCard = ({ image, message, date, time, name, onClick }) => {
-	return (
-		<div
-			onClick={onClick}
-			className="flex max-sm:flex-col gap-4 p-4 bg-gray-300 max-w-full h-fit md:h-[270px] mx-auto cursor-pointer"
-		>
-			<div className="h-full ">
-				<img src={InspectionImage} alt="/" className="object-cover w-full h-full rounded-xl" />
-			</div>
-
-			<div className="md:h-[240px] md:flex-1">
-				<h4 className="uppercase text-start">BLUE, TOYOTA COROLLA 2020</h4>
-
-				<div className="flex md:items-center justify-between max-md:flex-col">
-					<div className="h-full flex flex-col items-start justify-between gap-6  md:gap-28">
-						<div className="space-y-1">
-							<p className="flex gap-2">
-								<img src={Location} alt="/" className="w-3" />
-								Ikeja, Lagos
-							</p>
-							<div className="bg-white p-1 rounded-lg max-sm:text-sm ">Foreign Used</div>
-						</div>
-
-						<div className="flex gap-4 items-center max-md:my-2 mt-auto">
-							<p className="flex items-center gap-2 ">
-								<img src={GrabIcon} alt="/" className="w-5" /> 21-times
-							</p>
-							<p className="flex items-center gap-2 ">
-								<img src={InspectionCalender} alt="/" className="w-5" /> 4
-							</p>
-						</div>
-					</div>
-					<div className="md:ml-auto flex flex-col gap-2">
-						<Button variant={'primary'} size={'large'} className={'rounded-2xl font-semibold'}>
-							Active
-						</Button>
-						<Button variant={'grey'} size={'large'} className={'rounded-2xl font-semibold'}>
-							Close
-						</Button>
-					</div>
-				</div>
-			</div>
-		</div>
-	);
-};
+			</Modal> */
+}

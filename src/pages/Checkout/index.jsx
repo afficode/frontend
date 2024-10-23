@@ -3,7 +3,7 @@ import { useStates } from '../../hooks';
 import { Button, InputGroup } from '../../ui';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { formatCurrency, toSelectOptions } from '../../utils';
+import { toSelectOptions } from '../../utils';
 import { EditPencilBlack } from '../../assets/svgs';
 import { useState } from 'react';
 import PaymentOption from './PaymentOption';
@@ -64,57 +64,6 @@ const Checkout = () => {
 	});
 
 	const [inputValue, setInputValue] = useState('');
-
-	// Deposit formik
-	const formikDeposit = useFormik({
-		initialValues: {
-			amount: '',
-		},
-		onSubmit: (values) => {
-			console.log('Submitted values:', values);
-		},
-	});
-	const handleAmountChange = (e) => {
-		const rawValue = e.target.value.replace(/,/g, ''); // Remove commas for proper parsing
-
-		if (!isNaN(rawValue) || rawValue === '') {
-			setInputValue(rawValue);
-			formikDeposit.setFieldValue('amount', rawValue);
-		}
-	};
-
-	const handleAmountBlur = (e) => {
-		const formattedValue = formatCurrency(inputValue);
-		setInputValue(formattedValue);
-		formikDeposit.setFieldValue('amount', formattedValue);
-	};
-
-	// Withdraw formik
-	const formikWithdraw = useFormik({
-		initialValues: {
-			bank: '',
-			amount: '',
-		},
-		onSubmit: (values) => {
-			console.log('Submitted values:', values);
-		},
-	});
-	const handleWithdrawChange = (e) => {
-		const rawValue = e.target.value.replace(/,/g, ''); // Remove commas for proper parsing
-
-		if (!isNaN(rawValue) || rawValue === '') {
-			setInputValue(rawValue);
-			formikWithdraw.setFieldValue('amount', rawValue);
-		}
-	};
-
-	const handleWithdrawBlur = (e) => {
-		const formattedValue = formatCurrency(inputValue);
-		setInputValue(formattedValue);
-		formikWithdraw.setFieldValue('amount', formattedValue);
-	};
-
-	const [transactionType, setTransactionType] = useState('deposit');
 
 	return (
 		<section className="mx-6 my-4">
@@ -284,14 +233,6 @@ const Checkout = () => {
 						setCardType={setCardType}
 						cardType={cardType}
 						formikCard={formikCard}
-						formikDeposit={formikDeposit}
-						setTransactionType={setTransactionType}
-						transactionType={transactionType}
-						handleAmountChange={handleAmountChange}
-						handleAmountBlur={handleAmountBlur}
-						formikWithdraw={formikWithdraw}
-						handleWithdrawChange={handleWithdrawChange}
-						handleWithdrawBlur={handleWithdrawBlur}
 					/>
 				</div>
 

@@ -12,6 +12,7 @@
 	"dependencies": {
 		"@reduxjs/toolkit": "^1.9.5",
 		"@tanstack/react-query": "^5.37.1",
+		"@wojtekmaj/react-datetimerange-picker": "^6.0.0",
 		"axios": "^1.5.0",
 		"crypto-js": "^4.2.0",
 		"daisyui": "^3.7.6",

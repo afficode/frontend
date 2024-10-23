@@ -1,12 +1,13 @@
 import { Banner } from '../../components';
 import { Approutes } from '../../constants';
-import { Button } from '../../ui';
+// import { Button } from '../../ui';
 import Hero from './Hero';
 import RowContainer from './RowContainer';
 import { useProduct } from '../../hooks';
 const Home = () => {
 	const { data, isLoading, error } = useProduct();
-	// console.log();
+	console.log(data);
+
 	return (
 		<>
 			<Banner />

@@ -1,32 +1,14 @@
-import React, { useEffect } from 'react';
-import { privateAxios, toMoney } from '../../utils';
+import { toMoney } from '../../utils';
 import { Button } from '../../ui';
-import useTokenContext from '../../context/TokenContext';
-import { useNotify } from '../../hooks';
+import { useTotalCoin } from '../../hooks';
 
 const TokenInfo = ({ setStage }) => {
-	const { token, updateToken } = useTokenContext();
-
-	const notify = useNotify();
-
-	useEffect(() => {
-		fetchData();
-	}, []);
-
-	const fetchData = async () => {
-		try {
-			const res = await privateAxios.get('/token/total_coin');
-			const data = res?.data;
-			updateToken(data.coin.token);
-		} catch (error) {
-			notify(error?.response?.data?.message, 'error');
-		}
-	};
+	const { data } = useTotalCoin();
 
 	return (
 		<div className="space-y-4 text-center">
 			<h4>
-				You currently have <b>{token}</b> token
+				You currently have <b>{data?.coin.token}</b> token
 			</h4>
 			<h6>
 				To buy more token, click the button below. <br />

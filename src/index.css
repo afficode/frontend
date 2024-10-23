@@ -95,7 +95,7 @@ li {
 	@apply my-2 form-control;
 }
 .customAmountInput {
-	@apply text-right !pl-12 !pr-8 !w-full !rounded-xl !border !border-secondary focus:!outline-none focus:!ring-0 !outline-none focus:!border-primary;
+	@apply text-right pl-12 !pr-8 !w-full !rounded-xl !border !border-secondary focus:!outline-none focus:!ring-0 !outline-none focus:!border-primary;
 }
 .customSelectInput {
 	@apply !w-full !rounded-xl !border !border-secondary focus:!outline-none focus:!ring-0 !outline-none focus:!border-primary;
@@ -129,6 +129,73 @@ select:disabled {
 	border: 1px solid #cccccce5; /* Gray border */
 	cursor: not-allowed; /* Indicate that the element is not interactable */
 	opacity: 0.8; /* Make the element slightly transparent */
+}
+.input-group-label {
+	display: flex;
+	align-items: center;
+}
+.info-con {
+	position: relative;
+	margin-left: auto;
+}
+.info-con:focus-within > .outer {
+	opacity: 1;
+}
+
+.info-con > button {
+	cursor: pointer;
+	outline: 1px solid rgba(0, 0, 0, 0, 0.8);
+	border-radius: 50%;
+}
+
+.info-con > .outer {
+	position: absolute;
+	bottom: calc(100% + 0.75rem);
+	right: -0.4rem;
+	width: max-content;
+	max-width: 12.5rem;
+	display: flex;
+	opacity: 0;
+	transition: opacity 0.5s ease-in;
+	pointer-events: none;
+}
+.info-con > .outer::before {
+	content: '';
+	position: absolute;
+	background-color: #ffffff;
+	z-index: 1;
+	border-radius: 0.25rem;
+	border: 1px solid #dadada;
+	width: 1rem;
+	height: 1rem;
+	right: 1.25rem;
+	top: 100%;
+	transform: rotate(45deg) translateY(calc(-50% - 0.5rem));
+}
+.info-con > .outer span {
+	position: relative;
+	z-index: 200000;
+	background: #ffffff;
+	border: 1px solid #dadada;
+	font-weight: 500;
+	font-size: 0.6875rem;
+	line-height: 1.73;
+	color: #494848;
+	padding: 0.8125rem 1rem;
+	border-radius: 0.25rem;
+}
+.info-con > .outer > span::before {
+	content: '';
+	position: absolute;
+	background-color: #ffffff;
+	z-index: 100000;
+	border-radius: 0.25rem;
+	border: 1px solid transparent;
+	width: calc(1rem - 1px);
+	height: calc(1rem - 1px);
+	right: calc(1.25rem - 1px);
+	top: 100%;
+	transform: rotate(45deg) translateY(calc(-50% - 0.5rem));
 }
 
 /* hero cards  */

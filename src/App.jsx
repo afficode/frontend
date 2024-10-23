@@ -43,11 +43,18 @@ import {
 	BoonfuMedia,
 	Checkout,
 	InspectionLog,
+	Account,
+	PageNotFound,
+	AccountLayout,
+	Deposit,
+	Withdraw,
+	PaymentSuccess,
+	AdDetail,
 } from './pages';
 import { AppLayout, DashboardLayout } from './layout';
 import { Approutes } from './constants';
 import { ToastContainer } from 'react-toastify';
-import { RequireAuth, Success } from './components';
+import { AccountHistory, RequireAuth, Success } from './components';
 import useAuth from './context/UserContext';
 import 'react-toastify/dist/ReactToastify.css';
 import UnderConstruction from './pages/UnderConstruction';
@@ -109,6 +116,10 @@ function App() {
 								element={user?.grabberActive ? <GrabProducts /> : <Navigate to={Approutes.grab.initial} />}
 							/>
 							<Route
+								path={Approutes.grab.product(':ad_id')}
+								element={user?.grabberActive ? <GrabProduct /> : <Navigate to={Approutes.grab.initial} />}
+							/>
+							<Route
 								path={Approutes.grab.settings}
 								element={user?.grabberActive ? <GrabSettings /> : <Navigate to={Approutes.grab.initial} />}
 							/>
@@ -125,10 +136,7 @@ function App() {
 							path={Approutes.grab.home}
 							element={user?.grabberActive ? <GrabHome /> : <Navigate to={Approutes.grab.initial} />}
 						/>
-						<Route
-							path={Approutes.grab.product}
-							element={user?.grabberActive ? <GrabProduct /> : <Navigate to={Approutes.grab.initial} />}
-						/>
+
 						<Route path={Approutes.grab.register} element={<GrabRegister />} />
 
 						{/* <Route element={<GrabLayout />}>
@@ -141,7 +149,10 @@ function App() {
 						<Route path={Approutes.grab.register} element={ <GrabRegister />} />
 						<Route path={Approutes.grab.home} element={<GrabHome />} />
 						<Route path={Approutes.grab.product} element={<GrabProduct />} /> */}
-						<Route path={Approutes.grab.grabbedProduct} element={<GrabbedProduct />} />
+						<Route
+							path={Approutes.grab.grabbedProduct(':grabber_id', ':ad_id')}
+							element={<GrabbedProduct />}
+						/>
 						<Route path={Approutes.grab.inspectionLog} element={<InspectionLog />} />
 						<Route path={Approutes.welcome} element={<Welcome />} />
 						<Route path={`${Approutes.postDecision}`} element={<PostDecision />} />
@@ -150,6 +161,13 @@ function App() {
 						<Route path={`${Approutes.postSuccess}/:adId`} element={<PostSuccess />} />
 						<Route path={Approutes.tokenSuccess} element={<Success />} />
 						<Route path={Approutes.grab.checkout} element={<Checkout />} />
+						<Route path={Approutes.account.paymentSuccess} element={<PaymentSuccess />} />
+						<Route path={Approutes.account.initial} element={<AccountLayout />}>
+							<Route path={Approutes.account.initial} element={<AccountHistory />} />
+							<Route path={Approutes.account.deposit} element={<Deposit />} />
+							<Route path={Approutes.account.withdraw} element={<Withdraw />} />
+						</Route>
+						<Route path="/my-advert" element={<AdDetail />} />
 
 						{/* profile layout  */}
 						<Route element={<ProfileLayout />}>
@@ -165,6 +183,8 @@ function App() {
 						</Route>
 					</Route>
 				</Route>
+
+				<Route path="*" element={<PageNotFound />} />
 			</Routes>
 
 			<ToastContainer

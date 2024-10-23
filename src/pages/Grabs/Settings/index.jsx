@@ -93,7 +93,7 @@ const GrabSettings = () => {
 
 	const formik2 = useFormik({
 		initialValues: {
-			new_product: false,
+			new_product: true,
 			sold_product: false,
 			link_visited: false,
 			purchase_from_link: false,

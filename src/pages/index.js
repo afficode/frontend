@@ -1,7 +1,12 @@
+export { default as PageNotFound } from './404';
+export { default as Account } from './Account';
+export { default as AccountLayout } from './Account/Layout';
+export { default as AdDetail } from './Profile/Adverts/AdDetails';
 export { default as AboutUs } from './AboutUs';
 export { default as BoonfuMedia } from './BoonfuMedia';
 export { default as Checkout } from './Checkout';
 export { default as ContactUs } from './ContactUs';
+export { default as Deposit } from './Account/Deposit';
 export { default as GrabFlyer } from './Grabs/Flyer';
 export { default as Grabs } from './Grabs';
 export { default as GrabRegister } from './Grabs/Register';
@@ -14,6 +19,7 @@ export { default as GrabDashboard } from './Grabs/Dashboard';
 export { default as GrabSettings } from './Grabs/Settings';
 export { default as Home } from './Home';
 export { default as InspectionLog } from './Grabs/InspectionLog';
+export { default as PaymentSuccess } from './Account/PaymentSuccess';
 export { default as Playground } from './Playground';
 export { default as PostAd } from './PostAd';
 export { default as PostDecision } from './PostDecision';
@@ -21,6 +27,7 @@ export { default as PostSuccess } from './PostSuccess';
 export { default as UnderConstuction } from './UnderConstruction';
 export { default as UpdateAd } from './UpdateAd';
 export { default as Welcome } from './Welcome';
+export { default as Withdraw } from './Account/Withdraw';
 
 // auth
 export { default as Auth } from './auth';
