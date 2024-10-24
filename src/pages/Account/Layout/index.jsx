@@ -10,7 +10,7 @@ const AccountLayout = () => {
 
 	// localStorage.setItem('account-balance', data?.account.balance);
 	const balance = useAccountBalance();
-	console.log(balance);
+	// console.log(balance);
 
 	return (
 		<div className="min-h-screen p-8">

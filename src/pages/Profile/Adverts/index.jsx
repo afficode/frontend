@@ -12,7 +12,7 @@ const Adverts = () => {
 
 	const { data: ads, isLoading } = useMyAds();
 
-	console.log(ads);
+	// console.log(ads);
 
 	const adsData = ads?.active_ads.sort((a, b) => b.id - a.id);
 	// console.log(adsData);

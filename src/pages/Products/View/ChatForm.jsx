@@ -22,8 +22,8 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
 	const { isLogin, user } = useAuth();
 	const navigate = useNavigate();
 
-	console.log(ad);
-	console.log(user?.grabber);
+	// console.log(ad);
+	// console.log(user?.grabber);
 
 	// Modal
 	// const [isOpen, setIsOpen] = useState(false);
@@ -101,7 +101,7 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
 						}, 2000);
 					},
 					onError: (error) => {
-						console.log(error.response.data.message);
+						// console.log(error.response.data.message);
 						notify(error.response.data.message, 'error');
 					},
 				}

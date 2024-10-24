@@ -1,6 +1,6 @@
 import { Link, useParams } from 'react-router-dom';
 import { TbCurrencyNaira } from 'react-icons/tb';
-import { CarBlack, noimage } from '../../../assets/images';
+import { noimage } from '../../../assets/images';
 import { Carousel } from 'flowbite-react';
 import { FaCamera } from 'react-icons/fa';
 import OverviewPills from '../../Products/View/OverviewPills';

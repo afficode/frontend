@@ -32,7 +32,7 @@ const Withdraw = () => {
 
 			mutate(values, {
 				onSuccess: (data) => {
-					console.log('Withdraw data:', data);
+					// console.log('Withdraw data:', data);
 					notify(data.message, 'success');
 					queryClient.invalidateQueries('account-balance');
 					queryClient.invalidateQueries('all-transactions');
@@ -41,7 +41,7 @@ const Withdraw = () => {
 				},
 				onError: (error) => {
 					setSubmitting(false);
-					console.log(error);
+					// console.log(error);
 					notify(error.response.data.message, 'error');
 				},
 			});

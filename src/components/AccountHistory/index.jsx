@@ -61,7 +61,7 @@ const AccountHistory = ({ className, setIsOpen, isOpen }) => {
 	if (status && status !== 'all') {
 		db_option.push(status);
 	}
-	console.log(db_option);
+	// console.log(db_option);
 
 	// Combine URL parameters into the params object for querying the backend
 	const params = {
@@ -72,11 +72,11 @@ const AccountHistory = ({ className, setIsOpen, isOpen }) => {
 		page: page,
 	};
 
-	console.log(params);
+	// console.log(params);
 
 	const { data, isLoading } = useTransactions(params);
 
-	console.log(data);
+	// console.log(data);
 
 	const groupByMonth = (data) => {
 		// Sort the transactions by date in descending order (latest date first)

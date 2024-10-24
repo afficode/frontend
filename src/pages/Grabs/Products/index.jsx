@@ -1,16 +1,16 @@
 import { GrabIcon, GrabSave } from '../../../assets/svgs';
-import { Gown, Rolex, Sneakers } from '../../../assets/images';
 import { Button } from '../../../ui';
 import GrabHeader from '../GrabHeader';
 import { Link } from 'react-router-dom';
 import { Approutes } from '../../../constants';
 import { ScrollToTop } from '../../../utils';
 import { useGetGrabs } from '../../../hooks';
+import { SpinnerSkeleton } from '../../../components';
 
 const GrabProducts = () => {
 	const { data: result, isLoading } = useGetGrabs();
 
-	console.log(result);
+	// console.log(result);
 
 	if (isLoading)
 		return (
@@ -99,7 +99,6 @@ const GrabProducts = () => {
 		</section>
 	);
 
-	// return (
 	// 	<section>
 	// 		<GrabHeader text="Grabber’s Products Page" />
 
@@ -178,41 +177,3 @@ const GrabProducts = () => {
 };
 
 export default GrabProducts;
-const data = [
-	{
-		img: Gown,
-		title: 'Apparel Gown',
-	},
-	{
-		img: Sneakers,
-		title: 'Sketchers Trainers',
-	},
-	{
-		img: Rolex,
-		title: 'Rolex Watch for Men',
-	},
-	{
-		img: Gown,
-		title: 'Apparel Gown',
-	},
-	{
-		img: Sneakers,
-		title: 'Sketchers Trainers',
-	},
-	{
-		img: Rolex,
-		title: 'Rolex Watch for Men',
-	},
-	{
-		img: Gown,
-		title: 'Apparel Gown',
-	},
-	{
-		img: Sneakers,
-		title: 'Sketchers Trainers',
-	},
-	{
-		img: Rolex,
-		title: 'Rolex Watch for Men',
-	},
-];

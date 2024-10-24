@@ -47,9 +47,9 @@ const index = () => {
 		}
 	}, [isLoading, saveLoading]);
 
-	console.log('result', result?.data);
+	// console.log('result', result?.data);
 
-	console.log('user', user);
+	// console.log('user', user);
 
 	return isLoading ? (
 		<ViewProduct />
