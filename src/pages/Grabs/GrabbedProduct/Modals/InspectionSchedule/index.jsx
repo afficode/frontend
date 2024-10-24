@@ -7,17 +7,17 @@ import { format, parse } from 'date-fns';
 
 const InspectionSchedule = ({ setInspectionModalOpen, ad }) => {
 	const { user } = useAuth();
-	console.log(ad);
+	// console.log(ad);
 
 	const notify = useNotify();
 
 	const { mutate, isLoading } = useCreateSchedule();
-	console.log(user);
+	// console.log(user);
 
 	// inspection scheduling form for cars and properties
 
 	const handleInspectionSubmit = async (values, { resetForm }) => {
-		console.log(values);
+		// console.log(values);
 
 		const formData = {
 			...values,
@@ -35,10 +35,10 @@ const InspectionSchedule = ({ setInspectionModalOpen, ad }) => {
 				navigate(Approutes.auth.initial);
 			}, 2000);
 		} else {
-			console.log('data to submit', formData);
+			// console.log('data to submit', formData);
 			mutate(formData, {
 				onSuccess: (data) => {
-					console.log(data);
+					// console.log(data);
 					notify('Inspection Booked successfully', 'success');
 					resetForm();
 					setTimeout(() => {

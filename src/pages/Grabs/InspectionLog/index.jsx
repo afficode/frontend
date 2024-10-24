@@ -9,7 +9,7 @@ const InspectionLog = () => {
 	const [inspectionModal, setInspectionModal] = useState(false);
 	const { data } = useGetSchedules();
 
-	console.log(data?.schedules);
+	// console.log(data?.schedules);
 
 	// const {data: ad} = useFetchProduct();
 

@@ -36,15 +36,15 @@ const NewAccount = () => {
 			bank_code: Yup.string().required('Bank is required'),
 		}),
 		onSubmit: (values) => {
-			console.log('Submitted values:', values);
+			// console.log('Submitted values:', values);
 
 			mutate(values, {
 				onSuccess: (data) => {
-					console.log('Account add successful:', data);
+					// console.log('Account add successful:', data);
 					notify('Account added successfully', 'success');
 				},
 				onError: (error) => {
-					console.log('Account add error:', error);
+					// console.log('Account add error:', error);
 					notify(error?.response?.data.message, 'error');
 				},
 			});

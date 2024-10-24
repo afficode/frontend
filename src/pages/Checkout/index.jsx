@@ -36,7 +36,7 @@ const Checkout = () => {
 		initialValues: initialValuesDelivery,
 		validationSchema: validationSchemaDelivery,
 		onSubmit: async (values) => {
-			console.log(values);
+			// console.log(values);
 		},
 	});
 
@@ -59,7 +59,7 @@ const Checkout = () => {
 		initialValues: initialValuesCard,
 		validationSchema: validationSchemaCard,
 		onSubmit: async (values) => {
-			console.log(values);
+			// console.log(values);
 		},
 	});
 

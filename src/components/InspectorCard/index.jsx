@@ -10,10 +10,10 @@ const InspectorCard = () => {
 
 	const { mutate, isLoading: submitting } = useCreateSchedule();
 
-	console.log(data);
+	// console.log(data);
 
 	const handleSubmit = (values, { resetForm }) => {
-		console.log(values);
+		// console.log(values);
 
 		const formData = {
 			...values,
@@ -21,11 +21,11 @@ const InspectorCard = () => {
 
 		mutate(formData, {
 			onSuccess: (data) => {
-				console.log(data);
+				// console.log(data);
 				resetForm();
 			},
 			onError: (error) => {
-				console.log(error);
+				// console.log(error);
 			},
 		});
 	};
