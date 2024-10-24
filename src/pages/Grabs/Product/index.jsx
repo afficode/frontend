@@ -31,7 +31,9 @@ const GrabProduct = () => {
 		[ad_id, user.grabber.id]
 	);
 
-	const { data: result, isLoading } = fetchProduct(ad_id);
+	const { data: result, isLoading, isError } = fetchProduct(ad_id);
+
+	// console.log(result?.data);
 
 	const handleCopy = () => {
 		navigator.clipboard
@@ -46,12 +48,15 @@ const GrabProduct = () => {
 			});
 	};
 
-	if (isLoading)
+	if (isLoading) {
 		return (
 			<div className="h-screen">
 				<SpinnerSkeleton />
 			</div>
 		);
+	} else if (isError) {
+		return <div className="h-screen">Product not found</div>;
+	}
 
 	if (result) {
 		return (
@@ -90,8 +95,8 @@ const GrabProduct = () => {
 							</div>
 						</div>{' '}
 						<div className="relative rounded-none w-full  h-full mt-1">
-							{result.data?.images.length > 0 ? (
-								<Carousel className="h-full max-lg:h-[300px] md:min-h-[470px] rounded-none">
+							{result?.data?.images.length > 0 ? (
+								<Carousel className="h-full max-lg:h-[300px] md:min-h-[470px]  rounded-none">
 									{result.data?.images.map((img, index) => (
 										<img
 											src={img.path}

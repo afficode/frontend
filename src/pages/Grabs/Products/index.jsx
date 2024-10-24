@@ -1,5 +1,4 @@
 import { GrabIcon, GrabSave } from '../../../assets/svgs';
-import { Gown, Rolex, Sneakers } from '../../../assets/images';
 import { Button } from '../../../ui';
 import GrabHeader from '../GrabHeader';
 import { Link } from 'react-router-dom';
