@@ -1,18 +1,36 @@
 import { useState } from 'react';
 import { Button, InputGroup, Notification } from '../../ui';
-import { FormControl } from '../../components';
+import { ActionBar, FormControl, GrabUpdateTable } from '../../components';
 import { Form, Formik, useFormik } from 'formik';
 import * as Yup from 'yup';
-
-// import { useState } from "react";
-// import { Button, InputGroup, Notification } from "../../ui";
-// import { FormControl } from "../../components";
-// import { Field, Form, Formik, useFormik } from "formik";
 import { ToggleSwitch } from 'flowbite-react';
+import { useNotify } from '../../hooks';
+import InquiryChat from '../Grabs/GrabbedProduct/Modals/InquiryChat';
+import DatePicker from '../../components/FormComponents/DatePicker';
 
 const Playground = () => {
 	const [loading, setLoading] = useState(false);
 	const [checked, setChecked] = useState(false);
+
+	const [formData, setFormData] = useState({
+		response: '',
+		reschedule_date: '',
+	});
+
+	const handleChange = (e) => {
+		setFormData({ ...formData, [e.target.name]: e.target.value });
+	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		console.log(formData);
+	};
+
+	const notifyToast = useNotify();
+
+	const notify = () => {
+		notifyToast('You have successfully followed this user', 'success');
+	};
 
 	const initialValues = {
 		name: '',
@@ -121,7 +139,7 @@ const Playground = () => {
 						<div className="flex flex-wrap justify-center gap-12 my-3">
 							<div className="text-center ">
 								<p>variant - primary</p>
-								<Button variant="primary" className="my-4 text-lg font-bold rounded-full">
+								<Button onClick={notify} variant="primary" className="my-4 text-lg font-bold rounded-full">
 									+ Follow
 								</Button>
 							</div>
@@ -156,6 +174,20 @@ const Playground = () => {
 								</Button>
 							</div>
 						</div>
+					</div>
+
+					<div>
+						<h5 className="text-center">Action bar for grabber backend</h5>
+						<ActionBar />
+					</div>
+
+					<div>
+						<h5 className="text-center">Grab update table</h5>
+						<GrabUpdateTable />
+					</div>
+					<div>
+						<h5 className="text-center">Inquiry Chat</h5>
+						<InquiryChat />
 					</div>
 
 					<div>
@@ -220,6 +252,8 @@ const Playground = () => {
 
 					<div>
 						<h3 className="text-center text-primary">FormControl</h3>
+
+						{/* <DatePicker onChange={handleChange} value={formData.reschedule_date} /> */}
 
 						{/* <h5>Props </h5> */}
 						<div>

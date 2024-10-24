@@ -3915,6 +3915,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 		} catch (error) {
 			notify(error?.response?.data?.message, 'error');
 			// notify('Error uploading your images.', 'error');
+			console.log(error);
 			setSubmitting(false);
 			return;
 		}

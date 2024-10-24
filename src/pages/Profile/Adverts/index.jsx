@@ -12,6 +12,8 @@ const Adverts = () => {
 
 	const { data: ads, isLoading } = useMyAds();
 
+	console.log(ads);
+
 	const adsData = ads?.active_ads.sort((a, b) => b.id - a.id);
 	// console.log(adsData);
 
@@ -27,7 +29,7 @@ const Adverts = () => {
 								: 'lg:py-2 lg:px-6 py-1 px-4'
 						} cursor-pointer max-sm:text-sm`}
 					>
-						All <span>[17]</span>
+						All <span>[{ads?.total_ads}]</span>
 					</div>
 					<div
 						onClick={() => setFilteredAd('promoted')}

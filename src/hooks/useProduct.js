@@ -4,7 +4,20 @@ import { backendLink } from '../constants';
 // import { useQuery } from '@tanstack/react-query';
 
 export const useProduct = (params) => {
-	const fetchProduct = () => axios.get(`${backendLink}ads`, { params }).then((res) => res?.data);
+	const fetchProduct = () =>
+		axios
+			.get(
+				`${backendLink}ads`,
+				{ params }
+				// {
+				// 	headers: {
+				// 		...headers,
+				// 		'Content-Type': 'application/json',
+				// 		'ngrok-skip-browser-warning': 'skip-browser-warning',
+				// 	},
+				// }
+			)
+			.then((res) => res?.data);
 
 	return useQuery(['all-product', params], fetchProduct, {
 		refetchOnWindowFocus: false,
@@ -33,5 +46,5 @@ export const fetchCategorySummary = (cat_id) => {
 		refetchInterval: 5000,
 		refetchIntervalInBackground: false,
 		refetchOnWindowFocus: false,
-	})
-}
+	});
+};

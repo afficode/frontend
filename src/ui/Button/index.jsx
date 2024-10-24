@@ -21,10 +21,11 @@ const Button = ({ variant, size, loading, disabled, children, className, ...rest
 
 	const greyStyles = `${size === 'small' ? 'py-[0.5rem] px-[1.5rem]' : 'py-[.65rem] px-[2.8rem]'} ${
 		size === 'full' ? 'w-full' : 'w-auto'
-	} bg-[#D9D9D9] text-black shadow-xl`;
+	} bg-[#D9D9D9] text-black `;
 
 	return (
 		<button
+			style={variant === 'grey' ? { boxShadow: '2px 6px 4.2px 0px #00000040' } : {}}
 			disabled={disabled || loading}
 			className={`${className} ${disabled || loading ? 'cursor-not-allowed opacity-60' : ''} ${
 				variant === 'primary'

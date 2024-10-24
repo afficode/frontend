@@ -3,9 +3,12 @@ import { Button, Modal } from '../../../ui';
 import { Inspector } from '../../../assets/svgs';
 import { InspectorCard } from '../../../components';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Approutes } from '../../../constants';
 
 const NotificationContainer = ({ image, message, date, time, name, type }) => {
 	const [inspectorModal, setInspectorModal] = useState(false);
+	const navigate = useNavigate();
 
 	return (
 		<div
@@ -70,22 +73,13 @@ const NotificationContainer = ({ image, message, date, time, name, type }) => {
 						size={'small'}
 						className={'max-sm:text-sm'}
 						onClick={() => {
-							type === 'inspection' && setInspectorModal(true);
+							type === 'inspection' && navigate(Approutes.grab.inspectionLog);
 						}}
 					>
-						Respond to {name}
+						{type === 'inspection' ? `Click to view response` : `Respond to ${name}`}
 					</Button>
 				</div>
 			</div>
-
-			<Modal
-				isOpen={inspectorModal}
-				setIsOpen={setInspectorModal}
-				padding={false}
-				className={'max-w-fit px-4'}
-			>
-				<InspectorCard />
-			</Modal>
 		</div>
 	);
 };

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Field, Form, Formik } from 'formik';
 import Input from '../../../components/FormComponents/Input.jsx';
 import Button from '../../../ui/Button/index.jsx';
@@ -16,10 +16,14 @@ import ReportAd from './ReportAd.jsx';
 import { FaEnvelope } from 'react-icons/fa';
 import { FaMicrochip } from 'react-icons/fa6';
 import { BiSolidMessageRoundedDetail } from 'react-icons/bi';
+import { useGrabAd } from '../../../hooks/useGrab.js';
 
-const ChatForm = ({ ad_id, owner, active, feature }) => {
+const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
 	const { isLogin, user } = useAuth();
 	const navigate = useNavigate();
+
+	console.log(ad);
+	console.log(user?.grabber);
 
 	// Modal
 	// const [isOpen, setIsOpen] = useState(false);
@@ -42,6 +46,7 @@ const ChatForm = ({ ad_id, owner, active, feature }) => {
 		}
 	}, []);
 
+	const { mutate: grabAd } = useGrabAd();
 	const { mutate: creatingChat } = createChat();
 	const { mutate, error } = useSendMessage();
 	const sendMessage = (message) => {
@@ -83,6 +88,37 @@ const ChatForm = ({ ad_id, owner, active, feature }) => {
 			}
 		);
 	};
+
+	const handleGrab = () => {
+		if (user?.grabber.isActive === '1') {
+			grabAd(
+				{ ads_id: ad_id },
+				{
+					onSuccess: (data) => {
+						notify(data.message, 'success');
+						setTimeout(() => {
+							navigate(Approutes.grab.products);
+						}, 2000);
+					},
+					onError: (error) => {
+						console.log(error.response.data.message);
+						notify(error.response.data.message, 'error');
+					},
+				}
+			);
+		} else {
+			notify('You cannot grab this ad, register as a grabber to grab ad', 'error');
+
+			setTimeout(() => {
+				navigate(Approutes.grab.register);
+			}, 2000);
+		}
+	};
+
+	// const grabbed = localStorage.getItem('grabbed-item');
+
+	// console.log(typeof ad_id.toString());
+	// console.log(localStorage.getItem('grabbed-item') === ad_id.toString());
 
 	return (
 		<div className="">
@@ -170,18 +206,37 @@ const ChatForm = ({ ad_id, owner, active, feature }) => {
 						)}
 
 						{feature == '3' && (
-							<Button
-								variant="secondary"
-								size={'full'}
-								className="my-2 text-lg tracking-tighter line-clamp-1"
-								disabled={!isLogin || blocked || user?.id === owner}
-								type="button"
-							>
-								<span className="flex items-center gap-2 justify-center">
-									Grab Item
-									<FaMicrochip className="my-auto" />
-								</span>{' '}
-							</Button>
+							<>
+								{/* {grabbedAds?.grabs.ads_id === ad_id.toString() ? (
+									<Button
+										// onClick={handleGrab}
+										variant="secondary"
+										size={'full'}
+										className="my-2 text-lg tracking-tighter line-clamp-1"
+										disabled={true}
+										type="button"
+									>
+										<span className="flex items-center gap-2 justify-center">
+											Item Grabbed
+											<FaMicrochip className="my-auto" />
+										</span>{' '}
+									</Button>
+								) : ( */}
+								<Button
+									onClick={handleGrab}
+									variant="secondary"
+									size={'full'}
+									className="my-2 text-lg tracking-tighter line-clamp-1"
+									disabled={!isLogin || blocked || user?.id === owner}
+									type="button"
+								>
+									<span className="flex items-center gap-2 justify-center">
+										Grab Item
+										<FaMicrochip className="my-auto" />
+									</span>{' '}
+								</Button>
+								{/* )} */}
+							</>
 						)}
 
 						{/* <Button

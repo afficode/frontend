@@ -9,9 +9,9 @@ const GrabDashboard = () => {
 
 	return (
 		<section className="w-full">
-			<div className="lg:hidden">
-				<GrabHeader text={"Grabber's Dashboard"} />
-			</div>
+			{/* <div className="lg:hidden"> */}
+			<GrabHeader text={"Grabber's Dashboard"} />
+			{/* </div> */}
 
 			<div className="flex flex-wrap items-center justify-between gap-6 p-4 my-8 bg-gray-300 rounded-xl">
 				<div className="flex-1 p-4 space-y-3 text-center text-white bg-red-500 whitespace-nowrap">
@@ -33,9 +33,9 @@ const GrabDashboard = () => {
 			<div className="my-8 space-y-4">
 				<h4>Grab Activities Chart</h4>
 
-				<div className="mt-4 overflow-x-auto bg-white border border-black/40 max-h-96">
-					<table className="table table-pin-rows ">
-						<thead className="text-sm font-medium border-none">
+				<div className="mt-4 !overflow-x-auto max-sm:w-[92vw] bg-white border border-black/40 max-h-96">
+					<table className="table  table-pin-rows ">
+						<thead className="text-xs font-medium border-none">
 							<tr className="text-black bg-gray-200">
 								<th>Product(s)</th>
 								<th className="text-center">Grabbed date</th>
@@ -44,25 +44,25 @@ const GrabDashboard = () => {
 							</tr>
 						</thead>
 						<tbody>
-							<tr className="font-medium whitespace-nowrap hover:bg-gray-200">
+							<tr className="text-sm whitespace-nowrap font-medium  hover:bg-gray-200">
 								<td className="capitalize hover:underline hover:underline-offset-4">Toyota Corolla</td>
 								<td className="text-center text-primary">Mar 25. 2024</td>
 								<td className="text-center text-red-500">Sold</td>
 								<td className="text-center ">₦ 250k</td>
 							</tr>
-							<tr className="font-medium whitespace-nowrap hover:bg-gray-200">
+							<tr className="text-sm whitespace-nowrap font-medium  hover:bg-gray-200">
 								<td className="capitalize hover:underline hover:underline-offset-4">Shoe</td>
 								<td className="text-center text-primary">Mar 20. 2024</td>
 								<td className="text-center text-green-500">Active</td>
 								<td className="text-center ">₦ 2k</td>
 							</tr>
-							<tr className="font-medium whitespace-nowrap hover:bg-gray-200">
+							<tr className="text-sm whitespace-nowrap font-medium  hover:bg-gray-200">
 								<td className="capitalize hover:underline hover:underline-offset-4">Iphone 15</td>
 								<td className="text-center text-primary">Mar 15. 2024</td>
 								<td className="text-center text-green-500">Active</td>
 								<td className="text-center ">₦ 250k</td>
 							</tr>
-							<tr className="font-medium whitespace-nowrap hover:bg-gray-200">
+							<tr className="text-sm whitespace-nowrap font-medium  hover:bg-gray-200">
 								<td className="capitalize hover:underline hover:underline-offset-4">Toyota Corolla</td>
 								<td className="text-center text-primary">Mar 25. 2024</td>
 								<td className="text-center text-red-500">Sold</td>
@@ -81,7 +81,7 @@ const GrabDashboard = () => {
 
 				<div className="overflow-x-auto bg-white border mt-4a border-black/40 max-h-96">
 					<table className="table table-pin-rows ">
-						<thead className="text-sm font-medium border-none">
+						<thead className="text-xs font-medium border-none">
 							<tr className="text-black bg-gray-200">
 								<th>Categories</th>
 								<th className="text-center">Grabs</th>

@@ -22,6 +22,7 @@ import { FaCarSide, FaBuilding, FaRegHandshake } from 'react-icons/fa';
 import { useDebouncedCallback } from 'use-debounce';
 import { getSaves } from '../../hooks/useSaves';
 import { toSelectOptions } from '../../utils';
+import { NotificationBell } from '../../assets/svgs';
 // import { AccountHistory } from '../../components';
 
 const Navbar = () => {
@@ -33,6 +34,8 @@ const Navbar = () => {
 	const { isLogin, user } = useAuth();
 	const { data: saves, error } = getSaves(enable) || [];
 	const { unread } = useMessageContext();
+
+	// console.log(user);
 
 	// fetch categories
 	const { data } = useCategories();
@@ -111,7 +114,7 @@ const Navbar = () => {
 	}, [setNav, isLogin]);
 
 	return (
-		<header className="fixed top-0 z-[200000] w-full bg-primary">
+		<header className="fixed top-0 z-[2000] w-full bg-primary">
 			<nav className="relative ">
 				<div className="w-full pt-3 ">
 					{/* top nav  */}
@@ -182,6 +185,14 @@ const Navbar = () => {
 								// </Link>
 								// <div className="max-h-screen dropdown">
 								<>
+									<Link to={Approutes.profile.notifications}>
+										<div
+											className="flex flex-col justify-center items-center p-2 bg-white rounded-full"
+											title="My Notifications"
+										>
+											<img src={NotificationBell} alt="my notification" className="w-6 h-6" />
+										</div>
+									</Link>
 									<div className="dropdown">
 										<button
 											tabIndex={0}
@@ -215,7 +226,6 @@ const Navbar = () => {
 									)}
 								</div>
 							</Link>
-
 							{/* post ad dropdown */}
 							<div className="dropdown ">
 								<div
@@ -242,7 +252,6 @@ const Navbar = () => {
 									</ul>
 								</ul>
 							</div>
-
 							{!isLogin ? (
 								<Link to={Approutes.auth.initial}>
 									<div
@@ -257,7 +266,7 @@ const Navbar = () => {
 								<>
 									<Link to={Approutes.profile.messages}>
 										<div
-											className="relative flex flex-col items-center text-white cursor-pointer max-md:hidden"
+											className="relative flex flex-col items-center  text-white cursor-pointer max-md:hidden"
 											title="My messages"
 										>
 											{' '}
@@ -274,7 +283,7 @@ const Navbar = () => {
 										<Link to={Approutes.profile.initial}>
 											<div
 												tabIndex={0}
-												className="flex flex-col items-center text-white cursor-pointer"
+												className="flex flex-col max-sm:hidden items-center text-white cursor-pointer"
 												title="My profile"
 											>
 												<CgProfile size={25} />
@@ -361,9 +370,8 @@ const Navbar = () => {
 									</div>
 								</>
 							)}
-
 							{/* mobile categories/menu dropdown */}
-							{pathname === '/' ? (
+							{!isLogin ? (
 								<div className="dropdown dropdown-end">
 									<button className="flex flex-col gap-0 px-4 py-0 capitalize bg-white border-none max-sm:text-xs lg:hidden btn btn-sm text-primary hover:bg-white">
 										Categories
@@ -537,7 +545,7 @@ const Navbar = () => {
 					{/* bottom nav  */}
 					<div className="mt-2 border-y-2 border-y-white ">
 						<div className="max-w-[1380px] mx-auto px-2 relative flex items-center justify-between w-full  whitespace-nowrap">
-							{pathname === '/' ? (
+							{!isLogin ? (
 								// dropdown for categories
 								<div className="dropdown ">
 									<button className="flex flex-col gap-0 px-5 mr-16 text-sm capitalize bg-white border-none max-lg:hidden btn btn-sm hover:bg-white text-primary cat-btn">
