@@ -1,11 +1,7 @@
-import { io } from 'socket.io-client';
-import { backendLink } from '../constants';
+import { Manager } from "socket.io-client";
 
-export const socket = io(`${backendLink}`);
-socket.on('connect', () => {
-	// console.log(socket.id); // x8WIv7-mJelg7on_ALbx
-});
+import { backendLink } from "../constants";
 
-socket.on('user up', () => {
-	// console.log("connected", socket.id); // x8WIv7-mJelg7on_ALbx
+export const manager = new Manager(`${backendLink}`, {
+  autoConnect: false,
 });
