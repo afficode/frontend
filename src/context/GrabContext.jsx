@@ -1,18 +1,20 @@
 import { useContext, createContext, useEffect, useState } from "react";
 
 import useAuth from "./UserContext";
-import { getToken } from "../utils";
+import { getRefreshToken } from "../utils";
 import { manager } from "../utils/socket";
+import { useNotify } from "../hooks";
 
 const GrabContext = createContext();
 
 export const GrabProvider = ({ children }) => {
   const { isLogin } = useAuth();
   const [grabs, setGrabs] = useState([]);
+  const notify = useNotify();
   const socket = manager.socket("/grabber", {
     auth: (cb) => {
       cb({
-        token: getToken(),
+        token: getRefreshToken(),
       });
     },
   });
@@ -28,8 +30,16 @@ export const GrabProvider = ({ children }) => {
     socket.emit("grab_ad", adId);
   };
 
-  const unGrabAd = (adId) => {
-    socket.emit("ungrab_ad", adId);
+  const unGrabAd = async (adId) => {
+    socket.emit("ungrab_ad", adId, (response) => {
+      if (!response.success) {
+        notify(response.message, "info");
+      }
+      if (response.success) {
+        notify(response.message, "success");
+        setGrabs(() => [...response?.grabs]);
+      }
+    });
   };
 
   const disconnect_socket = () => {
@@ -43,12 +53,16 @@ export const GrabProvider = ({ children }) => {
     }
 
     socket.on("error", (error) => {
-      console.error("Grab Socket connection error:");
+      // console.error("Grab Socket connection error:");
       // Handle the error (e.g., display a message to the user)
     });
 
     socket.on("connect_error", (error) => {
-      console.error("Grab Socket connection error:", error?.message);
+      //console.error("Grab Socket connection error:", error?.message);
+      if (error?.message === "Unauthorized!") {
+        //
+        notify("Please try to login again to continue!", "error");
+      }
     });
 
     return () => socket.disconnect();
@@ -68,7 +82,7 @@ export const GrabProvider = ({ children }) => {
   );
 };
 const useGrabContext = () => {
-  const context = useContext(MessageContext);
+  const context = useContext(GrabContext);
 
   if (context === undefined) {
     throw new Error(

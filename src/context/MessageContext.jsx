@@ -1,7 +1,7 @@
 import { useEffect, useContext, createContext, useState } from "react";
 
 import useAuth from "./UserContext";
-import { getToken } from "../utils";
+import { getRefreshToken } from "../utils";
 import { useNotify } from "../hooks";
 import { manager } from "../utils/socket";
 
@@ -17,7 +17,7 @@ export const MessageProvider = ({ children }) => {
   const socket = manager.socket("/message", {
     auth: (cb) => {
       cb({
-        token: getToken(),
+        token: getRefreshToken(),
       });
     },
   });
@@ -109,14 +109,16 @@ export const MessageProvider = ({ children }) => {
     });
 
     socket.on("error", (error) => {
-      console.error("Socket connection error:");
+      // console.error("Socket connection error:");
       // Handle the error (e.g., display a message to the user)
     });
 
     socket.on("connect_error", (error) => {
-      console.error("Socket connection error:", error?.message);
-      // notify(error?.response?.data?.message, 'error');
-      // Handle the error (e.g., display a message to the user)
+      // console.error("Socket connection error:", error?.message);
+      if (error?.message === "Unauthorized!") {
+        //
+        notify("Please try to login again to continue!", "error");
+      }
     });
 
     return () => socket.disconnect();
