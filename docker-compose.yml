@@ -1,0 +1,17 @@
+services:
+  boonfu:
+    build:
+      context: .
+      target: deploy
+    ports:
+      - 80:80
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+    healthcheck:
+      test: [ "CMD-SHELL", "curl -f http://localhost || exit 1" ]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
