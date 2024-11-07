@@ -33,12 +33,12 @@ const ProfileLayout = () => {
 export default ProfileLayout;
 
 const navItems = [
-	{
-		name: 'My Details',
-		link: Approutes.profile.details,
-		icon: <CgProfile size={20} />,
-		title: 'My Details',
-	},
+	// {
+	// 	name: 'My Details',
+	// 	link: Approutes.profile.details,
+	// 	icon: <CgProfile size={20} />,
+	// 	title: 'My Details',
+	// },
 	{
 		name: 'My Saved Items',
 		link: Approutes.profile.saved,

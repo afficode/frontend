@@ -1,10 +1,14 @@
+import { Link } from 'react-router-dom';
+import { Approutes } from '../../constants';
+
 const ActionBar = (ad) => {
+	console.log(ad);
 	return (
 		<div className="">
 			<div className="flex items-center justify-between px-6 py-2 bg-primary text-white">
 				<div className="flex items-center gap-1">
 					<p className="font-light text-sm">Views:</p>
-					<b>{ad.views}</b>
+					<b>{ad?.views}</b>
 				</div>
 				<div className="flex items-center gap-1">
 					<p className="font-light text-sm">Clicks:</p>
@@ -22,7 +26,9 @@ const ActionBar = (ad) => {
 
 			<div className="flex justify-between items-center border px-6 py-2">
 				<div className="flex gap-6">
-					<button className="text-primary font-bold">Edit</button>
+					<Link to={`${Approutes.updateAd}/${ad?.ad.id}`} target="_blank" rel="noopener noreferrer">
+						<button className="text-primary font-bold">Edit</button>
+					</Link>
 					<button className="text-[#047F73] font-bold">Repost</button>
 				</div>
 

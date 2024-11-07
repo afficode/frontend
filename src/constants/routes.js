@@ -16,7 +16,7 @@ export const Approutes = {
 	profile: {
 		initial: '/profile',
 		adverts: '/profile/adverts',
-		details: '/profile/details',
+		// details: '/profile/details',
 		messages: '/profile/messages',
 		notifications: '/profile/notifications',
 		saved: '/profile/saved',

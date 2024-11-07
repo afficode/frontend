@@ -2,45 +2,83 @@ import { useMemo } from 'react';
 import { Inspector } from '../../assets/svgs';
 import { Button, InputGroup } from '../../ui';
 import { useFormik } from 'formik';
-import { format, parse } from 'date-fns';
-import { useCreateSchedule, useGetSchedule, useGetSchedules } from '../../hooks';
+import { format, parse, parseISO } from 'date-fns';
+import {
+	useCreateSchedule,
+	useGetSchedule,
+	useGetSchedules,
+	useNotify,
+	useUpdateSchedule,
+} from '../../hooks';
+import useAuth from '../../context/UserContext';
+import { useQueryClient } from 'react-query';
 
-const InspectorCard = () => {
-	const { data } = useGetSchedules();
+const InspectorCard = ({ data, isLoading }) => {
+	const { mutate, isLoading: submitting } = useUpdateSchedule(data?.schedules?.id);
 
-	const { mutate, isLoading: submitting } = useCreateSchedule();
+	// console.log('ad schedules', data?.schedules);
 
-	// console.log(data);
+	const latest = data?.schedules?.bookings.length - 1;
+	const latestBooking = data?.schedules?.bookings[latest];
+
+	console.log('latest', latestBooking?.date);
+
+	const { user } = useAuth();
+	// console.log('data', data?.schedules?.owner);
+	const notify = useNotify();
+	const queryClient = useQueryClient();
+
+	const initialValues = {
+		// user_id: user.id,
+		owner: data?.schedules?.owner,
+		ad_id: data?.schedules?.ad_id,
+		remark: '',
+		date: '',
+		time: {
+			from: '',
+			to: '',
+		},
+	};
 
 	const handleSubmit = (values, { resetForm }) => {
-		// console.log(values);
+		let formData;
+		if (values.remark === 'reschedule') {
+			formData = {
+				...values,
+			};
+		} else {
+			formData = {
+				...values,
+				date: latestBooking?.date,
+				time: {
+					from: latestBooking?.time?.from,
+					to: latestBooking?.time?.to,
+				},
+			};
+		}
 
-		const formData = {
-			...values,
-		};
+		// console.log('formdata', formData);
 
 		mutate(formData, {
 			onSuccess: (data) => {
-				// console.log(data);
+				notify(data?.message, 'success');
+				queryClient.invalidateQueries('get-schedule');
 				resetForm();
 			},
 			onError: (error) => {
-				// console.log(error);
+				console.log(error);
+				notify(error?.response.data.message, 'error');
 			},
 		});
 	};
 
 	const formik = useFormik({
-		initialValues: {
-			remark: '',
-			date: '',
-			time: {
-				from: '',
-				to: '',
-			},
-		},
+		initialValues,
 		onSubmit: handleSubmit,
+		enableReinitialize: true,
 	});
+
+	console.log('formik', initialValues);
 
 	const showDateInput = useMemo(() => {
 		if (formik.values.remark === 'reschedule') {
@@ -55,32 +93,74 @@ const InspectorCard = () => {
 	return (
 		<div className="max-w-[500px] border  p-4">
 			<div className="flex items-center justify-between">
-				<h4 className="">Inspector’s schedule :</h4>
+				{user?.id === data?.schedules?.owner ? (
+					<h4 className="">Inspector’s schedule :</h4>
+				) : (
+					<h4 className="">Response from: {data?.schedules?.ad_details.title}</h4>
+				)}
 				<img src={Inspector} alt="/" className="w-12" />
 			</div>
 
 			<div className="space-y-2">
-				<div className="bg-secondary px-2 py-4 sm:p-4 rounded-lg italic	sm:mr-6">
-					<div className="flex items-center gap-2">
-						<p>Inspector:</p>
-						<p>Godstime</p>
-					</div>
+				{data?.schedules?.bookings.map((booking) => {
+					return (
+						<div key={booking.id} className="bg-secondary px-2 py-4 sm:p-4 rounded-lg italic	sm:mr-6">
+							<div className="flex items-center gap-2">
+								{booking?.remark === 'reschedule' ? (
+									<p>Rescheduled Date & Time.</p>
+								) : booking?.remark === 'confirmed' ? (
+									<p>Confirmed Date & Time.</p>
+								) : booking?.remark === 'not_interested' ? (
+									<p>Not interested in the inspection.</p>
+								) : booking?.remark === 'withdrawn' ? (
+									<p>Withdrawn from the site.</p>
+								) : booking?.remark === 'not_available' ? (
+									<p>Item no longer available.</p>
+								) : booking?.remark === 'view_contact' ? (
+									<p>You can view the contact now.</p>
+								) : booking?.remark === 'ok' && data?.schedules?.owner === user?.id ? (
+									<>
+										<p>Inspector:</p>
+										<p>{data?.schedules?.buyer_name}</p>
+									</>
+								) : null}
+							</div>
 
-					<div className="flex items-center gap-2">
-						<p>For:</p>
-						<p>Black Toyota Corolla 2022 Inspection</p>
-					</div>
-					<div className="flex items-center gap-2">
-						<p>Date:</p>
-						<p> 29.10.2024</p>
-					</div>
-					<div className="flex items-center gap-2">
-						<p>Time:</p>
-						<p> 10am to 2pm</p>
-					</div>
-				</div>
+							<div className="flex items-center gap-2">
+								<p>For:</p>
+								<p className="capitalize">{data?.schedules?.ad_details.title}</p>
+							</div>
+							<div className="flex items-center gap-2">
+								<p>
+									{latestBooking?.remark === 'reschedule' &&
+									booking?.remark === 'reschedule' &&
+									latestBooking?.id === booking?.id
+										? 'New'
+										: null}{' '}
+									Date:
+								</p>
 
-				<div className="bg-secondary px-2 py-4 sm:p-4 rounded-lg italic	sm:mr-6">
+								<p> {format(parseISO(booking?.date), 'dd.MM.yyyy')}</p>
+							</div>
+							<div className="flex items-center gap-2">
+								<p>
+									{latestBooking?.remark === 'reschedule' &&
+									booking?.remark === 'reschedule' &&
+									latestBooking?.id === booking?.id
+										? 'New'
+										: null}{' '}
+									Time:
+								</p>
+								<p className="lowercase">
+									{format(parse(booking.time.from, 'HH:mm', new Date()), 'h:mma')} to{' '}
+									{format(parse(booking.time.to, 'HH:mm', new Date()), 'h:mma')}
+								</p>
+							</div>
+						</div>
+					);
+				})}
+
+				{/* <div className="bg-secondary px-2 py-4 sm:p-4 rounded-lg italic	sm:mr-6">
 					<div className="flex items-center gap-2">
 						<p>Rescheduled Date & Time.</p>
 					</div>
@@ -97,11 +177,18 @@ const InspectorCard = () => {
 						<p>New Time:</p>
 						<p> 1pm to 4pm</p>
 					</div>
-				</div>
+				</div> */}
 			</div>
 
 			<div className=" border-t border-black/40 py-4 mt-4">
-				<h4>Black Toyota Camry reply:</h4>
+				{user?.id === data?.schedules?.owner ? (
+					<h4 className="capitalize">
+						{data?.schedules?.ad_details.title} <span className="lowercase">reply</span>:
+					</h4>
+				) : (
+					<h4>Inspector's reply:</h4>
+				)}
+
 				<form onSubmit={formik.handleSubmit}>
 					<InputGroup
 						name={'remark'}
@@ -111,7 +198,9 @@ const InspectorCard = () => {
 						value={formik.values.remark}
 						onChange={formik.handleChange}
 						onBlur={formik.handleBlur}
-						optionLists={buyerResponseOptions}
+						optionLists={
+							user?.id === data?.schedules?.owner ? sellerResponseOptions : buyerResponseOptions
+						}
 						className={'customSelectInput'}
 					/>
 					{showDateInput && (
@@ -168,9 +257,23 @@ const InspectorCard = () => {
 						// />
 					)}
 
-					<Button variant={'primary'} type="submit" loading={submitting} className={'rounded-lg mt-4'}>
-						Send
-					</Button>
+					{latestBooking?.user_id === user?.id ? (
+						<Button
+							onClick={() => {
+								notify("You can't send another response, patiently wait for a reply", 'error');
+							}}
+							variant={'primary'}
+							type="button"
+							// disabled={true}
+							className={'rounded-lg mt-4'}
+						>
+							Send
+						</Button>
+					) : (
+						<Button variant={'primary'} type="submit" loading={submitting} className={'rounded-lg mt-4'}>
+							Send
+						</Button>
+					)}
 				</form>
 			</div>
 		</div>
@@ -198,7 +301,7 @@ const buyerResponseOptions = [
 	{ value: '', key: 'Select a response' },
 	{
 		key: 'Ok, that’s fine by me, please confirm.',
-		value: 'confirmed',
+		value: 'ok',
 	},
 	{ value: 'not_interested', key: 'I am no longer interested.' },
 	{ value: 'reschedule', key: 'I have to reschedule' },

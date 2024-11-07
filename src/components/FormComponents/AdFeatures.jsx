@@ -71,15 +71,15 @@ const AdFeatures = (props) => {
 					<div
 						className={`${
 							showGrab
-								? ' transform translate-x-[-1.2%] transition-all duration-500'
-								: ' transform translate-x-[150%] transition-all duration-500'
+								? ' transform translate-x-[-1.2%] transition-all duration-500 opacity-100'
+								: ' transform translate-x-[150%] transition-all duration-500 opacity-0'
 						} space-y-6 p-8 absolute top-0 bg-white z-10 w-full `}
 					>
 						<div className="space-y-2">
 							<div className="flex items-center gap-2 ">
 								<h4 className="text-primary ">Use “Grab Feature” ? </h4>
 
-								<div className="dropdown dropdown-top ">
+								<div className="dropdown dropdown-top z-50 ">
 									<img tabIndex={0} src={InfoYellow} className="w-4 cursor-pointer" alt="/" />
 									<div
 										tabIndex={0}
@@ -125,8 +125,33 @@ const AdFeatures = (props) => {
 									}}
 								</Field>
 
-								<div className=" bg-secondary border-4 p-4 max-w-[22rem] md:ml-[12rem]">
+								{/* <div className=" bg-secondary border-4 p-4 ">
 									Using the grab feature? Please read the terms and condition
+								</div> */}
+
+								<div className="dropdown dropdown-top ">
+									<Button type="button" variant="secondary" className={'max-w-[22rem] md:ml-[12rem]'}>
+										Using the grab feature? Please read the terms and condition
+									</Button>
+									<div
+										tabIndex={0}
+										className="dropdown-content transform translate-y-[100%] translate-x-[-80%] sm:translate-x-[-50%] lg:translate-x-[8%] bg-secondary border-4 p-4 w-screen max-w-[320px] sm:max-w-[600px]"
+									>
+										<div className="space-y-2">
+											<h4>Grab Feature</h4>
+											<p>
+												This is Boonfu’s affiliate marketing system whereby our “Grabbers” pick your
+												item/product for massive offline and other channels marketing.
+											</p>
+											<p>
+												{' '}
+												Your Item with “Grab feature” is open to about a thousand (1000+) grabbers to market for
+												you, this means your item won’t be seating on our website BUT rather gains massive reach
+												to guarantee <b>“Almost Instant Sale”</b>.
+											</p>
+											<p>You may want to try this feature out too.</p>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>

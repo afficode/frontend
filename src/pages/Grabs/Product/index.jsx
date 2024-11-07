@@ -5,7 +5,7 @@ import { IoCopy, IoCopyOutline } from 'react-icons/io5';
 import { noimage } from '../../../assets/images';
 import { FaCamera } from 'react-icons/fa';
 import OverviewPills from '../../Products/View/OverviewPills';
-import { convertKeyToName, numberWithCommas, ScrollToTop } from '../../../utils';
+import { convertKeyToName, formatAdId, numberWithCommas, ScrollToTop } from '../../../utils';
 import GrabHeader from '../GrabHeader';
 import { Approutes } from '../../../constants';
 import { Button } from '../../../ui';
@@ -36,7 +36,7 @@ const GrabProduct = () => {
 	// console.log(result?.data);
 
 	const handleCopy = () => {
-		navigator.clipboard
+		navigator?.clipboard
 			.writeText(grabLink)
 			.then(() => {
 				notify('Link copied to clipboard', 'success');
@@ -123,7 +123,7 @@ const GrabProduct = () => {
 						<div className="">
 							<h6 className="w-full text-lg font-bold text-center md:text-xl 2xl:text-3xl">
 								{/* Product ID:201344 */}
-								Product ID: {result.data?.id}
+								Product ID: {formatAdId(result.data?.id)}
 							</h6>
 
 							<hr className="h-px my-2 border-black/40 border-1" />
@@ -149,9 +149,13 @@ const GrabProduct = () => {
 									<p className="text-primary w-[16rem] truncate">{grabLink ? grabLink : null}</p>
 									<div>
 										{copied ? (
-											<IoCopy className="cursor-pointer" size={20} />
+											<button>
+												<IoCopy className="cursor-pointer" size={20} />
+											</button>
 										) : (
-											<IoCopyOutline onClick={handleCopy} className="cursor-pointer" size={20} />
+											<button onClick={handleCopy}>
+												<IoCopyOutline className="cursor-pointer" size={20} />
+											</button>
 										)}
 									</div>
 								</div>

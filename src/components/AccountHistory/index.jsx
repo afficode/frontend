@@ -42,8 +42,8 @@ const AccountHistory = ({ className, setIsOpen, isOpen }) => {
 		const newParams = new URLSearchParams(searchParams);
 		if (update[0] && update[1]) {
 			// If both dates are selected, set 'from' and 'to'
-			newParams.set('from', update[0].toISOString().split('T')[0]); // Format to YYYY-MM-DD
-			newParams.set('to', update[1].toISOString().split('T')[0]);
+			newParams.set('from', formatToISO(update[0])); // Format to YYYY-MM-DD
+			newParams.set('to', formatToISO(update[1]));
 		} else if (!update[0] && !update[1]) {
 			// If cleared, remove both 'from' and 'to'
 			newParams.delete('from');
@@ -51,6 +51,14 @@ const AccountHistory = ({ className, setIsOpen, isOpen }) => {
 		}
 
 		setSearchParams(newParams);
+	};
+
+	// Helper function to format date to YYYY-MM-DD
+	const formatToISO = (date) => {
+		// Use UTC to avoid timezone issues
+		return new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()))
+			.toISOString()
+			.split('T')[0];
 	};
 
 	// Prepare the `db_option` array

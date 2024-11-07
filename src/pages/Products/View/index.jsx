@@ -129,7 +129,7 @@ const index = () => {
 			{result?.data.feature === '3' ? (
 				<section className="my-8 space-y-4">
 					<h4>Inspection Update</h4>
-					<GrabUpdateTable />
+					<GrabUpdateTable ad={result?.data} />
 				</section>
 			) : null}
 			<section className="flex flex-col p-2 my-2 bg-gray-200 xl:p-6 xl:my-4">

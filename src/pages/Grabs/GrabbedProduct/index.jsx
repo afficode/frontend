@@ -12,14 +12,9 @@ import { SpinnerSkeleton } from '../../../components';
 const GrabbedProduct = () => {
 	const { grabber_id, ad_id } = useParams();
 
-	// console.log('grabber id', grabber_id);
-	// console.log('ad id', ad_id);
-
 	const grabberId = grabber_id.slice(2);
 
 	const { data: result, isLoading } = fetchProduct(ad_id);
-
-	// console.log(result);
 
 	if (isLoading)
 		return (
