@@ -29,7 +29,7 @@ const GrabUpdateTable = ({ ad }) => {
 						{schedulesResult?.schedules.map((schedule) => {
 							const latest = schedule?.bookings.length - 1;
 							const latestBooking = schedule?.bookings[latest];
-							console.log('latest', latestBooking);
+							// console.log('latest', latestBooking);
 
 							const getRemarkMessage = (remark) => {
 								switch (remark) {
@@ -53,7 +53,7 @@ const GrabUpdateTable = ({ ad }) => {
 							};
 							return (
 								<tr>
-									<td>{format(parseISO(latestBooking.date), 'dd.MM.yyyy')}</td>
+									<td>{format(parseISO(latestBooking.date), 'EEEE d, MMMM yyyy')}</td>
 									<td className="lowercase">
 										{format(parse(latestBooking.time.from, 'HH:mm', new Date()), 'h:mma')} -{' '}
 										{format(parse(latestBooking.time.to, 'HH:mm', new Date()), 'h:mma')}

@@ -140,7 +140,7 @@ const InspectorCard = ({ data, isLoading }) => {
 									Date:
 								</p>
 
-								<p> {format(parseISO(booking?.date), 'dd.MM.yyyy')}</p>
+								<p> {format(parseISO(booking?.date), 'EEEE d, MMMM yyyy')}</p>
 							</div>
 							<div className="flex items-center gap-2">
 								<p>

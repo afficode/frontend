@@ -2,13 +2,25 @@ import { Coin } from '../../assets/images';
 import { InfoYellow } from '../../assets/svgs';
 import { Field } from 'formik';
 import { Button } from '../../ui';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const AdFeatures = (props) => {
 	const { name, ...rest } = props;
 	const [showGrab, setShowGrab] = useState(false);
+	const { hash } = useLocation();
+
+	useEffect(() => {
+		if (hash) {
+			const element = document.querySelector(hash);
+			if (element) {
+				element.scrollIntoView({ behavior: 'smooth' });
+			}
+		}
+	}, [hash]);
+
 	return (
-		<div className="bg-white py-8 my-4">
+		<div id="post-package" className="scroll-mt-[100px] bg-white py-8 my-4">
 			<div className="flex flex-col items-center py-2">
 				<h3>Select Suitable Posting package for your ad.</h3>
 				<h6>
