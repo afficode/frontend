@@ -8,8 +8,12 @@ import * as Yup from 'yup';
 import LoadingScreen from './LoadingScreen';
 import { toast } from 'react-toastify';
 import { MdClose } from 'react-icons/md';
+import { toSelectOptions } from '../../../utils';
+import { useStates } from '../../../hooks';
 
 const Profile = () => {
+	const { data: states } = useStates();
+	const statesOptions = toSelectOptions(states, 'states', 'Select your state');
 	const [toggleEdit, setToggleEdit] = useState({
 		about: true,
 		bio: true,
@@ -19,8 +23,8 @@ const Profile = () => {
 
 	const initialValues = {
 		name: 'Adeola Lawal',
-		business_title: 'Auto Dealer',
-		business_location: 'Lagos State',
+		phone: 81234567892,
+		location: 'Lagos State',
 		established: 'Since 2008',
 		email_address: 'sijuadelawal@gmail.com',
 		bio: 'bio here',
@@ -29,8 +33,14 @@ const Profile = () => {
 
 	const validationSchema = Yup.object({
 		name: Yup.string().required('Required'),
-		business_title: Yup.string().required('Required'),
-		business_location: Yup.string().required('Required'),
+		phone: Yup.number()
+			.typeError('Phone number must not contain +234, but start with 0XXXXXXXXXX')
+			.required()
+			.positive()
+			.integer()
+			.min(1000000000, 'Phone number must be 11 or 12 digit 08012345678')
+			.max(99999999999, 'Phone number must be 11 or 12 digit 08012345678'),
+		location: Yup.string().required('Required'),
 		established: Yup.string().required('Required'),
 		email_address: Yup.string().required('Required').email('Invalid email address'),
 		bio: Yup.string().required('Required'),
@@ -142,41 +152,34 @@ const Profile = () => {
 						/>
 					</div>
 					<div className="flex max-md:flex-col md:items-center md:justify-between  border-b border-black/10">
-						<label className="max-md:text-sm max-md:mt-2" htmlFor="business_title">
-							Business Title
+						<label className="max-md:text-sm max-md:mt-2" htmlFor="phone">
+							Contact Number
 						</label>
 						<InputGroup
-							name="business_title"
-							type="text"
+							name="phone"
+							type="number"
 							className={`${toggleEdit.about && inputStyle} `}
 							disabled={toggleEdit.about}
-							value={formik.values.business_title}
+							value={formik.values.phone}
 							onChange={formik.handleChange}
 							onBlur={formik.handleBlur}
-							errorMsg={
-								formik.touched.business_title && formik.errors.business_title
-									? formik.errors.business_title
-									: null
-							}
+							errorMsg={formik.touched.phone && formik.errors.phone ? formik.errors.phone : null}
 						/>
 					</div>
 					<div className="flex max-md:flex-col md:items-center md:justify-between  border-b border-black/10">
-						<label className="max-md:text-sm max-md:mt-2" htmlFor="business_location">
-							Business Location
+						<label className="max-md:text-sm max-md:mt-2" htmlFor="location">
+							Location
 						</label>
 						<InputGroup
-							name="business_location"
-							type="text"
-							className={`${toggleEdit.about && inputStyle} `}
+							name="location"
+							type="select"
+							optionLists={statesOptions}
+							className={`${toggleEdit.about && inputStyle} w-[13.8rem] my-0`}
 							disabled={toggleEdit.about}
-							value={formik.values.business_location}
+							value={formik.values.location}
 							onChange={formik.handleChange}
 							onBlur={formik.handleBlur}
-							errorMsg={
-								formik.touched.business_location && formik.errors.business_location
-									? formik.errors.business_location
-									: null
-							}
+							errorMsg={formik.touched.location && formik.errors.location ? formik.errors.location : null}
 						/>
 					</div>
 					<div className="flex max-md:flex-col md:items-center md:justify-between  border-b border-black/10">
@@ -294,24 +297,24 @@ const inputStyle = 'border-transparent font-medium ';
 						/>
 					</div>
 					<div className="flex max-md:flex-col md:items-center md:justify-between  border-b border-black/10">
-						<label className="max-md:text-sm max-md:mt-2" htmlFor="business_title">Business Title</label>
+						<label className="max-md:text-sm max-md:mt-2" htmlFor="phone">Business Title</label>
 						<input
 							type="text"
-							id="business_title"
-							name="business_title"
-							value={aboutData?.business_title}
+							id="phone"
+							name="phone"
+							value={aboutData?.phone}
 							onChange={handleAboutChange}
 							className={toggleEdit.about ? 'border-transparent font-semibold' : ''}
 							disabled={toggleEdit.about}
 						/>
 					</div>
 					<div className="flex max-md:flex-col md:items-center md:justify-between  border-b border-black/10">
-						<label className="max-md:text-sm max-md:mt-2" htmlFor="business_location">Business Location</label>
+						<label className="max-md:text-sm max-md:mt-2" htmlFor="location">Business Location</label>
 						<input
 							type="text"
-							id="business_location"
-							name="business_location"
-							value={aboutData?.business_location}
+							id="location"
+							name="location"
+							value={aboutData?.location}
 							onChange={handleAboutChange}
 							className={toggleEdit.about ? 'border-transparent font-semibold' : ''}
 							disabled={toggleEdit.about}
@@ -362,8 +365,8 @@ const inputStyle = 'border-transparent font-medium ';
 
 // const [aboutData, setAboutData] = useState({
 // 	name: 'Adeola Lawal',
-// 	business_title: 'Auto Dealer',
-// 	business_location: 'Lagos State',
+// 	phone: 'Auto Dealer',
+// 	location: 'Lagos State',
 // 	established: 'Since 2008',
 // 	email_address: 'sijuadelawal@gmail.com',
 // 	bio: '',

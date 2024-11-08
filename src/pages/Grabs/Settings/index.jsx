@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { EditPencil } from '../../../assets/svgs';
 import { Button, InputGroup, Modal } from '../../../ui';
 import { privateAxios, toSelectOptions } from '../../../utils';
@@ -16,10 +16,24 @@ const GrabSettings = () => {
 	const statesOptions = toSelectOptions(states, 'states', 'Select your state');
 	const [isDisplayNameTaken, setIsDisplayNameTaken] = useState(false);
 	const [editModal, setEditModal] = useState(false);
+	const [settings, setSettings] = useState();
 
 	const notify = useNotify();
 	const { user } = useAuth();
-	// console.log(user);
+
+	const fetchSettings = async () => {
+		try {
+			const response = await privateAxios.get('/grab/setting');
+			setSettings(response.data.setting);
+		} catch (error) {
+			console.error('Error getting settings', error);
+			return false;
+		}
+	};
+
+	useEffect(() => {
+		fetchSettings();
+	}, []);
 
 	const checkDisplayName = async (displayName) => {
 		try {
@@ -37,17 +51,17 @@ const GrabSettings = () => {
 		setIsDisplayNameTaken(taken);
 	}, 100);
 
-	const [selectedDisplayName, setSelectedDislayName] = useState(null);
+	const [selectedDisplayName, setSelectedDisplayName] = useState(null);
 
 	const initialValues = {
-		display_name: user?.grabber.display_name,
-		current_location: user?.grabber.current_location_id,
-		bio: user?.grabber.bio,
-		x_page: user?.grabber.social_media.x_page,
-		facebook: user?.grabber.social_media.facebook,
-		whatsapp: user?.grabber.social_media.whatsapp,
-		instagram: user?.grabber.social_media.instagram,
-		tiktok: user?.grabber.social_media.tiktok,
+		display_name: user?.grabber.display_name || '',
+		current_location: user?.grabber.current_location_id || '',
+		bio: user?.grabber.bio || '',
+		x_page: user?.grabber.social_media.x_page || '',
+		facebook: user?.grabber.social_media.facebook || '',
+		whatsapp: user?.grabber.social_media.whatsapp || '',
+		instagram: user?.grabber.social_media.instagram || '',
+		tiktok: user?.grabber.social_media.tiktok || '',
 	};
 
 	// const validationSchema =
@@ -77,7 +91,7 @@ const GrabSettings = () => {
 				// Submit the form data to the backend endpoint
 				const response = await privateAxios.put('/grab/update_grabbers_data', values);
 				// console.log('Form submission successful!', response.data);
-				notify('Your grabber account has been updated!', 'success');
+				notify(response.data.message, 'success');
 				resetForm();
 
 				setEditModal(false);
@@ -89,21 +103,22 @@ const GrabSettings = () => {
 				setSubmitting(false);
 			}
 		},
+		enableReinitialize: true,
 	});
 
 	const formik2 = useFormik({
 		initialValues: {
-			new_product: true,
-			sold_product: false,
-			link_visited: false,
-			purchase_from_link: false,
-			commission_credited: false,
-			coin_low: false,
-			news_update: false,
-			sms_notification: false,
-			email_notification: false,
-			subscription_package: false,
-			feedback_message: false,
+			new_product: settings?.new_product === 1 ? true : false,
+			sold_product: settings?.sold_product === 1 ? true : false,
+			link_visited: settings?.link_visited === 1 ? true : false,
+			purchase_from_link: settings?.purchase_from_link === 1 ? true : false,
+			commission_credited: settings?.commission_credited === 1 ? true : false,
+			coin_low: settings?.coin_low === 1 ? true : false,
+			news_update: settings?.news_update === 1 ? true : false,
+			sms_notification: settings?.sms_notification === 1 ? true : false,
+			email_notification: settings?.email_notification === 1 ? true : false,
+			subscription_package: settings?.subscription_package === 1 ? true : false,
+			feedback_message: settings?.feedback_message === 1 ? true : false,
 		},
 		onSubmit: async (values, { setSubmitting }) => {
 			try {
@@ -112,22 +127,24 @@ const GrabSettings = () => {
 				// Submit the form data to the backend endpoint
 				const response = await privateAxios.put('/grab/setting', values);
 				// console.log('Settings saved successfully!', response.data);
-				notify('Settings saved successfully!', 'success');
+				notify(response.data.message, 'success');
 			} catch (error) {
 				console.error('Form submission error:', error);
 				notify('Something went wrong, try again', 'error');
 			} finally {
 				// Ensure to set submitting state to false after submission attempt
 				setSubmitting(false);
+				fetchSettings();
 			}
 		},
+		enableReinitialize: true,
 	});
 
 	const handleChange = (e) => {
 		formik.handleChange(e);
 		if (e.target.name === 'display_name') {
 			handleDisplayName(e.target.value);
-			setSelectedDislayName(e.target.value);
+			setSelectedDisplayName(e.target.value);
 		}
 	};
 
