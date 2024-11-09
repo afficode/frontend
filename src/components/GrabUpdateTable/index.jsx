@@ -5,10 +5,7 @@ import { useGetAdsSchedule } from '../../hooks';
 import { format, parse, parseISO } from 'date-fns';
 
 const GrabUpdateTable = ({ ad }) => {
-	// const cars = true;
-	// console.log(ad);
-	const { data: schedulesResult, isLoading } = useGetAdsSchedule(ad?.id);
-	// console.log(schedulesResult?.schedules);
+	const { data: schedulesResult } = useGetAdsSchedule(ad?.id);
 
 	return ad?.category === 5001 || ad?.category === 5002 ? (
 		<div className="w-full border border-black/30 overflow-x-auto">

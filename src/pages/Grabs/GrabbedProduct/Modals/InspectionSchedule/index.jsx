@@ -8,7 +8,6 @@ import { useNavigate } from 'react-router-dom';
 
 const InspectionSchedule = ({ setInspectionModalOpen, ad }) => {
 	const { user } = useAuth();
-	// console.log(ad);
 
 	const navigate = useNavigate();
 	const notify = useNotify();
@@ -34,7 +33,6 @@ const InspectionSchedule = ({ setInspectionModalOpen, ad }) => {
 		} else {
 			mutate(formData, {
 				onSuccess: (data) => {
-					// console.log(data);
 					notify('Inspection Booked successfully', 'success');
 					resetForm();
 					setTimeout(() => {

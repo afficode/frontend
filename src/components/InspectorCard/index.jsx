@@ -3,33 +3,21 @@ import { Inspector } from '../../assets/svgs';
 import { Button, InputGroup } from '../../ui';
 import { useFormik } from 'formik';
 import { format, parse, parseISO } from 'date-fns';
-import {
-	useCreateSchedule,
-	useGetSchedule,
-	useGetSchedules,
-	useNotify,
-	useUpdateSchedule,
-} from '../../hooks';
+import { useNotify, useUpdateSchedule } from '../../hooks';
 import useAuth from '../../context/UserContext';
 import { useQueryClient } from 'react-query';
 
-const InspectorCard = ({ data, isLoading }) => {
+const InspectorCard = ({ data }) => {
 	const { mutate, isLoading: submitting } = useUpdateSchedule(data?.schedules?.id);
-
-	// console.log('ad schedules', data?.schedules);
 
 	const latest = data?.schedules?.bookings.length - 1;
 	const latestBooking = data?.schedules?.bookings[latest];
 
-	console.log('latest', latestBooking?.date);
-
 	const { user } = useAuth();
-	// console.log('data', data?.schedules?.owner);
 	const notify = useNotify();
 	const queryClient = useQueryClient();
 
 	const initialValues = {
-		// user_id: user.id,
 		owner: data?.schedules?.owner,
 		ad_id: data?.schedules?.ad_id,
 		remark: '',
@@ -57,8 +45,6 @@ const InspectorCard = ({ data, isLoading }) => {
 			};
 		}
 
-		// console.log('formdata', formData);
-
 		mutate(formData, {
 			onSuccess: (data) => {
 				notify(data?.message, 'success');
@@ -66,7 +52,6 @@ const InspectorCard = ({ data, isLoading }) => {
 				resetForm();
 			},
 			onError: (error) => {
-				console.log(error);
 				notify(error?.response.data.message, 'error');
 			},
 		});
@@ -77,8 +62,6 @@ const InspectorCard = ({ data, isLoading }) => {
 		onSubmit: handleSubmit,
 		enableReinitialize: true,
 	});
-
-	console.log('formik', initialValues);
 
 	const showDateInput = useMemo(() => {
 		if (formik.values.remark === 'reschedule') {
@@ -159,25 +142,6 @@ const InspectorCard = ({ data, isLoading }) => {
 						</div>
 					);
 				})}
-
-				{/* <div className="bg-secondary px-2 py-4 sm:p-4 rounded-lg italic	sm:mr-6">
-					<div className="flex items-center gap-2">
-						<p>Rescheduled Date & Time.</p>
-					</div>
-
-					<div className="flex items-center gap-2">
-						<p>For:</p>
-						<p>Black Toyota Corolla 2022 Inspection</p>
-					</div>
-					<div className="flex items-center gap-2">
-						<p>New Date:</p>
-						<p> 02.11.2024</p>
-					</div>
-					<div className="flex items-center gap-2">
-						<p>New Time:</p>
-						<p> 1pm to 4pm</p>
-					</div>
-				</div> */}
 			</div>
 
 			<div className=" border-t border-black/40 py-4 mt-4">
@@ -245,16 +209,6 @@ const InspectorCard = ({ data, isLoading }) => {
 								</div>
 							) : null}
 						</>
-						// <InputGroup
-						// 	name={'reschedule_date'}
-						// 	type={'textarea'}
-						// 	label={'Reschedule Date'}
-						// 	moreInfo={'Input the date you want to reschedule to.'}
-						// 	rows={'2'}
-						// 	value={formData.reschedule_date}
-						// 	onChange={handleChange}
-						// 	className={'customSelectInput'}
-						// />
 					)}
 
 					{latestBooking?.user_id === user?.id ? (
@@ -264,7 +218,6 @@ const InspectorCard = ({ data, isLoading }) => {
 							}}
 							variant={'primary'}
 							type="button"
-							// disabled={true}
 							className={'rounded-lg mt-4'}
 						>
 							Send
@@ -281,18 +234,13 @@ const InspectorCard = ({ data, isLoading }) => {
 };
 
 export default InspectorCard;
-// 'ok', 'reschedule', 'not_interested', 'confirmed', 'not_available', 'withdrawn', 'view_contact'
+
 const sellerResponseOptions = [
 	{ value: '', key: 'Select a response' },
 	{
 		key: 'I can do this time and date (reschedule now).',
 		value: 'reschedule',
 	},
-	// { value: 'I confirm Date & Time', key: 'I confirm Date & Time' },
-	// {
-	// 	value: 'I am not available for this inspection ',
-	// 	key: 'I am not available for this inspection ',
-	// },
 	{ value: 'withdrawn', key: 'Withdrawn from site' },
 	{ value: 'not_available', key: 'Item no longer available' },
 	{ value: 'view_contact', key: 'You can View my contact now.' },

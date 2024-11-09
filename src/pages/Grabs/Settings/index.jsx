@@ -90,13 +90,11 @@ const GrabSettings = () => {
 				setSubmitting(true);
 				// Submit the form data to the backend endpoint
 				const response = await privateAxios.put('/grab/update_grabbers_data', values);
-				// console.log('Form submission successful!', response.data);
 				notify(response.data.message, 'success');
 				resetForm();
 
 				setEditModal(false);
 			} catch (error) {
-				console.error('Form submission error:', error);
 				notify('Something went wrong, check the links and try again', 'error');
 			} finally {
 				// Ensure to set submitting state to false after submission attempt
@@ -123,13 +121,10 @@ const GrabSettings = () => {
 		onSubmit: async (values, { setSubmitting }) => {
 			try {
 				setSubmitting(true);
-				// console.log(values);
 				// Submit the form data to the backend endpoint
 				const response = await privateAxios.put('/grab/setting', values);
-				// console.log('Settings saved successfully!', response.data);
 				notify(response.data.message, 'success');
 			} catch (error) {
-				console.error('Form submission error:', error);
 				notify('Something went wrong, try again', 'error');
 			} finally {
 				// Ensure to set submitting state to false after submission attempt
