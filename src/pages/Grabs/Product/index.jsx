@@ -17,7 +17,6 @@ import useAuth from '../../../context/UserContext';
 
 const GrabProduct = () => {
 	const frontendLink = 'http://89.107.60.191';
-	// const frontendLink = 'http://localhost:5173';
 
 	const notify = useNotify();
 	const [copied, setCopied] = useState(false);
@@ -32,8 +31,6 @@ const GrabProduct = () => {
 	);
 
 	const { data: result, isLoading, isError } = fetchProduct(ad_id);
-
-	// console.log(result?.data);
 
 	const handleCopy = () => {
 		navigator?.clipboard
@@ -122,17 +119,12 @@ const GrabProduct = () => {
 					<aside className="w-full h-[350px]  xl:w-[45%] border-2 border-gray-400 p-2 lg:p-4 flex flex-col justify-between">
 						<div className="">
 							<h6 className="w-full text-lg font-bold text-center md:text-xl 2xl:text-3xl">
-								{/* Product ID:201344 */}
 								Product ID: {formatAdId(result.data?.id)}
 							</h6>
 
 							<hr className="h-px my-2 border-black/40 border-1" />
 
 							<div className="w-full tracking-tighter">
-								{/* <div className="flex justify-between">
-									<p className="p-lg">Date Posted </p>
-									<p className="p-lg">22.04.2024 </p>
-								</div> */}
 								<div className="flex justify-between">
 									<p className="p-lg">Category </p>
 									<p className="font-semibold p-lg text-primary">{result?.data.parent_category}</p>
@@ -161,22 +153,6 @@ const GrabProduct = () => {
 								</div>
 							</div>
 							<div className="flex flex-col gap-4">
-								{/* <Button
-									variant={'primary'}
-									size={'full'}
-									className={'flex items-center justify-center gap-4 rounded-xl'}
-								>
-									<img src={Chat} alt="/" className="w-8" />
-									Chat Boonfu
-								</Button>
-								<Button
-									variant={'primary'}
-									size={'full'}
-									className={'flex items-center justify-center gap-4 rounded-xl'}
-								>
-									<img src={Share} alt="/" className="w-8" />
-									Share Now
-								</Button> */}
 								<Button
 									variant={'primary'}
 									size={'full'}

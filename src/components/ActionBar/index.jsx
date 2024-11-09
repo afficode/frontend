@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { Approutes } from '../../constants';
 
 const ActionBar = (ad) => {
-	// console.log(ad?.ad.views);
 	return (
 		<div className="">
 			<div className="flex items-center justify-between px-2 sm:px-6 py-2 bg-primary text-white">

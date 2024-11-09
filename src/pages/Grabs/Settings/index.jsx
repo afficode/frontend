@@ -26,7 +26,6 @@ const GrabSettings = () => {
 			const response = await privateAxios.get('/grab/setting');
 			setSettings(response.data.setting);
 		} catch (error) {
-			console.error('Error getting settings', error);
 			return false;
 		}
 	};
@@ -40,14 +39,12 @@ const GrabSettings = () => {
 			const response = await privateAxios.get(`/grab/verify_display_name/${displayName}`);
 			return response.data.success;
 		} catch (error) {
-			console.error('Error checking display name', error);
 			return false;
 		}
 	};
 
 	const handleDisplayName = useDebouncedCallback(async (displayName) => {
 		const taken = await checkDisplayName(displayName);
-		// console.log(taken);
 		setIsDisplayNameTaken(taken);
 	}, 100);
 
@@ -63,8 +60,6 @@ const GrabSettings = () => {
 		instagram: user?.grabber.social_media.instagram || '',
 		tiktok: user?.grabber.social_media.tiktok || '',
 	};
-
-	// const validationSchema =
 
 	const formik = useFormik({
 		initialValues,
@@ -88,7 +83,6 @@ const GrabSettings = () => {
 		onSubmit: async (values, { setSubmitting, resetForm }) => {
 			try {
 				setSubmitting(true);
-				// Submit the form data to the backend endpoint
 				const response = await privateAxios.put('/grab/update_grabbers_data', values);
 				notify(response.data.message, 'success');
 				resetForm();
@@ -97,7 +91,6 @@ const GrabSettings = () => {
 			} catch (error) {
 				notify('Something went wrong, check the links and try again', 'error');
 			} finally {
-				// Ensure to set submitting state to false after submission attempt
 				setSubmitting(false);
 			}
 		},
@@ -121,13 +114,11 @@ const GrabSettings = () => {
 		onSubmit: async (values, { setSubmitting }) => {
 			try {
 				setSubmitting(true);
-				// Submit the form data to the backend endpoint
 				const response = await privateAxios.put('/grab/setting', values);
 				notify(response.data.message, 'success');
 			} catch (error) {
 				notify('Something went wrong, try again', 'error');
 			} finally {
-				// Ensure to set submitting state to false after submission attempt
 				setSubmitting(false);
 				fetchSettings();
 			}
