@@ -72,7 +72,6 @@ const AccountHistory = ({ className, setIsOpen, isOpen }) => {
 	const { data, isLoading } = useTransactions(params);
 
 	const groupByMonth = (data) => {
-		// Sort the transactions by date in descending order (latest date first)
 		const sortedData = data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
 		return sortedData.reduce((acc, transaction) => {

@@ -26,7 +26,6 @@ const GrabUpdateTable = ({ ad }) => {
 						{schedulesResult?.schedules.map((schedule) => {
 							const latest = schedule?.bookings.length - 1;
 							const latestBooking = schedule?.bookings[latest];
-							// console.log('latest', latestBooking);
 
 							const getRemarkMessage = (remark) => {
 								switch (remark) {
