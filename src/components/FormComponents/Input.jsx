@@ -3,7 +3,7 @@ import TextError from './TextError';
 import { useState } from 'react';
 
 const Input = (props) => {
-	const { label, name, required, type, className, ...rest } = props;
+	const { label, name, required, type, className, id, ...rest } = props;
 
 	const [isVisible, setIsVisible] = useState(false);
 
@@ -23,7 +23,7 @@ const Input = (props) => {
 				<div className={`relative `}>
 					<Field
 						name={name}
-						id={name}
+						id={id ?? name}
 						type={isVisible ? 'text' : 'password'}
 						className={className}
 						{...rest}
@@ -36,7 +36,7 @@ const Input = (props) => {
 					</span>
 				</div>
 			) : (
-				<Field name={name} id={name} type={type} className={className} {...rest} />
+				<Field name={name} id={id ?? name} type={type} className={className} {...rest} />
 			)}
 			<ErrorMessage name={name} component={TextError} />
 		</div>

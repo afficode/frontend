@@ -57,7 +57,6 @@ const ResetPassword = () => {
 								<Input
 									type="password"
 									name="password"
-									id="password"
 									placeholder="Password"
 									className="input input-bordered border-black w-full bg-gray-100 text-black text-lg lg:text-xl rounded-none my-2 input-md"
 									{...formik.getFieldProps('password')}
@@ -68,7 +67,6 @@ const ResetPassword = () => {
 								<Input
 									type="password"
 									name="confirmPassword"
-									id="confirmPassword"
 									placeholder="Confirm Password"
 									className="input input-bordered border-black w-full bg-gray-100 text-black text-lg lg:text-xl rounded-none my-2 input-md"
 									{...formik.getFieldProps('confirmPassword')}

@@ -18,6 +18,7 @@ const Notifications = () => {
 					date={'Today '}
 					time={'5:00am'}
 					name={'Dayo'}
+					type={'inspection'}
 				/>
 				<NotificationContainer
 					image={RedCar}

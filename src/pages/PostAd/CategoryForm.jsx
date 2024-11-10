@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import { FormControl } from '../../components';
-import { Button } from '../../ui';
+import { FormControl, TermsAndCondition } from '../../components';
+import { Button, Modal } from '../../ui';
 import {
 	useSubCategories,
 	useStates,
@@ -66,6 +66,7 @@ import {
 } from '../../constants';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { encodeProductId } from '../../utils/dataManipulations';
+import { Coin } from '../../assets/images';
 
 const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 	const [selectedHealthCategory, setSelectedHealthCategory] = useState(null);
@@ -490,19 +491,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 					// { key: 'Unpainted', value: 'unpainted' },
 				],
 			},
-			{
-				control: 'input',
-				label: 'Price',
-				name: 'price',
-				type: 'number',
-				placeholder: '₦0.00',
-				required: true,
-			},
-			{
-				control: 'toggle',
-				label: 'Negotiable',
-				name: 'negotiable',
-			},
+
 			!['5005'].includes(selectedVehicleCategory) && {
 				control: 'select',
 				label: 'Year of Manufacture?',
@@ -629,10 +618,25 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				],
 				required: true,
 			},
+
 			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
+				control: 'price',
+				label: 'Price',
+				name: 'price',
+				type: 'number',
+				placeholder: '₦0.00',
+				required: true,
+			},
+
+			{
+				control: 'toggle',
+				label: 'Negotiable',
+				name: 'negotiable',
+			},
+			{
+				control: 'feature',
+				name: 'feature',
+				type: 'radio',
 			},
 		],
 		properties: [
@@ -802,8 +806,21 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				name: 'date_available',
 				placeholder: 'Select date available',
 			},
+
 			{
-				control: 'input',
+				control: 'checkbox',
+				type: 'checkbox',
+				label: 'Your Contact Details',
+				name: 'contact_type',
+				options: [
+					{ key: 'Email', value: 'email' },
+					{ key: 'Phone', value: 'phone' },
+				],
+				required: true,
+			},
+
+			{
+				control: 'price',
 				label: 'Price',
 				name: 'price',
 				type: 'number',
@@ -816,20 +833,9 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				name: 'negotiable',
 			},
 			{
-				control: 'checkbox',
-				type: 'checkbox',
-				label: 'Your Contact Details',
-				name: 'contact_type',
-				options: [
-					{ key: 'Email', value: 'email' },
-					{ key: 'Phone', value: 'phone' },
-				],
-				required: true,
-			},
-			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
+				control: 'feature',
+				name: 'feature',
+				type: 'radio',
 			},
 		],
 		services: [
@@ -1019,8 +1025,21 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 					{ key: 'Special arrangement', value: 'special arrangement' },
 				],
 			},
+
 			{
-				control: 'input',
+				control: 'checkbox',
+				type: 'checkbox',
+				label: 'Your Contact Details',
+				name: 'contact_type',
+				options: [
+					{ key: 'Email', value: 'email' },
+					{ key: 'Phone', value: 'phone' },
+				],
+				required: true,
+			},
+
+			{
+				control: 'price',
 				label: 'Price',
 				name: 'price',
 				type: 'number',
@@ -1033,20 +1052,9 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				name: 'negotiable',
 			},
 			{
-				control: 'checkbox',
-				type: 'checkbox',
-				label: 'Your Contact Details',
-				name: 'contact_type',
-				options: [
-					{ key: 'Email', value: 'email' },
-					{ key: 'Phone', value: 'phone' },
-				],
-				required: true,
-			},
-			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
+				control: 'feature',
+				name: 'feature',
+				type: 'radio',
 			},
 		],
 		agriculture: [
@@ -1160,8 +1168,21 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				type: 'text',
 				placeholder: 'Enter colour',
 			},
+
 			{
-				control: 'input',
+				control: 'checkbox',
+				type: 'checkbox',
+				label: 'Your Contact Details',
+				name: 'contact_type',
+				options: [
+					{ key: 'Email', value: 'email' },
+					{ key: 'Phone', value: 'phone' },
+				],
+				required: true,
+			},
+
+			{
+				control: 'price',
 				label: 'Price',
 				name: 'price',
 				type: 'number',
@@ -1174,20 +1195,9 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				name: 'negotiable',
 			},
 			{
-				control: 'checkbox',
-				type: 'checkbox',
-				label: 'Your Contact Details',
-				name: 'contact_type',
-				options: [
-					{ key: 'Email', value: 'email' },
-					{ key: 'Phone', value: 'phone' },
-				],
-				required: true,
-			},
-			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
+				control: 'feature',
+				name: 'feature',
+				type: 'radio',
 			},
 		],
 		electronics: [
@@ -1449,7 +1459,19 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			},
 
 			{
-				control: 'input',
+				control: 'checkbox',
+				type: 'checkbox',
+				label: 'Your Contact Details',
+				name: 'contact_type',
+				options: [
+					{ key: 'Email', value: 'email' },
+					{ key: 'Phone', value: 'phone' },
+				],
+				required: true,
+			},
+
+			{
+				control: 'price',
 				label: 'Price',
 				name: 'price',
 				type: 'number',
@@ -1462,20 +1484,9 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				name: 'negotiable',
 			},
 			{
-				control: 'checkbox',
-				type: 'checkbox',
-				label: 'Your Contact Details',
-				name: 'contact_type',
-				options: [
-					{ key: 'Email', value: 'email' },
-					{ key: 'Phone', value: 'phone' },
-				],
-				required: true,
-			},
-			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
+				control: 'feature',
+				name: 'feature',
+				type: 'radio',
 			},
 		],
 		fashion: [
@@ -1653,7 +1664,19 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				],
 			},
 			{
-				control: 'input',
+				control: 'checkbox',
+				type: 'checkbox',
+				label: 'Your Contact Details',
+				name: 'contact_type',
+				options: [
+					{ key: 'Email', value: 'email' },
+					{ key: 'Phone', value: 'phone' },
+				],
+				required: true,
+			},
+
+			{
+				control: 'price',
 				label: 'Price',
 				name: 'price',
 				type: 'number',
@@ -1666,20 +1689,9 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				name: 'negotiable',
 			},
 			{
-				control: 'checkbox',
-				type: 'checkbox',
-				label: 'Your Contact Details',
-				name: 'contact_type',
-				options: [
-					{ key: 'Email', value: 'email' },
-					{ key: 'Phone', value: 'phone' },
-				],
-				required: true,
-			},
-			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
+				control: 'feature',
+				name: 'feature',
+				type: 'radio',
 			},
 		],
 		health: [
@@ -1855,8 +1867,21 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				placeholder: 'Enter scent type',
 				required: true,
 			},
+
 			{
-				control: 'input',
+				control: 'checkbox',
+				type: 'checkbox',
+				label: 'Your Contact Details',
+				name: 'contact_type',
+				options: [
+					{ key: 'Email', value: 'email' },
+					{ key: 'Phone', value: 'phone' },
+				],
+				required: true,
+			},
+
+			{
+				control: 'price',
 				label: 'Price',
 				name: 'price',
 				type: 'number',
@@ -1869,20 +1894,9 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				name: 'negotiable',
 			},
 			{
-				control: 'checkbox',
-				type: 'checkbox',
-				label: 'Your Contact Details',
-				name: 'contact_type',
-				options: [
-					{ key: 'Email', value: 'email' },
-					{ key: 'Phone', value: 'phone' },
-				],
-				required: true,
-			},
-			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
+				control: 'feature',
+				name: 'feature',
+				type: 'radio',
 			},
 		],
 		home: [
@@ -2033,8 +2047,21 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				type: 'text',
 				placeholder: 'Enter colour',
 			},
+
 			{
-				control: 'input',
+				control: 'checkbox',
+				type: 'checkbox',
+				label: 'Your Contact Details',
+				name: 'contact_type',
+				options: [
+					{ key: 'Email', value: 'email' },
+					{ key: 'Phone', value: 'phone' },
+				],
+				required: true,
+			},
+
+			{
+				control: 'price',
 				label: 'Price',
 				name: 'price',
 				type: 'number',
@@ -2047,20 +2074,9 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				name: 'negotiable',
 			},
 			{
-				control: 'checkbox',
-				type: 'checkbox',
-				label: 'Your Contact Details',
-				name: 'contact_type',
-				options: [
-					{ key: 'Email', value: 'email' },
-					{ key: 'Phone', value: 'phone' },
-				],
-				required: true,
-			},
-			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
+				control: 'feature',
+				name: 'feature',
+				type: 'radio',
 			},
 		],
 		tradesman: [
@@ -2220,8 +2236,21 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 					{ key: 'No', value: 'no' },
 				],
 			},
+
 			{
-				control: 'input',
+				control: 'checkbox',
+				type: 'checkbox',
+				label: 'Your Contact Details',
+				name: 'contact_type',
+				options: [
+					{ key: 'Email', value: 'email' },
+					{ key: 'Phone', value: 'phone' },
+				],
+				required: true,
+			},
+
+			{
+				control: 'price',
 				label: 'Price',
 				name: 'price',
 				type: 'number',
@@ -2234,20 +2263,9 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				name: 'negotiable',
 			},
 			{
-				control: 'checkbox',
-				type: 'checkbox',
-				label: 'Your Contact Details',
-				name: 'contact_type',
-				options: [
-					{ key: 'Email', value: 'email' },
-					{ key: 'Phone', value: 'phone' },
-				],
-				required: true,
-			},
-			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
+				control: 'feature',
+				name: 'feature',
+				type: 'radio',
 			},
 		],
 		software: [
@@ -2398,7 +2416,19 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				],
 			},
 			{
-				control: 'input',
+				control: 'checkbox',
+				type: 'checkbox',
+				label: 'Your Contact Details',
+				name: 'contact_type',
+				options: [
+					{ key: 'Email', value: 'email' },
+					{ key: 'Phone', value: 'phone' },
+				],
+				required: true,
+			},
+
+			{
+				control: 'price',
 				label: 'Price',
 				name: 'price',
 				type: 'number',
@@ -2411,20 +2441,9 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				name: 'negotiable',
 			},
 			{
-				control: 'checkbox',
-				type: 'checkbox',
-				label: 'Your Contact Details',
-				name: 'contact_type',
-				options: [
-					{ key: 'Email', value: 'email' },
-					{ key: 'Phone', value: 'phone' },
-				],
-				required: true,
-			},
-			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
+				control: 'feature',
+				name: 'feature',
+				type: 'radio',
 			},
 		],
 		pet: [
@@ -2560,7 +2579,19 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			},
 
 			{
-				control: 'input',
+				control: 'checkbox',
+				type: 'checkbox',
+				label: 'Your Contact Details',
+				name: 'contact_type',
+				options: [
+					{ key: 'Email', value: 'email' },
+					{ key: 'Phone', value: 'phone' },
+				],
+				required: true,
+			},
+
+			{
+				control: 'price',
 				label: 'Price',
 				name: 'price',
 				type: 'number',
@@ -2568,7 +2599,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				required: true,
 			},
 			['6002', '6003'].includes(selectedPetCategory) && {
-				control: 'input',
+				control: 'price',
 				label: 'Bulk price',
 				name: 'bulk_price',
 				type: 'number',
@@ -2580,20 +2611,9 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				name: 'negotiable',
 			},
 			{
-				control: 'checkbox',
-				type: 'checkbox',
-				label: 'Your Contact Details',
-				name: 'contact_type',
-				options: [
-					{ key: 'Email', value: 'email' },
-					{ key: 'Phone', value: 'phone' },
-				],
-				required: true,
-			},
-			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
+				control: 'feature',
+				name: 'feature',
+				type: 'radio',
 			},
 		],
 		babies: [
@@ -2743,21 +2763,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				name: 'size',
 				options: babiesSizeOptions,
 			},
-			{
-				control: 'input',
-				label: 'Price',
-				name: 'price',
-				type: 'number',
-				placeholder: '₦0.00',
-				required: true,
-			},
-			{
-				control: 'input',
-				label: 'Bulk Price',
-				name: 'bulk_price',
-				type: 'number',
-				placeholder: '₦0.00',
-			},
+
 			{
 				control: 'checkbox',
 				type: 'checkbox',
@@ -2769,10 +2775,31 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				],
 				required: true,
 			},
+
 			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
+				control: 'price',
+				label: 'Price',
+				name: 'price',
+				type: 'number',
+				placeholder: '₦0.00',
+				required: true,
+			},
+			{
+				control: 'price',
+				label: 'Bulk Price',
+				name: 'bulk_price',
+				type: 'number',
+				placeholder: '₦0.00',
+			},
+			{
+				control: 'toggle',
+				label: 'Negotiable?',
+				name: 'negotiable',
+			},
+			{
+				control: 'feature',
+				name: 'feature',
+				type: 'radio',
 			},
 		],
 		sports: [
@@ -2909,7 +2936,19 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				],
 			},
 			{
-				control: 'input',
+				control: 'checkbox',
+				type: 'checkbox',
+				label: 'Your Contact Details',
+				name: 'contact_type',
+				options: [
+					{ key: 'Email', value: 'email' },
+					{ key: 'Phone', value: 'phone' },
+				],
+				required: true,
+			},
+
+			{
+				control: 'price',
 				label: 'Price',
 				name: 'price',
 				type: 'number',
@@ -2922,20 +2961,9 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				name: 'negotiable',
 			},
 			{
-				control: 'checkbox',
-				type: 'checkbox',
-				label: 'Your Contact Details',
-				name: 'contact_type',
-				options: [
-					{ key: 'Email', value: 'email' },
-					{ key: 'Phone', value: 'phone' },
-				],
-				required: true,
-			},
-			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
+				control: 'feature',
+				name: 'feature',
+				type: 'radio',
 			},
 		],
 		motorbike: [
@@ -3110,19 +3138,6 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			// 	name: 'engine_size',
 			// 	placeholder: '1200cc',
 			// },
-			{
-				control: 'input',
-				label: 'Price',
-				name: 'price',
-				type: 'number',
-				placeholder: '₦0.00',
-				required: true,
-			},
-			{
-				control: 'toggle',
-				label: 'Negotiable',
-				name: 'negotiable',
-			},
 
 			{
 				control: 'checkbox',
@@ -3135,10 +3150,25 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				],
 				required: true,
 			},
+
 			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
+				control: 'price',
+				label: 'Price',
+				name: 'price',
+				type: 'number',
+				placeholder: '₦0.00',
+				required: true,
+			},
+
+			{
+				control: 'toggle',
+				label: 'Negotiable',
+				name: 'negotiable',
+			},
+			{
+				control: 'feature',
+				name: 'feature',
+				type: 'radio',
 			},
 		],
 		requests: [
@@ -3228,6 +3258,17 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				type: 'text',
 				placeholder: 'eg: 6” foamboard material suitable for screen printing',
 			},
+			{
+				control: 'checkbox',
+				type: 'checkbox',
+				label: 'Your Contact Details',
+				name: 'contact_type',
+				options: [
+					{ key: 'Email', value: 'email' },
+					{ key: 'Phone', value: 'phone' },
+				],
+				required: true,
+			},
 
 			{
 				control: 'input',
@@ -3248,22 +3289,6 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				control: 'toggle',
 				label: 'Negotiable?',
 				name: 'negotiable	',
-			},
-			{
-				control: 'checkbox',
-				type: 'checkbox',
-				label: 'Your Contact Details',
-				name: 'contact_type',
-				options: [
-					{ key: 'Email', value: 'email' },
-					{ key: 'Phone', value: 'phone' },
-				],
-				required: true,
-			},
-			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
 			},
 		],
 		deals: [
@@ -3364,19 +3389,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				type: 'text',
 				placeholder: 'example; broken legs, rusted handles etc.',
 			},
-			{
-				control: 'input',
-				label: 'Price',
-				name: 'price',
-				type: 'number',
-				placeholder: '₦0.00',
-				required: true,
-			},
-			{
-				control: 'toggle',
-				label: 'Negotiable?',
-				name: 'negotiable	',
-			},
+
 			{
 				control: 'checkbox',
 				type: 'checkbox',
@@ -3388,15 +3401,28 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				],
 				required: true,
 			},
+
 			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
+				control: 'price',
+				label: 'Price',
+				name: 'price',
+				type: 'number',
+				placeholder: '₦0.00',
+				required: true,
+			},
+
+			{
+				control: 'toggle',
+				label: 'Negotiable?',
+				name: 'negotiable	',
+			},
+			{
+				control: 'feature',
+				name: 'feature',
+				type: 'radio',
 			},
 		],
 	};
-
-	const fields = categoryFields[categoryName] || [];
 
 	const validationSchema = {
 		vehicles: Yup.object().shape({
@@ -3427,6 +3453,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			contact_type: Yup.array().min(1, 'At least one option is required').required('Required'),
 			price: Yup.number().required('Required'),
 			negotiable: Yup.boolean(),
+			feature: Yup.string().required('Required'),
 			urgent: Yup.boolean(),
 			images: Yup.array().min(1, 'At least one image is required').required(),
 		}),
@@ -3458,6 +3485,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			description: Yup.string().required('Required'),
 			price: Yup.number().required('Required'),
 			negotiable: Yup.boolean(),
+			feature: Yup.string().required('Required'),
 			contact_type: Yup.array().min(1, 'At least one option is required').required('Required'),
 			urgent: Yup.boolean(),
 		}),
@@ -3483,6 +3511,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			price: Yup.number().required('Required'),
 			contact_type: Yup.array().min(1, 'At least one option is required').required('Required'),
 			negotiable: Yup.boolean(),
+			feature: Yup.string().required('Required'),
 			urgent: Yup.boolean(),
 		}),
 		agriculture: Yup.object().shape({
@@ -3499,6 +3528,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			color: Yup.string(),
 			price: Yup.number().required('Required'),
 			negotiable: Yup.boolean(),
+			feature: Yup.string().required('Required'),
 			contact_type: Yup.array().min(1, 'At least one option is required').required('Required'),
 			urgent: Yup.boolean(),
 		}),
@@ -3548,6 +3578,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			}),
 			color: Yup.string(),
 			negotiable: Yup.boolean(),
+			feature: Yup.string().required('Required'),
 			contact_type: Yup.array().min(1, 'At least one option is required').required('Required'),
 			urgent: Yup.boolean(),
 		}),
@@ -3571,6 +3602,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			}),
 			price: Yup.number().required('Required'),
 			negotiable: Yup.boolean(),
+			feature: Yup.string().required('Required'),
 			contact_type: Yup.array().min(1, 'At least one option is required').required('Required'),
 			urgent: Yup.boolean(),
 		}),
@@ -3590,6 +3622,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			scent_type: Yup.string(),
 			price: Yup.number().required('Required'),
 			negotiable: Yup.boolean(),
+			feature: Yup.string().required('Required'),
 			contact_type: Yup.array().min(1, 'At least one option is required').required('Required'),
 			urgent: Yup.boolean(),
 		}),
@@ -3609,6 +3642,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			formulation: Yup.string(),
 			color: Yup.string(),
 			negotiable: Yup.boolean(),
+			feature: Yup.string().required('Required'),
 			contact_type: Yup.array().min(1, 'At least one option is required').required('Required'),
 			urgent: Yup.boolean(),
 		}),
@@ -3635,6 +3669,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			available_to_travel: Yup.string(),
 			price: Yup.number().required('Required'),
 			negotiable: Yup.boolean(),
+			feature: Yup.string().required('Required'),
 			contact_type: Yup.array().min(1, 'At least one option is required').required('Required'),
 			urgent: Yup.boolean(),
 		}),
@@ -3654,6 +3689,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			software_type: Yup.string(),
 			price: Yup.number().required('Required'),
 			negotiable: Yup.boolean(),
+			feature: Yup.string().required('Required'),
 			contact_type: Yup.array().min(1, 'At least one option is required').required('Required'),
 			urgent: Yup.boolean(),
 		}),
@@ -3672,6 +3708,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			color: Yup.string(),
 			ad_condition: Yup.string(),
 			negotiable: Yup.boolean(),
+			feature: Yup.string().required('Required'),
 			contact_type: Yup.array().min(1, 'At least one option is required').required('Required'),
 			urgent: Yup.boolean(),
 		}),
@@ -3710,6 +3747,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			color: Yup.string(),
 			age: Yup.string(),
 			negotiable: Yup.boolean(),
+			feature: Yup.string().required('Required'),
 			contact_type: Yup.array().min(1, 'At least one option is required').required('Required'),
 			urgent: Yup.boolean(),
 		}),
@@ -3733,6 +3771,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			contact_type: Yup.array().min(1, 'At least one option is required').required('Required'),
 			price: Yup.number().required('Required'),
 			negotiable: Yup.boolean(),
+			feature: Yup.string().required('Required'),
 			urgent: Yup.boolean(),
 			images: Yup.array().min(1, 'At least one image is required').required(),
 		}),
@@ -3749,6 +3788,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			min_price: Yup.number().required('Required'),
 			max_price: Yup.number().required('Required'),
 			negotiable: Yup.boolean(),
+			feature: Yup.string().required('Required'),
 			contact_type: Yup.array().min(1, 'At least one option is required').required('Required'),
 			urgent: Yup.boolean(),
 		}),
@@ -3765,11 +3805,15 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			defects_detail: Yup.string(),
 			price: Yup.number().required('Required'),
 			negotiable: Yup.boolean(),
+			feature: Yup.string().required('Required'),
 			contact_type: Yup.array().min(1, 'At least one option is required').required('Required'),
 			urgent: Yup.boolean(),
 		}),
 	};
 
+	const fields = categoryFields[categoryName] || [];
+
+	//rendering form fields based on category
 	const renderFields =
 		fields &&
 		fields?.map((field, index) => (
@@ -3790,6 +3834,9 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 	const { mutate } = useCreateAd();
 	const navigate = useNavigate();
 
+	// payment window modal
+	const [paymentWindow, setPaymentWindow] = useState(false);
+
 	const onSubmit = async (values, { setSubmitting, resetForm }) => {
 		setSubmitting(true);
 
@@ -3800,8 +3847,9 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				images.push(data);
 			}
 		} catch (error) {
-			console.log(error);
-			notify('Error uploading your images.', 'error');
+			notify(error?.response?.data?.message, 'error');
+			// notify('Error uploading your images.', 'error');
+			// console.log(error);
 			setSubmitting(false);
 			return;
 		}
@@ -3828,9 +3876,10 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 
 		mutate(formData, {
 			onSuccess: (data) => {
-				notify(data.message, 'success');
 				setSubmitting(false);
+				setPaymentWindow(false);
 				resetForm();
+				notify(data.message, 'success');
 				navigate(`${Approutes.postSuccess}/${encodeProductId(data.ad_id)}`);
 			},
 			onError: async (error) => {
@@ -3843,21 +3892,42 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 						await deleteImages(filteredImages[i]);
 					}
 				} catch (error) {
-					console.log(error);
+					notify(error?.response?.data?.message, 'error');
 				}
 
+				setPaymentWindow(false);
+				setSubmitting(false);
 				notify(error?.response.data.message, 'error', {
 					toastId: 'create-ad-error',
 				});
-				setSubmitting(false);
 			},
 		});
 
-		console.log('Form data', formData);
+		// console.log('Form data', formData);
 		// console.log('Saved data', JSON.parse(JSON.stringify(values)));
 	};
 
 	const { pathname } = useLocation();
+	// const { token } = useTokenContext();
+
+	//to scroll into terms and condition document
+	const [isOpen, setIsOpen] = useState(false);
+	const termsRef = useRef(null);
+	const rulesRef = useRef(null);
+	const privacyRef = useRef(null);
+
+	const handleScrollTo = (ref) => {
+		if (!isOpen) {
+			setIsOpen(true);
+			setTimeout(() => {
+				ref.current.scrollIntoView({ behavior: 'smooth' });
+			}, 1000); // Add a delay to ensure the component is rendered before scrolling
+		} else {
+			ref.current.scrollIntoView({ behavior: 'smooth' });
+		}
+	};
+
+	// const [tokenModal, setTokenModal] = useState(false);
 
 	return (
 		<Formik
@@ -3867,6 +3937,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			validationSchema={validationSchema[categoryName]}
 		>
 			{(formik) => {
+				// let adToken = priceToToken(formik.values.price);
 				useEffect(() => {
 					setFormValues({
 						state_id: formik.values.state_id,
@@ -3961,19 +4032,112 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 					}
 				}, [formik.values.category]);
 
+				// console.log(formik.values.feature);
 				return (
 					<Form>
 						{renderFields ? renderFields : <div className="text-center">No fields to display</div>}
 
+						{/* submit button  */}
 						<Button
-							type="submit"
+							onClick={() => setPaymentWindow(true)}
+							type="button"
 							loading={formik.isSubmitting}
 							variant="primary"
 							size="full"
+							// token < adToken ||
+							disabled={!(formik.isValid && formik.dirty) || formik.values.feature === '-1'}
 							className={'mt-10 text-lg font-bold rounded-md'}
 						>
 							Post My Ad
 						</Button>
+
+						{/* terms and conditions */}
+						<p className="mt-4 text-center">
+							By selecting Post My Ad you agree you’ve read and accepted our{' '}
+							<button className="text-primary" onClick={() => handleScrollTo(termsRef)}>
+								Terms of Use
+							</button>{' '}
+							and{' '}
+							<button className="text-primary" onClick={() => handleScrollTo(rulesRef)}>
+								Posting Rules
+							</button>
+							. Please see our{' '}
+							<button className="text-primary" onClick={() => handleScrollTo(privacyRef)}>
+								Privacy Notice
+							</button>{' '}
+							for information regarding the processing of your provided data.{' '}
+						</p>
+
+						{/* terms and condition modal */}
+						<Modal isOpen={isOpen} setIsOpen={setIsOpen} headerText="Terms of Service">
+							<TermsAndCondition
+								rulesRef={rulesRef}
+								termsRef={termsRef}
+								privacyRef={privacyRef}
+								setIsOpen={setIsOpen}
+								isOpen={isOpen}
+							/>
+						</Modal>
+
+						{/* payment summary  */}
+						<Modal isOpen={paymentWindow} setIsOpen={setPaymentWindow} headerText={'Payment Summary'}>
+							<div className="space-y-4">
+								<div className="flex justify-between items-center mb-3">
+									<h4>Package Selected</h4>
+									<div className="flex items-center">
+										<h4>Cost</h4> <img src={Coin} alt="/" className="w-[1.8rem] mx-2" />
+									</div>
+								</div>
+								<div>
+									<div className="flex justify-between items-center">
+										<h6>
+											{formik.values.feature === '0'
+												? 'Basic feature'
+												: formik.values.feature === '1'
+												? 'Featured AD'
+												: formik.values.feature === '2'
+												? 'Spotlight Feature'
+												: 'Grab feature'}
+										</h6>
+										<h6>
+											{formik.values.feature === '0'
+												? '3.5'
+												: formik.values.feature === '1'
+												? '5'
+												: formik.values.feature === '2'
+												? '7'
+												: '10'}
+										</h6>
+									</div>
+									<div className="flex justify-between items-center">
+										<h6>VAT</h6>
+										<h6>0</h6>
+									</div>
+								</div>
+
+								<hr />
+
+								<div>
+									<div className="flex justify-between text-primary items-center">
+										<h4>Payment Total: </h4>
+										<h4>
+											{formik.values.feature === '0'
+												? '3.5'
+												: formik.values.feature === '1'
+												? '5'
+												: formik.values.feature === '2'
+												? '7'
+												: '10'}
+										</h4>
+									</div>
+									<h6>Payment total includes VAT</h6>
+								</div>
+
+								<Button loading={formik.isSubmitting} variant={'primary'} type="submit">
+									Pay Now
+								</Button>
+							</div>
+						</Modal>
 					</Form>
 				);
 			}}

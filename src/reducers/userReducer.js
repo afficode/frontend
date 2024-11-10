@@ -12,7 +12,7 @@ export const initialState = {
 	isBlocked: false,
 	isAdmin: false,
 	isGrabber: false,
-	grabberBlocked: false,
+	//grabberBlocked: false,
 };
 
 export const userReducerOptions = {
@@ -24,11 +24,12 @@ export const userReducerOptions = {
 	REFRESH_TOKEN: 'sfiurf',
 	USER: 'bs',
 	INITIAL_STATE: '_tye',
-	REDIRECT_LINK: '_plyvw'
+	REDIRECT_LINK: '_plyvw',
 };
 
-const setUpUser = (payload, state) => {
-	let userData = { ...state, ...payload };
+export const setUpUser = (payload, state) => {
+	let userData = { ...state, ...payload?.user };
+	// console.log(userData)
 	if (payload?.user?.verified === '1') {
 		userData = {
 			...userData,
@@ -47,17 +48,29 @@ const setUpUser = (payload, state) => {
 			isAdmin: true,
 		};
 	}
-	if (!isNaN(payload?.user?.grabber_id)) {
+	if (payload?.user?.grabber?.id) {
 		userData = {
 			...userData,
 			isGrabber: true,
 		};
-	}
-
-	if (payload?.user?.grabberActive === '0') {
+	} else {
 		userData = {
 			...userData,
-			grabberBlocked: true,
+			isGrabber: false,
+		};
+	}
+
+	if (payload?.user?.grabber?.isActive === '0' || payload?.user?.grabber === null) {
+		userData = {
+			...userData,
+			grabberActive: false,
+		};
+	}
+
+	if (payload?.user?.grabber?.isActive === '1') {
+		userData = {
+			...userData,
+			grabberActive: true,
 		};
 	}
 	return userData;
@@ -68,9 +81,10 @@ const userReducer = (state, action) => {
 	switch (type) {
 		case userReducerOptions.LOGIN_USER:
 			const userStatus = setUpUser(payload, state);
-			setUser(payload.user);
-			setToken(payload.token);
-			setRefreshToken(payload.refreshToken);
+			// console.log("reducer login", userStatus)
+			setUser(userStatus);
+			payload?.token && setToken(payload?.token);
+			payload?.refreshToken && setRefreshToken(payload?.refreshToken);
 			setReducerInitialState({ ...userStatus });
 			return { ...userStatus };
 		case userReducerOptions.LOGOUT:

@@ -16,7 +16,6 @@ export const Approutes = {
 	profile: {
 		initial: '/profile',
 		adverts: '/profile/adverts',
-		details: '/profile/details',
 		messages: '/profile/messages',
 		notifications: '/profile/notifications',
 		saved: '/profile/saved',
@@ -28,21 +27,33 @@ export const Approutes = {
 		viewCategoryId: '/product/category/:id',
 	},
 	aboutUs: '/about-us',
+
 	contactUs: '/contact-us',
 	forgotPassword: '/forgot-password',
 	grab: {
-		initial: '/grabber',
-		register: '/grabber/register',
-		home: '/grabber/home',
-		profile: '/grabber/profile',
-		dashboard: '/grabber/dashboard',
-		products: '/grabber/products',
-		product: '/grabber/product',
-		settings: '/grabber/settings',
-		flyer: '/grabber/flyer',
+		checkout: '/grab/checkout',
+		initial: '/grab',
+		register: '/grab/register',
+		home: '/grab/home',
+		inspectionLog: '/grab/inspection-log',
+		profile: '/grab/profile',
+		dashboard: '/grab/dashboard',
+		products: '/grab/products',
+		product: (ad_id) => `/grab/product/${ad_id}`,
+		grabbedProduct: (grbber_id, ad_id) => `/grab/view/${grbber_id}/${ad_id}`,
+		settings: '/grab/settings',
+		flyer: '/grab/flyer',
+	},
+	account: {
+		initial: '/my-account/',
+		history: '/my-account/account-history',
+		deposit: '/my-account/deposit',
+		withdraw: '/my-account/withdraw',
+		paymentSuccess: 'my-account/payment-success',
 	},
 	home: '/',
 	logout: '/logout',
+	media: '/boonfu-media',
 	playground: '/playground',
 	postAd: '/post-ad',
 	postDecision: '/post-decision',
@@ -54,14 +65,19 @@ export const Approutes = {
 };
 
 //export const backendLink = process.env.NODE_ENV !== "sam" ? 'http://109.237.25.252:4000/' : 'http://localhost:4000/';
-//export const backendLink = 'http://localhost:4000/';
+// export const backendLink = 'https://0923-2a02-8086-c97-8480-b99b-9152-327f-7924.ngrok-free.app/';
 export const backendLink =
 	import.meta.env.VITE_TESTING == 'gitpod'
 		? 'https://4000-afficode-backend-cch37ds4fkj.ws-eu108.gitpod.io/'
 		: import.meta.env.VITE_TESTING == 'sam'
 		? 'http://localhost:4000/'
+		: import.meta.env.VITE_TESTING == 'sam_elementary_os'
+		? 'http://192.168.0.206:4000/'
+		: import.meta.env.VITE_TESTING == 'staging_prod'
+		? 'http://89.107.60.191:4000/'
 		: 'https://backend-boonfu-staging-968fe07646b1.herokuapp.com/';
+// ('https://4924-2a02-8086-c97-8480-3923-b9e-5814-57c9.ngrok-free.app');
 // : 'http://109.237.25.252:4000/';
-//console.log(process.env.VITE_TESTING)
+// console.log(process.env.VITE_TESTING)
 
 export const frontendLink = 'http://localhost:5173/';

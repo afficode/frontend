@@ -8,7 +8,7 @@ const GrabLayout = () => {
 			<GrabSidebar />
 			{/* h-[83vh] */}
 
-			<section className="flex-1 px-3  py-2 ] sm:px-6">
+			<section className="flex-1 px-3  py-2 w-[calc(100vw - 15rem)] sm:px-6">
 				<Outlet />
 			</section>
 		</div>

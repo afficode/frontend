@@ -1,13 +1,13 @@
 import { useEffect, useContext, createContext, useState } from "react";
-import { Manager } from "socket.io-client";
-import useAuth from "./UserContext";
-import { backendLink } from "../constants";
-import { getToken } from "../utils";
-import { useNotify } from "../hooks";
 
-const manager = new Manager(`${backendLink}`, {
-  autoConnect: false,
-});
+import useAuth from "./UserContext";
+import { getRefreshToken } from "../utils";
+import { useNotify } from "../hooks";
+import { manager } from "../utils/socket";
+
+// export const manager = new Manager(`${backendLink}`, {
+// 	autoConnect: false,
+// });
 
 const MessageContext = createContext();
 export const MessageProvider = ({ children }) => {
@@ -17,7 +17,7 @@ export const MessageProvider = ({ children }) => {
   const socket = manager.socket("/message", {
     auth: (cb) => {
       cb({
-        token: getToken(),
+        token: getRefreshToken(),
       });
     },
   });
@@ -30,7 +30,7 @@ export const MessageProvider = ({ children }) => {
   const sendMessage = (messageData) => {
     socket.emit("send_message", { ...messageData }, (response) => {
       // acknowledgement callback function
-      console.log(response);
+      // console.log(response);
       if (!response.success) {
         notify(response.message, "info");
       }
@@ -87,10 +87,12 @@ export const MessageProvider = ({ children }) => {
   useEffect(() => {
     if (isLogin && !socket.active) {
       socket.connect();
+      // connecting socket
     }
 
     socket.on("receive_message", (data) => {
       let unreadMessages = 0;
+      // console.log('Receive message', data);
       const chats = data?.sort((a, b) => {
         return new Date(b.chat_updated_on) - new Date(a.chat_updated_on);
       });
@@ -107,13 +109,16 @@ export const MessageProvider = ({ children }) => {
     });
 
     socket.on("error", (error) => {
-      //console.error("Socket connection error:");
+      // console.error("Socket connection error:");
       // Handle the error (e.g., display a message to the user)
     });
 
     socket.on("connect_error", (error) => {
-      //console.error("Socket connection error:", error?.message);
-      // Handle the error (e.g., display a message to the user)
+      // console.error("Socket connection error:", error?.message);
+      if (error?.message === "Unauthorized!") {
+        //
+        notify("Please try to login again to continue!", "error");
+      }
     });
 
     return () => socket.disconnect();

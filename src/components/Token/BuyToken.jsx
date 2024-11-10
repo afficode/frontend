@@ -1,15 +1,19 @@
 import { useState } from 'react';
 import { Button, InputGroup } from '../../ui';
-import { privateAxios } from '../../utils';
-import { Approutes, frontendLink } from '../../constants';
+import { useBuyCoin, useNotify } from '../../hooks';
+import { useQueryClient } from 'react-query';
 
-
-const BuyToken = () => {
+const BuyToken = ({ setIsOpen }) => {
 	const [formData, setFormData] = useState({
-		amount: '',
+		coin_value: '',
 	});
 
-	const handleChnage = (e) => {
+	const { mutate } = useBuyCoin();
+	const queryClient = useQueryClient();
+
+	const notify = useNotify();
+
+	const handleChange = (e) => {
 		const { name, value } = e.target;
 		setFormData({
 			...formData,
@@ -20,41 +24,42 @@ const BuyToken = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		try {
-			const res = await privateAxios.post('/token/purchase', {
-				...formData,
-				amount: parseInt(formData.amount),
-			});
-
-			const data = res?.data;
-			window.location.replace(data.url);
-		} catch (error) {
-			console.log(error);
-		}
+		mutate(formData, {
+			onSuccess: (data) => {
+				queryClient.invalidateQueries('total-coin');
+				setFormData(() => ({ coin_value: '' }));
+				setIsOpen(() => false);
+				notify(data?.message, 'success');
+			},
+			onError: (error) => {
+				// console.log(error?.response?.data.message);
+				notify(error?.response?.data.message, 'error');
+			},
+		});
 	};
 
 	return (
 		<div className="space-y-4 text-center">
 			<form onSubmit={handleSubmit}>
-				<label htmlFor="amount" className="text-lg font-semibold">
-					Enter amount to buy
+				<label htmlFor="coin_value" className="text-lg font-semibold">
+					Enter coin amount to buy
 				</label>
 				<InputGroup
-					name={'amount'}
+					name={'coin_value'}
 					type={'number'}
 					placeholder={'₦000'}
-					value={formData.amount}
-					onChange={handleChnage}
+					value={formData.coin_value}
+					onChange={handleChange}
 				/>
 
 				<Button
 					variant={'secondary'}
 					onClick={handleSubmit}
-					disabled={formData.amount > 0 ? false : true}
+					disabled={formData.coin_value > 0 ? false : true}
 					className={'mt-4'}
 				>
 					{' '}
-					Buy <b>{formData.amount > 0 && `${formData.amount / 1000}`}</b> token(s){' '}
+					Pay <b>{formData.coin_value > 0 && `${formData.coin_value * 1000}`}</b>{' '}
 				</Button>
 			</form>
 		</div>

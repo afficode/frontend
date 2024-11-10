@@ -1,10 +1,31 @@
 import { useEffect, useRef } from 'react';
 import { Approutes } from '../../constants';
 import { Button } from '../../ui';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { useNotify } from '../../hooks';
+import { privateAxios } from '../../utils';
 
 const GrabMobileSidebar = ({ sidebar, setSidebar }) => {
 	const sidebarRef = useRef();
+
+	const navigate = useNavigate();
+	const notify = useNotify();
+
+	const handleDeactivateGrabber = async () => {
+		try {
+			const response = await privateAxios.delete('/grab/remove_grabber_account');
+			// console.log('Account deactivation successful!', response.data);
+			notify('Your grabber account has been deactivated.', 'success');
+
+			// Redirect to the home page or any other page
+			setTimeout(() => {
+				navigate(Approutes.logout);
+			}, 2000);
+		} catch (error) {
+			console.error('Account deactivation error:', error);
+			notify('There was an error deactivating your account. Please try again.', 'error');
+		}
+	};
 
 	useEffect(() => {
 		const handleClickOutside = (e) => {
@@ -19,11 +40,12 @@ const GrabMobileSidebar = ({ sidebar, setSidebar }) => {
 			document.removeEventListener('mousedown', handleClickOutside);
 		};
 	}, [setSidebar]);
+
 	return (
 		<div className={sidebar ? showStyles : closeStyles}>
 			<aside
 				ref={sidebarRef}
-				className="w-[15rem] h-[100vh]  bg-[#D9D9D9] rounded-r-[2.5rem] flex flex-col items-center text-center  "
+				className="w-[15rem] h-[100vh] bg-[#D9D9D9] rounded-r-[2.5rem] flex flex-col items-center  text-center  "
 			>
 				<nav className="flex flex-col justify-between flex-1 w-full px-4 my-12">
 					<ul className="flex flex-col gap-1 sidebar-list mt-6">
@@ -40,7 +62,13 @@ const GrabMobileSidebar = ({ sidebar, setSidebar }) => {
 								Log Out
 							</Button>
 						</Link>
-						<Button variant="plain" size="small" className="font-medium" title="Deactivate your account">
+						<Button
+							onClick={handleDeactivateGrabber}
+							variant="plain"
+							size="small"
+							className="font-medium"
+							title="Deactivate your account"
+						>
 							Deactivate Account{' '}
 						</Button>
 					</ul>
@@ -53,9 +81,9 @@ const GrabMobileSidebar = ({ sidebar, setSidebar }) => {
 export default GrabMobileSidebar;
 
 const showStyles =
-	'fixed top-0 left-0 z-50 w-full h-full bg-primary/50 transition-left duration-300 ease-in-out grid place-items-left';
+	'fixed top-0 left-0 z-[10000] w-full h-full   bg-primary/50 transition-left duration-300 ease-in-out grid place-items-left';
 const closeStyles =
-	'fixed top-0 left-[-100vw] z-50 w-full h-full bg-transparent transition-left duration-300 ease-in-out';
+	'fixed top-0 left-[-100vw] z-[10000] w-full h-full  bg-transparent transition-left duration-300 ease-in-out';
 
 const navList = [
 	{

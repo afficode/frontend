@@ -5,10 +5,10 @@ const DesktopView = () => {
 	return (
 		<div className="flex flex-col w-full lg:flex-row my-4 divide-x-4 ">
 			<div className="w-full">
-				<Register />
+				<Register id={'desktop'} />
 			</div>
 			<div className="w-full">
-				<Login />
+				<Login id={'desktop'} />
 			</div>
 		</div>
 	);

@@ -9,6 +9,7 @@ const PostAd = () => {
 	const { adId } = useParams();
 
 	const { data: ad, isLoading } = useGetAd(adId);
+	console.log(ad);
 
 	const categoryName = ad?.parent_category.toLowerCase().split(/[ ,]/)[0];
 	const categoryId = ad?.parent_category_id;
@@ -41,7 +42,7 @@ const PostAd = () => {
 			fuel_type: ad?.fuel_type,
 			engine_size: ad?.engine_size,
 			negotiable: ad?.negotiable,
-			urgent: ad?.urgent,
+			feature: ad?.feature,
 		},
 		51: {
 			category: ad?.category,
@@ -62,7 +63,7 @@ const PostAd = () => {
 			price: ad?.price,
 			negotiable: ad?.negotiable,
 			contact_type: ad?.contact_type,
-			urgent: ad?.urgent,
+			feature: ad?.feature,
 		},
 		52: {
 			category: ad?.category,
@@ -82,7 +83,7 @@ const PostAd = () => {
 			price: ad?.price,
 			negotiable: ad?.negotiable,
 			contact_type: ad?.contact_type,
-			urgent: ad?.urgent,
+			feature: ad?.feature,
 		},
 		53: {
 			category: ad?.category,
@@ -99,7 +100,7 @@ const PostAd = () => {
 			price: ad?.price,
 			negotiable: ad?.negotiable,
 			contact_type: ad?.contact_type,
-			urgent: ad?.urgent,
+			feature: ad?.feature,
 		},
 		54: {
 			category: ad?.category,
@@ -130,7 +131,7 @@ const PostAd = () => {
 			price: ad?.price,
 			negotiable: ad?.negotiable,
 			contact_type: ad?.contact_type,
-			urgent: ad?.urgent,
+			feature: ad?.feature,
 		},
 		55: {
 			category: ad?.category,
@@ -151,7 +152,7 @@ const PostAd = () => {
 			price: ad?.price,
 			negotiable: ad?.negotiable,
 			contact_type: ad?.contact_type,
-			urgent: ad?.urgent,
+			feature: ad?.feature,
 		},
 		56: {
 			category: ad?.category,
@@ -170,7 +171,7 @@ const PostAd = () => {
 			price: ad?.price,
 			negotiable: ad?.negotiable,
 			contact_type: ad?.contact_type,
-			urgent: ad?.urgent,
+			feature: ad?.feature,
 		},
 		57: {
 			category: ad?.category,
@@ -189,7 +190,7 @@ const PostAd = () => {
 			price: ad?.price,
 			negotiable: ad?.negotiable,
 			contact_type: ad?.contact_type,
-			urgent: ad?.urgent,
+			feature: ad?.feature,
 		},
 		58: {
 			category: ad?.category,
@@ -211,7 +212,7 @@ const PostAd = () => {
 			price: ad?.price,
 			negotiable: ad?.negotiable,
 			contact_type: ad?.contact_type,
-			urgent: ad?.urgent,
+			feature: ad?.feature,
 		},
 		59: {
 			category: ad?.category,
@@ -230,7 +231,7 @@ const PostAd = () => {
 			price: ad?.price,
 			negotiable: ad?.negotiable,
 			contact_type: ad?.contact_type,
-			urgent: ad?.urgent,
+			feature: ad?.feature,
 		},
 		60: {
 			category: ad?.category,
@@ -248,7 +249,7 @@ const PostAd = () => {
 			price: ad?.price,
 			negotiable: ad?.negotiable,
 			contact_type: ad?.contact_type,
-			urgent: ad?.urgent,
+			feature: ad?.feature,
 		},
 		61: {
 			category: ad?.category,
@@ -268,7 +269,7 @@ const PostAd = () => {
 			price: ad?.price,
 			bulk_price: ad?.bulk_price,
 			contact_type: ad?.contact_type,
-			urgent: ad?.urgent,
+			feature: ad?.feature,
 		},
 		62: {
 			category: ad?.category,
@@ -286,7 +287,7 @@ const PostAd = () => {
 			price: ad?.price,
 			negotiable: ad?.negotiable,
 			contact_type: ad?.contact_type,
-			urgent: ad?.urgent,
+			feature: ad?.feature,
 		},
 		63: {
 			category: ad?.category,
@@ -309,7 +310,7 @@ const PostAd = () => {
 			price: ad?.price,
 			negotiable: ad?.negotiable,
 			contact_type: ad?.contact_type,
-			urgent: ad?.urgent,
+			feature: ad?.feature,
 		},
 		64: {
 			category: ad?.category,
@@ -325,7 +326,7 @@ const PostAd = () => {
 			max_price: ad?.max_price,
 			negotiable: ad?.negotiable,
 			contact_type: ad?.contact_type,
-			urgent: ad?.urgent,
+			feature: ad?.feature,
 		},
 		65: {
 			category: ad?.category,
@@ -342,7 +343,7 @@ const PostAd = () => {
 			price: ad?.price,
 			negotiable: ad?.negotiable,
 			contact_type: ad?.contact_type,
-			urgent: ad?.urgent,
+			feature: ad?.feature,
 		},
 	};
 

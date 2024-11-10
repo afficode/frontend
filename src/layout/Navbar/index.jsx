@@ -1,16 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation, useSearchParams, useNavigate } from 'react-router-dom';
 import { Approutes } from '../../constants/routes';
-import { Dropdown } from '../../ui';
+import { CategoryDropdown, WalletDropdown } from '../../ui';
 import { BoonfuLogo } from '../../assets/images';
-import { useCategories } from '../../hooks';
+import { useCategories, useStates } from '../../hooks';
 import useAuth from '../../context/UserContext';
 import useMessageContext from '../../context/MessageContext';
 
 // icons
 import { HiSearch, HiOutlineSpeakerphone } from 'react-icons/hi';
 import { SlArrowRight } from 'react-icons/sl';
-import { AiOutlineBell } from 'react-icons/ai';
+import { IoWalletOutline } from 'react-icons/io5';
 import { BiEnvelope } from 'react-icons/bi';
 import { GoBookmark } from 'react-icons/go';
 import { IoMdClose } from 'react-icons/io';
@@ -21,6 +21,9 @@ import { MdMiscellaneousServices } from 'react-icons/md';
 import { FaCarSide, FaBuilding, FaRegHandshake } from 'react-icons/fa';
 import { useDebouncedCallback } from 'use-debounce';
 import { getSaves } from '../../hooks/useSaves';
+import { toSelectOptions } from '../../utils';
+import { NotificationBell } from '../../assets/svgs';
+// import { AccountHistory } from '../../components';
 
 const Navbar = () => {
 	const [nav, setNav] = useState(false);
@@ -32,10 +35,10 @@ const Navbar = () => {
 	const { data: saves, error } = getSaves(enable) || [];
 	const { unread } = useMessageContext();
 
+	// console.log(user);
+
 	// fetch categories
 	const { data } = useCategories();
-
-	// console.log(data);
 
 	// filter categories
 	const filteredCategories = {
@@ -69,21 +72,27 @@ const Navbar = () => {
 	}
 	const { pathname } = useLocation();
 
-	const handleSearch = useDebouncedCallback((query) => {
-		if (query) {
+	const handleSearch = useDebouncedCallback((query, stateId) => {
+		// console.log(stateId);
+		if (query || stateId) {
 			setSearchParams({
-				q: query,
+				q: query || '',
+				state_id: stateId || '',
 			});
 			if (!pathname !== '/product') {
-				navigate(`${Approutes.product.initial}/?q=${query}`);
+				navigate(`${Approutes.product.initial}/?q=${query}&state_id=${stateId}`);
 			}
 		} else {
 			// delete the query from the params
 			setSearchParams({
 				q: '',
+				state_id: '',
 			});
 		}
 	}, 500);
+
+	const { data: states } = useStates();
+	const statesOptions = toSelectOptions(states, 'states', 'All');
 
 	useEffect(() => {
 		const handleClickOutside = (e) => {
@@ -105,7 +114,7 @@ const Navbar = () => {
 	}, [setNav, isLogin]);
 
 	return (
-		<header className="fixed top-0 z-50 w-full bg-primary">
+		<header className="fixed top-0 z-[2000] w-full bg-primary">
 			<nav className="relative ">
 				<div className="w-full pt-3 ">
 					{/* top nav  */}
@@ -120,33 +129,89 @@ const Navbar = () => {
 						{/* <!-- Search input on desktop screen --> */}
 						<div className="items-center justify-between hidden lg:flex">
 							<div className="w-full px-10 mx-auto ">
-								<div className="relative ">
+								<div className="relative">
 									<input
 										title="Search for items here."
 										type="text"
-										className="w-full lg:w-[32rem] xl:w-[40rem] py-2 pl-4 pr-[12rem] text-black bg-white border border-transparent rounded-3xl  focus:border-secondary outline-none focus:ring focus:ring-opacity-10 focus:ring-secondary"
+										className="w-full lg:w-[32rem] xl:w-[40rem] py-2 pl-4 pr-[12rem] text-black text-sm  bg-white border border-transparent rounded-3xl  focus:border-secondary outline-none focus:ring focus:ring-opacity-10 focus:ring-secondary"
 										placeholder="Searching for?....."
-										defaultValue={searchParams.get('q')}
+										defaultValue={searchParams.get('q') || ''}
 										onChange={(e) => {
-											handleSearch(e.target.value);
+											const query = e.target.value;
+											const stateId = searchParams.get('state_id') || '';
+											handleSearch(query, stateId);
 										}}
 									/>
 
-									<span className="absolute inset-y-0 right-0 flex items-center pr-3">
-										<span className="mr-10 border-l-4 border-l-primary">
-											<span className="ml-4 text-sm lg:text-base">Nigeria</span>
-										</span>
+									<div className="absolute inset-y-0 right-0 flex items-center pr-3">
+										<div className="border-l-4 border-l-primary">
+											<select
+												type="select"
+												className="text-xs w-[10rem] h-6 border-transparent outline-none focus:border-none focus:ring focus:ring-transparent"
+												defaultValue={searchParams.get('state_id') || ''}
+												onChange={(e) => {
+													const query = searchParams.get('q') || '';
+													const stateId = e.target.value;
+													handleSearch(query, stateId);
+												}}
+											>
+												{statesOptions.map((option) => (
+													<option value={option.value} key={option.value}>
+														{option.key}
+													</option>
+												))}
+											</select>
+										</div>
 
-										<span className="bg-primary p-[0.4rem] rounded-xl">
+										<button className="bg-primary p-[0.4rem] rounded-xl">
 											<HiSearch size={23} className="text-white" />
-										</span>
-									</span>
+										</button>
+									</div>
 								</div>
 							</div>
 						</div>
 
 						{/* top nav items */}
 						<div className="flex items-center gap-2 lg:gap-3">
+							{isLogin && (
+								// <Link to={Approutes.profile.notifications}>
+								// 	<div
+								// 		className="flex flex-col items-center text-white cursor-pointer "
+								// 		title="My Notifications"
+								// 	>
+								// 		<AiOutlineBell size={25} />
+								// 		<span className="text-xs sm:text-sm">Notifications</span>
+								// 	</div>
+								// </Link>
+								// <div className="max-h-screen dropdown">
+								<>
+									<Link to={Approutes.profile.notifications}>
+										<div
+											className="flex flex-col justify-center items-center p-2 bg-white rounded-full"
+											title="My Notifications"
+										>
+											<img src={NotificationBell} alt="my notification" className="w-6 h-6" />
+										</div>
+									</Link>
+									<div className="dropdown">
+										<button
+											tabIndex={0}
+											className="flex flex-col items-center px-2 py-1 bg-white rounded-md cursor-pointer outline outline-4 outline-secondary text-primary"
+											title="My Wallet"
+										>
+											<IoWalletOutline size={25} />
+											<span className="text-xs sm:text-sm">Wallet</span>
+										</button>
+										<WalletDropdown />
+									</div>
+								</>
+
+								// 	{/* <AccountHistory
+								// 		tabIndex={0}
+								// 		className={`dropdown-content transform -translate-x-2/3 h-fit min-w-[300px]  z-[10] py-1 rounded-xl bg-white shadow-md overflow-y-auto`}
+								// 	/>
+								// </div> */}
+							)}
 							<Link to={Approutes.profile.saved}>
 								<div
 									className="relative flex flex-col items-center text-white cursor-pointer max-md:hidden"
@@ -161,18 +226,6 @@ const Navbar = () => {
 									)}
 								</div>
 							</Link>
-							{isLogin && (
-								<Link to={Approutes.profile.notifications}>
-									<div
-										className="flex flex-col items-center text-white cursor-pointer "
-										title="My Notifications"
-									>
-										<AiOutlineBell size={25} />
-										<span className="text-xs sm:text-sm">Notifications</span>
-									</div>
-								</Link>
-							)}
-
 							{/* post ad dropdown */}
 							<div className="dropdown ">
 								<div
@@ -199,7 +252,6 @@ const Navbar = () => {
 									</ul>
 								</ul>
 							</div>
-
 							{!isLogin ? (
 								<Link to={Approutes.auth.initial}>
 									<div
@@ -214,7 +266,7 @@ const Navbar = () => {
 								<>
 									<Link to={Approutes.profile.messages}>
 										<div
-											className="relative flex flex-col items-center text-white cursor-pointer max-md:hidden"
+											className="relative flex flex-col items-center  text-white cursor-pointer max-md:hidden"
 											title="My messages"
 										>
 											{' '}
@@ -231,7 +283,7 @@ const Navbar = () => {
 										<Link to={Approutes.profile.initial}>
 											<div
 												tabIndex={0}
-												className="flex flex-col items-center text-white cursor-pointer"
+												className="flex flex-col max-sm:hidden items-center text-white cursor-pointer"
 												title="My profile"
 											>
 												<CgProfile size={25} />
@@ -253,19 +305,19 @@ const Navbar = () => {
 														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Dashboard</li>
 													</div>
 												</NavLink>
-												<NavLink to={Approutes.profile.details}>
+												{/* <NavLink to={Approutes.profile.details}>
 													<div className="flex items-center hover:underline">
 														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">My Details</li>
 													</div>
-												</NavLink>
+												</NavLink> */}
 												<NavLink to={Approutes.profile.messages}>
 													<div className="flex items-center hover:underline">
 														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Messages</li>
 													</div>
 												</NavLink>
 												<NavLink to={'#'}>
-													<div className="flex items-center hover:underline">
-														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">My Shop</li>
+													<div className="flex items-center hover:underline opacity-50">
+														<li className="text-lg max-sm:text-base -12 whitespace-nowrap   ">My Shop</li>
 													</div>
 												</NavLink>
 												<NavLink to={Approutes.grab.initial}>
@@ -284,12 +336,12 @@ const Navbar = () => {
 													</div>
 												</NavLink>
 												<NavLink to={'#'}>
-													<div className="flex items-center hover:underline">
+													<div className="flex items-center hover:underline opacity-50">
 														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Manage my Ads</li>
 													</div>
 												</NavLink>
 												<NavLink to={'#'}>
-													<div className="flex items-center hover:underline">
+													<div className="flex items-center hover:underline opacity-50">
 														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Manage my shop</li>
 													</div>
 												</NavLink>
@@ -318,9 +370,8 @@ const Navbar = () => {
 									</div>
 								</>
 							)}
-
 							{/* mobile categories/menu dropdown */}
-							{pathname === '/' ? (
+							{!isLogin ? (
 								<div className="dropdown dropdown-end">
 									<button className="flex flex-col gap-0 px-4 py-0 capitalize bg-white border-none max-sm:text-xs lg:hidden btn btn-sm text-primary hover:bg-white">
 										Categories
@@ -368,12 +419,12 @@ const Navbar = () => {
 														<SlArrowRight size={20} className="ml-auto text-black " />
 													</div>
 												</NavLink>
-												<NavLink to={Approutes.profile.details}>
+												{/* <NavLink to={Approutes.profile.details}>
 													<div className="flex items-center hover:underline">
 														<li className="text-base whitespace-nowrap ">My Details</li>
 														<SlArrowRight size={20} className="ml-auto text-black " />
 													</div>
-												</NavLink>
+												</NavLink> */}
 												<NavLink to={Approutes.profile.messages}>
 													<div className="flex items-center hover:underline">
 														<li className="text-base whitespace-nowrap ">Messages</li>
@@ -381,7 +432,7 @@ const Navbar = () => {
 													</div>
 												</NavLink>
 												<NavLink to={'#'}>
-													<div className="flex items-center hover:underline">
+													<div className="flex items-center hover:underline opacity-50">
 														<li className="text-base whitespace-nowrap ">My Shop</li>
 														<SlArrowRight size={20} className="ml-auto text-black " />
 													</div>
@@ -405,13 +456,13 @@ const Navbar = () => {
 													</div>
 												</NavLink>
 												<NavLink to={'#'}>
-													<div className="flex items-center hover:underline">
+													<div className="flex items-center hover:underline opacity-50">
 														<li className="text-base whitespace-nowrap ">Manage my Ads</li>
 														<SlArrowRight size={20} className="ml-auto text-black " />
 													</div>
 												</NavLink>
 												<NavLink to={'#'}>
-													<div className="flex items-center hover:underline">
+													<div className="flex items-center hover:underline opacity-50">
 														<li className="text-base whitespace-nowrap ">Manage my shop</li>
 														<SlArrowRight size={20} className="ml-auto text-black " />
 													</div>
@@ -451,157 +502,71 @@ const Navbar = () => {
 
 					{/* <!-- Mobile search input --> */}
 					<div className="flex items-center w-full px-1 mt-2 lg:hidden">
-						<div className="relative w-full">
+						<form className="relative w-full">
 							<input
 								title="Search for items here."
 								type="text"
-								className="w-full py-2 pl-4 pr-[12rem] text-black bg-white border border-transparent rounded-3xl  focus:border-secondary outline-none focus:ring focus:ring-opacity-10 focus:ring-secondary"
+								className="w-full py-2 pl-4 pr-[12rem] text-black text-sm bg-white border border-transparent rounded-3xl  focus:border-secondary outline-none focus:ring focus:ring-opacity-10 focus:ring-secondary"
 								placeholder="Searching for?....."
-								defaultValue={searchParams.get('q')}
+								defaultValue={searchParams.get('q') || ''}
 								onChange={(e) => {
-									handleSearch(e.target.value);
+									const query = e.target.value;
+									const stateId = searchParams.get('state_id') || '';
+									handleSearch(query, stateId);
 								}}
 							/>
+							<div className="absolute inset-y-0 right-0 flex items-center pr-3">
+								<div className="border-l-4 border-l-primary">
+									<select
+										type="select"
+										className="text-xs w-[10rem] h-6 border-transparent outline-none focus:border-none focus:ring focus:ring-transparent"
+										defaultValue={searchParams.get('state_id') || ''}
+										onChange={(e) => {
+											const query = searchParams.get('q') || '';
+											const stateId = e.target.value;
+											handleSearch(query, stateId);
+										}}
+									>
+										{statesOptions.map((option) => (
+											<option value={option.value} key={option.value}>
+												{option.key}
+											</option>
+										))}
+									</select>
+								</div>
 
-							<span className="absolute inset-y-0 right-0 flex items-center pr-3">
-								<span className="mr-10 border-l-4 border-l-primary">
-									<span className="ml-4 text-sm">Nigeria</span>
-								</span>
-
-								<span className="bg-primary p-[0.4rem] rounded-xl">
+								<button className="bg-primary p-[0.4rem] rounded-xl">
 									<HiSearch size={23} className="text-white" />
-								</span>
-							</span>
-						</div>
+								</button>
+							</div>
+						</form>
 					</div>
 
 					{/* bottom nav  */}
 					<div className="mt-2 border-y-2 border-y-white ">
-						<div className="max-w-[1380px] mx-auto px-2 relative flex items-center justify-between w-full  whitespace-nowrap  ">
-							{pathname === '/' ? (
-								// dropdown for categories
-								<div className="dropdown ">
-									<button className="flex flex-col gap-0 px-5 mr-16 text-sm capitalize bg-white border-none max-lg:hidden btn btn-sm hover:bg-white text-primary cat-btn">
-										Categories
-									</button>
+						<div className="max-w-[1380px] mx-auto px-2 relative flex items-center justify-between w-full  whitespace-nowrap">
+							{/* // dropdown for categories */}
+							<div className="dropdown ">
+								<button className="flex flex-col gap-0 px-5 mr-16 text-sm capitalize bg-white border-none max-lg:hidden btn btn-sm hover:bg-white text-primary cat-btn">
+									Categories
+								</button>
 
-									<ul
-										tabIndex={0}
-										className={`dropdown-content transform -translate-x-[1%] min-h-fit w-fit  z-[10] px-4 py-6 bg-white shadow-md rounded-md`}
-									>
-										<h4 className="font-semibold whitespace-nowrap">Categories</h4>
-										<ul className="flex flex-col menu max-h-full w-full z-[10] py-4 ">
-											{filteredCategories?.allCat?.map((category) => (
-												<NavLink to={`${Approutes.product.category}/${btoa(category.id)}`} key={category.id}>
-													<li className="text-lg capitalize max-sm:text-base lg:pr-12 hover:underline whitespace-nowrap">
-														{category.name}
-													</li>
-												</NavLink>
-											))}
-										</ul>
-									</ul>
-								</div>
-							) : (
-								//dropdown for menu
-								<div className="dropdown">
-									<div tabIndex={0} className="mr-16 text-white cursor-pointer max-lg:hidden">
-										<VscMenu size={30} />
-									</div>
-									<ul
-										tabIndex={0}
-										className={`dropdown-content transform -translate-x-[5%] min-h-fit w-[20rem]  z-[10] p-4 bg-white shadow-md rounded-2xl`}
-									>
-										<ul className="flex flex-col gap-[0.4rem] menu max-h-full w-full z-[10] ">
-											<NavLink to={Approutes.home}>
+								<ul
+									tabIndex={0}
+									className={`dropdown-content transform -translate-x-[1%] min-h-fit w-fit  z-[10] px-4 py-6 bg-white shadow-md rounded-md`}
+								>
+									<h4 className="font-semibold whitespace-nowrap">Categories</h4>
+									<ul className="flex flex-col menu max-h-full w-full z-[10] py-4 ">
+										{filteredCategories?.allCat?.map((category) => (
+											<NavLink to={`${Approutes.product.category}/${btoa(category.id)}`} key={category.id}>
 												<li className="text-lg capitalize max-sm:text-base lg:pr-12 hover:underline whitespace-nowrap">
-													HOME
+													{category.name}
 												</li>
 											</NavLink>
-											<NavLink to={Approutes.dashboard.initial}>
-												<div className="flex items-center hover:underline">
-													<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Dashboard</li>
-													<SlArrowRight size={20} className="ml-auto text-black " />
-												</div>
-											</NavLink>
-											<NavLink to={Approutes.profile.details}>
-												<div className="flex items-center hover:underline">
-													<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">My Details</li>
-													<SlArrowRight size={20} className="ml-auto text-black " />
-												</div>
-											</NavLink>
-											<NavLink to={Approutes.profile.messages}>
-												<div className="flex items-center hover:underline">
-													<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Messages</li>
-													<SlArrowRight size={20} className="ml-auto text-black " />
-												</div>
-											</NavLink>
-											<NavLink to={'#'}>
-												<div className="flex items-center hover:underline">
-													<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">My Shop</li>
-													<SlArrowRight size={20} className="ml-auto text-black " />
-												</div>
-											</NavLink>
-											<NavLink to={Approutes.grab.initial}>
-												<div className="flex items-center hover:underline">
-													<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Grab</li>
-													<SlArrowRight size={20} className="ml-auto text-black " />
-												</div>
-											</NavLink>
-											{/* <NavLink to={'#'}>
-												<div className="flex items-center hover:underline">
-													<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">My Transactions</li>
-													<SlArrowRight size={20} className="ml-auto text-black " />
-												</div>
-											</NavLink> */}
-											<NavLink to={Approutes.profile.notifications}>
-												<div className="flex items-center hover:underline">
-													<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Notifications</li>
-													<SlArrowRight size={20} className="ml-auto text-black " />
-												</div>
-											</NavLink>
-											<NavLink to={'#'}>
-												<div className="flex items-center hover:underline">
-													<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Manage my Ads</li>
-													<SlArrowRight size={20} className="ml-auto text-black " />
-												</div>
-											</NavLink>
-											<NavLink to={'#'}>
-												<div className="flex items-center hover:underline">
-													<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Manage my shop</li>
-													<SlArrowRight size={20} className="ml-auto text-black " />
-												</div>
-											</NavLink>
-											<NavLink to={Approutes.profile.saved}>
-												<div className="flex items-center hover:underline">
-													<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">My Saved Items</li>
-													<SlArrowRight size={20} className="ml-auto text-black " />
-												</div>
-											</NavLink>
-
-											<NavLink to={Approutes.profile.adverts}>
-												<div className="flex items-center hover:underline">
-													<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">My Adverts</li>
-													<SlArrowRight size={20} className="ml-auto text-black " />
-												</div>
-											</NavLink>
-											<NavLink to={Approutes.contactUs}>
-												<div className="flex items-center hover:underline">
-													<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Help & Contact</li>
-													<SlArrowRight size={20} className="ml-auto text-black " />
-												</div>
-											</NavLink>
-											{isLogin && (
-												<NavLink to={Approutes.logout}>
-													<div className="flex items-center hover:underline">
-														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Logout</li>
-													</div>
-												</NavLink>
-											)}
-										</ul>
+										))}
 									</ul>
-								</div>
-							)}
-
+								</ul>
+							</div>
 							{/* bottom nav lists */}
 							<ul className="flex items-center justify-between w-full">
 								<li className={`${listStyles}`} title="Click to set up a shop">
@@ -621,7 +586,10 @@ const Navbar = () => {
 										<FaCarSide size={25} />
 									</a>
 									{filteredCategories?.vehicleCat && (
-										<Dropdown category={'CARS & VEHICLES'} subCategories={filteredCategories?.vehicleCat} />
+										<CategoryDropdown
+											category={'CARS & VEHICLES'}
+											subCategories={filteredCategories?.vehicleCat}
+										/>
 									)}
 								</li>
 
@@ -635,7 +603,7 @@ const Navbar = () => {
 										<FaBuilding size={25} />
 									</a>
 									{filteredCategories?.propertyCat && (
-										<Dropdown category={'PROPERTY'} subCategories={filteredCategories?.propertyCat} />
+										<CategoryDropdown category={'PROPERTY'} subCategories={filteredCategories?.propertyCat} />
 									)}
 								</li>
 
@@ -649,7 +617,7 @@ const Navbar = () => {
 										<MdMiscellaneousServices size={25} />
 									</a>
 									{filteredCategories?.servicesCat && (
-										<Dropdown category={'SERVICES'} subCategories={filteredCategories?.servicesCat} />
+										<CategoryDropdown category={'SERVICES'} subCategories={filteredCategories?.servicesCat} />
 									)}
 								</li>
 
@@ -663,7 +631,7 @@ const Navbar = () => {
 										<FaRegHandshake size={25} />
 									</NavLink>
 									{/* {filteredCategories?.dealsCat && (
-										<Dropdown category={'DEALS'} subCategories={filteredCategories?.dealsCat} />
+										<CategoryDropdown category={'DEALS'} subCategories={filteredCategories?.dealsCat} />
 									)} */}
 								</li>
 
@@ -677,7 +645,7 @@ const Navbar = () => {
 										<VscGitPullRequestGoToChanges size={25} />
 									</NavLink>
 									{/* {filteredCategories?.dealsCat && (
-										<Dropdown category={'REQUESTS'} subCategories={filteredCategories?.dealsCat} />
+										<CategoryDropdown category={'REQUESTS'} subCategories={filteredCategories?.dealsCat} />
 									)} */}
 								</li>
 							</ul>
