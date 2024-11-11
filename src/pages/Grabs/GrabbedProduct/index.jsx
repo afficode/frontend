@@ -26,7 +26,6 @@ const GrabbedProduct = () => {
 	if (result) {
 		return (
 			<section className="w-full p-4 lg:p-8">
-				{/* {result?.data.parent_category_id === 54 || result?.data.parent_category_id === 51 ? ( */}
 				<div className="flex flex-col gap-4 p-4 mb-6 rounded-xl bg-primary">
 					<h4 className="text-white">
 						Welcome to: <span className="capitalize">{result?.data.title}</span>,{' '}
@@ -37,7 +36,6 @@ const GrabbedProduct = () => {
 						<span className="px-2 text-primary"> {`BF${grabberId}`}</span>{' '}
 					</h5>
 				</div>
-				{/* // ) : null} */}
 				<div className="flex flex-col w-full h-full gap-2  lg:flex-row md:gap-8 line-clamp-1">
 					{/* product display */}
 
@@ -97,7 +95,9 @@ const GrabbedProduct = () => {
 					<div className="xl:w-[40%] lg:self-end h-full ">
 						<Action
 							isGeneral={
-								result?.data.parent_category_id === 50 || result?.data.parent_category_id === 51
+								[
+									5001, 5003, 5004, 5005, 5101, 5102, 5103, 5104, 5105, 5106, 5107, 5108, 5109, 6301, 6302,
+								].includes(result?.data.category)
 									? false
 									: true
 							}
@@ -105,6 +105,7 @@ const GrabbedProduct = () => {
 						/>
 					</div>
 				</div>
+
 				{/* description and overview */}
 				<div className="flex flex-col p-2 my-2 bg-gray-200 xl:p-6 xl:my-4">
 					<div className="flex flex-col items-start justify-start w-full gap-2 tracking-tighter lg:tracking-normal line-clamp-1">

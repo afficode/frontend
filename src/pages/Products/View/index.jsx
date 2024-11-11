@@ -37,6 +37,7 @@ const index = () => {
 	const { data: result, isLoading } = fetchProduct(decodeProductId(id));
 	const { data, isLoading: saveLoading } = getSaves();
 	const notify = useNotify();
+
 	useEffect(() => {
 		if (result?.data) {
 			setItems(() => [
@@ -46,10 +47,6 @@ const index = () => {
 			]);
 		}
 	}, [isLoading, saveLoading]);
-
-	// console.log('result', result?.data);
-
-	// console.log('user', user);
 
 	return isLoading ? (
 		<ViewProduct />
@@ -126,12 +123,7 @@ const index = () => {
 				</main>
 			</section>
 
-			{result?.data.feature === '3' ? (
-				<section className="my-8 space-y-4">
-					<h4>Inspection Update</h4>
-					<GrabUpdateTable ad={result?.data} />
-				</section>
-			) : null}
+			{result?.data.feature === '3' ? <GrabUpdateTable ad={result?.data} /> : null}
 			<section className="flex flex-col p-2 my-2 bg-gray-200 xl:p-6 xl:my-4">
 				<div className="flex flex-col items-start justify-start w-full gap-2 tracking-tighter lg:tracking-normal line-clamp-1">
 					<h2 className="text-xl xl:2xl">Description</h2>
