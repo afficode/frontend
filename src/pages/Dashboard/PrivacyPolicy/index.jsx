@@ -67,21 +67,10 @@ const PrivacyPolicy = () => {
 export default PrivacyPolicy;
 
 const activityAccessOptions = [
-	{ key: 'Everyone', value: 'everyone' },
 	{ key: 'Public', value: 'public' },
 	{ key: 'Only me', value: 'only me' },
 ];
 const contactAccessOptions = [
-	{ key: 'Everyone', value: 'everyone' },
 	{ key: 'Public', value: 'public' },
 	{ key: 'Only me', value: 'only me' },
 ];
-
-// PrivacyPolicy form data
-
-/* 
-	{
-		activity_access: '',
-		contact_access: '',
-	}
-*/

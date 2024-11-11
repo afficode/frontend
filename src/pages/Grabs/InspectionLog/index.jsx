@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { InspectionImage, noimage } from '../../../assets/images';
+import { noimage } from '../../../assets/images';
 import { GrabIcon, InspectionCalender, Location } from '../../../assets/svgs';
-import { Button, Modal } from '../../../ui';
+import { Modal } from '../../../ui';
 import { InspectorCard, SpinnerSkeleton } from '../../../components';
 import { useGetSchedule, useGetSchedules } from '../../../hooks';
 
@@ -9,7 +9,6 @@ const InspectionLog = () => {
 	const [adId, setAdId] = useState(null);
 	const [inspectionModal, setInspectionModal] = useState(false);
 	const { data, isLoading } = useGetSchedules();
-	console.log(data?.schedules);
 
 	const { data: schedule, isLoading: scheduleLoading } = useGetSchedule(adId, {
 		enabled: !!adId,
