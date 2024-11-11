@@ -5,7 +5,7 @@ import { IoCopy, IoCopyOutline } from 'react-icons/io5';
 import { noimage } from '../../../assets/images';
 import { FaCamera } from 'react-icons/fa';
 import OverviewPills from '../../Products/View/OverviewPills';
-import { convertKeyToName, numberWithCommas, ScrollToTop } from '../../../utils';
+import { convertKeyToName, formatAdId, numberWithCommas, ScrollToTop } from '../../../utils';
 import GrabHeader from '../GrabHeader';
 import { Approutes } from '../../../constants';
 import { Button } from '../../../ui';
@@ -17,7 +17,6 @@ import useAuth from '../../../context/UserContext';
 
 const GrabProduct = () => {
 	const frontendLink = 'http://89.107.60.191';
-	// const frontendLink = 'http://localhost:5173';
 
 	const notify = useNotify();
 	const [copied, setCopied] = useState(false);
@@ -33,10 +32,8 @@ const GrabProduct = () => {
 
 	const { data: result, isLoading, isError } = fetchProduct(ad_id);
 
-	// console.log(result?.data);
-
 	const handleCopy = () => {
-		navigator.clipboard
+		navigator?.clipboard
 			.writeText(grabLink)
 			.then(() => {
 				notify('Link copied to clipboard', 'success');
@@ -122,17 +119,12 @@ const GrabProduct = () => {
 					<aside className="w-full h-[350px]  xl:w-[45%] border-2 border-gray-400 p-2 lg:p-4 flex flex-col justify-between">
 						<div className="">
 							<h6 className="w-full text-lg font-bold text-center md:text-xl 2xl:text-3xl">
-								{/* Product ID:201344 */}
-								Product ID: {result.data?.id}
+								Product ID: {formatAdId(result.data?.id)}
 							</h6>
 
 							<hr className="h-px my-2 border-black/40 border-1" />
 
 							<div className="w-full tracking-tighter">
-								{/* <div className="flex justify-between">
-									<p className="p-lg">Date Posted </p>
-									<p className="p-lg">22.04.2024 </p>
-								</div> */}
 								<div className="flex justify-between">
 									<p className="p-lg">Category </p>
 									<p className="font-semibold p-lg text-primary">{result?.data.parent_category}</p>
@@ -149,30 +141,18 @@ const GrabProduct = () => {
 									<p className="text-primary w-[16rem] truncate">{grabLink ? grabLink : null}</p>
 									<div>
 										{copied ? (
-											<IoCopy className="cursor-pointer" size={20} />
+											<button>
+												<IoCopy className="cursor-pointer" size={20} />
+											</button>
 										) : (
-											<IoCopyOutline onClick={handleCopy} className="cursor-pointer" size={20} />
+											<button onClick={handleCopy}>
+												<IoCopyOutline className="cursor-pointer" size={20} />
+											</button>
 										)}
 									</div>
 								</div>
 							</div>
 							<div className="flex flex-col gap-4">
-								{/* <Button
-									variant={'primary'}
-									size={'full'}
-									className={'flex items-center justify-center gap-4 rounded-xl'}
-								>
-									<img src={Chat} alt="/" className="w-8" />
-									Chat Boonfu
-								</Button>
-								<Button
-									variant={'primary'}
-									size={'full'}
-									className={'flex items-center justify-center gap-4 rounded-xl'}
-								>
-									<img src={Share} alt="/" className="w-8" />
-									Share Now
-								</Button> */}
 								<Button
 									variant={'primary'}
 									size={'full'}

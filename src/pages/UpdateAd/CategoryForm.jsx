@@ -388,12 +388,10 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			},
 			{
 				control: 'imageinput',
-				label: 'Images',
+				label: '',
 				name: 'images',
 				type: 'file',
-				// required: true,
-				edit: true,
-				images: adImages,
+				required: true,
 			},
 			{
 				control: 'select',
@@ -468,7 +466,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				type: 'textarea',
 				maxLength: 350,
 				placeholder:
-					'Enter as much information as possible. Please state IF any defects.You could include reason for  selling, number of previous owners, if there had been colour changes or defects.',
+					'Enter as much information as possible. Please state IF any defects. You could include reason for  selling, number of previous owners, if there had been colour changes or defects.',
 				required: true,
 			},
 			{
@@ -484,19 +482,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 					// { key: 'Unpainted', value: 'unpainted' },
 				],
 			},
-			{
-				control: 'input',
-				label: 'Price',
-				name: 'price',
-				type: 'number',
-				placeholder: '₦0.00',
-				required: true,
-			},
-			{
-				control: 'toggle',
-				label: 'Negotiable',
-				name: 'negotiable',
-			},
+
 			!['5005'].includes(selectedVehicleCategory) && {
 				control: 'select',
 				label: 'Year of Manufacture?',
@@ -623,10 +609,25 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				],
 				required: true,
 			},
+
 			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
+				control: 'price',
+				label: 'Price',
+				name: 'price',
+				type: 'number',
+				placeholder: '₦0.00',
+				required: true,
+			},
+
+			{
+				control: 'toggle',
+				label: 'Negotiable',
+				name: 'negotiable',
+			},
+			{
+				control: 'feature',
+				name: 'feature',
+				type: 'radio',
 			},
 		],
 		properties: [
@@ -676,12 +677,10 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			},
 			{
 				control: 'imageinput',
-				label: 'Images',
+				label: '',
 				name: 'images',
 				type: 'file',
-				// required: true,
-				edit: true,
-				images: adImages,
+				required: true,
 			},
 			{
 				control: 'textarea',
@@ -798,8 +797,21 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				name: 'date_available',
 				placeholder: 'Select date available',
 			},
+
 			{
-				control: 'input',
+				control: 'checkbox',
+				type: 'checkbox',
+				label: 'Your Contact Details',
+				name: 'contact_type',
+				options: [
+					{ key: 'Email', value: 'email' },
+					{ key: 'Phone', value: 'phone' },
+				],
+				required: true,
+			},
+
+			{
+				control: 'price',
 				label: 'Price',
 				name: 'price',
 				type: 'number',
@@ -812,20 +824,9 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				name: 'negotiable',
 			},
 			{
-				control: 'checkbox',
-				type: 'checkbox',
-				label: 'Your Contact Details',
-				name: 'contact_type',
-				options: [
-					{ key: 'Email', value: 'email' },
-					{ key: 'Phone', value: 'phone' },
-				],
-				required: true,
-			},
-			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
+				control: 'feature',
+				name: 'feature',
+				type: 'radio',
 			},
 		],
 		services: [
@@ -928,7 +929,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 					{ key: 'Foton', value: 'foton' },
 					{ key: 'Goldoni', value: 'goldoni' },
 					{ key: 'Hyster', value: 'hyster' },
-					{ key: '	MAN', value: 'MAN' },
+					{ key: 'MAN', value: 'MAN' },
 					{ key: 'Toyota', value: 'toyota' },
 					{ key: '	Bomag', value: 'bomag' },
 					{ key: 'Fiat', value: 'fiat' },
@@ -1015,8 +1016,21 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 					{ key: 'Special arrangement', value: 'special arrangement' },
 				],
 			},
+
 			{
-				control: 'input',
+				control: 'checkbox',
+				type: 'checkbox',
+				label: 'Your Contact Details',
+				name: 'contact_type',
+				options: [
+					{ key: 'Email', value: 'email' },
+					{ key: 'Phone', value: 'phone' },
+				],
+				required: true,
+			},
+
+			{
+				control: 'price',
 				label: 'Price',
 				name: 'price',
 				type: 'number',
@@ -1029,20 +1043,9 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				name: 'negotiable',
 			},
 			{
-				control: 'checkbox',
-				type: 'checkbox',
-				label: 'Your Contact Details',
-				name: 'contact_type',
-				options: [
-					{ key: 'Email', value: 'email' },
-					{ key: 'Phone', value: 'phone' },
-				],
-				required: true,
-			},
-			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
+				control: 'feature',
+				name: 'feature',
+				type: 'radio',
 			},
 		],
 		agriculture: [
@@ -1075,12 +1078,10 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			},
 			{
 				control: 'imageinput',
-				label: 'Images',
+				label: '',
 				name: 'images',
 				type: 'file',
-				// required: true,
-				edit: true,
-				images: adImages,
+				required: true,
 			},
 			{
 				control: 'input',
@@ -1158,8 +1159,21 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				type: 'text',
 				placeholder: 'Enter colour',
 			},
+
 			{
-				control: 'input',
+				control: 'checkbox',
+				type: 'checkbox',
+				label: 'Your Contact Details',
+				name: 'contact_type',
+				options: [
+					{ key: 'Email', value: 'email' },
+					{ key: 'Phone', value: 'phone' },
+				],
+				required: true,
+			},
+
+			{
+				control: 'price',
 				label: 'Price',
 				name: 'price',
 				type: 'number',
@@ -1172,20 +1186,9 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				name: 'negotiable',
 			},
 			{
-				control: 'checkbox',
-				type: 'checkbox',
-				label: 'Your Contact Details',
-				name: 'contact_type',
-				options: [
-					{ key: 'Email', value: 'email' },
-					{ key: 'Phone', value: 'phone' },
-				],
-				required: true,
-			},
-			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
+				control: 'feature',
+				name: 'feature',
+				type: 'radio',
 			},
 		],
 		electronics: [
@@ -1218,12 +1221,10 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			},
 			{
 				control: 'imageinput',
-				label: 'Images',
+				label: '',
 				name: 'images',
 				type: 'file',
-				// required: true,
-				edit: true,
-				images: adImages,
+				required: true,
 			},
 			{
 				control: 'input',
@@ -1449,7 +1450,19 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			},
 
 			{
-				control: 'input',
+				control: 'checkbox',
+				type: 'checkbox',
+				label: 'Your Contact Details',
+				name: 'contact_type',
+				options: [
+					{ key: 'Email', value: 'email' },
+					{ key: 'Phone', value: 'phone' },
+				],
+				required: true,
+			},
+
+			{
+				control: 'price',
 				label: 'Price',
 				name: 'price',
 				type: 'number',
@@ -1462,20 +1475,9 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				name: 'negotiable',
 			},
 			{
-				control: 'checkbox',
-				type: 'checkbox',
-				label: 'Your Contact Details',
-				name: 'contact_type',
-				options: [
-					{ key: 'Email', value: 'email' },
-					{ key: 'Phone', value: 'phone' },
-				],
-				required: true,
-			},
-			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
+				control: 'feature',
+				name: 'feature',
+				type: 'radio',
 			},
 		],
 		fashion: [
@@ -1508,12 +1510,10 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			},
 			{
 				control: 'imageinput',
-				label: 'Images',
+				label: '',
 				name: 'images',
 				type: 'file',
-				// required: true,
-				edit: true,
-				images: adImages,
+				required: true,
 			},
 			{
 				control: 'input',
@@ -1655,7 +1655,19 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				],
 			},
 			{
-				control: 'input',
+				control: 'checkbox',
+				type: 'checkbox',
+				label: 'Your Contact Details',
+				name: 'contact_type',
+				options: [
+					{ key: 'Email', value: 'email' },
+					{ key: 'Phone', value: 'phone' },
+				],
+				required: true,
+			},
+
+			{
+				control: 'price',
 				label: 'Price',
 				name: 'price',
 				type: 'number',
@@ -1668,20 +1680,9 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				name: 'negotiable',
 			},
 			{
-				control: 'checkbox',
-				type: 'checkbox',
-				label: 'Your Contact Details',
-				name: 'contact_type',
-				options: [
-					{ key: 'Email', value: 'email' },
-					{ key: 'Phone', value: 'phone' },
-				],
-				required: true,
-			},
-			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
+				control: 'feature',
+				name: 'feature',
+				type: 'radio',
 			},
 		],
 		health: [
@@ -1714,12 +1715,10 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			},
 			{
 				control: 'imageinput',
-				label: 'Images',
+				label: '',
 				name: 'images',
 				type: 'file',
-				// required: true,
-				edit: true,
-				images: adImages,
+				required: true,
 			},
 			{
 				control: 'input',
@@ -1859,8 +1858,21 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				placeholder: 'Enter scent type',
 				required: true,
 			},
+
 			{
-				control: 'input',
+				control: 'checkbox',
+				type: 'checkbox',
+				label: 'Your Contact Details',
+				name: 'contact_type',
+				options: [
+					{ key: 'Email', value: 'email' },
+					{ key: 'Phone', value: 'phone' },
+				],
+				required: true,
+			},
+
+			{
+				control: 'price',
 				label: 'Price',
 				name: 'price',
 				type: 'number',
@@ -1873,20 +1885,9 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				name: 'negotiable',
 			},
 			{
-				control: 'checkbox',
-				type: 'checkbox',
-				label: 'Your Contact Details',
-				name: 'contact_type',
-				options: [
-					{ key: 'Email', value: 'email' },
-					{ key: 'Phone', value: 'phone' },
-				],
-				required: true,
-			},
-			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
+				control: 'feature',
+				name: 'feature',
+				type: 'radio',
 			},
 		],
 		home: [
@@ -1919,12 +1920,10 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			},
 			{
 				control: 'imageinput',
-				label: 'Images',
+				label: '',
 				name: 'images',
 				type: 'file',
-				// required: true,
-				edit: true,
-				images: adImages,
+				required: true,
 			},
 			{
 				control: 'input',
@@ -2039,8 +2038,21 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				type: 'text',
 				placeholder: 'Enter colour',
 			},
+
 			{
-				control: 'input',
+				control: 'checkbox',
+				type: 'checkbox',
+				label: 'Your Contact Details',
+				name: 'contact_type',
+				options: [
+					{ key: 'Email', value: 'email' },
+					{ key: 'Phone', value: 'phone' },
+				],
+				required: true,
+			},
+
+			{
+				control: 'price',
 				label: 'Price',
 				name: 'price',
 				type: 'number',
@@ -2053,20 +2065,9 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				name: 'negotiable',
 			},
 			{
-				control: 'checkbox',
-				type: 'checkbox',
-				label: 'Your Contact Details',
-				name: 'contact_type',
-				options: [
-					{ key: 'Email', value: 'email' },
-					{ key: 'Phone', value: 'phone' },
-				],
-				required: true,
-			},
-			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
+				control: 'feature',
+				name: 'feature',
+				type: 'radio',
 			},
 		],
 		tradesman: [
@@ -2099,12 +2100,10 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			},
 			{
 				control: 'imageinput',
-				label: 'Images',
+				label: '',
 				name: 'images',
 				type: 'file',
-				// required: true,
-				edit: true,
-				images: adImages,
+				required: true,
 			},
 			{
 				control: 'input',
@@ -2228,8 +2227,21 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 					{ key: 'No', value: 'no' },
 				],
 			},
+
 			{
-				control: 'input',
+				control: 'checkbox',
+				type: 'checkbox',
+				label: 'Your Contact Details',
+				name: 'contact_type',
+				options: [
+					{ key: 'Email', value: 'email' },
+					{ key: 'Phone', value: 'phone' },
+				],
+				required: true,
+			},
+
+			{
+				control: 'price',
 				label: 'Price',
 				name: 'price',
 				type: 'number',
@@ -2242,20 +2254,9 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				name: 'negotiable',
 			},
 			{
-				control: 'checkbox',
-				type: 'checkbox',
-				label: 'Your Contact Details',
-				name: 'contact_type',
-				options: [
-					{ key: 'Email', value: 'email' },
-					{ key: 'Phone', value: 'phone' },
-				],
-				required: true,
-			},
-			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
+				control: 'feature',
+				name: 'feature',
+				type: 'radio',
 			},
 		],
 		software: [
@@ -2288,12 +2289,10 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			},
 			{
 				control: 'imageinput',
-				label: 'Images',
+				label: '',
 				name: 'images',
 				type: 'file',
-				// required: true,
-				edit: true,
-				images: adImages,
+				required: true,
 			},
 			{
 				control: 'input',
@@ -2321,7 +2320,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 					{ key: 'New', value: 'new' },
 					{ key: 'Used', value: 'used' },
 					{ key: 'Refurbished', value: 'refurbished' },
-					{ key: 'For Parts/Not Working', value: 'for parts not working' },
+					{ key: 'For Parts/Not Working', value: 'for_parts_not_working' },
 				],
 			},
 			!['5903'].includes(selectedSoftwareCategory) && {
@@ -2344,7 +2343,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				name: 'format',
 				type: 'radio',
 				options: [
-					{ key: 'Product Keys', value: 'product_keys' },
+					{ key: 'Product Keys', value: 'product keys' },
 					{ key: 'USB', value: 'usb' },
 					{ key: 'Email', value: 'email format' },
 					{ key: 'CD', value: 'cd' },
@@ -2408,7 +2407,19 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				],
 			},
 			{
-				control: 'input',
+				control: 'checkbox',
+				type: 'checkbox',
+				label: 'Your Contact Details',
+				name: 'contact_type',
+				options: [
+					{ key: 'Email', value: 'email' },
+					{ key: 'Phone', value: 'phone' },
+				],
+				required: true,
+			},
+
+			{
+				control: 'price',
 				label: 'Price',
 				name: 'price',
 				type: 'number',
@@ -2421,20 +2432,9 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				name: 'negotiable',
 			},
 			{
-				control: 'checkbox',
-				type: 'checkbox',
-				label: 'Your Contact Details',
-				name: 'contact_type',
-				options: [
-					{ key: 'Email', value: 'email' },
-					{ key: 'Phone', value: 'phone' },
-				],
-				required: true,
-			},
-			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
+				control: 'feature',
+				name: 'feature',
+				type: 'radio',
 			},
 		],
 		pet: [
@@ -2467,12 +2467,10 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			},
 			{
 				control: 'imageinput',
-				label: 'Images',
+				label: '',
 				name: 'images',
 				type: 'file',
-				// required: true,
-				edit: true,
-				images: adImages,
+				required: true,
 			},
 			{
 				control: 'input',
@@ -2572,7 +2570,19 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			},
 
 			{
-				control: 'input',
+				control: 'checkbox',
+				type: 'checkbox',
+				label: 'Your Contact Details',
+				name: 'contact_type',
+				options: [
+					{ key: 'Email', value: 'email' },
+					{ key: 'Phone', value: 'phone' },
+				],
+				required: true,
+			},
+
+			{
+				control: 'price',
 				label: 'Price',
 				name: 'price',
 				type: 'number',
@@ -2580,7 +2590,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				required: true,
 			},
 			['6002', '6003'].includes(selectedPetCategory) && {
-				control: 'input',
+				control: 'price',
 				label: 'Bulk price',
 				name: 'bulk_price',
 				type: 'number',
@@ -2592,20 +2602,9 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				name: 'negotiable',
 			},
 			{
-				control: 'checkbox',
-				type: 'checkbox',
-				label: 'Your Contact Details',
-				name: 'contact_type',
-				options: [
-					{ key: 'Email', value: 'email' },
-					{ key: 'Phone', value: 'phone' },
-				],
-				required: true,
-			},
-			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
+				control: 'feature',
+				name: 'feature',
+				type: 'radio',
 			},
 		],
 		babies: [
@@ -2638,12 +2637,10 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			},
 			{
 				control: 'imageinput',
-				label: 'Images',
+				label: '',
 				name: 'images',
 				type: 'file',
-				// required: true,
-				edit: true,
-				images: adImages,
+				required: true,
 			},
 			{
 				control: 'input',
@@ -2757,21 +2754,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				name: 'size',
 				options: babiesSizeOptions,
 			},
-			{
-				control: 'input',
-				label: 'Price',
-				name: 'price',
-				type: 'number',
-				placeholder: '₦0.00',
-				required: true,
-			},
-			{
-				control: 'input',
-				label: 'Bulk Price',
-				name: 'bulk_price',
-				type: 'number',
-				placeholder: '₦0.00',
-			},
+
 			{
 				control: 'checkbox',
 				type: 'checkbox',
@@ -2783,10 +2766,31 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				],
 				required: true,
 			},
+
 			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
+				control: 'price',
+				label: 'Price',
+				name: 'price',
+				type: 'number',
+				placeholder: '₦0.00',
+				required: true,
+			},
+			{
+				control: 'price',
+				label: 'Bulk Price',
+				name: 'bulk_price',
+				type: 'number',
+				placeholder: '₦0.00',
+			},
+			{
+				control: 'toggle',
+				label: 'Negotiable?',
+				name: 'negotiable',
+			},
+			{
+				control: 'feature',
+				name: 'feature',
+				type: 'radio',
 			},
 		],
 		sports: [
@@ -2819,12 +2823,10 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			},
 			{
 				control: 'imageinput',
-				label: 'Images',
+				label: '',
 				name: 'images',
 				type: 'file',
-				// required: true,
-				edit: true,
-				images: adImages,
+				required: true,
 			},
 			{
 				control: 'input',
@@ -2925,7 +2927,19 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				],
 			},
 			{
-				control: 'input',
+				control: 'checkbox',
+				type: 'checkbox',
+				label: 'Your Contact Details',
+				name: 'contact_type',
+				options: [
+					{ key: 'Email', value: 'email' },
+					{ key: 'Phone', value: 'phone' },
+				],
+				required: true,
+			},
+
+			{
+				control: 'price',
 				label: 'Price',
 				name: 'price',
 				type: 'number',
@@ -2938,20 +2952,9 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				name: 'negotiable',
 			},
 			{
-				control: 'checkbox',
-				type: 'checkbox',
-				label: 'Your Contact Details',
-				name: 'contact_type',
-				options: [
-					{ key: 'Email', value: 'email' },
-					{ key: 'Phone', value: 'phone' },
-				],
-				required: true,
-			},
-			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
+				control: 'feature',
+				name: 'feature',
+				type: 'radio',
 			},
 		],
 		motorbike: [
@@ -3009,12 +3012,10 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			},
 			{
 				control: 'imageinput',
-				label: 'Images',
+				label: '',
 				name: 'images',
 				type: 'file',
-				// required: true,
-				edit: true,
-				images: adImages,
+				required: true,
 			},
 			{
 				control: 'select',
@@ -3055,7 +3056,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				type: 'textarea',
 				maxLength: 350,
 				placeholder:
-					'Enter as much information as possible. Please state IF any defects.You could include reason for  selling, number of previous owners, if there had been colour changes or defects.',
+					'Enter as much information as possible. Please state IF any defects. You could include reason for  selling, number of previous owners, if there had been colour changes or defects.',
 				required: true,
 			},
 			{
@@ -3128,19 +3129,6 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			// 	name: 'engine_size',
 			// 	placeholder: '1200cc',
 			// },
-			{
-				control: 'input',
-				label: 'Price',
-				name: 'price',
-				type: 'number',
-				placeholder: '₦0.00',
-				required: true,
-			},
-			{
-				control: 'toggle',
-				label: 'Negotiable',
-				name: 'negotiable',
-			},
 
 			{
 				control: 'checkbox',
@@ -3153,10 +3141,25 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				],
 				required: true,
 			},
+
 			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
+				control: 'price',
+				label: 'Price',
+				name: 'price',
+				type: 'number',
+				placeholder: '₦0.00',
+				required: true,
+			},
+
+			{
+				control: 'toggle',
+				label: 'Negotiable',
+				name: 'negotiable',
+			},
+			{
+				control: 'feature',
+				name: 'feature',
+				type: 'radio',
 			},
 		],
 		requests: [
@@ -3189,12 +3192,10 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			},
 			{
 				control: 'imageinput',
-				label: 'Images',
+				label: '',
 				name: 'images',
 				type: 'file',
-				// required: true,
-				edit: true,
-				images: adImages,
+				required: true,
 			},
 			{
 				control: 'input',
@@ -3248,6 +3249,17 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				type: 'text',
 				placeholder: 'eg: 6” foamboard material suitable for screen printing',
 			},
+			{
+				control: 'checkbox',
+				type: 'checkbox',
+				label: 'Your Contact Details',
+				name: 'contact_type',
+				options: [
+					{ key: 'Email', value: 'email' },
+					{ key: 'Phone', value: 'phone' },
+				],
+				required: true,
+			},
 
 			{
 				control: 'input',
@@ -3268,22 +3280,6 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				control: 'toggle',
 				label: 'Negotiable?',
 				name: 'negotiable	',
-			},
-			{
-				control: 'checkbox',
-				type: 'checkbox',
-				label: 'Your Contact Details',
-				name: 'contact_type',
-				options: [
-					{ key: 'Email', value: 'email' },
-					{ key: 'Phone', value: 'phone' },
-				],
-				required: true,
-			},
-			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
 			},
 		],
 		deals: [
@@ -3316,12 +3312,10 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			},
 			{
 				control: 'imageinput',
-				label: 'Images',
+				label: '',
 				name: 'images',
 				type: 'file',
-				// required: true,
-				edit: true,
-				images: adImages,
+				required: true,
 			},
 			{
 				control: 'input',
@@ -3386,19 +3380,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				type: 'text',
 				placeholder: 'example; broken legs, rusted handles etc.',
 			},
-			{
-				control: 'input',
-				label: 'Price',
-				name: 'price',
-				type: 'number',
-				placeholder: '₦0.00',
-				required: true,
-			},
-			{
-				control: 'toggle',
-				label: 'Negotiable?',
-				name: 'negotiable	',
-			},
+
 			{
 				control: 'checkbox',
 				type: 'checkbox',
@@ -3410,13 +3392,29 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				],
 				required: true,
 			},
+
 			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
+				control: 'price',
+				label: 'Price',
+				name: 'price',
+				type: 'number',
+				placeholder: '₦0.00',
+				required: true,
+			},
+
+			{
+				control: 'toggle',
+				label: 'Negotiable?',
+				name: 'negotiable	',
+			},
+			{
+				control: 'feature',
+				name: 'feature',
+				type: 'radio',
 			},
 		],
 	};
+
 	const fields = categoryFields[categoryName] || [];
 
 	const validationSchema = {

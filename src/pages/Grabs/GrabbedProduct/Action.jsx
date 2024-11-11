@@ -10,18 +10,21 @@ import {
 	SingleArrowRight,
 	Visa,
 } from '../../../assets/svgs';
-import { Form, Formik } from 'formik';
-import { date, Schema } from 'yup';
 import { Approutes } from '../../../constants';
 import InquiryChat from './Modals/InquiryChat';
 import PickUp from './Modals/PickUp';
 import Delivery from './Modals/Delivery';
 import InspectionSchedule from './Modals/InspectionSchedule';
+import { useGetSchedules } from '../../../hooks';
 
 const Action = ({ isGeneral, ad }) => {
+	const { data } = useGetSchedules();
+
 	const [formData, setFormData] = useState({
 		delivery_option: '',
 	});
+
+	const hasBookedSchedule = data?.schedules.some((schedule) => schedule.ad_id === ad.id);
 
 	// form modals
 	const [inspectionModalOpen, setInspectionModalOpen] = useState(false);
@@ -297,7 +300,7 @@ const Action = ({ isGeneral, ad }) => {
 								</div>
 							</Button>
 
-							{localStorage.getItem('inspection') ? (
+							{hasBookedSchedule ? (
 								<div className="flex items-center justify-between p-3 border rounded-xl border-primary">
 									<h6 className="font-semibold">Inspection reports</h6>
 									<Link to={Approutes.grab.inspectionLog}>

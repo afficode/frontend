@@ -9,7 +9,7 @@ const Toggle = (props) => {
 		<div className={'my-2'}>
 			{label && (
 				<label className="formLabel" htmlFor={name}>
-					{label}{' '}
+					{label}
 					{required ? (
 						<span className="text-black" title="This field is required">
 							*
