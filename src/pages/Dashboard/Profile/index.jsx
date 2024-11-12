@@ -13,7 +13,7 @@ import { toSelectOptions } from '../../../utils';
 import useAuth from '../../../context/UserContext.jsx'
 import { useStates } from "../../../hooks/index.js";
 
-import {uploadImage} from "../../../utils/index.js";
+import {uploadImage, deleteImages} from "../../../utils/index.js";
 
 import { userUpdate} from "../../../hooks/index.js";
 import {useNotify} from "../../../hooks/index.js";
@@ -29,23 +29,17 @@ const Profile = () => {
 	const { data } = useStates();
 	const state = useMemo( () => data?.map(state => ({value: state?.state_id, key: state?.name})), [data])
 	const [isLoading, setIsLoading] = useState(true);
-	const { user } = useAuth();
+	const { user, updateUserInfo } = useAuth();
 	const { mutate, isLoading: isUpdating } = userUpdate('dashboard/update_user');
 	const notify = useNotify();
 
 	const initialValues = {
-		name: user ? user?.firstname + ' ' + user?.lastname : '',
-		phone: 81234567892,
-		business_title: user?.business_title || '',
+		phone: user.phone.filter(num => num.isDefault === "1")[0].number || 1000000000,
 		location: user?.location || '',
-		established: user ? `Since ${new Date(user?.joined_on).getFullYear()}` : '',
-		email: user?.email || '',
 		bio: user?.bio || '',
-		cover_image: '',
 	};
 
 	const validationSchema = Yup.object({
-		name: Yup.string().required('Required'),
 		phone: Yup.number()
 			.typeError('Phone number must not contain +234, but start with 0XXXXXXXXXX')
 			.required()
@@ -54,8 +48,6 @@ const Profile = () => {
 			.min(1000000000, 'Phone number must be 11 or 12 digit 08012345678')
 			.max(99999999999, 'Phone number must be 11 or 12 digit 08012345678'),
 		location: Yup.string().required('Required'),
-		established: Yup.string().required('Required'),
-		email_address: Yup.string().required('Required').email('Invalid email address'),
 		bio: Yup.string().required('Required'),
 	});
 
@@ -66,7 +58,7 @@ const Profile = () => {
 			delete values.established;
 			delete values.name;
 
-
+			console.log(values)
 			if (values?.cover_image) {
 				// TODO: Delete Old image if new one is uploaded.
 				profile_image = await uploadImage(values?.cover_image, 'cover_image');
@@ -74,8 +66,18 @@ const Profile = () => {
 			} else {
 				delete values.cover_image;
 			}
+			if (values.phone.toString().substring(0, 1) !== '0') {
+				values.phone = '0' + values.phone.toString();
+			}
 			await mutate(values, {
-				onSuccess: (data) => {
+				onSuccess: async (data) => {
+					if (values?.cover_image) {
+						let _publicId = user?.cover_image?.filename.split(".");
+						_publicId.pop();
+						let publicId = _publicId.join(".")
+						await deleteImages(publicId);
+					}
+					updateUserInfo(data?.user);
 					notify(data?.message, 'success');
 				},
 				onError: (error) => {
@@ -89,7 +91,7 @@ const Profile = () => {
 				cover_image: true,
 			}));
 		} catch (e) {
-			console.log(e)
+			notify("Something went wrong...", 'error');
 		}
 	};
 
@@ -190,21 +192,34 @@ const Profile = () => {
 						<label className="max-md:text-sm max-md:mt-2" htmlFor="phone">
 							Contact Number
 						</label>
-						<InputGroup
-							name="phone"
-							type="number"
-							className={`${toggleEdit.about && inputStyle} `}
-							disabled={toggleEdit.about}
-							value={formik.values.phone}
-							onChange={formik.handleChange}
-							onBlur={formik.handleBlur}
-							errorMsg={formik.touched.phone && formik.errors.phone ? formik.errors.phone : null}
-						/>
+						{
+							toggleEdit?.about ? (
+								<InputGroup
+									name="num"
+									type="text"
+									className={`${toggleEdit.about && inputStyle} `}
+									disabled={true}
+									value={formik.values.phone}
+								/>
+							) : (
+								<InputGroup
+									name="phone"
+									type="number"
+									className={`${toggleEdit.about && inputStyle} `}
+									disabled={toggleEdit.about}
+									value={formik.values.phone}
+									onChange={formik.handleChange}
+									onBlur={formik.handleBlur}
+									errorMsg={formik.touched.phone && formik.errors.phone ? formik.errors.phone : null}
+								/>
+							)
+						}
+
 					</div>
 					{
 						toggleEdit?.about ? (<div className="flex max-md:flex-col md:items-center md:justify-between  border-b border-black/10">
 							<label className="max-md:text-sm max-md:mt-2" htmlFor="user_location">
-								Business Location
+								Current Location
 							</label>
 							<InputGroup
 								name="user_location"
