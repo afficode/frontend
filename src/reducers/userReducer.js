@@ -93,7 +93,8 @@ const userReducer = (state, action) => {
 		case userReducerOptions.UPDATE_USER_INFO:
 			const updatedUserStatus = setUpUser(payload, state);
 			setUser(updatedUserStatus);
-			setToken(payload.token);
+			payload?.token && setToken(payload?.token);
+			payload?.refreshToken && setRefreshToken(payload?.refreshToken);
 			setReducerInitialState({ ...updatedUserStatus });
 			return { ...updatedUserStatus };
 		case userReducerOptions.GET_USER:

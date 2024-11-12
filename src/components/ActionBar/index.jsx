@@ -1,10 +1,56 @@
+import { Link, useNavigate } from 'react-router-dom';
+import { Approutes } from '../../constants';
+import { deleteImages, privateAxios } from '../../utils';
+import { useNotify } from '../../hooks';
+import { useQueryClient } from 'react-query';
+import { useState } from 'react';
+
 const ActionBar = (ad) => {
+	const notify = useNotify();
+	const navigate = useNavigate();
+
+	const queryClient = useQueryClient();
+
+	const [isDeleting, setIsDeleting] = useState(false);
+
+	const handleDelete = (id, images = []) => {
+		setIsDeleting(true);
+
+		privateAxios
+			.delete(`/ads/${id}`)
+			.then(async (res) => {
+				setIsDeleting(true);
+				try {
+					if (images?.length > 0) {
+						const filteredImages = images.map((image) => {
+							return image.filename.slice(0, image.filename.lastIndexOf('.'));
+						});
+
+						for (let i = 0; i < filteredImages.length; i++) {
+							await deleteImages(filteredImages[i]);
+						}
+					}
+				} catch (error) {
+					setIsDeleting(false);
+				}
+				setIsDeleting(false);
+				queryClient.invalidateQueries({ queryKey: ['getUserAds'] });
+				notify(res?.data.message, 'success');
+				navigate(Approutes.dashboard.initial);
+			})
+			.catch((error) => {
+				// console.log(error)
+			});
+
+		setIsDeleting(false);
+	};
+
 	return (
 		<div className="">
-			<div className="flex items-center justify-between px-6 py-2 bg-primary text-white">
+			<div className="flex items-center justify-between px-2 sm:px-6 py-2 bg-primary text-white">
 				<div className="flex items-center gap-1">
 					<p className="font-light text-sm">Views:</p>
-					<b>{ad.views}</b>
+					<b>{ad?.ad.views}</b>
 				</div>
 				<div className="flex items-center gap-1">
 					<p className="font-light text-sm">Clicks:</p>
@@ -20,14 +66,27 @@ const ActionBar = (ad) => {
 				</div>
 			</div>
 
-			<div className="flex justify-between items-center border px-6 py-2">
+			<div className="flex justify-between items-center border px-2 sm:px-6 py-2">
 				<div className="flex gap-6">
-					<button className="text-primary font-bold">Edit</button>
-					<button className="text-[#047F73] font-bold">Repost</button>
+					<Link to={`${Approutes.updateAd}/${ad?.ad.id}`} target="_blank" rel="noopener noreferrer">
+						<button className="text-primary font-bold">Edit</button>
+					</Link>
+					<Link
+						to={`${Approutes.updateAd}/${ad?.ad.id}#post-package`}
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<button className="text-[#047F73] font-bold">Repost</button>
+					</Link>
 				</div>
 
 				<div className="flex gap-6 ">
-					<button className="text-[#D60949] font-bold">Delete</button>
+					<button
+						onClick={() => handleDelete(ad?.ad?.id, ad?.ad?.images)}
+						className="text-[#D60949] font-bold"
+					>
+						{isDeleting ? 'Deleting...' : 'Delete'}
+					</button>
 				</div>
 			</div>
 		</div>

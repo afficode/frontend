@@ -4,21 +4,17 @@ import { Approutes } from '../../../../../constants';
 import { useFormik } from 'formik';
 import { useCreateSchedule, useNotify } from '../../../../../hooks';
 import { format, parse } from 'date-fns';
+import { useNavigate } from 'react-router-dom';
 
 const InspectionSchedule = ({ setInspectionModalOpen, ad }) => {
 	const { user } = useAuth();
-	// console.log(ad);
 
+	const navigate = useNavigate();
 	const notify = useNotify();
 
 	const { mutate, isLoading } = useCreateSchedule();
-	// console.log(user);
-
-	// inspection scheduling form for cars and properties
 
 	const handleInspectionSubmit = async (values, { resetForm }) => {
-		// console.log(values);
-
 		const formData = {
 			...values,
 			user_id: user.id,
@@ -35,10 +31,8 @@ const InspectionSchedule = ({ setInspectionModalOpen, ad }) => {
 				navigate(Approutes.auth.initial);
 			}, 2000);
 		} else {
-			// console.log('data to submit', formData);
 			mutate(formData, {
 				onSuccess: (data) => {
-					// console.log(data);
 					notify('Inspection Booked successfully', 'success');
 					resetForm();
 					setTimeout(() => {

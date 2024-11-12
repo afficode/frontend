@@ -16,7 +16,6 @@ export const Approutes = {
 	profile: {
 		initial: '/profile',
 		adverts: '/profile/adverts',
-		details: '/profile/details',
 		messages: '/profile/messages',
 		notifications: '/profile/notifications',
 		saved: '/profile/saved',
@@ -40,7 +39,7 @@ export const Approutes = {
 		profile: '/grab/profile',
 		dashboard: '/grab/dashboard',
 		products: '/grab/products',
-		product: (ad_id) => `/grab/product/${ad_id}`,
+		product: (ad_id) => `/grab/products/${ad_id}`,
 		grabbedProduct: (grbber_id, ad_id) => `/grab/view/${grbber_id}/${ad_id}`,
 		settings: '/grab/settings',
 		flyer: '/grab/flyer',

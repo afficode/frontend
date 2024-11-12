@@ -14,7 +14,7 @@ const Security = () => {
 	const formik = useFormik({
 		initialValues: {
 			remember_password: false,
-			login_notification: false,
+			login_failure_alert: false,
 		},
 		onSubmit: (values) => {
 			// console.log(values);
@@ -102,10 +102,10 @@ const Security = () => {
 						</div>
 						<div className="ml-auto" title="Check to get notified.">
 							<ToggleSwitch
-								checked={formik.values.login_notification}
-								name="login_notification"
-								onChange={(e) => formik.setFieldValue('login_notification', e)}
-								className={formik.values.login_notification ? 'custom-toggle' : ''}
+								checked={formik.values.login_failure_alert}
+								name="login_failure_alert"
+								onChange={(e) => formik.setFieldValue('login_failure_alert', e)}
+								className={formik.values.login_failure_alert ? 'custom-toggle' : ''}
 							/>
 						</div>
 					</div>
@@ -124,7 +124,12 @@ const Security = () => {
 				</div>
 			</div>
 
-			<Modal isOpen={isOpen} setIsOpen={setIsOpen} headerText="UPDATE PASSWORD">
+			<Modal
+				isOpen={isOpen}
+				setIsOpen={setIsOpen}
+				headerText="UPDATE PASSWORD"
+				className={'max-w-[500px]'}
+			>
 				<UpdatePassword setIsOpen={setIsOpen} />
 			</Modal>
 		</div>
@@ -132,13 +137,3 @@ const Security = () => {
 };
 
 export default Security;
-
-// security & login
-
-/* 
-{
-	login_notification: boolean,
-
-	ignored (remember_password: boolean,)
-}
-*/

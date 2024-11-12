@@ -23,7 +23,7 @@ const PostAd = () => {
 			contact_type: [],
 			price: '',
 			negotiable: false,
-			urgent: false,
+			// urgent: false,
 			feature: '',
 		},
 		51: {
@@ -36,7 +36,7 @@ const PostAd = () => {
 			price: '',
 			contact_type: [],
 			negotiable: false,
-			urgent: false,
+			// urgent: false,
 			feature: '',
 		},
 		52: {
@@ -49,7 +49,7 @@ const PostAd = () => {
 			price: '',
 			negotiable: false,
 			contact_type: [],
-			urgent: false,
+			// urgent: false,
 			feature: '',
 		},
 		53: {
@@ -62,7 +62,7 @@ const PostAd = () => {
 			price: '',
 			negotiable: false,
 			contact_type: [],
-			urgent: false,
+			// urgent: false,
 			feature: '',
 		},
 		54: {
@@ -75,7 +75,7 @@ const PostAd = () => {
 			price: '',
 			negotiable: false,
 			contact_type: [],
-			urgent: false,
+			// urgent: false,
 			feature: '',
 		},
 		55: {
@@ -88,7 +88,7 @@ const PostAd = () => {
 			price: '',
 			negotiable: false,
 			contact_type: [],
-			urgent: false,
+			// urgent: false,
 			feature: '',
 		},
 		56: {
@@ -101,7 +101,7 @@ const PostAd = () => {
 			price: '',
 			negotiable: false,
 			contact_type: [],
-			urgent: false,
+			// urgent: false,
 			feature: '',
 		},
 		57: {
@@ -114,7 +114,7 @@ const PostAd = () => {
 			price: '',
 			negotiable: false,
 			contact_type: [],
-			urgent: false,
+			// urgent: false,
 			feature: '',
 		},
 		58: {
@@ -127,7 +127,7 @@ const PostAd = () => {
 			price: '',
 			negotiable: false,
 			contact_type: [],
-			urgent: false,
+			// urgent: false,
 			feature: '',
 		},
 		59: {
@@ -140,7 +140,7 @@ const PostAd = () => {
 			price: '',
 			negotiable: false,
 			contact_type: [],
-			urgent: false,
+			// urgent: false,
 			feature: '',
 		},
 		60: {
@@ -153,7 +153,7 @@ const PostAd = () => {
 			price: '',
 			negotiable: false,
 			contact_type: [],
-			urgent: false,
+			// urgent: false,
 			feature: '',
 		},
 		61: {
@@ -166,7 +166,7 @@ const PostAd = () => {
 			price: '',
 			negotiable: false,
 			contact_type: [],
-			urgent: false,
+			// urgent: false,
 			feature: '',
 		},
 		62: {
@@ -179,7 +179,7 @@ const PostAd = () => {
 			price: '',
 			negotiable: false,
 			contact_type: [],
-			urgent: false,
+			// urgent: false,
 			feature: '',
 		},
 		63: {
@@ -192,7 +192,7 @@ const PostAd = () => {
 			price: '',
 			negotiable: false,
 			contact_type: [],
-			urgent: false,
+			// urgent: false,
 			feature: '',
 		},
 		64: {
@@ -205,7 +205,7 @@ const PostAd = () => {
 			price: '',
 			negotiable: false,
 			contact_type: [],
-			urgent: false,
+			// urgent: false,
 			feature: '',
 		},
 		65: {
@@ -218,7 +218,7 @@ const PostAd = () => {
 			price: '',
 			negotiable: false,
 			contact_type: [],
-			urgent: false,
+			// urgent: false,
 			feature: '',
 		},
 	};

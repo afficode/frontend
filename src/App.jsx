@@ -173,9 +173,9 @@ function App() {
 						<Route element={<ProfileLayout />}>
 							<Route
 								path={Approutes.profile.initial}
-								element={<Navigate to={Approutes.profile.details} />}
+								element={<Navigate to={Approutes.profile.adverts} />}
 							/>
-							<Route path={Approutes.profile.details} element={<Details />} />
+							{/* <Route path={Approutes.profile.details} element={<Details />} /> */}
 							<Route path={Approutes.profile.adverts} element={<Adverts />} />
 							<Route path={Approutes.profile.messages} element={<Messages />} />
 							<Route path={Approutes.profile.notifications} element={<Notifications />} />

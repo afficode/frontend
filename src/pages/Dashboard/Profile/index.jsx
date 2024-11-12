@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import {useEffect, useMemo, useState} from 'react';
 import { ProfileBanner } from '../../../assets/images';
 import { CameraBlue, EditPencil } from '../../../assets/svgs';
 import { DashboardHeader } from '../../../components';
@@ -8,41 +8,91 @@ import * as Yup from 'yup';
 import LoadingScreen from './LoadingScreen';
 import { toast } from 'react-toastify';
 import { MdClose } from 'react-icons/md';
+import { toSelectOptions } from '../../../utils';
+
+import useAuth from '../../../context/UserContext.jsx'
+import { useStates } from "../../../hooks/index.js";
+
+import {uploadImage, deleteImages} from "../../../utils/index.js";
+
+import { userUpdate} from "../../../hooks/index.js";
+import {useNotify} from "../../../hooks/index.js";
 
 const Profile = () => {
+	const { data: states } = useStates();
+	const statesOptions = toSelectOptions(states, 'states', 'Select your state');
 	const [toggleEdit, setToggleEdit] = useState({
 		about: true,
 		bio: true,
 		cover_image: true,
 	});
+	const { data } = useStates();
+	const state = useMemo( () => data?.map(state => ({value: state?.state_id, key: state?.name})), [data])
 	const [isLoading, setIsLoading] = useState(true);
+	const { user, updateUserInfo } = useAuth();
+	const { mutate, isLoading: isUpdating } = userUpdate('dashboard/update_user');
+	const notify = useNotify();
 
 	const initialValues = {
-		name: 'Adeola Lawal',
-		business_title: 'Auto Dealer',
-		business_location: 'Lagos State',
-		established: 'Since 2008',
-		email_address: 'sijuadelawal@gmail.com',
-		bio: 'bio here',
-		cover_image: '',
+		phone: user.phone.filter(num => num.isDefault === "1")[0].number || 1000000000,
+		location: user?.location || '',
+		bio: user?.bio || '',
 	};
 
 	const validationSchema = Yup.object({
-		name: Yup.string().required('Required'),
-		business_title: Yup.string().required('Required'),
-		business_location: Yup.string().required('Required'),
-		established: Yup.string().required('Required'),
-		email_address: Yup.string().required('Required').email('Invalid email address'),
+		phone: Yup.number()
+			.typeError('Phone number must not contain +234, but start with 0XXXXXXXXXX')
+			.required()
+			.positive()
+			.integer()
+			.min(1000000000, 'Phone number must be 11 or 12 digit 08012345678')
+			.max(99999999999, 'Phone number must be 11 or 12 digit 08012345678'),
+		location: Yup.string().required('Required'),
 		bio: Yup.string().required('Required'),
 	});
 
-	const handleSave = (values) => {
-		// console.log(values);
-		setToggleEdit(() => ({
-			about: true,
-			bio: true,
-			cover_image: true,
-		}));
+	const handleSave = async (values) => {
+		try {
+			let profile_image;
+			delete values.email;
+			delete values.established;
+			delete values.name;
+
+			console.log(values)
+			if (values?.cover_image) {
+				// TODO: Delete Old image if new one is uploaded.
+				profile_image = await uploadImage(values?.cover_image, 'cover_image');
+				values = { ...values, cover_image: profile_image }
+			} else {
+				delete values.cover_image;
+			}
+			if (values.phone.toString().substring(0, 1) !== '0') {
+				values.phone = '0' + values.phone.toString();
+			}
+			await mutate(values, {
+				onSuccess: async (data) => {
+					if (values?.cover_image) {
+						let _publicId = user?.cover_image?.filename.split(".");
+						_publicId.pop();
+						let publicId = _publicId.join(".")
+						await deleteImages(publicId);
+					}
+					updateUserInfo(data?.user);
+					notify(data?.message, 'success');
+				},
+				onError: (error) => {
+					notify(error?.message, 'error');
+				}
+			});
+
+			setToggleEdit(() => ({
+				about: true,
+				bio: true,
+				cover_image: true,
+			}));
+		} catch (e) {
+			notify("Something went wrong...", 'error');
+		}
 	};
 
 	const formik = useFormik({
@@ -76,7 +126,7 @@ const Profile = () => {
 		}, 1000);
 	}, []);
 
-	if (isLoading) {
+	if (isLoading || isUpdating) {
 		return (
 			<>
 				<DashboardHeader />
@@ -103,7 +153,7 @@ const Profile = () => {
 						</div>
 					</div>
 				) : (
-					<img src={ProfileBanner} alt="/" className="w-full h-full mx-auto object-fit rounded-xl" />
+					<img src={user?.cover_image?.path || ProfileBanner} alt="/" className="w-full h-full mx-auto object-fit rounded-xl" />
 				)}
 				<form encType="multipart/form-data">
 					<InputGroup type="file" name="cover_image" onChange={handleFileChange}>
@@ -134,51 +184,71 @@ const Profile = () => {
 							name="name"
 							type="text"
 							className={`${toggleEdit.about && inputStyle} `}
-							disabled={toggleEdit.about}
-							value={formik.values.name}
-							onChange={formik.handleChange}
-							onBlur={formik.handleBlur}
-							errorMsg={formik.touched.name && formik.errors.name ? formik.errors.name : null}
+							disabled={true}
+							value={user?.firstname + " " + user?.lastname}
 						/>
 					</div>
 					<div className="flex max-md:flex-col md:items-center md:justify-between  border-b border-black/10">
-						<label className="max-md:text-sm max-md:mt-2" htmlFor="business_title">
-							Business Title
+						<label className="max-md:text-sm max-md:mt-2" htmlFor="phone">
+							Contact Number
 						</label>
-						<InputGroup
-							name="business_title"
-							type="text"
-							className={`${toggleEdit.about && inputStyle} `}
-							disabled={toggleEdit.about}
-							value={formik.values.business_title}
-							onChange={formik.handleChange}
-							onBlur={formik.handleBlur}
-							errorMsg={
-								formik.touched.business_title && formik.errors.business_title
-									? formik.errors.business_title
-									: null
-							}
-						/>
+						{
+							toggleEdit?.about ? (
+								<InputGroup
+									name="num"
+									type="text"
+									className={`${toggleEdit.about && inputStyle} `}
+									disabled={true}
+									value={formik.values.phone}
+								/>
+							) : (
+								<InputGroup
+									name="phone"
+									type="number"
+									className={`${toggleEdit.about && inputStyle} `}
+									disabled={toggleEdit.about}
+									value={formik.values.phone}
+									onChange={formik.handleChange}
+									onBlur={formik.handleBlur}
+									errorMsg={formik.touched.phone && formik.errors.phone ? formik.errors.phone : null}
+								/>
+							)
+						}
+
 					</div>
-					<div className="flex max-md:flex-col md:items-center md:justify-between  border-b border-black/10">
-						<label className="max-md:text-sm max-md:mt-2" htmlFor="business_location">
-							Business Location
-						</label>
-						<InputGroup
-							name="business_location"
-							type="text"
-							className={`${toggleEdit.about && inputStyle} `}
-							disabled={toggleEdit.about}
-							value={formik.values.business_location}
-							onChange={formik.handleChange}
-							onBlur={formik.handleBlur}
-							errorMsg={
-								formik.touched.business_location && formik.errors.business_location
-									? formik.errors.business_location
-									: null
-							}
-						/>
-					</div>
+					{
+						toggleEdit?.about ? (<div className="flex max-md:flex-col md:items-center md:justify-between  border-b border-black/10">
+							<label className="max-md:text-sm max-md:mt-2" htmlFor="user_location">
+								Current Location
+							</label>
+							<InputGroup
+								name="user_location"
+								type="text"
+								className={`${toggleEdit.about && inputStyle} `}
+								disabled={true}
+								value={user?.user_location}
+							/>
+						</div>) : (<div
+							className="flex max-md:flex-col md:items-center md:justify-between  border-b border-black/10">
+							<label className="max-md:text-sm max-md:mt-2" htmlFor="business_location">
+								Change Location
+							</label>
+							<InputGroup
+								name="location"
+								type="select"
+								optionLists={state}
+								className={`${toggleEdit.about && inputStyle} `}
+								disabled={toggleEdit.about}
+								onChange={formik.handleChange}
+								onBlur={formik.handleBlur}
+								errorMsg={
+									formik.touched.location && formik.errors.location
+										? formik.errors.location
+										: null
+								}
+							/>
+						</div>)
+					}
 					<div className="flex max-md:flex-col md:items-center md:justify-between  border-b border-black/10">
 						<label className="max-md:text-sm max-md:mt-2" htmlFor="established">
 							Established
@@ -187,32 +257,22 @@ const Profile = () => {
 							name="established"
 							type="text"
 							className={`${toggleEdit.about && inputStyle} `}
-							disabled={toggleEdit.about}
-							value={formik.values.established}
-							onChange={formik.handleChange}
-							onBlur={formik.handleBlur}
-							errorMsg={
-								formik.touched.established && formik.errors.established ? formik.errors.established : null
-							}
+							disabled={true}
+							value={`Since ${new Date(user?.joined_on).getFullYear()}`}
+
 						/>
 					</div>
 					<div className="flex max-md:flex-col md:items-center md:justify-between  border-b border-black/10">
-						<label className="max-md:text-sm max-md:mt-2" htmlFor="email_address">
-							E-mail
+						<label className="max-md:text-sm max-md:mt-2" htmlFor="email">
+						E-mail
 						</label>
 						<InputGroup
-							name="email_address"
+							name="email"
 							type="email"
 							className={`${toggleEdit.about && inputStyle} `}
-							disabled={toggleEdit.about}
-							value={formik.values.email_address}
-							onChange={formik.handleChange}
-							onBlur={formik.handleBlur}
-							errorMsg={
-								formik.touched.email_address && formik.errors.email_address
-									? formik.errors.email_address
-									: null
-							}
+							disabled={true}
+							value={user?.email}
+
 						/>
 					</div>
 				</form>
@@ -223,10 +283,10 @@ const Profile = () => {
 				<div className="flex justify-between border-b border-black/30">
 					<h4>Bio</h4>
 					<div
-						onClick={() => setToggleEdit((prev) => ({ ...prev, bio: false }))}
+						onClick={() => setToggleEdit((prev) => ({...prev, bio: false}))}
 						className="flex gap-1 items-center text-primary text-lg font-medium cursor-pointer"
 					>
-						<img src={EditPencil} alt="/" className="w-4" />
+						<img src={EditPencil} alt="/" className="w-4"/>
 						<span>Edit</span>
 					</div>
 				</div>
@@ -272,7 +332,7 @@ const inputStyle = 'border-transparent font-medium ';
 		bussiness_title: 'Auto Dealer',
 		bussiness_location: 'Lagos State',
 		established: 'Since 2008',
-		email_address: 'lawal@gmail.com',
+		email: 'lawal@gmail.com',
 		bio: 'bio here',
 		cover_image: 'cover image here',
 	}
@@ -294,24 +354,24 @@ const inputStyle = 'border-transparent font-medium ';
 						/>
 					</div>
 					<div className="flex max-md:flex-col md:items-center md:justify-between  border-b border-black/10">
-						<label className="max-md:text-sm max-md:mt-2" htmlFor="business_title">Business Title</label>
+						<label className="max-md:text-sm max-md:mt-2" htmlFor="phone">Business Title</label>
 						<input
 							type="text"
-							id="business_title"
-							name="business_title"
-							value={aboutData?.business_title}
+							id="phone"
+							name="phone"
+							value={aboutData?.phone}
 							onChange={handleAboutChange}
 							className={toggleEdit.about ? 'border-transparent font-semibold' : ''}
 							disabled={toggleEdit.about}
 						/>
 					</div>
 					<div className="flex max-md:flex-col md:items-center md:justify-between  border-b border-black/10">
-						<label className="max-md:text-sm max-md:mt-2" htmlFor="business_location">Business Location</label>
+						<label className="max-md:text-sm max-md:mt-2" htmlFor="location">Business Location</label>
 						<input
 							type="text"
-							id="business_location"
-							name="business_location"
-							value={aboutData?.business_location}
+							id="location"
+							name="location"
+							value={aboutData?.location}
 							onChange={handleAboutChange}
 							className={toggleEdit.about ? 'border-transparent font-semibold' : ''}
 							disabled={toggleEdit.about}
@@ -335,7 +395,7 @@ const inputStyle = 'border-transparent font-medium ';
 							type="email"
 							id="email_adress"
 							name="email_adress"
-							value={aboutData?.email_address}
+							value={aboutData?.email}
 							onChange={handleAboutChange}
 							className={toggleEdit.about ? 'border-transparent font-semibold' : ''}
 							disabled={toggleEdit.about}
@@ -362,10 +422,10 @@ const inputStyle = 'border-transparent font-medium ';
 
 // const [aboutData, setAboutData] = useState({
 // 	name: 'Adeola Lawal',
-// 	business_title: 'Auto Dealer',
-// 	business_location: 'Lagos State',
+// 	phone: 'Auto Dealer',
+// 	location: 'Lagos State',
 // 	established: 'Since 2008',
-// 	email_address: 'sijuadelawal@gmail.com',
+// 	email: 'sijuadelawal@gmail.com',
 // 	bio: '',
 // });
 

@@ -36,3 +36,14 @@ export const useGetSchedule = (ad_id) => {
 		refetchIntervalInBackground: false,
 	});
 };
+
+export const useGetAdsSchedule = (ad_id) => {
+	const getAdsSchedule = () =>
+		privateAxios.get(`${backendLink}schedule/ad/${ad_id}`).then((res) => res?.data);
+
+	return useQuery(['get-ads-schedule', ad_id], getAdsSchedule, {
+		refetchInterval: false,
+		refetchOnWindowFocus: false,
+		refetchIntervalInBackground: false,
+	});
+};

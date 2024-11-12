@@ -20,7 +20,6 @@ const Performance = () => {
 		created_at: filteredDateResult,
 	});
 
-	// console.log(date);
 	useEffect(() => {
 		let result = '';
 

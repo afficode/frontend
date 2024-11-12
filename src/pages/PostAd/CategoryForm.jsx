@@ -618,11 +618,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				],
 				required: true,
 			},
-			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
-			},
+
 			{
 				control: 'price',
 				label: 'Price',
@@ -822,11 +818,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				],
 				required: true,
 			},
-			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
-			},
+
 			{
 				control: 'price',
 				label: 'Price',
@@ -1045,11 +1037,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				],
 				required: true,
 			},
-			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
-			},
+
 			{
 				control: 'price',
 				label: 'Price',
@@ -1192,11 +1180,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				],
 				required: true,
 			},
-			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
-			},
+
 			{
 				control: 'price',
 				label: 'Price',
@@ -1485,11 +1469,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				],
 				required: true,
 			},
-			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
-			},
+
 			{
 				control: 'price',
 				label: 'Price',
@@ -1694,11 +1674,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				],
 				required: true,
 			},
-			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
-			},
+
 			{
 				control: 'price',
 				label: 'Price',
@@ -1903,11 +1879,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				],
 				required: true,
 			},
-			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
-			},
+
 			{
 				control: 'price',
 				label: 'Price',
@@ -2086,11 +2058,6 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 					{ key: 'Phone', value: 'phone' },
 				],
 				required: true,
-			},
-			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
 			},
 
 			{
@@ -2281,11 +2248,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				],
 				required: true,
 			},
-			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
-			},
+
 			{
 				control: 'price',
 				label: 'Price',
@@ -2463,11 +2426,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				],
 				required: true,
 			},
-			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
-			},
+
 			{
 				control: 'price',
 				label: 'Price',
@@ -2629,11 +2588,6 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 					{ key: 'Phone', value: 'phone' },
 				],
 				required: true,
-			},
-			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
 			},
 
 			{
@@ -2821,11 +2775,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				],
 				required: true,
 			},
-			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
-			},
+
 			{
 				control: 'price',
 				label: 'Price',
@@ -2996,11 +2946,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				],
 				required: true,
 			},
-			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
-			},
+
 			{
 				control: 'price',
 				label: 'Price',
@@ -3204,11 +3150,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				],
 				required: true,
 			},
-			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
-			},
+
 			{
 				control: 'price',
 				label: 'Price',
@@ -3327,11 +3269,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				],
 				required: true,
 			},
-			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
-			},
+
 			{
 				control: 'input',
 				label: 'Price Offering?',
@@ -3463,11 +3401,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				],
 				required: true,
 			},
-			{
-				control: 'urgent',
-				label: 'Label as Urgent:',
-				name: 'urgent',
-			},
+
 			{
 				control: 'price',
 				label: 'Price',
