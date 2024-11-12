@@ -305,19 +305,19 @@ const Navbar = () => {
 														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Dashboard</li>
 													</div>
 												</NavLink>
-												<NavLink to={Approutes.profile.details}>
+												{/* <NavLink to={Approutes.profile.details}>
 													<div className="flex items-center hover:underline">
 														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">My Details</li>
 													</div>
-												</NavLink>
+												</NavLink> */}
 												<NavLink to={Approutes.profile.messages}>
 													<div className="flex items-center hover:underline">
 														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Messages</li>
 													</div>
 												</NavLink>
 												<NavLink to={'#'}>
-													<div className="flex items-center hover:underline">
-														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">My Shop</li>
+													<div className="flex items-center hover:underline opacity-50">
+														<li className="text-lg max-sm:text-base -12 whitespace-nowrap   ">My Shop</li>
 													</div>
 												</NavLink>
 												<NavLink to={Approutes.grab.initial}>
@@ -336,12 +336,12 @@ const Navbar = () => {
 													</div>
 												</NavLink>
 												<NavLink to={'#'}>
-													<div className="flex items-center hover:underline">
+													<div className="flex items-center hover:underline opacity-50">
 														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Manage my Ads</li>
 													</div>
 												</NavLink>
 												<NavLink to={'#'}>
-													<div className="flex items-center hover:underline">
+													<div className="flex items-center hover:underline opacity-50">
 														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Manage my shop</li>
 													</div>
 												</NavLink>
@@ -419,12 +419,12 @@ const Navbar = () => {
 														<SlArrowRight size={20} className="ml-auto text-black " />
 													</div>
 												</NavLink>
-												<NavLink to={Approutes.profile.details}>
+												{/* <NavLink to={Approutes.profile.details}>
 													<div className="flex items-center hover:underline">
 														<li className="text-base whitespace-nowrap ">My Details</li>
 														<SlArrowRight size={20} className="ml-auto text-black " />
 													</div>
-												</NavLink>
+												</NavLink> */}
 												<NavLink to={Approutes.profile.messages}>
 													<div className="flex items-center hover:underline">
 														<li className="text-base whitespace-nowrap ">Messages</li>
@@ -432,7 +432,7 @@ const Navbar = () => {
 													</div>
 												</NavLink>
 												<NavLink to={'#'}>
-													<div className="flex items-center hover:underline">
+													<div className="flex items-center hover:underline opacity-50">
 														<li className="text-base whitespace-nowrap ">My Shop</li>
 														<SlArrowRight size={20} className="ml-auto text-black " />
 													</div>
@@ -456,13 +456,13 @@ const Navbar = () => {
 													</div>
 												</NavLink>
 												<NavLink to={'#'}>
-													<div className="flex items-center hover:underline">
+													<div className="flex items-center hover:underline opacity-50">
 														<li className="text-base whitespace-nowrap ">Manage my Ads</li>
 														<SlArrowRight size={20} className="ml-auto text-black " />
 													</div>
 												</NavLink>
 												<NavLink to={'#'}>
-													<div className="flex items-center hover:underline">
+													<div className="flex items-center hover:underline opacity-50">
 														<li className="text-base whitespace-nowrap ">Manage my shop</li>
 														<SlArrowRight size={20} className="ml-auto text-black " />
 													</div>
@@ -545,130 +545,28 @@ const Navbar = () => {
 					{/* bottom nav  */}
 					<div className="mt-2 border-y-2 border-y-white ">
 						<div className="max-w-[1380px] mx-auto px-2 relative flex items-center justify-between w-full  whitespace-nowrap">
-							{!isLogin ? (
-								// dropdown for categories
-								<div className="dropdown ">
-									<button className="flex flex-col gap-0 px-5 mr-16 text-sm capitalize bg-white border-none max-lg:hidden btn btn-sm hover:bg-white text-primary cat-btn">
-										Categories
-									</button>
+							{/* // dropdown for categories */}
+							<div className="dropdown ">
+								<button className="flex flex-col gap-0 px-5 mr-16 text-sm capitalize bg-white border-none max-lg:hidden btn btn-sm hover:bg-white text-primary cat-btn">
+									Categories
+								</button>
 
-									<ul
-										tabIndex={0}
-										className={`dropdown-content transform -translate-x-[1%] min-h-fit w-fit  z-[10] px-4 py-6 bg-white shadow-md rounded-md`}
-									>
-										<h4 className="font-semibold whitespace-nowrap">Categories</h4>
-										<ul className="flex flex-col menu max-h-full w-full z-[10] py-4 ">
-											{filteredCategories?.allCat?.map((category) => (
-												<NavLink to={`${Approutes.product.category}/${btoa(category.id)}`} key={category.id}>
-													<li className="text-lg capitalize max-sm:text-base lg:pr-12 hover:underline whitespace-nowrap">
-														{category.name}
-													</li>
-												</NavLink>
-											))}
-										</ul>
-									</ul>
-								</div>
-							) : (
-								//dropdown for menu
-								<div className="dropdown">
-									<div tabIndex={0} className="mr-16 text-white cursor-pointer max-lg:hidden">
-										<VscMenu size={30} />
-									</div>
-									<ul
-										tabIndex={0}
-										className={`dropdown-content transform -translate-x-[5%] min-h-fit w-[20rem]  z-[10] p-4 bg-white shadow-md rounded-2xl`}
-									>
-										<ul className="flex flex-col gap-[0.4rem] menu max-h-full w-full z-[10] ">
-											<NavLink to={Approutes.home}>
+								<ul
+									tabIndex={0}
+									className={`dropdown-content transform -translate-x-[1%] min-h-fit w-fit  z-[10] px-4 py-6 bg-white shadow-md rounded-md`}
+								>
+									<h4 className="font-semibold whitespace-nowrap">Categories</h4>
+									<ul className="flex flex-col menu max-h-full w-full z-[10] py-4 ">
+										{filteredCategories?.allCat?.map((category) => (
+											<NavLink to={`${Approutes.product.category}/${btoa(category.id)}`} key={category.id}>
 												<li className="text-lg capitalize max-sm:text-base lg:pr-12 hover:underline whitespace-nowrap">
-													HOME
+													{category.name}
 												</li>
 											</NavLink>
-											<NavLink to={Approutes.dashboard.initial}>
-												<div className="flex items-center hover:underline">
-													<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Dashboard</li>
-													<SlArrowRight size={20} className="ml-auto text-black " />
-												</div>
-											</NavLink>
-											<NavLink to={Approutes.profile.details}>
-												<div className="flex items-center hover:underline">
-													<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">My Details</li>
-													<SlArrowRight size={20} className="ml-auto text-black " />
-												</div>
-											</NavLink>
-											<NavLink to={Approutes.profile.messages}>
-												<div className="flex items-center hover:underline">
-													<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Messages</li>
-													<SlArrowRight size={20} className="ml-auto text-black " />
-												</div>
-											</NavLink>
-											<NavLink to={'#'}>
-												<div className="flex items-center hover:underline">
-													<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">My Shop</li>
-													<SlArrowRight size={20} className="ml-auto text-black " />
-												</div>
-											</NavLink>
-											<NavLink to={Approutes.grab.initial}>
-												<div className="flex items-center hover:underline">
-													<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Grab</li>
-													<SlArrowRight size={20} className="ml-auto text-black " />
-												</div>
-											</NavLink>
-											{/* <NavLink to={'#'}>
-												<div className="flex items-center hover:underline">
-													<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">My Transactions</li>
-													<SlArrowRight size={20} className="ml-auto text-black " />
-												</div>
-											</NavLink> */}
-											<NavLink to={Approutes.profile.notifications}>
-												<div className="flex items-center hover:underline">
-													<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Notifications</li>
-													<SlArrowRight size={20} className="ml-auto text-black " />
-												</div>
-											</NavLink>
-											<NavLink to={'#'}>
-												<div className="flex items-center hover:underline">
-													<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Manage my Ads</li>
-													<SlArrowRight size={20} className="ml-auto text-black " />
-												</div>
-											</NavLink>
-											<NavLink to={'#'}>
-												<div className="flex items-center hover:underline">
-													<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Manage my shop</li>
-													<SlArrowRight size={20} className="ml-auto text-black " />
-												</div>
-											</NavLink>
-											<NavLink to={Approutes.profile.saved}>
-												<div className="flex items-center hover:underline">
-													<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">My Saved Items</li>
-													<SlArrowRight size={20} className="ml-auto text-black " />
-												</div>
-											</NavLink>
-
-											<NavLink to={Approutes.profile.adverts}>
-												<div className="flex items-center hover:underline">
-													<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">My Adverts</li>
-													<SlArrowRight size={20} className="ml-auto text-black " />
-												</div>
-											</NavLink>
-											<NavLink to={Approutes.contactUs}>
-												<div className="flex items-center hover:underline">
-													<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Help & Contact</li>
-													<SlArrowRight size={20} className="ml-auto text-black " />
-												</div>
-											</NavLink>
-											{isLogin && (
-												<NavLink to={Approutes.logout}>
-													<div className="flex items-center hover:underline">
-														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Logout</li>
-													</div>
-												</NavLink>
-											)}
-										</ul>
+										))}
 									</ul>
-								</div>
-							)}
-
+								</ul>
+							</div>
 							{/* bottom nav lists */}
 							<ul className="flex items-center justify-between w-full">
 								<li className={`${listStyles}`} title="Click to set up a shop">

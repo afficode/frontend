@@ -11,41 +11,35 @@ import { useEffect, useState } from 'react';
 import LoadingScreen from './LoadingScreen';
 
 const AccountHistory = ({ className, setIsOpen, isOpen }) => {
-	// Initialize URL search params
 	const [searchParams, setSearchParams] = useSearchParams();
 
-	const [dateRange, setDateRange] = useState([null, null]); // [from, to]
-	const [from, to] = dateRange; // Destructure dateRange for easier access
+	const [dateRange, setDateRange] = useState([null, null]);
+	const [from, to] = dateRange;
 
-	// Get filters from URL parameters or set defaults
-	const transactionType = searchParams.get('type') || 'all'; // default: 'all'
-	const status = searchParams.get('status') || 'all'; // default: 'all'
+	const transactionType = searchParams.get('type') || 'all';
+	const status = searchParams.get('status') || 'all';
 	const fromDate = searchParams.get('from');
 	const toDate = searchParams.get('to');
-	const page = searchParams.get('p') || 1; // default: 1
+	const page = searchParams.get('p') || 1;
 
-	// Function to update URL params when a transaction type and status filter is changed
 	const updateParams = (key, value) => {
 		const newParams = new URLSearchParams(searchParams);
 		if (value === 'all' || !value) {
-			newParams.delete(key); // Remove param if 'all' or empty
+			newParams.delete(key);
 		} else {
-			newParams.set(key, value); // Update param with new value
+			newParams.set(key, value);
 		}
-		setSearchParams(newParams); // Update the URL
+		setSearchParams(newParams);
 	};
 
 	const onChangeDate = (update) => {
 		setDateRange(update);
 
-		// Update URL params when both dates are selected
 		const newParams = new URLSearchParams(searchParams);
 		if (update[0] && update[1]) {
-			// If both dates are selected, set 'from' and 'to'
-			newParams.set('from', update[0].toISOString().split('T')[0]); // Format to YYYY-MM-DD
-			newParams.set('to', update[1].toISOString().split('T')[0]);
+			newParams.set('from', formatToISO(update[0]));
+			newParams.set('to', formatToISO(update[1]));
 		} else if (!update[0] && !update[1]) {
-			// If cleared, remove both 'from' and 'to'
 			newParams.delete('from');
 			newParams.delete('to');
 		}
@@ -53,7 +47,12 @@ const AccountHistory = ({ className, setIsOpen, isOpen }) => {
 		setSearchParams(newParams);
 	};
 
-	// Prepare the `db_option` array
+	const formatToISO = (date) => {
+		return new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()))
+			.toISOString()
+			.split('T')[0];
+	};
+
 	const db_option = [];
 	if (transactionType && transactionType !== 'all') {
 		db_option.push(transactionType);
@@ -61,25 +60,18 @@ const AccountHistory = ({ className, setIsOpen, isOpen }) => {
 	if (status && status !== 'all') {
 		db_option.push(status);
 	}
-	// console.log(db_option);
 
-	// Combine URL parameters into the params object for querying the backend
 	const params = {
-		db_option: db_option.length > 0 ? db_option : undefined, // Include only if non-empty
+		db_option: db_option.length > 0 ? db_option : undefined,
 		from: toDate || undefined,
 		to: fromDate || undefined,
 		page_size: 5,
 		page: page,
 	};
 
-	// console.log(params);
-
 	const { data, isLoading } = useTransactions(params);
 
-	// console.log(data);
-
 	const groupByMonth = (data) => {
-		// Sort the transactions by date in descending order (latest date first)
 		const sortedData = data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
 		return sortedData.reduce((acc, transaction) => {
@@ -98,8 +90,6 @@ const AccountHistory = ({ className, setIsOpen, isOpen }) => {
 	};
 
 	const groupedTransactions = groupByMonth(data?.data || []);
-
-	// console.log(groupedTransactions);
 
 	const { hash } = useLocation();
 
@@ -282,17 +272,6 @@ const AccountHistory = ({ className, setIsOpen, isOpen }) => {
 							»
 						</button>
 					</div>
-					{/* <div className="join">
-						{Array.from({ length: data?.total_page }).map((_, i) => (
-							<button
-								key={i}
-								onClick={() => updateParams('p', i + 1)}
-								className="join-item btn bg-primary "
-							>
-								{i + 1}
-							</button>
-						))}
-					</div> */}
 				</div>
 			</div>
 		</div>
@@ -313,7 +292,6 @@ const Pallet = ({ title, amount, referenceId, date, status }) => {
 
 			<div className="flex items-end justify-between">
 				<div className="flex flex-col ">
-					{/* <p>Toyota Corolla 2022</p> */}
 					<p className="text-black/50 truncate max-w-[10rem] md:max-w-[15rem]">{referenceId}</p>
 					<p>{format(new Date(date), 'dd.MM.yyyy')}</p>
 				</div>
