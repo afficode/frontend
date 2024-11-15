@@ -22,7 +22,7 @@ const AdFeatures = (props) => {
 	return (
 		<div id="post-package" className="scroll-mt-[100px] bg-white py-8 my-4">
 			<div className="flex flex-col items-center py-2">
-				<h3>Select Suitable Posting package for your ad.</h3>
+				<h3 className="text-center">Select Suitable Posting package for your ad.</h3>
 				<h6>
 					( You have to select <b>ONLY ONE</b> option )
 				</h6>
@@ -142,12 +142,16 @@ const AdFeatures = (props) => {
 								</div> */}
 
 								<div className="dropdown dropdown-top ">
-									<Button type="button" variant="secondary" className={'max-w-[22rem] md:ml-[12rem]'}>
+									<Button
+										type="button"
+										variant="secondary"
+										className={'max-w-[22rem] md:ml-[12rem] shadow-xl shadow-blue-100 max-sm:!px-4'}
+									>
 										Using the grab feature? Please read the terms and condition
 									</Button>
 									<div
 										tabIndex={0}
-										className="dropdown-content transform translate-y-[100%] translate-x-[-80%] sm:translate-x-[-50%] lg:translate-x-[8%] bg-secondary border-4 p-4 w-screen max-w-[320px] sm:max-w-[600px]"
+										className="dropdown-content transform translate-y-[100%] translate-x-[-10%] sm:translate-x-[-50%] lg:translate-x-[8%] bg-secondary border-4 p-4 w-screen max-w-[320px] sm:max-w-[600px]"
 									>
 										<div className="space-y-2">
 											<h4>Grab Feature</h4>
@@ -181,7 +185,7 @@ const AdFeatures = (props) => {
 				</div>
 			</div>
 
-			<div className="flex justify-center w-full mt-[6rem]">
+			<div className="flex justify-center w-full mt-[8rem] sm:mt-[6rem]">
 				<Button
 					type="button"
 					variant={'primary'}
@@ -201,23 +205,23 @@ const featureList = [
 	{
 		key: 'Basic',
 		value: '0',
-		coin: '3.5',
+		coin: '2.5',
 		color: 'bg-secondary text-black',
-		info: 'Your Ad appears as PRIORITY AD',
+		info: 'Basic posting package.',
 	},
 	{
 		key: 'Feature Ad',
 		value: '1',
-		coin: '5',
+		coin: '4.5',
 		color: 'bg-primary text-white',
-		info: 'This indicates  that your ad is to be sold quickly and distressed',
+		info: 'Each category listing features yours on TOP.',
 	},
 	{
 		key: 'Spotlight',
 		value: '2',
 		coin: '7',
 		color: 'bg-green-600 text-white',
-		info: 'Your Ad appears as PRIORITY AD + GRAB ENABLED',
+		info: ' Your AD is  placed on Boonfu homepage + Priority given.',
 	},
 ];
 const grabOptions = [
