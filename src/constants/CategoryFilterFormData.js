@@ -1,71 +1,71 @@
-import { arrayRange } from "../utils/dataManipulations";
+import { arrayRange } from '../utils/dataManipulations';
 
 //constants used to create the filter options
 const make = [
-    "Audi",
-    "Chevrolet",
-    "Cadillac",
-    "Acura",
-    "BMW",
-    "Chrysler",
-    "Ford",
-    "Buick",
-    "INFINITI",
-    "GMC",
-    "Honda",
-    "Hyundai",
-    "Jeep",
-    "Genesis",
-    "Dodge",
-    "Jaguar",
-    "Kia",
-    "Land Rover",
-    "Lexus",
-    "Mercedes-Benz",
-    "Mitsubishi",
-    "Lincoln",
-    "MAZDA",
-    "Nissan",
-    "MINI",
-    "Porsche",
-    "Ram",
-    "Subaru",
-    "Toyota",
-    "Volkswagen",
-    "Volvo",
-    "Alfa Romeo",
-    "FIAT",
-    "Freightliner",
-    "Maserati",
-    "Tesla",
-    "Aston Martin",
-    "Bentley",
-    "Ferrari",
-    "Lamborghini",
-    "Lotus",
-    "McLaren",
-    "Rolls-Royce",
-    "smart",
-    "Scion",
-    "SRT",
-    "Suzuki",
-    "Fisker",
-    "Maybach",
-    "Mercury",
-    "Saab",
-    "HUMMER",
-    "Pontiac",
-    "Saturn",
-    "Isuzu",
-    "Panoz",
-    "Oldsmobile",
-    "Daewoo",
-    "Plymouth",
-    "Eagle",
-    "Geo",
-    "Daihatsu",
-    "Polestar",
-    "Rivian",
+	'Audi',
+	'Chevrolet',
+	'Cadillac',
+	'Acura',
+	'BMW',
+	'Chrysler',
+	'Ford',
+	'Buick',
+	'INFINITI',
+	'GMC',
+	'Honda',
+	'Hyundai',
+	'Jeep',
+	'Genesis',
+	'Dodge',
+	'Jaguar',
+	'Kia',
+	'Land Rover',
+	'Lexus',
+	'Mercedes-Benz',
+	'Mitsubishi',
+	'Lincoln',
+	'MAZDA',
+	'Nissan',
+	'MINI',
+	'Porsche',
+	'Ram',
+	'Subaru',
+	'Toyota',
+	'Volkswagen',
+	'Volvo',
+	'Alfa Romeo',
+	'FIAT',
+	'Freightliner',
+	'Maserati',
+	'Tesla',
+	'Aston Martin',
+	'Bentley',
+	'Ferrari',
+	'Lamborghini',
+	'Lotus',
+	'McLaren',
+	'Rolls-Royce',
+	'smart',
+	'Scion',
+	'SRT',
+	'Suzuki',
+	'Fisker',
+	'Maybach',
+	'Mercury',
+	'Saab',
+	'HUMMER',
+	'Pontiac',
+	'Saturn',
+	'Isuzu',
+	'Panoz',
+	'Oldsmobile',
+	'Daewoo',
+	'Plymouth',
+	'Eagle',
+	'Geo',
+	'Daihatsu',
+	'Polestar',
+	'Rivian',
 ];
 // color options
 const colors = [
@@ -901,17 +901,81 @@ const motorbikeType = [
 	'Tricycle',
 	'Other',
 ];
-const vehcle_price = [{label: "All", value: ""}, {label: "Under 1.5m", value: "1500000"}, {label: "1.5m to 3m", value: "3000000"}, {label: "3m to 7.5m", value: "7500000"}, {label: "7.5m to 11m", value: "11000000"}, {label: "11m and more", value: ">11000000"}]
-const price = [{label: "All", value: ""}, {label: "0 - 5k", value: "5000"}, {label: "5k to 10k", value: "10000"}, {label: "10k - 15k", value: "15000"}, {label: "15k to 20k", value: "20000"}, {label: "20k to 30k", value: "30000"}, {label: "30k and more", value: ">30000"}]
-const mode_of_charge = [{name: "All", value: ""}, {name: "TBD", value: "tbd"}, {name: "Estimate", value: "estimate"}];
-const fuel_type = ["Petrol", "Electric", "Gasoline", "Hybrid"];
-const transmission = ["Automatic", "Manual", "CVT"];
-const condition = [{label: "Nigerian Used", "value": "nigerian use"}, {label: "Foreign Used", "value": "foreign use"}, {label: "Brand New", "value": "new"}];
-const condition_refub = [{label: "Refurbished", "value": "refurbished"}, {label: "Used", "value": "used"}, {label: "New", "value": "new"}];
-const size =["28","30","32","33","35","16","17","18","19","20","21","22","23","24","25","26","27","29","31","34"];
-const softwareFormat = ["DVD", "Email","Download", "Subscription","USB","CD","Product keys"]
-const age_group = ["All", "Baby", "Toddler", "Kids", "Teens", "Adult", "Senior"];
-const vehicle_body = ['suv', 'crossover', 'hatchback', 'pick up truck', 'station wagon', 'coupe', 'sports car', 'sedan', 'minivan', 'convertible', 'van', 'panel van', 'compact car', 'microcar', 'roadster']
+const vehcle_price = [
+	{ label: 'All', value: '' },
+	{ label: 'Under 1.5m', value: '1500000' },
+	{ label: '1.5m to 3m', value: '3000000' },
+	{ label: '3m to 7.5m', value: '7500000' },
+	{ label: '7.5m to 11m', value: '11000000' },
+	{ label: '11m and more', value: '>11000000' },
+];
+const price = [
+	{ label: 'All', value: '' },
+	{ label: '0 - 5k', value: '5000' },
+	{ label: '5k to 10k', value: '10000' },
+	{ label: '10k - 15k', value: '15000' },
+	{ label: '15k to 20k', value: '20000' },
+	{ label: '20k to 30k', value: '30000' },
+	{ label: '30k and more', value: '>30000' },
+];
+const mode_of_charge = [
+	{ name: 'All', value: '' },
+	{ name: 'TBD', value: 'tbd' },
+	{ name: 'Estimate', value: 'estimate' },
+];
+const fuel_type = ['Petrol', 'Electric', 'Gasoline', 'Hybrid'];
+const transmission = ['Automatic', 'Manual', 'CVT'];
+const condition = [
+	{ label: 'Nigerian Used', value: 'nigerian use' },
+	{ label: 'Foreign Used', value: 'foreign use' },
+	{ label: 'Brand New', value: 'new' },
+];
+const condition_refub = [
+	{ label: 'Refurbished', value: 'refurbished' },
+	{ label: 'Used', value: 'used' },
+	{ label: 'New', value: 'new' },
+];
+const size = [
+	'28',
+	'30',
+	'32',
+	'33',
+	'35',
+	'16',
+	'17',
+	'18',
+	'19',
+	'20',
+	'21',
+	'22',
+	'23',
+	'24',
+	'25',
+	'26',
+	'27',
+	'29',
+	'31',
+	'34',
+];
+const softwareFormat = ['DVD', 'Email', 'Download', 'Subscription', 'USB', 'CD', 'Product keys'];
+const age_group = ['All', 'Baby', 'Toddler', 'Kids', 'Teens', 'Adult', 'Senior'];
+const vehicle_body = [
+	'suv',
+	'crossover',
+	'hatchback',
+	'pick up truck',
+	'station wagon',
+	'coupe',
+	'sports car',
+	'sedan',
+	'minivan',
+	'convertible',
+	'van',
+	'panel van',
+	'compact car',
+	'microcar',
+	'roadster',
+];
 const vehicleAccessoriesType = [
 	'Car Tuning & Styling',
 	'Wheel Rims & Tyres',
@@ -1012,7 +1076,29 @@ const gameGenre = [
 	'Other',
 ];
 
-const furnitureFor = ["Bedroom ","Dining Room","Home Office / Study","Kitchen","Living Room","Attic","Balcony","Basement","Bathroom","Dressing Room","Foyer","Garage","Guestroom","Hallway", "Laundry Utility Room","Other","Patio","Playroom ","Porch", "Sport Room ","Sunroo"];
+const furnitureFor = [
+	'Bedroom ',
+	'Dining Room',
+	'Home Office / Study',
+	'Kitchen',
+	'Living Room',
+	'Attic',
+	'Balcony',
+	'Basement',
+	'Bathroom',
+	'Dressing Room',
+	'Foyer',
+	'Garage',
+	'Guestroom',
+	'Hallway',
+	'Laundry Utility Room',
+	'Other',
+	'Patio',
+	'Playroom ',
+	'Porch',
+	'Sport Room ',
+	'Sunroo',
+];
 
 // property
 const propertyType = {
@@ -1070,8 +1156,8 @@ const propertyType = {
 	],
 };
 const propertyFacilities = {
-  5101: [		
-    'Wi-Fi',
+	5101: [
+		'Wi-Fi',
 		'Wardrobe',
 		'Dining Area',
 		'Tiled Floor',
@@ -1087,13 +1173,13 @@ const propertyFacilities = {
 		'Pop Ceiling',
 		'Sectionals',
 		'TV',
-    'Balcony',
-    'Parking Space',
-    'Jacuzzi Bath',
+		'Balcony',
+		'Parking Space',
+		'Jacuzzi Bath',
 		'En suites',
-		'Ensuite'
-  ],
-  5105: [
+		'Ensuite',
+	],
+	5105: [
 		'Electricity Supply',
 		'Gas Supply',
 		'Car Parking',
@@ -1101,7 +1187,7 @@ const propertyFacilities = {
 		'Rain Water Drainage',
 		'Water Supply',
 	],
-  default: [
+	default: [
 		'Constant light',
 		'Fully furnished',
 		'Gated',
@@ -1111,7 +1197,7 @@ const propertyFacilities = {
 		'C of O',
 		'Security',
 	],
-}
+};
 // Services
 const servicesType = {
 	5201: [
@@ -1299,7 +1385,7 @@ const tutorialTopics = [
 	'Real Estate',
 	'Video Editing',
 	'Test Prep',
-	'Other'
+	'Other',
 ];
 
 // Agriculture
@@ -9217,6429 +9303,7086 @@ const babiesTypes = {
 	],
 };
 
-
 // FIlter Form Data
 const defaults = [
-    {
-      id: "location",
-      title: "Location",
-      type: "modal",
-      content_checkbox: false,
-      content: [{
-        type: "modal",
-      }],
-    },
-    {
-      id: "price",
-      title: "Price #",
-      type: "radio",
-      content_checkbox: false,
-      options: [{
-          name: "min_price",
-          type: "text",
-          placeholder: "min",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },{
-          name: "max_price",
-          type: "text",
-          placeholder: "max",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },],
-      content: price.map(price => ({
-          name: "price",
-          value: price.value,
-          label: price.label,
-        }))
-    },
+	{
+		id: 'location',
+		title: 'Location',
+		type: 'modal',
+		content_checkbox: false,
+		content: [
+			{
+				type: 'modal',
+			},
+		],
+	},
+	{
+		id: 'price',
+		title: 'Price ₦',
+		type: 'radio',
+		content_checkbox: false,
+		options: [
+			{
+				name: 'min_price',
+				type: 'text',
+				placeholder: 'min',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+			{
+				name: 'max_price',
+				type: 'text',
+				placeholder: 'max',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+		],
+		content: price.map((price) => ({
+			name: 'price',
+			value: price.value,
+			label: price.label,
+		})),
+	},
 ];
 
 // Vehicles (50**)
 export const filterFields = [
-    {
-      id: "location",
-      title: "Location",
-      type: "modal",
-      content_checkbox: false,
-      content: [{
-        type: "modal",
-      }],
-    },
-    {
-      id: "seller_type",
-      title: "Seller Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "seller_type",
-          value: "dealer",
-          label: "Dealer",
-        },
-        {
-          name: "seller_type",
-          value: "private",
-          label: "Private",
-        },
-      ],
-    },
-    {
-      id: "price",
-      title: "Price #",
-      type: "radio",
-      content_checkbox: false,
-      options: [{
-          name: "min_price",
-          type: "text",
-          placeholder: "min",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },{
-          name: "max_price",
-          type: "text",
-          placeholder: "max",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },],
-      content: vehcle_price.map(price => ({
-          name: "price",
-          value: price.value,
-          label: price.label,
-        }))
-    },
-    {
-      id: "color",
-      title: "Color",
-      type: "checkbox",
-      content_checkbox: false,
-      content: colors.map(color => ({
-          name: "color",
-          value: color,
-          label: color,
-        })),
-    },{
-      id: "vehicle_condition",
-      title: "Condition",
-      type: "checkbox",
-      content_checkbox: false,
-      content: condition.map(vehicle_condition => ({
-	name: "vehicle_condition",
-	value: vehicle_condition.value,
-	label: vehicle_condition.label,
-}))
-    },
-    {
-      id: "fuel_type",
-      title: "Fuel Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: fuel_type.map(fuel_type => ({
-          name: "fuel_type",
-          value: fuel_type.toLowerCase(),
-          label: fuel_type,
-        })),
-    },
-    {
-      id: "make",
-      title: "Make",
-      type: "checkbox",
-      content_checkbox: false,
-      content: make.map((val) => ({ name: "make", value: val, label: val })),
-    },
-    {
-      id: "year",
-      title: "Manufacture Year",
-      type: "checkbox",
-      content_checkbox: false,
-      content: arrayRange(1990, parseInt(new Date().getFullYear()), 1)
-        .reverse()
-        .map((val) => ({
-          name: "year",
-          value: val.toString(),
-          label: val.toString(),
-        })),
-    },
-    {
-      id: "transmission",
-      title: "Transmission",
-      type: "checkbox",
-      content_checkbox: false,
-      content: transmission.map(transmision => ({
-          name: "transmission",
-          value: transmision.toLowerCase(),
-          label: transmision,
-        })),
-    },{
-      id: "type",
-      title: "Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: vehicleAccessoriesType.map(type => ({
-          name: "type",
-          value: type.toLowerCase(),
-          label: type,
-        })),
-    },{
-      id: "vehicle_body",
-      title: "Body",
-      type: "checkbox",
-      content_checkbox: false,
-      content: vehicle_body.map(vehicle_body => ({
-          name: "vehicle_body",
-          value: vehicle_body.toLowerCase(),
-          label: vehicle_body.toUpperCase(),
-        })),
-    },{
-      id: "number_of_door",
-      title: "Doors",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "number_of_door",
-          value: "",
-          label: "Any",
-        },
-        {
-          name: "number_of_door",
-          value: "1",
-          label: "1 Door",
-        },
-        {
-          name: "number_of_door",
-          value: "2",
-          label: "2 Doors",
-        },
-        {
-          name: "number_of_door",
-          value: "3",
-          label: "3 Doors",
-        },{
-          name: "number_of_door",
-          value: "4",
-          label: "4 Doors",
-        },{
-          name: "number_of_door",
-          value: "5",
-          label: "5 Doors",
-        },{
-          name: "number_of_door",
-          value: "6",
-          label: "Others",
-        },
-      ],
-    },{
-      id: "millage",
-      title: "Millage",
-      type: "radio",
-      content_checkbox: false,
-      content: [
-        {
-          name: "millage",
-          value: "",
-          label: "Any",
-        },
-        {
-          name: "millage",
-          value: "5000",
-          label: "Up to 5,000 miles",
-        },
-        {
-          name: "millage",
-          value: "10000",
-          label: "Up to 10,000 miles",
-        },
-        {
-          name: "millage",
-          value: "15000",
-          label: "Up to 15,000 miles",
-        },{
-          name: "millage",
-          value: "20000",
-          label: "Up to 20,000 miles",
-        },{
-          name: "millage",
-          value: "30000",
-          label: "Up to 30,000 miles",
-        },{
-          name: "millage",
-          value: "40000",
-          label: "Up to 40,000 miles",
-        },{
-          name: "millage",
-          value: "70000",
-          label: "Up to 70,000 miles",
-        },{
-          name: "millage",
-          value: "80000",
-          label: "Over 80,000 miles",
-        },
-      ],
-    },
+	{
+		id: 'location',
+		title: 'Location',
+		type: 'modal',
+		content_checkbox: false,
+		content: [
+			{
+				type: 'modal',
+			},
+		],
+	},
+	{
+		id: 'seller_type',
+		title: 'Seller Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'seller_type',
+				value: 'dealer',
+				label: 'Dealer',
+			},
+			{
+				name: 'seller_type',
+				value: 'private',
+				label: 'Private',
+			},
+		],
+	},
+	{
+		id: 'price',
+		title: 'Price ₦',
+		type: 'radio',
+		content_checkbox: false,
+		options: [
+			{
+				name: 'min_price',
+				type: 'text',
+				placeholder: 'min',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+			{
+				name: 'max_price',
+				type: 'text',
+				placeholder: 'max',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+		],
+		content: vehcle_price.map((price) => ({
+			name: 'price',
+			value: price.value,
+			label: price.label,
+		})),
+	},
+	{
+		id: 'color',
+		title: 'Color',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: colors.map((color) => ({
+			name: 'color',
+			value: color,
+			label: color,
+		})),
+	},
+	{
+		id: 'vehicle_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: condition.map((vehicle_condition) => ({
+			name: 'vehicle_condition',
+			value: vehicle_condition.value,
+			label: vehicle_condition.label,
+		})),
+	},
+	{
+		id: 'fuel_type',
+		title: 'Fuel Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: fuel_type.map((fuel_type) => ({
+			name: 'fuel_type',
+			value: fuel_type.toLowerCase(),
+			label: fuel_type,
+		})),
+	},
+	{
+		id: 'make',
+		title: 'Make',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: make.map((val) => ({ name: 'make', value: val, label: val })),
+	},
+	{
+		id: 'year',
+		title: 'Manufacture Year',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: arrayRange(1990, parseInt(new Date().getFullYear()), 1)
+			.reverse()
+			.map((val) => ({
+				name: 'year',
+				value: val.toString(),
+				label: val.toString(),
+			})),
+	},
+	{
+		id: 'transmission',
+		title: 'Transmission',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: transmission.map((transmision) => ({
+			name: 'transmission',
+			value: transmision.toLowerCase(),
+			label: transmision,
+		})),
+	},
+	{
+		id: 'type',
+		title: 'Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: vehicleAccessoriesType.map((type) => ({
+			name: 'type',
+			value: type.toLowerCase(),
+			label: type,
+		})),
+	},
+	{
+		id: 'vehicle_body',
+		title: 'Body',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: vehicle_body.map((vehicle_body) => ({
+			name: 'vehicle_body',
+			value: vehicle_body.toLowerCase(),
+			label: vehicle_body.toUpperCase(),
+		})),
+	},
+	{
+		id: 'number_of_door',
+		title: 'Doors',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'number_of_door',
+				value: '',
+				label: 'Any',
+			},
+			{
+				name: 'number_of_door',
+				value: '1',
+				label: '1 Door',
+			},
+			{
+				name: 'number_of_door',
+				value: '2',
+				label: '2 Doors',
+			},
+			{
+				name: 'number_of_door',
+				value: '3',
+				label: '3 Doors',
+			},
+			{
+				name: 'number_of_door',
+				value: '4',
+				label: '4 Doors',
+			},
+			{
+				name: 'number_of_door',
+				value: '5',
+				label: '5 Doors',
+			},
+			{
+				name: 'number_of_door',
+				value: '6',
+				label: 'Others',
+			},
+		],
+	},
+	{
+		id: 'millage',
+		title: 'Millage',
+		type: 'radio',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'millage',
+				value: '',
+				label: 'Any',
+			},
+			{
+				name: 'millage',
+				value: '5000',
+				label: 'Up to 5,000 miles',
+			},
+			{
+				name: 'millage',
+				value: '10000',
+				label: 'Up to 10,000 miles',
+			},
+			{
+				name: 'millage',
+				value: '15000',
+				label: 'Up to 15,000 miles',
+			},
+			{
+				name: 'millage',
+				value: '20000',
+				label: 'Up to 20,000 miles',
+			},
+			{
+				name: 'millage',
+				value: '30000',
+				label: 'Up to 30,000 miles',
+			},
+			{
+				name: 'millage',
+				value: '40000',
+				label: 'Up to 40,000 miles',
+			},
+			{
+				name: 'millage',
+				value: '70000',
+				label: 'Up to 70,000 miles',
+			},
+			{
+				name: 'millage',
+				value: '80000',
+				label: 'Over 80,000 miles',
+			},
+		],
+	},
 ];
 const cars = [
-    {
-      id: "location",
-      title: "Location",
-      type: "modal",
-      content_checkbox: false,
-      content: [{
-        type: "modal",
-      }],
-    },
-    {
-      id: "seller_type",
-      title: "Seller Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "seller_type",
-          value: "dealer",
-          label: "Dealer",
-        },
-        {
-          name: "seller_type",
-          value: "private",
-          label: "Private",
-        },
-      ],
-    },
-    {
-      id: "price",
-      title: "Price #",
-      type: "radio",
-      content_checkbox: false,
-      options: [{
-          name: "min_price",
-          type: "text",
-          placeholder: "min",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },{
-          name: "max_price",
-          type: "text",
-          placeholder: "max",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },],
-      content: vehcle_price.map(price => ({
-          name: "price",
-          value: price.value,
-          label: price.label,
-        }))
-    },
-    {
-      id: "color",
-      title: "Color",
-      type: "checkbox",
-      content_checkbox: false,
-      content: colors.map(color => ({
-          name: "color",
-          value: color,
-          label: color,
-        })),
-    },{
-      id: "vehicle_condition",
-      title: "Condition",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "vehicle_condition",
-          value: "nigeria use",
-          label: "Nigerian Used",
-        },{
-          name: "vehicle_condition",
-          value: "foreign use",
-          label: "Foreign Use",
-        },{
-          name: "vehicle_condition",
-          value: "new",
-          label: "Brand New",
-        }
-      ],
-    },
-    {
-      id: "fuel_type",
-      title: "Fuel Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "fuel_type",
-          value: "hybrid",
-          label: "Hybrid",
-        },
-        {
-          name: "fuel_type",
-          value: "petrol",
-          label: "Petrol",
-        },
-        {
-          name: "fuel_type",
-          value: "diesel",
-          label: "Diesel",
-        },
-        {
-          name: "fuel_type",
-          value: "gas",
-          label: "Gas",
-        },
-      ],
-    },
-    {
-      id: "make",
-      title: "Make",
-      type: "checkbox",
-      content_checkbox: false,
-      content: make.map((val) => ({ name: "make", value: val, label: val })),
-    },
-    {
-      id: "year",
-      title: "Manufacture Year",
-      type: "checkbox",
-      content_checkbox: false,
-      content: arrayRange(1990, parseInt(new Date().getFullYear()), 1)
-        .reverse()
-        .map((val) => ({
-          name: "year",
-          value: val.toString(),
-          label: val.toString(),
-        })),
-    },
-    {
-      id: "transmission",
-      title: "Transmission",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "transmission",
-          value: "automatic",
-          label: "Automatic",
-        },
-        {
-          name: "transmission",
-          value: "manual",
-          label: "Manual",
-        },
-        {
-          name: "transmission",
-          value: "hybrid",
-          label: "Hybrid",
-        },
-        {
-          name: "transmission",
-          value: "cvt",
-          label: "CVT",
-        },
-      ],
-    },{
-      id: "millage",
-      title: "Millage",
-      type: "radio",
-      content_checkbox: false,
-      content: [
-        {
-          name: "millage",
-          value: "",
-          label: "Any",
-        },
-        {
-          name: "millage",
-          value: "5000",
-          label: "Up to 5,000 miles",
-        },
-        {
-          name: "millage",
-          value: "10000",
-          label: "Up to 10,000 miles",
-        },
-        {
-          name: "millage",
-          value: "15000",
-          label: "Up to 15,000 miles",
-        },{
-          name: "millage",
-          value: "20000",
-          label: "Up to 20,000 miles",
-        },{
-          name: "millage",
-          value: "30000",
-          label: "Up to 30,000 miles",
-        },{
-          name: "millage",
-          value: "40000",
-          label: "Up to 40,000 miles",
-        },{
-          name: "millage",
-          value: "70000",
-          label: "Up to 70,000 miles",
-        },{
-          name: "millage",
-          value: "80000",
-          label: "Over 80,000 miles",
-        },
-      ],
-    },
+	{
+		id: 'location',
+		title: 'Location',
+		type: 'modal',
+		content_checkbox: false,
+		content: [
+			{
+				type: 'modal',
+			},
+		],
+	},
+	{
+		id: 'seller_type',
+		title: 'Seller Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'seller_type',
+				value: 'dealer',
+				label: 'Dealer',
+			},
+			{
+				name: 'seller_type',
+				value: 'private',
+				label: 'Private',
+			},
+		],
+	},
+	{
+		id: 'price',
+		title: 'Price ₦',
+		type: 'radio',
+		content_checkbox: false,
+		options: [
+			{
+				name: 'min_price',
+				type: 'text',
+				placeholder: 'min',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+			{
+				name: 'max_price',
+				type: 'text',
+				placeholder: 'max',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+		],
+		content: vehcle_price.map((price) => ({
+			name: 'price',
+			value: price.value,
+			label: price.label,
+		})),
+	},
+	{
+		id: 'color',
+		title: 'Color',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: colors.map((color) => ({
+			name: 'color',
+			value: color,
+			label: color,
+		})),
+	},
+	{
+		id: 'vehicle_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'vehicle_condition',
+				value: 'nigeria use',
+				label: 'Nigerian Used',
+			},
+			{
+				name: 'vehicle_condition',
+				value: 'foreign use',
+				label: 'Foreign Use',
+			},
+			{
+				name: 'vehicle_condition',
+				value: 'new',
+				label: 'Brand New',
+			},
+		],
+	},
+	{
+		id: 'fuel_type',
+		title: 'Fuel Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'fuel_type',
+				value: 'hybrid',
+				label: 'Hybrid',
+			},
+			{
+				name: 'fuel_type',
+				value: 'petrol',
+				label: 'Petrol',
+			},
+			{
+				name: 'fuel_type',
+				value: 'diesel',
+				label: 'Diesel',
+			},
+			{
+				name: 'fuel_type',
+				value: 'gas',
+				label: 'Gas',
+			},
+		],
+	},
+	{
+		id: 'make',
+		title: 'Make',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: make.map((val) => ({ name: 'make', value: val, label: val })),
+	},
+	{
+		id: 'year',
+		title: 'Manufacture Year',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: arrayRange(1990, parseInt(new Date().getFullYear()), 1)
+			.reverse()
+			.map((val) => ({
+				name: 'year',
+				value: val.toString(),
+				label: val.toString(),
+			})),
+	},
+	{
+		id: 'transmission',
+		title: 'Transmission',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'transmission',
+				value: 'automatic',
+				label: 'Automatic',
+			},
+			{
+				name: 'transmission',
+				value: 'manual',
+				label: 'Manual',
+			},
+			{
+				name: 'transmission',
+				value: 'hybrid',
+				label: 'Hybrid',
+			},
+			{
+				name: 'transmission',
+				value: 'cvt',
+				label: 'CVT',
+			},
+		],
+	},
+	{
+		id: 'millage',
+		title: 'Millage',
+		type: 'radio',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'millage',
+				value: '',
+				label: 'Any',
+			},
+			{
+				name: 'millage',
+				value: '5000',
+				label: 'Up to 5,000 miles',
+			},
+			{
+				name: 'millage',
+				value: '10000',
+				label: 'Up to 10,000 miles',
+			},
+			{
+				name: 'millage',
+				value: '15000',
+				label: 'Up to 15,000 miles',
+			},
+			{
+				name: 'millage',
+				value: '20000',
+				label: 'Up to 20,000 miles',
+			},
+			{
+				name: 'millage',
+				value: '30000',
+				label: 'Up to 30,000 miles',
+			},
+			{
+				name: 'millage',
+				value: '40000',
+				label: 'Up to 40,000 miles',
+			},
+			{
+				name: 'millage',
+				value: '70000',
+				label: 'Up to 70,000 miles',
+			},
+			{
+				name: 'millage',
+				value: '80000',
+				label: 'Over 80,000 miles',
+			},
+		],
+	},
 ];
 const vans = [
-    {
-      id: "location",
-      title: "Location",
-      type: "modal",
-      content_checkbox: false,
-      content: [{
-        type: "modal",
-      }],
-    },
-    {
-      id: "seller_type",
-      title: "Seller Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "seller_type",
-          value: "dealer",
-          label: "Dealer",
-        },
-        {
-          name: "seller_type",
-          value: "private",
-          label: "Private",
-        },
-      ],
-    },
-    {
-      id: "price",
-      title: "Price #",
-      type: "radio",
-      content_checkbox: false,
-      options: [{
-          name: "min_price",
-          type: "text",
-          placeholder: "min",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },{
-          name: "max_price",
-          type: "text",
-          placeholder: "max",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },],
-      content: vehcle_price.map(price => ({
-          name: "price",
-          value: price.value,
-          label: price.label,
-        }))
-    },
-    {
-      id: "color",
-      title: "Color",
-      type: "checkbox",
-      content_checkbox: false,
-      content: colors.map(color => ({
-          name: "color",
-          value: color,
-          label: color,
-        })),
-    },{
-      id: "vehicle_condition",
-      title: "Condition",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "vehicle_condition",
-          value: "nigeria use",
-          label: "Nigerian Used",
-        },{
-          name: "vehicle_condition",
-          value: "foreign use",
-          label: "Foreign Use",
-        },{
-          name: "vehicle_condition",
-          value: "new",
-          label: "Brand New",
-        }
-      ],
-    },
-    {
-      id: "fuel_type",
-      title: "Fuel Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "fuel_type",
-          value: "hybrid",
-          label: "Hybrid",
-        },
-        {
-          name: "fuel_type",
-          value: "petrol",
-          label: "Petrol",
-        },
-        {
-          name: "fuel_type",
-          value: "diesel",
-          label: "Diesel",
-        },
-        {
-          name: "fuel_type",
-          value: "gas",
-          label: "Gas",
-        },
-      ],
-    },
-    {
-      id: "make",
-      title: "Make",
-      type: "checkbox",
-      content_checkbox: false,
-      content: make.map((val) => ({ name: "make", value: val, label: val })),
-    },
-    {
-      id: "year",
-      title: "Manufacture Year",
-      type: "checkbox",
-      content_checkbox: false,
-      content: arrayRange(1990, parseInt(new Date().getFullYear()), 1)
-        .reverse()
-        .map((val) => ({
-          name: "year",
-          value: val.toString(),
-          label: val.toString(),
-        })),
-    },
-    {
-      id: "transmission",
-      title: "Transmission",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "transmission",
-          value: "automatic",
-          label: "Automatic",
-        },
-        {
-          name: "transmission",
-          value: "manual",
-          label: "Manual",
-        },
-        {
-          name: "transmission",
-          value: "hybrid",
-          label: "Hybrid",
-        },
-        {
-          name: "transmission",
-          value: "cvt",
-          label: "CVT",
-        },
-      ],
-    },{
-      id: "millage",
-      title: "Millage",
-      type: "radio",
-      content_checkbox: false,
-      content: [
-        {
-          name: "millage",
-          value: "",
-          label: "Any",
-        },
-        {
-          name: "millage",
-          value: "5000",
-          label: "Up to 5,000 miles",
-        },
-        {
-          name: "millage",
-          value: "10000",
-          label: "Up to 10,000 miles",
-        },
-        {
-          name: "millage",
-          value: "15000",
-          label: "Up to 15,000 miles",
-        },{
-          name: "millage",
-          value: "20000",
-          label: "Up to 20,000 miles",
-        },{
-          name: "millage",
-          value: "30000",
-          label: "Up to 30,000 miles",
-        },{
-          name: "millage",
-          value: "40000",
-          label: "Up to 40,000 miles",
-        },{
-          name: "millage",
-          value: "70000",
-          label: "Up to 70,000 miles",
-        },{
-          name: "millage",
-          value: "80000",
-          label: "Over 80,000 miles",
-        },
-      ],
-    },{
-      id: "number_of_door",
-      title: "Doors",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "number_of_door",
-          value: "",
-          label: "Any",
-        },
-        {
-          name: "number_of_door",
-          value: "1",
-          label: "1 Door",
-        },
-        {
-          name: "number_of_door",
-          value: "2",
-          label: "2 Doors",
-        },
-        {
-          name: "number_of_door",
-          value: "3",
-          label: "3 Doors",
-        },{
-          name: "number_of_door",
-          value: "4",
-          label: "4 Doors",
-        },{
-          name: "number_of_door",
-          value: "5",
-          label: "5 Doors",
-        },{
-          name: "number_of_door",
-          value: "6",
-          label: "Others",
-        },
-      ],
-    },
+	{
+		id: 'location',
+		title: 'Location',
+		type: 'modal',
+		content_checkbox: false,
+		content: [
+			{
+				type: 'modal',
+			},
+		],
+	},
+	{
+		id: 'seller_type',
+		title: 'Seller Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'seller_type',
+				value: 'dealer',
+				label: 'Dealer',
+			},
+			{
+				name: 'seller_type',
+				value: 'private',
+				label: 'Private',
+			},
+		],
+	},
+	{
+		id: 'price',
+		title: 'Price ₦',
+		type: 'radio',
+		content_checkbox: false,
+		options: [
+			{
+				name: 'min_price',
+				type: 'text',
+				placeholder: 'min',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+			{
+				name: 'max_price',
+				type: 'text',
+				placeholder: 'max',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+		],
+		content: vehcle_price.map((price) => ({
+			name: 'price',
+			value: price.value,
+			label: price.label,
+		})),
+	},
+	{
+		id: 'color',
+		title: 'Color',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: colors.map((color) => ({
+			name: 'color',
+			value: color,
+			label: color,
+		})),
+	},
+	{
+		id: 'vehicle_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'vehicle_condition',
+				value: 'nigeria use',
+				label: 'Nigerian Used',
+			},
+			{
+				name: 'vehicle_condition',
+				value: 'foreign use',
+				label: 'Foreign Use',
+			},
+			{
+				name: 'vehicle_condition',
+				value: 'new',
+				label: 'Brand New',
+			},
+		],
+	},
+	{
+		id: 'fuel_type',
+		title: 'Fuel Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'fuel_type',
+				value: 'hybrid',
+				label: 'Hybrid',
+			},
+			{
+				name: 'fuel_type',
+				value: 'petrol',
+				label: 'Petrol',
+			},
+			{
+				name: 'fuel_type',
+				value: 'diesel',
+				label: 'Diesel',
+			},
+			{
+				name: 'fuel_type',
+				value: 'gas',
+				label: 'Gas',
+			},
+		],
+	},
+	{
+		id: 'make',
+		title: 'Make',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: make.map((val) => ({ name: 'make', value: val, label: val })),
+	},
+	{
+		id: 'year',
+		title: 'Manufacture Year',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: arrayRange(1990, parseInt(new Date().getFullYear()), 1)
+			.reverse()
+			.map((val) => ({
+				name: 'year',
+				value: val.toString(),
+				label: val.toString(),
+			})),
+	},
+	{
+		id: 'transmission',
+		title: 'Transmission',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'transmission',
+				value: 'automatic',
+				label: 'Automatic',
+			},
+			{
+				name: 'transmission',
+				value: 'manual',
+				label: 'Manual',
+			},
+			{
+				name: 'transmission',
+				value: 'hybrid',
+				label: 'Hybrid',
+			},
+			{
+				name: 'transmission',
+				value: 'cvt',
+				label: 'CVT',
+			},
+		],
+	},
+	{
+		id: 'millage',
+		title: 'Millage',
+		type: 'radio',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'millage',
+				value: '',
+				label: 'Any',
+			},
+			{
+				name: 'millage',
+				value: '5000',
+				label: 'Up to 5,000 miles',
+			},
+			{
+				name: 'millage',
+				value: '10000',
+				label: 'Up to 10,000 miles',
+			},
+			{
+				name: 'millage',
+				value: '15000',
+				label: 'Up to 15,000 miles',
+			},
+			{
+				name: 'millage',
+				value: '20000',
+				label: 'Up to 20,000 miles',
+			},
+			{
+				name: 'millage',
+				value: '30000',
+				label: 'Up to 30,000 miles',
+			},
+			{
+				name: 'millage',
+				value: '40000',
+				label: 'Up to 40,000 miles',
+			},
+			{
+				name: 'millage',
+				value: '70000',
+				label: 'Up to 70,000 miles',
+			},
+			{
+				name: 'millage',
+				value: '80000',
+				label: 'Over 80,000 miles',
+			},
+		],
+	},
+	{
+		id: 'number_of_door',
+		title: 'Doors',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'number_of_door',
+				value: '',
+				label: 'Any',
+			},
+			{
+				name: 'number_of_door',
+				value: '1',
+				label: '1 Door',
+			},
+			{
+				name: 'number_of_door',
+				value: '2',
+				label: '2 Doors',
+			},
+			{
+				name: 'number_of_door',
+				value: '3',
+				label: '3 Doors',
+			},
+			{
+				name: 'number_of_door',
+				value: '4',
+				label: '4 Doors',
+			},
+			{
+				name: 'number_of_door',
+				value: '5',
+				label: '5 Doors',
+			},
+			{
+				name: 'number_of_door',
+				value: '6',
+				label: 'Others',
+			},
+		],
+	},
 ];
 const automobile = [
-    {
-      id: "location",
-      title: "Location",
-      type: "modal",
-      content_checkbox: false,
-      content: [{
-        type: "modal",
-      }],
-    },
-    {
-      id: "seller_type",
-      title: "Seller Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "seller_type",
-          value: "dealer",
-          label: "Dealer",
-        },
-        {
-          name: "seller_type",
-          value: "private",
-          label: "Private",
-        },
-      ],
-    },
-    {
-      id: "price",
-      title: "Price #",
-      type: "radio",
-      content_checkbox: false,
-      options: [{
-          name: "min_price",
-          type: "text",
-          placeholder: "min",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },{
-          name: "max_price",
-          type: "text",
-          placeholder: "max",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },],
-      content: vehcle_price.map(price => ({
-          name: "price",
-          value: price.value,
-          label: price.label,
-        }))
-    },{
-      id: "vehicle_condition",
-      title: "Condition",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "vehicle_condition",
-          value: "nigeria use",
-          label: "Nigerian Used",
-        },{
-          name: "vehicle_condition",
-          value: "foreign use",
-          label: "Foreign Use",
-        },{
-          name: "vehicle_condition",
-          value: "new",
-          label: "Brand New",
-        }
-      ],
-    },
-    {
-      id: "fuel_type",
-      title: "Fuel Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "fuel_type",
-          value: "hybrid",
-          label: "Hybrid",
-        },
-        {
-          name: "fuel_type",
-          value: "petrol",
-          label: "Petrol",
-        },
-        {
-          name: "fuel_type",
-          value: "diesel",
-          label: "Diesel",
-        },
-        {
-          name: "fuel_type",
-          value: "gas",
-          label: "Gas",
-        },
-      ],
-    },
-    {
-      id: "make",
-      title: "Make",
-      type: "checkbox",
-      content_checkbox: false,
-      content: make.map((val) => ({ name: "make", value: val, label: val })),
-    },
-    {
-      id: "year",
-      title: "Manufacture Year",
-      type: "checkbox",
-      content_checkbox: false,
-      content: arrayRange(1990, parseInt(new Date().getFullYear()), 1)
-        .reverse()
-        .map((val) => ({
-          name: "year",
-          value: val.toString(),
-          label: val.toString(),
-        })),
-    },
-    {
-      id: "type",
-      title: "Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: otherVehicleType.map(type => ({
-          name: "type",
-          value: type.toLowerCase(),
-          label: type,
-        })),
-    },{
-      id: "vehicle_body",
-      title: "Body",
-      type: "checkbox",
-      content_checkbox: false,
-      content: vehicle_body.map(vehicle_body => ({
-          name: "vehicle_body",
-          value: vehicle_body.toLowerCase(),
-          label: vehicle_body.toUpperCase(),
-        })),
-    }
+	{
+		id: 'location',
+		title: 'Location',
+		type: 'modal',
+		content_checkbox: false,
+		content: [
+			{
+				type: 'modal',
+			},
+		],
+	},
+	{
+		id: 'seller_type',
+		title: 'Seller Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'seller_type',
+				value: 'dealer',
+				label: 'Dealer',
+			},
+			{
+				name: 'seller_type',
+				value: 'private',
+				label: 'Private',
+			},
+		],
+	},
+	{
+		id: 'price',
+		title: 'Price ₦',
+		type: 'radio',
+		content_checkbox: false,
+		options: [
+			{
+				name: 'min_price',
+				type: 'text',
+				placeholder: 'min',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+			{
+				name: 'max_price',
+				type: 'text',
+				placeholder: 'max',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+		],
+		content: vehcle_price.map((price) => ({
+			name: 'price',
+			value: price.value,
+			label: price.label,
+		})),
+	},
+	{
+		id: 'vehicle_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'vehicle_condition',
+				value: 'nigeria use',
+				label: 'Nigerian Used',
+			},
+			{
+				name: 'vehicle_condition',
+				value: 'foreign use',
+				label: 'Foreign Use',
+			},
+			{
+				name: 'vehicle_condition',
+				value: 'new',
+				label: 'Brand New',
+			},
+		],
+	},
+	{
+		id: 'fuel_type',
+		title: 'Fuel Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'fuel_type',
+				value: 'hybrid',
+				label: 'Hybrid',
+			},
+			{
+				name: 'fuel_type',
+				value: 'petrol',
+				label: 'Petrol',
+			},
+			{
+				name: 'fuel_type',
+				value: 'diesel',
+				label: 'Diesel',
+			},
+			{
+				name: 'fuel_type',
+				value: 'gas',
+				label: 'Gas',
+			},
+		],
+	},
+	{
+		id: 'make',
+		title: 'Make',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: make.map((val) => ({ name: 'make', value: val, label: val })),
+	},
+	{
+		id: 'year',
+		title: 'Manufacture Year',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: arrayRange(1990, parseInt(new Date().getFullYear()), 1)
+			.reverse()
+			.map((val) => ({
+				name: 'year',
+				value: val.toString(),
+				label: val.toString(),
+			})),
+	},
+	{
+		id: 'type',
+		title: 'Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: otherVehicleType.map((type) => ({
+			name: 'type',
+			value: type.toLowerCase(),
+			label: type,
+		})),
+	},
+	{
+		id: 'vehicle_body',
+		title: 'Body',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: vehicle_body.map((vehicle_body) => ({
+			name: 'vehicle_body',
+			value: vehicle_body.toLowerCase(),
+			label: vehicle_body.toUpperCase(),
+		})),
+	},
 ];
 
 // Properties.
 const propertyFields = [
-    {
-      id: "location",
-      title: "Location",
-      type: "modal",
-      content_checkbox: false,
-      content: [{
-        type: "modal",
-      }],
-    },
-    {
-      id: "seller_type",
-      title: "Seller Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "seller_type",
-          value: "dealer",
-          label: "Dealer",
-        },
-        {
-          name: "seller_type",
-          value: "private",
-          label: "Private",
-        },
-      ],
-    },
-    {
-      id: "price",
-      title: "Price #",
-      type: "radio",
-      content_checkbox: false,
-      options: [{
-          name: "min_price",
-          type: "text",
-          placeholder: "min",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },{
-          name: "max_price",
-          type: "text",
-          placeholder: "max",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },],
-      content: [
-        {
-          name: "price",
-          value: "",
-          label: "All",
-        },
-        {
-          name: "price",
-          value: "1500000",
-          label: "Under 1.5m",
-        },
-        {
-          name: "price",
-          value: "3000000",
-          label: "1.5m to 3m",
-        },
-        {
-          name: "price",
-          value: "7500000",
-          label: "3m to 7.5m",
-        },{
-          name: "price",
-          value: "11000000",
-          label: "7.5m to 11m",
-        },{
-          name: "price",
-          value: ">11000000",
-          label: "11m and more",
-        },
-      ],
-    },{
-      id: "ad_condition",
-      title: "Condition",
-      type: "checkbox",
-      content_checkbox: false,
-      content: condition_refub.map(condition => ({
-          name: "ad_condition",
-          value: condition.value,
-          label: condition.label,
-        })),
-    },
+	{
+		id: 'location',
+		title: 'Location',
+		type: 'modal',
+		content_checkbox: false,
+		content: [
+			{
+				type: 'modal',
+			},
+		],
+	},
+	{
+		id: 'seller_type',
+		title: 'Seller Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'seller_type',
+				value: 'dealer',
+				label: 'Dealer',
+			},
+			{
+				name: 'seller_type',
+				value: 'private',
+				label: 'Private',
+			},
+		],
+	},
+	{
+		id: 'price',
+		title: 'Price ₦',
+		type: 'radio',
+		content_checkbox: false,
+		options: [
+			{
+				name: 'min_price',
+				type: 'text',
+				placeholder: 'min',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+			{
+				name: 'max_price',
+				type: 'text',
+				placeholder: 'max',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+		],
+		content: [
+			{
+				name: 'price',
+				value: '',
+				label: 'All',
+			},
+			{
+				name: 'price',
+				value: '1500000',
+				label: 'Under 1.5m',
+			},
+			{
+				name: 'price',
+				value: '3000000',
+				label: '1.5m to 3m',
+			},
+			{
+				name: 'price',
+				value: '7500000',
+				label: '3m to 7.5m',
+			},
+			{
+				name: 'price',
+				value: '11000000',
+				label: '7.5m to 11m',
+			},
+			{
+				name: 'price',
+				value: '>11000000',
+				label: '11m and more',
+			},
+		],
+	},
+	{
+		id: 'ad_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: condition_refub.map((condition) => ({
+			name: 'ad_condition',
+			value: condition.value,
+			label: condition.label,
+		})),
+	},
 ];
 const propertyHouseApartment = [
-    {
-      id: "location",
-      title: "Location",
-      type: "modal",
-      content_checkbox: false,
-      content: [{
-        type: "modal",
-      }],
-    },
-    {
-      id: "seller_type",
-      title: "Seller Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "seller_type",
-          value: "dealer",
-          label: "Dealer",
-        },
-        {
-          name: "seller_type",
-          value: "private",
-          label: "Private",
-        },
-      ],
-    },
-    {
-      id: "price",
-      title: "Price #",
-      type: "radio",
-      content_checkbox: false,
-      options: [{
-          name: "min_price",
-          type: "text",
-          placeholder: "min",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },{
-          name: "max_price",
-          type: "text",
-          placeholder: "max",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },],
-      content: vehcle_price.map(price => ({
-          name: "price",
-          value: price.value,
-          label: price.label,
-        }))
-    },{
-      id: "property_type",
-      title: "Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: propertyType["default"]?.map(type => ({
-        name: "property_type",
-        value: type,
-        label: type,
-      })),
-    },{
-      id: "facilities",
-      title: "Facilities",
-      type: "checkbox",
-      content_checkbox: false,
-      content: propertyFacilities["default"].concat(propertyFacilities[5101])?.map(facility => ({
-        name: "facilities",
-        value: facility,
-        label: facility,
-      })),
-    },
+	{
+		id: 'location',
+		title: 'Location',
+		type: 'modal',
+		content_checkbox: false,
+		content: [
+			{
+				type: 'modal',
+			},
+		],
+	},
+	{
+		id: 'seller_type',
+		title: 'Seller Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'seller_type',
+				value: 'dealer',
+				label: 'Dealer',
+			},
+			{
+				name: 'seller_type',
+				value: 'private',
+				label: 'Private',
+			},
+		],
+	},
+	{
+		id: 'price',
+		title: 'Price ₦',
+		type: 'radio',
+		content_checkbox: false,
+		options: [
+			{
+				name: 'min_price',
+				type: 'text',
+				placeholder: 'min',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+			{
+				name: 'max_price',
+				type: 'text',
+				placeholder: 'max',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+		],
+		content: vehcle_price.map((price) => ({
+			name: 'price',
+			value: price.value,
+			label: price.label,
+		})),
+	},
+	{
+		id: 'property_type',
+		title: 'Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: propertyType['default']?.map((type) => ({
+			name: 'property_type',
+			value: type,
+			label: type,
+		})),
+	},
+	{
+		id: 'facilities',
+		title: 'Facilities',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: propertyFacilities['default'].concat(propertyFacilities[5101])?.map((facility) => ({
+			name: 'facilities',
+			value: facility,
+			label: facility,
+		})),
+	},
 ];
 
 const propertyLand = [
-    {
-      id: "location",
-      title: "Location",
-      type: "modal",
-      content_checkbox: false,
-      content: [{
-        type: "modal",
-      }],
-    },
-    {
-      id: "seller_type",
-      title: "Seller Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "seller_type",
-          value: "dealer",
-          label: "Dealer",
-        },
-        {
-          name: "seller_type",
-          value: "private",
-          label: "Private",
-        },
-      ],
-    },
-    {
-      id: "price",
-      title: "Price #",
-      type: "radio",
-      content_checkbox: false,
-      options: [{
-          name: "min_price",
-          type: "text",
-          placeholder: "min",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },{
-          name: "max_price",
-          type: "text",
-          placeholder: "max",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },],
-      content: vehcle_price.map(price => ({
-          name: "price",
-          value: price.value,
-          label: price.label,
-        }))
-    },{
-      id: "property_type",
-      title: "Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: propertyType[5105]?.map(type => ({
-        name: "property_type",
-        value: type,
-        label: type,
-      })),
-    },{
-      id: "facilities",
-      title: "Facilities",
-      type: "checkbox",
-      content_checkbox: false,
-      content: propertyFacilities[5105]?.map(facility => ({
-        name: "facilities",
-        value: facility,
-        label: facility,
-      })),
-    },
+	{
+		id: 'location',
+		title: 'Location',
+		type: 'modal',
+		content_checkbox: false,
+		content: [
+			{
+				type: 'modal',
+			},
+		],
+	},
+	{
+		id: 'seller_type',
+		title: 'Seller Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'seller_type',
+				value: 'dealer',
+				label: 'Dealer',
+			},
+			{
+				name: 'seller_type',
+				value: 'private',
+				label: 'Private',
+			},
+		],
+	},
+	{
+		id: 'price',
+		title: 'Price ₦',
+		type: 'radio',
+		content_checkbox: false,
+		options: [
+			{
+				name: 'min_price',
+				type: 'text',
+				placeholder: 'min',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+			{
+				name: 'max_price',
+				type: 'text',
+				placeholder: 'max',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+		],
+		content: vehcle_price.map((price) => ({
+			name: 'price',
+			value: price.value,
+			label: price.label,
+		})),
+	},
+	{
+		id: 'property_type',
+		title: 'Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: propertyType[5105]?.map((type) => ({
+			name: 'property_type',
+			value: type,
+			label: type,
+		})),
+	},
+	{
+		id: 'facilities',
+		title: 'Facilities',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: propertyFacilities[5105]?.map((facility) => ({
+			name: 'facilities',
+			value: facility,
+			label: facility,
+		})),
+	},
 ];
-const years = [{label: "All", value: ""}, { label: "0 - 5 years", value: "5"}, { label: "5 - 10 years", value: "10"}, { label: "10 - 15 years", value: "15"}, { label: "15 - 20 years", value: "20"}, { label: "20 years+", value: ">20"}]
+const years = [
+	{ label: 'All', value: '' },
+	{ label: '0 - 5 years', value: '5' },
+	{ label: '5 - 10 years', value: '10' },
+	{ label: '10 - 15 years', value: '15' },
+	{ label: '15 - 20 years', value: '20' },
+	{ label: '20 years+', value: '>20' },
+];
 // services:
 const serviceDefault = [
-    ...defaults,    {
-      id: "years",
-      title: "Years of Experience",
-      type: "radio",
-      content_checkbox: false,
-      options: [{
-          name: "min_years",
-          type: "text",
-          placeholder: "min",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },{
-          name: "max_years",
-          type: "text",
-          placeholder: "max",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },],
-      content: years.map(year => ({
-          name: "years",
-          value: year.value,
-          label: year.label,
-        })),
-    },
-    {
-      id: "available_for_travel",
-      title: "Available to Travel?",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "available_for_travel",
-          value: "yes",
-          label: "Yes",
-        },{
-          name: "available_for_travel",
-          value: "no",
-          label: "No",
-        }
-      ],
-    },
+	...defaults,
+	{
+		id: 'years',
+		title: 'Years of Experience',
+		type: 'radio',
+		content_checkbox: false,
+		options: [
+			{
+				name: 'min_years',
+				type: 'text',
+				placeholder: 'min',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+			{
+				name: 'max_years',
+				type: 'text',
+				placeholder: 'max',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+		],
+		content: years.map((year) => ({
+			name: 'years',
+			value: year.value,
+			label: year.label,
+		})),
+	},
+	{
+		id: 'available_for_travel',
+		title: 'Available to Travel?',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'available_for_travel',
+				value: 'yes',
+				label: 'Yes',
+			},
+			{
+				name: 'available_for_travel',
+				value: 'no',
+				label: 'No',
+			},
+		],
+	},
 ];
 
 const serviceOffice = [
-    ...serviceDefault, {
-      id: "type",
-      title: "Service Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: servicesType[5201]?.map(type => ({
-        name: "type",
-        value: type,
-        label: type,
-      })),
-    },
+	...serviceDefault,
+	{
+		id: 'type',
+		title: 'Service Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: servicesType[5201]?.map((type) => ({
+			name: 'type',
+			value: type,
+			label: type,
+		})),
+	},
 ];
 
 const serviceFood = [
-    ...serviceDefault, {
-      id: "type",
-      title: "Service Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: servicesType[5202]?.map(type => ({
-        name: "type",
-        value: type,
-        label: type,
-      })),
-    },
+	...serviceDefault,
+	{
+		id: 'type',
+		title: 'Service Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: servicesType[5202]?.map((type) => ({
+			name: 'type',
+			value: type,
+			label: type,
+		})),
+	},
 ];
 
 const serviceWeddings = [
-    ...serviceDefault, {
-      id: "type",
-      title: "Service Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: servicesType[5203]?.map(type => ({
-        name: "type",
-        value: type,
-        label: type,
-      })),
-    },
+	...serviceDefault,
+	{
+		id: 'type',
+		title: 'Service Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: servicesType[5203]?.map((type) => ({
+			name: 'type',
+			value: type,
+			label: type,
+		})),
+	},
 ];
 
 const serviceChildCare = [
-    ...serviceDefault, {
-      id: "type",
-      title: "Service Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: servicesType[5204]?.map(type => ({
-        name: "type",
-        value: type,
-        label: type,
-      })),
-    },
+	...serviceDefault,
+	{
+		id: 'type',
+		title: 'Service Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: servicesType[5204]?.map((type) => ({
+			name: 'type',
+			value: type,
+			label: type,
+		})),
+	},
 ];
 
 const serviceMaintenance = [
-    ...serviceDefault, {
-      id: "type",
-      title: "Service Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: servicesType[5205]?.map(type => ({
-        name: "type",
-        value: type,
-        label: type,
-      })),
-    },
+	...serviceDefault,
+	{
+		id: 'type',
+		title: 'Service Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: servicesType[5205]?.map((type) => ({
+			name: 'type',
+			value: type,
+			label: type,
+		})),
+	},
 ];
 
 const serviceTutorial = [
-    ...serviceDefault, {
-      id: "type",
-      title: "Service Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: servicesType[5206]?.map(type => ({
-        name: "type",
-        value: type,
-        label: type,
-      })),
-    },{
-      id: "topic",
-      title: "Tutorial Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: tutorialTopics?.map(topic => ({
-        name: "topic",
-        value: topic,
-        label: topic,
-      })),
-    },
+	...serviceDefault,
+	{
+		id: 'type',
+		title: 'Service Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: servicesType[5206]?.map((type) => ({
+			name: 'type',
+			value: type,
+			label: type,
+		})),
+	},
+	{
+		id: 'topic',
+		title: 'Tutorial Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: tutorialTopics?.map((topic) => ({
+			name: 'topic',
+			value: topic,
+			label: topic,
+		})),
+	},
 ];
 
 const serviceClothing = [
-    ...serviceDefault, {
-      id: "type",
-      title: "Service Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: servicesType[5207]?.map(type => ({
-        name: "type",
-        value: type,
-        label: type,
-      })),
-    },
+	...serviceDefault,
+	{
+		id: 'type',
+		title: 'Service Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: servicesType[5207]?.map((type) => ({
+			name: 'type',
+			value: type,
+			label: type,
+		})),
+	},
 ];
 
 const serviceAutomotive = [
-    ...serviceDefault, {
-      id: "type",
-      title: "Service Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: servicesType[5208]?.map(type => ({
-        name: "type",
-        value: type,
-        label: type,
-      })),
-    },
+	...serviceDefault,
+	{
+		id: 'type',
+		title: 'Service Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: servicesType[5208]?.map((type) => ({
+			name: 'type',
+			value: type,
+			label: type,
+		})),
+	},
 ];
 
 const serviceEntertainment = [
-    ...serviceDefault, {
-      id: "type",
-      title: "Service Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: servicesType[5209]?.map(type => ({
-        name: "type",
-        value: type,
-        label: type,
-      })),
-    },
+	...serviceDefault,
+	{
+		id: 'type',
+		title: 'Service Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: servicesType[5209]?.map((type) => ({
+			name: 'type',
+			value: type,
+			label: type,
+		})),
+	},
 ];
 
 const serviceTravel = [
-    ...serviceDefault, {
-      id: "type",
-      title: "Service Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: servicesType[5210]?.map(type => ({
-        name: "type",
-        value: type,
-        label: type,
-      })),
-    },
+	...serviceDefault,
+	{
+		id: 'type',
+		title: 'Service Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: servicesType[5210]?.map((type) => ({
+			name: 'type',
+			value: type,
+			label: type,
+		})),
+	},
 ];
 
 const serviceGoods = [
-    ...serviceDefault, {
-      id: "type",
-      title: "Service Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: servicesType[5211]?.map(type => ({
-        name: "type",
-        value: type,
-        label: type,
-      })),
-    },
+	...serviceDefault,
+	{
+		id: 'type',
+		title: 'Service Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: servicesType[5211]?.map((type) => ({
+			name: 'type',
+			value: type,
+			label: type,
+		})),
+	},
 ];
 
 const serviceLegal = [
-    ...serviceDefault, {
-      id: "type",
-      title: "Service Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: servicesType[5212]?.map(type => ({
-        name: "type",
-        value: type,
-        label: type,
-      })),
-    },
+	...serviceDefault,
+	{
+		id: 'type',
+		title: 'Service Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: servicesType[5212]?.map((type) => ({
+			name: 'type',
+			value: type,
+			label: type,
+		})),
+	},
 ];
 
 const serviceTransport = [
-    ...serviceDefault, {
-      id: "type",
-      title: "Service Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: servicesType[5213]?.map(type => ({
-        name: "type",
-        value: type,
-        label: type,
-      })),
-    },
+	...serviceDefault,
+	{
+		id: 'type',
+		title: 'Service Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: servicesType[5213]?.map((type) => ({
+			name: 'type',
+			value: type,
+			label: type,
+		})),
+	},
 ];
 
 // agriculture
 
 const agric = [
-  ...defaults,
-  {
-      id: "type",
-      title: "Farm Filter",
-      type: "checkbox",
-      content_checkbox: false,
-      content: agricultureTypes[5301].concat(agricultureTypes[5302],agricultureTypes[5303],agricultureTypes[5304]).map(farm => ({
-        name: farm,
-        value: farm,
-        label: farm
-      }))
-    },
-]
+	...defaults,
+	{
+		id: 'type',
+		title: 'Farm Filter',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: agricultureTypes[5301]
+			.concat(agricultureTypes[5302], agricultureTypes[5303], agricultureTypes[5304])
+			.map((farm) => ({
+				name: farm,
+				value: farm,
+				label: farm,
+			})),
+	},
+];
 
 const agricultureAnimal = [
-    ...defaults,  {
-      id: "age",
-      title: "Years of Experience",
-      type: "radio",
-      content_checkbox: false,
-      content: [
-        {
-          name: "age",
-          value: "",
-          label: "All",
-        },
-        {
-          name: "age",
-          value: "1-2",
-          label: "1 - 2 years",
-        },
-        {
-          name: "age",
-          value: "2-4",
-          label: "2 - 4 years",
-        },
-        {
-          name: "age",
-          value: "4-6",
-          label: "4 - 6 years",
-        },{
-          name: "age",
-          value: "20",
-          label: "6 - 8 years",
-        },{
-          name: "age",
-          value: ">8",
-          label: "8 years+",
-        },
-      ],
-    },{
-      id: "type",
-      title: "Animal Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: agricultureTypes[5301].map(animal => ({
-        name: animal,
-        value: animal,
-        label: animal
-      }))
-    },
+	...defaults,
+	{
+		id: 'age',
+		title: 'Years of Experience',
+		type: 'radio',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'age',
+				value: '',
+				label: 'All',
+			},
+			{
+				name: 'age',
+				value: '1-2',
+				label: '1 - 2 years',
+			},
+			{
+				name: 'age',
+				value: '2-4',
+				label: '2 - 4 years',
+			},
+			{
+				name: 'age',
+				value: '4-6',
+				label: '4 - 6 years',
+			},
+			{
+				name: 'age',
+				value: '20',
+				label: '6 - 8 years',
+			},
+			{
+				name: 'age',
+				value: '>8',
+				label: '8 years+',
+			},
+		],
+	},
+	{
+		id: 'type',
+		title: 'Animal Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: agricultureTypes[5301].map((animal) => ({
+			name: animal,
+			value: animal,
+			label: animal,
+		})),
+	},
 ];
 
 const agricultureFarm = [
-    ...defaults, {
-      id: "type",
-      title: "Farm Produce",
-      type: "checkbox",
-      content_checkbox: false,
-      content: agricultureTypes[5302].map(farm => ({
-        name: farm,
-        value: farm,
-        label: farm
-      }))
-    },
+	...defaults,
+	{
+		id: 'type',
+		title: 'Farm Produce',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: agricultureTypes[5302].map((farm) => ({
+			name: farm,
+			value: farm,
+			label: farm,
+		})),
+	},
 ];
 
 const agricultureEquipment = [
-    ...defaults, {
-      id: "type",
-      title: "Farm Equipment",
-      type: "checkbox",
-      content_checkbox: false,
-      content: agricultureTypes[5303].map(equipment => ({
-        name: equipment,
-        value: equipment,
-        label: equipment
-      }))
-    },
+	...defaults,
+	{
+		id: 'type',
+		title: 'Farm Equipment',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: agricultureTypes[5303].map((equipment) => ({
+			name: equipment,
+			value: equipment,
+			label: equipment,
+		})),
+	},
 ];
 
 const agricultureFeed = [
-    ...defaults, {
-      id: "type",
-      title: "Farm Seeds / Feeds",
-      type: "checkbox",
-      content_checkbox: false,
-      content: agricultureTypes[5304].map(feed => ({
-        name: feed,
-        value: feed,
-        label: feed
-      }))
-    },
+	...defaults,
+	{
+		id: 'type',
+		title: 'Farm Seeds / Feeds',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: agricultureTypes[5304].map((feed) => ({
+			name: feed,
+			value: feed,
+			label: feed,
+		})),
+	},
 ];
 
 // Electronics Filter Form
 const electronic = [
-  ...defaults, {
-      id: "type",
-      title: "Electronic Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: electronicsType[5407].concat(electronicsType[5404],electronicsType[5405], electronicsType[5408], electronicsType[5410]).map(type => ({
-        name: "type",
-        value: type,
-        label: type
-      }))
-    },
-    {
-      id: "type",
-      title: "Brand",
-      type: "checkbox",
-      content_checkbox: false,
-      content: electronicsBrands["default"].map(brand => ({
-        name: brand,
-        value: brand,
-        label: brand
-      }))
-    },{
-      id: "ad_condition",
-      title: "Condition",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "ad_condition",
-          value: "used",
-          label: "Used",
-        },{
-          name: "ad_condition",
-          value: "refurbished",
-          label: "Refurbished",
-        },{
-          name: "ad_condition",
-          value: "new",
-          label: "New",
-        }
-      ],
-    },{
-      id: "type",
-      title: "Display Size",
-      type: "checkbox",
-      content_checkbox: false,
-      content: displaySizes.map(size => ({
-        name: size,
-        value: size,
-        label: size
-      }))
-    },
-  ];
+	...defaults,
+	{
+		id: 'type',
+		title: 'Electronic Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: electronicsType[5407]
+			.concat(
+				electronicsType[5404],
+				electronicsType[5405],
+				electronicsType[5408],
+				electronicsType[5410]
+			)
+			.map((type) => ({
+				name: 'type',
+				value: type,
+				label: type,
+			})),
+	},
+	{
+		id: 'type',
+		title: 'Brand',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: electronicsBrands['default'].map((brand) => ({
+			name: brand,
+			value: brand,
+			label: brand,
+		})),
+	},
+	{
+		id: 'ad_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'ad_condition',
+				value: 'used',
+				label: 'Used',
+			},
+			{
+				name: 'ad_condition',
+				value: 'refurbished',
+				label: 'Refurbished',
+			},
+			{
+				name: 'ad_condition',
+				value: 'new',
+				label: 'New',
+			},
+		],
+	},
+	{
+		id: 'type',
+		title: 'Display Size',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: displaySizes.map((size) => ({
+			name: size,
+			value: size,
+			label: size,
+		})),
+	},
+];
 
 const electronics01 = [
-	...defaults,  {
-      id: "type",
-      title: "Electronic Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: electronicsType[5407].concat(electronicsType[5404],electronicsType[5405], electronicsType[5408], electronicsType[5410]).map(type => ({
-        name: "type",
-        value: type,
-        label: type
-      }))
-    },
-    {
-      id: "type",
-      title: "Brand",
-      type: "checkbox",
-      content_checkbox: false,
-      content: electronicsBrands[5401].map(brand => ({
-        name: brand,
-        value: brand,
-        label: brand
-      }))
-    },{
-      id: "ad_condition",
-      title: "Condition",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "ad_condition",
-          value: "used",
-          label: "Used",
-        },{
-          name: "ad_condition",
-          value: "refurbished",
-          label: "Refurbished",
-        },{
-          name: "ad_condition",
-          value: "new",
-          label: "New",
-        }
-      ],
-    }
+	...defaults,
+	{
+		id: 'type',
+		title: 'Electronic Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: electronicsType[5407]
+			.concat(
+				electronicsType[5404],
+				electronicsType[5405],
+				electronicsType[5408],
+				electronicsType[5410]
+			)
+			.map((type) => ({
+				name: 'type',
+				value: type,
+				label: type,
+			})),
+	},
+	{
+		id: 'type',
+		title: 'Brand',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: electronicsBrands[5401].map((brand) => ({
+			name: brand,
+			value: brand,
+			label: brand,
+		})),
+	},
+	{
+		id: 'ad_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'ad_condition',
+				value: 'used',
+				label: 'Used',
+			},
+			{
+				name: 'ad_condition',
+				value: 'refurbished',
+				label: 'Refurbished',
+			},
+			{
+				name: 'ad_condition',
+				value: 'new',
+				label: 'New',
+			},
+		],
+	},
 ];
 const electronics02 = [
-  ...defaults,  {
-      id: "type",
-      title: "Electronic Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: electronicsType[5407].concat(electronicsType[5404],electronicsType[5405], electronicsType[5408], electronicsType[5410]).map(type => ({
-        name: "type",
-        value: type,
-        label: type
-      }))
-    },
-    {
-      id: "type",
-      title: "Brand",
-      type: "checkbox",
-      content_checkbox: false,
-      content: electronicsBrands[5402].map(brand => ({
-        name: brand,
-        value: brand,
-        label: brand
-      }))
-    },{
-      id: "ad_condition",
-      title: "Condition",
-      type: "checkbox",
-      content_checkbox: false,
-      content: condition_refub.map(val => ({
-          name: "ad_condition",
-          value: val.value,
-          label: val.label,
-        })),
-    }
-]
+	...defaults,
+	{
+		id: 'type',
+		title: 'Electronic Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: electronicsType[5407]
+			.concat(
+				electronicsType[5404],
+				electronicsType[5405],
+				electronicsType[5408],
+				electronicsType[5410]
+			)
+			.map((type) => ({
+				name: 'type',
+				value: type,
+				label: type,
+			})),
+	},
+	{
+		id: 'type',
+		title: 'Brand',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: electronicsBrands[5402].map((brand) => ({
+			name: brand,
+			value: brand,
+			label: brand,
+		})),
+	},
+	{
+		id: 'ad_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: condition_refub.map((val) => ({
+			name: 'ad_condition',
+			value: val.value,
+			label: val.label,
+		})),
+	},
+];
 const electronics03 = [
-  ...defaults,  {
-      id: "type",
-      title: "Electronic Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: electronicsType[5407].concat(electronicsType[5404],electronicsType[5405], electronicsType[5408], electronicsType[5410]).map(type => ({
-        name: "type",
-        value: type,
-        label: type
-      }))
-    },
-    {
-      id: "type",
-      title: "Brand",
-      type: "checkbox",
-      content_checkbox: false,
-      content: electronicsBrands[5403].map(brand => ({
-        name: brand,
-        value: brand,
-        label: brand
-      }))
-    },{
-      id: "ad_condition",
-      title: "Condition",
-      type: "checkbox",
-      content_checkbox: false,
-      content: condition_refub.map(val => ({
-          name: "ad_condition",
-          value: val.value,
-          label: val.label,
-        })),
-    }
-]
+	...defaults,
+	{
+		id: 'type',
+		title: 'Electronic Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: electronicsType[5407]
+			.concat(
+				electronicsType[5404],
+				electronicsType[5405],
+				electronicsType[5408],
+				electronicsType[5410]
+			)
+			.map((type) => ({
+				name: 'type',
+				value: type,
+				label: type,
+			})),
+	},
+	{
+		id: 'type',
+		title: 'Brand',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: electronicsBrands[5403].map((brand) => ({
+			name: brand,
+			value: brand,
+			label: brand,
+		})),
+	},
+	{
+		id: 'ad_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: condition_refub.map((val) => ({
+			name: 'ad_condition',
+			value: val.value,
+			label: val.label,
+		})),
+	},
+];
 const electronics06 = [
-  ...defaults,  {
-      id: "type",
-      title: "Electronic Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: electronicsType[5407].concat(electronicsType[5404],electronicsType[5405], electronicsType[5408], electronicsType[5410]).map(type => ({
-        name: "type",
-        value: type,
-        label: type
-      }))
-    },
-    {
-      id: "type",
-      title: "Brand",
-      type: "checkbox",
-      content_checkbox: false,
-      content: electronicsBrands[5406].map(brand => ({
-        name: brand,
-        value: brand,
-        label: brand
-      }))
-    },{
-      id: "ad_condition",
-      title: "Condition",
-      type: "checkbox",
-      content_checkbox: false,
-      content: condition_refub.map(val => ({
-          name: "ad_condition",
-          value: val.value,
-          label: val.label,
-        })),
-    }
-]
+	...defaults,
+	{
+		id: 'type',
+		title: 'Electronic Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: electronicsType[5407]
+			.concat(
+				electronicsType[5404],
+				electronicsType[5405],
+				electronicsType[5408],
+				electronicsType[5410]
+			)
+			.map((type) => ({
+				name: 'type',
+				value: type,
+				label: type,
+			})),
+	},
+	{
+		id: 'type',
+		title: 'Brand',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: electronicsBrands[5406].map((brand) => ({
+			name: brand,
+			value: brand,
+			label: brand,
+		})),
+	},
+	{
+		id: 'ad_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: condition_refub.map((val) => ({
+			name: 'ad_condition',
+			value: val.value,
+			label: val.label,
+		})),
+	},
+];
 const electronics09 = [
-  ...defaults,  {
-      id: "type",
-      title: "Electronic Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: electronicsType[5407].concat(electronicsType[5404],electronicsType[5405], electronicsType[5408], electronicsType[5410]).map(type => ({
-        name: "type",
-        value: type,
-        label: type
-      }))
-    },
-    {
-      id: "type",
-      title: "Brand",
-      type: "checkbox",
-      content_checkbox: false,
-      content: electronicsBrands[5409].map(brand => ({
-        name: brand,
-        value: brand,
-        label: brand
-      }))
-    },{
-      id: "ad_condition",
-      title: "Condition",
-      type: "checkbox",
-      content_checkbox: false,
-      content: condition_refub.map(val => ({
-          name: "ad_condition",
-          value: val.value,
-          label: val.label,
-        })),
-    }
-]
+	...defaults,
+	{
+		id: 'type',
+		title: 'Electronic Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: electronicsType[5407]
+			.concat(
+				electronicsType[5404],
+				electronicsType[5405],
+				electronicsType[5408],
+				electronicsType[5410]
+			)
+			.map((type) => ({
+				name: 'type',
+				value: type,
+				label: type,
+			})),
+	},
+	{
+		id: 'type',
+		title: 'Brand',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: electronicsBrands[5409].map((brand) => ({
+			name: brand,
+			value: brand,
+			label: brand,
+		})),
+	},
+	{
+		id: 'ad_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: condition_refub.map((val) => ({
+			name: 'ad_condition',
+			value: val.value,
+			label: val.label,
+		})),
+	},
+];
 const electronics04 = [
-  ...defaults,  {
-      id: "type",
-      title: "Electronic Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: electronicsType[5404].map(type => ({
-        name: "type",
-        value: type,
-        label: type
-      }))
-    },
-    {
-      id: "type",
-      title: "Brand",
-      type: "checkbox",
-      content_checkbox: false,
-      content: electronicsBrands[5404].map(brand => ({
-        name: brand,
-        value: brand,
-        label: brand
-      }))
-    },{
-      id: "ad_condition",
-      title: "Condition",
-      type: "checkbox",
-      content_checkbox: false,
-      content:condition_refub.map(val => ({
-          name: "ad_condition",
-          value: val.value,
-          label: val.label,
-        })),
-    }
-]
+	...defaults,
+	{
+		id: 'type',
+		title: 'Electronic Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: electronicsType[5404].map((type) => ({
+			name: 'type',
+			value: type,
+			label: type,
+		})),
+	},
+	{
+		id: 'type',
+		title: 'Brand',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: electronicsBrands[5404].map((brand) => ({
+			name: brand,
+			value: brand,
+			label: brand,
+		})),
+	},
+	{
+		id: 'ad_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: condition_refub.map((val) => ({
+			name: 'ad_condition',
+			value: val.value,
+			label: val.label,
+		})),
+	},
+];
 const electronics05 = [
-  ...defaults,  {
-      id: "type",
-      title: "Electronic Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: electronicsType[5405].map(type => ({
-        name: "type",
-        value: type,
-        label: type
-      }))
-    },
-    {
-      id: "type",
-      title: "Brand",
-      type: "checkbox",
-      content_checkbox: false,
-      content: electronicsBrands[5405].map(brand => ({
-        name: brand,
-        value: brand,
-        label: brand
-      }))
-    },{
-      id: "ad_condition",
-      title: "Condition",
-      type: "checkbox",
-      content_checkbox: false,
-      content: condition_refub.map(val => ({
-          name: "ad_condition",
-          value: val.value,
-          label: val.label,
-        })),
-    }
-]
+	...defaults,
+	{
+		id: 'type',
+		title: 'Electronic Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: electronicsType[5405].map((type) => ({
+			name: 'type',
+			value: type,
+			label: type,
+		})),
+	},
+	{
+		id: 'type',
+		title: 'Brand',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: electronicsBrands[5405].map((brand) => ({
+			name: brand,
+			value: brand,
+			label: brand,
+		})),
+	},
+	{
+		id: 'ad_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: condition_refub.map((val) => ({
+			name: 'ad_condition',
+			value: val.value,
+			label: val.label,
+		})),
+	},
+];
 const electronics07 = [
-  ...defaults,  {
-      id: "type",
-      title: "Electronic Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: electronicsType[5407].map(type => ({
-        name: "type",
-        value: type,
-        label: type
-      }))
-    },
-    {
-      id: "type",
-      title: "Brand",
-      type: "checkbox",
-      content_checkbox: false,
-      content: electronicsBrands[5407].map(brand => ({
-        name: brand,
-        value: brand,
-        label: brand
-      }))
-    },{
-      id: "ad_condition",
-      title: "Condition",
-      type: "checkbox",
-      content_checkbox: false,
-      content: condition_refub.map(val => ({
-          name: "ad_condition",
-          value: val.value,
-          label: val.label,
-        })),
-    }
-]
+	...defaults,
+	{
+		id: 'type',
+		title: 'Electronic Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: electronicsType[5407].map((type) => ({
+			name: 'type',
+			value: type,
+			label: type,
+		})),
+	},
+	{
+		id: 'type',
+		title: 'Brand',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: electronicsBrands[5407].map((brand) => ({
+			name: brand,
+			value: brand,
+			label: brand,
+		})),
+	},
+	{
+		id: 'ad_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: condition_refub.map((val) => ({
+			name: 'ad_condition',
+			value: val.value,
+			label: val.label,
+		})),
+	},
+];
 const electronics08 = [
-  ...defaults,  {
-      id: "type",
-      title: "Electronic Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: electronicsType[5408].map(type => ({
-        name: "type",
-        value: type,
-        label: type
-      }))
-    },
-    {
-      id: "type",
-      title: "Brand",
-      type: "checkbox",
-      content_checkbox: false,
-      content: electronicsBrands[5408].map(brand => ({
-        name: brand,
-        value: brand,
-        label: brand
-      }))
-    },{
-      id: "ad_condition",
-      title: "Condition",
-      type: "checkbox",
-      content_checkbox: false,
-      content: condition_refub.map(val => ({
-          name: "ad_condition",
-          value: val.value,
-          label: val.label,
-        })),
-    }
-]
+	...defaults,
+	{
+		id: 'type',
+		title: 'Electronic Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: electronicsType[5408].map((type) => ({
+			name: 'type',
+			value: type,
+			label: type,
+		})),
+	},
+	{
+		id: 'type',
+		title: 'Brand',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: electronicsBrands[5408].map((brand) => ({
+			name: brand,
+			value: brand,
+			label: brand,
+		})),
+	},
+	{
+		id: 'ad_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: condition_refub.map((val) => ({
+			name: 'ad_condition',
+			value: val.value,
+			label: val.label,
+		})),
+	},
+];
 const electronics10 = [
-  ...defaults,  {
-      id: "type",
-      title: "Electronic Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: electronicsType[5410].map(type => ({
-        name: "type",
-        value: type,
-        label: type
-      }))
-    },
-    {
-      id: "type",
-      title: "Brand",
-      type: "checkbox",
-      content_checkbox: false,
-      content: electronicsBrands[5410].map(brand => ({
-        name: brand,
-        value: brand,
-        label: brand
-      }))
-    },{
-      id: "ad_condition",
-      title: "Condition",
-      type: "checkbox",
-      content_checkbox: false,
-      content: condition_refub.map(val => ({
-          name: "ad_condition",
-          value: val.value,
-          label: val.label,
-        })),
-    }
+	...defaults,
+	{
+		id: 'type',
+		title: 'Electronic Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: electronicsType[5410].map((type) => ({
+			name: 'type',
+			value: type,
+			label: type,
+		})),
+	},
+	{
+		id: 'type',
+		title: 'Brand',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: electronicsBrands[5410].map((brand) => ({
+			name: brand,
+			value: brand,
+			label: brand,
+		})),
+	},
+	{
+		id: 'ad_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: condition_refub.map((val) => ({
+			name: 'ad_condition',
+			value: val.value,
+			label: val.label,
+		})),
+	},
 ];
 
-// Fashion 
+// Fashion
 const fashion = [
-  ...defaults, {
-      id: "brand",
-      title: "Brand",
-      type: "checkbox",
-      content_checkbox: false,
-      content: fashionBrands["default"].map(brand => ({
-        name: brand,
-        value: brand,
-        label: brand
-      }))
-    }, {
-      id: "type",
-      title: "Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: fashionTypes["default"].map(type => ({
-        name: "type",
-        value: type,
-        label: type
-      }))
-    }, {
-      id: "color",
-      title: "Color",
-      type: "checkbox",
-      content_checkbox: false,
-      content: colors.map(color => ({
-        name: color,
-        value: color,
-        label: color
-      }))
-    },{
-      id: "ad_condition",
-      title: "Condition",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "ad_condition",
-          value: "used",
-          label: "Used",
-        },{
-          name: "ad_condition",
-          value: "new",
-          label: "New",
-        }
-      ],
-    }, {
-      id: "size",
-      title: "Size",
-      type: "checkbox",
-      content_checkbox: false,
-      content: fashionSizes["default"].map(size => ({
-        name: size,
-        value: size,
-        label: size
-      }))
-    },
-    {
-      id: "material",
-      title: "Material",
-      type: "checkbox",
-      content_checkbox: false,
-      content: fashionMaterials["default"].map(material => ({
-        name: material,
-        value: material,
-        label: material
-      }))
-    },{
-      id: "gender",
-      title: "Gender",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "gender",
-          value: "m",
-          label: "Male",
-        },{
-          name: "gender",
-          value: "f",
-          label: "Female",
-        }
-      ],
-    },
-]
+	...defaults,
+	{
+		id: 'brand',
+		title: 'Brand',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: fashionBrands['default'].map((brand) => ({
+			name: brand,
+			value: brand,
+			label: brand,
+		})),
+	},
+	{
+		id: 'type',
+		title: 'Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: fashionTypes['default'].map((type) => ({
+			name: 'type',
+			value: type,
+			label: type,
+		})),
+	},
+	{
+		id: 'color',
+		title: 'Color',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: colors.map((color) => ({
+			name: color,
+			value: color,
+			label: color,
+		})),
+	},
+	{
+		id: 'ad_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'ad_condition',
+				value: 'used',
+				label: 'Used',
+			},
+			{
+				name: 'ad_condition',
+				value: 'new',
+				label: 'New',
+			},
+		],
+	},
+	{
+		id: 'size',
+		title: 'Size',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: fashionSizes['default'].map((size) => ({
+			name: size,
+			value: size,
+			label: size,
+		})),
+	},
+	{
+		id: 'material',
+		title: 'Material',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: fashionMaterials['default'].map((material) => ({
+			name: material,
+			value: material,
+			label: material,
+		})),
+	},
+	{
+		id: 'gender',
+		title: 'Gender',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'gender',
+				value: 'm',
+				label: 'Male',
+			},
+			{
+				name: 'gender',
+				value: 'f',
+				label: 'Female',
+			},
+		],
+	},
+];
 
 const fashion01 = [
-  ...defaults, {
-      id: "brand",
-      title: "Brand",
-      type: "checkbox",
-      content_checkbox: false,
-      content: fashionBrands[5501].map(brand => ({
-        name: brand,
-        value: brand,
-        label: brand
-      }))
-    }, {
-      id: "type",
-      title: "Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: fashionTypes[5501].map(type => ({
-        name: "type",
-        value: type,
-        label: type
-      }))
-    }, {
-      id: "color",
-      title: "Color",
-      type: "checkbox",
-      content_checkbox: false,
-      content: colors.map(color => ({
-        name: color,
-        value: color,
-        label: color
-      }))
-    },{
-      id: "ad_condition",
-      title: "Condition",
-      type: "checkbox",
-      content_checkbox: false,
-      content: condition_refub.filter(val => val.value !== "refurbished").map(val => ({
-          name: "ad_condition",
-          value: val.value,
-          label: val.label,
-        })),
-    }, {
-      id: "size",
-      title: "Size",
-      type: "checkbox",
-      content_checkbox: false,
-      content: fashionSizes[5501].map(size => ({
-        name: size,
-        value: size,
-        label: size
-      }))
-    },{
-      id: "gender",
-      title: "Gender",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "gender",
-          value: "m",
-          label: "Male",
-        },{
-          name: "gender",
-          value: "f",
-          label: "Female",
-        }
-      ],
-    },
-]
+	...defaults,
+	{
+		id: 'brand',
+		title: 'Brand',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: fashionBrands[5501].map((brand) => ({
+			name: brand,
+			value: brand,
+			label: brand,
+		})),
+	},
+	{
+		id: 'type',
+		title: 'Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: fashionTypes[5501].map((type) => ({
+			name: 'type',
+			value: type,
+			label: type,
+		})),
+	},
+	{
+		id: 'color',
+		title: 'Color',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: colors.map((color) => ({
+			name: color,
+			value: color,
+			label: color,
+		})),
+	},
+	{
+		id: 'ad_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: condition_refub
+			.filter((val) => val.value !== 'refurbished')
+			.map((val) => ({
+				name: 'ad_condition',
+				value: val.value,
+				label: val.label,
+			})),
+	},
+	{
+		id: 'size',
+		title: 'Size',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: fashionSizes[5501].map((size) => ({
+			name: size,
+			value: size,
+			label: size,
+		})),
+	},
+	{
+		id: 'gender',
+		title: 'Gender',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'gender',
+				value: 'm',
+				label: 'Male',
+			},
+			{
+				name: 'gender',
+				value: 'f',
+				label: 'Female',
+			},
+		],
+	},
+];
 
 const fashion03 = [
-  ...defaults, {
-      id: "brand",
-      title: "Brand",
-      type: "checkbox",
-      content_checkbox: false,
-      content: fashionBrands[5503].map(brand => ({
-        name: brand,
-        value: brand,
-        label: brand
-      }))
-    }, {
-      id: "type",
-      title: "Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: fashionTypes[5503].map(type => ({
-        name: "type",
-        value: type,
-        label: type
-      }))
-    }, {
-      id: "color",
-      title: "Color",
-      type: "checkbox",
-      content_checkbox: false,
-      content: colors.map(color => ({
-        name: color,
-        value: color,
-        label: color
-      }))
-    },{
-      id: "ad_condition",
-      title: "Condition",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "ad_condition",
-          value: "used",
-          label: "Used",
-        },{
-          name: "ad_condition",
-          value: "new",
-          label: "New",
-        }
-      ],
-    }, {
-      id: "gender",
-      title: "Gender",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "gender",
-          value: "m",
-          label: "Male",
-        },{
-          name: "gender",
-          value: "f",
-          label: "Female",
-        }
-      ],
-    },
-]
+	...defaults,
+	{
+		id: 'brand',
+		title: 'Brand',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: fashionBrands[5503].map((brand) => ({
+			name: brand,
+			value: brand,
+			label: brand,
+		})),
+	},
+	{
+		id: 'type',
+		title: 'Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: fashionTypes[5503].map((type) => ({
+			name: 'type',
+			value: type,
+			label: type,
+		})),
+	},
+	{
+		id: 'color',
+		title: 'Color',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: colors.map((color) => ({
+			name: color,
+			value: color,
+			label: color,
+		})),
+	},
+	{
+		id: 'ad_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'ad_condition',
+				value: 'used',
+				label: 'Used',
+			},
+			{
+				name: 'ad_condition',
+				value: 'new',
+				label: 'New',
+			},
+		],
+	},
+	{
+		id: 'gender',
+		title: 'Gender',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'gender',
+				value: 'm',
+				label: 'Male',
+			},
+			{
+				name: 'gender',
+				value: 'f',
+				label: 'Female',
+			},
+		],
+	},
+];
 
 const fashion04 = [
-  ...defaults, {
-      id: "brand",
-      title: "Brand",
-      type: "checkbox",
-      content_checkbox: false,
-      content: fashionBrands["default"].map(brand => ({
-        name: brand,
-        value: brand,
-        label: brand
-      }))
-    }, {
-      id: "type",
-      title: "Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: fashionTypes[5504].map(type => ({
-        name: "type",
-        value: type,
-        label: type
-      }))
-    }, {
-      id: "color",
-      title: "Color",
-      type: "checkbox",
-      content_checkbox: false,
-      content: colors.map(color => ({
-        name: color,
-        value: color,
-        label: color
-      }))
-    },{
-      id: "ad_condition",
-      title: "Condition",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "ad_condition",
-          value: "used",
-          label: "Used",
-        },{
-          name: "ad_condition",
-          value: "new",
-          label: "New",
-        }
-      ],
-    },{
-      id: "material",
-      title: "Material",
-      type: "checkbox",
-      content_checkbox: false,
-      content: fashionMaterials[5504].map(material => ({
-        name: material,
-        value: material,
-        label: material
-      }))
-    },{
-      id: "gender",
-      title: "Gender",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "gender",
-          value: "m",
-          label: "Male",
-        },{
-          name: "gender",
-          value: "f",
-          label: "Female",
-        }
-      ],
-    },
-]
+	...defaults,
+	{
+		id: 'brand',
+		title: 'Brand',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: fashionBrands['default'].map((brand) => ({
+			name: brand,
+			value: brand,
+			label: brand,
+		})),
+	},
+	{
+		id: 'type',
+		title: 'Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: fashionTypes[5504].map((type) => ({
+			name: 'type',
+			value: type,
+			label: type,
+		})),
+	},
+	{
+		id: 'color',
+		title: 'Color',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: colors.map((color) => ({
+			name: color,
+			value: color,
+			label: color,
+		})),
+	},
+	{
+		id: 'ad_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'ad_condition',
+				value: 'used',
+				label: 'Used',
+			},
+			{
+				name: 'ad_condition',
+				value: 'new',
+				label: 'New',
+			},
+		],
+	},
+	{
+		id: 'material',
+		title: 'Material',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: fashionMaterials[5504].map((material) => ({
+			name: material,
+			value: material,
+			label: material,
+		})),
+	},
+	{
+		id: 'gender',
+		title: 'Gender',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'gender',
+				value: 'm',
+				label: 'Male',
+			},
+			{
+				name: 'gender',
+				value: 'f',
+				label: 'Female',
+			},
+		],
+	},
+];
 
 const fashion06 = [
-  ...defaults, {
-      id: "brand",
-      title: "Brand",
-      type: "checkbox",
-      content_checkbox: false,
-      content: fashionBrands[5506].map(brand => ({
-        name: brand,
-        value: brand,
-        label: brand
-      }))
-    },{
-      id: "ad_condition",
-      title: "Condition",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "ad_condition",
-          value: "used",
-          label: "Used",
-        },{
-          name: "ad_condition",
-          value: "new",
-          label: "New",
-        }
-      ],
-    },{
-      id: "gender",
-      title: "Gender",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "gender",
-          value: "m",
-          label: "Male",
-        },{
-          name: "gender",
-          value: "f",
-          label: "Female",
-        }
-      ],
-    },{
-      id: "style",
-      title: "Style",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "style",
-          value: "business",
-          label: "Business",
-        },{
-          name: "style",
-          value: "casual",
-          label: "Casual",
-        }, {
-          name: "style",
-          value: "sport",
-          label: "Sport",
-        },{
-          name: "style",
-          value: "other",
-          label: "Other",
-        }
-      ],
-    },
-]
+	...defaults,
+	{
+		id: 'brand',
+		title: 'Brand',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: fashionBrands[5506].map((brand) => ({
+			name: brand,
+			value: brand,
+			label: brand,
+		})),
+	},
+	{
+		id: 'ad_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'ad_condition',
+				value: 'used',
+				label: 'Used',
+			},
+			{
+				name: 'ad_condition',
+				value: 'new',
+				label: 'New',
+			},
+		],
+	},
+	{
+		id: 'gender',
+		title: 'Gender',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'gender',
+				value: 'm',
+				label: 'Male',
+			},
+			{
+				name: 'gender',
+				value: 'f',
+				label: 'Female',
+			},
+		],
+	},
+	{
+		id: 'style',
+		title: 'Style',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'style',
+				value: 'business',
+				label: 'Business',
+			},
+			{
+				name: 'style',
+				value: 'casual',
+				label: 'Casual',
+			},
+			{
+				name: 'style',
+				value: 'sport',
+				label: 'Sport',
+			},
+			{
+				name: 'style',
+				value: 'other',
+				label: 'Other',
+			},
+		],
+	},
+];
 
 const fashion07 = [
-  ...defaults, {
-      id: "brand",
-      title: "Brand",
-      type: "checkbox",
-      content_checkbox: false,
-      content: fashionBrands[5507].map(brand => ({
-        name: brand,
-        value: brand,
-        label: brand
-      }))
-    }, {
-      id: "type",
-      title: "Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: fashionTypes[5507].map(type => ({
-        name: "type",
-        value: type,
-        label: type
-      }))
-    }, {
-      id: "color",
-      title: "Color",
-      type: "checkbox",
-      content_checkbox: false,
-      content: colors.map(color => ({
-        name: color,
-        value: color,
-        label: color
-      }))
-    },{
-      id: "ad_condition",
-      title: "Condition",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "ad_condition",
-          value: "used",
-          label: "Used",
-        },{
-          name: "ad_condition",
-          value: "new",
-          label: "New",
-        }
-      ],
-    },{
-      id: "gender",
-      title: "Gender",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "gender",
-          value: "m",
-          label: "Male",
-        },{
-          name: "gender",
-          value: "f",
-          label: "Female",
-        }
-      ],
-    },
-]
+	...defaults,
+	{
+		id: 'brand',
+		title: 'Brand',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: fashionBrands[5507].map((brand) => ({
+			name: brand,
+			value: brand,
+			label: brand,
+		})),
+	},
+	{
+		id: 'type',
+		title: 'Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: fashionTypes[5507].map((type) => ({
+			name: 'type',
+			value: type,
+			label: type,
+		})),
+	},
+	{
+		id: 'color',
+		title: 'Color',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: colors.map((color) => ({
+			name: color,
+			value: color,
+			label: color,
+		})),
+	},
+	{
+		id: 'ad_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'ad_condition',
+				value: 'used',
+				label: 'Used',
+			},
+			{
+				name: 'ad_condition',
+				value: 'new',
+				label: 'New',
+			},
+		],
+	},
+	{
+		id: 'gender',
+		title: 'Gender',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'gender',
+				value: 'm',
+				label: 'Male',
+			},
+			{
+				name: 'gender',
+				value: 'f',
+				label: 'Female',
+			},
+		],
+	},
+];
 
 // Health and Beauty
-const health = [
-  ...defaults
-]
+const health = [...defaults];
 const health01 = [
-  ...defaults,  {
-      id: "brand",
-      title: "Brand",
-      type: "checkbox",
-      content_checkbox: false,
-      content: healthBrands[5601].map(brand => ({
-        name: brand,
-        value: brand,
-        label: brand
-      }))
-    }, {
-      id: "type",
-      title: "Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: healthTypes[5601].map(type => ({
-        name: "type",
-        value: type,
-        label: type
-      }))
-    }, {
-      id: "color",
-      title: "Color",
-      type: "checkbox",
-      content_checkbox: false,
-      content: colors.map(color => ({
-        name: color,
-        value: color,
-        label: color
-      }))
-    },{
-      id: "ad_condition",
-      title: "Condition",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "ad_condition",
-          value: "used",
-          label: "Used",
-        },{
-          name: "ad_condition",
-          value: "new",
-          label: "New",
-        }
-      ],
-    }, {
-      id: "gender",
-      title: "Gender",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "gender",
-          value: "m",
-          label: "Male",
-        },{
-          name: "gender",
-          value: "f",
-          label: "Female",
-        }
-      ],
-    },
+	...defaults,
+	{
+		id: 'brand',
+		title: 'Brand',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: healthBrands[5601].map((brand) => ({
+			name: brand,
+			value: brand,
+			label: brand,
+		})),
+	},
+	{
+		id: 'type',
+		title: 'Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: healthTypes[5601].map((type) => ({
+			name: 'type',
+			value: type,
+			label: type,
+		})),
+	},
+	{
+		id: 'color',
+		title: 'Color',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: colors.map((color) => ({
+			name: color,
+			value: color,
+			label: color,
+		})),
+	},
+	{
+		id: 'ad_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'ad_condition',
+				value: 'used',
+				label: 'Used',
+			},
+			{
+				name: 'ad_condition',
+				value: 'new',
+				label: 'New',
+			},
+		],
+	},
+	{
+		id: 'gender',
+		title: 'Gender',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'gender',
+				value: 'm',
+				label: 'Male',
+			},
+			{
+				name: 'gender',
+				value: 'f',
+				label: 'Female',
+			},
+		],
+	},
 ];
 
 const health02 = [
-  ...defaults,  {
-      id: "brand",
-      title: "Brand",
-      type: "checkbox",
-      content_checkbox: false,
-      content: healthBrands[5602].map(brand => ({
-        name: brand,
-        value: brand,
-        label: brand
-      }))
-    }, {
-      id: "type",
-      title: "Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: healthTypes[5602].map(type => ({
-        name: "type",
-        value: type,
-        label: type
-      }))
-    }, {
-      id: "ad_condition",
-      title: "Condition",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "ad_condition",
-          value: "used",
-          label: "Used",
-        },{
-          name: "ad_condition",
-          value: "new",
-          label: "New",
-        }
-      ],
-    },{
-      id: "age",
-      title: "Age Group",
-      type: "radio",
-      content_checkbox: false,
-      content: age_group.map(age => ({
-          name: "age",
-          value: age.toLowerCase(),
-          label: age,
-        }))
-    },{
-      id: "formulation",
-      title: "Formulation",
-      type: "radio",
-      content_checkbox: false,
-      content: healthProductFormulation["default"].map(formulation => ({
-          name: "formulation",
-          value: formulation.toLowerCase(),
-          label: formulation,
-        }))
-    },
+	...defaults,
+	{
+		id: 'brand',
+		title: 'Brand',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: healthBrands[5602].map((brand) => ({
+			name: brand,
+			value: brand,
+			label: brand,
+		})),
+	},
+	{
+		id: 'type',
+		title: 'Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: healthTypes[5602].map((type) => ({
+			name: 'type',
+			value: type,
+			label: type,
+		})),
+	},
+	{
+		id: 'ad_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'ad_condition',
+				value: 'used',
+				label: 'Used',
+			},
+			{
+				name: 'ad_condition',
+				value: 'new',
+				label: 'New',
+			},
+		],
+	},
+	{
+		id: 'age',
+		title: 'Age Group',
+		type: 'radio',
+		content_checkbox: false,
+		content: age_group.map((age) => ({
+			name: 'age',
+			value: age.toLowerCase(),
+			label: age,
+		})),
+	},
+	{
+		id: 'formulation',
+		title: 'Formulation',
+		type: 'radio',
+		content_checkbox: false,
+		content: healthProductFormulation['default'].map((formulation) => ({
+			name: 'formulation',
+			value: formulation.toLowerCase(),
+			label: formulation,
+		})),
+	},
 ];
 
 const health03 = [
-  ...defaults,  {
-      id: "brand",
-      title: "Brand",
-      type: "checkbox",
-      content_checkbox: false,
-      content: healthBrands[5603].map(brand => ({
-        name: brand,
-        value: brand,
-        label: brand
-      }))
-    }, {
-      id: "type",
-      title: "Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: healthTypes[5603].map(type => ({
-        name: "type",
-        value: type,
-        label: type
-      }))
-    }, {
-      id: "formulation",
-      title: "Formulation",
-      type: "radio",
-      content_checkbox: false,
-      content: healthProductFormulation[5603].map(formulation => ({
-          name: "formulation",
-          value: formulation.toLowerCase(),
-          label: formulation,
-        }))
-    },
+	...defaults,
+	{
+		id: 'brand',
+		title: 'Brand',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: healthBrands[5603].map((brand) => ({
+			name: brand,
+			value: brand,
+			label: brand,
+		})),
+	},
+	{
+		id: 'type',
+		title: 'Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: healthTypes[5603].map((type) => ({
+			name: 'type',
+			value: type,
+			label: type,
+		})),
+	},
+	{
+		id: 'formulation',
+		title: 'Formulation',
+		type: 'radio',
+		content_checkbox: false,
+		content: healthProductFormulation[5603].map((formulation) => ({
+			name: 'formulation',
+			value: formulation.toLowerCase(),
+			label: formulation,
+		})),
+	},
 ];
 
 const health04 = [
-  ...defaults,  {
-      id: "brand",
-      title: "Brand",
-      type: "checkbox",
-      content_checkbox: false,
-      content: healthBrands[5604].map(brand => ({
-        name: brand,
-        value: brand,
-        label: brand
-      }))
-    }, {
-      id: "type",
-      title: "Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: healthTypes[5604].map(type => ({
-        name: "type",
-        value: type,
-        label: type
-      }))
-    }
+	...defaults,
+	{
+		id: 'brand',
+		title: 'Brand',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: healthBrands[5604].map((brand) => ({
+			name: brand,
+			value: brand,
+			label: brand,
+		})),
+	},
+	{
+		id: 'type',
+		title: 'Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: healthTypes[5604].map((type) => ({
+			name: 'type',
+			value: type,
+			label: type,
+		})),
+	},
 ];
 
 const health05 = [
-  ...defaults,  {
-      id: "brand",
-      title: "Brand",
-      type: "checkbox",
-      content_checkbox: false,
-      content: healthBrands[5605].map(brand => ({
-        name: brand,
-        value: brand,
-        label: brand
-      }))
-    }, {
-      id: "type",
-      title: "Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: healthTypes[5605].map(type => ({
-        name: "type",
-        value: type,
-        label: type
-      }))
-    }, {
-      id: "color",
-      title: "Color",
-      type: "checkbox",
-      content_checkbox: false,
-      content: colors.map(color => ({
-        name: color,
-        value: color,
-        label: color
-      }))
-    },{
-      id: "ad_condition",
-      title: "Condition",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "ad_condition",
-          value: "used",
-          label: "Used",
-        },{
-          name: "ad_condition",
-          value: "new",
-          label: "New",
-        }
-      ],
-    }, {
-      id: "gender",
-      title: "Gender",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "gender",
-          value: "m",
-          label: "Male",
-        },{
-          name: "gender",
-          value: "f",
-          label: "Female",
-        }
-      ],
-    },
+	...defaults,
+	{
+		id: 'brand',
+		title: 'Brand',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: healthBrands[5605].map((brand) => ({
+			name: brand,
+			value: brand,
+			label: brand,
+		})),
+	},
+	{
+		id: 'type',
+		title: 'Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: healthTypes[5605].map((type) => ({
+			name: 'type',
+			value: type,
+			label: type,
+		})),
+	},
+	{
+		id: 'color',
+		title: 'Color',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: colors.map((color) => ({
+			name: color,
+			value: color,
+			label: color,
+		})),
+	},
+	{
+		id: 'ad_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'ad_condition',
+				value: 'used',
+				label: 'Used',
+			},
+			{
+				name: 'ad_condition',
+				value: 'new',
+				label: 'New',
+			},
+		],
+	},
+	{
+		id: 'gender',
+		title: 'Gender',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'gender',
+				value: 'm',
+				label: 'Male',
+			},
+			{
+				name: 'gender',
+				value: 'f',
+				label: 'Female',
+			},
+		],
+	},
 ];
 
 const health06 = [
-  ...defaults,  {
-      id: "brand",
-      title: "Brand",
-      type: "checkbox",
-      content_checkbox: false,
-      content: healthBrands[5606].map(brand => ({
-        name: brand,
-        value: brand,
-        label: brand
-      }))
-    }, {
-      id: "type",
-      title: "Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: healthTypes[5606].map(type => ({
-        name: "type",
-        value: type,
-        label: type
-      }))
-    }
+	...defaults,
+	{
+		id: 'brand',
+		title: 'Brand',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: healthBrands[5606].map((brand) => ({
+			name: brand,
+			value: brand,
+			label: brand,
+		})),
+	},
+	{
+		id: 'type',
+		title: 'Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: healthTypes[5606].map((type) => ({
+			name: 'type',
+			value: type,
+			label: type,
+		})),
+	},
 ];
 
 const health07 = [
-  ...defaults,  {
-      id: "brand",
-      title: "Brand",
-      type: "checkbox",
-      content_checkbox: false,
-      content: healthBrands[5607].map(brand => ({
-        name: brand,
-        value: brand,
-        label: brand
-      }))
-    }, {
-      id: "type",
-      title: "Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: healthTypes[5607].map(type => ({
-        name: "type",
-        value: type,
-        label: type
-      }))
-    }, {
-      id: "gender",
-      title: "Gender",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "gender",
-          value: "m",
-          label: "Male",
-        },{
-          name: "gender",
-          value: "f",
-          label: "Female",
-        }
-      ],
-    },
+	...defaults,
+	{
+		id: 'brand',
+		title: 'Brand',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: healthBrands[5607].map((brand) => ({
+			name: brand,
+			value: brand,
+			label: brand,
+		})),
+	},
+	{
+		id: 'type',
+		title: 'Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: healthTypes[5607].map((type) => ({
+			name: 'type',
+			value: type,
+			label: type,
+		})),
+	},
+	{
+		id: 'gender',
+		title: 'Gender',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'gender',
+				value: 'm',
+				label: 'Male',
+			},
+			{
+				name: 'gender',
+				value: 'f',
+				label: 'Female',
+			},
+		],
+	},
 ];
 
 const health08 = [
-  ...defaults,  {
-      id: "type",
-      title: "Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: healthTypes[5608].map(type => ({
-        name: "type",
-        value: type,
-        label: type
-      }))
-    },{
-      id: "ad_condition",
-      title: "Condition",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "ad_condition",
-          value: "used",
-          label: "Used",
-        },{
-          name: "ad_condition",
-          value: "new",
-          label: "New",
-        }
-      ],
-    }
+	...defaults,
+	{
+		id: 'type',
+		title: 'Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: healthTypes[5608].map((type) => ({
+			name: 'type',
+			value: type,
+			label: type,
+		})),
+	},
+	{
+		id: 'ad_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'ad_condition',
+				value: 'used',
+				label: 'Used',
+			},
+			{
+				name: 'ad_condition',
+				value: 'new',
+				label: 'New',
+			},
+		],
+	},
 ];
 
 // Home and Accessories
 const home = [
-  ...defaults,{
-      id: "brand",
-      title: "Brand",
-      type: "checkbox",
-      content_checkbox: false,
-      content: homeBrands["default"].map(brand => ({
-        name: brand,
-        value: brand,
-        label: brand
-      }))
-    }, {
-      id: "type",
-      title: "Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: homeTypes["default"].map(type => ({
-        name: "type",
-        value: type,
-        label: type
-      }))
-    }, {
-      id: "ad_condition",
-      title: "Condition",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "ad_condition",
-          value: "used",
-          label: "Used",
-        },{
-          name: "ad_condition",
-          value: "new",
-          label: "Brand New",
-        }, {
-          name: "ad_condition",
-          value: "refurbished",
-          label: "Refurbished",
-        }
-      ],
-    }, 
+	...defaults,
+	{
+		id: 'brand',
+		title: 'Brand',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: homeBrands['default'].map((brand) => ({
+			name: brand,
+			value: brand,
+			label: brand,
+		})),
+	},
+	{
+		id: 'type',
+		title: 'Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: homeTypes['default'].map((type) => ({
+			name: 'type',
+			value: type,
+			label: type,
+		})),
+	},
+	{
+		id: 'ad_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'ad_condition',
+				value: 'used',
+				label: 'Used',
+			},
+			{
+				name: 'ad_condition',
+				value: 'new',
+				label: 'Brand New',
+			},
+			{
+				name: 'ad_condition',
+				value: 'refurbished',
+				label: 'Refurbished',
+			},
+		],
+	},
 ];
 const home01 = [
-  ...defaults,{
-      id: "brand",
-      title: "Brand",
-      type: "checkbox",
-      content_checkbox: false,
-      content: homeBrands[5701].map(brand => ({
-        name: brand,
-        value: brand,
-        label: brand
-      }))
-    }, {
-      id: "type",
-      title: "Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: homeTypes[5701].map(type => ({
-        name: "type",
-        value: type,
-        label: type
-      }))
-    }, {
-      id: "ad_condition",
-      title: "Condition",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "ad_condition",
-          value: "used",
-          label: "Used",
-        },{
-          name: "ad_condition",
-          value: "new",
-          label: "Brand New",
-        }, {
-          name: "ad_condition",
-          value: "refurbished",
-          label: "Refurbished",
-        }
-      ],
-    }, {
-      id: "color",
-      title: "Color",
-      type: "checkbox",
-      content_checkbox: false,
-      content: colors.map(color => ({
-        name: color,
-        value: color,
-        label: color
-      }))
-    }, {
-      id: "material",
-      title: "Material",
-      type: "checkbox",
-      content_checkbox: false,
-      content: homeMaterials.map(material => ({
-        name: material,
-        value: material,
-        label: material
-      }))
-    }, {
-      id: "furniture",
-      title: "For",
-      type: "checkbox",
-      content_checkbox: false,
-      content: furnitureFor.map(furnitureUse => ({
-        name: furnitureUse,
-        value: furnitureUse,
-        label: furnitureUse
-      }))
-    },
+	...defaults,
+	{
+		id: 'brand',
+		title: 'Brand',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: homeBrands[5701].map((brand) => ({
+			name: brand,
+			value: brand,
+			label: brand,
+		})),
+	},
+	{
+		id: 'type',
+		title: 'Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: homeTypes[5701].map((type) => ({
+			name: 'type',
+			value: type,
+			label: type,
+		})),
+	},
+	{
+		id: 'ad_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'ad_condition',
+				value: 'used',
+				label: 'Used',
+			},
+			{
+				name: 'ad_condition',
+				value: 'new',
+				label: 'Brand New',
+			},
+			{
+				name: 'ad_condition',
+				value: 'refurbished',
+				label: 'Refurbished',
+			},
+		],
+	},
+	{
+		id: 'color',
+		title: 'Color',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: colors.map((color) => ({
+			name: color,
+			value: color,
+			label: color,
+		})),
+	},
+	{
+		id: 'material',
+		title: 'Material',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: homeMaterials.map((material) => ({
+			name: material,
+			value: material,
+			label: material,
+		})),
+	},
+	{
+		id: 'furniture',
+		title: 'For',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: furnitureFor.map((furnitureUse) => ({
+			name: furnitureUse,
+			value: furnitureUse,
+			label: furnitureUse,
+		})),
+	},
 ];
 const home02 = [
-  ...defaults,{
-      id: "brand",
-      title: "Brand",
-      type: "checkbox",
-      content_checkbox: false,
-      content: homeBrands[5702].map(brand => ({
-        name: brand,
-        value: brand,
-        label: brand
-      }))
-    }, {
-      id: "type",
-      title: "Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: homeTypes[5702].map(type => ({
-        name: "type",
-        value: type,
-        label: type
-      }))
-    }, {
-      id: "ad_condition",
-      title: "Condition",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "ad_condition",
-          value: "used",
-          label: "Used",
-        },{
-          name: "ad_condition",
-          value: "new",
-          label: "Brand New",
-        }, {
-          name: "ad_condition",
-          value: "refurbished",
-          label: "Refurbished",
-        }
-      ],
-    }, 
+	...defaults,
+	{
+		id: 'brand',
+		title: 'Brand',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: homeBrands[5702].map((brand) => ({
+			name: brand,
+			value: brand,
+			label: brand,
+		})),
+	},
+	{
+		id: 'type',
+		title: 'Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: homeTypes[5702].map((type) => ({
+			name: 'type',
+			value: type,
+			label: type,
+		})),
+	},
+	{
+		id: 'ad_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'ad_condition',
+				value: 'used',
+				label: 'Used',
+			},
+			{
+				name: 'ad_condition',
+				value: 'new',
+				label: 'Brand New',
+			},
+			{
+				name: 'ad_condition',
+				value: 'refurbished',
+				label: 'Refurbished',
+			},
+		],
+	},
 ];
 const home04 = [
-  ...defaults,{
-      id: "brand",
-      title: "Brand",
-      type: "checkbox",
-      content_checkbox: false,
-      content: homeBrands[5707].map(brand => ({
-        name: brand,
-        value: brand,
-        label: brand
-      }))
-    }, {
-      id: "type",
-      title: "Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: homeTypes[5707].map(type => ({
-        name: "type",
-        value: type,
-        label: type
-      }))
-    }, {
-      id: "ad_condition",
-      title: "Condition",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "ad_condition",
-          value: "used",
-          label: "Used",
-        },{
-          name: "ad_condition",
-          value: "new",
-          label: "Brand New",
-        }, {
-          name: "ad_condition",
-          value: "refurbished",
-          label: "Refurbished",
-        }
-      ],
-    }, {
-      id: "formulation",
-      title: "Formulation",
-      type: "checkbox",
-      content_checkbox: false,
-      content: healthProductFormulation["default"].map(formulation => ({
-          name: "formulation",
-          value: formulation.toLowerCase(),
-          label: formulation,
-        }))
-    },
+	...defaults,
+	{
+		id: 'brand',
+		title: 'Brand',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: homeBrands[5707].map((brand) => ({
+			name: brand,
+			value: brand,
+			label: brand,
+		})),
+	},
+	{
+		id: 'type',
+		title: 'Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: homeTypes[5707].map((type) => ({
+			name: 'type',
+			value: type,
+			label: type,
+		})),
+	},
+	{
+		id: 'ad_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'ad_condition',
+				value: 'used',
+				label: 'Used',
+			},
+			{
+				name: 'ad_condition',
+				value: 'new',
+				label: 'Brand New',
+			},
+			{
+				name: 'ad_condition',
+				value: 'refurbished',
+				label: 'Refurbished',
+			},
+		],
+	},
+	{
+		id: 'formulation',
+		title: 'Formulation',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: healthProductFormulation['default'].map((formulation) => ({
+			name: 'formulation',
+			value: formulation.toLowerCase(),
+			label: formulation,
+		})),
+	},
 ];
 const home05 = [
-  ...defaults,{
-      id: "brand",
-      title: "Brand",
-      type: "checkbox",
-      content_checkbox: false,
-      content: homeBrands[5707].map(brand => ({
-        name: brand,
-        value: brand,
-        label: brand
-      }))
-    }, {
-      id: "type",
-      title: "Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: homeTypes[5707].map(type => ({
-        name: "type",
-        value: type,
-        label: type
-      }))
-    }, {
-      id: "ad_condition",
-      title: "Condition",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "ad_condition",
-          value: "used",
-          label: "Used",
-        },{
-          name: "ad_condition",
-          value: "new",
-          label: "Brand New",
-        }, {
-          name: "ad_condition",
-          value: "refurbished",
-          label: "Refurbished",
-        }
-      ],
-    },  {
-      id: "color",
-      title: "Color",
-      type: "checkbox",
-      content_checkbox: false,
-      content: colors.map(color => ({
-        name: color,
-        value: color,
-        label: color
-      }))
-    },
+	...defaults,
+	{
+		id: 'brand',
+		title: 'Brand',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: homeBrands[5707].map((brand) => ({
+			name: brand,
+			value: brand,
+			label: brand,
+		})),
+	},
+	{
+		id: 'type',
+		title: 'Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: homeTypes[5707].map((type) => ({
+			name: 'type',
+			value: type,
+			label: type,
+		})),
+	},
+	{
+		id: 'ad_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'ad_condition',
+				value: 'used',
+				label: 'Used',
+			},
+			{
+				name: 'ad_condition',
+				value: 'new',
+				label: 'Brand New',
+			},
+			{
+				name: 'ad_condition',
+				value: 'refurbished',
+				label: 'Refurbished',
+			},
+		],
+	},
+	{
+		id: 'color',
+		title: 'Color',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: colors.map((color) => ({
+			name: color,
+			value: color,
+			label: color,
+		})),
+	},
 ];
 const home06 = [
-  ...defaults,{
-      id: "brand",
-      title: "Brand",
-      type: "checkbox",
-      content_checkbox: false,
-      content: homeBrands[5706].map(brand => ({
-        name: brand,
-        value: brand,
-        label: brand
-      }))
-    }, {
-      id: "type",
-      title: "Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: homeTypes[5706].map(type => ({
-        name: "type",
-        value: type,
-        label: type
-      }))
-    }, {
-      id: "ad_condition",
-      title: "Condition",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "ad_condition",
-          value: "used",
-          label: "Used",
-        },{
-          name: "ad_condition",
-          value: "new",
-          label: "Brand New",
-        }, {
-          name: "ad_condition",
-          value: "refurbished",
-          label: "Refurbished",
-        }
-      ],
-    }, 
+	...defaults,
+	{
+		id: 'brand',
+		title: 'Brand',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: homeBrands[5706].map((brand) => ({
+			name: brand,
+			value: brand,
+			label: brand,
+		})),
+	},
+	{
+		id: 'type',
+		title: 'Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: homeTypes[5706].map((type) => ({
+			name: 'type',
+			value: type,
+			label: type,
+		})),
+	},
+	{
+		id: 'ad_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'ad_condition',
+				value: 'used',
+				label: 'Used',
+			},
+			{
+				name: 'ad_condition',
+				value: 'new',
+				label: 'Brand New',
+			},
+			{
+				name: 'ad_condition',
+				value: 'refurbished',
+				label: 'Refurbished',
+			},
+		],
+	},
 ];
 const home07 = [
-  ...defaults,{
-      id: "brand",
-      title: "Brand",
-      type: "checkbox",
-      content_checkbox: false,
-      content: homeBrands[5707].map(brand => ({
-        name: brand,
-        value: brand,
-        label: brand
-      }))
-    }, {
-      id: "type",
-      title: "Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: homeTypes[5707].map(type => ({
-        name: "type",
-        value: type,
-        label: type
-      }))
-    }, {
-      id: "ad_condition",
-      title: "Condition",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "ad_condition",
-          value: "used",
-          label: "Used",
-        },{
-          name: "ad_condition",
-          value: "new",
-          label: "Brand New",
-        }, {
-          name: "ad_condition",
-          value: "refurbished",
-          label: "Refurbished",
-        }
-      ],
-    }, 
+	...defaults,
+	{
+		id: 'brand',
+		title: 'Brand',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: homeBrands[5707].map((brand) => ({
+			name: brand,
+			value: brand,
+			label: brand,
+		})),
+	},
+	{
+		id: 'type',
+		title: 'Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: homeTypes[5707].map((type) => ({
+			name: 'type',
+			value: type,
+			label: type,
+		})),
+	},
+	{
+		id: 'ad_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'ad_condition',
+				value: 'used',
+				label: 'Used',
+			},
+			{
+				name: 'ad_condition',
+				value: 'new',
+				label: 'Brand New',
+			},
+			{
+				name: 'ad_condition',
+				value: 'refurbished',
+				label: 'Refurbished',
+			},
+		],
+	},
 ];
 // Tradesman and construction
 const tradesman = [
-	 {
-      id: "mode_of_charge",
-      title: "Mode of Charge",
-      type: "checkbox",
-      content_checkbox: false,
-      content: mode_of_charge.map(mode_of_charge => ({
-        name: mode_of_charge.name,
-        value: mode_of_charge.value.toLowerCase(),
-        label: mode_of_charge.name
-      }))
-    }, defaults[0],
-    {
-      id: "type",
-      title: "Service Type:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: tradesmanType[5803].concat(tradesmanType[5804], tradesmanType[5805], tradesmanType[5806], tradesmanType[5807], tradesmanType[5808], tradesmanType[5809], tradesmanType[5810], tradesmanType[5811], tradesmanType[5812], tradesmanType[5813]).map(type => ({
-        name: "type",
-        value: type.toLowerCase(),
-        label: type
-      }))
-    }, {
-      id: "service_type",
-      title: "Service In:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: tradesmanArea["default"].map(service_type => ({
-        name: service_type,
-        value: service_type.toLowerCase(),
-        label: service_type
-      }))
-    },{
-      id: "available_for_travel",
-      title: "Available to Travel?",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "available_for_travel",
-          value: "yes",
-          label: "Yes",
-        },{
-          name: "available_for_travel",
-          value: "no",
-          label: "No",
-        }
-      ],
-    }, {
-      id: "years",
-      title: "Years of Experience",
-      type: "radio",
-      content_checkbox: false,
-      options: [{
-          name: "min_years",
-          type: "text",
-          placeholder: "min",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },{
-          name: "max_years",
-          type: "text",
-          placeholder: "max",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },],
-      content: [
-        {
-          name: "years",
-          value: "",
-          label: "All",
-        },
-        {
-          name: "years",
-          value: "3",
-          label: "0 - 3 years",
-        },
-        {
-          name: "years",
-          value: "6",
-          label: "3 - 6 years",
-        },
-        {
-          name: "years",
-          value: "10",
-          label: "6 - 10 years",
-        },{
-          name: "years",
-          value: "15",
-          label: "10 - 15 years",
-        },{
-          name: "years",
-          value: "20",
-          label: "15 - 20 years",
-        },{
-          name: "years",
-          value: ">20",
-          label: "20 years+",
-        },
-      ],
-    },
+	{
+		id: 'mode_of_charge',
+		title: 'Mode of Charge',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: mode_of_charge.map((mode_of_charge) => ({
+			name: mode_of_charge.name,
+			value: mode_of_charge.value.toLowerCase(),
+			label: mode_of_charge.name,
+		})),
+	},
+	defaults[0],
+	{
+		id: 'type',
+		title: 'Service Type:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: tradesmanType[5803]
+			.concat(
+				tradesmanType[5804],
+				tradesmanType[5805],
+				tradesmanType[5806],
+				tradesmanType[5807],
+				tradesmanType[5808],
+				tradesmanType[5809],
+				tradesmanType[5810],
+				tradesmanType[5811],
+				tradesmanType[5812],
+				tradesmanType[5813]
+			)
+			.map((type) => ({
+				name: 'type',
+				value: type.toLowerCase(),
+				label: type,
+			})),
+	},
+	{
+		id: 'service_type',
+		title: 'Service In:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: tradesmanArea['default'].map((service_type) => ({
+			name: service_type,
+			value: service_type.toLowerCase(),
+			label: service_type,
+		})),
+	},
+	{
+		id: 'available_for_travel',
+		title: 'Available to Travel?',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'available_for_travel',
+				value: 'yes',
+				label: 'Yes',
+			},
+			{
+				name: 'available_for_travel',
+				value: 'no',
+				label: 'No',
+			},
+		],
+	},
+	{
+		id: 'years',
+		title: 'Years of Experience',
+		type: 'radio',
+		content_checkbox: false,
+		options: [
+			{
+				name: 'min_years',
+				type: 'text',
+				placeholder: 'min',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+			{
+				name: 'max_years',
+				type: 'text',
+				placeholder: 'max',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+		],
+		content: [
+			{
+				name: 'years',
+				value: '',
+				label: 'All',
+			},
+			{
+				name: 'years',
+				value: '3',
+				label: '0 - 3 years',
+			},
+			{
+				name: 'years',
+				value: '6',
+				label: '3 - 6 years',
+			},
+			{
+				name: 'years',
+				value: '10',
+				label: '6 - 10 years',
+			},
+			{
+				name: 'years',
+				value: '15',
+				label: '10 - 15 years',
+			},
+			{
+				name: 'years',
+				value: '20',
+				label: '15 - 20 years',
+			},
+			{
+				name: 'years',
+				value: '>20',
+				label: '20 years+',
+			},
+		],
+	},
 ];
 const tradesman06 = [
- defaults[0],
-    {
-      id: "service_type",
-      title: "Service Type:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: tradesmanArea[5806].map(service_type => ({
-        name: service_type,
-        value: service_type.toLowerCase(),
-        label: service_type
-      }))
-    }, {
-      id: "type",
-      title: "Service In:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: tradesmanType[5806].map(type => ({
-        name: "type",
-        value: type.toLowerCase(),
-        label: type
-      }))
-    },{
-      id: "available_for_travel",
-      title: "Available to Travel?",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "available_for_travel",
-          value: "yes",
-          label: "Yes",
-        },{
-          name: "available_for_travel",
-          value: "no",
-          label: "No",
-        }
-      ],
-    },
+	defaults[0],
+	{
+		id: 'service_type',
+		title: 'Service Type:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: tradesmanArea[5806].map((service_type) => ({
+			name: service_type,
+			value: service_type.toLowerCase(),
+			label: service_type,
+		})),
+	},
+	{
+		id: 'type',
+		title: 'Service In:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: tradesmanType[5806].map((type) => ({
+			name: 'type',
+			value: type.toLowerCase(),
+			label: type,
+		})),
+	},
+	{
+		id: 'available_for_travel',
+		title: 'Available to Travel?',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'available_for_travel',
+				value: 'yes',
+				label: 'Yes',
+			},
+			{
+				name: 'available_for_travel',
+				value: 'no',
+				label: 'No',
+			},
+		],
+	},
 ];
 const tradesman08 = [
- defaults[0],
-    {
-      id: "service_type",
-      title: "Service Type:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: tradesmanArea[5808].map(service_type => ({
-        name: service_type,
-        value: service_type.toLowerCase(),
-        label: service_type
-      }))
-    }, {
-      id: "type",
-      title: "Service In:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: tradesmanType[5808].map(type => ({
-        name: "type",
-        value: type.toLowerCase(),
-        label: type
-      }))
-    },{
-      id: "available_for_travel",
-      title: "Available to Travel?",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "available_for_travel",
-          value: "yes",
-          label: "Yes",
-        },{
-          name: "available_for_travel",
-          value: "no",
-          label: "No",
-        }
-      ],
-    },
+	defaults[0],
+	{
+		id: 'service_type',
+		title: 'Service Type:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: tradesmanArea[5808].map((service_type) => ({
+			name: service_type,
+			value: service_type.toLowerCase(),
+			label: service_type,
+		})),
+	},
+	{
+		id: 'type',
+		title: 'Service In:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: tradesmanType[5808].map((type) => ({
+			name: 'type',
+			value: type.toLowerCase(),
+			label: type,
+		})),
+	},
+	{
+		id: 'available_for_travel',
+		title: 'Available to Travel?',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'available_for_travel',
+				value: 'yes',
+				label: 'Yes',
+			},
+			{
+				name: 'available_for_travel',
+				value: 'no',
+				label: 'No',
+			},
+		],
+	},
 ];
 const tradesman11 = [
- defaults[0],
-    {
-      id: "type",
-      title: "Service Type:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: tradesmanType[5811].map(type => ({
-        name: "type",
-        value: type.toLowerCase(),
-        label: type
-      }))
-    },
+	defaults[0],
+	{
+		id: 'type',
+		title: 'Service Type:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: tradesmanType[5811].map((type) => ({
+			name: 'type',
+			value: type.toLowerCase(),
+			label: type,
+		})),
+	},
 ];
 const tradesman03 = [
- defaults[0],
-    {
-      id: "type",
-      title: "Service Type:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: tradesmanType[5803].map(type => ({
-        name: "type",
-        value: type.toLowerCase(),
-        label: type
-      }))
-    }
+	defaults[0],
+	{
+		id: 'type',
+		title: 'Service Type:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: tradesmanType[5803].map((type) => ({
+			name: 'type',
+			value: type.toLowerCase(),
+			label: type,
+		})),
+	},
 ];
 const tradesman02 = [
- defaults[0],
-    {
-      id: "service_type",
-      title: "Service Type:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: tradesmanArea[5802].map(service_type => ({
-        name: service_type,
-        value: service_type.toLowerCase(),
-        label: service_type
-      }))
-    },{
-      id: "available_for_travel",
-      title: "Available to Travel?",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "available_for_travel",
-          value: "yes",
-          label: "Yes",
-        },{
-          name: "available_for_travel",
-          value: "no",
-          label: "No",
-        }
-      ],
-    },
+	defaults[0],
+	{
+		id: 'service_type',
+		title: 'Service Type:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: tradesmanArea[5802].map((service_type) => ({
+			name: service_type,
+			value: service_type.toLowerCase(),
+			label: service_type,
+		})),
+	},
+	{
+		id: 'available_for_travel',
+		title: 'Available to Travel?',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'available_for_travel',
+				value: 'yes',
+				label: 'Yes',
+			},
+			{
+				name: 'available_for_travel',
+				value: 'no',
+				label: 'No',
+			},
+		],
+	},
 ];
 const tradesman04 = [
- defaults[0],
-    {
-      id: "service_type",
-      title: "Service Type:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: tradesmanArea[5804].map(service_type => ({
-        name: service_type,
-        value: service_type.toLowerCase(),
-        label: service_type
-      }))
-    }, {
-      id: "type",
-      title: "Service In:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: tradesmanType[5804].map(type => ({
-        name: "type",
-        value: type.toLowerCase(),
-        label: type
-      }))
-    },{
-      id: "available_for_travel",
-      title: "Available to Travel?",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "available_for_travel",
-          value: "yes",
-          label: "Yes",
-        },{
-          name: "available_for_travel",
-          value: "no",
-          label: "No",
-        }
-      ],
-    },
-]
+	defaults[0],
+	{
+		id: 'service_type',
+		title: 'Service Type:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: tradesmanArea[5804].map((service_type) => ({
+			name: service_type,
+			value: service_type.toLowerCase(),
+			label: service_type,
+		})),
+	},
+	{
+		id: 'type',
+		title: 'Service In:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: tradesmanType[5804].map((type) => ({
+			name: 'type',
+			value: type.toLowerCase(),
+			label: type,
+		})),
+	},
+	{
+		id: 'available_for_travel',
+		title: 'Available to Travel?',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'available_for_travel',
+				value: 'yes',
+				label: 'Yes',
+			},
+			{
+				name: 'available_for_travel',
+				value: 'no',
+				label: 'No',
+			},
+		],
+	},
+];
 const tradesman09 = [
- defaults[0],
-    {
-      id: "service_type",
-      title: "Service Type:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: tradesmanArea[5809].map(service_type => ({
-        name: service_type,
-        value: service_type.toLowerCase(),
-        label: service_type
-      }))
-    }, {
-      id: "type",
-      title: "Service In:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: tradesmanType[5809].map(type => ({
-        name: "type",
-        value: type.toLowerCase(),
-        label: type
-      }))
-    },{
-      id: "available_for_travel",
-      title: "Available to Travel?",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "available_for_travel",
-          value: "yes",
-          label: "Yes",
-        },{
-          name: "available_for_travel",
-          value: "no",
-          label: "No",
-        }
-      ],
-    },
+	defaults[0],
+	{
+		id: 'service_type',
+		title: 'Service Type:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: tradesmanArea[5809].map((service_type) => ({
+			name: service_type,
+			value: service_type.toLowerCase(),
+			label: service_type,
+		})),
+	},
+	{
+		id: 'type',
+		title: 'Service In:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: tradesmanType[5809].map((type) => ({
+			name: 'type',
+			value: type.toLowerCase(),
+			label: type,
+		})),
+	},
+	{
+		id: 'available_for_travel',
+		title: 'Available to Travel?',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'available_for_travel',
+				value: 'yes',
+				label: 'Yes',
+			},
+			{
+				name: 'available_for_travel',
+				value: 'no',
+				label: 'No',
+			},
+		],
+	},
 ];
 const tradesman07 = [
- defaults[0],
-    {
-      id: "service_type",
-      title: "Service Type:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: tradesmanArea[5807].map(service_type => ({
-        name: service_type,
-        value: service_type.toLowerCase(),
-        label: service_type
-      }))
-    }, {
-      id: "type",
-      title: "Service In:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: tradesmanType[5807].map(type => ({
-        name: "type",
-        value: type.toLowerCase(),
-        label: type
-      }))
-    },{
-      id: "available_for_travel",
-      title: "Available to Travel?",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "available_for_travel",
-          value: "yes",
-          label: "Yes",
-        },{
-          name: "available_for_travel",
-          value: "no",
-          label: "No",
-        }
-      ],
-    },
+	defaults[0],
+	{
+		id: 'service_type',
+		title: 'Service Type:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: tradesmanArea[5807].map((service_type) => ({
+			name: service_type,
+			value: service_type.toLowerCase(),
+			label: service_type,
+		})),
+	},
+	{
+		id: 'type',
+		title: 'Service In:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: tradesmanType[5807].map((type) => ({
+			name: 'type',
+			value: type.toLowerCase(),
+			label: type,
+		})),
+	},
+	{
+		id: 'available_for_travel',
+		title: 'Available to Travel?',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'available_for_travel',
+				value: 'yes',
+				label: 'Yes',
+			},
+			{
+				name: 'available_for_travel',
+				value: 'no',
+				label: 'No',
+			},
+		],
+	},
 ];
 const tradesman05 = [
- defaults[0],
-    {
-      id: "service_type",
-      title: "Service Type:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: tradesmanArea[5805].map(service_type => ({
-        name: service_type,
-        value: service_type.toLowerCase(),
-        label: service_type
-      }))
-    }, {
-      id: "type",
-      title: "Service In:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: tradesmanType[5805].map(type => ({
-        name: "type",
-        value: type.toLowerCase(),
-        label: type
-      }))
-    },{
-      id: "available_for_travel",
-      title: "Available to Travel?",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "available_for_travel",
-          value: "yes",
-          label: "Yes",
-        },{
-          name: "available_for_travel",
-          value: "no",
-          label: "No",
-        }
-      ],
-    },
-]
+	defaults[0],
+	{
+		id: 'service_type',
+		title: 'Service Type:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: tradesmanArea[5805].map((service_type) => ({
+			name: service_type,
+			value: service_type.toLowerCase(),
+			label: service_type,
+		})),
+	},
+	{
+		id: 'type',
+		title: 'Service In:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: tradesmanType[5805].map((type) => ({
+			name: 'type',
+			value: type.toLowerCase(),
+			label: type,
+		})),
+	},
+	{
+		id: 'available_for_travel',
+		title: 'Available to Travel?',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'available_for_travel',
+				value: 'yes',
+				label: 'Yes',
+			},
+			{
+				name: 'available_for_travel',
+				value: 'no',
+				label: 'No',
+			},
+		],
+	},
+];
 const tradesman12 = [
- defaults[0],
-    {
-      id: "service_type",
-      title: "Service Type:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: tradesmanArea[5812].map(service_type => ({
-        name: service_type,
-        value: service_type.toLowerCase(),
-        label: service_type
-      }))
-    }, {
-      id: "type",
-      title: "Service In:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: tradesmanType[5812].map(type => ({
-        name: "type",
-        value: type.toLowerCase(),
-        label: type
-      }))
-    }
+	defaults[0],
+	{
+		id: 'service_type',
+		title: 'Service Type:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: tradesmanArea[5812].map((service_type) => ({
+			name: service_type,
+			value: service_type.toLowerCase(),
+			label: service_type,
+		})),
+	},
+	{
+		id: 'type',
+		title: 'Service In:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: tradesmanType[5812].map((type) => ({
+			name: 'type',
+			value: type.toLowerCase(),
+			label: type,
+		})),
+	},
 ];
 const tradesman10 = [
- defaults[0],
-    {
-      id: "service_type",
-      title: "Service Type:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: tradesmanArea[5810].map(service_type => ({
-        name: service_type,
-        value: service_type.toLowerCase(),
-        label: service_type
-      }))
-    }, {
-      id: "type",
-      title: "Service In:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: tradesmanType[5810].map(type => ({
-        name: "type",
-        value: type.toLowerCase(),
-        label: type
-      }))
-    }
+	defaults[0],
+	{
+		id: 'service_type',
+		title: 'Service Type:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: tradesmanArea[5810].map((service_type) => ({
+			name: service_type,
+			value: service_type.toLowerCase(),
+			label: service_type,
+		})),
+	},
+	{
+		id: 'type',
+		title: 'Service In:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: tradesmanType[5810].map((type) => ({
+			name: 'type',
+			value: type.toLowerCase(),
+			label: type,
+		})),
+	},
 ];
 const tradesman13 = [
- defaults[0],
-    {
-      id: "service_type",
-      title: "Service Type:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: tradesmanArea[5813].map(service_type => ({
-        name: service_type,
-        value: service_type.toLowerCase(),
-        label: service_type
-      }))
-    }, {
-      id: "type",
-      title: "Service In:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: tradesmanType[5813].map(type => ({
-        name: "type",
-        value: type.toLowerCase(),
-        label: type
-      }))
-    },  {
-      id: "years",
-      title: "Years of Experience",
-      type: "radio",
-      content_checkbox: false,
-      options: [{
-          name: "min_years",
-          type: "text",
-          placeholder: "min",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },{
-          name: "max_years",
-          type: "text",
-          placeholder: "max",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },],
-      content: [
-        {
-          name: "years",
-          value: "",
-          label: "All",
-        },
-        {
-          name: "years",
-          value: "3",
-          label: "0 - 3 years",
-        },
-        {
-          name: "years",
-          value: "6",
-          label: "3 - 6 years",
-        },
-        {
-          name: "years",
-          value: "10",
-          label: "6 - 10 years",
-        },{
-          name: "years",
-          value: "15",
-          label: "10 - 15 years",
-        },{
-          name: "years",
-          value: "20",
-          label: "15 - 20 years",
-        },{
-          name: "years",
-          value: ">20",
-          label: "20 years+",
-        },
-      ],
-    },
+	defaults[0],
+	{
+		id: 'service_type',
+		title: 'Service Type:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: tradesmanArea[5813].map((service_type) => ({
+			name: service_type,
+			value: service_type.toLowerCase(),
+			label: service_type,
+		})),
+	},
+	{
+		id: 'type',
+		title: 'Service In:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: tradesmanType[5813].map((type) => ({
+			name: 'type',
+			value: type.toLowerCase(),
+			label: type,
+		})),
+	},
+	{
+		id: 'years',
+		title: 'Years of Experience',
+		type: 'radio',
+		content_checkbox: false,
+		options: [
+			{
+				name: 'min_years',
+				type: 'text',
+				placeholder: 'min',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+			{
+				name: 'max_years',
+				type: 'text',
+				placeholder: 'max',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+		],
+		content: [
+			{
+				name: 'years',
+				value: '',
+				label: 'All',
+			},
+			{
+				name: 'years',
+				value: '3',
+				label: '0 - 3 years',
+			},
+			{
+				name: 'years',
+				value: '6',
+				label: '3 - 6 years',
+			},
+			{
+				name: 'years',
+				value: '10',
+				label: '6 - 10 years',
+			},
+			{
+				name: 'years',
+				value: '15',
+				label: '10 - 15 years',
+			},
+			{
+				name: 'years',
+				value: '20',
+				label: '15 - 20 years',
+			},
+			{
+				name: 'years',
+				value: '>20',
+				label: '20 years+',
+			},
+		],
+	},
 ];
 
 const software = [
 	defaults[0],
-    {
-      id: "price",
-      title: "Price #",
-      type: "radio",
-      content_checkbox: false,
-      options: [{
-          name: "min_price",
-          type: "text",
-          placeholder: "min",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },{
-          name: "max_price",
-          type: "text",
-          placeholder: "max",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },],
-      content: [
-        {
-          name: "price",
-          value: "",
-          label: "All",
-        },
-        {
-          name: "price",
-          value: "1500000",
-          label: "Under 1.5m",
-        },
-        {
-          name: "price",
-          value: "3000000",
-          label: "1.5m to 3m",
-        },
-        {
-          name: "price",
-          value: "7500000",
-          label: "3m to 7.5m",
-        },{
-          name: "price",
-          value: "11000000",
-          label: "7.5m to 11m",
-        },{
-          name: "price",
-          value: ">11000000",
-          label: "11m and more",
-        },
-      ],
-    }, {
-      id: "type",
-      title: "Software Type:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: softwareTypes.map(type => ({
-        name: "type",
-        value: type.toLowerCase(),
-        label: type
-      }))
-    },  {
-      id: "type",
-      title: "Plaftorm:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: softwarePlatforms["default"].map(platform => ({
-        name: platform,
-        value: platform.toLowerCase(),
-        label: platform
-      }))
-    },  {
-      id: "type",
-      title: "Game Genre:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: gameGenre.map(genre => ({
-        name: genre,
-        value: genre.toLowerCase(),
-        label: genre
-      }))
-    }, {
-      id: "year",
-      title: "Manufacture Year",
-      type: "checkbox",
-      content_checkbox: false,
-      content: arrayRange(1990, parseInt(new Date().getFullYear()), 1)
-        .reverse()
-        .map((val) => ({
-          name: "year",
-          value: val.toString(),
-          label: val.toString(),
-        })),
-    },
-]; 
+	{
+		id: 'price',
+		title: 'Price ₦',
+		type: 'radio',
+		content_checkbox: false,
+		options: [
+			{
+				name: 'min_price',
+				type: 'text',
+				placeholder: 'min',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+			{
+				name: 'max_price',
+				type: 'text',
+				placeholder: 'max',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+		],
+		content: [
+			{
+				name: 'price',
+				value: '',
+				label: 'All',
+			},
+			{
+				name: 'price',
+				value: '1500000',
+				label: 'Under 1.5m',
+			},
+			{
+				name: 'price',
+				value: '3000000',
+				label: '1.5m to 3m',
+			},
+			{
+				name: 'price',
+				value: '7500000',
+				label: '3m to 7.5m',
+			},
+			{
+				name: 'price',
+				value: '11000000',
+				label: '7.5m to 11m',
+			},
+			{
+				name: 'price',
+				value: '>11000000',
+				label: '11m and more',
+			},
+		],
+	},
+	{
+		id: 'type',
+		title: 'Software Type:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: softwareTypes.map((type) => ({
+			name: 'type',
+			value: type.toLowerCase(),
+			label: type,
+		})),
+	},
+	{
+		id: 'type',
+		title: 'Plaftorm:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: softwarePlatforms['default'].map((platform) => ({
+			name: platform,
+			value: platform.toLowerCase(),
+			label: platform,
+		})),
+	},
+	{
+		id: 'type',
+		title: 'Game Genre:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: gameGenre.map((genre) => ({
+			name: genre,
+			value: genre.toLowerCase(),
+			label: genre,
+		})),
+	},
+	{
+		id: 'year',
+		title: 'Manufacture Year',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: arrayRange(1990, parseInt(new Date().getFullYear()), 1)
+			.reverse()
+			.map((val) => ({
+				name: 'year',
+				value: val.toString(),
+				label: val.toString(),
+			})),
+	},
+];
 
 const software01 = [
-	defaults[0], ,
-    {
-      id: "price",
-      title: "Price #",
-      type: "radio",
-      content_checkbox: false,
-      options: [{
-          name: "min_price",
-          type: "text",
-          placeholder: "min",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },{
-          name: "max_price",
-          type: "text",
-          placeholder: "max",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },],
-      content: [
-        {
-          name: "price",
-          value: "",
-          label: "All",
-        },
-        {
-          name: "price",
-          value: "1500000",
-          label: "Under 1.5m",
-        },
-        {
-          name: "price",
-          value: "3000000",
-          label: "1.5m to 3m",
-        },
-        {
-          name: "price",
-          value: "7500000",
-          label: "3m to 7.5m",
-        },{
-          name: "price",
-          value: "11000000",
-          label: "7.5m to 11m",
-        },{
-          name: "price",
-          value: ">11000000",
-          label: "11m and more",
-        },
-      ],
-    }, {
-      id: "type",
-      title: "Software Type:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: softwareTypes.map(type => ({
-        name: "type",
-        value: type.toLowerCase(),
-        label: type
-      }))
-    },  {
-      id: "type",
-      title: "Plaftorm:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: softwarePlatforms[5901].map(platform => ({
-        name: platform,
-        value: platform.toLowerCase(),
-        label: platform
-      }))
-    },  {
-      id: "type",
-      title: "Softwar Format:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: softwareFormat.map(format => ({
-        name: format,
-        value: format.toLowerCase(),
-        label: format
-      }))
-    },
+	defaults[0],
+	,
+	{
+		id: 'price',
+		title: 'Price ₦',
+		type: 'radio',
+		content_checkbox: false,
+		options: [
+			{
+				name: 'min_price',
+				type: 'text',
+				placeholder: 'min',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+			{
+				name: 'max_price',
+				type: 'text',
+				placeholder: 'max',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+		],
+		content: [
+			{
+				name: 'price',
+				value: '',
+				label: 'All',
+			},
+			{
+				name: 'price',
+				value: '1500000',
+				label: 'Under 1.5m',
+			},
+			{
+				name: 'price',
+				value: '3000000',
+				label: '1.5m to 3m',
+			},
+			{
+				name: 'price',
+				value: '7500000',
+				label: '3m to 7.5m',
+			},
+			{
+				name: 'price',
+				value: '11000000',
+				label: '7.5m to 11m',
+			},
+			{
+				name: 'price',
+				value: '>11000000',
+				label: '11m and more',
+			},
+		],
+	},
+	{
+		id: 'type',
+		title: 'Software Type:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: softwareTypes.map((type) => ({
+			name: 'type',
+			value: type.toLowerCase(),
+			label: type,
+		})),
+	},
+	{
+		id: 'type',
+		title: 'Plaftorm:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: softwarePlatforms[5901].map((platform) => ({
+			name: platform,
+			value: platform.toLowerCase(),
+			label: platform,
+		})),
+	},
+	{
+		id: 'type',
+		title: 'Softwar Format:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: softwareFormat.map((format) => ({
+			name: format,
+			value: format.toLowerCase(),
+			label: format,
+		})),
+	},
 ];
 
 const pet = [
-	defaults[0],    {
-      id: "price",
-      title: "Price #",
-      type: "radio",
-      content_checkbox: false,
-      options: [{
-          name: "min_price",
-          type: "text",
-          placeholder: "min",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },{
-          name: "max_price",
-          type: "text",
-          placeholder: "max",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },],
-      content: [
-        {
-          name: "price",
-          value: "",
-          label: "All",
-        },
-        {
-          name: "price",
-          value: "5000",
-          label: "0 - 5k",
-        },
-        {
-          name: "price",
-          value: "10000",
-          label: "5k to 10k",
-        },
-        {
-          name: "price",
-          value: "15000",
-          label: "10k - 15k",
-        },{
-          name: "price",
-          value: "20000",
-          label: "15k to 20k",
-        },{
-          name: "price",
-          value: "30000",
-          label: "20k to 30k",
-        },{
-          name: "price",
-          value: ">20000",
-          label: "30k and more",
-        },
-      ],
-    }, {
-      id: "type",
-      title: "Breed Type:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: petTypes["default"].map(type => ({
-        name: "type",
-        value: type.toLowerCase(),
-        label: type
-      }))
-    }, {
-      id: "breed",
-      title: "Breed Type:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: petBreeds[6001].map(breed => ({
-        name: breed,
-        value: breed.toLowerCase(),
-        label: breed
-      }))
-    },{
-      id: "gender",
-      title: "Gender",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "gender",
-          value: "m",
-          label: "Male",
-        },{
-          name: "gender",
-          value: "f",
-          label: "Female",
-        }
-      ],
-    },{
-      id: "color",
-      title: "Color",
-      type: "checkbox",
-      content_checkbox: false,
-      content: colors.map(color => ({
-          name: "color",
-          value: color,
-          label: color,
-        })),
-    }, {
-      id: "years",
-      title: "Years of Experience",
-      type: "radio",
-      content_checkbox: false,
-      content: [
-        {
-          name: "years",
-          value: "",
-          label: "All",
-        },
-        {
-          name: "years",
-          value: "2",
-          label: "0 - 2 years",
-        },
-        {
-          name: "years",
-          value: "4",
-          label: "2 - 4 years",
-        },
-        {
-          name: "years",
-          value: "6",
-          label: "4 - 6 years",
-        },{
-          name: "years",
-          value: "8",
-          label: "6 - 8 years",
-        },{
-          name: "years",
-          value: ">8",
-          label: "8 years+",
-        },
-      ],
-    },
-]
+	defaults[0],
+	{
+		id: 'price',
+		title: 'Price ₦',
+		type: 'radio',
+		content_checkbox: false,
+		options: [
+			{
+				name: 'min_price',
+				type: 'text',
+				placeholder: 'min',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+			{
+				name: 'max_price',
+				type: 'text',
+				placeholder: 'max',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+		],
+		content: [
+			{
+				name: 'price',
+				value: '',
+				label: 'All',
+			},
+			{
+				name: 'price',
+				value: '5000',
+				label: '0 - 5k',
+			},
+			{
+				name: 'price',
+				value: '10000',
+				label: '5k to 10k',
+			},
+			{
+				name: 'price',
+				value: '15000',
+				label: '10k - 15k',
+			},
+			{
+				name: 'price',
+				value: '20000',
+				label: '15k to 20k',
+			},
+			{
+				name: 'price',
+				value: '30000',
+				label: '20k to 30k',
+			},
+			{
+				name: 'price',
+				value: '>20000',
+				label: '30k and more',
+			},
+		],
+	},
+	{
+		id: 'type',
+		title: 'Breed Type:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: petTypes['default'].map((type) => ({
+			name: 'type',
+			value: type.toLowerCase(),
+			label: type,
+		})),
+	},
+	{
+		id: 'breed',
+		title: 'Breed Type:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: petBreeds[6001].map((breed) => ({
+			name: breed,
+			value: breed.toLowerCase(),
+			label: breed,
+		})),
+	},
+	{
+		id: 'gender',
+		title: 'Gender',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'gender',
+				value: 'm',
+				label: 'Male',
+			},
+			{
+				name: 'gender',
+				value: 'f',
+				label: 'Female',
+			},
+		],
+	},
+	{
+		id: 'color',
+		title: 'Color',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: colors.map((color) => ({
+			name: 'color',
+			value: color,
+			label: color,
+		})),
+	},
+	{
+		id: 'years',
+		title: 'Years of Experience',
+		type: 'radio',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'years',
+				value: '',
+				label: 'All',
+			},
+			{
+				name: 'years',
+				value: '2',
+				label: '0 - 2 years',
+			},
+			{
+				name: 'years',
+				value: '4',
+				label: '2 - 4 years',
+			},
+			{
+				name: 'years',
+				value: '6',
+				label: '4 - 6 years',
+			},
+			{
+				name: 'years',
+				value: '8',
+				label: '6 - 8 years',
+			},
+			{
+				name: 'years',
+				value: '>8',
+				label: '8 years+',
+			},
+		],
+	},
+];
 
-const pet02 = [defaults[0],    {
-      id: "price",
-      title: "Price #",
-      type: "radio",
-      content_checkbox: false,
-      options: [{
-          name: "min_price",
-          type: "text",
-          placeholder: "min",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },{
-          name: "max_price",
-          type: "text",
-          placeholder: "max",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },],
-      content: [
-        {
-          name: "price",
-          value: "",
-          label: "All",
-        },
-        {
-          name: "price",
-          value: "5000",
-          label: "0 - 5k",
-        },
-        {
-          name: "price",
-          value: "10000",
-          label: "5k to 10k",
-        },
-        {
-          name: "price",
-          value: "15000",
-          label: "10k - 15k",
-        },{
-          name: "price",
-          value: "20000",
-          label: "15k to 20k",
-        },{
-          name: "price",
-          value: "30000",
-          label: "20k to 30k",
-        },{
-          name: "price",
-          value: ">20000",
-          label: "30k and more",
-        },
-      ],
-    }, {
-      id: "type",
-      title: "Type:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: petTypes[6002].map(type => ({
-        name: "type",
-        value: type.toLowerCase(),
-        label: type
-      }))
-    }]
+const pet02 = [
+	defaults[0],
+	{
+		id: 'price',
+		title: 'Price ₦',
+		type: 'radio',
+		content_checkbox: false,
+		options: [
+			{
+				name: 'min_price',
+				type: 'text',
+				placeholder: 'min',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+			{
+				name: 'max_price',
+				type: 'text',
+				placeholder: 'max',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+		],
+		content: [
+			{
+				name: 'price',
+				value: '',
+				label: 'All',
+			},
+			{
+				name: 'price',
+				value: '5000',
+				label: '0 - 5k',
+			},
+			{
+				name: 'price',
+				value: '10000',
+				label: '5k to 10k',
+			},
+			{
+				name: 'price',
+				value: '15000',
+				label: '10k - 15k',
+			},
+			{
+				name: 'price',
+				value: '20000',
+				label: '15k to 20k',
+			},
+			{
+				name: 'price',
+				value: '30000',
+				label: '20k to 30k',
+			},
+			{
+				name: 'price',
+				value: '>20000',
+				label: '30k and more',
+			},
+		],
+	},
+	{
+		id: 'type',
+		title: 'Type:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: petTypes[6002].map((type) => ({
+			name: 'type',
+			value: type.toLowerCase(),
+			label: type,
+		})),
+	},
+];
 
-const pet03 = [defaults[0],    {
-id: "price",
-title: "Price #",
-type: "radio",
-content_checkbox: false,
-options: [{
-	name: "min_price",
-	type: "text",
-	placeholder: "min",
-	className: "md:w-20 w-24 lg:w-[8rem] border-black"
-},{
-	name: "max_price",
-	type: "text",
-	placeholder: "max",
-	className: "md:w-20 w-24 lg:w-[8rem] border-black"
-},],
-content: [
-{
-	name: "price",
-	value: "",
-	label: "All",
-},
-{
-	name: "price",
-	value: "5000",
-	label: "0 - 5k",
-},
-{
-	name: "price",
-	value: "10000",
-	label: "5k to 10k",
-},
-{
-	name: "price",
-	value: "15000",
-	label: "10k - 15k",
-},{
-	name: "price",
-	value: "20000",
-	label: "15k to 20k",
-},{
-	name: "price",
-	value: "30000",
-	label: "20k to 30k",
-},{
-	name: "price",
-	value: ">20000",
-	label: "30k and more",
-},
-],
-}, {
-id: "type",
-title: "Type:",
-type: "checkbox",
-content_checkbox: false,
-content: petTypes[6003].map(type => ({
-name: "type",
-value: type.toLowerCase(),
-label: type
-}))
-},{
-id: "color",
-title: "Color",
-type: "checkbox",
-content_checkbox: false,
-content: colors.map(color => ({
-	name: "color",
-	value: color,
-	label: color,
-})),
-},{
-id: "ad_condition",
-title: "Condition",
-type: "checkbox",
-content_checkbox: false,
-content: condition.map(ad_condition => ({
-	name: "ad_condition",
-	value: ad_condition.value,
-	label: ad_condition.label,
-})),
-},]
+const pet03 = [
+	defaults[0],
+	{
+		id: 'price',
+		title: 'Price ₦',
+		type: 'radio',
+		content_checkbox: false,
+		options: [
+			{
+				name: 'min_price',
+				type: 'text',
+				placeholder: 'min',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+			{
+				name: 'max_price',
+				type: 'text',
+				placeholder: 'max',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+		],
+		content: [
+			{
+				name: 'price',
+				value: '',
+				label: 'All',
+			},
+			{
+				name: 'price',
+				value: '5000',
+				label: '0 - 5k',
+			},
+			{
+				name: 'price',
+				value: '10000',
+				label: '5k to 10k',
+			},
+			{
+				name: 'price',
+				value: '15000',
+				label: '10k - 15k',
+			},
+			{
+				name: 'price',
+				value: '20000',
+				label: '15k to 20k',
+			},
+			{
+				name: 'price',
+				value: '30000',
+				label: '20k to 30k',
+			},
+			{
+				name: 'price',
+				value: '>20000',
+				label: '30k and more',
+			},
+		],
+	},
+	{
+		id: 'type',
+		title: 'Type:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: petTypes[6003].map((type) => ({
+			name: 'type',
+			value: type.toLowerCase(),
+			label: type,
+		})),
+	},
+	{
+		id: 'color',
+		title: 'Color',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: colors.map((color) => ({
+			name: 'color',
+			value: color,
+			label: color,
+		})),
+	},
+	{
+		id: 'ad_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: condition.map((ad_condition) => ({
+			name: 'ad_condition',
+			value: ad_condition.value,
+			label: ad_condition.label,
+		})),
+	},
+];
 
 const pet04 = [
-	defaults[0],    {
-      id: "price",
-      title: "Price #",
-      type: "radio",
-      content_checkbox: false,
-      options: [{
-          name: "min_price",
-          type: "text",
-          placeholder: "min",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },{
-          name: "max_price",
-          type: "text",
-          placeholder: "max",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },],
-      content: [
-        {
-          name: "price",
-          value: "",
-          label: "All",
-        },
-        {
-          name: "price",
-          value: "5000",
-          label: "0 - 5k",
-        },
-        {
-          name: "price",
-          value: "10000",
-          label: "5k to 10k",
-        },
-        {
-          name: "price",
-          value: "15000",
-          label: "10k - 15k",
-        },{
-          name: "price",
-          value: "20000",
-          label: "15k to 20k",
-        },{
-          name: "price",
-          value: "30000",
-          label: "20k to 30k",
-        },{
-          name: "price",
-          value: ">20000",
-          label: "30k and more",
-        },
-      ],
-    }, {
-      id: "type",
-      title: "Breed Type:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: petTypes["default"].map(type => ({
-        name: "type",
-        value: type.toLowerCase(),
-        label: type
-      }))
-    }, {
-      id: "breed",
-      title: "Breed:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: petBreeds[6004].map(breed => ({
-        name: breed,
-        value: breed.toLowerCase(),
-        label: breed
-      }))
-    },{
-      id: "gender",
-      title: "Gender",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "gender",
-          value: "m",
-          label: "Male",
-        },{
-          name: "gender",
-          value: "f",
-          label: "Female",
-        }
-      ],
-    }, {
-      id: "years",
-      title: "Years of Experience",
-      type: "radio",
-      content_checkbox: false,
-      content: [
-        {
-          name: "years",
-          value: "",
-          label: "All",
-        },
-        {
-          name: "years",
-          value: "2",
-          label: "0 - 2 years",
-        },
-        {
-          name: "years",
-          value: "4",
-          label: "2 - 4 years",
-        },
-        {
-          name: "years",
-          value: "6",
-          label: "4 - 6 years",
-        },{
-          name: "years",
-          value: "8",
-          label: "6 - 8 years",
-        },{
-          name: "years",
-          value: ">8",
-          label: "8 years+",
-        },
-      ],
-    },
-]
+	defaults[0],
+	{
+		id: 'price',
+		title: 'Price ₦',
+		type: 'radio',
+		content_checkbox: false,
+		options: [
+			{
+				name: 'min_price',
+				type: 'text',
+				placeholder: 'min',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+			{
+				name: 'max_price',
+				type: 'text',
+				placeholder: 'max',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+		],
+		content: [
+			{
+				name: 'price',
+				value: '',
+				label: 'All',
+			},
+			{
+				name: 'price',
+				value: '5000',
+				label: '0 - 5k',
+			},
+			{
+				name: 'price',
+				value: '10000',
+				label: '5k to 10k',
+			},
+			{
+				name: 'price',
+				value: '15000',
+				label: '10k - 15k',
+			},
+			{
+				name: 'price',
+				value: '20000',
+				label: '15k to 20k',
+			},
+			{
+				name: 'price',
+				value: '30000',
+				label: '20k to 30k',
+			},
+			{
+				name: 'price',
+				value: '>20000',
+				label: '30k and more',
+			},
+		],
+	},
+	{
+		id: 'type',
+		title: 'Breed Type:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: petTypes['default'].map((type) => ({
+			name: 'type',
+			value: type.toLowerCase(),
+			label: type,
+		})),
+	},
+	{
+		id: 'breed',
+		title: 'Breed:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: petBreeds[6004].map((breed) => ({
+			name: breed,
+			value: breed.toLowerCase(),
+			label: breed,
+		})),
+	},
+	{
+		id: 'gender',
+		title: 'Gender',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'gender',
+				value: 'm',
+				label: 'Male',
+			},
+			{
+				name: 'gender',
+				value: 'f',
+				label: 'Female',
+			},
+		],
+	},
+	{
+		id: 'years',
+		title: 'Years of Experience',
+		type: 'radio',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'years',
+				value: '',
+				label: 'All',
+			},
+			{
+				name: 'years',
+				value: '2',
+				label: '0 - 2 years',
+			},
+			{
+				name: 'years',
+				value: '4',
+				label: '2 - 4 years',
+			},
+			{
+				name: 'years',
+				value: '6',
+				label: '4 - 6 years',
+			},
+			{
+				name: 'years',
+				value: '8',
+				label: '6 - 8 years',
+			},
+			{
+				name: 'years',
+				value: '>8',
+				label: '8 years+',
+			},
+		],
+	},
+];
 
 const pet05 = [
-	defaults[0],    {
-      id: "price",
-      title: "Price #",
-      type: "radio",
-      content_checkbox: false,
-      options: [{
-          name: "min_price",
-          type: "text",
-          placeholder: "min",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },{
-          name: "max_price",
-          type: "text",
-          placeholder: "max",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },],
-      content: [
-        {
-          name: "price",
-          value: "",
-          label: "All",
-        },
-        {
-          name: "price",
-          value: "5000",
-          label: "0 - 5k",
-        },
-        {
-          name: "price",
-          value: "10000",
-          label: "5k to 10k",
-        },
-        {
-          name: "price",
-          value: "15000",
-          label: "10k - 15k",
-        },{
-          name: "price",
-          value: "20000",
-          label: "15k to 20k",
-        },{
-          name: "price",
-          value: "30000",
-          label: "20k to 30k",
-        },{
-          name: "price",
-          value: ">20000",
-          label: "30k and more",
-        },
-      ],
-    }, {
-      id: "type",
-      title: "Type:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: petTypes[6005].map(type => ({
-        name: "type",
-        value: type.toLowerCase(),
-        label: type
-      }))
-    },{
-      id: "gender",
-      title: "Gender",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "gender",
-          value: "m",
-          label: "Male",
-        },{
-          name: "gender",
-          value: "f",
-          label: "Female",
-        }
-      ],
-    }
-]
+	defaults[0],
+	{
+		id: 'price',
+		title: 'Price ₦',
+		type: 'radio',
+		content_checkbox: false,
+		options: [
+			{
+				name: 'min_price',
+				type: 'text',
+				placeholder: 'min',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+			{
+				name: 'max_price',
+				type: 'text',
+				placeholder: 'max',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+		],
+		content: [
+			{
+				name: 'price',
+				value: '',
+				label: 'All',
+			},
+			{
+				name: 'price',
+				value: '5000',
+				label: '0 - 5k',
+			},
+			{
+				name: 'price',
+				value: '10000',
+				label: '5k to 10k',
+			},
+			{
+				name: 'price',
+				value: '15000',
+				label: '10k - 15k',
+			},
+			{
+				name: 'price',
+				value: '20000',
+				label: '15k to 20k',
+			},
+			{
+				name: 'price',
+				value: '30000',
+				label: '20k to 30k',
+			},
+			{
+				name: 'price',
+				value: '>20000',
+				label: '30k and more',
+			},
+		],
+	},
+	{
+		id: 'type',
+		title: 'Type:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: petTypes[6005].map((type) => ({
+			name: 'type',
+			value: type.toLowerCase(),
+			label: type,
+		})),
+	},
+	{
+		id: 'gender',
+		title: 'Gender',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'gender',
+				value: 'm',
+				label: 'Male',
+			},
+			{
+				name: 'gender',
+				value: 'f',
+				label: 'Female',
+			},
+		],
+	},
+];
 
 const babies = [
-	defaults[0],    {
-      id: "price",
-      title: "Price #",
-      type: "radio",
-      content_checkbox: false,
-      options: [{
-          name: "min_price",
-          type: "text",
-          placeholder: "min",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },{
-          name: "max_price",
-          type: "text",
-          placeholder: "max",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },],
-      content: [
-        {
-          name: "price",
-          value: "",
-          label: "All",
-        },
-        {
-          name: "price",
-          value: "5000",
-          label: "0 - 5k",
-        },
-        {
-          name: "price",
-          value: "10000",
-          label: "5k to 10k",
-        },
-        {
-          name: "price",
-          value: "15000",
-          label: "10k - 15k",
-        },{
-          name: "price",
-          value: "20000",
-          label: "15k to 20k",
-        },{
-          name: "price",
-          value: "30000",
-          label: "20k to 30k",
-        },{
-          name: "price",
-          value: ">20000",
-          label: "30k and more",
-        },
-      ],
-    }, {
-      id: "type",
-      title: "Type:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: babiesTypes["default"].map(type => ({
-        name: "type",
-        value: type.toLowerCase(),
-        label: type
-      }))
-    }, {
-      id: "brand",
-      title: "Brand:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: babiesBrands["default"].map(brand => ({
-        name: "brand",
-        value: brand.toLowerCase(),
-        label: brand
-      }))
-    },{
-      id: "gender",
-      title: "Gender",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "gender",
-          value: "m",
-          label: "Male",
-        },{
-          name: "gender",
-          value: "f",
-          label: "Female",
-        }
-      ],
-    },{
-      id: "color",
-      title: "Color",
-      type: "checkbox",
-      content_checkbox: false,
-      content: colors.map(color => ({
-          name: "color",
-          value: color,
-          label: color,
-        })),
-    },{
-id: "ad_condition",
-title: "Condition",
-type: "checkbox",
-content_checkbox: false,
-content: condition.map(ad_condition => ({
-	name: "ad_condition",
-	value: ad_condition.value,
-	label: ad_condition.label,
-})),
-},
+	defaults[0],
+	{
+		id: 'price',
+		title: 'Price ₦',
+		type: 'radio',
+		content_checkbox: false,
+		options: [
+			{
+				name: 'min_price',
+				type: 'text',
+				placeholder: 'min',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+			{
+				name: 'max_price',
+				type: 'text',
+				placeholder: 'max',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+		],
+		content: [
+			{
+				name: 'price',
+				value: '',
+				label: 'All',
+			},
+			{
+				name: 'price',
+				value: '5000',
+				label: '0 - 5k',
+			},
+			{
+				name: 'price',
+				value: '10000',
+				label: '5k to 10k',
+			},
+			{
+				name: 'price',
+				value: '15000',
+				label: '10k - 15k',
+			},
+			{
+				name: 'price',
+				value: '20000',
+				label: '15k to 20k',
+			},
+			{
+				name: 'price',
+				value: '30000',
+				label: '20k to 30k',
+			},
+			{
+				name: 'price',
+				value: '>20000',
+				label: '30k and more',
+			},
+		],
+	},
+	{
+		id: 'type',
+		title: 'Type:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: babiesTypes['default'].map((type) => ({
+			name: 'type',
+			value: type.toLowerCase(),
+			label: type,
+		})),
+	},
+	{
+		id: 'brand',
+		title: 'Brand:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: babiesBrands['default'].map((brand) => ({
+			name: 'brand',
+			value: brand.toLowerCase(),
+			label: brand,
+		})),
+	},
+	{
+		id: 'gender',
+		title: 'Gender',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'gender',
+				value: 'm',
+				label: 'Male',
+			},
+			{
+				name: 'gender',
+				value: 'f',
+				label: 'Female',
+			},
+		],
+	},
+	{
+		id: 'color',
+		title: 'Color',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: colors.map((color) => ({
+			name: 'color',
+			value: color,
+			label: color,
+		})),
+	},
+	{
+		id: 'ad_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: condition.map((ad_condition) => ({
+			name: 'ad_condition',
+			value: ad_condition.value,
+			label: ad_condition.label,
+		})),
+	},
 ];
 
 const babies04 = [
-	defaults[0],    {
-      id: "price",
-      title: "Price #",
-      type: "radio",
-      content_checkbox: false,
-      options: [{
-          name: "min_price",
-          type: "text",
-          placeholder: "min",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },{
-          name: "max_price",
-          type: "text",
-          placeholder: "max",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },],
-      content: [
-        {
-          name: "price",
-          value: "",
-          label: "All",
-        },
-        {
-          name: "price",
-          value: "5000",
-          label: "0 - 5k",
-        },
-        {
-          name: "price",
-          value: "10000",
-          label: "5k to 10k",
-        },
-        {
-          name: "price",
-          value: "15000",
-          label: "10k - 15k",
-        },{
-          name: "price",
-          value: "20000",
-          label: "15k to 20k",
-        },{
-          name: "price",
-          value: "30000",
-          label: "20k to 30k",
-        },{
-          name: "price",
-          value: ">20000",
-          label: "30k and more",
-        },
-      ],
-    }, {
-      id: "type",
-      title: "Type:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: babiesTypes[6104].map(type => ({
-        name: "type",
-        value: type.toLowerCase(),
-        label: type
-      }))
-    }, {
-      id: "brand",
-      title: "Brand:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: babiesBrands[6104].map(brand => ({
-        name: "brand",
-        value: brand.toLowerCase(),
-        label: brand
-      }))
-    },{
-      id: "gender",
-      title: "Gender",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "gender",
-          value: "m",
-          label: "Male",
-        },{
-          name: "gender",
-          value: "f",
-          label: "Female",
-        }
-      ],
-    },{
-      id: "color",
-      title: "Color",
-      type: "checkbox",
-      content_checkbox: false,
-      content: colors.map(color => ({
-          name: "color",
-          value: color,
-          label: color,
-        })),
-    },{
-id: "ad_condition",
-title: "Condition",
-type: "checkbox",
-content_checkbox: false,
-content: condition.map(ad_condition => ({
-	name: "ad_condition",
-	value: ad_condition.value,
-	label: ad_condition.label,
-})),
-},
+	defaults[0],
+	{
+		id: 'price',
+		title: 'Price ₦',
+		type: 'radio',
+		content_checkbox: false,
+		options: [
+			{
+				name: 'min_price',
+				type: 'text',
+				placeholder: 'min',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+			{
+				name: 'max_price',
+				type: 'text',
+				placeholder: 'max',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+		],
+		content: [
+			{
+				name: 'price',
+				value: '',
+				label: 'All',
+			},
+			{
+				name: 'price',
+				value: '5000',
+				label: '0 - 5k',
+			},
+			{
+				name: 'price',
+				value: '10000',
+				label: '5k to 10k',
+			},
+			{
+				name: 'price',
+				value: '15000',
+				label: '10k - 15k',
+			},
+			{
+				name: 'price',
+				value: '20000',
+				label: '15k to 20k',
+			},
+			{
+				name: 'price',
+				value: '30000',
+				label: '20k to 30k',
+			},
+			{
+				name: 'price',
+				value: '>20000',
+				label: '30k and more',
+			},
+		],
+	},
+	{
+		id: 'type',
+		title: 'Type:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: babiesTypes[6104].map((type) => ({
+			name: 'type',
+			value: type.toLowerCase(),
+			label: type,
+		})),
+	},
+	{
+		id: 'brand',
+		title: 'Brand:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: babiesBrands[6104].map((brand) => ({
+			name: 'brand',
+			value: brand.toLowerCase(),
+			label: brand,
+		})),
+	},
+	{
+		id: 'gender',
+		title: 'Gender',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'gender',
+				value: 'm',
+				label: 'Male',
+			},
+			{
+				name: 'gender',
+				value: 'f',
+				label: 'Female',
+			},
+		],
+	},
+	{
+		id: 'color',
+		title: 'Color',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: colors.map((color) => ({
+			name: 'color',
+			value: color,
+			label: color,
+		})),
+	},
+	{
+		id: 'ad_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: condition.map((ad_condition) => ({
+			name: 'ad_condition',
+			value: ad_condition.value,
+			label: ad_condition.label,
+		})),
+	},
 ];
 
 const babies06 = [
-	defaults[0],    {
-      id: "price",
-      title: "Price #",
-      type: "radio",
-      content_checkbox: false,
-      options: [{
-          name: "min_price",
-          type: "text",
-          placeholder: "min",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },{
-          name: "max_price",
-          type: "text",
-          placeholder: "max",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },],
-      content: [
-        {
-          name: "price",
-          value: "",
-          label: "All",
-        },
-        {
-          name: "price",
-          value: "5000",
-          label: "0 - 5k",
-        },
-        {
-          name: "price",
-          value: "10000",
-          label: "5k to 10k",
-        },
-        {
-          name: "price",
-          value: "15000",
-          label: "10k - 15k",
-        },{
-          name: "price",
-          value: "20000",
-          label: "15k to 20k",
-        },{
-          name: "price",
-          value: "30000",
-          label: "20k to 30k",
-        },{
-          name: "price",
-          value: ">20000",
-          label: "30k and more",
-        },
-      ],
-    }, {
-      id: "type",
-      title: "Type:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: babiesTypes[6106].map(type => ({
-        name: "type",
-        value: type.toLowerCase(),
-        label: type
-      }))
-    },,{
-id: "ad_condition",
-title: "Condition",
-type: "checkbox",
-content_checkbox: false,
-content: condition.map(ad_condition => ({
-	name: "ad_condition",
-	value: ad_condition.value,
-	label: ad_condition.label,
-})),
-},{
-      id: "color",
-      title: "Color",
-      type: "checkbox",
-      content_checkbox: false,
-      content: colors.map(color => ({
-          name: "color",
-          value: color,
-          label: color,
-        })),
-    },{
-      id: "gender",
-      title: "Gender",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "gender",
-          value: "m",
-          label: "Male",
-        },{
-          name: "gender",
-          value: "f",
-          label: "Female",
-        }
-      ],
-    }
+	defaults[0],
+	{
+		id: 'price',
+		title: 'Price ₦',
+		type: 'radio',
+		content_checkbox: false,
+		options: [
+			{
+				name: 'min_price',
+				type: 'text',
+				placeholder: 'min',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+			{
+				name: 'max_price',
+				type: 'text',
+				placeholder: 'max',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+		],
+		content: [
+			{
+				name: 'price',
+				value: '',
+				label: 'All',
+			},
+			{
+				name: 'price',
+				value: '5000',
+				label: '0 - 5k',
+			},
+			{
+				name: 'price',
+				value: '10000',
+				label: '5k to 10k',
+			},
+			{
+				name: 'price',
+				value: '15000',
+				label: '10k - 15k',
+			},
+			{
+				name: 'price',
+				value: '20000',
+				label: '15k to 20k',
+			},
+			{
+				name: 'price',
+				value: '30000',
+				label: '20k to 30k',
+			},
+			{
+				name: 'price',
+				value: '>20000',
+				label: '30k and more',
+			},
+		],
+	},
+	{
+		id: 'type',
+		title: 'Type:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: babiesTypes[6106].map((type) => ({
+			name: 'type',
+			value: type.toLowerCase(),
+			label: type,
+		})),
+	},
+	,
+	{
+		id: 'ad_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: condition.map((ad_condition) => ({
+			name: 'ad_condition',
+			value: ad_condition.value,
+			label: ad_condition.label,
+		})),
+	},
+	{
+		id: 'color',
+		title: 'Color',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: colors.map((color) => ({
+			name: 'color',
+			value: color,
+			label: color,
+		})),
+	},
+	{
+		id: 'gender',
+		title: 'Gender',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'gender',
+				value: 'm',
+				label: 'Male',
+			},
+			{
+				name: 'gender',
+				value: 'f',
+				label: 'Female',
+			},
+		],
+	},
 ];
 
 const babies03 = [
-	defaults[0],    {
-      id: "price",
-      title: "Price #",
-      type: "radio",
-      content_checkbox: false,
-      options: [{
-          name: "min_price",
-          type: "text",
-          placeholder: "min",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },{
-          name: "max_price",
-          type: "text",
-          placeholder: "max",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },],
-      content: [
-        {
-          name: "price",
-          value: "",
-          label: "All",
-        },
-        {
-          name: "price",
-          value: "5000",
-          label: "0 - 5k",
-        },
-        {
-          name: "price",
-          value: "10000",
-          label: "5k to 10k",
-        },
-        {
-          name: "price",
-          value: "15000",
-          label: "10k - 15k",
-        },{
-          name: "price",
-          value: "20000",
-          label: "15k to 20k",
-        },{
-          name: "price",
-          value: "30000",
-          label: "20k to 30k",
-        },{
-          name: "price",
-          value: ">20000",
-          label: "30k and more",
-        },
-      ],
-    }, {
-      id: "brand",
-      title: "Brand:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: babiesBrands[6103].map(brand => ({
-        name: "brand",
-        value: brand.toLowerCase(),
-        label: brand
-      }))
-    }, {
-      id: "type",
-      title: "Type:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: babiesTypes[6103].map(type => ({
-        name: "type",
-        value: type.toLowerCase(),
-        label: type
-      }))
-    },{
-id: "ad_condition",
-title: "Condition",
-type: "checkbox",
-content_checkbox: false,
-content: condition.map(ad_condition => ({
-	name: "ad_condition",
-	value: ad_condition.value,
-	label: ad_condition.label,
-})),
-},{
-      id: "color",
-      title: "Color",
-      type: "checkbox",
-      content_checkbox: false,
-      content: colors.map(color => ({
-          name: "color",
-          value: color,
-          label: color,
-        })),
-    },{
-      id: "gender",
-      title: "Gender",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "gender",
-          value: "m",
-          label: "Male",
-        },{
-          name: "gender",
-          value: "f",
-          label: "Female",
-        },{
-          name: "gender",
-          value: "u",
-          label: "Unisex",
-        }
-      ],
-    }
+	defaults[0],
+	{
+		id: 'price',
+		title: 'Price ₦',
+		type: 'radio',
+		content_checkbox: false,
+		options: [
+			{
+				name: 'min_price',
+				type: 'text',
+				placeholder: 'min',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+			{
+				name: 'max_price',
+				type: 'text',
+				placeholder: 'max',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+		],
+		content: [
+			{
+				name: 'price',
+				value: '',
+				label: 'All',
+			},
+			{
+				name: 'price',
+				value: '5000',
+				label: '0 - 5k',
+			},
+			{
+				name: 'price',
+				value: '10000',
+				label: '5k to 10k',
+			},
+			{
+				name: 'price',
+				value: '15000',
+				label: '10k - 15k',
+			},
+			{
+				name: 'price',
+				value: '20000',
+				label: '15k to 20k',
+			},
+			{
+				name: 'price',
+				value: '30000',
+				label: '20k to 30k',
+			},
+			{
+				name: 'price',
+				value: '>20000',
+				label: '30k and more',
+			},
+		],
+	},
+	{
+		id: 'brand',
+		title: 'Brand:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: babiesBrands[6103].map((brand) => ({
+			name: 'brand',
+			value: brand.toLowerCase(),
+			label: brand,
+		})),
+	},
+	{
+		id: 'type',
+		title: 'Type:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: babiesTypes[6103].map((type) => ({
+			name: 'type',
+			value: type.toLowerCase(),
+			label: type,
+		})),
+	},
+	{
+		id: 'ad_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: condition.map((ad_condition) => ({
+			name: 'ad_condition',
+			value: ad_condition.value,
+			label: ad_condition.label,
+		})),
+	},
+	{
+		id: 'color',
+		title: 'Color',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: colors.map((color) => ({
+			name: 'color',
+			value: color,
+			label: color,
+		})),
+	},
+	{
+		id: 'gender',
+		title: 'Gender',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'gender',
+				value: 'm',
+				label: 'Male',
+			},
+			{
+				name: 'gender',
+				value: 'f',
+				label: 'Female',
+			},
+			{
+				name: 'gender',
+				value: 'u',
+				label: 'Unisex',
+			},
+		],
+	},
 ];
 
 const babies10 = [
-	defaults[0],    {
-      id: "price",
-      title: "Price #",
-      type: "radio",
-      content_checkbox: false,
-      options: [{
-          name: "min_price",
-          type: "text",
-          placeholder: "min",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },{
-          name: "max_price",
-          type: "text",
-          placeholder: "max",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },],
-      content: [
-        {
-          name: "price",
-          value: "",
-          label: "All",
-        },
-        {
-          name: "price",
-          value: "5000",
-          label: "0 - 5k",
-        },
-        {
-          name: "price",
-          value: "10000",
-          label: "5k to 10k",
-        },
-        {
-          name: "price",
-          value: "15000",
-          label: "10k - 15k",
-        },{
-          name: "price",
-          value: "20000",
-          label: "15k to 20k",
-        },{
-          name: "price",
-          value: "30000",
-          label: "20k to 30k",
-        },{
-          name: "price",
-          value: ">20000",
-          label: "30k and more",
-        },
-      ],
-    }, {
-      id: "brand",
-      title: "Brand:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: babiesBrands[6110].map(brand => ({
-        name: "brand",
-        value: brand.toLowerCase(),
-        label: brand
-      }))
-    }, {
-      id: "type",
-      title: "Type:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: babiesTypes[6110].map(type => ({
-        name: "type",
-        value: type.toLowerCase(),
-        label: type
-      }))
-    },{
-id: "ad_condition",
-title: "Condition",
-type: "checkbox",
-content_checkbox: false,
-content: condition_refub.map(ad_condition => ({
-	name: "ad_condition",
-	value: ad_condition.value,
-	label: ad_condition.label,
-})),
-},{
-      id: "color",
-      title: "Color",
-      type: "checkbox",
-      content_checkbox: false,
-      content: colors.map(color => ({
-          name: "color",
-          value: color,
-          label: color,
-        })),
-    },{
-      id: "gender",
-      title: "Gender",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "gender",
-          value: "m",
-          label: "Male",
-        },{
-          name: "gender",
-          value: "f",
-          label: "Female",
-        },{
-          name: "gender",
-          value: "u",
-          label: "Unisex",
-        }
-      ],},
-//        {
-//       id: "age_group",
-//       title: "Years",
-//       type: "radio",
-//       content_checkbox: false,
-//       content: [
-//         {
-//           name: "age_group",
-//           value: "",
-//           label: "All",
-//         },
-//         {
-//           name: "age_group",
-//           value: "0.6",
-//           label: "0 - 6 months",
-//         },
-//         {
-//           name: "age_group",
-//           value: "2.4",
-//           label: "5 - 10 age_group",
-//         },
-//         {
-//           name: "age_group",
-//           value: "15",
-//           label: "10 - 15 age_group",
-//         },{
-//           name: "age_group",
-//           value: "20",
-//           label: "15 - 20 age_group",
-//         },{
-//           name: "age_group",
-//           value: ">20",
-//           label: "20 age_group+",
-//         },
-//       ],
-//     },
+	defaults[0],
+	{
+		id: 'price',
+		title: 'Price ₦',
+		type: 'radio',
+		content_checkbox: false,
+		options: [
+			{
+				name: 'min_price',
+				type: 'text',
+				placeholder: 'min',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+			{
+				name: 'max_price',
+				type: 'text',
+				placeholder: 'max',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+		],
+		content: [
+			{
+				name: 'price',
+				value: '',
+				label: 'All',
+			},
+			{
+				name: 'price',
+				value: '5000',
+				label: '0 - 5k',
+			},
+			{
+				name: 'price',
+				value: '10000',
+				label: '5k to 10k',
+			},
+			{
+				name: 'price',
+				value: '15000',
+				label: '10k - 15k',
+			},
+			{
+				name: 'price',
+				value: '20000',
+				label: '15k to 20k',
+			},
+			{
+				name: 'price',
+				value: '30000',
+				label: '20k to 30k',
+			},
+			{
+				name: 'price',
+				value: '>20000',
+				label: '30k and more',
+			},
+		],
+	},
+	{
+		id: 'brand',
+		title: 'Brand:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: babiesBrands[6110].map((brand) => ({
+			name: 'brand',
+			value: brand.toLowerCase(),
+			label: brand,
+		})),
+	},
+	{
+		id: 'type',
+		title: 'Type:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: babiesTypes[6110].map((type) => ({
+			name: 'type',
+			value: type.toLowerCase(),
+			label: type,
+		})),
+	},
+	{
+		id: 'ad_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: condition_refub.map((ad_condition) => ({
+			name: 'ad_condition',
+			value: ad_condition.value,
+			label: ad_condition.label,
+		})),
+	},
+	{
+		id: 'color',
+		title: 'Color',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: colors.map((color) => ({
+			name: 'color',
+			value: color,
+			label: color,
+		})),
+	},
+	{
+		id: 'gender',
+		title: 'Gender',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'gender',
+				value: 'm',
+				label: 'Male',
+			},
+			{
+				name: 'gender',
+				value: 'f',
+				label: 'Female',
+			},
+			{
+				name: 'gender',
+				value: 'u',
+				label: 'Unisex',
+			},
+		],
+	},
+	//        {
+	//       id: "age_group",
+	//       title: "Years",
+	//       type: "radio",
+	//       content_checkbox: false,
+	//       content: [
+	//         {
+	//           name: "age_group",
+	//           value: "",
+	//           label: "All",
+	//         },
+	//         {
+	//           name: "age_group",
+	//           value: "0.6",
+	//           label: "0 - 6 months",
+	//         },
+	//         {
+	//           name: "age_group",
+	//           value: "2.4",
+	//           label: "5 - 10 age_group",
+	//         },
+	//         {
+	//           name: "age_group",
+	//           value: "15",
+	//           label: "10 - 15 age_group",
+	//         },{
+	//           name: "age_group",
+	//           value: "20",
+	//           label: "15 - 20 age_group",
+	//         },{
+	//           name: "age_group",
+	//           value: ">20",
+	//           label: "20 age_group+",
+	//         },
+	//       ],
+	//     },
 ];
 
 const babies01 = [
-	defaults[0],    {
-      id: "price",
-      title: "Price #",
-      type: "radio",
-      content_checkbox: false,
-      options: [{
-          name: "min_price",
-          type: "text",
-          placeholder: "min",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },{
-          name: "max_price",
-          type: "text",
-          placeholder: "max",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },],
-      content: [
-        {
-          name: "price",
-          value: "",
-          label: "All",
-        },
-        {
-          name: "price",
-          value: "5000",
-          label: "0 - 5k",
-        },
-        {
-          name: "price",
-          value: "10000",
-          label: "5k to 10k",
-        },
-        {
-          name: "price",
-          value: "15000",
-          label: "10k - 15k",
-        },{
-          name: "price",
-          value: "20000",
-          label: "15k to 20k",
-        },{
-          name: "price",
-          value: "30000",
-          label: "20k to 30k",
-        },{
-          name: "price",
-          value: ">20000",
-          label: "30k and more",
-        },
-      ],
-    }, {
-      id: "type",
-      title: "Type:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: babiesTypes[6101].map(type => ({
-        name: "type",
-        value: type.toLowerCase(),
-        label: type
-      }))
-    },{
-id: "ad_condition",
-title: "Condition",
-type: "checkbox",
-content_checkbox: false,
-content: condition_refub.map(ad_condition => ({
-	name: "ad_condition",
-	value: ad_condition.value,
-	label: ad_condition.label,
-})),
-},
-//        {
-//       id: "age_group",
-//       title: "Years",
-//       type: "radio",
-//       content_checkbox: false,
-//       content: [
-//         {
-//           name: "age_group",
-//           value: "",
-//           label: "All",
-//         },
-//         {
-//           name: "age_group",
-//           value: "0.6",
-//           label: "0 - 6 months",
-//         },
-//         {
-//           name: "age_group",
-//           value: "2.4",
-//           label: "5 - 10 age_group",
-//         },
-//         {
-//           name: "age_group",
-//           value: "15",
-//           label: "10 - 15 age_group",
-//         },{
-//           name: "age_group",
-//           value: "20",
-//           label: "15 - 20 age_group",
-//         },{
-//           name: "age_group",
-//           value: ">20",
-//           label: "20 age_group+",
-//         },
-//       ],
-//     },
+	defaults[0],
+	{
+		id: 'price',
+		title: 'Price ₦',
+		type: 'radio',
+		content_checkbox: false,
+		options: [
+			{
+				name: 'min_price',
+				type: 'text',
+				placeholder: 'min',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+			{
+				name: 'max_price',
+				type: 'text',
+				placeholder: 'max',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+		],
+		content: [
+			{
+				name: 'price',
+				value: '',
+				label: 'All',
+			},
+			{
+				name: 'price',
+				value: '5000',
+				label: '0 - 5k',
+			},
+			{
+				name: 'price',
+				value: '10000',
+				label: '5k to 10k',
+			},
+			{
+				name: 'price',
+				value: '15000',
+				label: '10k - 15k',
+			},
+			{
+				name: 'price',
+				value: '20000',
+				label: '15k to 20k',
+			},
+			{
+				name: 'price',
+				value: '30000',
+				label: '20k to 30k',
+			},
+			{
+				name: 'price',
+				value: '>20000',
+				label: '30k and more',
+			},
+		],
+	},
+	{
+		id: 'type',
+		title: 'Type:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: babiesTypes[6101].map((type) => ({
+			name: 'type',
+			value: type.toLowerCase(),
+			label: type,
+		})),
+	},
+	{
+		id: 'ad_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: condition_refub.map((ad_condition) => ({
+			name: 'ad_condition',
+			value: ad_condition.value,
+			label: ad_condition.label,
+		})),
+	},
+	//        {
+	//       id: "age_group",
+	//       title: "Years",
+	//       type: "radio",
+	//       content_checkbox: false,
+	//       content: [
+	//         {
+	//           name: "age_group",
+	//           value: "",
+	//           label: "All",
+	//         },
+	//         {
+	//           name: "age_group",
+	//           value: "0.6",
+	//           label: "0 - 6 months",
+	//         },
+	//         {
+	//           name: "age_group",
+	//           value: "2.4",
+	//           label: "5 - 10 age_group",
+	//         },
+	//         {
+	//           name: "age_group",
+	//           value: "15",
+	//           label: "10 - 15 age_group",
+	//         },{
+	//           name: "age_group",
+	//           value: "20",
+	//           label: "15 - 20 age_group",
+	//         },{
+	//           name: "age_group",
+	//           value: ">20",
+	//           label: "20 age_group+",
+	//         },
+	//       ],
+	//     },
 ];
 
 const babies11 = [
-	defaults[0],    {
-      id: "price",
-      title: "Price #",
-      type: "radio",
-      content_checkbox: false,
-      options: [{
-          name: "min_price",
-          type: "text",
-          placeholder: "min",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },{
-          name: "max_price",
-          type: "text",
-          placeholder: "max",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },],
-      content: [
-        {
-          name: "price",
-          value: "",
-          label: "All",
-        },
-        {
-          name: "price",
-          value: "5000",
-          label: "0 - 5k",
-        },
-        {
-          name: "price",
-          value: "10000",
-          label: "5k to 10k",
-        },
-        {
-          name: "price",
-          value: "15000",
-          label: "10k - 15k",
-        },{
-          name: "price",
-          value: "20000",
-          label: "15k to 20k",
-        },{
-          name: "price",
-          value: "30000",
-          label: "20k to 30k",
-        },{
-          name: "price",
-          value: ">20000",
-          label: "30k and more",
-        },
-      ],
-    }, {
-      id: "brand",
-      title: "Brand:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: babiesBrands[6111].map(brand => ({
-        name: "brand",
-        value: brand.toLowerCase(),
-        label: brand
-      }))
-    },
-//        {
-//       id: "age_group",
-//       title: "Years",
-//       type: "radio",
-//       content_checkbox: false,
-//       content: [
-//         {
-//           name: "age_group",
-//           value: "",
-//           label: "All",
-//         },
-//         {
-//           name: "age_group",
-//           value: "0.6",
-//           label: "0 - 6 months",
-//         },
-//         {
-//           name: "age_group",
-//           value: "2.4",
-//           label: "5 - 10 age_group",
-//         },
-//         {
-//           name: "age_group",
-//           value: "15",
-//           label: "10 - 15 age_group",
-//         },{
-//           name: "age_group",
-//           value: "20",
-//           label: "15 - 20 age_group",
-//         },{
-//           name: "age_group",
-//           value: ">20",
-//           label: "20 age_group+",
-//         },
-//       ],
-//     },
+	defaults[0],
+	{
+		id: 'price',
+		title: 'Price ₦',
+		type: 'radio',
+		content_checkbox: false,
+		options: [
+			{
+				name: 'min_price',
+				type: 'text',
+				placeholder: 'min',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+			{
+				name: 'max_price',
+				type: 'text',
+				placeholder: 'max',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+		],
+		content: [
+			{
+				name: 'price',
+				value: '',
+				label: 'All',
+			},
+			{
+				name: 'price',
+				value: '5000',
+				label: '0 - 5k',
+			},
+			{
+				name: 'price',
+				value: '10000',
+				label: '5k to 10k',
+			},
+			{
+				name: 'price',
+				value: '15000',
+				label: '10k - 15k',
+			},
+			{
+				name: 'price',
+				value: '20000',
+				label: '15k to 20k',
+			},
+			{
+				name: 'price',
+				value: '30000',
+				label: '20k to 30k',
+			},
+			{
+				name: 'price',
+				value: '>20000',
+				label: '30k and more',
+			},
+		],
+	},
+	{
+		id: 'brand',
+		title: 'Brand:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: babiesBrands[6111].map((brand) => ({
+			name: 'brand',
+			value: brand.toLowerCase(),
+			label: brand,
+		})),
+	},
+	//        {
+	//       id: "age_group",
+	//       title: "Years",
+	//       type: "radio",
+	//       content_checkbox: false,
+	//       content: [
+	//         {
+	//           name: "age_group",
+	//           value: "",
+	//           label: "All",
+	//         },
+	//         {
+	//           name: "age_group",
+	//           value: "0.6",
+	//           label: "0 - 6 months",
+	//         },
+	//         {
+	//           name: "age_group",
+	//           value: "2.4",
+	//           label: "5 - 10 age_group",
+	//         },
+	//         {
+	//           name: "age_group",
+	//           value: "15",
+	//           label: "10 - 15 age_group",
+	//         },{
+	//           name: "age_group",
+	//           value: "20",
+	//           label: "15 - 20 age_group",
+	//         },{
+	//           name: "age_group",
+	//           value: ">20",
+	//           label: "20 age_group+",
+	//         },
+	//       ],
+	//     },
 ];
 
 const babies05 = [
-	defaults[0],    {
-      id: "price",
-      title: "Price #",
-      type: "radio",
-      content_checkbox: false,
-      options: [{
-          name: "min_price",
-          type: "text",
-          placeholder: "min",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },{
-          name: "max_price",
-          type: "text",
-          placeholder: "max",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },],
-      content: [
-        {
-          name: "price",
-          value: "",
-          label: "All",
-        },
-        {
-          name: "price",
-          value: "5000",
-          label: "0 - 5k",
-        },
-        {
-          name: "price",
-          value: "10000",
-          label: "5k to 10k",
-        },
-        {
-          name: "price",
-          value: "15000",
-          label: "10k - 15k",
-        },{
-          name: "price",
-          value: "20000",
-          label: "15k to 20k",
-        },{
-          name: "price",
-          value: "30000",
-          label: "20k to 30k",
-        },{
-          name: "price",
-          value: ">20000",
-          label: "30k and more",
-        },
-      ],
-    }, {
-      id: "brand",
-      title: "Brand:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: babiesBrands[6105].map(brand => ({
-        name: "brand",
-        value: brand.toLowerCase(),
-        label: brand
-      }))
-    }, {
-id: "ad_condition",
-title: "Condition",
-type: "checkbox",
-content_checkbox: false,
-content: condition_refub.map(ad_condition => ({
-	name: "ad_condition",
-	value: ad_condition.value,
-	label: ad_condition.label,
-})),
-},{
-      id: "color",
-      title: "Color",
-      type: "checkbox",
-      content_checkbox: false,
-      content: colors.map(color => ({
-          name: "color",
-          value: color,
-          label: color,
-        })),
-    },
-//        {
-//       id: "age_group",
-//       title: "Years",
-//       type: "radio",
-//       content_checkbox: false,
-//       content: [
-//         {
-//           name: "age_group",
-//           value: "",
-//           label: "All",
-//         },
-//         {
-//           name: "age_group",
-//           value: "0.6",
-//           label: "0 - 6 months",
-//         },
-//         {
-//           name: "age_group",
-//           value: "2.4",
-//           label: "5 - 10 age_group",
-//         },
-//         {
-//           name: "age_group",
-//           value: "15",
-//           label: "10 - 15 age_group",
-//         },{
-//           name: "age_group",
-//           value: "20",
-//           label: "15 - 20 age_group",
-//         },{
-//           name: "age_group",
-//           value: ">20",
-//           label: "20 age_group+",
-//         },
-//       ],
-//     },
+	defaults[0],
+	{
+		id: 'price',
+		title: 'Price ₦',
+		type: 'radio',
+		content_checkbox: false,
+		options: [
+			{
+				name: 'min_price',
+				type: 'text',
+				placeholder: 'min',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+			{
+				name: 'max_price',
+				type: 'text',
+				placeholder: 'max',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+		],
+		content: [
+			{
+				name: 'price',
+				value: '',
+				label: 'All',
+			},
+			{
+				name: 'price',
+				value: '5000',
+				label: '0 - 5k',
+			},
+			{
+				name: 'price',
+				value: '10000',
+				label: '5k to 10k',
+			},
+			{
+				name: 'price',
+				value: '15000',
+				label: '10k - 15k',
+			},
+			{
+				name: 'price',
+				value: '20000',
+				label: '15k to 20k',
+			},
+			{
+				name: 'price',
+				value: '30000',
+				label: '20k to 30k',
+			},
+			{
+				name: 'price',
+				value: '>20000',
+				label: '30k and more',
+			},
+		],
+	},
+	{
+		id: 'brand',
+		title: 'Brand:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: babiesBrands[6105].map((brand) => ({
+			name: 'brand',
+			value: brand.toLowerCase(),
+			label: brand,
+		})),
+	},
+	{
+		id: 'ad_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: condition_refub.map((ad_condition) => ({
+			name: 'ad_condition',
+			value: ad_condition.value,
+			label: ad_condition.label,
+		})),
+	},
+	{
+		id: 'color',
+		title: 'Color',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: colors.map((color) => ({
+			name: 'color',
+			value: color,
+			label: color,
+		})),
+	},
+	//        {
+	//       id: "age_group",
+	//       title: "Years",
+	//       type: "radio",
+	//       content_checkbox: false,
+	//       content: [
+	//         {
+	//           name: "age_group",
+	//           value: "",
+	//           label: "All",
+	//         },
+	//         {
+	//           name: "age_group",
+	//           value: "0.6",
+	//           label: "0 - 6 months",
+	//         },
+	//         {
+	//           name: "age_group",
+	//           value: "2.4",
+	//           label: "5 - 10 age_group",
+	//         },
+	//         {
+	//           name: "age_group",
+	//           value: "15",
+	//           label: "10 - 15 age_group",
+	//         },{
+	//           name: "age_group",
+	//           value: "20",
+	//           label: "15 - 20 age_group",
+	//         },{
+	//           name: "age_group",
+	//           value: ">20",
+	//           label: "20 age_group+",
+	//         },
+	//       ],
+	//     },
 ];
 
 const babies02 = [
-	defaults[0],    {
-      id: "price",
-      title: "Price #",
-      type: "radio",
-      content_checkbox: false,
-      options: [{
-          name: "min_price",
-          type: "text",
-          placeholder: "min",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },{
-          name: "max_price",
-          type: "text",
-          placeholder: "max",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },],
-      content: [
-        {
-          name: "price",
-          value: "",
-          label: "All",
-        },
-        {
-          name: "price",
-          value: "5000",
-          label: "0 - 5k",
-        },
-        {
-          name: "price",
-          value: "10000",
-          label: "5k to 10k",
-        },
-        {
-          name: "price",
-          value: "15000",
-          label: "10k - 15k",
-        },{
-          name: "price",
-          value: "20000",
-          label: "15k to 20k",
-        },{
-          name: "price",
-          value: "30000",
-          label: "20k to 30k",
-        },{
-          name: "price",
-          value: ">20000",
-          label: "30k and more",
-        },
-      ],
-    }, {
-      id: "brand",
-      title: "Brand:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: babiesBrands[6102].map(brand => ({
-        name: "brand",
-        value: brand.toLowerCase(),
-        label: brand
-      }))
-    }, {
-      id: "type",
-      title: "Type:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: babiesTypes[6102].map(type => ({
-        name: "type",
-        value: type.toLowerCase(),
-        label: type
-      }))
-    },{
-id: "ad_condition",
-title: "Condition",
-type: "checkbox",
-content_checkbox: false,
-content: condition_refub.map(ad_condition => ({
-	name: "ad_condition",
-	value: ad_condition.value,
-	label: ad_condition.label,
-})),
-},{
-      id: "color",
-      title: "Color",
-      type: "checkbox",
-      content_checkbox: false,
-      content: colors.map(color => ({
-          name: "color",
-          value: color,
-          label: color,
-        })),
-    },{
-      id: "gender",
-      title: "Gender",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "gender",
-          value: "m",
-          label: "Male",
-        },{
-          name: "gender",
-          value: "f",
-          label: "Female",
-        },{
-          name: "gender",
-          value: "u",
-          label: "Unisex",
-        }
-      ],
-},{
-id: "size",
-title: "Size",
-type: "checkbox",
-content_checkbox: false,
-content: size.map(size => ({
-	name: "size",
-	value: size.toString(),
-	label: size.toString(),
-})),
-},
-//        {
-//       id: "age_group",
-//       title: "Years",
-//       type: "radio",
-//       content_checkbox: false,
-//       content: [
-//         {
-//           name: "age_group",
-//           value: "",
-//           label: "All",
-//         },
-//         {
-//           name: "age_group",
-//           value: "0.6",
-//           label: "0 - 6 months",
-//         },
-//         {
-//           name: "age_group",
-//           value: "2.4",
-//           label: "5 - 10 age_group",
-//         },
-//         {
-//           name: "age_group",
-//           value: "15",
-//           label: "10 - 15 age_group",
-//         },{
-//           name: "age_group",
-//           value: "20",
-//           label: "15 - 20 age_group",
-//         },{
-//           name: "age_group",
-//           value: ">20",
-//           label: "20 age_group+",
-//         },
-//       ],
-//     },
+	defaults[0],
+	{
+		id: 'price',
+		title: 'Price ₦',
+		type: 'radio',
+		content_checkbox: false,
+		options: [
+			{
+				name: 'min_price',
+				type: 'text',
+				placeholder: 'min',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+			{
+				name: 'max_price',
+				type: 'text',
+				placeholder: 'max',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+		],
+		content: [
+			{
+				name: 'price',
+				value: '',
+				label: 'All',
+			},
+			{
+				name: 'price',
+				value: '5000',
+				label: '0 - 5k',
+			},
+			{
+				name: 'price',
+				value: '10000',
+				label: '5k to 10k',
+			},
+			{
+				name: 'price',
+				value: '15000',
+				label: '10k - 15k',
+			},
+			{
+				name: 'price',
+				value: '20000',
+				label: '15k to 20k',
+			},
+			{
+				name: 'price',
+				value: '30000',
+				label: '20k to 30k',
+			},
+			{
+				name: 'price',
+				value: '>20000',
+				label: '30k and more',
+			},
+		],
+	},
+	{
+		id: 'brand',
+		title: 'Brand:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: babiesBrands[6102].map((brand) => ({
+			name: 'brand',
+			value: brand.toLowerCase(),
+			label: brand,
+		})),
+	},
+	{
+		id: 'type',
+		title: 'Type:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: babiesTypes[6102].map((type) => ({
+			name: 'type',
+			value: type.toLowerCase(),
+			label: type,
+		})),
+	},
+	{
+		id: 'ad_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: condition_refub.map((ad_condition) => ({
+			name: 'ad_condition',
+			value: ad_condition.value,
+			label: ad_condition.label,
+		})),
+	},
+	{
+		id: 'color',
+		title: 'Color',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: colors.map((color) => ({
+			name: 'color',
+			value: color,
+			label: color,
+		})),
+	},
+	{
+		id: 'gender',
+		title: 'Gender',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'gender',
+				value: 'm',
+				label: 'Male',
+			},
+			{
+				name: 'gender',
+				value: 'f',
+				label: 'Female',
+			},
+			{
+				name: 'gender',
+				value: 'u',
+				label: 'Unisex',
+			},
+		],
+	},
+	{
+		id: 'size',
+		title: 'Size',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: size.map((size) => ({
+			name: 'size',
+			value: size.toString(),
+			label: size.toString(),
+		})),
+	},
+	//        {
+	//       id: "age_group",
+	//       title: "Years",
+	//       type: "radio",
+	//       content_checkbox: false,
+	//       content: [
+	//         {
+	//           name: "age_group",
+	//           value: "",
+	//           label: "All",
+	//         },
+	//         {
+	//           name: "age_group",
+	//           value: "0.6",
+	//           label: "0 - 6 months",
+	//         },
+	//         {
+	//           name: "age_group",
+	//           value: "2.4",
+	//           label: "5 - 10 age_group",
+	//         },
+	//         {
+	//           name: "age_group",
+	//           value: "15",
+	//           label: "10 - 15 age_group",
+	//         },{
+	//           name: "age_group",
+	//           value: "20",
+	//           label: "15 - 20 age_group",
+	//         },{
+	//           name: "age_group",
+	//           value: ">20",
+	//           label: "20 age_group+",
+	//         },
+	//       ],
+	//     },
 ];
 
 const babies09 = [
-	defaults[0],    {
-      id: "price",
-      title: "Price #",
-      type: "radio",
-      content_checkbox: false,
-      options: [{
-          name: "min_price",
-          type: "text",
-          placeholder: "min",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },{
-          name: "max_price",
-          type: "text",
-          placeholder: "max",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },],
-      content: [
-        {
-          name: "price",
-          value: "",
-          label: "All",
-        },
-        {
-          name: "price",
-          value: "5000",
-          label: "0 - 5k",
-        },
-        {
-          name: "price",
-          value: "10000",
-          label: "5k to 10k",
-        },
-        {
-          name: "price",
-          value: "15000",
-          label: "10k - 15k",
-        },{
-          name: "price",
-          value: "20000",
-          label: "15k to 20k",
-        },{
-          name: "price",
-          value: "30000",
-          label: "20k to 30k",
-        },{
-          name: "price",
-          value: ">20000",
-          label: "30k and more",
-        },
-      ],
-    }, {
-      id: "brand",
-      title: "Brand:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: babiesBrands[6109].map(brand => ({
-        name: "brand",
-        value: brand.toLowerCase(),
-        label: brand
-      }))
-    }, {
-      id: "type",
-      title: "Type:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: babiesTypes[6109].map(type => ({
-        name: "type",
-        value: type.toLowerCase(),
-        label: type
-      }))
-    },{
-id: "ad_condition",
-title: "Condition",
-type: "checkbox",
-content_checkbox: false,
-content: condition_refub.map(ad_condition => ({
-	name: "ad_condition",
-	value: ad_condition.value,
-	label: ad_condition.label,
-})),
-},{
-      id: "color",
-      title: "Color",
-      type: "checkbox",
-      content_checkbox: false,
-      content: colors.map(color => ({
-          name: "color",
-          value: color,
-          label: color,
-        })),
-    },
-//        {
-//       id: "age_group",
-//       title: "Years",
-//       type: "radio",
-//       content_checkbox: false,
-//       content: [
-//         {
-//           name: "age_group",
-//           value: "",
-//           label: "All",
-//         },
-//         {
-//           name: "age_group",
-//           value: "0.6",
-//           label: "0 - 6 months",
-//         },
-//         {
-//           name: "age_group",
-//           value: "2.4",
-//           label: "5 - 10 age_group",
-//         },
-//         {
-//           name: "age_group",
-//           value: "15",
-//           label: "10 - 15 age_group",
-//         },{
-//           name: "age_group",
-//           value: "20",
-//           label: "15 - 20 age_group",
-//         },{
-//           name: "age_group",
-//           value: ">20",
-//           label: "20 age_group+",
-//         },
-//       ],
-//     },
+	defaults[0],
+	{
+		id: 'price',
+		title: 'Price ₦',
+		type: 'radio',
+		content_checkbox: false,
+		options: [
+			{
+				name: 'min_price',
+				type: 'text',
+				placeholder: 'min',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+			{
+				name: 'max_price',
+				type: 'text',
+				placeholder: 'max',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+		],
+		content: [
+			{
+				name: 'price',
+				value: '',
+				label: 'All',
+			},
+			{
+				name: 'price',
+				value: '5000',
+				label: '0 - 5k',
+			},
+			{
+				name: 'price',
+				value: '10000',
+				label: '5k to 10k',
+			},
+			{
+				name: 'price',
+				value: '15000',
+				label: '10k - 15k',
+			},
+			{
+				name: 'price',
+				value: '20000',
+				label: '15k to 20k',
+			},
+			{
+				name: 'price',
+				value: '30000',
+				label: '20k to 30k',
+			},
+			{
+				name: 'price',
+				value: '>20000',
+				label: '30k and more',
+			},
+		],
+	},
+	{
+		id: 'brand',
+		title: 'Brand:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: babiesBrands[6109].map((brand) => ({
+			name: 'brand',
+			value: brand.toLowerCase(),
+			label: brand,
+		})),
+	},
+	{
+		id: 'type',
+		title: 'Type:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: babiesTypes[6109].map((type) => ({
+			name: 'type',
+			value: type.toLowerCase(),
+			label: type,
+		})),
+	},
+	{
+		id: 'ad_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: condition_refub.map((ad_condition) => ({
+			name: 'ad_condition',
+			value: ad_condition.value,
+			label: ad_condition.label,
+		})),
+	},
+	{
+		id: 'color',
+		title: 'Color',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: colors.map((color) => ({
+			name: 'color',
+			value: color,
+			label: color,
+		})),
+	},
+	//        {
+	//       id: "age_group",
+	//       title: "Years",
+	//       type: "radio",
+	//       content_checkbox: false,
+	//       content: [
+	//         {
+	//           name: "age_group",
+	//           value: "",
+	//           label: "All",
+	//         },
+	//         {
+	//           name: "age_group",
+	//           value: "0.6",
+	//           label: "0 - 6 months",
+	//         },
+	//         {
+	//           name: "age_group",
+	//           value: "2.4",
+	//           label: "5 - 10 age_group",
+	//         },
+	//         {
+	//           name: "age_group",
+	//           value: "15",
+	//           label: "10 - 15 age_group",
+	//         },{
+	//           name: "age_group",
+	//           value: "20",
+	//           label: "15 - 20 age_group",
+	//         },{
+	//           name: "age_group",
+	//           value: ">20",
+	//           label: "20 age_group+",
+	//         },
+	//       ],
+	//     },
 ];
 
 const sport = [
-	defaults[0],    {
-      id: "price",
-      title: "Price #",
-      type: "radio",
-      content_checkbox: false,
-      options: [{
-          name: "min_price",
-          type: "text",
-          placeholder: "min",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },{
-          name: "max_price",
-          type: "text",
-          placeholder: "max",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },],
-      content: [
-        {
-          name: "price",
-          value: "",
-          label: "All",
-        },
-        {
-          name: "price",
-          value: "5000",
-          label: "0 - 5k",
-        },
-        {
-          name: "price",
-          value: "10000",
-          label: "5k to 10k",
-        },
-        {
-          name: "price",
-          value: "15000",
-          label: "10k - 15k",
-        },{
-          name: "price",
-          value: "20000",
-          label: "15k to 20k",
-        },{
-          name: "price",
-          value: "30000",
-          label: "20k to 30k",
-        },{
-          name: "price",
-          value: ">20000",
-          label: "30k and more",
-        },
-      ],
-    }, {
-      id: "type",
-      title: "Type:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: sportTypes[6205].map(type => ({
-        name: "type",
-        value: type.toLowerCase(),
-        label: type
-      }))
-	}, {
-	id: "ad_condition",
-	title: "Condition",
-	type: "checkbox",
-	content_checkbox: false,
-	content: condition_refub.filter(condtion => condition.values !== "refurbished").map(ad_condition => ({
-		name: "ad_condition",
-		value: ad_condition.value,
-		label: ad_condition.label,
-	})),
+	defaults[0],
+	{
+		id: 'price',
+		title: 'Price ₦',
+		type: 'radio',
+		content_checkbox: false,
+		options: [
+			{
+				name: 'min_price',
+				type: 'text',
+				placeholder: 'min',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+			{
+				name: 'max_price',
+				type: 'text',
+				placeholder: 'max',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+		],
+		content: [
+			{
+				name: 'price',
+				value: '',
+				label: 'All',
+			},
+			{
+				name: 'price',
+				value: '5000',
+				label: '0 - 5k',
+			},
+			{
+				name: 'price',
+				value: '10000',
+				label: '5k to 10k',
+			},
+			{
+				name: 'price',
+				value: '15000',
+				label: '10k - 15k',
+			},
+			{
+				name: 'price',
+				value: '20000',
+				label: '15k to 20k',
+			},
+			{
+				name: 'price',
+				value: '30000',
+				label: '20k to 30k',
+			},
+			{
+				name: 'price',
+				value: '>20000',
+				label: '30k and more',
+			},
+		],
 	},
-]
+	{
+		id: 'type',
+		title: 'Type:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: sportTypes[6205].map((type) => ({
+			name: 'type',
+			value: type.toLowerCase(),
+			label: type,
+		})),
+	},
+	{
+		id: 'ad_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: condition_refub
+			.filter((condtion) => condition.values !== 'refurbished')
+			.map((ad_condition) => ({
+				name: 'ad_condition',
+				value: ad_condition.value,
+				label: ad_condition.label,
+			})),
+	},
+];
 const sport01 = [
-	defaults[0],    {
-      id: "price",
-      title: "Price #",
-      type: "radio",
-      content_checkbox: false,
-      options: [{
-          name: "min_price",
-          type: "text",
-          placeholder: "min",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },{
-          name: "max_price",
-          type: "text",
-          placeholder: "max",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },],
-      content: [
-        {
-          name: "price",
-          value: "",
-          label: "All",
-        },
-        {
-          name: "price",
-          value: "5000",
-          label: "0 - 5k",
-        },
-        {
-          name: "price",
-          value: "10000",
-          label: "5k to 10k",
-        },
-        {
-          name: "price",
-          value: "15000",
-          label: "10k - 15k",
-        },{
-          name: "price",
-          value: "20000",
-          label: "15k to 20k",
-        },{
-          name: "price",
-          value: "30000",
-          label: "20k to 30k",
-        },{
-          name: "price",
-          value: ">20000",
-          label: "30k and more",
-        },
-      ],
-    }, {
-      id: "type",
-      title: "Type:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: sportTypes[6201].map(type => ({
-        name: "type",
-        value: type.toLowerCase(),
-        label: type
-      }))
-	}, {
-	id: "ad_condition",
-	title: "Condition",
-	type: "checkbox",
-	content_checkbox: false,
-	content: condition_refub.filter(condtion => condition.values !== "refurbished").map(ad_condition => ({
-		name: "ad_condition",
-		value: ad_condition.value,
-		label: ad_condition.label,
-	})),
+	defaults[0],
+	{
+		id: 'price',
+		title: 'Price ₦',
+		type: 'radio',
+		content_checkbox: false,
+		options: [
+			{
+				name: 'min_price',
+				type: 'text',
+				placeholder: 'min',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+			{
+				name: 'max_price',
+				type: 'text',
+				placeholder: 'max',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+		],
+		content: [
+			{
+				name: 'price',
+				value: '',
+				label: 'All',
+			},
+			{
+				name: 'price',
+				value: '5000',
+				label: '0 - 5k',
+			},
+			{
+				name: 'price',
+				value: '10000',
+				label: '5k to 10k',
+			},
+			{
+				name: 'price',
+				value: '15000',
+				label: '10k - 15k',
+			},
+			{
+				name: 'price',
+				value: '20000',
+				label: '15k to 20k',
+			},
+			{
+				name: 'price',
+				value: '30000',
+				label: '20k to 30k',
+			},
+			{
+				name: 'price',
+				value: '>20000',
+				label: '30k and more',
+			},
+		],
 	},
-]
+	{
+		id: 'type',
+		title: 'Type:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: sportTypes[6201].map((type) => ({
+			name: 'type',
+			value: type.toLowerCase(),
+			label: type,
+		})),
+	},
+	{
+		id: 'ad_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: condition_refub
+			.filter((condtion) => condition.values !== 'refurbished')
+			.map((ad_condition) => ({
+				name: 'ad_condition',
+				value: ad_condition.value,
+				label: ad_condition.label,
+			})),
+	},
+];
 const sport04 = [
-	defaults[0],    {
-      id: "price",
-      title: "Price #",
-      type: "radio",
-      content_checkbox: false,
-      options: [{
-          name: "min_price",
-          type: "text",
-          placeholder: "min",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },{
-          name: "max_price",
-          type: "text",
-          placeholder: "max",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },],
-      content: [
-        {
-          name: "price",
-          value: "",
-          label: "All",
-        },
-        {
-          name: "price",
-          value: "5000",
-          label: "0 - 5k",
-        },
-        {
-          name: "price",
-          value: "10000",
-          label: "5k to 10k",
-        },
-        {
-          name: "price",
-          value: "15000",
-          label: "10k - 15k",
-        },{
-          name: "price",
-          value: "20000",
-          label: "15k to 20k",
-        },{
-          name: "price",
-          value: "30000",
-          label: "20k to 30k",
-        },{
-          name: "price",
-          value: ">20000",
-          label: "30k and more",
-        },
-      ],
-    }, {
-      id: "type",
-      title: "Type:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: sportTypes[6205].map(type => ({
-        name: "type",
-        value: type.toLowerCase(),
-        label: type
-      }))
-	}
-]
+	defaults[0],
+	{
+		id: 'price',
+		title: 'Price ₦',
+		type: 'radio',
+		content_checkbox: false,
+		options: [
+			{
+				name: 'min_price',
+				type: 'text',
+				placeholder: 'min',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+			{
+				name: 'max_price',
+				type: 'text',
+				placeholder: 'max',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+		],
+		content: [
+			{
+				name: 'price',
+				value: '',
+				label: 'All',
+			},
+			{
+				name: 'price',
+				value: '5000',
+				label: '0 - 5k',
+			},
+			{
+				name: 'price',
+				value: '10000',
+				label: '5k to 10k',
+			},
+			{
+				name: 'price',
+				value: '15000',
+				label: '10k - 15k',
+			},
+			{
+				name: 'price',
+				value: '20000',
+				label: '15k to 20k',
+			},
+			{
+				name: 'price',
+				value: '30000',
+				label: '20k to 30k',
+			},
+			{
+				name: 'price',
+				value: '>20000',
+				label: '30k and more',
+			},
+		],
+	},
+	{
+		id: 'type',
+		title: 'Type:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: sportTypes[6205].map((type) => ({
+			name: 'type',
+			value: type.toLowerCase(),
+			label: type,
+		})),
+	},
+];
 const sport02 = [
-	defaults[0],    {
-      id: "price",
-      title: "Price #",
-      type: "radio",
-      content_checkbox: false,
-      options: [{
-          name: "min_price",
-          type: "text",
-          placeholder: "min",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },{
-          name: "max_price",
-          type: "text",
-          placeholder: "max",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },],
-      content: [
-        {
-          name: "price",
-          value: "",
-          label: "All",
-        },
-        {
-          name: "price",
-          value: "5000",
-          label: "0 - 5k",
-        },
-        {
-          name: "price",
-          value: "10000",
-          label: "5k to 10k",
-        },
-        {
-          name: "price",
-          value: "15000",
-          label: "10k - 15k",
-        },{
-          name: "price",
-          value: "20000",
-          label: "15k to 20k",
-        },{
-          name: "price",
-          value: "30000",
-          label: "20k to 30k",
-        },{
-          name: "price",
-          value: ">20000",
-          label: "30k and more",
-        },
-      ],
-    }, {
-      id: "type",
-      title: "Type:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: sportTypes[6202].map(type => ({
-        name: "type",
-        value: type.toLowerCase(),
-        label: type
-      }))
-	}, {
-	id: "ad_condition",
-	title: "Condition",
-	type: "checkbox",
-	content_checkbox: false,
-	content: condition_refub.filter(condtion => condition.values !== "refurbished").map(ad_condition => ({
-		name: "ad_condition",
-		value: ad_condition.value,
-		label: ad_condition.label,
-	})),
-	},{
-      id: "brand",
-      title: "Brand:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: sportBrands[6202].map(brand => ({
-        name: "brand",
-        value: brand.toLowerCase(),
-        label: brand
-      }))
-    },
-]
+	defaults[0],
+	{
+		id: 'price',
+		title: 'Price ₦',
+		type: 'radio',
+		content_checkbox: false,
+		options: [
+			{
+				name: 'min_price',
+				type: 'text',
+				placeholder: 'min',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+			{
+				name: 'max_price',
+				type: 'text',
+				placeholder: 'max',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+		],
+		content: [
+			{
+				name: 'price',
+				value: '',
+				label: 'All',
+			},
+			{
+				name: 'price',
+				value: '5000',
+				label: '0 - 5k',
+			},
+			{
+				name: 'price',
+				value: '10000',
+				label: '5k to 10k',
+			},
+			{
+				name: 'price',
+				value: '15000',
+				label: '10k - 15k',
+			},
+			{
+				name: 'price',
+				value: '20000',
+				label: '15k to 20k',
+			},
+			{
+				name: 'price',
+				value: '30000',
+				label: '20k to 30k',
+			},
+			{
+				name: 'price',
+				value: '>20000',
+				label: '30k and more',
+			},
+		],
+	},
+	{
+		id: 'type',
+		title: 'Type:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: sportTypes[6202].map((type) => ({
+			name: 'type',
+			value: type.toLowerCase(),
+			label: type,
+		})),
+	},
+	{
+		id: 'ad_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: condition_refub
+			.filter((condtion) => condition.values !== 'refurbished')
+			.map((ad_condition) => ({
+				name: 'ad_condition',
+				value: ad_condition.value,
+				label: ad_condition.label,
+			})),
+	},
+	{
+		id: 'brand',
+		title: 'Brand:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: sportBrands[6202].map((brand) => ({
+			name: 'brand',
+			value: brand.toLowerCase(),
+			label: brand,
+		})),
+	},
+];
 const sport03 = [
-	defaults[0],    {
-      id: "price",
-      title: "Price #",
-      type: "radio",
-      content_checkbox: false,
-      options: [{
-          name: "min_price",
-          type: "text",
-          placeholder: "min",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },{
-          name: "max_price",
-          type: "text",
-          placeholder: "max",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },],
-      content: [
-        {
-          name: "price",
-          value: "",
-          label: "All",
-        },
-        {
-          name: "price",
-          value: "5000",
-          label: "0 - 5k",
-        },
-        {
-          name: "price",
-          value: "10000",
-          label: "5k to 10k",
-        },
-        {
-          name: "price",
-          value: "15000",
-          label: "10k - 15k",
-        },{
-          name: "price",
-          value: "20000",
-          label: "15k to 20k",
-        },{
-          name: "price",
-          value: "30000",
-          label: "20k to 30k",
-        },{
-          name: "price",
-          value: ">20000",
-          label: "30k and more",
-        },
-      ],
-    }, {
-      id: "type",
-      title: "Type:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: sportTypes[6203].map(type => ({
-        name: "type",
-        value: type.toLowerCase(),
-        label: type
-      }))
-	}, {
-	id: "ad_condition",
-	title: "Condition",
-	type: "checkbox",
-	content_checkbox: false,
-	content: condition_refub.filter(condtion => condition.values !== "refurbished").map(ad_condition => ({
-		name: "ad_condition",
-		value: ad_condition.value,
-		label: ad_condition.label,
-	})),
-	},{
-      id: "brand",
-      title: "Brand:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: sportBrands[6203].map(brand => ({
-        name: "brand",
-        value: brand.toLowerCase(),
-        label: brand
-      }))
-    },
-]
+	defaults[0],
+	{
+		id: 'price',
+		title: 'Price ₦',
+		type: 'radio',
+		content_checkbox: false,
+		options: [
+			{
+				name: 'min_price',
+				type: 'text',
+				placeholder: 'min',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+			{
+				name: 'max_price',
+				type: 'text',
+				placeholder: 'max',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+		],
+		content: [
+			{
+				name: 'price',
+				value: '',
+				label: 'All',
+			},
+			{
+				name: 'price',
+				value: '5000',
+				label: '0 - 5k',
+			},
+			{
+				name: 'price',
+				value: '10000',
+				label: '5k to 10k',
+			},
+			{
+				name: 'price',
+				value: '15000',
+				label: '10k - 15k',
+			},
+			{
+				name: 'price',
+				value: '20000',
+				label: '15k to 20k',
+			},
+			{
+				name: 'price',
+				value: '30000',
+				label: '20k to 30k',
+			},
+			{
+				name: 'price',
+				value: '>20000',
+				label: '30k and more',
+			},
+		],
+	},
+	{
+		id: 'type',
+		title: 'Type:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: sportTypes[6203].map((type) => ({
+			name: 'type',
+			value: type.toLowerCase(),
+			label: type,
+		})),
+	},
+	{
+		id: 'ad_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: condition_refub
+			.filter((condtion) => condition.values !== 'refurbished')
+			.map((ad_condition) => ({
+				name: 'ad_condition',
+				value: ad_condition.value,
+				label: ad_condition.label,
+			})),
+	},
+	{
+		id: 'brand',
+		title: 'Brand:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: sportBrands[6203].map((brand) => ({
+			name: 'brand',
+			value: brand.toLowerCase(),
+			label: brand,
+		})),
+	},
+];
 const sport06 = [
-	defaults[0],    {
-      id: "price",
-      title: "Price #",
-      type: "radio",
-      content_checkbox: false,
-      options: [{
-          name: "min_price",
-          type: "text",
-          placeholder: "min",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },{
-          name: "max_price",
-          type: "text",
-          placeholder: "max",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },],
-      content: [
-        {
-          name: "price",
-          value: "",
-          label: "All",
-        },
-        {
-          name: "price",
-          value: "5000",
-          label: "0 - 5k",
-        },
-        {
-          name: "price",
-          value: "10000",
-          label: "5k to 10k",
-        },
-        {
-          name: "price",
-          value: "15000",
-          label: "10k - 15k",
-        },{
-          name: "price",
-          value: "20000",
-          label: "15k to 20k",
-        },{
-          name: "price",
-          value: "30000",
-          label: "20k to 30k",
-        },{
-          name: "price",
-          value: ">20000",
-          label: "30k and more",
-        },
-      ],
-    }, {
-      id: "type",
-      title: "Type:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: sportTypes[6206].map(type => ({
-        name: "type",
-        value: type.toLowerCase(),
-        label: type
-      }))
-	}, {
-	id: "ad_condition",
-	title: "Condition",
-	type: "checkbox",
-	content_checkbox: false,
-	content: condition_refub.filter(condtion => condition.values !== "refurbished").map(ad_condition => ({
-		name: "ad_condition",
-		value: ad_condition.value,
-		label: ad_condition.label,
-	})),
-	},{
-      id: "brand",
-      title: "Brand:",
-      type: "checkbox",
-      content_checkbox: false,
-      content: sportBrands[6206].map(brand => ({
-        name: "brand",
-        value: brand.toLowerCase(),
-        label: brand
-      }))
-    }, {
-      id: "color",
-      title: "Color",
-      type: "checkbox",
-      content_checkbox: false,
-      content: colors.map(color => ({
-          name: "color",
-          value: color,
-          label: color,
-        })),
-    },
+	defaults[0],
+	{
+		id: 'price',
+		title: 'Price ₦',
+		type: 'radio',
+		content_checkbox: false,
+		options: [
+			{
+				name: 'min_price',
+				type: 'text',
+				placeholder: 'min',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+			{
+				name: 'max_price',
+				type: 'text',
+				placeholder: 'max',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+		],
+		content: [
+			{
+				name: 'price',
+				value: '',
+				label: 'All',
+			},
+			{
+				name: 'price',
+				value: '5000',
+				label: '0 - 5k',
+			},
+			{
+				name: 'price',
+				value: '10000',
+				label: '5k to 10k',
+			},
+			{
+				name: 'price',
+				value: '15000',
+				label: '10k - 15k',
+			},
+			{
+				name: 'price',
+				value: '20000',
+				label: '15k to 20k',
+			},
+			{
+				name: 'price',
+				value: '30000',
+				label: '20k to 30k',
+			},
+			{
+				name: 'price',
+				value: '>20000',
+				label: '30k and more',
+			},
+		],
+	},
+	{
+		id: 'type',
+		title: 'Type:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: sportTypes[6206].map((type) => ({
+			name: 'type',
+			value: type.toLowerCase(),
+			label: type,
+		})),
+	},
+	{
+		id: 'ad_condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: condition_refub
+			.filter((condtion) => condition.values !== 'refurbished')
+			.map((ad_condition) => ({
+				name: 'ad_condition',
+				value: ad_condition.value,
+				label: ad_condition.label,
+			})),
+	},
+	{
+		id: 'brand',
+		title: 'Brand:',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: sportBrands[6206].map((brand) => ({
+			name: 'brand',
+			value: brand.toLowerCase(),
+			label: brand,
+		})),
+	},
+	{
+		id: 'color',
+		title: 'Color',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: colors.map((color) => ({
+			name: 'color',
+			value: color,
+			label: color,
+		})),
+	},
 ];
 
 const motorbike = [
-    {
-      id: "location",
-      title: "Location",
-      type: "modal",
-      content_checkbox: false,
-      content: [{
-        type: "modal",
-      }],
-    },
-    {
-      id: "seller_type",
-      title: "Seller Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "seller_type",
-          value: "dealer",
-          label: "Dealer",
-        },
-        {
-          name: "seller_type",
-          value: "private",
-          label: "Private",
-        },
-      ],
-    },
-    {
-      id: "price",
-      title: "Price #",
-      type: "radio",
-      content_checkbox: false,
-      options: [{
-          name: "min_price",
-          type: "text",
-          placeholder: "min",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },{
-          name: "max_price",
-          type: "text",
-          placeholder: "max",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },],
-      content: [
-        {
-          name: "price",
-          value: "",
-          label: "All",
-        },
-        {
-          name: "price",
-          value: "1500000",
-          label: "Under 1.5m",
-        },
-        {
-          name: "price",
-          value: "3000000",
-          label: "1.5m to 3m",
-        },
-        {
-          name: "price",
-          value: "7500000",
-          label: "3m to 7.5m",
-        },{
-          name: "price",
-          value: "11000000",
-          label: "7.5m to 11m",
-        },{
-          name: "price",
-          value: ">11000000",
-          label: "11m and more",
-        },
-      ],
-    },
-    {
-      id: "color",
-      title: "Color",
-      type: "checkbox",
-      content_checkbox: false,
-      content: colors.map(color => ({
-          name: "color",
-          value: color,
-          label: color,
-        })),
-    },{
-      id: "condition",
-      title: "Condition",
-      type: "checkbox",
-      content_checkbox: false,
-      content: condition.map(condition => ({
-	name: "condition",
-	value: condition.value,
-	label: condition.label,
-}))
-    },
-    {
-      id: "fuel_type",
-      title: "Fuel Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: fuel_type.map(fuel_type => ({
-          name: "fuel_type",
-          value: fuel_type.toLowerCase(),
-          label: fuel_type,
-        })),
-    },
-    {
-      id: "make",
-      title: "Make",
-      type: "checkbox",
-      content_checkbox: false,
-      content: motorbikeMake[6301].concat(motorbikeMake[6302]).map((val) => ({ name: "make", value: val, label: val })),
-    },
-    {
-      id: "year",
-      title: "Manufacture Year",
-      type: "checkbox",
-      content_checkbox: false,
-      content: arrayRange(1990, parseInt(new Date().getFullYear()), 1)
-        .reverse()
-        .map((val) => ({
-          name: "year",
-          value: val.toString(),
-          label: val.toString(),
-        })),
-    },
-    {
-      id: "transmission",
-      title: "Transmission",
-      type: "checkbox",
-      content_checkbox: false,
-      content: transmission.map(transmision => ({
-          name: "transmission",
-          value: transmision.toLowerCase(),
-          label: transmision,
-        })),
-    },{
-      id: "millage",
-      title: "Millage",
-      type: "radio",
-      content_checkbox: false,
-      content: [
-        {
-          name: "millage",
-          value: "",
-          label: "Any",
-        },
-        {
-          name: "millage",
-          value: "5000",
-          label: "Up to 5,000 miles",
-        },
-        {
-          name: "millage",
-          value: "10000",
-          label: "Up to 10,000 miles",
-        },
-        {
-          name: "millage",
-          value: "15000",
-          label: "Up to 15,000 miles",
-        },{
-          name: "millage",
-          value: "20000",
-          label: "Up to 20,000 miles",
-        },{
-          name: "millage",
-          value: "30000",
-          label: "Up to 30,000 miles",
-        },{
-          name: "millage",
-          value: "40000",
-          label: "Up to 40,000 miles",
-        },{
-          name: "millage",
-          value: "70000",
-          label: "Up to 70,000 miles",
-        },{
-          name: "millage",
-          value: "80000",
-          label: "Over 80,000 miles",
-        },
-      ],
-    },
+	{
+		id: 'location',
+		title: 'Location',
+		type: 'modal',
+		content_checkbox: false,
+		content: [
+			{
+				type: 'modal',
+			},
+		],
+	},
+	{
+		id: 'seller_type',
+		title: 'Seller Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'seller_type',
+				value: 'dealer',
+				label: 'Dealer',
+			},
+			{
+				name: 'seller_type',
+				value: 'private',
+				label: 'Private',
+			},
+		],
+	},
+	{
+		id: 'price',
+		title: 'Price ₦',
+		type: 'radio',
+		content_checkbox: false,
+		options: [
+			{
+				name: 'min_price',
+				type: 'text',
+				placeholder: 'min',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+			{
+				name: 'max_price',
+				type: 'text',
+				placeholder: 'max',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+		],
+		content: [
+			{
+				name: 'price',
+				value: '',
+				label: 'All',
+			},
+			{
+				name: 'price',
+				value: '1500000',
+				label: 'Under 1.5m',
+			},
+			{
+				name: 'price',
+				value: '3000000',
+				label: '1.5m to 3m',
+			},
+			{
+				name: 'price',
+				value: '7500000',
+				label: '3m to 7.5m',
+			},
+			{
+				name: 'price',
+				value: '11000000',
+				label: '7.5m to 11m',
+			},
+			{
+				name: 'price',
+				value: '>11000000',
+				label: '11m and more',
+			},
+		],
+	},
+	{
+		id: 'color',
+		title: 'Color',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: colors.map((color) => ({
+			name: 'color',
+			value: color,
+			label: color,
+		})),
+	},
+	{
+		id: 'condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: condition.map((condition) => ({
+			name: 'condition',
+			value: condition.value,
+			label: condition.label,
+		})),
+	},
+	{
+		id: 'fuel_type',
+		title: 'Fuel Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: fuel_type.map((fuel_type) => ({
+			name: 'fuel_type',
+			value: fuel_type.toLowerCase(),
+			label: fuel_type,
+		})),
+	},
+	{
+		id: 'make',
+		title: 'Make',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: motorbikeMake[6301]
+			.concat(motorbikeMake[6302])
+			.map((val) => ({ name: 'make', value: val, label: val })),
+	},
+	{
+		id: 'year',
+		title: 'Manufacture Year',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: arrayRange(1990, parseInt(new Date().getFullYear()), 1)
+			.reverse()
+			.map((val) => ({
+				name: 'year',
+				value: val.toString(),
+				label: val.toString(),
+			})),
+	},
+	{
+		id: 'transmission',
+		title: 'Transmission',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: transmission.map((transmision) => ({
+			name: 'transmission',
+			value: transmision.toLowerCase(),
+			label: transmision,
+		})),
+	},
+	{
+		id: 'millage',
+		title: 'Millage',
+		type: 'radio',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'millage',
+				value: '',
+				label: 'Any',
+			},
+			{
+				name: 'millage',
+				value: '5000',
+				label: 'Up to 5,000 miles',
+			},
+			{
+				name: 'millage',
+				value: '10000',
+				label: 'Up to 10,000 miles',
+			},
+			{
+				name: 'millage',
+				value: '15000',
+				label: 'Up to 15,000 miles',
+			},
+			{
+				name: 'millage',
+				value: '20000',
+				label: 'Up to 20,000 miles',
+			},
+			{
+				name: 'millage',
+				value: '30000',
+				label: 'Up to 30,000 miles',
+			},
+			{
+				name: 'millage',
+				value: '40000',
+				label: 'Up to 40,000 miles',
+			},
+			{
+				name: 'millage',
+				value: '70000',
+				label: 'Up to 70,000 miles',
+			},
+			{
+				name: 'millage',
+				value: '80000',
+				label: 'Over 80,000 miles',
+			},
+		],
+	},
 ];
 const motorbike01 = [
-    {
-      id: "location",
-      title: "Location",
-      type: "modal",
-      content_checkbox: false,
-      content: [{
-        type: "modal",
-      }],
-    },
-    {
-      id: "seller_type",
-      title: "Seller Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: [
-        {
-          name: "seller_type",
-          value: "dealer",
-          label: "Dealer",
-        },
-        {
-          name: "seller_type",
-          value: "private",
-          label: "Private",
-        },
-      ],
-    },
-    {
-      id: "price",
-      title: "Price #",
-      type: "radio",
-      content_checkbox: false,
-      options: [{
-          name: "min_price",
-          type: "text",
-          placeholder: "min",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },{
-          name: "max_price",
-          type: "text",
-          placeholder: "max",
-          className: "md:w-20 w-24 lg:w-[8rem] border-black"
-        },],
-      content: [
-        {
-          name: "price",
-          value: "",
-          label: "All",
-        },
-        {
-          name: "price",
-          value: "1500000",
-          label: "Under 1.5m",
-        },
-        {
-          name: "price",
-          value: "3000000",
-          label: "1.5m to 3m",
-        },
-        {
-          name: "price",
-          value: "7500000",
-          label: "3m to 7.5m",
-        },{
-          name: "price",
-          value: "11000000",
-          label: "7.5m to 11m",
-        },{
-          name: "price",
-          value: ">11000000",
-          label: "11m and more",
-        },
-      ],
-    },
-    {
-      id: "color",
-      title: "Color",
-      type: "checkbox",
-      content_checkbox: false,
-      content: colors.map(color => ({
-          name: "color",
-          value: color,
-          label: color,
-        })),
-    },{
-      id: "condition",
-      title: "Condition",
-      type: "checkbox",
-      content_checkbox: false,
-      content: condition_refub.filter(val => val.value !== "refurbished").map(condition => ({
-	name: "condition",
-	value: condition.value,
-	label: condition.label,
-}))
-    },
-    {
-      id: "fuel_type",
-      title: "Fuel Type",
-      type: "checkbox",
-      content_checkbox: false,
-      content: fuel_type.map(fuel_type => ({
-          name: "fuel_type",
-          value: fuel_type.toLowerCase(),
-          label: fuel_type,
-        })),
-    },
-    {
-      id: "make",
-      title: "Make",
-      type: "checkbox",
-      content_checkbox: false,
-      content: motorbikeMake[6301].map((val) => ({ name: "make", value: val, label: val })),
-    },
-    {
-      id: "type",
-      title: "Types",
-      type: "checkbox",
-      content_checkbox: false,
-      content: motorbikeType.map((val) => ({ name: "type", value: val, label: val })),
-    },
-    {
-      id: "year",
-      title: "Manufacture Year",
-      type: "checkbox",
-      content_checkbox: false,
-      content: arrayRange(1990, parseInt(new Date().getFullYear()), 1)
-        .reverse()
-        .map((val) => ({
-          name: "year",
-          value: val.toString(),
-          label: val.toString(),
-        })),
-    },
-    {
-      id: "transmission",
-      title: "Transmission",
-      type: "checkbox",
-      content_checkbox: false,
-      content: transmission.map(transmision => ({
-          name: "transmission",
-          value: transmision.toLowerCase(),
-          label: transmision,
-        })),
-    },{
-      id: "millage",
-      title: "Millage",
-      type: "radio",
-      content_checkbox: false,
-      content: [
-        {
-          name: "millage",
-          value: "",
-          label: "Any",
-        },
-        {
-          name: "millage",
-          value: "5000",
-          label: "Up to 5,000 miles",
-        },
-        {
-          name: "millage",
-          value: "10000",
-          label: "Up to 10,000 miles",
-        },
-        {
-          name: "millage",
-          value: "15000",
-          label: "Up to 15,000 miles",
-        },{
-          name: "millage",
-          value: "20000",
-          label: "Up to 20,000 miles",
-        },{
-          name: "millage",
-          value: "30000",
-          label: "Up to 30,000 miles",
-        },{
-          name: "millage",
-          value: "40000",
-          label: "Up to 40,000 miles",
-        },{
-          name: "millage",
-          value: "70000",
-          label: "Up to 70,000 miles",
-        },{
-          name: "millage",
-          value: "80000",
-          label: "Over 80,000 miles",
-        },
-      ],
-    },
+	{
+		id: 'location',
+		title: 'Location',
+		type: 'modal',
+		content_checkbox: false,
+		content: [
+			{
+				type: 'modal',
+			},
+		],
+	},
+	{
+		id: 'seller_type',
+		title: 'Seller Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'seller_type',
+				value: 'dealer',
+				label: 'Dealer',
+			},
+			{
+				name: 'seller_type',
+				value: 'private',
+				label: 'Private',
+			},
+		],
+	},
+	{
+		id: 'price',
+		title: 'Price ₦',
+		type: 'radio',
+		content_checkbox: false,
+		options: [
+			{
+				name: 'min_price',
+				type: 'text',
+				placeholder: 'min',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+			{
+				name: 'max_price',
+				type: 'text',
+				placeholder: 'max',
+				className: 'md:w-20 w-24 lg:w-[8rem]  border-black',
+			},
+		],
+		content: [
+			{
+				name: 'price',
+				value: '',
+				label: 'All',
+			},
+			{
+				name: 'price',
+				value: '1500000',
+				label: 'Under 1.5m',
+			},
+			{
+				name: 'price',
+				value: '3000000',
+				label: '1.5m to 3m',
+			},
+			{
+				name: 'price',
+				value: '7500000',
+				label: '3m to 7.5m',
+			},
+			{
+				name: 'price',
+				value: '11000000',
+				label: '7.5m to 11m',
+			},
+			{
+				name: 'price',
+				value: '>11000000',
+				label: '11m and more',
+			},
+		],
+	},
+	{
+		id: 'color',
+		title: 'Color',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: colors.map((color) => ({
+			name: 'color',
+			value: color,
+			label: color,
+		})),
+	},
+	{
+		id: 'condition',
+		title: 'Condition',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: condition_refub
+			.filter((val) => val.value !== 'refurbished')
+			.map((condition) => ({
+				name: 'condition',
+				value: condition.value,
+				label: condition.label,
+			})),
+	},
+	{
+		id: 'fuel_type',
+		title: 'Fuel Type',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: fuel_type.map((fuel_type) => ({
+			name: 'fuel_type',
+			value: fuel_type.toLowerCase(),
+			label: fuel_type,
+		})),
+	},
+	{
+		id: 'make',
+		title: 'Make',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: motorbikeMake[6301].map((val) => ({ name: 'make', value: val, label: val })),
+	},
+	{
+		id: 'type',
+		title: 'Types',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: motorbikeType.map((val) => ({ name: 'type', value: val, label: val })),
+	},
+	{
+		id: 'year',
+		title: 'Manufacture Year',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: arrayRange(1990, parseInt(new Date().getFullYear()), 1)
+			.reverse()
+			.map((val) => ({
+				name: 'year',
+				value: val.toString(),
+				label: val.toString(),
+			})),
+	},
+	{
+		id: 'transmission',
+		title: 'Transmission',
+		type: 'checkbox',
+		content_checkbox: false,
+		content: transmission.map((transmision) => ({
+			name: 'transmission',
+			value: transmision.toLowerCase(),
+			label: transmision,
+		})),
+	},
+	{
+		id: 'millage',
+		title: 'Millage',
+		type: 'radio',
+		content_checkbox: false,
+		content: [
+			{
+				name: 'millage',
+				value: '',
+				label: 'Any',
+			},
+			{
+				name: 'millage',
+				value: '5000',
+				label: 'Up to 5,000 miles',
+			},
+			{
+				name: 'millage',
+				value: '10000',
+				label: 'Up to 10,000 miles',
+			},
+			{
+				name: 'millage',
+				value: '15000',
+				label: 'Up to 15,000 miles',
+			},
+			{
+				name: 'millage',
+				value: '20000',
+				label: 'Up to 20,000 miles',
+			},
+			{
+				name: 'millage',
+				value: '30000',
+				label: 'Up to 30,000 miles',
+			},
+			{
+				name: 'millage',
+				value: '40000',
+				label: 'Up to 40,000 miles',
+			},
+			{
+				name: 'millage',
+				value: '70000',
+				label: 'Up to 70,000 miles',
+			},
+			{
+				name: 'millage',
+				value: '80000',
+				label: 'Over 80,000 miles',
+			},
+		],
+	},
 ];
-
-
-
-
 
 // FilterForm Controller, To avoid exporting everything to the page, we only return what is needed.
 export const formToDisplay = (categoryId) => {
-  switch(categoryId) {
-    case 50:
-    case 5005:
-    case 5007:
-      return filterFields;
-    case 5003:
-    case 5004:
-      return vans;
-    case 5001:
-      return cars;
-    case 5002: 
-      return automobile;
-    case 51:
-      return propertyFields;
-    case 5101:
-    case 5102:
-    case 5103:
-    case 5104:
-    case 5106:
-    case 5107:
-    case 5108:
-    case 5109:
-      return propertyHouseApartment;
-    case 5105:
-      return propertyLand;
-    case 52:
-      return serviceDefault;
-    case 5201:
-      return serviceOffice;
-    case 5202:
-      return serviceFood;
-    case 5203:
-      return serviceWeddings;
-    case 5204:
-      return serviceChildCare;
-    case 5205:
-      return serviceMaintenance;
-    case 5206:
-      return serviceTutorial;
-    case 5207:
-      return serviceClothing;
-    case 5208:
-      return serviceAutomotive;
-    case 5209:
-      return serviceEntertainment;
-    case 5210:
-      return serviceTravel;
-    case 5211:
-      return serviceGoods;
-    case 5212:
-      return serviceLegal;
-    case 5213:
-      return serviceTransport;
-    case 53:
-      return agric;
-    case 5301:
-      return agricultureAnimal;
-    case 5302:
-      return agricultureFarm;
-    case 5303:
-      return agricultureEquipment;
-    case 5304:
-    case 5305:
-      return agricultureFeed;
-    case 54:
-    case 5411:
-      return electronic;
-    case 5401:
-      return electronics01;
-    case 5402:
-      return electronics02;
-    case 5403:
-      return electronics03;
-    case 5404:
-      return electronics04;
-    case 5405:
-      return electronics05;
-    case 5406:
-      return electronics06;
-    case 5407:
-      return electronics07;
-    case 5408:
-      return electronics08;
-    case 5409:
-      return electronics09;
-    case 5410:
-      return electronics10;
-    case 55:
-    case 5502:
-    case 5505:
-      return fashion;
-    case 5501:
-      return fashion01;
-    case 5503:
-      return fashion03;
-    case 5504:
-      return fashion04;
-    case 5506:
-      return fashion06;
-    case 5507:
-      return fashion07;
-    case 56:
-      return health;
-    case 5601:
-      return health01;
-    case 5602:
-      return health02;
-    case 5603:
-      return health03;
-    case 5604:
-      return health04;
-    case 5605:
-      return health05;
-    case 5606:
-      return health06;
-    case 5607:
-      return health07;
-    case 5608:
-      return health08;
-    case 57:
-    case 5703:
-      return home;
-    case 5701:
-      return home01;
-    case 5702:
-      return home02;
-    case 5704:
-      return home04;
-    case 5705:
-      return home05;
-    case 5706:
-      return home06;
-    case 5707:
-	return home07;
-    case 58:
-    case 5801:
-      return tradesman;
-    case 5802:
-      return tradesman02;
-    case 5803:
-      return tradesman03;
-    case 5804:
-      return tradesman04;
-    case 5805:
-      return tradesman05;
-    case 5806:
-      return tradesman06;
-    case 5807:
-	return tradesman07;
-    case 5808:
-      return tradesman08;
-    case 5809:
-      return tradesman09;
-    case 5810:
-      return tradesman10;
-    case 5811:
-      return tradesman11;
-    case 5812:
-      return tradesman12;
-    case 5813:
-      return tradesman13;
-    case 59:
-	case 5902:
-	case 5903:
-		return software;
-	case 5901:
-		return software01;
-	case 60:
-	case 6001:
-	case 6006:
-		return pet;
-	case 6002:
-		return pet02;
-	case 6003:
-		return pet03;
-	case 6004:
-		return pet04;
-	case 6005:
-		return pet05;
-	case 61:
-	case 6107:
-	case 6108:
-		return babies;
-	case 6101:
-		return babies01;
-	case 6102:
-		return babies02;
-	case 6103:
-		return babies03;
-	case 6104:
-		return babies04;
-	case 6105:
-		return babies05;
-	case 6106:
-		return babies06;
-	case 6109:
-		return babies09;
-	case 6110:
-		return babies10;
-	case 6111:
-		return babies11;
-	case 62:
-	case 6205:
-		return sport;
-	case 6201:
-		return sport01;
-	case 6202:
-		return sport02;
-	case 6203:
-		return sport03;
-	case 6204:
-		return sport04;
-	case 6206:
-		return sport06;
-	case 63:
-	case 6302:
-		return motorbike;
-	case 6301:
-		return motorbike01;
-	default:
-		return [];
-  }
-}
-
+	switch (categoryId) {
+		case 50:
+		case 5005:
+		case 5007:
+			return filterFields;
+		case 5003:
+		case 5004:
+			return vans;
+		case 5001:
+			return cars;
+		case 5002:
+			return automobile;
+		case 51:
+			return propertyFields;
+		case 5101:
+		case 5102:
+		case 5103:
+		case 5104:
+		case 5106:
+		case 5107:
+		case 5108:
+		case 5109:
+			return propertyHouseApartment;
+		case 5105:
+			return propertyLand;
+		case 52:
+			return serviceDefault;
+		case 5201:
+			return serviceOffice;
+		case 5202:
+			return serviceFood;
+		case 5203:
+			return serviceWeddings;
+		case 5204:
+			return serviceChildCare;
+		case 5205:
+			return serviceMaintenance;
+		case 5206:
+			return serviceTutorial;
+		case 5207:
+			return serviceClothing;
+		case 5208:
+			return serviceAutomotive;
+		case 5209:
+			return serviceEntertainment;
+		case 5210:
+			return serviceTravel;
+		case 5211:
+			return serviceGoods;
+		case 5212:
+			return serviceLegal;
+		case 5213:
+			return serviceTransport;
+		case 53:
+			return agric;
+		case 5301:
+			return agricultureAnimal;
+		case 5302:
+			return agricultureFarm;
+		case 5303:
+			return agricultureEquipment;
+		case 5304:
+		case 5305:
+			return agricultureFeed;
+		case 54:
+		case 5411:
+			return electronic;
+		case 5401:
+			return electronics01;
+		case 5402:
+			return electronics02;
+		case 5403:
+			return electronics03;
+		case 5404:
+			return electronics04;
+		case 5405:
+			return electronics05;
+		case 5406:
+			return electronics06;
+		case 5407:
+			return electronics07;
+		case 5408:
+			return electronics08;
+		case 5409:
+			return electronics09;
+		case 5410:
+			return electronics10;
+		case 55:
+		case 5502:
+		case 5505:
+			return fashion;
+		case 5501:
+			return fashion01;
+		case 5503:
+			return fashion03;
+		case 5504:
+			return fashion04;
+		case 5506:
+			return fashion06;
+		case 5507:
+			return fashion07;
+		case 56:
+			return health;
+		case 5601:
+			return health01;
+		case 5602:
+			return health02;
+		case 5603:
+			return health03;
+		case 5604:
+			return health04;
+		case 5605:
+			return health05;
+		case 5606:
+			return health06;
+		case 5607:
+			return health07;
+		case 5608:
+			return health08;
+		case 57:
+		case 5703:
+			return home;
+		case 5701:
+			return home01;
+		case 5702:
+			return home02;
+		case 5704:
+			return home04;
+		case 5705:
+			return home05;
+		case 5706:
+			return home06;
+		case 5707:
+			return home07;
+		case 58:
+		case 5801:
+			return tradesman;
+		case 5802:
+			return tradesman02;
+		case 5803:
+			return tradesman03;
+		case 5804:
+			return tradesman04;
+		case 5805:
+			return tradesman05;
+		case 5806:
+			return tradesman06;
+		case 5807:
+			return tradesman07;
+		case 5808:
+			return tradesman08;
+		case 5809:
+			return tradesman09;
+		case 5810:
+			return tradesman10;
+		case 5811:
+			return tradesman11;
+		case 5812:
+			return tradesman12;
+		case 5813:
+			return tradesman13;
+		case 59:
+		case 5902:
+		case 5903:
+			return software;
+		case 5901:
+			return software01;
+		case 60:
+		case 6001:
+		case 6006:
+			return pet;
+		case 6002:
+			return pet02;
+		case 6003:
+			return pet03;
+		case 6004:
+			return pet04;
+		case 6005:
+			return pet05;
+		case 61:
+		case 6107:
+		case 6108:
+			return babies;
+		case 6101:
+			return babies01;
+		case 6102:
+			return babies02;
+		case 6103:
+			return babies03;
+		case 6104:
+			return babies04;
+		case 6105:
+			return babies05;
+		case 6106:
+			return babies06;
+		case 6109:
+			return babies09;
+		case 6110:
+			return babies10;
+		case 6111:
+			return babies11;
+		case 62:
+		case 6205:
+			return sport;
+		case 6201:
+			return sport01;
+		case 6202:
+			return sport02;
+		case 6203:
+			return sport03;
+		case 6204:
+			return sport04;
+		case 6206:
+			return sport06;
+		case 63:
+		case 6302:
+			return motorbike;
+		case 6301:
+			return motorbike01;
+		default:
+			return [];
+	}
+};

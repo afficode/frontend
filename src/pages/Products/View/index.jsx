@@ -157,9 +157,9 @@ const index = () => {
 				<Breadcrumb items={items} className={'text-md breadcrumbs text-primary'} />
 			</header>
 
-			<section className="flex flex-col w-full gap-2 md:flex-row md:gap-8 line-clamp-1">
-				<main className="w-full md:w-[60%] xl:w-[70%] flex flex-col">
-					<div className="w-full my-2 ml-2">
+			<section className="flex flex-col md:h-[680px] w-full gap-2 md:flex-row md:gap-8 line-clamp-1">
+				<main className="w-full h-full md:w-[60%] xl:w-[70%] flex flex-col">
+					<div className="w-full my-2 pl-2">
 						<div className="flex items-center justify-between w-full my-2 font-bold uppercase text-md md:text-2xl xl:text-3xl">
 							<span className="">{result.data?.title}</span>
 							<span className=" flex items-center gap-2 lg:gap-8 my-auto mr-4 lg:mr-0">
@@ -195,10 +195,10 @@ const index = () => {
 							</p>
 						</div>
 					</div>{' '}
-					<div className="w-full mx-auto mt-1">
-						<div className="relative rounded-none ">
+					<div className="w-full h-full mx-auto mt-1">
+						<div className="relative h-full rounded-none ">
 							{result.data?.images.length > 0 ? (
-								<Carousel className="h-[250px] md:h-[650px] rounded-none">
+								<Carousel className="h-[250px] md:h-full rounded-none">
 									{result.data?.images.map((img, index) => (
 										<img
 											src={img.path}
@@ -209,7 +209,11 @@ const index = () => {
 									))}
 								</Carousel>
 							) : (
-								<img src={noimage} alt="no image" className="rounded-sm " />
+								<img
+									src={noimage}
+									alt="no image"
+									className="rounded-sm  h-[250px] md:h-full w-full object-cover"
+								/>
 							)}
 							<div className="absolute bottom-0 flex w-full h-10 py-2 pl-6 text-white rounded-none bg-black/50">
 								<span className="flex px-2 my-auto border-2 border-white">
@@ -220,7 +224,8 @@ const index = () => {
 						</div>
 					</div>
 				</main>
-				<aside className="w-full md:w-[40%] xl:w-[30%] border-2 border-gray-400 p-2 lg:p-4">
+
+				<aside className="w-full min-h-full md:w-[40%] xl:w-[30%] border-2 border-gray-400 p-2 lg:p-4 flex flex-col">
 					<h2 className="w-full text-lg font-bold md:text-xl 2xl:text-3xl">{result.data?.firstname}</h2>
 					<p className="text-lg">
 						Since{' '}
@@ -231,76 +236,82 @@ const index = () => {
 					</p>
 
 					<hr className="h-px my-2 bg-gray-700 border-black border-1" />
-					<div className="w-full text-lg tracking-tighter lg:text-xl">
-						<p className="w-full">Contact {result.data?.firstname} </p>
-						{result?.data?.contact_type.includes('phone') && (
-							<div className="flex items-center justify-between">
-								<p className="my-2 text-xl lg:text-2xl ">
-									<span className="text-xl font-bold">
-										{revealNumber ? result.data?.number : `${result.data?.number.substring(0, 3)}XXXXXXXX`}
-									</span>
-								</p>
 
-								<button
-									className={`font-bold text-black bg-white rounded-none btn btn-sm hover:bg-primary hover:text-white hover:border-0 hover:rounded-sm ${
-										!isLogin && 'bg-gray-100 cursor-not-allowed'
-									}`}
-									onClick={() => {
-										if (isLogin && result?.data?.contact_type.includes('phone')) {
-											setRevealNumber(!revealNumber);
-										} else {
-											notify('Please login to reveal phone number');
-										}
-									}}
-								>
-									{!revealNumber ? (
-										<span className="flex items-center justify-center">
-											<IoEye /> &nbsp; Reveal{' '}
+					{result?.data.feature !== '3' && (
+						<div className="w-full text-lg tracking-tighter lg:text-xl">
+							<p className="w-full">Contact {result.data?.firstname} </p>
+							{result?.data?.contact_type.includes('phone') && (
+								<div className="flex items-center justify-between">
+									<p className="my-2 text-xl lg:text-2xl ">
+										<span className="text-xl font-bold">
+											{revealNumber ? result.data?.number : `${result.data?.number.substring(0, 3)}XXXXXXXX`}
 										</span>
-									) : (
-										<span className="flex items-center justify-center">
-											<IoEyeOff /> &nbsp; Hide
-										</span>
-									)}
-								</button>
-							</div>
-						)}
-						{result?.data?.contact_type.includes('email') && (
-							<div className="flex items-center justify-between w-full">
-								<p
-									className={`my-2 w-full overflow-x-scroll ${revealEmail ? 'tooltip tooltip-primary' : ''}`}
-									data-tip={revealEmail ? result.data?.email : ''}
-								>
-									<span className="pr-1 text-xl font-bold">
-										{revealEmail && result.data?.email !== null
-											? result.data?.email
-											: `${result?.data?.email.substring(0, 3)}XXXXXXXX`}
-									</span>
-								</p>
+									</p>
 
-								<button
-									className={`font-bold text-black bg-white rounded-none btn btn-sm hover:bg-primary hover:text-white hover:border-0 hover:rounded-sm ${
-										!isLogin && 'bg-gray-100 cursor-not-allowed'
-									} `}
-									onClick={() => {
-										isLogin && result?.data?.contact_type.includes('email')
-											? setRevealEmail(!revealEmail)
-											: notify('Please login to reveal Ads owner email');
-									}}
-								>
-									{!revealEmail ? (
-										<span className="flex items-center justify-center">
-											<IoEye /> &nbsp; Reveal{' '}
+									<button
+										className={`font-bold text-black bg-white rounded-none btn btn-sm hover:bg-primary hover:text-white hover:border-0 hover:rounded-sm ${
+											!isLogin && 'bg-gray-100 cursor-not-allowed'
+										}`}
+										onClick={() => {
+											if (isLogin && result?.data?.contact_type.includes('phone')) {
+												setRevealNumber(!revealNumber);
+											} else {
+												notify('Please login to reveal phone number');
+											}
+										}}
+									>
+										{!revealNumber ? (
+											<span className="flex items-center justify-center">
+												<IoEye /> &nbsp; Reveal{' '}
+											</span>
+										) : (
+											<span className="flex items-center justify-center">
+												<IoEyeOff /> &nbsp; Hide
+											</span>
+										)}
+									</button>
+								</div>
+							)}
+							{result?.data?.contact_type.includes('email') && (
+								<div className="flex items-center justify-between w-full">
+									<p
+										className={`my-2 w-full overflow-x-scroll ${
+											revealEmail ? 'tooltip tooltip-primary' : ''
+										}`}
+										data-tip={revealEmail ? result.data?.email : ''}
+									>
+										<span className="pr-1 text-xl font-bold">
+											{revealEmail && result.data?.email !== null
+												? result.data?.email
+												: `${result?.data?.email.substring(0, 3)}XXXXXXXX`}
 										</span>
-									) : (
-										<span className="flex items-center justify-center">
-											<IoEyeOff /> &nbsp; Hide
-										</span>
-									)}
-								</button>
-							</div>
-						)}
-					</div>
+									</p>
+
+									<button
+										className={`font-bold text-black bg-white rounded-none btn btn-sm hover:bg-primary hover:text-white hover:border-0 hover:rounded-sm ${
+											!isLogin && 'bg-gray-100 cursor-not-allowed'
+										} `}
+										onClick={() => {
+											isLogin && result?.data?.contact_type.includes('email')
+												? setRevealEmail(!revealEmail)
+												: notify('Please login to reveal Ads owner email');
+										}}
+									>
+										{!revealEmail ? (
+											<span className="flex items-center justify-center">
+												<IoEye /> &nbsp; Reveal{' '}
+											</span>
+										) : (
+											<span className="flex items-center justify-center">
+												<IoEyeOff /> &nbsp; Hide
+											</span>
+										)}
+									</button>
+								</div>
+							)}
+						</div>
+					)}
+
 					<ChatForm
 						ad={result?.data}
 						ad_id={result?.data?.id}
@@ -310,6 +321,7 @@ const index = () => {
 					/>
 				</aside>
 			</section>
+
 			<section className="flex flex-col p-2 my-2 bg-gray-200 xl:p-6 xl:my-4">
 				<div className="flex flex-col items-start justify-start w-full gap-2 tracking-tighter lg:tracking-normal line-clamp-1">
 					<h2 className="text-xl xl:2xl">Description</h2>

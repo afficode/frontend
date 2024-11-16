@@ -46,7 +46,7 @@ const Deposit = () => {
 							name="amount"
 							id="amount"
 							type="text"
-							amount
+							amount="NGN"
 							autoComplete="off"
 							className={'customAmountInput relative'}
 							value={formikDeposit.values.amount}

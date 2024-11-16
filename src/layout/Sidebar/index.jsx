@@ -86,9 +86,6 @@ const Sidebar = () => {
 				</ul>
 
 				<ul className="mb-2 space-y-4">
-					{/* <Button variant="plain" size="small" className="font-medium">
-						Switch Mode
-					</Button> */}
 					<Link to={Approutes.logout}>
 						<Button variant="plain" size="small" className="font-medium" title="Log out">
 							Log Out

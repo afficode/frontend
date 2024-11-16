@@ -42,6 +42,7 @@ export { default as Location } from './location.svg';
 export { default as LoginLock } from './loginLock.svg';
 export { default as NotificationCheck } from './notificationCheck.svg';
 export { default as New } from './new.svg';
+export { default as Naira } from './naira.svg';
 export { default as NotificationBell } from './notificationBell.svg';
 export { default as NotificationInfo } from './notificationInfo.svg';
 export { default as NotificationCool } from './notificationCool.svg';

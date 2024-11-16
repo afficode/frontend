@@ -57,19 +57,24 @@ const AccountHistory = ({ className, setIsOpen, isOpen }) => {
 	if (transactionType && transactionType !== 'all') {
 		db_option.push(transactionType);
 	}
-	if (status && status !== 'all') {
-		db_option.push(status);
-	}
+	// if (status && status !== 'all') {
+	// 	db_option.push(status);
+	// }
+
+	console.log(db_option);
 
 	const params = {
-		db_option: db_option.length > 0 ? db_option : undefined,
+		db_option: db_option.length > 0 ? db_option : [],
 		from: toDate || undefined,
 		to: fromDate || undefined,
 		page_size: 5,
 		page: page,
+		status: status === 'all' ? '' : status,
 	};
 
 	const { data, isLoading } = useTransactions(params);
+
+	console.log(data);
 
 	const groupByMonth = (data) => {
 		const sortedData = data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
@@ -138,13 +143,13 @@ const AccountHistory = ({ className, setIsOpen, isOpen }) => {
 							className="dropdown-content menu z-[10] p-4 shadow bg-white rounded-box w-[10rem] space-y-2"
 						>
 							<li
-								onClick={() => updateParams('type', 'deposit')}
+								onClick={() => updateParams('type', 'deposits')}
 								className="cursor-pointer font-medium hover:text-primary"
 							>
 								Deposit
 							</li>
 							<li
-								onClick={() => updateParams('type', 'withdrawal')}
+								onClick={() => updateParams('type', 'withdrawals')}
 								className="cursor-pointer font-medium hover:text-primary"
 							>
 								Withdrawals
@@ -176,10 +181,10 @@ const AccountHistory = ({ className, setIsOpen, isOpen }) => {
 								All Status
 							</li>
 							<li
-								onClick={() => updateParams('status', 'completed')}
+								onClick={() => updateParams('status', 'success')}
 								className="cursor-pointer font-medium hover:text-primary"
 							>
-								Completed
+								Success
 							</li>
 							<li
 								onClick={() => updateParams('status', 'pending')}
