@@ -7,7 +7,7 @@ on:
       - devops
 
 jobs:
-  build:
+  login-to-docker:
     runs-on: ubuntu-latest
     steps:
       - name: Login to Docker Hub
@@ -15,17 +15,21 @@ jobs:
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-#      - name: Build for prod
-#        uses: docker/build-push-action@v6
-#        with:
-#          target: prod
-#          load: true
-      - name: Build and push
-        uses: docker/build-push-action@v6
-        with:
-          platforms: linux/amd64,linux/arm64/v8
-          push: true
-          target: deploy
-          tags: ${{ vars.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest
+  build:
+    needs: login-to-docker
+    runs-on: ubuntu-latest
+    steps:
+        - name: Build and push Docker Image
+        - uses: docker/build-push-action@v6
+          with:
+            platforms: linux/amd64,linux/arm64/v8
+            push: true
+            target: deploy
+            tags: ${{ vars.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest
+            build-args: |
+              VITE_CLOUDINARY_API_KEY=${{secrets.VITE_CLOUDINARY_API_KEY}}
+              VITE_CLOUDINARY_SECRET=${{secrets.VITE_CLOUDINARY_SECRET}}
+              VITE_CLOUD_NAME=${{secrets.VITE_CLOUD_NAME}}
+              VITE_UPLOAD_PRESET=${{secrets.VITE_UPLOAD_PRESET}}
+              
+              
