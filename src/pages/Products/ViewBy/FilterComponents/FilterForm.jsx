@@ -6,9 +6,9 @@ import { filterFields, formToDisplay } from '../../../../constants/CategoryFilte
 import { manipulateFilterForm } from '../../../../utils/dataManipulations';
 import { toast } from 'react-toastify';
 
-const FilterForm = ({ setSearchParams, categoryId }) => {
+const FilterForm = ({ setSearchParams, categoryId, setCategoryId }) => {
 	return (
-		<div className="my-2 ">
+		<div className="my-2">
 			<Formik
 				initialValues={{}}
 				onSubmit={async (values) => {

@@ -11,8 +11,11 @@ import { SpinnerSkeleton } from '../../../components';
 
 const GrabbedProduct = () => {
 	const { grabber_id, ad_id } = useParams();
+	let grabberId;
 
-	const grabberId = grabber_id.slice(2);
+	if (grabber_id) {
+		grabberId = grabber_id.slice(2);
+	}
 
 	const { data: result, isLoading } = fetchProduct(ad_id);
 
@@ -31,10 +34,12 @@ const GrabbedProduct = () => {
 						Welcome to: <span className="capitalize">{result?.data.title}</span>,{' '}
 						{result.data?.location.split(',')[1]} - Page
 					</h4>
-					<h5 className="flex justify-center max-sm:flex-col max-sm:items-center p-2 bg-white">
-						You were directed here by:
-						<span className="px-2 text-primary"> {`BF${grabberId}`}</span>{' '}
-					</h5>
+					{grabber_id && (
+						<h5 className="flex justify-center max-sm:flex-col max-sm:items-center p-2 bg-white">
+							You were directed here by:
+							<span className="px-2 text-primary"> {`BF${grabberId}`}</span>{' '}
+						</h5>
+					)}
 				</div>
 				<div className="flex flex-col w-full h-full gap-2  lg:flex-row md:gap-8 line-clamp-1">
 					{/* product display */}

@@ -110,7 +110,7 @@ const Withdraw = () => {
 							name="amount"
 							id="amount"
 							type="number"
-							amount
+							amount="NGN"
 							autoComplete="off"
 							className={'customAmountInput '}
 							value={formikWithdraw.values.amount}
