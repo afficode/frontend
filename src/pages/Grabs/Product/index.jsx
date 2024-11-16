@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { TbCurrencyNaira } from 'react-icons/tb';
 import { IoCopy, IoCopyOutline } from 'react-icons/io5';
 import { noimage } from '../../../assets/images';
@@ -9,11 +9,14 @@ import { convertKeyToName, formatAdId, numberWithCommas, ScrollToTop } from '../
 import GrabHeader from '../GrabHeader';
 import { Approutes } from '../../../constants';
 import { Button } from '../../../ui';
-import { Download } from '../../../assets/svgs';
+import { Download, GrabIcon } from '../../../assets/svgs';
 import { fetchProduct, useNotify } from '../../../hooks';
 import { Carousel } from 'flowbite-react';
 import { SpinnerSkeleton } from '../../../components';
 import useAuth from '../../../context/UserContext';
+import useGrabContext from '../../../context/GrabContext';
+import { useQueryClient } from 'react-query';
+import { FcCancel } from 'react-icons/fc';
 
 const GrabProduct = () => {
 	const frontendLink = 'http://89.107.60.191';
@@ -31,6 +34,16 @@ const GrabProduct = () => {
 	);
 
 	const { data: result, isLoading, isError } = fetchProduct(ad_id);
+
+	const { unGrabAd } = useGrabContext();
+	const queryClient = useQueryClient();
+	const navigate = useNavigate();
+
+	const handleUnGrab = () => {
+		unGrabAd(ad_id);
+		queryClient.invalidateQueries({ queryKey: ['get-grabs'] });
+		navigate(Approutes.grab.products);
+	};
 
 	const handleCopy = () => {
 		navigator?.clipboard
@@ -152,14 +165,22 @@ const GrabProduct = () => {
 									</div>
 								</div>
 							</div>
-							<div className="flex flex-col gap-4">
+							<div className="flex flex-col gap-2">
+								<Button
+									onClick={handleUnGrab}
+									variant={'secondary'}
+									size={'full'}
+									className={'flex items-center justify-center gap-4 rounded-xl'}
+								>
+									<img src={GrabIcon} alt="/" className=" w-8 " />
+									Remove Item
+								</Button>
 								<Button
 									variant={'primary'}
 									size={'full'}
 									className={'flex items-center justify-center gap-4 rounded-xl'}
 								>
-									<img src={Download} alt="/" className="w-8" />
-									Download images{' '}
+									<img src={Download} alt="/" className="w-8" /> Download images
 								</Button>
 							</div>
 						</div>

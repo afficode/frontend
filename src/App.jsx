@@ -153,6 +153,7 @@ function App() {
 							path={Approutes.grab.grabbedProduct(':grabber_id', ':ad_id')}
 							element={<GrabbedProduct />}
 						/>
+						<Route path={Approutes.grab.grabProduct(':ad_id')} element={<GrabbedProduct />} />
 						<Route path={Approutes.grab.inspectionLog} element={<InspectionLog />} />
 						<Route path={Approutes.welcome} element={<Welcome />} />
 						<Route path={`${Approutes.postDecision}`} element={<PostDecision />} />
