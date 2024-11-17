@@ -8,6 +8,8 @@ ARG VITE_CLOUDINARY_API_KEY
 ARG VITE_CLOUDINARY_SECRET
 ARG VITE_CLOUD_NAME
 ARG VITE_UPLOAD_PRESET
+ARG PLATFORM
+# Adjust as needed
 
 FROM base_image AS dev
 RUN --mount=type=bind,source=package.json,target=package.json \
