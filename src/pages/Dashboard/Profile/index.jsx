@@ -58,7 +58,7 @@ const Profile = () => {
 			delete values.established;
 			delete values.name;
 
-			console.log(values)
+			//console.log(values)
 			if (values?.cover_image) {
 				// TODO: Delete Old image if new one is uploaded.
 				profile_image = await uploadImage(values?.cover_image, 'cover_image');
@@ -71,8 +71,8 @@ const Profile = () => {
 			}
 			await mutate(values, {
 				onSuccess: async (data) => {
-					if (values?.cover_image) {
-						let _publicId = user?.cover_image?.filename.split(".");
+					if (values?.cover_image && user?.cover_image) {
+						let _publicId = user?.cover_image?.filename?.split(".");
 						_publicId.pop();
 						let publicId = _publicId.join(".")
 						await deleteImages(publicId);
