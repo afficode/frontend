@@ -41,7 +41,7 @@ jobs:
         run: |
           docker info | grep Container
   build:
-    needs: install_continerd
+    needs: login-to-docker
     runs-on: ubuntu-latest
     steps:
       - # Add support for more platforms with QEMU (optional)
