@@ -32,7 +32,6 @@ const Profile = () => {
 	);
 	const [isLoading, setIsLoading] = useState(true);
 	const { user, updateUserInfo } = useAuth();
-	// console.log(user);
 	const { mutate, isLoading: isUpdating } = userUpdate('dashboard/update_user');
 	const notify = useNotify();
 
