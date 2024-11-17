@@ -44,18 +44,24 @@ jobs:
     needs: install_continerd
     runs-on: ubuntu-latest
     steps:
-        - name: Build and push Docker Image
-          uses: docker/build-push-action@v6
-          with:
-            platforms: linux/amd64,linux/arm64/v8
-            push: true
-            target: deploy
-            tags: ${{ vars.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest
-            build-args: |
-              VITE_CLOUDINARY_API_KEY=${{secrets.VITE_CLOUDINARY_API_KEY}}
-              VITE_CLOUDINARY_SECRET=${{secrets.VITE_CLOUDINARY_SECRET}}
-              VITE_CLOUD_NAME=${{secrets.VITE_CLOUD_NAME}}
-              VITE_UPLOAD_PRESET=${{secrets.VITE_UPLOAD_PRESET}}
-              PLATFORM=linux/amd64,linux/arm64/v8
+      - # Add support for more platforms with QEMU (optional)
+        # https://github.com/docker/setup-qemu-action
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Build and push Docker Image
+        uses: docker/build-push-action@v6
+        with:
+          platforms: linux/amd64,linux/arm64/v8
+          push: true
+          target: deploy
+          tags: ${{ vars.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest
+          build-args: |
+            VITE_CLOUDINARY_API_KEY=${{secrets.VITE_CLOUDINARY_API_KEY}}
+            VITE_CLOUDINARY_SECRET=${{secrets.VITE_CLOUDINARY_SECRET}}
+            VITE_CLOUD_NAME=${{secrets.VITE_CLOUD_NAME}}
+            VITE_UPLOAD_PRESET=${{secrets.VITE_UPLOAD_PRESET}}
+            PLATFORM=linux/amd64,linux/arm64/v8
               
               
