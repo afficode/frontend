@@ -1,5 +1,5 @@
 import TextError from '../../components/FormComponents/TextError';
-import { InputInfo } from '../../assets/svgs';
+import { InputInfo, Naira } from '../../assets/svgs';
 
 const InputGroup = ({
 	children,
@@ -169,7 +169,13 @@ const InputGroup = ({
 							readOnly={readOnly}
 							{...rest}
 						/>
-						{amount && <span className="absolute left-2 inset-y-0 my-auto h-fit font-bold">NGN</span>}
+						{amount && amount === 'naira' ? (
+							<span className="absolute left-2 inset-y-0 my-auto h-fit font-bold">
+								<img src={Naira} alt="naira" className="w-4" />
+							</span>
+						) : amount === 'NGN' ? (
+							<span className="absolute left-2 inset-y-0 my-auto h-fit font-bold">{amount}</span>
+						) : null}
 						{cancelButton && cancelButton}
 					</div>
 					{errorMsg && <TextError>{errorMsg}</TextError>}

@@ -96,11 +96,9 @@ const PerformanceCharts = ({ adsData }) => {
 	const notify = useNotify();
 
 	const handleDelete = (id, images = []) => {
-		// console.log(id);
 		privateAxios
 			.delete(`/ads/${id}`)
 			.then(async (res) => {
-				// console.log(res);
 				try {
 					if (images?.length > 0) {
 						const filteredImages = images.map((image) => {
@@ -117,7 +115,6 @@ const PerformanceCharts = ({ adsData }) => {
 				queryClient.invalidateQueries({ queryKey: ['getUserAds'] });
 				notify(res?.data.message, 'success');
 			})
-
 			.catch((error) => console.log(err));
 	};
 

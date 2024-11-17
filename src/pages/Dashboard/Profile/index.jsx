@@ -1,5 +1,4 @@
-import {useEffect, useMemo, useState} from 'react';
-import { ProfileBanner } from '../../../assets/images';
+import { useEffect, useMemo, useState } from 'react';
 import { CameraBlue, EditPencil } from '../../../assets/svgs';
 import { DashboardHeader } from '../../../components';
 import { Button, InputGroup } from '../../../ui';
@@ -10,13 +9,13 @@ import { toast } from 'react-toastify';
 import { MdClose } from 'react-icons/md';
 import { toSelectOptions } from '../../../utils';
 
-import useAuth from '../../../context/UserContext.jsx'
-import { useStates } from "../../../hooks/index.js";
+import useAuth from '../../../context/UserContext.jsx';
+import { useStates } from '../../../hooks/index.js';
 
-import {uploadImage, deleteImages} from "../../../utils/index.js";
+import { uploadImage, deleteImages } from '../../../utils/index.js';
 
-import { userUpdate} from "../../../hooks/index.js";
-import {useNotify} from "../../../hooks/index.js";
+import { userUpdate } from '../../../hooks/index.js';
+import { useNotify } from '../../../hooks/index.js';
 
 const Profile = () => {
 	const { data: states } = useStates();
@@ -27,14 +26,18 @@ const Profile = () => {
 		cover_image: true,
 	});
 	const { data } = useStates();
-	const state = useMemo( () => data?.map(state => ({value: state?.state_id, key: state?.name})), [data])
+	const state = useMemo(
+		() => data?.map((state) => ({ value: state?.state_id, key: state?.name })),
+		[data]
+	);
 	const [isLoading, setIsLoading] = useState(true);
 	const { user, updateUserInfo } = useAuth();
+	// console.log(user);
 	const { mutate, isLoading: isUpdating } = userUpdate('dashboard/update_user');
 	const notify = useNotify();
 
 	const initialValues = {
-		phone: user.phone.filter(num => num.isDefault === "1")[0].number || 1000000000,
+		phone: user.phone.filter((num) => num.isDefault === '1')[0].number || 1000000000,
 		location: user?.location || '',
 		bio: user?.bio || '',
 	};
@@ -48,7 +51,7 @@ const Profile = () => {
 			.min(1000000000, 'Phone number must be 11 or 12 digit 08012345678')
 			.max(99999999999, 'Phone number must be 11 or 12 digit 08012345678'),
 		location: Yup.string().required('Required'),
-		bio: Yup.string().required('Required'),
+		bio: Yup.string(),
 	});
 
 	const handleSave = async (values) => {
@@ -58,11 +61,10 @@ const Profile = () => {
 			delete values.established;
 			delete values.name;
 
-			//console.log(values)
 			if (values?.cover_image) {
 				// TODO: Delete Old image if new one is uploaded.
 				profile_image = await uploadImage(values?.cover_image, 'cover_image');
-				values = { ...values, cover_image: profile_image }
+				values = { ...values, cover_image: profile_image };
 			} else {
 				delete values.cover_image;
 			}
@@ -74,7 +76,7 @@ const Profile = () => {
 					if (values?.cover_image && user?.cover_image) {
 						let _publicId = user?.cover_image?.filename?.split(".");
 						_publicId.pop();
-						let publicId = _publicId.join(".")
+						let publicId = _publicId.join('.');
 						await deleteImages(publicId);
 					}
 					updateUserInfo(data?.user);
@@ -82,7 +84,7 @@ const Profile = () => {
 				},
 				onError: (error) => {
 					notify(error?.message, 'error');
-				}
+				},
 			});
 
 			setToggleEdit(() => ({
@@ -91,7 +93,16 @@ const Profile = () => {
 				cover_image: true,
 			}));
 		} catch (e) {
-			notify("Something went wrong...", 'error');
+			notify('Something went wrong...', 'error');
+		}
+	};
+
+	const handleBioChange = (event) => {
+		const inputValue = event.target.value;
+
+		// Enforce the text limit
+		if (inputValue.length <= 500) {
+			formik.setFieldValue('bio', inputValue);
 		}
 	};
 
@@ -103,6 +114,7 @@ const Profile = () => {
 
 	const handleFileChange = (e) => {
 		const file = e.currentTarget.files[0];
+		formik.setFieldValue('cover_image', null);
 		if (file && file.type.startsWith('image/')) {
 			if (file.size <= 1024 * 1024) {
 				formik.setFieldValue('cover_image', file);
@@ -116,7 +128,7 @@ const Profile = () => {
 	};
 
 	const handleRemoveFile = () => {
-		formik.setFieldValue('cover_image', '');
+		formik.setFieldValue('cover_image', null);
 		setToggleEdit((prev) => ({ ...prev, cover_image: false }));
 	};
 
@@ -140,20 +152,32 @@ const Profile = () => {
 			<DashboardHeader />
 
 			{/* banner */}
-			<div className="relative w-full h-[20rem] my-4">
-				{formik?.values.cover_image ? (
+			<div
+				className={`${
+					!formik?.values.cover_image && 'border rounded-xl flex items-center justify-center'
+				} w-full h-[20rem] my-4 relative`}
+			>
+				{(formik?.values.cover_image || user?.cover_image) ? (
 					<div className="w-full h-full relative group">
 						<img
-							src={URL.createObjectURL(formik.values.cover_image)}
+							src={formik?.values.cover_image ? URL.createObjectURL(formik.values.cover_image) : user?.cover_image?.path}
 							alt="/"
 							className="w-full h-full mx-auto object-fit rounded-xl"
 						/>
-						<div className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-100 absolute right-2 top-2 cursor-pointer opacity-0 group-hover:opacity-100 transition-all">
-							<MdClose size={15} onClick={handleRemoveFile} />
-						</div>
+						{/*{ formik?.values.cover_image &&*/}
+						{/*	<div className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-100 absolute right-2 top-2 cursor-pointer opacity-0 group-hover:opacity-100 transition-all">*/}
+						{/*		<MdClose size={15} onClick={handleRemoveFile} />*/}
+						{/*	</div>*/}
+						{/*}*/}
 					</div>
 				) : (
-					<img src={user?.cover_image?.path || ProfileBanner} alt="/" className="w-full h-full mx-auto object-fit rounded-xl" />
+					// <img
+					// 	src={user?.cover_image?.path || ProfileBanner}
+					// 	alt="/"
+					// 	className="w-full h-full mx-auto object-fit rounded-xl"
+					// />
+
+					<h4 className="text-primary">No cover image</h4>
 				)}
 				<form encType="multipart/form-data">
 					<InputGroup type="file" name="cover_image" onChange={handleFileChange}>
@@ -185,39 +209,36 @@ const Profile = () => {
 							type="text"
 							className={`${toggleEdit.about && inputStyle} `}
 							disabled={true}
-							value={user?.firstname + " " + user?.lastname}
+							value={user?.firstname + ' ' + user?.lastname}
 						/>
 					</div>
 					<div className="flex max-md:flex-col md:items-center md:justify-between  border-b border-black/10">
 						<label className="max-md:text-sm max-md:mt-2" htmlFor="phone">
 							Contact Number
 						</label>
-						{
-							toggleEdit?.about ? (
-								<InputGroup
-									name="num"
-									type="text"
-									className={`${toggleEdit.about && inputStyle} `}
-									disabled={true}
-									value={formik.values.phone}
-								/>
-							) : (
-								<InputGroup
-									name="phone"
-									type="number"
-									className={`${toggleEdit.about && inputStyle} `}
-									disabled={toggleEdit.about}
-									value={formik.values.phone}
-									onChange={formik.handleChange}
-									onBlur={formik.handleBlur}
-									errorMsg={formik.touched.phone && formik.errors.phone ? formik.errors.phone : null}
-								/>
-							)
-						}
-
+						{toggleEdit?.about ? (
+							<InputGroup
+								name="num"
+								type="text"
+								className={`${toggleEdit.about && inputStyle} `}
+								disabled={true}
+								value={formik.values.phone}
+							/>
+						) : (
+							<InputGroup
+								name="phone"
+								type="number"
+								className={`${toggleEdit.about && inputStyle} `}
+								disabled={toggleEdit.about}
+								value={formik.values.phone}
+								onChange={formik.handleChange}
+								onBlur={formik.handleBlur}
+								errorMsg={formik.touched.phone && formik.errors.phone ? formik.errors.phone : null}
+							/>
+						)}
 					</div>
-					{
-						toggleEdit?.about ? (<div className="flex max-md:flex-col md:items-center md:justify-between  border-b border-black/10">
+					{toggleEdit?.about ? (
+						<div className="flex max-md:flex-col md:items-center md:justify-between  border-b border-black/10">
 							<label className="max-md:text-sm max-md:mt-2" htmlFor="user_location">
 								Current Location
 							</label>
@@ -228,8 +249,9 @@ const Profile = () => {
 								disabled={true}
 								value={user?.user_location}
 							/>
-						</div>) : (<div
-							className="flex max-md:flex-col md:items-center md:justify-between  border-b border-black/10">
+						</div>
+					) : (
+						<div className="flex max-md:flex-col md:items-center md:justify-between  border-b border-black/10">
 							<label className="max-md:text-sm max-md:mt-2" htmlFor="business_location">
 								Change Location
 							</label>
@@ -241,14 +263,10 @@ const Profile = () => {
 								disabled={toggleEdit.about}
 								onChange={formik.handleChange}
 								onBlur={formik.handleBlur}
-								errorMsg={
-									formik.touched.location && formik.errors.location
-										? formik.errors.location
-										: null
-								}
+								errorMsg={formik.touched.location && formik.errors.location ? formik.errors.location : null}
 							/>
-						</div>)
-					}
+						</div>
+					)}
 					<div className="flex max-md:flex-col md:items-center md:justify-between  border-b border-black/10">
 						<label className="max-md:text-sm max-md:mt-2" htmlFor="established">
 							Established
@@ -259,12 +277,11 @@ const Profile = () => {
 							className={`${toggleEdit.about && inputStyle} `}
 							disabled={true}
 							value={`Since ${new Date(user?.joined_on).getFullYear()}`}
-
 						/>
 					</div>
 					<div className="flex max-md:flex-col md:items-center md:justify-between  border-b border-black/10">
 						<label className="max-md:text-sm max-md:mt-2" htmlFor="email">
-						E-mail
+							E-mail
 						</label>
 						<InputGroup
 							name="email"
@@ -272,7 +289,6 @@ const Profile = () => {
 							className={`${toggleEdit.about && inputStyle} `}
 							disabled={true}
 							value={user?.email}
-
 						/>
 					</div>
 				</form>
@@ -283,22 +299,26 @@ const Profile = () => {
 				<div className="flex justify-between border-b border-black/30">
 					<h4>Bio</h4>
 					<div
-						onClick={() => setToggleEdit((prev) => ({...prev, bio: false}))}
+						onClick={() => setToggleEdit((prev) => ({ ...prev, bio: false }))}
 						className="flex gap-1 items-center text-primary text-lg font-medium cursor-pointer"
 					>
-						<img src={EditPencil} alt="/" className="w-4"/>
+						<img src={EditPencil} alt="/" className="w-4" />
 						<span>Edit</span>
 					</div>
 				</div>
 
 				<form>
+					<p className="text-sm text-gray-500 flex items-end justify-end mt-4">
+						{formik.values.bio.length}/{500} characters
+					</p>
 					<InputGroup
 						name="bio"
 						type="textarea"
+						rows={'5'}
 						className={`${toggleEdit.bio && inputStyle} p-2`}
 						disabled={toggleEdit.bio}
 						value={formik.values.bio}
-						onChange={formik.handleChange}
+						onChange={handleBioChange}
 						onBlur={formik.handleBlur}
 						errorMsg={formik.touched.bio && formik.errors.bio ? formik.errors.bio : null}
 					/>
