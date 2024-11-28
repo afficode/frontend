@@ -15,86 +15,89 @@ import motorbike from '../assets/images/categories/motorbike.jpg';
 import requests from '../assets/images/categories/requests.jpg';
 import deals from '../assets/images/categories/deals.jpg';
 
-
 export const categoryData = [
-        {
-        "id": 50,
-        "name": "Vehicles",
-        "image": vehicles,
-        },
-        {
-        "id": 51,
-        "name": "Properties",
-        "image": properties,
-        },
-        {
-        "id": 52,
-        "name": "Services",
-        "image": services,
-        },
-        {
-        "id": 53,
-        "name": "Agriculture",
-        "image": agriculture,
-        },
-        {
-        "id": 54,
-        "name": "Electronics",
-        "image": electronics,
-        },
-        {
-        "id": 55,
-        "name": "Fashion",
-        "image": fashion,
-        },
-        {
-        "id": 56,
-        "name": "Health and Beauty",
-        "image": health,
-        },
-        {
-        "id": 57,
-        "name": "Home and Accessories",
-        "image": furniture,
-        },
-        {
-        "id": 58,
-        "name": "Tradesman and Construction",
-        "image": tradesman,
-        },
-        {
-        "id": 59,
-        "name": "Software and Games",
-        "image": softwares,
-        },
-        {
-        "id": 60,
-        "name": "Pet",
-        "image": pets,
-        },
-        {
-        "id": 61,
-        "name": "Babies and Kids",
-        "image": babies,
-        },
-        {
-        "id": 62,
-        "name": "Sports, Music and Outdoors",
-        "image": sports,
-        },
-        {
-        "id": 63,
-        "name": "Motorbike and Scooters",
-        "image": motorbike,
-        },
-        {
-        "id": 64,
-        "name": "Requests",
-        "image": requests,
-        },
-        {
-        "id": 65,
-        "name": "Deals",
-        "image": deals,
-        },
-]
+	{
+		id: 50,
+		name: 'Vehicles',
+		image: vehicles,
+	},
+	{
+		id: 51,
+		name: 'Properties',
+		image: properties,
+	},
+	{
+		id: 52,
+		name: 'Services',
+		image: services,
+	},
+	{
+		id: 53,
+		name: 'Agriculture',
+		image: agriculture,
+	},
+	{
+		id: 54,
+		name: 'Electronics',
+		image: electronics,
+	},
+	{
+		id: 55,
+		name: 'Fashion',
+		image: fashion,
+	},
+	{
+		id: 56,
+		name: 'Health and Beauty',
+		image: health,
+	},
+	{
+		id: 57,
+		name: 'Home and Accessories',
+		image: furniture,
+	},
+	{
+		id: 58,
+		name: 'Tradesman and Construction',
+		image: tradesman,
+	},
+	{
+		id: 59,
+		name: 'Software and Games',
+		image: softwares,
+	},
+	{
+		id: 60,
+		name: 'Pet',
+		image: pets,
+	},
+	{
+		id: 61,
+		name: 'Babies and Kids',
+		image: babies,
+	},
+	{
+		id: 62,
+		name: 'Sports, Music and Outdoors',
+		image: sports,
+	},
+	{
+		id: 63,
+		name: 'Motorbike and Scooters',
+		image: motorbike,
+	},
+	{
+		id: 64,
+		name: 'Requests',
+		image: requests,
+	},
+	{
+		id: 65,
+		name: 'Deals',
+		image: deals,
+	},
+];
+
+export const inspectCategories = [
+	5001, 5003, 5004, 5005, 5101, 5102, 5103, 5104, 5105, 5106, 5107, 5108, 5109, 6301, 6302,
+];

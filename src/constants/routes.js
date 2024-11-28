@@ -27,11 +27,10 @@ export const Approutes = {
 		viewCategoryId: '/product/category/:id',
 	},
 	aboutUs: '/about-us',
-
+	checkout: '/checkout',
 	contactUs: '/contact-us',
 	forgotPassword: '/forgot-password',
 	grab: {
-		checkout: '/grab/checkout',
 		initial: '/grab',
 		register: '/grab/register',
 		home: '/grab/home',

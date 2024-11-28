@@ -140,7 +140,9 @@ const GrabProduct = () => {
 							<div className="w-full tracking-tighter">
 								<div className="flex justify-between">
 									<p className="p-lg">Category </p>
-									<p className="font-semibold p-lg text-primary">{result?.data.parent_category}</p>
+									<p className="font-semibold p-lg text-primary text-right">
+										{result?.data.parent_category}
+									</p>
 								</div>
 							</div>
 						</div>
@@ -151,14 +153,14 @@ const GrabProduct = () => {
 								<p className="p-lg">Grab Link</p>
 
 								<div className="flex items-center justify-between">
-									<p className="text-primary w-[16rem] truncate">{grabLink ? grabLink : null}</p>
+									<p className="text-primary w-[16rem] break-words">{grabLink ? grabLink : null}</p>
 									<div>
 										{copied ? (
-											<button>
+											<button title="Link copied to your clipboard">
 												<IoCopy className="cursor-pointer" size={20} />
 											</button>
 										) : (
-											<button onClick={handleCopy}>
+											<button title="Copy link!" onClick={handleCopy}>
 												<IoCopyOutline className="cursor-pointer" size={20} />
 											</button>
 										)}

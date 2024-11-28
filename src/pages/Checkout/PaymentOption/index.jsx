@@ -317,7 +317,7 @@ const BankTransfer = () => {
 
 				<div className="flex flex-col items-center text-center space-y-4 ">
 					<p className="mt-4">Use this account for this transaction ONLY</p>
-					<img src={LoadingYellow} alt="/" className="w-16" />
+					<img src={LoadingYellow} alt="/" className="w-16  " />
 					<p>
 						Expires in <span className="text-secondary">10:23</span>
 					</p>

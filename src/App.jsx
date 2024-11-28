@@ -161,7 +161,7 @@ function App() {
 						<Route path={`${Approutes.updateAd}/:adId`} element={<UpdateAd />} />
 						<Route path={`${Approutes.postSuccess}/:adId`} element={<PostSuccess />} />
 						<Route path={Approutes.tokenSuccess} element={<Success />} />
-						<Route path={Approutes.grab.checkout} element={<Checkout />} />
+						<Route path={Approutes.checkout} element={<Checkout />} />
 						<Route path={Approutes.account.paymentSuccess} element={<PaymentSuccess />} />
 						<Route path={Approutes.account.initial} element={<AccountLayout />}>
 							<Route path={Approutes.account.initial} element={<AccountHistory />} />
