@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Button, Modal } from '../../../ui';
+import { Link, useNavigate } from 'react-router-dom';
+import { Button, Modal as ModalUi } from '../../../ui';
 import {
 	BankTransfer,
 	DeliveryQuote,
@@ -16,9 +16,15 @@ import PickUp from './Modals/PickUp';
 import Delivery from './Modals/Delivery';
 import InspectionSchedule from './Modals/InspectionSchedule';
 import { useGetSchedules } from '../../../hooks';
+import Modal from '../../Products/View/Modal.jsx';
+import ReportAd from '../../Products/View/ReportAd';
+import { BiSolidMessageRoundedDetail } from 'react-icons/bi';
+import useAuth from '../../../context/UserContext';
 
 const Action = ({ isGeneral, ad }) => {
 	const { data } = useGetSchedules();
+	const { isLogin, user } = useAuth();
+	const navigate = useNavigate();
 
 	const [formData, setFormData] = useState({
 		delivery_option: '',
@@ -31,6 +37,7 @@ const Action = ({ isGeneral, ad }) => {
 	const [quoteFormModalOpen, setQuoteFormModalOpen] = useState(false);
 	const [quoteModalOpen, setQuoteModalOpen] = useState(false);
 	const [inquiryModal, setInquiryModal] = useState(false);
+	const [pickupModal, setPickupModal] = useState(false);
 
 	return (
 		<>
@@ -50,10 +57,6 @@ const Action = ({ isGeneral, ad }) => {
 							</span>
 						</p>
 						<div className="pb-4 space-y-4 border-b border-black/40 border-1">
-							<div className="p-3 font-semibold text-center bg-gray-300 rounded-lg">
-								Ready to Buy Item Now?
-							</div>
-
 							<div>
 								<p className="font-semibold">Select delivery option:</p>
 
@@ -65,12 +68,15 @@ const Action = ({ isGeneral, ad }) => {
 											id={'delivery'}
 											value={'delivery'}
 											checked={formData.delivery_option === 'delivery'}
-											onChange={(e) => setFormData({ ...formData, delivery_option: e.target.value })}
+											onChange={(e) => {
+												setFormData({ ...formData, delivery_option: e.target.value });
+												setQuoteFormModalOpen(true);
+											}}
 											className={``}
 										/>
 										<label htmlFor={'delivery'} className="flex items-center gap-2">
 											Boonfu Delivery
-											<div className="dropdown">
+											<div className="dropdown dropdown-hover">
 												<img tabIndex={0} src={InfoYellow} alt="/" className="w-4 cursor-pointer" />
 												<div
 													tabIndex={0}
@@ -111,12 +117,15 @@ const Action = ({ isGeneral, ad }) => {
 											id={'pickup'}
 											value={'pickup'}
 											checked={formData.delivery_option === 'pickup'}
-											onChange={(e) => setFormData({ ...formData, delivery_option: e.target.value })}
+											onChange={(e) => {
+												setFormData({ ...formData, delivery_option: e.target.value });
+												setPickupModal(true);
+											}}
 											className={``}
 										/>
 										<label htmlFor={'pickup'} className="flex items-center gap-2">
 											Pick up by self{' '}
-											<div className="dropdown">
+											<div className="dropdown dropdown-hover">
 												<img tabIndex={0} src={InfoYellow} alt="/" className="w-4 cursor-pointer" />
 												<div
 													tabIndex={0}
@@ -150,7 +159,7 @@ const Action = ({ isGeneral, ad }) => {
 
 									<div className="mb-2 space-y-3">
 										<Button
-											onClick={() => setQuoteFormModalOpen(true)}
+											onClick={() => navigate(Approutes.checkout)}
 											disabled={formData.delivery_option === '' ? true : false}
 											type="button"
 											variant={'primary'}
@@ -162,42 +171,56 @@ const Action = ({ isGeneral, ad }) => {
 										<Button
 											type="button"
 											onClick={() => setInquiryModal(true)}
-											// disabled={true}
 											variant={'primary'}
 											size={'full'}
 											className={'flex items-center justify-center gap-4 rounded-3xl mt-4 z-[-1]'}
 										>
 											Inquire about Item
 										</Button>
+										<Modal
+											modalHeader={true}
+											children={<ReportAd ad_id={ad?.id} />}
+											headerText={'Feedback / Abuse'}
+											className={`w-full px-2 py-3 my-2 text-lg tracking-tighter rounded-3xl text-white bg-slate-600 hover:bg-slate-500 line-clamp-1 ${
+												!isLogin && 'cursor-not-allowed'
+											}`}
+											disabled={!isLogin || ad?.active === '0' || user?.id === ad?.owner}
+											type="button"
+											buttonChild={
+												<>
+													<span className="flex items-center gap-2 justify-center">
+														Feedback <BiSolidMessageRoundedDetail className="my-auto" />
+													</span>
+												</>
+											}
+										/>
 									</div>
 								</form>
 
-								{formData.delivery_option === 'delivery' ? (
-									<Modal
-										isOpen={quoteFormModalOpen}
-										setIsOpen={setQuoteFormModalOpen}
-										headerText={'Thanks for choosing Boonfu delivery service.'}
-										headerStye={'italic mb-[-1rem]'}
-										headerSize={'text'}
-										className={'bg-secondary max-w-[600px] '}
-									>
-										<Delivery />
-									</Modal>
-								) : (
-									<Modal
-										isOpen={quoteFormModalOpen}
-										setIsOpen={setQuoteFormModalOpen}
-										headerText={'Pick up by self'}
-										headerSize={'text'}
-										headerStye={'underline'}
-										className={'bg-secondary max-w-[600px] '}
-									>
-										<PickUp />
-									</Modal>
-								)}
+								<ModalUi
+									isOpen={quoteFormModalOpen}
+									setIsOpen={setQuoteFormModalOpen}
+									headerText={'Thanks for choosing Boonfu delivery service.'}
+									headerStye={'italic mb-[-1rem]'}
+									headerSize={'text'}
+									className={'bg-secondary max-w-[600px] '}
+								>
+									<Delivery />
+								</ModalUi>
 
-								{/* delivery quote modal */}
-								<Modal
+								<ModalUi
+									isOpen={pickupModal}
+									setIsOpen={setPickupModal}
+									headerText={'Pick up by self'}
+									headerSize={'text'}
+									headerStye={'underline'}
+									className={'bg-secondary max-w-[600px] '}
+								>
+									<PickUp />
+								</ModalUi>
+
+								{/* delivery quote ModalUi */}
+								<ModalUi
 									isOpen={quoteModalOpen}
 									setIsOpen={setQuoteModalOpen}
 									modalHeader={false}
@@ -239,15 +262,15 @@ const Action = ({ isGeneral, ad }) => {
 											</Link>
 										</div>
 									</div>
-								</Modal>
-								<Modal
+								</ModalUi>
+								<ModalUi
 									isOpen={inquiryModal}
 									setIsOpen={setInquiryModal}
 									modalHeader={false}
 									className={' max-w-fit p-0 '}
 								>
 									<InquiryChat ad={ad} />
-								</Modal>
+								</ModalUi>
 							</div>
 						</div>
 
@@ -320,8 +343,8 @@ const Action = ({ isGeneral, ad }) => {
 								</Button>
 							)}
 
-							{/* inspection modal  */}
-							<Modal
+							{/* inspection ModalUi  */}
+							<ModalUi
 								isOpen={inspectionModalOpen}
 								setIsOpen={setInspectionModalOpen}
 								headerText={'Welcome to : Inspection scheduling'}
@@ -330,7 +353,7 @@ const Action = ({ isGeneral, ad }) => {
 								className={'bg-secondary max-w-[600px]'}
 							>
 								<InspectionSchedule setInspectionModalOpen={setInspectionModalOpen} ad={ad} />
-							</Modal>
+							</ModalUi>
 						</div>
 
 						<div className="mt-3">
