@@ -3,13 +3,12 @@ import { Approutes } from '../../constants';
 import { Link } from 'react-router-dom';
 import { useGetAdsSchedule } from '../../hooks';
 import { format, parse, parseISO } from 'date-fns';
+import { inspectCategories } from '../../constants/Category';
 
 const GrabUpdateTable = ({ ad }) => {
 	const { data: schedulesResult } = useGetAdsSchedule(ad?.id);
 
-	return [
-		5001, 5003, 5004, 5005, 5101, 5102, 5103, 5104, 5105, 5106, 5107, 5108, 5109, 6301, 6302,
-	].includes(ad?.category) ? (
+	return inspectCategories.includes(ad?.category) ? (
 		<section className="my-8 space-y-4">
 			<h4>Grab Update</h4>
 

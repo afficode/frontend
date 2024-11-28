@@ -12,9 +12,20 @@ import { Gown, Rolex, Sneakers } from '../../../assets/images';
 import { Approutes } from '../../../constants';
 import { ScrollToTop } from '../../../utils';
 import useAuth from '../../../context/UserContext';
+import { useGetGrabs } from '../../../hooks';
+import useGrabContext from '../../../context/GrabContext';
+import { useQueryClient } from 'react-query';
 
 const GrabberHome = () => {
 	const { user } = useAuth();
+	const { data: result, isLoading } = useGetGrabs();
+	const { unGrabAd } = useGrabContext();
+	const queryClient = useQueryClient();
+
+	const handleUnGrab = (ad) => {
+		unGrabAd(ad.ads_id);
+		queryClient.invalidateQueries({ queryKey: ['get-grabs'] });
+	};
 
 	return (
 		<section className="min-h-screen text-center max-w-[1024px] space-y-6 mx-auto mb-16">
@@ -99,21 +110,33 @@ const GrabberHome = () => {
 					</Link>
 
 					<div className="flex flex-wrap items-center justify-between gap-6">
-						{data.map((item, i) => (
-							<div key={i} className="relative flex mx-auto flex-col w-[250px] bg-white">
+						{result?.grabs?.map((ad) => (
+							<div key={ad.ads_id} className="relative flex mx-auto flex-col w-[250px] bg-white">
 								<button>
 									<img src={GrabSave} alt="/" className="absolute w-8 top-2 left-2" />
 								</button>
-								<button>
+								<button onClick={() => handleUnGrab(ad)}>
 									<img src={GrabIcon} alt="/" className="absolute w-8 top-2 right-2" />
 								</button>
-								<img src={item.img} alt="/" className="w-full h-[200px] " />
-								<h6 className="px-2 font-semibold text-left">{item.title}</h6>
-								<Button variant={'primary'} size={'small'} className={'mt-8 mb-2 w-fit mx-auto'}>
-									Click for info
-								</Button>
+								<img
+									src={ad?.images[0]?.path ? ad?.images[0]?.path : noimage}
+									alt={ad?.images[0]?.filename ? ad?.images[0]?.filename : 'no image'}
+									className="w-full h-[200px] "
+								/>
+								<h6 className="px-2 font-semibold text-left">{ad?.title}</h6>
+								<Link to={Approutes.grab.product(ad.ads_id)} className={'mt-8 mb-2 mx-auto'}>
+									<Button variant={'primary'} size={'small'} className={' w-fit '}>
+										Click for info
+									</Button>
+								</Link>
 							</div>
 						))}
+
+						{result?.grabs <= 0 && (
+							<h4 className="flex items-center justify-center my-16 text-center w-full text-white">
+								No ad grabbed
+							</h4>
+						)}
 					</div>
 				</div>
 			</div>
@@ -123,42 +146,3 @@ const GrabberHome = () => {
 };
 
 export default GrabberHome;
-
-const data = [
-	{
-		img: Gown,
-		title: 'Apparel Gown',
-	},
-	{
-		img: Sneakers,
-		title: 'Sketchers Trainers',
-	},
-	{
-		img: Rolex,
-		title: 'Rolex Watch for Men',
-	},
-	{
-		img: Gown,
-		title: 'Apparel Gown',
-	},
-	{
-		img: Sneakers,
-		title: 'Sketchers Trainers',
-	},
-	{
-		img: Rolex,
-		title: 'Rolex Watch for Men',
-	},
-	{
-		img: Gown,
-		title: 'Apparel Gown',
-	},
-	{
-		img: Sneakers,
-		title: 'Sketchers Trainers',
-	},
-	{
-		img: Rolex,
-		title: 'Rolex Watch for Men',
-	},
-];

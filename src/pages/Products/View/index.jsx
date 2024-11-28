@@ -157,10 +157,12 @@ const index = () => {
 				<Breadcrumb items={items} className={'text-md breadcrumbs text-primary'} />
 			</header>
 
-			<section className="flex flex-col md:h-[680px] w-full gap-2 md:flex-row md:gap-8 line-clamp-1">
-				<main className="w-full h-full md:w-[60%] xl:w-[70%] flex flex-col">
-					<div className="w-full my-2 pl-2">
-						<div className="flex items-center justify-between w-full my-2 font-bold uppercase text-md md:text-2xl xl:text-3xl">
+			<section className="flex flex-col  h-full w-full gap-2 md:flex-row md:items-stretch md:gap-8 line-clamp-1">
+				<main className="w-full h-full  md:w-[60%] xl:w-[70%] flex flex-col justify-between lg:py-4 border-2 border-transparent">
+					{/* ad top info */}
+					<div className="w-full mb-2 pl-2">
+						{/* ad name and options */}
+						<div className="flex items-center justify-between w-full mb-2 font-bold uppercase text-md md:text-2xl xl:text-3xl">
 							<span className="">{result.data?.title}</span>
 							<span className=" flex items-center gap-2 lg:gap-8 my-auto mr-4 lg:mr-0">
 								<NegotiableIcon negotiable={result.data?.negotiable} />
@@ -173,6 +175,7 @@ const index = () => {
 							</span>
 						</div>
 
+						{/* ad location */}
 						<div className="flex items-center justify-between">
 							<p className="w-full">
 								<Link
@@ -195,37 +198,36 @@ const index = () => {
 							</p>
 						</div>
 					</div>{' '}
-					<div className="w-full h-full mx-auto mt-1">
-						<div className="relative h-full rounded-none ">
-							{result.data?.images.length > 0 ? (
-								<Carousel className="h-[250px] md:h-full rounded-none">
-									{result.data?.images.map((img, index) => (
-										<img
-											src={img.path}
-											alt={img.filename}
-											key={index * 3}
-											className="rounded-t-sm rounded-b-none "
-										/>
-									))}
-								</Carousel>
-							) : (
-								<img
-									src={noimage}
-									alt="no image"
-									className="rounded-sm  h-[250px] md:h-full w-full object-cover"
-								/>
-							)}
-							<div className="absolute bottom-0 flex w-full h-10 py-2 pl-6 text-white rounded-none bg-black/50">
-								<span className="flex px-2 my-auto border-2 border-white">
-									<FaCamera className="mt-1 text-sm" />
-									&nbsp; &nbsp; <span className="my-auto text-sm"> {result.data?.images.length}</span>
-								</span>
-							</div>
+					{/* ad images */}
+					<div className="relative w-full h-full mx-auto mt-1  rounded-none ">
+						{result.data?.images.length > 0 ? (
+							<Carousel className="h-[250px] md:min-h-[650px] rounded-none">
+								{result.data?.images.map((img, index) => (
+									<img
+										src={img.path}
+										alt={img.filename}
+										key={index * 3}
+										className="rounded-t-sm rounded-b-none"
+									/>
+								))}
+							</Carousel>
+						) : (
+							<img
+								src={noimage}
+								alt="no image"
+								className="rounded-sm  h-[250px] md:min-h-[650px] w-full object-cover"
+							/>
+						)}
+						<div className="absolute bottom-0 flex w-full h-10 my-0 py-2 pl-6 text-white rounded-none bg-black/50">
+							<span className="flex px-2 my-auto border-2 border-white">
+								<FaCamera className="mt-1 text-sm" />
+								&nbsp; &nbsp; <span className="my-auto text-sm"> {result.data?.images.length}</span>
+							</span>
 						</div>
 					</div>
 				</main>
 
-				<aside className="w-full min-h-full md:w-[40%] xl:w-[30%] border-2 border-gray-400 p-2 lg:p-4 flex flex-col">
+				<aside className="w-full h-full md:w-[40%] xl:w-[30%] border-2 border-gray-400 max-lg:p-2 lg:px-4 lg:pt-4 flex flex-col">
 					<h2 className="w-full text-lg font-bold md:text-xl 2xl:text-3xl">{result.data?.firstname}</h2>
 					<p className="text-lg">
 						Since{' '}

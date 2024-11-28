@@ -19,6 +19,8 @@ import { BiSolidMessageRoundedDetail } from 'react-icons/bi';
 import { useGrabAd } from '../../../hooks/useGrab.js';
 import { ArrowDown, Cancel, Naira } from '../../../assets/svgs/index.js';
 import { InputGroup } from '../../../ui/index.js';
+import { inspectCategories } from '../../../constants/Category.js';
+import toMoney from '../../../utils/toMoney.js';
 
 const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
 	const navigate = useNavigate();
@@ -91,7 +93,7 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
 				{ ads_id: ad_id },
 				{
 					onSuccess: (data) => {
-						notify('Item Grabbed, View on Grab Page', 'success');
+						notify('Item Grabbed, View on Grab Page', 'success', Approutes.grab.product(ad?.id));
 						socketGrabAd(ad_id);
 					},
 					onError: (error) => {
@@ -109,11 +111,7 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
 	};
 
 	return (
-		<div
-			className={`${ad?.negotiable && 'max-sm:pb-16 '} ${
-				ad?.feature === '3' && 'md:mt-[6rem]'
-			}   pb-16  mt-4 h-full`}
-		>
+		<div className={`} ${ad?.feature === '3' && 'md:mt-[6rem]'}     mt-4 h-full`}>
 			<Formik
 				initialValues={{
 					message:
@@ -130,7 +128,7 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
 			>
 				{({ isSubmitting }) => (
 					<Form>
-						{feature == '3' ? (
+						{inspectCategories.includes(ad?.category) && feature == '3' ? (
 							<>
 								<Link to={Approutes.grab.grabProduct(ad_id)}>
 									<Button
@@ -142,80 +140,53 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
 										Interested
 									</Button>
 								</Link>
-								{ad?.negotiable === 1 && (
-									<div className="dropdown dropdown-bottom dropdown-center w-full ">
-										<Button
-											variant={'secondary'}
-											size={'full'}
-											type="button"
-											className=" text-lg  tracking-tighter line-clamp-1 group focus:bg-white focus:border-black"
-										>
-											<span className="flex items-center gap-4 justify-center font-semibold">
-												Make offer{' '}
-												<img
-													src={ArrowDown}
-													alt="/"
-													className="w-4 group-focus:transform group-focus:rotate-180 transition-all"
-												/>
-											</span>
-										</Button>
-										<div
-											tabIndex={0}
-											className="dropdown-content  z-[10] menu  p-4 bg-white shadow-2xl w-full flex flex-col justify-between"
-										>
-											<form className="space-y-4">
-												<div>
-													<div className="flex items-center justify-between">
-														<p>Price:</p>
-														<h6 className="font-bold flex items-center gap-2">
-															{' '}
-															<img src={Naira} alt="naira" className="w-4" /> 4,500,000.00
-														</h6>
-													</div>
-													<div className="flex items-center justify-between gap-6">
-														<label htmlFor="offer">Offer:</label>
-														<InputGroup
-															name="offer"
-															id="offer"
-															type="number"
-															amount={'naira'}
-															autoComplete="off"
-															className={' customAmountInput '}
-															// value={formikWithdraw.values.amount}
-															// onChange={formikWithdraw.handleChange}
-															// onBlur={formikWithdraw.handleBlur}
-															// errorMsg={
-															// 	formikWithdraw.touched.amount && formikWithdraw.errors.amount
-															// 		? formikWithdraw.errors.amount
-															// 		: null
-															// }
-															cancelButton={
-																<button
-																	// onClick={() => {
-																	// 	formikWithdraw.resetForm();
-																	// }}
-																	type="button"
-																	className="absolute right-2 inset-y-0 my-auto h-fit "
-																>
-																	<img src={Cancel} alt="/" className="w-4" />
-																</button>
-															}
-														/>
-													</div>
-												</div>
 
-												<Button
-													variant={'secondary'}
-													size={'full'}
-													className={'py-2 font-semibold'}
-													type="button"
-												>
-													Send this offer
-												</Button>
-											</form>
-										</div>
-									</div>
+								{grabs?.includes(parseInt(ad_id, 10)) ? (
+									<Button
+										onClick={async () => unGrabAd(ad_id)}
+										variant="secondary"
+										size={'full'}
+										className="my-2  text-lg tracking-tighter line-clamp-1 hover:opacity-40"
+										disabled={isLoading || false}
+										type="button"
+									>
+										<span className="flex items-center gap-2 justify-center">
+											Ungrab Item
+											<FcCancel className="my-auto" />
+										</span>{' '}
+									</Button>
+								) : (
+									<Button
+										onClick={handleGrab}
+										variant="secondary"
+										size={'full'}
+										className={`my-2  text-lg tracking-tighter line-clamp-1 ${isLoading ? 'opacity-40' : ''}`}
+										disabled={!isLogin || blocked || user?.id === owner || isLoading}
+										type="button"
+									>
+										{isLoading ? (
+											<span className="loading loading-spinner loading-md"></span>
+										) : (
+											<span className="flex items-center gap-2 justify-center">
+												Grab Item
+												<FaMicrochip className="my-auto" />
+											</span>
+										)}{' '}
+									</Button>
 								)}
+							</>
+						) : !inspectCategories.includes(ad?.category) && feature == '3' ? (
+							<>
+								<Link to={Approutes.grab.grabProduct(ad_id)}>
+									<Button
+										variant={'primary'}
+										size={'full'}
+										type="button"
+										className="my-2  text-lg tracking-tighter line-clamp-1 "
+									>
+										Place order
+									</Button>
+								</Link>
 
 								{grabs?.includes(parseInt(ad_id, 10)) ? (
 									<Button
@@ -318,6 +289,80 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
 										>
 											Submit
 										</Button>
+									</div>
+								)}
+								{ad?.negotiable === 1 && (
+									<div className="dropdown dropdown-top dropdown-center w-full ">
+										<Button
+											variant={'secondary'}
+											size={'full'}
+											type="button"
+											className=" text-lg  tracking-tighter line-clamp-1 group focus:bg-white focus:border-black"
+										>
+											<span className="flex items-center gap-4 justify-center font-semibold">
+												Make offer{' '}
+												<img
+													src={ArrowDown}
+													alt="/"
+													className="w-4 group-focus:transform group-focus:rotate-180 transition-all"
+												/>
+											</span>
+										</Button>
+										<div
+											tabIndex={0}
+											className="dropdown-content   z-[10] menu  p-4 bg-white shadow-2xl w-full flex flex-col justify-between"
+										>
+											<form className="space-y-4">
+												<div>
+													<div className="flex items-center justify-between">
+														<p>Price:</p>
+														<h6 className="font-bold flex items-center gap-2">
+															{' '}
+															<img src={Naira} alt="naira" className="w-4" /> {toMoney(ad?.price)}
+														</h6>
+													</div>
+													<div className="flex items-center justify-between gap-6">
+														<label htmlFor="offer">Offer:</label>
+														<InputGroup
+															name="offer"
+															id="offer"
+															type="number"
+															amount={'naira'}
+															autoComplete="off"
+															className={' customAmountInput '}
+															// value={formikWithdraw.values.amount}
+															// onChange={formikWithdraw.handleChange}
+															// onBlur={formikWithdraw.handleBlur}
+															// errorMsg={
+															// 	formikWithdraw.touched.amount && formikWithdraw.errors.amount
+															// 		? formikWithdraw.errors.amount
+															// 		: null
+															// }
+															cancelButton={
+																<button
+																	// onClick={() => {
+																	// 	formikWithdraw.resetForm();
+																	// }}
+																	type="button"
+																	className="absolute right-2 inset-y-0 my-auto h-fit "
+																>
+																	<img src={Cancel} alt="/" className="w-4" />
+																</button>
+															}
+														/>
+													</div>
+												</div>
+
+												<Button
+													variant={'secondary'}
+													size={'full'}
+													className={'py-2 font-semibold'}
+													type="button"
+												>
+													Send this offer
+												</Button>
+											</form>
+										</div>
 									</div>
 								)}
 							</>
