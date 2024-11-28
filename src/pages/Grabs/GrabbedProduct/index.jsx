@@ -8,6 +8,7 @@ import { convertKeyToName, numberWithCommas, ScrollToTop } from '../../../utils'
 import Action from './Action';
 import { fetchProduct } from '../../../hooks';
 import { SpinnerSkeleton } from '../../../components';
+import { inspectCategories } from '../../../constants/Category';
 
 const GrabbedProduct = () => {
 	const { grabber_id, ad_id } = useParams();
@@ -74,7 +75,7 @@ const GrabbedProduct = () => {
 						</div>{' '}
 						<div className="relative rounded-none w-full h-full mt-1">
 							{result.data?.images.length > 0 ? (
-								<Carousel className="h-full max-lg:h-[300px] md:min-h-[470px]  rounded-none">
+								<Carousel className="h-full max-lg:h-[300px] md:min-h-[470px]    rounded-none">
 									{result.data?.images.map((img, index) => (
 										<img
 											src={img.path}
@@ -85,7 +86,7 @@ const GrabbedProduct = () => {
 									))}
 								</Carousel>
 							) : (
-								<img src={noimage} alt="no image" className="object-cover w-full h-full " />
+								<img src={noimage} alt="no image" className="object-cover w-full h-full md:h-[470px] " />
 							)}
 
 							<div className="absolute bottom-0 flex w-full h-10 py-2 pl-6 text-white rounded-none bg-black/50">
@@ -99,13 +100,7 @@ const GrabbedProduct = () => {
 
 					<div className="xl:w-[40%] lg:self-end h-full ">
 						<Action
-							isGeneral={
-								[
-									5001, 5003, 5004, 5005, 5101, 5102, 5103, 5104, 5105, 5106, 5107, 5108, 5109, 6301, 6302,
-								].includes(result?.data.category)
-									? false
-									: true
-							}
+							isGeneral={inspectCategories.includes(result?.data.category) ? false : true}
 							ad={result?.data}
 						/>
 					</div>

@@ -32,7 +32,6 @@ const Profile = () => {
 	);
 	const [isLoading, setIsLoading] = useState(true);
 	const { user, updateUserInfo } = useAuth();
-	// console.log(user);
 	const { mutate, isLoading: isUpdating } = userUpdate('dashboard/update_user');
 	const notify = useNotify();
 
@@ -73,8 +72,8 @@ const Profile = () => {
 			}
 			await mutate(values, {
 				onSuccess: async (data) => {
-					if (values?.cover_image) {
-						let _publicId = user?.cover_image?.filename.split('.');
+					if (values?.cover_image && user?.cover_image) {
+						let _publicId = user?.cover_image?.filename?.split(".");
 						_publicId.pop();
 						let publicId = _publicId.join('.');
 						await deleteImages(publicId);
@@ -114,6 +113,7 @@ const Profile = () => {
 
 	const handleFileChange = (e) => {
 		const file = e.currentTarget.files[0];
+		formik.setFieldValue('cover_image', null);
 		if (file && file.type.startsWith('image/')) {
 			if (file.size <= 1024 * 1024) {
 				formik.setFieldValue('cover_image', file);
@@ -127,7 +127,7 @@ const Profile = () => {
 	};
 
 	const handleRemoveFile = () => {
-		formik.setFieldValue('cover_image', '');
+		formik.setFieldValue('cover_image', null);
 		setToggleEdit((prev) => ({ ...prev, cover_image: false }));
 	};
 
@@ -156,16 +156,18 @@ const Profile = () => {
 					!formik?.values.cover_image && 'border rounded-xl flex items-center justify-center'
 				} w-full h-[20rem] my-4 relative`}
 			>
-				{formik?.values.cover_image ? (
+				{(formik?.values.cover_image || user?.cover_image) ? (
 					<div className="w-full h-full relative group">
 						<img
-							src={URL.createObjectURL(formik.values.cover_image)}
+							src={formik?.values.cover_image ? URL.createObjectURL(formik.values.cover_image) : user?.cover_image?.path}
 							alt="/"
 							className="w-full h-full mx-auto object-fit rounded-xl"
 						/>
-						<div className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-100 absolute right-2 top-2 cursor-pointer opacity-0 group-hover:opacity-100 transition-all">
-							<MdClose size={15} onClick={handleRemoveFile} />
-						</div>
+						{/*{ formik?.values.cover_image &&*/}
+						{/*	<div className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-100 absolute right-2 top-2 cursor-pointer opacity-0 group-hover:opacity-100 transition-all">*/}
+						{/*		<MdClose size={15} onClick={handleRemoveFile} />*/}
+						{/*	</div>*/}
+						{/*}*/}
 					</div>
 				) : (
 					// <img

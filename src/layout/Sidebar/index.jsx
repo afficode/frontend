@@ -6,8 +6,13 @@ import { CameraSmall } from '../../assets/svgs';
 import { Approutes } from '../../constants';
 import { Button, InputGroup } from '../../ui';
 import useAuth from '../../context/UserContext';
+import { useNotify, userUpdate } from '../../hooks';
 
 const Sidebar = () => {
+	const { mutate, isLoading } = userUpdate('dashboard/update_user');
+	const notify = useNotify();
+	const { user, updateUserInfo } = useAuth();
+
 	const initialValues = {
 		profile_image: null,
 	};
@@ -32,11 +37,53 @@ const Sidebar = () => {
 		validationSchema,
 	});
 
-	const handleFileChange = (event) => {
-		formik.setFieldValue('profile_image', event.currentTarget.files[0]);
-	};
+	const handleFileChange = async (event) => {
+		const file = event.currentTarget.files[0];
 
-	const { user } = useAuth();
+		let profile_image;
+		let formData;
+
+		try {
+			if (file && file.type.startsWith('image/')) {
+				if (file.size <= 1024 * 1024) {
+					// TODO: Delete Old image if new one is uploaded.
+
+					console.log('Profile image', file);
+					profile_image = await uploadImage(file, 'profile_image');
+
+					console.log('Profile image uploaded', profile_image);
+
+					formik.setFieldValue('profile_image', file);
+
+					formData = { ...formik.values, profile_image: profile_image };
+
+					await mutate(formData, {
+						onSuccess: async (data) => {
+							if (formik.values.profile_image) {
+								let _publicId = user?.profile_image?.filename.split('.');
+								_publicId.pop();
+								let publicId = _publicId.join('.');
+								await deleteImages(publicId);
+							}
+							updateUserInfo(data?.user);
+							notify(data?.message, 'success');
+						},
+						onError: (error) => {
+							notify(error?.message, 'error');
+						},
+					});
+				} else {
+					notify('File size must be less than 1MB', 'error');
+				}
+			} else {
+				notify('Please upload an image file', 'error');
+			}
+		} catch (e) {
+			notify('Something went wrong...', 'error');
+		}
+
+		console.log('from data', formData);
+	};
 
 	return (
 		<aside className="w-[15rem] h-full bg-[#D9D9D9] rounded-r-[2.5rem] flex flex-col items-center text-center max-lg:hidden">
