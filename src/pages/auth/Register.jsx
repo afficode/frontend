@@ -37,23 +37,22 @@ const Register = ({ id }) => {
 			.required('Lastname Field must not be empty')
 			.min(2, 'Lastname must have at least 2 characters'),
 		email: Yup.string().required('Email field is required').email('Invalid email address'),
-		location: Yup.string().required('Location is required'),
 		phone: Yup.number()
 			.typeError('Phone number must not contain +234, but start with 0XXXXXXXXXX')
-			.required('Phone number is required')
+			.required()
 			.positive()
 			.integer()
 			.min(1000000000, 'Phone number must be 11 or 12 digit 08012345678')
 			.max(99999999999, 'Phone number must be 11 or 12 digit 08012345678'),
 		password: Yup.string()
-			.required('Password is required')
+			.required()
 			.min(8, 'Password must be 8 characters long')
 			.matches(/[0-9]/, 'Password requires a number')
 			.matches(/[a-z]/, 'Password requires a lowercase letter')
 			.matches(/[A-Z]/, 'Password requires an uppercase letter'),
 		confirmPassword: Yup.string()
 			.oneOf([Yup.ref('password'), null], 'Must match "password" field value')
-			.required('Confirm password is required'),
+			.required(),
 	});
 	const notify = useNotify();
 	const onSubmit = async (values, { setSubmitting }) => {
@@ -61,10 +60,13 @@ const Register = ({ id }) => {
 		setTimeout(async () => {
 			const submit = await RegistrationHook(values, setSubmitting, 'register');
 			if (submit?.success) {
+				// notifySuc();
 				notify(submit.message, 'success');
 				return navigate('/', { replace: true });
 			} else {
+				// notifyErr(submit.message);
 				notify(submit.message, 'error');
+				// console.log(submit.message);
 			}
 			setIsLoading(false);
 		}, 3000);
@@ -157,16 +159,6 @@ const Register = ({ id }) => {
 										/>
 									</div>
 									<div className="form-control">
-										<Select
-											className={inputClass}
-											type="select"
-											name="location"
-											id={`${id}-register-location`}
-											options={statesOptions}
-											{...formik.getFieldProps('location')}
-										/>
-									</div>
-									<div className="form-control">
 										<Input
 											className={inputClass}
 											type="password"
@@ -187,11 +179,22 @@ const Register = ({ id }) => {
 										/>
 									</div>
 									<div className=" form-control">
+										{/* <Button
+                  type="submit"
+                  size={"xl"}
+                  className="bg-primary border-0"
+                  disabled={formik.isValid || !formik.dirty}
+                >
+                  <span className="flex text-xl">
+                    Register &emsp; <MdAppRegistration className="my-auto" />
+                  </span>
+                </Button> */}
+
 										<Button
 											type="submit"
 											tabIndex="-1"
 											aria-disabled="true"
-											className={`text-white mt-4 text-normal lg:text-lg border-0 bg-primary btn-md lg:btn-lg hover:bg-primary/80 ${
+											className={`text-white text-normal lg:text-lg border-0 bg-primary btn-md lg:btn-lg hover:bg-primary/80 ${
 												!formik.isValid || !formik.dirty || formik.isSubmitting
 													? 'cursor-not-allowed'
 													: 'cursor-pointer'

@@ -3,6 +3,7 @@ export const Approutes = {
 		initial: '/auth',
 		verifyMail: '/auth/verifyaccount',
 		resetPassword: '/auth/reset_password',
+		reverifyEmail: '/auth/reverify_email',
 	},
 	dashboard: {
 		initial: '/dashboard',
