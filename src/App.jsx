@@ -18,6 +18,7 @@ import {
 	ProfileLayout,
 	Products,
 	ResetPassword,
+	ReverifyEmail,
 	SavedItems,
 	Security,
 	Settings,
@@ -80,6 +81,7 @@ function App() {
 					<Route path={Approutes.auth.initial} element={<Auth />} />
 					<Route path={Approutes.forgotPassword} element={<ForgotPassword />} />
 					<Route path={Approutes.auth.verifyMail} element={<VerifyMail />} />
+					<Route path={Approutes.auth.reverifyEmail} element={<ReverifyEmail />} />
 					<Route path={Approutes.auth.resetPassword} element={<ResetPassword />} />
 					<Route path={Approutes.logout} element={<Logout />} />
 					<Route path={Approutes.product.initial} element={<Products />} />

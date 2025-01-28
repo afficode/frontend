@@ -35,6 +35,7 @@ export { default as ForgotPassword } from './auth/ForgotPassword';
 export { default as VerifyMail } from './auth/VerifyMail';
 export { default as ResetPassword } from './auth/ResetPassword';
 export { default as Logout } from './auth/Logout';
+export { default as ReverifyEmail } from './auth/ReverifyEmail';
 
 //dashboard
 export { default as Performance } from './Dashboard/Performance';
