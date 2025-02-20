@@ -45,7 +45,7 @@ const GrabFlyer = () => {
 
 	return (
 		<div className="px-8 py-24 bg-gray-200">
-			<div ref={contentRef} className="grid flex-1 w-full grid-cols-2 mx-auto ">
+			<div ref={contentRef} className="grid flex-1 w-full lg:w-[1050px] grid-cols-2 mx-auto ">
 				<div className="flex flex-col p-3 sm:p-6 bg-secondary ">
 					<div className="mb-6">
 						<img src={BoonfuLogo} className="w-16" alt="Boonfu Logo" />

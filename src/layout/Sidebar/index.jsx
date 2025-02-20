@@ -7,9 +7,12 @@ import { Approutes } from '../../constants';
 import { Button, InputGroup } from '../../ui';
 import useAuth from '../../context/UserContext';
 import { useNotify, userUpdate } from '../../hooks';
+import { deleteImages, uploadImage } from '../../utils';
+import { useState } from 'react';
 
 const Sidebar = () => {
 	const { mutate, isLoading } = userUpdate('dashboard/update_user');
+	const [uploadingImage, setUploadingImage] = useState(false);
 	const notify = useNotify();
 	const { user, updateUserInfo } = useAuth();
 
@@ -40,58 +43,70 @@ const Sidebar = () => {
 	const handleFileChange = async (event) => {
 		const file = event.currentTarget.files[0];
 
-		let profile_image;
-		let formData;
-
 		try {
+			let profile_image;
+			let formData;
+			setUploadingImage(true);
+
 			if (file && file.type.startsWith('image/')) {
 				if (file.size <= 1024 * 1024) {
 					// TODO: Delete Old image if new one is uploaded.
 
-					console.log('Profile image', file);
 					profile_image = await uploadImage(file, 'profile_image');
 
-					console.log('Profile image uploaded', profile_image);
+					setUploadingImage(false);
 
 					formik.setFieldValue('profile_image', file);
 
-					formData = { ...formik.values, profile_image: profile_image };
+					formData = { ...formik.values, profile_image: JSON.stringify(profile_image) };
 
-					await mutate(formData, {
-						onSuccess: async (data) => {
-							if (formik.values.profile_image) {
-								let _publicId = user?.profile_image?.filename.split('.');
-								_publicId.pop();
-								let publicId = _publicId.join('.');
-								await deleteImages(publicId);
-							}
-							updateUserInfo(data?.user);
-							notify(data?.message, 'success');
-						},
-						onError: (error) => {
-							notify(error?.message, 'error');
-						},
-					});
+					if (formData !== null)
+						mutate(formData, {
+							onSuccess: async (data) => {
+								// console.log('success data return', data);
+								if (user?.profile_image) {
+									let _publicId = user?.profile_image?.filename.split('.');
+									_publicId.pop();
+									let publicId = _publicId.join('.');
+									await deleteImages(publicId);
+								}
+								updateUserInfo(data?.user);
+								notify(data?.message, 'success');
+							},
+							onError: (error) => {
+								notify(error?.message, 'error');
+							},
+						});
 				} else {
 					notify('File size must be less than 1MB', 'error');
+					setUploadingImage(false);
 				}
 			} else {
 				notify('Please upload an image file', 'error');
+				setUploadingImage(false);
 			}
 		} catch (e) {
 			notify('Something went wrong...', 'error');
+			setUploadingImage(false);
 		}
-
-		console.log('from data', formData);
 	};
 
 	return (
 		<aside className="w-[15rem] h-full bg-[#D9D9D9] rounded-r-[2.5rem] flex flex-col items-center text-center max-lg:hidden">
 			<div className="w-full pb-2 mt-2 space-y-4 border-b border-black/30 ">
 				<div className="relative w-[9rem] h-[9rem] mx-auto">
-					{formik?.values.profile_image ? (
+					{isLoading || uploadingImage ? (
+						<div className="w-full h-full m-auto flex items-center justify-center rounded-full bg-slate-400 text-white text-xs ">
+							{' '}
+							Loading...
+						</div>
+					) : formik?.values.profile_image || user?.profile_image ? (
 						<img
-							src={URL.createObjectURL(formik.values.profile_image)}
+							src={
+								formik?.values.profile_image
+									? URL.createObjectURL(formik.values.profile_image)
+									: user?.profile_image?.path
+							}
 							alt="/"
 							className="w-full h-full mx-auto rounded-full object-fit "
 						/>

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { Approutes } from '../../constants';
 import { Button } from '../../ui';
 
-const TermsAndCondition = ({ setIsOpen, isOpen, rulesRef, termsRef, privacyRef }) => {
+const TermsAndCondition = ({ setIsOpen, isOpen, rulesRef, termsRef, privacyRef, returnRef }) => {
 	return (
 		<div ref={termsRef} className="space-y-4 text-justify">
 			<h4>Introduction</h4>
@@ -532,8 +532,156 @@ const TermsAndCondition = ({ setIsOpen, isOpen, rulesRef, termsRef, privacyRef }
 				</li>
 			</ul>
 
+			<h4 ref={returnRef}>Return Policy</h4>
+			<p className={textStyles}>
+				The eligibility for returning an order on Boonfu marketplace is general, Albeit, there are
+				items/ products that are NOT eligible for return, Please read through our policy on items bought
+				on this website. <br />
+				Below are the general criteria that determine whether an order is eligible for return.
+			</p>
+
+			<ol className={orderedListStyles}>
+				<li>Timeframe for Returns</li>
+				<ul className={listStyles}>
+					<li>
+						Boonfu delivery service can ONLY return items a customer rejects at the point of delivery,
+						This implies that you are available to receive your order by YOURSELF or someone you trust
+						their judgement.
+					</li>
+				</ul>
+
+				<li>Condition of the Product</li>
+				<ul className={listStyles}>
+					<li>
+						The product must be in its original condition:
+						<ul className={listStyles}>
+							<li>Unused, unopened, and with all original tags/labels intact.</li>
+							<li>Packaging (e.g., box, wrapping) should be undamaged.</li>
+						</ul>
+					</li>
+					<li>Products that are damaged, used, or altered are typically not eligible for return.</li>
+				</ul>
+
+				<li>Proof of Purchase</li>
+				<ul className={listStyles}>
+					<li>A valid invoice or order number is usually required to process a return</li>
+					<li>Without proof of purchase, the return request may be denied</li>
+				</ul>
+
+				<li> Type of Product</li>
+				<ul className={listStyles}>
+					<li>
+						Eligible for Return:
+						<ul className={listStyles}>
+							<li>Most non-perishable goods (e.g., clothing, electronics, books).</li>
+						</ul>
+					</li>
+					<li>
+						Not Eligible for Return
+						<ul className={listStyles}>
+							<li>Perishable items (e.g., food, flowers).</li>
+							<li>Personalized or custom-made products.</li>
+							<li>Intimate items (e.g., underwear, swimwear).</li>
+							<li>Digital products (e.g., software, eBooks) once downloaded or activated.</li>
+							<li>Products marked as "final sale" or "non-returnable."</li>
+						</ul>
+					</li>
+				</ul>
+
+				<li>Reason for Return</li>
+				<ul className={listStyles}>
+					<li>
+						Common acceptable reasons for return include:
+						<ul className={listStyles}>
+							<li>Defective or damaged product.</li>
+							<li>Incorrect product delivered.</li>
+							<li>Product not as described on the website.</li>
+						</ul>
+						<p className={textStyles}>
+							Generally customers are expected to fill the{' '}
+							<span className="text-primary">customer refund request form</span> after which our team would
+							access your request and IF required call for further details and also discuss possible
+							exchange of item, in most cases.
+						</p>
+					</li>
+				</ul>
+
+				<li>Return Process Initiation</li>
+				<ul className={listStyles}>
+					<li>
+						Noteworthy for customer to return order:
+						<ul className={listStyles}>
+							<li>Receive item from delivery personnel and examine it.</li>
+							<li>
+								Decide IF order meets expectation, IF YES, receive, IF NOT communicate to personnel and make
+								your reason(s) known to him/he
+							</li>
+							<li>Valid reason, personnel gives option of replacement of item or refund.</li>
+							<li>Take pictures of the concern where necessary and other supporting evidences</li>
+							<li>
+								IF replacement is requested, delivery personnel initiates the process and discuss next
+								delivery time and day with customer
+							</li>
+							<li>
+								IF refund, delivery personnel assists you with the link to fill the refund request form with
+								supporting document submitted for review and conclusion.
+							</li>
+						</ul>
+					</li>
+				</ul>
+
+				<li>Shipping the Return</li>
+				<ul className={listStyles}>
+					<li>
+						The customer is responsible for shipping the product back to the seller <b>AFTER</b> delivery
+						is done:
+						<ul className={listStyles}>
+							<li>Use the provided return label (if applicable).</li>
+							<li>Ensure the product is securely packaged to prevent damage during transit.</li>
+							<li>
+								Boonfu cannot compel seller to accept order after the day of delivery is past, It is
+								entirely up to the seller to take the decision of accepting a late returned item.
+							</li>
+						</ul>
+					</li>
+				</ul>
+
+				<li>Refund or Replacement</li>
+				<ul className={listStyles}>
+					<li>
+						Once the seller receives and inspects the returned product:
+						<ul className={listStyles}>
+							<li>
+								<b>Refund</b>: The purchase amount is refunded to the original payment method (may take 5–10
+								business days).
+							</li>
+							<li>
+								<b>Replacement</b>: A new product is shipped to the customer (if requested and available).
+							</li>
+						</ul>
+					</li>
+				</ul>
+
+				<h6 className="mt-2">Exceptions and Special Cases</h6>
+				<ul className={listStyles}>
+					<li>
+						<b>Damaged During Delivery</b>: If the product is damaged during transit, the customer must
+						report it immediately at delivery point and provide evidence (e.g., photos)
+					</li>
+					<li>
+						<b>Wrong Product Delivered</b>: The seller typically covers return shipping costs for
+						incorrect items.
+					</li>
+					<li>
+						<b>Late Returns</b>: Some sellers may accept late returns but an arrangement between seller
+						and customer.
+					</li>
+				</ul>
+			</ol>
+
 			<div className="mt-6 text-center">
 				<Button
+					type="button"
 					onClick={() => setIsOpen(!isOpen)}
 					variant="primary"
 					size="small"
@@ -550,3 +698,5 @@ export default TermsAndCondition;
 
 const textStyles = 'text-base leading-relaxed text-gray-500 dark:text-gray-400';
 const listStyles = 'text-base leading-relaxed text-gray-500 dark:text-gray-400 list-disc pl-6';
+const orderedListStyles =
+	'text-base leading-relaxed text-gray-500 dark:text-gray-400 list-decimal pl-6';

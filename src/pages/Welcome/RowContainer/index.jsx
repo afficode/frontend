@@ -37,7 +37,7 @@ const RowContainer = ({ title, link }) => {
 			</div>
 			<div className="grid grid-cols-1 gap-4 place-items-center sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 				{title === 'Discover more...'
-					? product?.data?.ads.slice(0, 4).map((item) => <CardDetails key={item.title} {...item} />)
+					? product?.data?.ads.slice(0, 4).map((item) => <CardDetails key={item.id} {...item} />)
 					: title === 'Categories'
 					? categoriesData.map((item) => <Card key={item.title} {...item} />)
 					: shopsData.map((item) => <Card key={item.title} {...item} />)}
@@ -56,9 +56,7 @@ const CardDetails = ({ id, title, location, images, created_at, price, feature }
 			className=" w-[18rem] sm:max-w-[25rem] h-[22rem] border border-black/25 shadow-sm cursor-pointer hover:shadow-lg transition-all  ease-in-out"
 		>
 			<div className="relative ml-0.5">
-				{(feature !== '0' && feature !== '3') && (
-					<Feature feature={feature} />
-				)}
+				{feature !== '0' && feature !== '3' && <Feature feature={feature} />}
 			</div>
 			<img className=" min-w-full h-[70%] object-cover" src={img} alt="/" />
 

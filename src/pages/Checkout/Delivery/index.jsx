@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { Button, InputGroup } from '../../../../../ui';
-import { useStates } from '../../../../../hooks';
-import { toSelectOptions } from '../../../../../utils';
+import { Button, InputGroup } from '../../../ui';
+import { useStates } from '../../../hooks';
+import { toSelectOptions } from '../../../utils';
 
-const Delivery = () => {
+const Delivery = ({ setQuoteLoading }) => {
 	const { data: states } = useStates();
 	const statesOptions = toSelectOptions(states, 'states', 'Select your state');
 
@@ -12,8 +12,6 @@ const Delivery = () => {
 		seller_address: '',
 		buyer_address: '',
 		buyer_state: '',
-		buyer_name: '',
-		buyer_phone: '',
 		delivery_type: '',
 		note: '',
 	});
@@ -32,9 +30,12 @@ const Delivery = () => {
 	};
 
 	return (
-		<div>
-			<div className="mb-2">
-				Please enter in your location and other details for this delivery service.
+		<div className="bg-secondary p-4">
+			<div className="mb-6 space-y-1">
+				<p className="italic">Thanks for choosing Boonfu delivery service.</p>
+				<p className="italic">
+					Please fill the quote form below to enable us generate accurate delivery quote for you.
+				</p>
 			</div>
 			<form autoComplete="off" className="flex flex-col space-y-4" onSubmit={handleQuoteFormSubmit}>
 				<label htmlFor="seller_address" className="flex flex-col font-medium">
@@ -52,6 +53,8 @@ const Delivery = () => {
 						onChange={handleQuoteFormChange}
 					/>
 				</label>
+
+				<hr className=" border-1 border-black" />
 				<label htmlFor="buyer_address" className="flex flex-col font-medium">
 					<span className="flex items-center ">
 						<b className="pr-2">To: </b> Buyer’s address
@@ -80,32 +83,7 @@ const Delivery = () => {
 						onChange={handleQuoteFormChange}
 					/>
 				</label>
-				<label htmlFor="buyer_name" className="flex flex-col font-medium">
-					Buyer's name
-					<InputGroup
-						type="text"
-						name="buyer_name"
-						id="buyer_name"
-						autoComplete={'off'}
-						className={'w-full '}
-						placeholder="Mr Kunle Kalejaiye"
-						value={quoteFormData.buyer_name}
-						onChange={handleQuoteFormChange}
-					/>
-				</label>
-				<label htmlFor="buyer_phone" className="flex flex-col font-medium">
-					Buyer's Phone Number
-					<InputGroup
-						type="number"
-						name="buyer_phone"
-						id="buyer_phone"
-						autoComplete={'off'}
-						className={'w-full '}
-						placeholder="+234 803 xxxxxxxx"
-						value={quoteFormData.buyer_phone}
-						onChange={handleQuoteFormChange}
-					/>
-				</label>
+
 				<div className="flex flex-col font-medium">
 					Delivery type
 					<div className="flex px-2 gap-6 items-center">
@@ -154,7 +132,7 @@ const Delivery = () => {
 					/>
 				</label>
 
-				<Button type="submit" variant={'primary'} size={'small'}>
+				<Button type="submit" variant={'primary'} size={'small'} onClick={() => setQuoteLoading(true)}>
 					Get a Quote
 				</Button>
 			</form>

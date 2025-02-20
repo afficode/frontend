@@ -11,7 +11,7 @@ import PriceInput from './PriceInput';
 import AdFeatures from './AdFeatures';
 
 const FormControl = (props) => {
-	const { control, ...rest } = props;
+	const { control, price, subCat, ...rest } = props;
 
 	switch (control) {
 		case 'input':
@@ -43,7 +43,7 @@ const FormControl = (props) => {
 		case 'urgent':
 			return <UrgentField {...rest} />;
 		case 'feature':
-			return <AdFeatures {...rest} />;
+			return <AdFeatures price={price} subCat={subCat} {...rest} />;
 
 		default:
 			return null;

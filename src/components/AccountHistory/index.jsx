@@ -61,7 +61,7 @@ const AccountHistory = ({ className, setIsOpen, isOpen }) => {
 	// 	db_option.push(status);
 	// }
 
-	console.log(db_option);
+	// console.log(db_option);
 
 	const params = {
 		db_option: db_option.length > 0 ? db_option : [],
@@ -74,7 +74,7 @@ const AccountHistory = ({ className, setIsOpen, isOpen }) => {
 
 	const { data, isLoading } = useTransactions(params);
 
-	console.log(data);
+	// console.log(data);
 
 	const groupByMonth = (data) => {
 		const sortedData = data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
@@ -298,7 +298,7 @@ const Pallet = ({ title, amount, referenceId, date, status }) => {
 			<div className="flex items-end justify-between">
 				<div className="flex flex-col ">
 					<p className="text-black/50 truncate max-w-[10rem] md:max-w-[15rem]">{referenceId}</p>
-					<p>{format(new Date(date), 'dd.MM.yyyy')}</p>
+					<p>{format(new Date(date), 'EEEE d, MMMM yyyy')}</p>
 				</div>
 
 				<span
