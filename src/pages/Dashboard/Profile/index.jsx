@@ -53,6 +53,8 @@ const Profile = () => {
 		bio: Yup.string(),
 	});
 
+	console.log(user?.cover_image.filename.split('.')[0]);
+
 	const handleSave = async (values) => {
 		try {
 			let profile_image;
@@ -62,6 +64,7 @@ const Profile = () => {
 
 			if (values?.cover_image) {
 				// TODO: Delete Old image if new one is uploaded.
+				// deleteImages(user?.cover_image.filename.split('.')[0]);
 				profile_image = await uploadImage(values?.cover_image, 'cover_image');
 				values = { ...values, cover_image: profile_image };
 			} else {
@@ -73,7 +76,7 @@ const Profile = () => {
 			await mutate(values, {
 				onSuccess: async (data) => {
 					if (values?.cover_image && user?.cover_image) {
-						let _publicId = user?.cover_image?.filename?.split(".");
+						let _publicId = user?.cover_image?.filename?.split('.');
 						_publicId.pop();
 						let publicId = _publicId.join('.');
 						await deleteImages(publicId);
@@ -119,10 +122,10 @@ const Profile = () => {
 				formik.setFieldValue('cover_image', file);
 				setToggleEdit((prev) => ({ ...prev, cover_image: false }));
 			} else {
-				toast.error('File size must be less than 1MB');
+				notify('File size must be less than 1MB', 'error');
 			}
 		} else {
-			toast.error('Only image files are allowed');
+			notify('Only image files are allowed', 'error');
 		}
 	};
 
@@ -156,10 +159,14 @@ const Profile = () => {
 					!formik?.values.cover_image && 'border rounded-xl flex items-center justify-center'
 				} w-full h-[20rem] my-4 relative`}
 			>
-				{(formik?.values.cover_image || user?.cover_image) ? (
+				{formik?.values.cover_image || user?.cover_image ? (
 					<div className="w-full h-full relative group">
 						<img
-							src={formik?.values.cover_image ? URL.createObjectURL(formik.values.cover_image) : user?.cover_image?.path}
+							src={
+								formik?.values.cover_image
+									? URL.createObjectURL(formik.values.cover_image)
+									: user?.cover_image?.path
+							}
 							alt="/"
 							className="w-full h-full mx-auto object-fit rounded-xl"
 						/>

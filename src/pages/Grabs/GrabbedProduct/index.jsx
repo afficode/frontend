@@ -8,7 +8,7 @@ import { convertKeyToName, numberWithCommas, ScrollToTop } from '../../../utils'
 import Action from './Action';
 import { fetchProduct } from '../../../hooks';
 import { SpinnerSkeleton } from '../../../components';
-import { inspectCategories } from '../../../constants/Category';
+import { inspectableCategories } from '../../../constants/Category';
 
 const GrabbedProduct = () => {
 	const { grabber_id, ad_id } = useParams();
@@ -100,7 +100,7 @@ const GrabbedProduct = () => {
 
 					<div className="xl:w-[40%] lg:self-end h-full ">
 						<Action
-							isGeneral={inspectCategories.includes(result?.data.category) ? false : true}
+							isGeneral={inspectableCategories.includes(result?.data.category) ? false : true}
 							ad={result?.data}
 						/>
 					</div>

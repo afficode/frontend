@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Button, Modal as ModalUi } from '../../../ui';
 import {
 	BankTransfer,
-	DeliveryQuote,
 	Info,
 	InfoYellow,
 	Paypal,
@@ -11,9 +10,7 @@ import {
 	Visa,
 } from '../../../assets/svgs';
 import { Approutes } from '../../../constants';
-import InquiryChat from './Modals/InquiryChat';
-import PickUp from './Modals/PickUp';
-import Delivery from './Modals/Delivery';
+// import InquiryChat from './Modals/InquiryChat';
 import InspectionSchedule from './Modals/InspectionSchedule';
 import { useGetSchedules } from '../../../hooks';
 import Modal from '../../Products/View/Modal.jsx';
@@ -24,7 +21,7 @@ import useAuth from '../../../context/UserContext';
 const Action = ({ isGeneral, ad }) => {
 	const { data } = useGetSchedules();
 	const { isLogin, user } = useAuth();
-	const navigate = useNavigate();
+	const category = ad?.category.toString();
 
 	const [formData, setFormData] = useState({
 		delivery_option: '',
@@ -34,10 +31,8 @@ const Action = ({ isGeneral, ad }) => {
 
 	// form modals
 	const [inspectionModalOpen, setInspectionModalOpen] = useState(false);
-	const [quoteFormModalOpen, setQuoteFormModalOpen] = useState(false);
-	const [quoteModalOpen, setQuoteModalOpen] = useState(false);
-	const [inquiryModal, setInquiryModal] = useState(false);
-	const [pickupModal, setPickupModal] = useState(false);
+
+	// const [inquiryModal, setInquiryModal] = useState(false);
 
 	return (
 		<>
@@ -61,54 +56,55 @@ const Action = ({ isGeneral, ad }) => {
 								<p className="font-semibold">Select delivery option:</p>
 
 								<form className="mt-1">
-									<div className="flex items-center space-x-4">
-										<input
-											type="radio"
-											name={'delivery'}
-											id={'delivery'}
-											value={'delivery'}
-											checked={formData.delivery_option === 'delivery'}
-											onChange={(e) => {
-												setFormData({ ...formData, delivery_option: e.target.value });
-												setQuoteFormModalOpen(true);
-											}}
-											className={``}
-										/>
-										<label htmlFor={'delivery'} className="flex items-center gap-2">
-											Boonfu Delivery
-											<div className="dropdown dropdown-hover">
-												<img tabIndex={0} src={InfoYellow} alt="/" className="w-4 cursor-pointer" />
-												<div
-													tabIndex={0}
-													className="dropdown-content transform translate-y-[-25%] md:translate-y-[2%] translate-x-[-54%] md:translate-x-[-80%] lg:translate-x-[-70%]  bg-secondary border-4 p-4 w-screen max-w-[340px] sm:max-w-[580px] z-[100000]"
-												>
-													<div className="space-y-2 text-start">
-														<h4>Boonfu Delivery.</h4>
-														<p>
-															Delivery with boonfu is handled by our third-party logistic company. Delivery of a
-															particular product/item is done in the state where it is sold. NO inter-state
-															delivery is available, for now.
-														</p>
-														<p>
-															To get a quote for cost of delivery,{' '}
-															<button className="underline text-primary">click quote form</button> fill and you get
-															your quote in minutes.
-														</p>
-														<p>Delivery fee is paid alongside cost of item or product being purchased.</p>
-														<p>
-															Return of Item or Product that DOES NOT meet expectation with strong proof is covered
-															by the seller.
-														</p>
-														<p>
-															If you change your mind after payment and shipment is initiated, you would pay
-															administrative charge of one thousand five hundred naira (₦1,500) and get the refund
-															of your balance.
-														</p>
+									{category.startsWith(54) ? null : (
+										<div className="flex items-center space-x-4">
+											<input
+												type="radio"
+												name={'delivery'}
+												id={'delivery'}
+												value={'delivery'}
+												checked={formData.delivery_option === 'delivery'}
+												onChange={(e) => {
+													setFormData({ ...formData, delivery_option: e.target.value });
+												}}
+												className={``}
+											/>
+											<label htmlFor={'delivery'} className="flex items-center gap-2">
+												Boonfu Delivery
+												<div className="dropdown dropdown-hover">
+													<img tabIndex={0} src={InfoYellow} alt="/" className="w-4 cursor-pointer" />
+													<div
+														tabIndex={0}
+														className="dropdown-content transform translate-y-[-25%] md:translate-y-[2%] translate-x-[-54%] md:translate-x-[-80%] lg:translate-x-[-70%]  bg-secondary border-4 p-4 w-screen max-w-[340px] sm:max-w-[580px] z-[100000]"
+													>
+														<div className="space-y-2 text-start">
+															<h4>Boonfu Delivery.</h4>
+															<p>
+																Delivery with boonfu is handled by our third-party logistic company. Delivery of a
+																particular product/item is done in the state where it is sold. NO inter-state
+																delivery is available, for now.
+															</p>
+															<p>
+																To get a quote for cost of delivery,{' '}
+																<button className="underline text-primary">click quote form</button> fill and you
+																get your quote in minutes.
+															</p>
+															<p>Delivery fee is paid alongside cost of item or product being purchased.</p>
+															<p>
+																Return of Item or Product that DOES NOT meet expectation with strong proof is
+																covered by the seller.
+															</p>
+															<p>
+																If you change your mind after payment and shipment is initiated, you would pay
+																administrative charge of one thousand five hundred naira (₦1,500) and get the refund
+																of your balance.
+															</p>
+														</div>
 													</div>
 												</div>
-											</div>
-										</label>
-									</div>
+											</label>
+										</div>
+									)}
 
 									<div className="flex items-center space-x-4">
 										<input
@@ -119,7 +115,6 @@ const Action = ({ isGeneral, ad }) => {
 											checked={formData.delivery_option === 'pickup'}
 											onChange={(e) => {
 												setFormData({ ...formData, delivery_option: e.target.value });
-												setPickupModal(true);
 											}}
 											className={``}
 										/>
@@ -158,17 +153,22 @@ const Action = ({ isGeneral, ad }) => {
 									</button>
 
 									<div className="mb-2 space-y-3">
-										<Button
-											onClick={() => navigate(Approutes.checkout)}
-											disabled={formData.delivery_option === '' ? true : false}
-											type="button"
-											variant={'primary'}
-											size={'full'}
-											className={'flex items-center justify-center gap-4 rounded-3xl mt-4'}
+										<Link
+											to={`${Approutes.checkout}?delivery=${
+												formData.delivery_option === 'delivery' ? true : false
+											}`}
 										>
-											Place Order
-										</Button>
-										<Button
+											<Button
+												disabled={formData.delivery_option === '' ? true : false}
+												type="button"
+												variant={'primary'}
+												size={'full'}
+												className={'flex items-center justify-center gap-4 rounded-3xl mt-4'}
+											>
+												Place Order
+											</Button>
+										</Link>
+										{/* <Button
 											type="button"
 											onClick={() => setInquiryModal(true)}
 											variant={'primary'}
@@ -176,7 +176,7 @@ const Action = ({ isGeneral, ad }) => {
 											className={'flex items-center justify-center gap-4 rounded-3xl mt-4 z-[-1]'}
 										>
 											Inquire about Item
-										</Button>
+										</Button> */}
 										<Modal
 											modalHeader={true}
 											children={<ReportAd ad_id={ad?.id} />}
@@ -197,80 +197,14 @@ const Action = ({ isGeneral, ad }) => {
 									</div>
 								</form>
 
-								<ModalUi
-									isOpen={quoteFormModalOpen}
-									setIsOpen={setQuoteFormModalOpen}
-									headerText={'Thanks for choosing Boonfu delivery service.'}
-									headerStye={'italic mb-[-1rem]'}
-									headerSize={'text'}
-									className={'bg-secondary max-w-[600px] '}
-								>
-									<Delivery />
-								</ModalUi>
-
-								<ModalUi
-									isOpen={pickupModal}
-									setIsOpen={setPickupModal}
-									headerText={'Pick up by self'}
-									headerSize={'text'}
-									headerStye={'underline'}
-									className={'bg-secondary max-w-[600px] '}
-								>
-									<PickUp />
-								</ModalUi>
-
-								{/* delivery quote ModalUi */}
-								<ModalUi
-									isOpen={quoteModalOpen}
-									setIsOpen={setQuoteModalOpen}
-									modalHeader={false}
-									className={' max-w-fit p-0 bg-primary'}
-								>
-									<div className="bg-primary p-4 text-white w-[300px]">
-										<h6 className="text-center">Your delivery quote</h6>
-
-										<div className="flex items-center gap-4 my-4">
-											<div className="flex-1 space-y-1">
-												<div>
-													<p>From: </p>
-													<div className="bg-gray-300 text-black text-center p-2">Amuwo-odofin</div>
-												</div>
-												<div>
-													<p>To: </p>
-													<div className="bg-gray-300 text-black text-center p-2">Lekki Phase 1</div>
-												</div>
-											</div>
-
-											<img src={DeliveryQuote} alt="delivery quote" className="w-16" />
-										</div>
-
-										<p className="border-y border-black py-1 text-lg my-4 font-semibold">Cost : #3,500</p>
-
-										<div className="flex justify-between gap-2 my-2 max-w-full">
-											<Button
-												variant={'grey'}
-												size={'small'}
-												onClick={() => setQuoteModalOpen(false)}
-												className="flex-1  !px-2"
-											>
-												Back
-											</Button>
-											<Link to={Approutes.grab.checkout} className="flex-1 ">
-												<Button variant={'secondary'} size={'small'} className=" w-ful">
-													Continue
-												</Button>
-											</Link>
-										</div>
-									</div>
-								</ModalUi>
-								<ModalUi
+								{/* <ModalUi
 									isOpen={inquiryModal}
 									setIsOpen={setInquiryModal}
 									modalHeader={false}
 									className={' max-w-fit p-0 '}
 								>
 									<InquiryChat ad={ad} />
-								</ModalUi>
+								</ModalUi> */}
 							</div>
 						</div>
 

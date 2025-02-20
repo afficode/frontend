@@ -4,6 +4,7 @@ import { useCategory } from '../../hooks';
 import { PropertyHeader } from '../../assets/images';
 import LoadingScreen from './LoadingScreen';
 import { ScrollToTop } from '../../utils';
+// import PostPreview from './PostPreview';
 
 const PostAd = () => {
 	const { categoryId } = useParams();
@@ -244,6 +245,7 @@ const PostAd = () => {
 						categoryName={categoryName}
 						initialValues={initialValues[categoryId]}
 					/>
+					{/* <PostPreview /> */}
 				</div>
 			)}
 

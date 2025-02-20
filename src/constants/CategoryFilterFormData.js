@@ -9662,7 +9662,7 @@ const cars = [
 			{
 				name: 'vehicle_condition',
 				value: 'foreign use',
-				label: 'Foreign Use',
+				label: 'Foreign Used',
 			},
 			{
 				name: 'vehicle_condition',
@@ -9881,7 +9881,7 @@ const vans = [
 			{
 				name: 'vehicle_condition',
 				value: 'foreign use',
-				label: 'Foreign Use',
+				label: 'Foreign Used',
 			},
 			{
 				name: 'vehicle_condition',
@@ -10132,7 +10132,7 @@ const automobile = [
 			{
 				name: 'vehicle_condition',
 				value: 'foreign use',
-				label: 'Foreign Use',
+				label: 'Foreign Used',
 			},
 			{
 				name: 'vehicle_condition',

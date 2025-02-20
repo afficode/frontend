@@ -51,6 +51,8 @@ import {
 	Withdraw,
 	PaymentSuccess,
 	AdDetail,
+	TransactionActivity,
+	RefundForm,
 } from './pages';
 import { AppLayout, DashboardLayout } from './layout';
 import { Approutes } from './constants';
@@ -183,9 +185,12 @@ function App() {
 							<Route path={Approutes.profile.messages} element={<Messages />} />
 							<Route path={Approutes.profile.notifications} element={<Notifications />} />
 							<Route path={Approutes.profile.saved} element={<SavedItems />} />
+							<Route path={Approutes.profile.transactions} element={<TransactionActivity />} />
 						</Route>
 					</Route>
 				</Route>
+
+				<Route path={Approutes.refundForm} element={<RefundForm />} />
 
 				<Route path="*" element={<PageNotFound />} />
 			</Routes>

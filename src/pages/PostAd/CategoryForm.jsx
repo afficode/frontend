@@ -84,6 +84,10 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 	const [selectedServicesCategory, setSelectedServicesCategory] = useState(null);
 	const [selectedTradesmanCategory, setSelectedTradesmanCategory] = useState(null);
 
+	if (['5001', '5003', '5007', '5004'].includes(selectedVehicleCategory)) {
+		// create a state to track if the category is amongst fix commision categories or   percentage commission
+	}
+
 	// if other option is selected
 	const [otherMake, setOtherMake] = useState(false);
 	const [otherBand, setOtherBrand] = useState(false);
@@ -3812,6 +3816,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 	};
 
 	const fields = categoryFields[categoryName] || [];
+	const [priceValue, setPriceValue] = useState(null);
 
 	//rendering form fields based on category
 	const renderFields =
@@ -3827,6 +3832,13 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				label={field.label}
 				options={field.options}
 				required={field.required}
+				price={priceValue}
+				subCat={
+					selectedVehicleCategory ||
+					selectedPropertyCategory ||
+					selectedAgricultureCategory ||
+					selectedMotorbikeCategory
+				}
 			/>
 		));
 
@@ -4031,6 +4043,12 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 						setSelectedMotorbikeCategory(() => formik.values.category);
 					}
 				}, [formik.values.category]);
+
+				useEffect(() => {
+					if (formik.values.price) {
+						setPriceValue(formik.values.price);
+					}
+				}, [formik.values.price]);
 
 				// console.log(formik.values.feature);
 				return (

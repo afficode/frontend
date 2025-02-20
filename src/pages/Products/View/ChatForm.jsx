@@ -19,7 +19,7 @@ import { BiSolidMessageRoundedDetail } from 'react-icons/bi';
 import { useGrabAd } from '../../../hooks/useGrab.js';
 import { ArrowDown, Cancel, Naira } from '../../../assets/svgs/index.js';
 import { InputGroup } from '../../../ui/index.js';
-import { inspectCategories } from '../../../constants/Category.js';
+import { inspectableCategories } from '../../../constants/Category.js';
 import toMoney from '../../../utils/toMoney.js';
 
 const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
@@ -128,7 +128,7 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
 			>
 				{({ isSubmitting }) => (
 					<Form>
-						{inspectCategories.includes(ad?.category) && feature == '3' ? (
+						{inspectableCategories.includes(ad?.category) && feature == '3' ? (
 							<>
 								<Link to={Approutes.grab.grabProduct(ad_id)}>
 									<Button
@@ -175,7 +175,7 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
 									</Button>
 								)}
 							</>
-						) : !inspectCategories.includes(ad?.category) && feature == '3' ? (
+						) : !inspectableCategories.includes(ad?.category) && feature == '3' ? (
 							<>
 								<Link to={Approutes.grab.grabProduct(ad_id)}>
 									<Button

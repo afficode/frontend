@@ -1,14 +1,20 @@
 import { Coin } from '../../assets/images';
-import { InfoYellow } from '../../assets/svgs';
+import { InfoYellow, Naira } from '../../assets/svgs';
 import { Field } from 'formik';
 import { Button } from '../../ui';
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
+import { grabbableCategories, inspectableCategories } from '../../constants/Category';
+import { getCommission, toMoney } from '../../utils';
 
 const AdFeatures = (props) => {
-	const { name, ...rest } = props;
+	const { name, price, subCat, ...rest } = props;
 	const [showGrab, setShowGrab] = useState(false);
 	const { hash } = useLocation();
+	const { categoryId } = useParams();
+	console.log('subCategory', subCat);
+
+	const { boonfuCommission, grabberCommission } = getCommission(price);
 
 	useEffect(() => {
 		if (hash) {
@@ -172,29 +178,74 @@ const AdFeatures = (props) => {
 							</div>
 						</div>
 
-						<div className="">
-							<h6 className="font-semibold">Grabber’s commission. (in coin)</h6>
-							<div className="bg-gray-300 p-2 border border-black max-w-[15rem]">
-								<span className="flex items-center space-x-2">
-									<img src={Coin} alt="/" className="w-[1.8rem] mx-2" />{' '}
-									<span className="text-xl font-semibold text-[#333]">10</span>
-								</span>
+						<div className="flex items-center flex-wrap gap-16">
+							<div className="">
+								<h6 className="font-semibold">Price of item :</h6>
+								<div className="border border-black flex items-center gap-2 max-w-[22rem] ">
+									<span className="flex items-center gap-1  p-2 w-full font-bold text-xl">
+										<img src={Naira} alt="/" />
+										{price ? toMoney(price) : '00'}
+									</span>
+								</div>
 							</div>
+
+							{inspectableCategories.includes(parseInt(subCat)) ? (
+								<div>
+									<h6 className="font-semibold ">To pay: Fixed Commission:</h6>
+									<div className=" flex items-center gap-2 max-w-[22rem] ">
+										<span className="flex items-center gap-3 border border-black bg-[#D9D9D9] p-2 w-full font-bold text-xl">
+											<img src={Coin} alt="/" className="w-8 h-8" />
+											10
+										</span>
+									</div>
+								</div>
+							) : (
+								<div className="">
+									<h6 className="font-semibold ml-14">To pay: Grab Commission:</h6>
+									<div className=" flex items-center gap-2 max-w-[22rem] ">
+										<span className="flex items-center space-x-2 border-2 border-primary p-2 font-bold text-xl">
+											1%
+										</span>
+										<span className="flex items-center gap-1 border-2 border-primary p-2 w-full font-bold text-xl">
+											<img src={Naira} alt="/" />
+											{grabberCommission && toMoney(grabberCommission)}
+										</span>
+									</div>
+								</div>
+							)}
 						</div>
 					</div>
 				</div>
 			</div>
 
-			<div className="flex justify-center w-full mt-[8rem] sm:mt-[6rem]">
-				<Button
-					type="button"
-					variant={'primary'}
-					className="bg-red-600 text-white text-center font-semibold"
-					onClick={() => setShowGrab(!showGrab)}
+			{grabbableCategories.includes(parseInt(categoryId)) && (
+				<div
+					className={
+						showGrab
+							? 'flex justify-between items-center w-full mt-[8rem] sm:mt-[6rem] px-8'
+							: 'flex justify-center w-full mt-[8rem] sm:mt-[6rem] px-8'
+					}
 				>
-					{showGrab ? 'Back' : 'Need to sell Urgently?'}
-				</Button>
-			</div>
+					<Button
+						type="button"
+						variant={'primary'}
+						className="bg-red-600 text-white text-center font-semibold"
+						onClick={() => setShowGrab(!showGrab)}
+					>
+						{showGrab ? 'Back' : 'Need to sell Urgently?'}
+					</Button>
+					{showGrab && (
+						<Button
+							type="button"
+							variant={'primary'}
+							className=" text-white text-center font-semibold"
+							// onClick={() => setShowGrab(!showGrab)}
+						>
+							Pay to Continue
+						</Button>
+					)}
+				</div>
+			)}
 		</div>
 	);
 };

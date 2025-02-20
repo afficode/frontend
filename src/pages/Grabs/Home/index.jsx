@@ -8,13 +8,13 @@ import {
 	GrabSave,
 } from '../../../assets/svgs';
 import { Button } from '../../../ui';
-import { Gown, Rolex, Sneakers } from '../../../assets/images';
 import { Approutes } from '../../../constants';
 import { ScrollToTop } from '../../../utils';
 import useAuth from '../../../context/UserContext';
 import { useGetGrabs } from '../../../hooks';
 import useGrabContext from '../../../context/GrabContext';
 import { useQueryClient } from 'react-query';
+import { noimage } from '../../../assets/images';
 
 const GrabberHome = () => {
 	const { user } = useAuth();

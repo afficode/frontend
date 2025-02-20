@@ -1,7 +1,7 @@
 import { NavLink, Outlet } from 'react-router-dom';
 import { Approutes } from '../../../constants';
 import { BsBellFill, BsBookmarkFill, BsChatLeftTextFill } from 'react-icons/bs';
-import { CgProfile } from 'react-icons/cg';
+import { GrTransaction } from 'react-icons/gr';
 import { HiOutlineSpeakerphone } from 'react-icons/hi';
 
 const ProfileLayout = () => {
@@ -17,7 +17,9 @@ const ProfileLayout = () => {
 							title={item.title}
 						>
 							<li className="hidden text-sm font-medium md:text-lg sm:block">{item.name}</li>
-							<li className="flex justify-center text-center  sm:hidden">{item.icon}</li>
+							<li className="flex justify-center text-center  sm:hidden active:!text-white">
+								{item.icon}
+							</li>
 						</NavLink>
 					))}
 				</ul>
@@ -33,12 +35,12 @@ const ProfileLayout = () => {
 export default ProfileLayout;
 
 const navItems = [
-	// {
-	// 	name: 'My Details',
-	// 	link: Approutes.profile.details,
-	// 	icon: <CgProfile size={20} />,
-	// 	title: 'My Details',
-	// },
+	{
+		name: 'Transaction Activity',
+		link: Approutes.profile.transactions,
+		icon: <GrTransaction size={20} />,
+		title: 'Transaction Activity',
+	},
 	{
 		name: 'My Saved Items',
 		link: Approutes.profile.saved,
