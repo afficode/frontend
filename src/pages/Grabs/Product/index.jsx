@@ -7,7 +7,7 @@ import { FaCamera } from 'react-icons/fa';
 import OverviewPills from '../../Products/View/OverviewPills';
 import { convertKeyToName, formatAdId, numberWithCommas, ScrollToTop } from '../../../utils';
 import GrabHeader from '../GrabHeader';
-import { Approutes } from '../../../constants';
+import { Approutes, frontendLink } from '../../../constants';
 import { Button } from '../../../ui';
 import { Download, GrabIcon } from '../../../assets/svgs';
 import { fetchProduct, useNotify } from '../../../hooks';
@@ -16,11 +16,9 @@ import { SpinnerSkeleton } from '../../../components';
 import useAuth from '../../../context/UserContext';
 import useGrabContext from '../../../context/GrabContext';
 import { useQueryClient } from 'react-query';
-import { FcCancel } from 'react-icons/fc';
+// import { FcCancel } from 'react-icons/fc';
 
 const GrabProduct = () => {
-	const frontendLink = 'http://89.107.60.191';
-
 	const notify = useNotify();
 	const [copied, setCopied] = useState(false);
 
@@ -29,7 +27,8 @@ const GrabProduct = () => {
 	const { user } = useAuth();
 
 	const grabLink = useMemo(
-		() => `${frontendLink}${Approutes.grab.grabbedProduct(`bf${user.grabber.id}`, ad_id)}`,
+		() =>
+			`${frontendLink.slice(0, -1)}${Approutes.grab.grabbedProduct(`bf${user.grabber.id}`, ad_id)}`,
 		[ad_id, user.grabber.id]
 	);
 
