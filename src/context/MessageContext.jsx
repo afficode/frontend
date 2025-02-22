@@ -1,9 +1,10 @@
 import { useEffect, useContext, createContext, useState } from "react";
 
 import useAuth from "./UserContext";
-import { getRefreshToken } from "../utils";
+import {getRefreshToken, privateAxios} from "../utils";
 import { useNotify } from "../hooks";
 import { manager } from "../utils/socket";
+import {backendLink} from "../constants/index.js";
 
 // export const manager = new Manager(`${backendLink}`, {
 // 	autoConnect: false,
@@ -11,7 +12,7 @@ import { manager } from "../utils/socket";
 
 const MessageContext = createContext();
 export const MessageProvider = ({ children }) => {
-  const [onlineUsers, setOnlineUsers] = useState();
+  const [onlineUsers, setOnlineUsers] = useState([]);
   const [unread, setUnread] = useState(0);
   const notify = useNotify();
   const socket = manager.socket("/message", {
@@ -29,8 +30,6 @@ export const MessageProvider = ({ children }) => {
   };
   const sendMessage = (messageData) => {
     socket.emit("send_message", { ...messageData }, (response) => {
-      // acknowledgement callback function
-      // console.log(response);
       if (!response.success) {
         notify(response.message, "info");
       }
@@ -44,7 +43,9 @@ export const MessageProvider = ({ children }) => {
     socket.emit("read_message", chat_id, receiver);
   };
 
-  socket.on("connect_error", (error) => {});
+  socket.on("connect_error", (error) => {
+    // TODO: have to find a way to notify admin about this
+  });
 
   socket.on("users", (users) => {
     setOnlineUsers(() => [...users]);
@@ -84,6 +85,12 @@ export const MessageProvider = ({ children }) => {
     setChats(() => [...chats]);
   });
 
+  const fetchChats = async () => {
+    await privateAxios.get(`${backendLink}chat`)
+        .then((response) => {
+          setChats(response?.data?.chats);
+        })
+  }
   useEffect(() => {
     if (isLogin && !socket.active) {
       socket.connect();
@@ -123,6 +130,11 @@ export const MessageProvider = ({ children }) => {
 
     return () => socket.disconnect();
   }, [socket]);
+
+  useEffect(() => {
+    fetchChats();
+
+  }, []);
 
   return (
     <MessageContext.Provider

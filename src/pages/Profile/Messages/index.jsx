@@ -8,8 +8,6 @@ import { IoIosChatboxes } from 'react-icons/io';
 import { useEffect } from 'react';
 
 const Messages = () => {
-	// fetch chats
-	// const { data: chatData, error, loading } = useChats();
 
 	const { chats, onlineUsers, readMessage } = useMessageContext();
 
@@ -17,9 +15,6 @@ const Messages = () => {
 
 	// id to fetch for a particular chat messages
 	const [chatId, setChatId] = useState(null);
-
-	// fetch messages
-	// const { data: messageData } = useMessages(chatId ? chatId : chats[0]?.chat_id);
 
 	const chat_viewed = (chat_id) => {
 		const chat = chats?.find((chat) => chat?.chat_id === chat_id);
@@ -30,7 +25,6 @@ const Messages = () => {
 		}
 	};
 
-	// console.log(sortedChats);
 	useEffect(() => {}, [onlineUsers]);
 
 	return (
@@ -68,7 +62,7 @@ const Messages = () => {
 												{ad.user_a != user.id ? ad.user_a_name : ad.user_b_name}{' '}
 											</h6>
 
-											{onlineUsers.includes(
+											{onlineUsers?.includes(
 												ad.user_a != user.id ? ad.user_a.toString() : ad.user_b.toString()
 											) ? (
 												<div className="p-1 text-xs text-green-800 bg-green-200 rounded-full animate-bounce">
