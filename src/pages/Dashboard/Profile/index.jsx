@@ -5,8 +5,6 @@ import { Button, InputGroup } from '../../../ui';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import LoadingScreen from './LoadingScreen';
-import { toast } from 'react-toastify';
-import { MdClose } from 'react-icons/md';
 import { toSelectOptions } from '../../../utils';
 
 import useAuth from '../../../context/UserContext.jsx';
@@ -27,7 +25,11 @@ const Profile = () => {
 	});
 	const { data } = useStates();
 	const state = useMemo(
-		() => data?.map((state) => ({ value: state?.state_id, key: state?.name })),
+		() =>
+			data?.map((state) => ({
+				value: state?.state_id,
+				key: state?.name,
+			})),
 		[data]
 	);
 	const [isLoading, setIsLoading] = useState(true);
@@ -52,8 +54,6 @@ const Profile = () => {
 		location: Yup.string().required('Required'),
 		bio: Yup.string(),
 	});
-
-	console.log(user?.cover_image.filename.split('.')[0]);
 
 	const handleSave = async (values) => {
 		try {
@@ -363,117 +363,4 @@ const inputStyle = 'border-transparent font-medium ';
 		cover_image: 'cover image here',
 	}
 
-*/
-
-/*
-	<form className="flex flex-col gap-3 mt-4 w-[500px]">
-					<div className="flex max-md:flex-col md:items-center md:justify-between  border-b border-black/10">
-						<label className="max-md:text-sm max-md:mt-2" htmlFor="name">Name</label>
-						<input
-							type="text"
-							id="name"
-							name="name"
-							value={aboutData?.name}
-							onChange={handleAboutChange}
-							className={toggleEdit.about ? 'border-transparent font-semibold' : ''}
-							disabled={toggleEdit.about}
-						/>
-					</div>
-					<div className="flex max-md:flex-col md:items-center md:justify-between  border-b border-black/10">
-						<label className="max-md:text-sm max-md:mt-2" htmlFor="phone">Business Title</label>
-						<input
-							type="text"
-							id="phone"
-							name="phone"
-							value={aboutData?.phone}
-							onChange={handleAboutChange}
-							className={toggleEdit.about ? 'border-transparent font-semibold' : ''}
-							disabled={toggleEdit.about}
-						/>
-					</div>
-					<div className="flex max-md:flex-col md:items-center md:justify-between  border-b border-black/10">
-						<label className="max-md:text-sm max-md:mt-2" htmlFor="location">Business Location</label>
-						<input
-							type="text"
-							id="location"
-							name="location"
-							value={aboutData?.location}
-							onChange={handleAboutChange}
-							className={toggleEdit.about ? 'border-transparent font-semibold' : ''}
-							disabled={toggleEdit.about}
-						/>
-					</div>
-					<div className="flex max-md:flex-col md:items-center md:justify-between  border-b border-black/10">
-						<label className="max-md:text-sm max-md:mt-2" htmlFor="established">Established</label>
-						<input
-							type="text"
-							id="established"
-							name="established"
-							value={aboutData?.established}
-							onChange={handleAboutChange}
-							className={toggleEdit.about ? 'border-transparent font-semibold' : ''}
-							disabled={toggleEdit.about}
-						/>
-					</div>
-					<div className="flex max-md:flex-col md:items-center md:justify-between  border-b border-black/10">
-						<label className="max-md:text-sm max-md:mt-2" htmlFor="email_adress">E-mail</label>
-						<input
-							type="email"
-							id="email_adress"
-							name="email_adress"
-							value={aboutData?.email}
-							onChange={handleAboutChange}
-							className={toggleEdit.about ? 'border-transparent font-semibold' : ''}
-							disabled={toggleEdit.about}
-						/>
-					</div>
-				</form>
-*/
-
-/*
-		<div>
-					<textarea
-						name="bio"
-						id="bio"
-						cols="30"
-						rows="5"
-						placeholder="Describe yourself and business generally"
-						value={aboutData?.bio}
-						onChange={handleAboutChange}
-						className={toggleEdit.bio ? 'border-transparent font-semibold' : 'p-4'}
-						disabled={toggleEdit.bio}
-					></textarea>
-				</div>
-*/
-
-// const [aboutData, setAboutData] = useState({
-// 	name: 'Adeola Lawal',
-// 	phone: 'Auto Dealer',
-// 	location: 'Lagos State',
-// 	established: 'Since 2008',
-// 	email: 'sijuadelawal@gmail.com',
-// 	bio: '',
-// });
-
-// const handleAboutChange = (e) => {
-// 	const name = e.target.name;
-// 	const value = e.target.value;
-
-// 	setAboutData((prev) => ({ ...prev, [name]: value }));
-// };
-
-/*
-
-		cover_image: Yup.mixed()
-			.test('fileType', 'Only image files are allowed', (value) => {
-				if (!value) return true; // Allow empty files (no validation)
-				return (
-					value && value.type.startsWith('image/') // Check if the file is an image
-				);
-			})
-			.test('fileSize', 'File size must be less than 1MB', (value) => {
-				if (!value) return true; // Allow empty files (no validation)
-				return value && value.size <= 1024 * 1024; // Check if the file size is <= 1MB
-			}),
-		// .required('Image file is required'),
 */

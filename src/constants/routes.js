@@ -68,21 +68,10 @@ export const Approutes = {
 };
 
 //export const backendLink = process.env.NODE_ENV !== "sam" ? 'http://109.237.25.252:4000/' : 'http://localhost:4000/';
-export const backendLink = 'https://api.boonfu.site/';
-// export const backendLink = 'https://0923-2a02-8086-c97-8480-b99b-9152-327f-7924.ngrok-free.app/';
-// export const backendLink =
-// 	import.meta.env.VITE_TESTING == 'gitpod'
-// 		? 'https://4000-afficode-backend-cch37ds4fkj.ws-eu108.gitpod.io/'
-// 		: import.meta.env.VITE_TESTING == 'sam'
-// 		? 'http://localhost:4000/'
-// 		: import.meta.env.VITE_TESTING == 'sam_elementary_os'
-// 		? 'http://192.168.0.206:4000/'
-// 		: import.meta.env.VITE_TESTING == 'staging_prod'
-// 		? 'http://89.107.60.191:4000/'
-// 		: 'https://backend-boonfu-staging-968fe07646b1.herokuapp.com/';
-// ('https://4924-2a02-8086-c97-8480-3923-b9e-5814-57c9.ngrok-free.app');
-// : 'http://109.237.25.252:4000/';
-// console.log(process.env.VITE_TESTING)
+export const backendLink =
+	import.meta.env.VITE_CHECK_ENV === 'sam_dev'
+		? 'http://localhost:4000/'
+		: 'https://api.boonfu.site/';
 
 export const frontendLink = 'https://boonfu.site/';
 // export const frontendLink = 'http://localhost:5173/';

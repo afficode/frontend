@@ -107,7 +107,7 @@ const ItemContainer = ({
 
               <div className="flex items-center gap-2 sm:gap-4 mt-2 sm:mt-4">
                 {specifications.map((spec, index) => (
-                  <>
+                  <div key={10*index}>
                     {spec !== null && (
                       <span
                         key={index * 3}
@@ -116,7 +116,7 @@ const ItemContainer = ({
                         {spec}
                       </span>
                     )}
-                  </>
+                  </div>
                 ))}
               </div>
             </div>
