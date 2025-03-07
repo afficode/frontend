@@ -8,6 +8,7 @@ import OverviewPills from '../../Products/View/OverviewPills';
 import {
 	convertKeyToName,
 	formatAdId,
+	getCommission,
 	numberWithCommas,
 	ScrollToTop,
 	toMoney,
@@ -63,6 +64,8 @@ const GrabProduct = () => {
 			});
 	};
 
+	const { grabberCommission } = getCommission(result?.data?.price);
+
 	if (isLoading) {
 		return (
 			<div className="h-screen">
@@ -78,7 +81,7 @@ const GrabProduct = () => {
 			<section>
 				<GrabHeader text="Grabbed Item preview" />
 				<div className="w-full p-2 my-4 text-center text-white bg-red-500 whitespace-nowrap">
-					<h4>Commission : {toMoney(result?.data?.price)}</h4>
+					{grabberCommission && <h4>Commission : ₦ {toMoney(grabberCommission)}</h4>}
 				</div>
 				<div className="flex flex-col w-full h-full gap-2 xl:flex-row xl:gap-4 line-clamp-1">
 					<div className="w-full  flex flex-col justify-between">

@@ -36,6 +36,7 @@ export { default as JoinUs } from './joinUs.svg';
 export { default as Linkdin } from './linkdin.svg';
 export { default as ListArrow } from './listArrow.svg';
 export { default as LoadingYellow } from './loadingYellow.svg';
+export { default as LogIcon } from './logIcon.svg';
 export { default as Padlock } from './padlock.svg';
 export { default as Instagram } from './instagram.svg';
 export { default as SingleArrowRight } from './singleArrowRight.svg';
