@@ -158,6 +158,7 @@ function App() {
 							element={<GrabbedProduct />}
 						/>
 						<Route path={Approutes.grab.grabProduct(':ad_id')} element={<GrabbedProduct />} />
+						<Route path={Approutes.checkout} element={<Checkout />} />
 						<Route path={Approutes.grab.inspectionLog} element={<InspectionLog />} />
 						<Route path={Approutes.welcome} element={<Welcome />} />
 						<Route path={`${Approutes.postDecision}`} element={<PostDecision />} />
@@ -165,7 +166,6 @@ function App() {
 						<Route path={`${Approutes.updateAd}/:adId`} element={<UpdateAd />} />
 						<Route path={`${Approutes.postSuccess}/:adId`} element={<PostSuccess />} />
 						<Route path={Approutes.tokenSuccess} element={<Success />} />
-						<Route path={Approutes.checkout} element={<Checkout />} />
 						<Route path={Approutes.account.paymentSuccess} element={<PaymentSuccess />} />
 						<Route path={Approutes.account.initial} element={<AccountLayout />}>
 							<Route path={Approutes.account.initial} element={<AccountHistory />} />

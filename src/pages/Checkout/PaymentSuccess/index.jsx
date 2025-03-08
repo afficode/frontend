@@ -3,14 +3,14 @@ import { PaymentSuccessful } from '../../../assets/images';
 import { Approutes } from '../../../constants';
 import { Link } from 'react-router-dom';
 
-const PaymentSuccess = () => {
+const PaymentSuccess = ({ grabber_id, ad_id, ad }) => {
 	return (
 		<div className="max-w-[720px] py-6 px-4 flex flex-col gap-8 m-auto ">
 			<div className="flex flex-col items-center gap-4">
 				<img src={PaymentSuccessful} className="w-[180px]" alt="Payment successful" />
 				<div className="space-y-2 text-center">
 					<h3>Payment Successful</h3>
-					<p>Successfully paid: #153,500</p>
+					<p>Successfully paid: {ad?.data?.price}</p>
 				</div>
 			</div>
 
@@ -24,7 +24,7 @@ const PaymentSuccess = () => {
 						</tr>
 						<tr>
 							<td>Item paid for</td>
-							<td>JBL Headphone</td>
+							<td>{ad?.data?.title}</td>
 						</tr>
 						<tr>
 							<td>Date</td>

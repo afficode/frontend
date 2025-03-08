@@ -29,7 +29,8 @@ export const Approutes = {
 		viewCategoryId: '/product/category/:id',
 	},
 	aboutUs: '/about-us',
-	checkout: '/checkout',
+	checkout: '/checkout/:grabber_id/:ad_id',
+	useCheckout: (grabber_id, ad_id) => `/checkout/${grabber_id}/${ad_id}`,
 	contactUs: '/contact-us',
 	forgotPassword: '/forgot-password',
 	grab: {
@@ -42,7 +43,7 @@ export const Approutes = {
 		products: '/grab/products',
 		product: (ad_id) => `/grab/products/${ad_id}`,
 		grabProduct: (ad_id) => `/grab/view/${ad_id}`,
-		grabbedProduct: (grbber_id, ad_id) => `/grab/view/${grbber_id}/${ad_id}`,
+		grabbedProduct: (grabber_id, ad_id) => `/grab/view/${grabber_id}/${ad_id}`,
 		settings: '/grab/settings',
 		flyer: '/grab/flyer',
 	},
@@ -68,7 +69,10 @@ export const Approutes = {
 };
 
 //export const backendLink = process.env.NODE_ENV !== "sam" ? 'http://109.237.25.252:4000/' : 'http://localhost:4000/';
-export const backendLink = import.meta.env.VITE_CHECK_ENV === 'sam_dev' ? 'http://localhost:4000/' : 'https://api.boonfu.site/';
+export const backendLink =
+	import.meta.env.VITE_CHECK_ENV === 'sam_dev'
+		? 'http://localhost:4000/'
+		: 'https://api.boonfu.site/';
 
 export const frontendLink = 'https://boonfu.site/';
 // export const frontendLink = 'http://localhost:5173/';

@@ -12,7 +12,6 @@ const AdFeatures = (props) => {
 	const [showGrab, setShowGrab] = useState(false);
 	const { hash } = useLocation();
 	const { categoryId } = useParams();
-	console.log('subCategory', subCat);
 
 	const { boonfuCommission, grabberCommission } = getCommission(price);
 
@@ -204,7 +203,7 @@ const AdFeatures = (props) => {
 									<h6 className="font-semibold ml-14">To pay: Grab Commission:</h6>
 									<div className=" flex items-center gap-2 max-w-[22rem] ">
 										<span className="flex items-center space-x-2 border-2 border-primary p-2 font-bold text-xl">
-											1%
+											%
 										</span>
 										<span className="flex items-center gap-1 border-2 border-primary p-2 w-full font-bold text-xl">
 											<img src={Naira} alt="/" />

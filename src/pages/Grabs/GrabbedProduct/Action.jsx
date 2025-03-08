@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Button, Modal as ModalUi } from '../../../ui';
 import {
 	BankTransfer,
@@ -22,6 +22,7 @@ const Action = ({ isGeneral, ad }) => {
 	const { data } = useGetSchedules();
 	const { isLogin, user } = useAuth();
 	const category = ad?.category.toString();
+	const { grabber_id, ad_id } = useParams();
 
 	const [formData, setFormData] = useState({
 		delivery_option: '',
@@ -154,7 +155,7 @@ const Action = ({ isGeneral, ad }) => {
 
 									<div className="mb-2 space-y-3">
 										<Link
-											to={`${Approutes.checkout}?delivery=${
+											to={`${Approutes.useCheckout(grabber_id, ad_id)}?delivery=${
 												formData.delivery_option === 'delivery' ? true : false
 											}`}
 										>
