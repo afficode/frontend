@@ -39,7 +39,9 @@ const Hero = () => {
 						</div>
 						<h4 className="text-center text-primary whitespace-nowrap">Setting Up A Shop</h4>
 						<div className="pt-2">
-							<p className="mb-2">It takes less than 5-mins to set up your account for success on AFFI.</p>
+							<p className="mb-2">
+								It takes less than 5-mins to set up your account for success on BOONFU.
+							</p>
 							<span className="max-sm:text-sm">Benefits;</span>
 							<ul className="flex flex-col pt-0 pl-6 text-base list-disc max-sm:text-sm">
 								<li>We drive clients to your store, constantly</li>

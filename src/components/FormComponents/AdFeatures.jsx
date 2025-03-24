@@ -101,28 +101,9 @@ const AdFeatures = (props) => {
 							<div className="flex items-center gap-2 ">
 								<h4 className="text-primary ">Use “Grab Feature” ? </h4>
 
-								<div className="dropdown dropdown-top z-50 ">
+								<button onClick={() => setGrabModal(true)}>
 									<img tabIndex={0} src={InfoYellow} className="w-4 cursor-pointer" alt="/" />
-									<div
-										tabIndex={0}
-										className="dropdown-content transform translate-y-[100%] translate-x-[-80%] sm:translate-x-[-50%] lg:translate-x-[8%] bg-secondary border-4 p-4 w-screen max-w-[320px] sm:max-w-[600px]"
-									>
-										<div className="space-y-2">
-											<h4>Grab Feature</h4>
-											<p>
-												This is Boonfu’s affiliate marketing system whereby our “Grabbers” pick your
-												item/product for massive offline and other channels marketing.
-											</p>
-											<p>
-												{' '}
-												Your Item with “Grab feature” is open to about a thousand (1000+) grabbers to market for
-												you, this means your item won’t be seating on our website BUT rather gains massive reach
-												to guarantee <b>“Almost Instant Sale”</b>.
-											</p>
-											<p>You may want to try this feature out too.</p>
-										</div>
-									</div>
-								</div>
+								</button>
 							</div>
 
 							<div className="flex max-sm:flex-col md:items-center gap-6 ">
@@ -209,48 +190,21 @@ const AdFeatures = (props) => {
 								{/* <div className=" bg-secondary border-4 p-4 ">
 									Using the grab feature? Please read the terms and condition
 								</div> */}
-
-								<div className="dropdown dropdown-top ">
-									<Button
-										type="button"
-										variant="secondary"
-										className={'max-w-[22rem] md:ml-[12rem] shadow-xl shadow-blue-100 max-sm:!px-4'}
-									>
-										Using the grab feature? Please read the terms and condition
-									</Button>
-									<div
-										tabIndex={0}
-										className="dropdown-content transform translate-y-[100%] translate-x-[-10%] sm:translate-x-[-50%] lg:translate-x-[8%] bg-secondary border-4 p-4 w-screen max-w-[320px] sm:max-w-[600px]"
-									>
-										<div className="space-y-2">
-											<h4>Grab Feature</h4>
-											<p>
-												This is Boonfu’s affiliate marketing system whereby our “Grabbers” pick your
-												item/product for massive offline and other channels marketing.
-											</p>
-											<p>
-												{' '}
-												Your Item with “Grab feature” is open to about a thousand (1000+) grabbers to market for
-												you, this means your item won’t be seating on our website BUT rather gains massive reach
-												to guarantee <b>“Almost Instant Sale”</b>.
-											</p>
-											<p>You may want to try this feature out too.</p>
-										</div>
-									</div>
-								</div>
 							</div>
 						</div>
 
 						<div className="flex items-center flex-wrap gap-16">
-							<div className="">
-								<h6 className="font-semibold">Price of item :</h6>
-								<div className="border border-black flex items-center gap-2 max-w-[22rem] ">
-									<span className="flex items-center gap-1  p-2 w-full font-bold text-xl">
-										<img src={Naira} alt="/" />
-										{price ? toMoney(price) : '00'}
-									</span>
+							{!inspectableCategories.includes(parseInt(subCat)) && (
+								<div className="">
+									<h6 className="font-semibold">Price of item :</h6>
+									<div className="border border-black flex items-center gap-2 max-w-[22rem] ">
+										<span className="flex items-center gap-1  p-2 w-full font-bold text-xl">
+											<img src={Naira} alt="/" />
+											{price ? toMoney(price) : '00'}
+										</span>
+									</div>
 								</div>
-							</div>
+							)}
 
 							{inspectableCategories.includes(parseInt(subCat)) ? (
 								<div>
@@ -297,7 +251,7 @@ const AdFeatures = (props) => {
 					>
 						{showGrab ? 'Back' : 'Need to sell Urgently?'}
 					</Button>
-					{showGrab && (
+					{/* {showGrab && (
 						<Button
 							type="button"
 							variant={'primary'}
@@ -306,7 +260,7 @@ const AdFeatures = (props) => {
 						>
 							Pay to Continue
 						</Button>
-					)}
+					)} */}
 				</div>
 			)}
 		</div>
