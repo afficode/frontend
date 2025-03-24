@@ -120,7 +120,7 @@ const Footer = () => {
 							<Link to={Approutes.grab.home}>
 								<li className={listStyles}>Grab System</li>
 							</Link>
-							<Link to={Approutes.underConstruction}>
+							<Link to={Approutes.logistics.signup}>
 								<li className={listStyles}>Logistics Services</li>
 							</Link>
 							<Link to={Approutes.underConstruction}>

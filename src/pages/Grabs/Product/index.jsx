@@ -114,13 +114,13 @@ const GrabProduct = () => {
 						</div>{' '}
 						<div className="relative rounded-none w-full  h-full mt-1">
 							{result?.data?.images.length > 0 ? (
-								<Carousel className="h-full max-lg:h-[300px] md:min-h-[470px]  rounded-none">
+								<Carousel className="h-full max-lg:h-[300px] md:h-[470px]  rounded-none">
 									{result.data?.images.map((img, index) => (
 										<img
 											src={img.path}
 											alt={img.filename}
 											key={index * 3}
-											className="rounded-t-sm rounded-b-none object-cover"
+											className="rounded-t-sm rounded-b-none object-cover w-full h-full"
 										/>
 									))}
 								</Carousel>
@@ -137,7 +137,7 @@ const GrabProduct = () => {
 						</div>
 					</div>
 
-					<aside className="w-full h-[350px]  xl:w-[45%] border-2 border-gray-400 p-2 lg:p-4 flex flex-col justify-between">
+					<aside className="w-full h-max min-h-[350px]  xl:w-[45%] border-2 border-gray-400 p-2 lg:p-4 flex flex-col justify-between">
 						<div className="">
 							<h6 className="w-full text-lg font-bold text-center md:text-xl 2xl:text-3xl">
 								Product ID: {formatAdId(result.data?.id)}

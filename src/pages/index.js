@@ -5,11 +5,14 @@ export { default as AdDetail } from './Profile/Adverts/AdDetails';
 export { default as AboutUs } from './AboutUs';
 export { default as BoonfuMedia } from './BoonfuMedia';
 export { default as Checkout } from './Checkout';
+export { default as Delivery } from './Checkout/Delivery';
+export { default as Pickup } from './Checkout/PickUp';
 export { default as ContactUs } from './ContactUs';
 export { default as Deposit } from './Account/Deposit';
 export { default as GrabFlyer } from './Grabs/Flyer';
 export { default as Grabs } from './Grabs';
 export { default as GrabRegister } from './Grabs/Register';
+export { default as GrabPaymentSuccess } from './Checkout/PaymentSuccess';
 export { default as GrabHome } from './Grabs/Home';
 export { default as GrabProfile } from './Grabs/Profile';
 export { default as GrabProducts } from './Grabs/Products';
@@ -37,6 +40,13 @@ export { default as VerifyMail } from './auth/VerifyMail';
 export { default as ResetPassword } from './auth/ResetPassword';
 export { default as Logout } from './auth/Logout';
 export { default as ReverifyEmail } from './auth/ReverifyEmail';
+
+// logistics
+export { default as LogisticSignup } from './Logistics/Signup';
+export { default as LogisticLogin } from './Logistics/Login';
+export { default as LogisticDashboard } from './Logistics/Dashboard';
+export { default as LogisticOrders } from './Logistics/Orders';
+export { default as LogisticOrdersNew } from './Logistics/Orders/New';
 
 //dashboard
 export { default as Performance } from './Dashboard/Performance';

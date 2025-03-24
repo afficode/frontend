@@ -36,7 +36,8 @@ const GrabProducts = () => {
 
 			<div className="flex flex-wrap items-center justify-between gap-6 mt-8 mb-12 ">
 				{result?.grabs?.map((ad) => (
-					<div key={ad.ads_id} className="relative flex mx-auto flex-col w-[250px] bg-white border ">
+					// <Link key={ad.ads_id} to={Approutes.grab.product(ad.ads_id)}>
+					<div className="relative flex mx-auto flex-col w-[250px] bg-white border ">
 						<button>
 							<img src={GrabSave} alt="/" className="absolute w-8 top-2 left-2" />
 						</button>
@@ -55,6 +56,7 @@ const GrabProducts = () => {
 							</Button>
 						</Link>
 					</div>
+					// </Link>
 				))}
 			</div>
 

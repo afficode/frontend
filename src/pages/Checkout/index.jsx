@@ -11,7 +11,6 @@ import { toMoney } from '../../utils';
 
 const Checkout = () => {
 	const [paymentOption, setPaymentOption] = useState('paystack');
-	const { grabber_id, ad_id } = useParams();
 
 	const [stage, setStage] = useState(1);
 
@@ -20,6 +19,7 @@ const Checkout = () => {
 	const [quoteLoading, setQuoteLoading] = useState(false);
 	const [paymentModal, setPaymentModal] = useState(false);
 
+	const { grabber_id, ad_id } = useParams();
 	const { data: result, isLoading } = fetchProduct(ad_id);
 
 	if (isLoading)
@@ -29,7 +29,7 @@ const Checkout = () => {
 			</div>
 		);
 
-	return stage !== 2 ? (
+	return (
 		<section className="mx-6 my-4">
 			{deliveryMode === 'true' ? (
 				<div className="space-y-6">
@@ -61,11 +61,22 @@ const Checkout = () => {
 											<p>Service: Boonfu delivery</p>
 											<p>Type: Express delivery (Same day)</p>
 											<p className="flex items-center gap-2 font-semibold text-primary mt-2">
-												Get a Quote <img src={ArrowScrollDown} alt="arrow down" className="w-4" />
+												Pay to Get a Quote <img src={ArrowScrollDown} alt="arrow down" className="w-4" />
 											</p>
 										</div>
 									</div>
 								</div>
+							</div>
+
+							<div className=" p-3 max-w-[300px] ">
+								<Button
+									variant={'primary'}
+									size={'small'}
+									className=" w-full"
+									onClick={() => setPaymentModal(true)}
+								>
+									Pay
+								</Button>
 							</div>
 						</section>
 
@@ -158,17 +169,6 @@ const Checkout = () => {
 									</div>
 								</div>
 							</section>
-
-							{/* Payment method */}
-							{/* <PaymentOption
-								paymentOption={paymentOption}
-								setPaymentOption={setPaymentOption}
-								inputValue={inputValue}
-								setInputValue={setInputValue}
-								setCardType={setCardType}
-								cardType={cardType}
-								formikCard={formikCard}
-							/> */}
 						</div>
 
 						{/* right container  */}
@@ -228,12 +228,9 @@ const Checkout = () => {
 					result={result}
 					paymentOption={paymentOption}
 					setPaymentOption={setPaymentOption}
-					setStage={setStage}
 				/>
 			</Modal>
 		</section>
-	) : (
-		<PaymentSuccess grabber_id={grabber_id} ad_id={ad_id} ad={result} />
 	);
 };
 

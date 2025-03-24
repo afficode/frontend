@@ -1,14 +1,20 @@
 import { toMoney } from '../../../utils';
 import { Button } from '../../../ui';
-import { useEscrow, useNotify } from '../../../hooks';
-import { useParams } from 'react-router-dom';
+import { useEscrow, useGetOrders, useNotify } from '../../../hooks';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import useAuth from '../../../context/UserContext';
+import { useState } from 'react';
 
-const PaymentOption = ({ result, paymentOption, setPaymentOption, setStage }) => {
+const PaymentOption = ({ result, setStage }) => {
 	const { mutate: pay, isLoading } = useEscrow();
+
+	const [paymentOption, setPaymentOption] = useState('paystack');
 
 	const { grabber_id, ad_id } = useParams();
 	const { user } = useAuth();
+	const { pathname } = useLocation();
+
+	const escrow_type = pathname.split('/')[2];
 
 	// console.log(user);
 
@@ -24,13 +30,15 @@ const PaymentOption = ({ result, paymentOption, setPaymentOption, setStage }) =>
 				payment_method: paymentOption === 'paystack' ? 'paystack' : 'wallet',
 				stage: 'init',
 				callback_url: 'https://boonfu.site/my-account/payment-success',
+				escrow_type: escrow_type === 'delivery' ? 'boonfu_delivery' : 'self_pickup',
 			},
 			{
 				onSuccess: (data) => {
 					console.log(data);
 
 					notify(data?.message, 'success');
-					setStage(2);
+					window.location.replace(data?.url);
+					// setStage(2);
 				},
 				onError: (error) => {
 					console.log(error);

@@ -8,7 +8,6 @@ import { Button } from 'flowbite-react';
 import { RegistrationHook } from '../../hooks/AuthHook';
 import { SpinnerSkeleton, Spinner } from '../../components';
 import { useNotify, useStates } from '../../hooks';
-import Select from '../../components/FormComponents/Select';
 import { toSelectOptions } from '../../utils';
 
 const Register = ({ id }) => {
