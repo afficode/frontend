@@ -155,9 +155,11 @@ const Action = ({ isGeneral, ad }) => {
 
 									<div className="mb-2 space-y-3">
 										<Link
-											to={`${Approutes.useCheckout(grabber_id, ad_id)}?delivery=${
-												formData.delivery_option === 'delivery' ? true : false
-											}`}
+											to={
+												formData.delivery_option === 'delivery'
+													? Approutes.checkout.useDelivery(grabber_id, ad_id)
+													: Approutes.checkout.usePickup(grabber_id, ad_id)
+											}
 										>
 											<Button
 												disabled={formData.delivery_option === '' ? true : false}

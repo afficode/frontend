@@ -3817,6 +3817,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 
 	const fields = categoryFields[categoryName] || [];
 	const [priceValue, setPriceValue] = useState(null);
+	const [address, setAddress] = useState('');
 
 	//rendering form fields based on category
 	const renderFields =
@@ -3833,6 +3834,8 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				options={field.options}
 				required={field.required}
 				price={priceValue}
+				address={address}
+				setAddress={setAddress}
 				subCat={
 					selectedVehicleCategory ||
 					selectedPropertyCategory ||
@@ -3884,6 +3887,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			state_id: parseInt(values.state_id),
 			lga_id: parseInt(values.lga_id),
 			images: images,
+			address: address,
 		};
 
 		mutate(formData, {

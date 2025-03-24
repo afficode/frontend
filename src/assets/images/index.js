@@ -10,6 +10,7 @@ export { default as HairDryer } from './hairDryer.png';
 export { default as House } from './house.png';
 export { default as InspectionImage } from './inspectionImage.png';
 export { default as ImageUpload } from './imageUpload.png';
+export { default as LogisticsSignup } from './LogisticsSignup.png';
 export { default as KitchenTools } from './kitchenTools.png';
 export { default as ManSmiling } from './manSmiling.png';
 export { default as Mastercard } from './mastercard.png';

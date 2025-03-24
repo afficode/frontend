@@ -1,17 +1,18 @@
 import { Coin } from '../../assets/images';
 import { InfoYellow, Naira } from '../../assets/svgs';
 import { Field } from 'formik';
-import { Button } from '../../ui';
+import { Button, InputGroup, Modal } from '../../ui';
 import { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { grabbableCategories, inspectableCategories } from '../../constants/Category';
 import { getCommission, toMoney } from '../../utils';
 
 const AdFeatures = (props) => {
-	const { name, price, subCat, ...rest } = props;
+	const { name, price, subCat, address, setAddress, ...rest } = props;
 	const [showGrab, setShowGrab] = useState(false);
 	const { hash } = useLocation();
 	const { categoryId } = useParams();
+	const [grabModal, setGrabModal] = useState(false);
 
 	const { boonfuCommission, grabberCommission } = getCommission(price);
 
@@ -23,6 +24,10 @@ const AdFeatures = (props) => {
 			}
 		}
 	}, [hash]);
+
+	const handleAddressChange = (e) => {
+		setAddress(e.target.value);
+	};
 
 	return (
 		<div id="post-package" className="scroll-mt-[100px] bg-white py-8 my-4">
@@ -134,8 +139,67 @@ const AdFeatures = (props) => {
 														value={option.value}
 														checked={option.value === field.value}
 														className={``}
+														onClick={option.value === '3' ? () => setGrabModal(true) : () => setGrabModal(false)}
 													/>
 													<label htmlFor={option.value}>{option.key}</label>
+
+													{option.value === '3' && (
+														<Modal
+															isOpen={grabModal}
+															setIsOpen={setGrabModal}
+															padding={false}
+															className={'bg-secondary max-w-fit px-4'}
+															modalHeader={false}
+														>
+															<div className=" text-black space-y-3">
+																<h3>Grab Feature</h3>
+
+																<p>
+																	The Grab Feature is a secure escrow system where the platform holds payment until
+																	the buyer confirms satisfactory pick-up or delivery of the item. Sellers provide
+																	the pick-up location in advance (belwo), ensuring transparency and efficiency. Once
+																	the buyer approves the transaction, funds are released to the seller, offering
+																	peace of mind for buyers and guaranteed payments for sellers. This feature builds
+																	trust, streamlines transactions and enhances security for all parties involved.
+																</p>
+
+																<form autoComplete="off" className="flex flex-col space-y-2">
+																	<label htmlFor="seller_address" className="flex flex-col space-y-1 font-medium">
+																		<span className="flex items-center ">Address of item pick up</span>
+																		<InputGroup
+																			type="text"
+																			name="address"
+																			id="address"
+																			autoComplete={'off'}
+																			className={'w-full '}
+																			required
+																			value={address}
+																			onChange={handleAddressChange}
+																		/>
+																	</label>
+																	{/* <label htmlFor="seller_address" className="flex flex-col space-y-1 font-medium">
+																		<span className="flex items-center ">City</span>
+																		<InputGroup
+																			type="text"
+																			name="city"
+																			id="city"
+																			autoComplete={'off'}
+																			className={'w-full '}
+																			required
+																			// value={quoteFormData.seller_address}
+																			// onChange={handleQuoteFormChange}
+																		/>
+																	</label> */}
+
+																	<div className="w-full flex items-end justify-end pt-4">
+																		<Button variant={'primary'} size={'small'}>
+																			Submit to continue
+																		</Button>
+																	</div>
+																</form>
+															</div>
+														</Modal>
+													)}
 												</div>
 											);
 										});
@@ -207,7 +271,7 @@ const AdFeatures = (props) => {
 										</span>
 										<span className="flex items-center gap-1 border-2 border-primary p-2 w-full font-bold text-xl">
 											<img src={Naira} alt="/" />
-											{grabberCommission && toMoney(grabberCommission)}
+											{boonfuCommission && toMoney(boonfuCommission)}
 										</span>
 									</div>
 								</div>

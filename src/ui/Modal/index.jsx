@@ -1,3 +1,4 @@
+import ReactDom from 'react-dom';
 import { useEffect } from 'react';
 import { useRef } from 'react';
 import { ImCancelCircle } from 'react-icons/im';
@@ -31,7 +32,7 @@ const Modal = ({
 		};
 	}, [isOpen, setIsOpen]);
 
-	return (
+	return ReactDom.createPortal(
 		<div
 			className={`fixed inset-0 z-[2010] bg-primary/50 h-full w-full flex items-center justify-center 
       ${
@@ -64,7 +65,8 @@ const Modal = ({
 
 				<div className={`modal-body relative overflow-auto py-4  `}>{children}</div>
 			</div>
-		</div>
+		</div>,
+		document.getElementById('portal')
 	);
 };
 

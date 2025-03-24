@@ -53,8 +53,16 @@ import {
 	AdDetail,
 	TransactionActivity,
 	RefundForm,
+	GrabPaymentSuccess,
+	Delivery,
+	Pickup,
+	LogisticSignup,
+	LogisticLogin,
+	LogisticOrders,
+	LogisticDashboard,
+	LogisticOrdersNew,
 } from './pages';
-import { AppLayout, DashboardLayout } from './layout';
+import { AppLayout, DashboardLayout, LogisticsLayout } from './layout';
 import { Approutes } from './constants';
 import { ToastContainer } from 'react-toastify';
 import { AccountHistory, RequireAuth, Success } from './components';
@@ -158,7 +166,9 @@ function App() {
 							element={<GrabbedProduct />}
 						/>
 						<Route path={Approutes.grab.grabProduct(':ad_id')} element={<GrabbedProduct />} />
-						<Route path={Approutes.checkout} element={<Checkout />} />
+						<Route path={Approutes.checkout.checkout} element={<Checkout />} />
+						<Route path={Approutes.checkout.delivery} element={<Delivery />} />
+						<Route path={Approutes.checkout.pickup} element={<Pickup />} />
 						<Route path={Approutes.grab.inspectionLog} element={<InspectionLog />} />
 						<Route path={Approutes.welcome} element={<Welcome />} />
 						<Route path={`${Approutes.postDecision}`} element={<PostDecision />} />
@@ -167,6 +177,7 @@ function App() {
 						<Route path={`${Approutes.postSuccess}/:adId`} element={<PostSuccess />} />
 						<Route path={Approutes.tokenSuccess} element={<Success />} />
 						<Route path={Approutes.account.paymentSuccess} element={<PaymentSuccess />} />
+						<Route path={Approutes.grab.paymentSuccess} element={<GrabPaymentSuccess />} />
 						<Route path={Approutes.account.initial} element={<AccountLayout />}>
 							<Route path={Approutes.account.initial} element={<AccountHistory />} />
 							<Route path={Approutes.account.deposit} element={<Deposit />} />
@@ -187,6 +198,16 @@ function App() {
 							<Route path={Approutes.profile.saved} element={<SavedItems />} />
 							<Route path={Approutes.profile.transactions} element={<TransactionActivity />} />
 						</Route>
+					</Route>
+				</Route>
+
+				{/* Logistic routes */}
+				<Route path={Approutes.logistics.signup} element={<LogisticSignup />} />
+				<Route path={Approutes.logistics.login} element={<LogisticLogin />} />
+				<Route element={<LogisticsLayout />}>
+					<Route path={Approutes.logistics.dashboard} element={<LogisticDashboard />} />
+					<Route path={Approutes.logistics.orders.new} element={<LogisticOrders />}>
+						<Route path={Approutes.logistics.orders.new} element={<LogisticOrdersNew />} />
 					</Route>
 				</Route>
 
