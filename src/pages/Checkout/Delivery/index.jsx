@@ -22,8 +22,6 @@ const Delivery = () => {
 	const [quoteLoading, setQuoteLoading] = useState(false);
 	const orderId = uuidv4();
 
-	console.log(result);
-
 	useEffect(() => {}, []);
 
 	const { mutate, isLoading: orderLoading } = useSendOrder();
@@ -52,6 +50,8 @@ const Delivery = () => {
 	const handleOrderSubmit = (e) => {
 		e.preventDefault();
 		console.log(orderData);
+
+		if (!orderData.state || !orderData.buyer_address) return;
 
 		const { state, ...rest } = orderData;
 
@@ -82,68 +82,43 @@ const Delivery = () => {
 
 	return (
 		<section className="mx-6 my-4">
-			{stage !== 2 ? (
-				<div className="space-y-6">
-					<h3 className="py-4 text-center">Place Order review page</h3>
+			<div className="space-y-6">
+				<h3 className="py-4 text-center">Place Order review page</h3>
 
-					<div className="max-w-[720px] mx-auto space-y-6">
-						{/* Review item */}
-						<section className="border border-black">
-							<h5 className="py-2 px-4 font-bold bg-gray-300">Review Item</h5>
+				<div className="max-w-[720px] mx-auto space-y-6">
+					{/* Review item */}
+					<section className="border border-black">
+						<h5 className="py-2 px-4 font-bold bg-gray-300">Review Item</h5>
 
-							<div className="px-4 pt-2 pb-6">
-								<h6 className="text-black/60 py-2">Grabber ID: {grabber_id}</h6>
-								<div className="flex gap-6">
-									<img
-										src={result?.data?.images[0]?.path}
-										alt={result?.data?.images[0]?.filename}
-										className="w-16 h-16"
-									/>
-									<div className="flex flex-col gap-6">
-										<div>
-											<p className="uppercase">
-												{result?.data.title} {result?.data?.color && `(, ${result?.data?.color})`}
-											</p>
-											<p className="font-bold">{toMoney(result?.data?.price)}</p>
-										</div>
+						<div className="px-4 pt-2 pb-6">
+							<h6 className="text-black/60 py-2">Grabber ID: {grabber_id}</h6>
+							<div className="flex gap-6">
+								<img
+									src={result?.data?.images[0]?.path}
+									alt={result?.data?.images[0]?.filename}
+									className="w-16 h-16"
+								/>
+								<div className="flex flex-col gap-6">
+									<div>
+										<p className="uppercase">
+											{result?.data.title} {result?.data?.color && `(, ${result?.data?.color})`}
+										</p>
+										<p className="font-bold">{toMoney(result?.data?.price)}</p>
+									</div>
 
-										<div>
-											<h6 className="font-bold mb-1">Delivery</h6>
-											<p>Service: Boonfu delivery</p>
-											<p>Type: Express delivery (Same day)</p>
-											<p className="flex items-center gap-2 font-semibold text-primary mt-2">
-												Pay to Get a Quote <img src={ArrowScrollDown} alt="arrow down" className="w-4" />
-											</p>
-										</div>
+									<div>
+										<h6 className="font-bold mb-1">Delivery</h6>
+										<p>Service: Boonfu delivery</p>
+										<p>Type: Express delivery (Same day)</p>
+										<p className="flex items-center gap-2 font-semibold text-primary mt-2">
+											Get a Quote <img src={ArrowScrollDown} alt="arrow down" className="w-4" />
+										</p>
 									</div>
 								</div>
 							</div>
+						</div>
+					</section>
 
-							<div className=" p-3 max-w-[300px] ">
-								<Button
-									variant={'primary'}
-									size={'small'}
-									className=" w-full"
-									onClick={() => setPaymentModal(true)}
-								>
-									Pay
-								</Button>
-							</div>
-						</section>
-
-						{/* Quote form  */}
-						{/* <Delivery setQuoteLoading={setQuoteLoading} /> */}
-
-						{/* Delivery Quote */}
-					</div>
-
-					<div className="flex items-center  gap-2">
-						<img src={LogIcon} alt="Quote log" className="w-4 h-4" />
-						<p className="text-primary ">View Quote Log page</p>
-					</div>
-				</div>
-			) : (
-				<div className="max-w-[720px] mx-auto py-6">
 					<div className="bg-secondary p-4">
 						<div className="mb-6 space-y-1">
 							<p className="italic">Thanks for choosing Boonfu delivery service.</p>
@@ -182,6 +157,7 @@ const Delivery = () => {
 									placeholder="Lekki Phase 1"
 									value={orderData.buyer_address}
 									onChange={handleOrderFormChange}
+									required
 								/>
 							</label>
 							<label htmlFor="state" className="flex flex-col font-medium">
@@ -195,6 +171,7 @@ const Delivery = () => {
 									optionLists={statesOptions}
 									value={orderData.state}
 									onChange={handleOrderFormChange}
+									required
 								/>
 							</label>
 
@@ -243,6 +220,7 @@ const Delivery = () => {
 									onChange={handleOrderFormChange}
 									rows={4}
 									cols={10}
+									required
 								/>
 							</label>
 
@@ -258,6 +236,12 @@ const Delivery = () => {
 						</form>
 					</div>
 
+					{/* Delivery Quote */}
+				</div>
+			</div>
+
+			{stage === 2 && (
+				<div className="max-w-[720px] mx-auto py-6">
 					{/* Delivery Quote */}
 					<div className="bg-primary p-4 text-white w-[300px] mx-auto">
 						<h6 className="text-center">Your delivery quote</h6>
@@ -281,13 +265,13 @@ const Delivery = () => {
 
 						<div className="flex items-center  justify-center gap-2 my-2 max-w-full">
 							{/* <Button
-										variant={'grey'}
-										size={'small'}
-										onClick={() => s(false)}
-										className="flex-1  !px-2"
-									>
-										Back
-									</Button> */}
+									variant={'grey'}
+									size={'small'}
+									onClick={() => s(false)}
+									className="flex-1  !px-2"
+								>
+									Back
+								</Button> */}
 							<Button
 								variant={'secondary'}
 								size={'small'}
@@ -300,6 +284,11 @@ const Delivery = () => {
 					</div>
 				</div>
 			)}
+
+			<div className="flex items-center  gap-2">
+				<img src={LogIcon} alt="Quote log" className="w-4 h-4" />
+				<p className="text-primary ">View Quote Log page</p>
+			</div>
 
 			<Modal
 				isOpen={quoteLoading}

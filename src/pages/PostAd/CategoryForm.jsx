@@ -67,6 +67,7 @@ import {
 import { useLocation, useNavigate } from 'react-router-dom';
 import { encodeProductId } from '../../utils/dataManipulations';
 import { Coin } from '../../assets/images';
+import { inspectableCategories } from '../../constants/Category';
 
 const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 	const [selectedHealthCategory, setSelectedHealthCategory] = useState(null);
@@ -4060,18 +4061,40 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 						{renderFields ? renderFields : <div className="text-center">No fields to display</div>}
 
 						{/* submit button  */}
-						<Button
-							onClick={() => setPaymentWindow(true)}
-							type="button"
-							loading={formik.isSubmitting}
-							variant="primary"
-							size="full"
-							// token < adToken ||
-							disabled={!(formik.isValid && formik.dirty) || formik.values.feature === '-1'}
-							className={'mt-10 text-lg font-bold rounded-md'}
-						>
-							Post My Ad
-						</Button>
+						{inspectableCategories.includes(
+							parseInt(
+								selectedVehicleCategory ||
+									selectedPropertyCategory ||
+									selectedAgricultureCategory ||
+									selectedMotorbikeCategory
+							)
+						) ? (
+							<Button
+								onClick={() => setPaymentWindow(true)}
+								type="button"
+								loading={formik.isSubmitting}
+								variant="primary"
+								size="full"
+								// token < adToken ||
+								disabled={!(formik.isValid && formik.dirty) || formik.values.feature === '-1'}
+								className={'mt-10 text-lg font-bold rounded-md'}
+							>
+								Post My Ad
+							</Button>
+						) : (
+							<Button
+								onClick={formik.handleSubmit}
+								type="button"
+								loading={formik.isSubmitting}
+								variant="primary"
+								size="full"
+								// token < adToken ||
+								disabled={!(formik.isValid && formik.dirty) || formik.values.feature === '-1'}
+								className={'mt-10 text-lg font-bold rounded-md'}
+							>
+								Post My Ad
+							</Button>
+						)}
 
 						{/* terms and conditions */}
 						<p className="mt-4 text-center">
@@ -4155,8 +4178,13 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 									<h6>Payment total includes VAT</h6>
 								</div>
 
-								<Button loading={formik.isSubmitting} variant={'primary'} type="submit">
-									Pay Now
+								<Button
+									onClick={formik.handleSubmit}
+									loading={formik.isSubmitting}
+									variant={'primary'}
+									type="submit"
+								>
+									Proceed
 								</Button>
 							</div>
 						</Modal>
