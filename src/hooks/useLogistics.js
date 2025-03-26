@@ -1,16 +1,23 @@
 import axios from 'axios';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import { backendLink } from '../constants';
 
-export const useLogisticsSignup = () => {
-	const register = (data) =>
-		axios.post(`${backendLink}logistics/register`, data).then((res) => res?.data);
+export const useLogisticsRegister = () => {
+	const register = (data) => axios.post(`${backendLink}logistic/register`, data).then((res) => res?.data);
 
 	return useMutation(['logistics-register'], register);
 };
 
 export const useLogisticsLogin = () => {
-	const login = (data) => axios.post(`${backendLink}logistics/login`, data).then((res) => res?.data);
+	const queryClient = useQueryClient();
 
-	return useMutation(['logistics-login'], login);
+	return useMutation({
+		mutationFn: async (data) => {
+			const response = await axios.post(`${backendLink}logistic/login`, data);
+			return response.data;
+		},
+		onSuccess: () => {
+			queryClient.invalidateQueries(['logistics']);
+		},
+	});
 };
