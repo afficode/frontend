@@ -49,7 +49,8 @@ const Delivery = () => {
 
 	const handleOrderSubmit = (e) => {
 		e.preventDefault();
-		console.log(orderData);
+
+		if (!orderData.state || !orderData.buyer_address) return;
 
 		if (!orderData.state || !orderData.buyer_address) return;
 
@@ -62,12 +63,10 @@ const Delivery = () => {
 
 		mutate(formData, {
 			onSuccess: (data) => {
-				console.log(data);
 				notify(data?.message, 'success');
 				setQuoteLoading(true);
 			},
 			onError: (error) => {
-				console.log(error);
 				notify(error?.response?.data?.message, 'error');
 			},
 		});
@@ -260,8 +259,6 @@ const Delivery = () => {
 
 							<img src={DeliveryQuote} alt="delivery quote" className="w-16" />
 						</div>
-
-						<p className="border-y border-white py-1 text-lg my-4 font-semibold">Cost : #3,500</p>
 
 						<div className="flex items-center  justify-center gap-2 my-2 max-w-full">
 							{/* <Button
