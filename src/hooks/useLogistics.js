@@ -3,7 +3,8 @@ import { useMutation, useQueryClient } from 'react-query';
 import { backendLink } from '../constants';
 
 export const useLogisticsRegister = () => {
-	const register = (data) => axios.post(`${backendLink}logistic/register`, data).then((res) => res?.data);
+	const register = (data) =>
+		axios.post(`${backendLink}logistic/register`, data).then((res) => res?.data);
 
 	return useMutation(['logistics-register'], register);
 };
@@ -19,5 +20,12 @@ export const useLogisticsLogin = () => {
 		onSuccess: () => {
 			queryClient.invalidateQueries(['logistics']);
 		},
+	});
+};
+
+export const useGetOrders = () => {
+	return useQuery('orders', async () => {
+		const response = await axios.get(`${backendLink}logistic/orders`);
+		return response.data;
 	});
 };
