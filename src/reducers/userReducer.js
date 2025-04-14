@@ -12,6 +12,7 @@ export const initialState = {
 	isBlocked: false,
 	isAdmin: false,
 	isGrabber: false,
+	isLogistics: false,
 	//grabberBlocked: false,
 };
 
@@ -29,50 +30,63 @@ export const userReducerOptions = {
 
 export const setUpUser = (payload, state) => {
 	let userData = { ...state, ...payload?.user };
-	// console.log(userData)
-	if (payload?.user?.verified === '1') {
-		userData = {
-			...userData,
-			isLogin: true,
-		};
+	if (Object.keys(userData).includes('company_name')) {
+		// implement logistics
+		if (payload?.user?.verified == '1') {
+			userData = {
+				...userData,
+				isLogin: true,
+				isLogistics: true,
+			};
+		}
+	} else {
+		if (payload?.user?.verified === '1') {
+			userData = {
+				...userData,
+				isLogin: true,
+			};
+		}
+
+		if (payload?.user?.isAdmin === '1') {
+			userData = {
+				...userData,
+				isAdmin: true,
+			};
+		}
+		if (payload?.user?.grabber?.id) {
+			userData = {
+				...userData,
+				isGrabber: true,
+			};
+		} else {
+			userData = {
+				...userData,
+				isGrabber: false,
+			};
+		}
+
+		if (payload?.user?.grabber?.isActive === '0' || payload?.user?.grabber === null) {
+			userData = {
+				...userData,
+				grabberActive: false,
+			};
+		}
+
+		if (payload?.user?.grabber?.isActive === '1') {
+			userData = {
+				...userData,
+				grabberActive: true,
+			};
+		}
 	}
+
 	if (payload?.user?.blocked === '1') {
 		userData = {
 			...userData,
 			isBlocked: true,
 		};
 	}
-	if (payload?.user?.isAdmin === '1') {
-		userData = {
-			...userData,
-			isAdmin: true,
-		};
-	}
-	if (payload?.user?.grabber?.id) {
-		userData = {
-			...userData,
-			isGrabber: true,
-		};
-	} else {
-		userData = {
-			...userData,
-			isGrabber: false,
-		};
-	}
 
-	if (payload?.user?.grabber?.isActive === '0' || payload?.user?.grabber === null) {
-		userData = {
-			...userData,
-			grabberActive: false,
-		};
-	}
-
-	if (payload?.user?.grabber?.isActive === '1') {
-		userData = {
-			...userData,
-			grabberActive: true,
-		};
-	}
 	return userData;
 };
 

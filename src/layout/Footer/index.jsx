@@ -120,7 +120,7 @@ const Footer = () => {
 							<Link to={Approutes.grab.home}>
 								<li className={listStyles}>Grab System</li>
 							</Link>
-							<Link to={Approutes.logistics.signup}>
+							<Link to={'https://logistic.boonfu.site/'} target="_blank" rel="noreferrer">
 								<li className={listStyles}>Logistics Services</li>
 							</Link>
 							<Link to={Approutes.underConstruction}>
@@ -131,9 +131,9 @@ const Footer = () => {
 
 					{/* copyright */}
 					<p className="text-center md:text-start">
-						&copy; Copyright 2024{' '}
+						&copy; Copyright 2025{' '}
 						<b>
-							<Link to={'/'}>Boonfu.ng</Link>
+							<Link to={'/'}>Boonfu.site</Link>
 						</b>
 						. All rights reserved.
 					</p>

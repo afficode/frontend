@@ -8,6 +8,13 @@ export const useEscrow = () => {
 	return useMutation(['escrow-pay'], pay);
 };
 
+export const useQuotedPay = (id) => {
+	const pay = (data) =>
+		privateAxios.post(`${backendLink}order/pay${id}`, data).then((res) => res?.data);
+
+	return useMutation(['quoted-pay'], pay);
+};
+
 export const useSendOrder = () => {
 	const sendOrder = (data) =>
 		privateAxios.post(`${backendLink}order`, data).then((res) => res?.data);
@@ -22,5 +29,15 @@ export const useGetOrders = () => {
 		refetchOnWindowFocus: false,
 		refetchOnMount: false,
 		refetchInterval: false,
+	});
+};
+
+export const useGetOrder = (id) => {
+	const getOrder = () => privateAxios.get(`${backendLink}order/${id}`).then((res) => res?.data);
+
+	return useQuery(['get-order', id], getOrder, {
+		refetchInterval: false,
+		refetchOnWindowFocus: false,
+		refetchIntervalInBackground: false,
 	});
 };
