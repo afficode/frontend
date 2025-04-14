@@ -105,7 +105,7 @@ const WalletDropdown = () => {
 					<div className="flex justify-between px-8">
 						<div className="flex flex-col items-center">
 							<span className="mb-2 text-white/70 ">Total coin(s)</span>
-							<span className="text-lg font-semibold text-white sm:text-xl">{token?.coin.token}</span>
+							<span className="text-lg font-semibold text-white sm:text-xl">{token?.coin?.token}</span>
 						</div>
 
 						<div className="flex flex-col items-center">

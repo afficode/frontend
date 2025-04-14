@@ -41,13 +41,6 @@ export { default as ResetPassword } from './auth/ResetPassword';
 export { default as Logout } from './auth/Logout';
 export { default as ReverifyEmail } from './auth/ReverifyEmail';
 
-// logistics
-export { default as LogisticSignup } from './Logistics/Signup';
-export { default as LogisticLogin } from './Logistics/Login';
-export { default as LogisticDashboard } from './Logistics/Dashboard';
-export { default as LogisticOrders } from './Logistics/Orders';
-export { default as LogisticOrdersNew } from './Logistics/Orders/New';
-
 //dashboard
 export { default as Performance } from './Dashboard/Performance';
 export { default as Profile } from './Dashboard/Profile';

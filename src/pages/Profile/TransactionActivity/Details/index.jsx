@@ -1,12 +1,15 @@
 import { useRef, useState } from 'react';
-import { RedCar } from '../../../../assets/images';
 import { ArrowRightBlue } from '../../../../assets/svgs';
 import { Modal } from '../../../../ui';
 import { TermsAndCondition } from '../../../../components';
+import { toMoney } from '../../../../utils';
+import { format, parseISO } from 'date-fns';
 
-const Details = () => {
+const Details = ({ data }) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const returnRef = useRef(null);
+
+	console.log(data);
 
 	const handleScrollTo = (ref) => {
 		if (!isOpen) {
@@ -24,13 +27,17 @@ const Details = () => {
 			<h4>Details of your order</h4>
 			<div className="flex items-start gap-6 border-b border-black/50 pb-4 max-md:flex-col max-md:items-center">
 				<div className="border border-black/50 rounded-xl w-[372px] h-[260px] p-2">
-					<img src={RedCar} alt="" className="object-contain w-full h-full" />
+					<img
+						src={data?.images ? data?.images[0] : ''}
+						alt={data.title}
+						className="object-contain w-full h-full"
+					/>
 				</div>
 
 				<div className="h-full w-full flex flex-col gap-4">
 					<div className="flex flex-col items-start justify-end self-end max-md:self-center max-md:items-center">
 						<p>Order number: 0127846253HD </p>
-						<p>Order placed: 10.11.2025</p>
+						<p>Order placed: {format(parseISO(data?.created_at), 'd MMMM ')}</p>
 					</div>
 
 					<div className="flex flex-col gap-4 justify-between">
@@ -69,25 +76,36 @@ const Details = () => {
 			<div className="space-y-4 border-b border-black/50 py-2 pb-4">
 				<div className="grid grid-cols-[repeat(auto-fit,_minmax(170px,_1fr))] gap-4">
 					<div className="space-y-2">
-						<p>JBL Necklace pod</p>
-						<p>#153,000.00</p>
+						<p className="capitalize">{data.title}</p>
+						<div className="flex items-center gap-1">
+							<p>Ad price:</p>
+							<p>₦{toMoney(data.ad_price)}</p>
+						</div>
+						{data?.price && (
+							<div className="flex items-center gap-1">
+								<p>Quoted price:</p>
+								<p>₦{toMoney(data.price)}</p>
+							</div>
+						)}
 					</div>
 
 					<div>
 						<h5 className="font-semibold text-lg">Deliver to:</h5>
 
 						<p>
-							<span className="text-primary italic font-normal">Mr Kelly Cole.</span> <br />
-							Plot 4, Akibu street, off freedom way, Lekki 1
+							<span className="text-primary italic font-normal">Mr {data.buyer_name}.</span> <br />
+							{data.buyer_address}, {data.buyer_state}
 						</p>
 					</div>
 
-					<div className="flex flex-col items-end gap-1">
-						<p className="">Delivery Note</p>
-						<div className="italic shadow-md border border-black/30 p-2">
-							If you knock and no answer kindly drop with security, Kamal.
+					{data.note && (
+						<div className="flex flex-col items-end gap-1">
+							<p className="">Delivery Note</p>
+							<div className="italic shadow-md border border-black/30 p-2">
+								If you knock and no answer kindly drop with security, Kamal.
+							</div>
 						</div>
-					</div>
+					)}
 				</div>
 
 				<button

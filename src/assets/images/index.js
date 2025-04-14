@@ -1,5 +1,6 @@
 export { default as AboutBg } from './aboutBg.png';
 export { default as AffiLogo } from './affiLogo.png';
+export { default as Avatar } from './Avatar.png';
 export { default as BoonfuLogo } from './boonfuLogo.png';
 export { default as Car } from './car.png';
 export { default as CarBlack } from './carBlack.png';
@@ -39,6 +40,7 @@ export { default as Spa } from './spa.png';
 export { default as SportCar } from './sportCar.png';
 export { default as Store } from './store.png';
 export { default as Suzuki } from './suzuki.png';
+export { default as Telephone } from './Telephone.png';
 export { default as Tailor } from './tailor.png';
 export { default as Toyota } from './toyota.png';
 export { default as Vehicles } from './vehicles.png';
