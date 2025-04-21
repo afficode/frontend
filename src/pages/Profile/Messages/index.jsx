@@ -50,9 +50,9 @@ const Messages = () => {
 								<div className="flex w-full gap-2 ">
 									<img
 										src={
-											ad?.image[0]?.filename.startsWith('vehicles') ? noimage : ad?.image[0]?.path || noimage
+											ad?.image[0]?.filename?.startsWith('vehicles') ? noimage : ad?.image[0]?.path || noimage
 										}
-										alt={ad?.image[0].filename}
+										alt={ad?.image[0]?.filename}
 										className="w-[5rem] h-[5.5rem] object-fit rounded-l-lg rounded-b-lg overflow-x-hidden"
 									/>
 									{/* name, ad, last msg  */}

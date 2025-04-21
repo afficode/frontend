@@ -32,7 +32,7 @@ const ChatWindow = ({ chat_id, chat_data, title }) => {
 					<div className="flex gap-2 ">
 						<img
 							src={
-								data?.image[0].filename.startsWith('vehicles') ? noimage : data?.image[0].path || noimage
+								data?.image[0].filename?.startsWith('vehicles') ? noimage : data?.image[0].path || noimage
 							}
 							alt={'/'}
 							className="w-[3rem] h-[3rem]  object-fit rounded-full "
