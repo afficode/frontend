@@ -56,7 +56,10 @@ import {
 	GrabPaymentSuccess,
 	Delivery,
 	Pickup,
+<<<<<<< HEAD
 	SafetyGuides,
+=======
+>>>>>>> e9e94b69ea6be04d634afcde3eb5f27f7fd31f48
 } from './pages';
 import { AppLayout, DashboardLayout } from './layout';
 import { Approutes } from './constants';
