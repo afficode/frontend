@@ -86,8 +86,8 @@ const ContactUs = () => {
 
 						<h6 className="mt-4 font-medium text-black ">Email</h6>
 						<p className="mt-2 text-gray-500 dark:text-gray-400">Our friendly team is here to help.</p>
-						<Link to="mailto:reachaffi@gmail.com">
-							<span className="mt-2 text-sm hover:underline text-primary ">reachaffi@gmail.com</span>
+						<Link to="mailto:myboonfu@gmail.com">
+							<span className="mt-2 text-sm hover:underline text-primary ">myboonfu@gmail.com</span>
 						</Link>
 					</div>
 

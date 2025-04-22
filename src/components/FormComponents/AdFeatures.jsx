@@ -159,18 +159,18 @@ const AdFeatures = (props) => {
 																		/>
 																	</label>
 																	{/* <label htmlFor="seller_address" className="flex flex-col space-y-1 font-medium">
-																		<span className="flex items-center ">City</span>
-																		<InputGroup
-																			type="text"
-																			name="city"
-																			id="city"
-																			autoComplete={'off'}
-																			className={'w-full '}
-																			required
-																			// value={quoteFormData.seller_address}
-																			// onChange={handleQuoteFormChange}
-																		/>
-																	</label> */}
+																	<span className="flex items-center ">City</span>
+																	<InputGroup
+																		type="text"
+																		name="city"
+																		id="city"
+																		autoComplete={'off'}
+																		className={'w-full '}
+																		required
+																		// value={quoteFormData.seller_address}
+																		// onChange={handleQuoteFormChange}
+																	/>
+																</label> */}
 
 																	<div className="w-full flex items-end justify-end pt-4">
 																		<Button variant={'primary'} size={'small'}>
@@ -273,14 +273,14 @@ const featureList = [
 	{
 		key: 'Basic',
 		value: '0',
-		coin: '2.5',
+		coin: '3.5',
 		color: 'bg-secondary text-black',
 		info: 'Basic posting package.',
 	},
 	{
 		key: 'Feature Ad',
 		value: '1',
-		coin: '4.5',
+		coin: '5',
 		color: 'bg-primary text-white',
 		info: 'Each category listing features yours on TOP.',
 	},

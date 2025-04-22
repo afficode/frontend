@@ -63,10 +63,13 @@ const Delivery = () => {
 			state: Number(state),
 		};
 
+		console.log(formData);
+
 		mutate(formData, {
 			onSuccess: (data) => {
 				notify(data?.message, 'success');
 				setQuoteLoading(true);
+				console.log(data);
 			},
 			onError: (error) => {
 				notify(error?.response?.data?.message, 'error');
@@ -316,7 +319,7 @@ const Delivery = () => {
 				modalHeader={false}
 				className={' max-w-[720px] p-0 bg-white'}
 			>
-				<PaymentOption result={result} quotePrice={orderDetails.price} />
+				<PaymentOption result={result} quotePrice={orderDetails?.price} />
 			</Modal>
 		</section>
 	);

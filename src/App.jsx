@@ -56,6 +56,7 @@ import {
 	GrabPaymentSuccess,
 	Delivery,
 	Pickup,
+	SafetyGuides,
 } from './pages';
 import { AppLayout, DashboardLayout } from './layout';
 import { Approutes } from './constants';
@@ -82,6 +83,7 @@ function App() {
 					<Route path={Approutes.home} element={isLogin ? <Welcome /> : <Home />} />
 					<Route path={Approutes.aboutUs} element={<AboutUs />} />
 					<Route path={Approutes.media} element={<BoonfuMedia />} />
+					<Route path={Approutes.safety} element={<SafetyGuides />} />
 					<Route path={Approutes.contactUs} element={<ContactUs />} />
 					<Route path={Approutes.auth.initial} element={<Auth />} />
 					<Route path={Approutes.forgotPassword} element={<ForgotPassword />} />

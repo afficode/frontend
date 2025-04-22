@@ -64,6 +64,7 @@ export const Approutes = {
 	home: '/',
 	logout: '/logout',
 	media: '/boonfu-media',
+	safety: '/safety-guides',
 	playground: '/playground',
 	postAd: '/post-ad',
 	postDecision: '/post-decision',

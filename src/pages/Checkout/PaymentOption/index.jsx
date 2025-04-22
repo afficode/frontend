@@ -1,6 +1,6 @@
 import { toMoney } from '../../../utils';
 import { Button } from '../../../ui';
-import { useEscrow, useGetOrders, useNotify } from '../../../hooks';
+import { useEscrow, useGetOrders, useNotify, useQuotedPay } from '../../../hooks';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import useAuth from '../../../context/UserContext';
 import { useState } from 'react';
@@ -19,35 +19,53 @@ const PaymentOption = ({ result, setStage, quotePrice }) => {
 	// console.log(user);
 
 	const total = Number(result?.data?.price) + quotePrice;
-	// console.log('ad', Number(result?.data?.price));
-	// console.log('quote', quotePrice);
-	// console.log('total', typeof total);
 
 	const notify = useNotify();
 
-	const handlePay = () => {
-		pay(
-			{
-				amount: total.toString(),
-				grabber_id: grabber_id,
-				ad_id: ad_id,
-				user_id: user?.id,
-				payment_method: paymentOption === 'paystack' ? 'paystack' : 'wallet',
-				stage: 'init',
-				callback_url: 'https://boonfu.site/my-account/payment-success',
-				escrow_type: escrow_type === 'delivery' ? 'boonfu_delivery' : 'self_pickup',
-			},
-			{
-				onSuccess: (data) => {
-					notify(data?.message, 'success');
-					window.location.replace(data?.url);
-					// setStage(2);
-				},
-				onError: (error) => {
-					notify(error?.response?.data?.message, 'error');
-				},
-			}
-		);
+	// const { mutateAsync: payEscrow } = useEscrow();
+	// const { mutateAsync: payQuoted } = useQuotedPay();
+
+	const handlePay = async () => {
+		// pay(
+		// 	{
+		// 		amount: total.toString(),
+		// 		grabber_id: grabber_id,
+		// 		ad_id: ad_id,
+		// 		user_id: user?.id,
+		// 		payment_method: paymentOption === 'paystack' ? 'paystack' : 'wallet',
+		// 		stage: 'init',
+		// 		callback_url: 'https://boonfu.site/my-account/payment-success',
+		// 		escrow_type: escrow_type === 'delivery' ? 'boonfu_delivery' : 'self_pickup',
+		// 	},
+		// 	{
+		// 		onSuccess: (data) => {
+		// 			notify(data?.message, 'success');
+		// 			window.location.replace(data?.url);
+		// 			// setStage(2);
+		// 		},
+		// 		onError: (error) => {
+		// 			notify(error?.response?.data?.message, 'error');
+		// 		},
+		// 	}
+		// );
+		// try {
+		// 	const escrowPromise = payEscrow({
+		// 		amount: result?.data?.price,
+		// 		grabber_id,
+		// 		ad_id,
+		// 		user_id: user?.id,
+		// 		payment_method: paymentOption === 'paystack' ? 'paystack' : 'wallet',
+		// 		stage: 'init',
+		// 		callback_url: 'https://boonfu.site/my-account/payment-success',
+		// 		escrow_type: escrow_type === 'delivery' ? 'boonfu_delivery' : 'self_pickup',
+		// 	});
+		// 	const quotedPromise = payQuoted({ price: quotePrice.toString() });
+		// 	const [escrowData, quotedData] = await Promise.all([escrowPromise, quotedPromise]);
+		// 	notify('Both payments successful', 'success');
+		// 	window.location.replace(escrowData?.url); // or any other logic
+		// } catch (error) {
+		// 	notify(error?.response?.data?.message || 'Something went wrong', 'error');
+		// }
 	};
 
 	return (
