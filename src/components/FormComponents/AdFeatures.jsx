@@ -4,7 +4,11 @@ import { Field } from 'formik';
 import { Button, InputGroup, Modal } from '../../ui';
 import { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
-import { grabbableCategories, inspectableCategories } from '../../constants/Category';
+import {
+	grabbableCategories,
+	inspectableCategories,
+	pickupCategories,
+} from '../../constants/Category';
 import { getCommission, toMoney } from '../../utils';
 
 const AdFeatures = (props) => {
@@ -14,7 +18,7 @@ const AdFeatures = (props) => {
 	const { categoryId } = useParams();
 	const [grabModal, setGrabModal] = useState(false);
 
-	const { boonfuCommission, grabberCommission } = getCommission(price);
+	const { boonfuCommission } = getCommission(price);
 
 	useEffect(() => {
 		if (hash) {
@@ -120,11 +124,15 @@ const AdFeatures = (props) => {
 														value={option.value}
 														checked={option.value === field.value}
 														className={``}
-														onClick={option.value === '3' ? () => setGrabModal(true) : () => setGrabModal(false)}
+														onClick={
+															option.value === '3' && !pickupCategories.includes(parseInt(subCat))
+																? () => setGrabModal(true)
+																: () => setGrabModal(false)
+														}
 													/>
 													<label htmlFor={option.value}>{option.key}</label>
 
-													{option.value === '3' && (
+													{option.value === '3' && !pickupCategories.includes(parseInt(subCat)) && (
 														<Modal
 															isOpen={grabModal}
 															setIsOpen={setGrabModal}

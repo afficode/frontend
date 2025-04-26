@@ -174,7 +174,7 @@ function App() {
 						<Route path={`${Approutes.postSuccess}/:adId`} element={<PostSuccess />} />
 						<Route path={Approutes.tokenSuccess} element={<Success />} />
 						<Route path={Approutes.account.paymentSuccess} element={<PaymentSuccess />} />
-						<Route path={Approutes.grab.paymentSuccess} element={<GrabPaymentSuccess />} />
+						<Route path={Approutes.checkout.paymentSuccess} element={<GrabPaymentSuccess />} />
 						<Route path={Approutes.account.initial} element={<AccountLayout />}>
 							<Route path={Approutes.account.initial} element={<AccountHistory />} />
 							<Route path={Approutes.account.deposit} element={<Deposit />} />

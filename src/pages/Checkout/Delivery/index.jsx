@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { Button, InputGroup, Modal } from '../../../ui';
-import { fetchProduct, useGetOrders, useNotify, useSendOrder, useStates } from '../../../hooks';
+import { fetchProduct, useCheckOrder, useNotify, useSendOrder, useStates } from '../../../hooks';
 import { toMoney, toSelectOptions } from '../../../utils';
 import { useParams } from 'react-router-dom';
 import { SpinnerSkeleton } from '../../../components';
@@ -8,6 +8,7 @@ import { ArrowScrollDown, DeliveryQuote, LogIcon } from '../../../assets/svgs';
 import PaymentOption from '../PaymentOption';
 import useAuth from '../../../context/UserContext';
 import { v4 as uuidv4 } from 'uuid';
+import { Approutes } from '../../../constants';
 
 const Delivery = () => {
 	const { data: states } = useStates();
@@ -21,12 +22,19 @@ const Delivery = () => {
 	const [quoteLoading, setQuoteLoading] = useState(false);
 	const orderId = uuidv4();
 
-	const { data: userOrders, isLoading: getOrderLoading } = useGetOrders();
-	const orderDetails = userOrders?.orders?.find((order) => order.ad_id === Number(ad_id));
+	const { data: checkOrder, isLoading: checking } = useCheckOrder(ad_id);
+
+	console.log('checkOrder', checkOrder);
 
 	const stage = useMemo(() => {
-		return orderDetails?.price ? 2 : 1;
-	}, [orderDetails?.price]);
+		if (checkOrder?.ad_orders[0]?.price && checkOrder?.ad_orders[0]?.paid === 0) {
+			return 2;
+		} else if (checkOrder?.ad_orders[0]?.price && checkOrder?.ad_orders[0]?.paid === 1) {
+			return 3;
+		} else {
+			return 1;
+		}
+	}, [checkOrder]);
 
 	const { mutate, isLoading: orderLoading } = useSendOrder();
 
@@ -36,6 +44,7 @@ const Delivery = () => {
 		buyer_id: user?.id,
 		seller_id: result?.data?.user_id ?? result?.data?.user_id,
 		ad_id: Number(ad_id) ?? Number(ad_id),
+		grabber_id: Number(grabber_id) ?? Number(grabber_id),
 		buyer_address: '',
 		state: '',
 		// delivery_type: '',
@@ -77,7 +86,7 @@ const Delivery = () => {
 		});
 	};
 
-	if (isLoading || getOrderLoading)
+	if (isLoading || checking)
 		return (
 			<div className="h-screen">
 				<SpinnerSkeleton />
@@ -244,7 +253,7 @@ const Delivery = () => {
 						{/* Delivery Quote */}
 					</div>
 				</div>
-			) : (
+			) : stage === 2 ? (
 				<div className="max-w-[720px] mx-auto py-6">
 					{/* Delivery Quote */}
 					<div className="bg-primary p-4 text-white w-[300px] mx-auto">
@@ -254,13 +263,15 @@ const Delivery = () => {
 							<div className="flex-1 space-y-1">
 								<div>
 									<p>From: </p>
-									<div className="bg-gray-300 text-black text-center p-2">
-										{orderDetails?.seller_address}
+									<div className="bg-gray-300 text-black text-start p-2">
+										{checkOrder?.ad_orders[0]?.seller_address}
 									</div>
 								</div>
 								<div>
 									<p>To: </p>
-									<div className="bg-gray-300 text-black text-center p-2">{orderDetails?.buyer_address}</div>
+									<div className="bg-gray-300 text-black text-start p-2">
+										{checkOrder?.ad_orders[0]?.buyer_address}
+									</div>
 								</div>
 							</div>
 
@@ -268,7 +279,7 @@ const Delivery = () => {
 						</div>
 
 						<div className="border-y border-white py-1 font-semibold mb-4">
-							Cost: {orderDetails?.price ? '₦' + toMoney(orderDetails.price) : ''}
+							Cost: {checkOrder?.ad_orders[0]?.price ? '₦' + toMoney(checkOrder?.ad_orders[0]?.price) : ''}
 						</div>
 
 						<div className="flex items-center  justify-center gap-2 my-2 max-w-full">
@@ -291,11 +302,17 @@ const Delivery = () => {
 						</div>
 					</div>
 				</div>
+			) : (
+				<div className="h-[30vh] flex items-center justify-center">
+					<p>Ad paid for successfully</p>
+				</div>
 			)}
 
 			<div className="flex items-center  gap-2">
 				<img src={LogIcon} alt="Quote log" className="w-4 h-4" />
-				<p className="text-primary ">View Quote Log page</p>
+				<a href={Approutes.profile.transactions} className="text-primary ">
+					View Quote Log page
+				</a>
 			</div>
 
 			<Modal
@@ -319,7 +336,11 @@ const Delivery = () => {
 				modalHeader={false}
 				className={' max-w-[720px] p-0 bg-white'}
 			>
-				<PaymentOption result={result} quotePrice={orderDetails?.price} />
+				<PaymentOption
+					result={result}
+					quotePrice={checkOrder?.ad_orders[0]?.price}
+					orderId={checkOrder?.ad_orders[0]?.id}
+				/>
 			</Modal>
 		</section>
 	);

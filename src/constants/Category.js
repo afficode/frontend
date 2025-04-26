@@ -103,3 +103,8 @@ export const inspectableCategories = [
 ];
 
 export const grabbableCategories = [50, 51, 53, 54, 55, 56, 57, 59, 60, 62, 63];
+
+export const pickupCategories = [
+	5001, 5003, 5004, 5005, 5101, 5102, 5103, 5104, 5105, 5106, 5107, 5108, 5109, 5303, 5401, 5402,
+	5403, 5404, 5405, 5406, 5407, 5408, 5409, 5410, 5411, 6301, 6302,
+];

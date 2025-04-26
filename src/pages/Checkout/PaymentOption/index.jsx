@@ -1,11 +1,11 @@
 import { toMoney } from '../../../utils';
 import { Button } from '../../../ui';
-import { useEscrow, useGetOrders, useNotify, useQuotedPay } from '../../../hooks';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useEscrow, useNotify, useQuotedPay } from '../../../hooks';
+import { useLocation, useParams } from 'react-router-dom';
 import useAuth from '../../../context/UserContext';
 import { useState } from 'react';
 
-const PaymentOption = ({ result, setStage, quotePrice }) => {
+const PaymentOption = ({ result, quotePrice, orderId }) => {
 	const { mutate: pay, isLoading } = useEscrow();
 
 	const [paymentOption, setPaymentOption] = useState('paystack');
@@ -16,56 +16,58 @@ const PaymentOption = ({ result, setStage, quotePrice }) => {
 
 	const escrow_type = pathname.split('/')[2];
 
-	// console.log(user);
-
 	const total = Number(result?.data?.price) + quotePrice;
 
 	const notify = useNotify();
 
-	// const { mutateAsync: payEscrow } = useEscrow();
-	// const { mutateAsync: payQuoted } = useQuotedPay();
+	const { mutateAsync: payEscrow, isLoading: escrowLoading } = useEscrow();
+	const { mutateAsync: payQuoted, isLoading: quoteLoading } = useQuotedPay(orderId);
 
 	const handlePay = async () => {
-		// pay(
-		// 	{
-		// 		amount: total.toString(),
-		// 		grabber_id: grabber_id,
-		// 		ad_id: ad_id,
-		// 		user_id: user?.id,
-		// 		payment_method: paymentOption === 'paystack' ? 'paystack' : 'wallet',
-		// 		stage: 'init',
-		// 		callback_url: 'https://boonfu.site/my-account/payment-success',
-		// 		escrow_type: escrow_type === 'delivery' ? 'boonfu_delivery' : 'self_pickup',
-		// 	},
-		// 	{
-		// 		onSuccess: (data) => {
-		// 			notify(data?.message, 'success');
-		// 			window.location.replace(data?.url);
-		// 			// setStage(2);
-		// 		},
-		// 		onError: (error) => {
-		// 			notify(error?.response?.data?.message, 'error');
-		// 		},
-		// 	}
-		// );
-		// try {
-		// 	const escrowPromise = payEscrow({
-		// 		amount: result?.data?.price,
-		// 		grabber_id,
-		// 		ad_id,
-		// 		user_id: user?.id,
-		// 		payment_method: paymentOption === 'paystack' ? 'paystack' : 'wallet',
-		// 		stage: 'init',
-		// 		callback_url: 'https://boonfu.site/my-account/payment-success',
-		// 		escrow_type: escrow_type === 'delivery' ? 'boonfu_delivery' : 'self_pickup',
-		// 	});
-		// 	const quotedPromise = payQuoted({ price: quotePrice.toString() });
-		// 	const [escrowData, quotedData] = await Promise.all([escrowPromise, quotedPromise]);
-		// 	notify('Both payments successful', 'success');
-		// 	window.location.replace(escrowData?.url); // or any other logic
-		// } catch (error) {
-		// 	notify(error?.response?.data?.message || 'Something went wrong', 'error');
-		// }
+		try {
+			const escrowPromise = payEscrow({
+				amount: Number(result?.data?.price),
+				grabber_id,
+				ad_id,
+				user_id: user?.id,
+				payment_method: paymentOption === 'paystack' ? 'paystack' : 'wallet',
+				stage: 'init',
+				callback_url: 'https://boonfu.site/checkout/payment-success',
+				escrow_type: escrow_type === 'delivery' ? 'boonfu_delivery' : 'self_pickup',
+			});
+			const quotedPromise = payQuoted({ ad_id: ad_id });
+			const [escrowData, quotedData] = await Promise.all([escrowPromise, quotedPromise]);
+
+			console.log('res', escrowData, quotedData);
+			notify('Payments successful', 'success');
+		} catch (error) {
+			notify(error?.response?.data?.message || 'Something went wrong', 'error');
+		}
+	};
+
+	const handlePickupPay = () => {
+		pay(
+			{
+				amount: Number(result?.data?.price),
+				grabber_id: grabber_id,
+				ad_id: ad_id,
+				user_id: user?.id,
+				payment_method: paymentOption === 'paystack' ? 'paystack' : 'wallet',
+				stage: 'init',
+				callback_url: 'https://boonfu.site/checkout/payment-success',
+				escrow_type: escrow_type === 'delivery' ? 'boonfu_delivery' : 'self_pickup',
+			},
+			{
+				onSuccess: (data) => {
+					notify(data?.message, 'success');
+					// window.location.replace(data?.url);
+					// setStage(2);
+				},
+				onError: (error) => {
+					notify(error?.response?.data?.message, 'error');
+				},
+			}
+		);
 	};
 
 	return (
@@ -136,12 +138,12 @@ const PaymentOption = ({ result, setStage, quotePrice }) => {
 						<div>
 							<Button
 								type="button"
-								onClick={handlePay}
+								onClick={escrow_type === 'pickup' ? handlePickupPay : handlePay}
 								variant={'primary'}
 								size={'full'}
 								className={'rounded-2xl font-bold text-xl'}
-								loading={isLoading}
-								disabled={isLoading}
+								loading={escrowLoading || quoteLoading || isLoading}
+								disabled={escrowLoading || quoteLoading || isLoading}
 							>
 								Confirm and pay
 							</Button>
@@ -175,12 +177,12 @@ const PaymentOption = ({ result, setStage, quotePrice }) => {
 						<div>
 							<Button
 								type="button"
-								onClick={handlePay}
+								onClick={escrow_type === 'pickup' ? handlePickupPay : handlePay}
 								variant={'primary'}
 								size={'full'}
 								className={'rounded-2xl font-bold text-xl'}
-								loading={isLoading}
-								disabled={isLoading}
+								loading={escrowLoading || quoteLoading || isLoading}
+								disabled={escrowLoading || quoteLoading || isLoading}
 							>
 								Confirm and pay
 							</Button>
