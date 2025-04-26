@@ -24,8 +24,6 @@ const Delivery = () => {
 
 	const { data: checkOrder, isLoading: checking } = useCheckOrder(ad_id);
 
-	console.log('checkOrder', checkOrder);
-
 	const stage = useMemo(() => {
 		if (checkOrder?.ad_orders[0]?.price && checkOrder?.ad_orders[0]?.paid === 0) {
 			return 2;
@@ -72,13 +70,10 @@ const Delivery = () => {
 			state: Number(state),
 		};
 
-		console.log(formData);
-
 		mutate(formData, {
 			onSuccess: (data) => {
 				notify(data?.message, 'success');
 				setQuoteLoading(true);
-				console.log(data);
 			},
 			onError: (error) => {
 				notify(error?.response?.data?.message, 'error');

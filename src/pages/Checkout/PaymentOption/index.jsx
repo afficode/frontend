@@ -38,7 +38,7 @@ const PaymentOption = ({ result, quotePrice, orderId }) => {
 			const quotedPromise = payQuoted({ ad_id: ad_id });
 			const [escrowData, quotedData] = await Promise.all([escrowPromise, quotedPromise]);
 
-			console.log('res', escrowData, quotedData);
+			// console.log('res', escrowData, quotedData);
 			notify('Payments successful', 'success');
 		} catch (error) {
 			notify(error?.response?.data?.message || 'Something went wrong', 'error');
