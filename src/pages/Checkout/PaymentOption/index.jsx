@@ -1,11 +1,12 @@
 import { toMoney } from '../../../utils';
 import { Button } from '../../../ui';
-import { useEscrow, useGetOrders, useNotify } from '../../../hooks';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useEscrow, useNotify, useQuotedPay } from '../../../hooks';
+import { useLocation, useParams } from 'react-router-dom';
 import useAuth from '../../../context/UserContext';
 import { useState } from 'react';
+import { frontendLink } from '../../../constants';
 
-const PaymentOption = ({ result, setStage, quotePrice }) => {
+const PaymentOption = ({ result, quotePrice, orderId }) => {
 	const { mutate: pay, isLoading } = useEscrow();
 
 	const [paymentOption, setPaymentOption] = useState('paystack');
@@ -16,31 +17,51 @@ const PaymentOption = ({ result, setStage, quotePrice }) => {
 
 	const escrow_type = pathname.split('/')[2];
 
-	// console.log(user);
-
 	const total = Number(result?.data?.price) + quotePrice;
-	// console.log('ad', Number(result?.data?.price));
-	// console.log('quote', quotePrice);
-	// console.log('total', typeof total);
 
 	const notify = useNotify();
 
-	const handlePay = () => {
+	const { mutateAsync: payEscrow, isLoading: escrowLoading } = useEscrow();
+	const { mutateAsync: payQuoted, isLoading: quoteLoading } = useQuotedPay(orderId);
+
+	const handlePay = async () => {
+		try {
+			const escrowPromise = payEscrow({
+				amount: Number(result?.data?.price),
+				grabber_id,
+				ad_id,
+				user_id: user?.id,
+				payment_method: 'wallet',
+				stage: 'init',
+				callback_url: `${frontendLink}checkout/payment-success`,
+				escrow_type: escrow_type === 'delivery' ? 'boonfu_delivery' : 'self_pickup',
+			});
+			const quotedPromise = payQuoted({ ad_id: ad_id });
+			const [escrowData, quotedData] = await Promise.all([escrowPromise, quotedPromise]);
+
+			// console.log('res', escrowData, quotedData);
+			notify('Payments successful', 'success');
+		} catch (error) {
+			notify(error?.response?.data?.message || 'Something went wrong', 'error');
+		}
+	};
+
+	const handlePickupPay = () => {
 		pay(
 			{
-				amount: total.toString(),
+				amount: Number(result?.data?.price),
 				grabber_id: grabber_id,
 				ad_id: ad_id,
 				user_id: user?.id,
 				payment_method: paymentOption === 'paystack' ? 'paystack' : 'wallet',
 				stage: 'init',
-				callback_url: 'https://boonfu.site/my-account/payment-success',
+				callback_url: 'https://boonfu.site/checkout/payment-success',
 				escrow_type: escrow_type === 'delivery' ? 'boonfu_delivery' : 'self_pickup',
 			},
 			{
 				onSuccess: (data) => {
 					notify(data?.message, 'success');
-					window.location.replace(data?.url);
+					// window.location.replace(data?.url);
 					// setStage(2);
 				},
 				onError: (error) => {
@@ -57,24 +78,26 @@ const PaymentOption = ({ result, setStage, quotePrice }) => {
 			<div className="px-4 py-6 bg-white">
 				{/* select payment option  */}
 				<div className="flex justify-between ">
-					<div className="flex  gap-2">
-						<input
-							type="radio"
-							name={'paystack'}
-							id={'paystack'}
-							value={'paystack'}
-							checked={paymentOption === 'paystack'}
-							onChange={(e) => setPaymentOption(e.target.value)}
-							className={`mt-1 cursor-pointer`}
-						/>
-						<label htmlFor="paystack" className=" cursor-pointer">
-							Paystack
-							{/* <div className="flex gap-2 items-center">
+					{escrow_type === 'pickup' && (
+						<div className="flex  gap-2">
+							<input
+								type="radio"
+								name={'paystack'}
+								id={'paystack'}
+								value={'paystack'}
+								checked={paymentOption === 'paystack'}
+								onChange={(e) => setPaymentOption(e.target.value)}
+								className={`mt-1 cursor-pointer`}
+							/>
+							<label htmlFor="paystack" className=" cursor-pointer">
+								Paystack
+								{/* <div className="flex gap-2 items-center">
 								<img src={Visa} alt="/" className="w-8" />
 								<img src={Mastercard} alt="/" className="w-6" />
 							</div> */}
-						</label>
-					</div>
+							</label>
+						</div>
+					)}
 
 					<div className="flex  gap-2">
 						<input
@@ -118,12 +141,12 @@ const PaymentOption = ({ result, setStage, quotePrice }) => {
 						<div>
 							<Button
 								type="button"
-								onClick={handlePay}
+								onClick={escrow_type === 'pickup' ? handlePickupPay : handlePay}
 								variant={'primary'}
 								size={'full'}
 								className={'rounded-2xl font-bold text-xl'}
-								loading={isLoading}
-								disabled={isLoading}
+								loading={escrowLoading || quoteLoading || isLoading}
+								disabled={escrowLoading || quoteLoading || isLoading}
 							>
 								Confirm and pay
 							</Button>
@@ -157,12 +180,12 @@ const PaymentOption = ({ result, setStage, quotePrice }) => {
 						<div>
 							<Button
 								type="button"
-								onClick={handlePay}
+								onClick={escrow_type === 'pickup' ? handlePickupPay : handlePay}
 								variant={'primary'}
 								size={'full'}
 								className={'rounded-2xl font-bold text-xl'}
-								loading={isLoading}
-								disabled={isLoading}
+								loading={escrowLoading || quoteLoading || isLoading}
+								disabled={escrowLoading || quoteLoading || isLoading}
 							>
 								Confirm and pay
 							</Button>

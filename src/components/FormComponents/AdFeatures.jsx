@@ -4,7 +4,11 @@ import { Field } from 'formik';
 import { Button, InputGroup, Modal } from '../../ui';
 import { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
-import { grabbableCategories, inspectableCategories } from '../../constants/Category';
+import {
+	grabbableCategories,
+	inspectableCategories,
+	pickupCategories,
+} from '../../constants/Category';
 import { getCommission, toMoney } from '../../utils';
 
 const AdFeatures = (props) => {
@@ -14,7 +18,7 @@ const AdFeatures = (props) => {
 	const { categoryId } = useParams();
 	const [grabModal, setGrabModal] = useState(false);
 
-	const { boonfuCommission, grabberCommission } = getCommission(price);
+	const { boonfuCommission } = getCommission(price);
 
 	useEffect(() => {
 		if (hash) {
@@ -120,11 +124,15 @@ const AdFeatures = (props) => {
 														value={option.value}
 														checked={option.value === field.value}
 														className={``}
-														onClick={option.value === '3' ? () => setGrabModal(true) : () => setGrabModal(false)}
+														onClick={
+															option.value === '3' && !pickupCategories.includes(parseInt(subCat))
+																? () => setGrabModal(true)
+																: () => setGrabModal(false)
+														}
 													/>
 													<label htmlFor={option.value}>{option.key}</label>
 
-													{option.value === '3' && (
+													{option.value === '3' && !pickupCategories.includes(parseInt(subCat)) && (
 														<Modal
 															isOpen={grabModal}
 															setIsOpen={setGrabModal}
@@ -159,18 +167,18 @@ const AdFeatures = (props) => {
 																		/>
 																	</label>
 																	{/* <label htmlFor="seller_address" className="flex flex-col space-y-1 font-medium">
-																		<span className="flex items-center ">City</span>
-																		<InputGroup
-																			type="text"
-																			name="city"
-																			id="city"
-																			autoComplete={'off'}
-																			className={'w-full '}
-																			required
-																			// value={quoteFormData.seller_address}
-																			// onChange={handleQuoteFormChange}
-																		/>
-																	</label> */}
+																	<span className="flex items-center ">City</span>
+																	<InputGroup
+																		type="text"
+																		name="city"
+																		id="city"
+																		autoComplete={'off'}
+																		className={'w-full '}
+																		required
+																		// value={quoteFormData.seller_address}
+																		// onChange={handleQuoteFormChange}
+																	/>
+																</label> */}
 
 																	<div className="w-full flex items-end justify-end pt-4">
 																		<Button variant={'primary'} size={'small'}>
@@ -273,14 +281,14 @@ const featureList = [
 	{
 		key: 'Basic',
 		value: '0',
-		coin: '2.5',
+		coin: '3.5',
 		color: 'bg-secondary text-black',
 		info: 'Basic posting package.',
 	},
 	{
 		key: 'Feature Ad',
 		value: '1',
-		coin: '4.5',
+		coin: '5',
 		color: 'bg-primary text-white',
 		info: 'Each category listing features yours on TOP.',
 	},

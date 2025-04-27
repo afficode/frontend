@@ -34,9 +34,13 @@ const Footer = () => {
 						<div className="col-span-2 md:mr-[2rem] lg:mr-[8rem] space-y-2">
 							<h3 className="text-start">Transact with peace of mind on Boonfu</h3>
 							<p className="text-justify p-lg">
-								Indigenous platform for listing; services, cars and vehicles, properties, own an online
-								shop-saving you from the hassle of site building, Agency freelancing and enlisting items
-								(goods and products) for transactional purposes.
+								Shop and sell securely with Boonfu's escrow protection (Grab) - your funds are safe until
+								delivery is confirmed. Our verified marketplace ensures trustworthy transactions, while
+								real-time tracking keeps you in control. Sellers can boost sales through our Grab Feature,
+								where independent marketers promote your products for commission-on-sale. Enjoy instant
+								dispute resolution and worry-free commerce. At Boonfu, security and growth go hand-in-hand!{' '}
+								<br />
+								#SecureTransactions #EarnWithBoonfu
 							</p>
 						</div>
 						<div className="flex flex-col items-center justify-center gap-3 text-center">
@@ -108,7 +112,7 @@ const Footer = () => {
 							<Link to={Approutes.underConstruction}>
 								<li className={listStyles}>FAQs</li>
 							</Link>
-							<Link to={Approutes.underConstruction}>
+							<Link to={Approutes.safety}>
 								<li className={listStyles}>Safety Guides</li>
 							</Link>
 						</ul>

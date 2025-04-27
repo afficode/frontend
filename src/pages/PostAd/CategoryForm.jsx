@@ -3841,7 +3841,8 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 					selectedVehicleCategory ||
 					selectedPropertyCategory ||
 					selectedAgricultureCategory ||
-					selectedMotorbikeCategory
+					selectedMotorbikeCategory ||
+					selectedElectronicsCategory
 				}
 			/>
 		));

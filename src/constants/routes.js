@@ -36,6 +36,7 @@ export const Approutes = {
 		useDelivery: (grabber_id, ad_id) => `/checkout/delivery/${grabber_id}/${ad_id}`,
 		pickup: '/checkout/pickup/:grabber_id/:ad_id',
 		usePickup: (grabber_id, ad_id) => `/checkout/pickup/${grabber_id}/${ad_id}`,
+		paymentSuccess: '/checkout/payment-success',
 	},
 	contactUs: '/contact-us',
 	forgotPassword: '/forgot-password',
@@ -52,7 +53,6 @@ export const Approutes = {
 		grabbedProduct: (grabber_id, ad_id) => `/grab/view/${grabber_id}/${ad_id}`,
 		settings: '/grab/settings',
 		flyer: '/grab/flyer',
-		paymentSuccess: '/grab/payment-success',
 	},
 	account: {
 		initial: '/my-account/',
@@ -64,6 +64,7 @@ export const Approutes = {
 	home: '/',
 	logout: '/logout',
 	media: '/boonfu-media',
+	safety: '/safety-guides',
 	playground: '/playground',
 	postAd: '/post-ad',
 	postDecision: '/post-decision',

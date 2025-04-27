@@ -10,7 +10,7 @@ export const useEscrow = () => {
 
 export const useQuotedPay = (id) => {
 	const pay = (data) =>
-		privateAxios.post(`${backendLink}order/pay${id}`, data).then((res) => res?.data);
+		privateAxios.post(`${backendLink}order/pay/${id}`, data).then((res) => res?.data);
 
 	return useMutation(['quoted-pay'], pay);
 };
@@ -39,5 +39,16 @@ export const useGetOrder = (id) => {
 		refetchInterval: false,
 		refetchOnWindowFocus: false,
 		refetchIntervalInBackground: false,
+	});
+};
+
+export const useCheckOrder = (ad_id) => {
+	const checkOrder = () =>
+		privateAxios.get(`${backendLink}order/ad/${ad_id}`).then((res) => res?.data);
+
+	return useQuery(['check-order', ad_id], checkOrder, {
+		refetchOnWindowFocus: false,
+		refetchOnMount: false,
+		refetchInterval: false,
 	});
 };

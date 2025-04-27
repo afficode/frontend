@@ -6,9 +6,11 @@ import { FaCamera } from 'react-icons/fa';
 import OverviewPills from '../../Products/View/OverviewPills';
 import { convertKeyToName, numberWithCommas, ScrollToTop } from '../../../utils';
 import Action from './Action';
-import { fetchProduct } from '../../../hooks';
+import { fetchProduct, useCheckOrder } from '../../../hooks';
 import { SpinnerSkeleton } from '../../../components';
 import { inspectableCategories } from '../../../constants/Category';
+import useAuth from '../../../context/UserContext';
+import { Approutes } from '../../../constants';
 
 const GrabbedProduct = () => {
 	const { grabber_id, ad_id } = useParams();
@@ -19,13 +21,33 @@ const GrabbedProduct = () => {
 	}
 
 	const { data: result, isLoading } = fetchProduct(ad_id);
+	const { data: checkOrder, isError, error, isLoading: checking } = useCheckOrder(Number(ad_id));
+	const { user } = useAuth();
 
-	if (isLoading)
+	if (isError) {
+		return (
+			<div className="flex items-center justify-center w-full h-[70vh]">
+				<h1 className="text-2xl font-bold text-red-500 max-w-lg text-center">
+					{error.response.data.message}
+				</h1>
+			</div>
+		);
+	}
+
+	if (isLoading || checking)
 		return (
 			<div className="h-screen">
 				<SpinnerSkeleton />
 			</div>
 		);
+
+	if (checkOrder?.ad_orders.find((order) => order?.buyer_id === user?.id)) {
+		location.replace(`${Approutes.checkout.useDelivery(grabber_id, ad_id)}`);
+	}
+
+	if (checkOrder?.escrow.find((order) => order?.buyer_id === user?.id)) {
+		location.replace(`${Approutes.checkout.usePickup(grabber_id, ad_id)}`);
+	}
 
 	if (result) {
 		return (

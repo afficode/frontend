@@ -56,6 +56,7 @@ import {
 	GrabPaymentSuccess,
 	Delivery,
 	Pickup,
+	SafetyGuides,
 } from './pages';
 import { AppLayout, DashboardLayout } from './layout';
 import { Approutes } from './constants';
@@ -82,6 +83,7 @@ function App() {
 					<Route path={Approutes.home} element={isLogin ? <Welcome /> : <Home />} />
 					<Route path={Approutes.aboutUs} element={<AboutUs />} />
 					<Route path={Approutes.media} element={<BoonfuMedia />} />
+					<Route path={Approutes.safety} element={<SafetyGuides />} />
 					<Route path={Approutes.contactUs} element={<ContactUs />} />
 					<Route path={Approutes.auth.initial} element={<Auth />} />
 					<Route path={Approutes.forgotPassword} element={<ForgotPassword />} />
@@ -172,7 +174,7 @@ function App() {
 						<Route path={`${Approutes.postSuccess}/:adId`} element={<PostSuccess />} />
 						<Route path={Approutes.tokenSuccess} element={<Success />} />
 						<Route path={Approutes.account.paymentSuccess} element={<PaymentSuccess />} />
-						<Route path={Approutes.grab.paymentSuccess} element={<GrabPaymentSuccess />} />
+						<Route path={Approutes.checkout.paymentSuccess} element={<GrabPaymentSuccess />} />
 						<Route path={Approutes.account.initial} element={<AccountLayout />}>
 							<Route path={Approutes.account.initial} element={<AccountHistory />} />
 							<Route path={Approutes.account.deposit} element={<Deposit />} />

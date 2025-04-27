@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
-import { fetchProduct } from '../../../hooks';
-import { useState } from 'react';
+import { fetchProduct, useCheckOrder } from '../../../hooks';
+import { useMemo, useState } from 'react';
 import { Location } from '../../../assets/svgs';
 import { toMoney } from '../../../utils';
 import { Button, Modal } from '../../../ui';
@@ -10,10 +10,19 @@ import { SpinnerSkeleton } from '../../../components';
 const PickUp = () => {
 	const { grabber_id, ad_id } = useParams();
 	const { data: result, isLoading } = fetchProduct(ad_id);
-	const [stage, setStage] = useState(1);
 	const [paymentModal, setPaymentModal] = useState(false);
 
-	if (isLoading)
+	const { data: checkOrder, isLoading: checking } = useCheckOrder(ad_id);
+
+	const stage = useMemo(() => {
+		if (checkOrder?.escrow[0]?.status === 'success') {
+			return 2;
+		} else {
+			return 1;
+		}
+	}, [checkOrder]);
+
+	if (isLoading || checking)
 		return (
 			<div className="h-screen">
 				<SpinnerSkeleton />

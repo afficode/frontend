@@ -23,6 +23,7 @@ import { SpinnerSkeleton } from '../../../components';
 import useAuth from '../../../context/UserContext';
 import useGrabContext from '../../../context/GrabContext';
 import { useQueryClient } from 'react-query';
+import { toast } from 'react-toastify';
 // import { FcCancel } from 'react-icons/fc';
 
 const GrabProduct = () => {
@@ -59,12 +60,48 @@ const GrabProduct = () => {
 				setCopied(true);
 			})
 			.catch((err) => {
-				// console.log(err);
 				notify('Failed to copy link', 'error');
 			});
 	};
 
 	const { grabberCommission } = getCommission(result?.data?.price);
+	const [isDownloading, setIsDownloading] = useState(false);
+
+	const forceDownloadUrl = (url) => {
+		return url.replace('/upload/', '/upload/fl_attachment/');
+	};
+
+	const downloadImage = async (img) => {
+		const response = await fetch(forceDownloadUrl(img.path));
+		const blob = await response.blob();
+		const blobUrl = window.URL.createObjectURL(blob);
+		const urlExt = img.path.split('.').pop();
+		const a = document.createElement('a');
+		a.href = blobUrl;
+		a.download = !img.filename
+			? `download.${urlExt}`
+			: /\.[a-zA-Z0-9]+$/.test(img.filename)
+			? img.filename
+			: `${img.filename}.${urlExt}`;
+		document.body.appendChild(a);
+		a.click();
+		document.body.removeChild(a);
+		window.URL.revokeObjectURL(blobUrl);
+
+		setIsDownloading(false);
+		// notify('Image downloaded successfully', 'success');
+	};
+
+	const handleDownloadAll = async () => {
+		setIsDownloading(true);
+		notify('Downloading images...', 'info', {
+			toastId: 'downloading',
+		});
+
+		for (const img of result?.data?.images) {
+			await downloadImage(img);
+		}
+	};
 
 	if (isLoading) {
 		return (
@@ -186,6 +223,9 @@ const GrabProduct = () => {
 									Remove Item
 								</Button>
 								<Button
+									onClick={handleDownloadAll}
+									loading={isDownloading}
+									disabled={isDownloading}
 									variant={'primary'}
 									size={'full'}
 									className={'flex items-center justify-center gap-4 rounded-xl'}
