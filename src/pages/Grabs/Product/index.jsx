@@ -42,8 +42,6 @@ const GrabProduct = () => {
 
 	const { data: result, isLoading, isError } = fetchProduct(ad_id);
 
-	console.log(result);
-
 	const { unGrabAd } = useGrabContext();
 	const queryClient = useQueryClient();
 	const navigate = useNavigate();
@@ -62,7 +60,6 @@ const GrabProduct = () => {
 				setCopied(true);
 			})
 			.catch((err) => {
-				// console.log(err);
 				notify('Failed to copy link', 'error');
 			});
 	};

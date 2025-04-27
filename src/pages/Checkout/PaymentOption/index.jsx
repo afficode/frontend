@@ -4,6 +4,7 @@ import { useEscrow, useNotify, useQuotedPay } from '../../../hooks';
 import { useLocation, useParams } from 'react-router-dom';
 import useAuth from '../../../context/UserContext';
 import { useState } from 'react';
+import { frontendLink } from '../../../constants';
 
 const PaymentOption = ({ result, quotePrice, orderId }) => {
 	const { mutate: pay, isLoading } = useEscrow();
@@ -30,9 +31,9 @@ const PaymentOption = ({ result, quotePrice, orderId }) => {
 				grabber_id,
 				ad_id,
 				user_id: user?.id,
-				payment_method: paymentOption === 'paystack' ? 'paystack' : 'wallet',
+				payment_method: 'wallet',
 				stage: 'init',
-				callback_url: 'https://boonfu.site/checkout/payment-success',
+				callback_url: `${frontendLink}checkout/payment-success`,
 				escrow_type: escrow_type === 'delivery' ? 'boonfu_delivery' : 'self_pickup',
 			});
 			const quotedPromise = payQuoted({ ad_id: ad_id });
@@ -77,24 +78,26 @@ const PaymentOption = ({ result, quotePrice, orderId }) => {
 			<div className="px-4 py-6 bg-white">
 				{/* select payment option  */}
 				<div className="flex justify-between ">
-					<div className="flex  gap-2">
-						<input
-							type="radio"
-							name={'paystack'}
-							id={'paystack'}
-							value={'paystack'}
-							checked={paymentOption === 'paystack'}
-							onChange={(e) => setPaymentOption(e.target.value)}
-							className={`mt-1 cursor-pointer`}
-						/>
-						<label htmlFor="paystack" className=" cursor-pointer">
-							Paystack
-							{/* <div className="flex gap-2 items-center">
+					{escrow_type === 'pickup' && (
+						<div className="flex  gap-2">
+							<input
+								type="radio"
+								name={'paystack'}
+								id={'paystack'}
+								value={'paystack'}
+								checked={paymentOption === 'paystack'}
+								onChange={(e) => setPaymentOption(e.target.value)}
+								className={`mt-1 cursor-pointer`}
+							/>
+							<label htmlFor="paystack" className=" cursor-pointer">
+								Paystack
+								{/* <div className="flex gap-2 items-center">
 								<img src={Visa} alt="/" className="w-8" />
 								<img src={Mastercard} alt="/" className="w-6" />
 							</div> */}
-						</label>
-					</div>
+							</label>
+						</div>
+					)}
 
 					<div className="flex  gap-2">
 						<input

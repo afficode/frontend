@@ -2,6 +2,7 @@ import React from 'react';
 import { FacebookBlue, Instagram, Linkdin, Twitter } from '../../assets/svgs';
 import { Button } from '../../ui';
 import { ScrollToTop } from '../../utils';
+import { BOONFU_MAIL } from '../../constants';
 
 const BoonfuMedia = () => {
 	return (
@@ -59,7 +60,7 @@ const BoonfuMedia = () => {
 				</p>
 				<ul className="list-disc list-inside">
 					<li>Name: [Your Media Contact's Name]</li>
-					<li>Email: [myboonfu@gmail.com]</li>
+					<li>Email: [{BOONFU_MAIL}]</li>
 					<li>Phone: [+234 (0) 9135350168]</li>
 				</ul>
 			</div>

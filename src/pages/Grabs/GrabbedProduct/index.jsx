@@ -15,7 +15,6 @@ import { Approutes } from '../../../constants';
 const GrabbedProduct = () => {
 	const { grabber_id, ad_id } = useParams();
 	let grabberId;
-	// console.log(typeof ad_id);
 
 	if (grabber_id) {
 		grabberId = grabber_id.slice(2);
