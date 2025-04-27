@@ -37,8 +37,16 @@ All`(*)` exports comes before named exports and are arranged according to their 
 
 `export { Abc } from 'a'`
 
-TODO: Change the notification for revealing ads owner details to the lates notification
+# CI / CD
+To have access to our CI/CD server, contact admin to give register your email. 
+This gives you access to check deployment, check deployment error.
 
-TODO: Let the number in the save navbar reflect the information gotten from DB (badge)
+You can also confirm if your commit to codebase is build. 
 
-TODO: Phone number verification
+> For developers, the branch for CI/CD is the dev branch. Any testing for deployment is done in our development server ${hostname}.site.
+
+Do not attempt to change anything in the development CI/CD pipeline. 
+
+contact <samuelemyrs@gmail.com> for access to the CI/CD pipeline.
+
+Our base CI/CD server is COOLIFY. 
