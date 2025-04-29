@@ -98,7 +98,7 @@ const GrabbedProduct = () => {
 						<div className="relative rounded-none w-full h-full mt-1">
 							{result.data?.images.length > 0 ? (
 								<Carousel className="h-full max-lg:h-[300px] md:min-h-[470px]    rounded-none">
-									{result.data?.images.map((img, index) => (
+									{result.data?.images?.map((img, index) => (
 										<img
 											src={img.path}
 											alt={img.filename}
@@ -142,7 +142,7 @@ const GrabbedProduct = () => {
 						<h2 className="text-xl tracking-tighter lg:tracking-normal">Overview</h2>
 
 						<div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-							{convertKeyToName(result?.data).map((val, index) => (
+							{convertKeyToName(result?.data)?.map((val, index) => (
 								<OverviewPills overview={val} key={index} />
 							))}
 						</div>

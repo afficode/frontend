@@ -39,39 +39,43 @@ const TransactionActivity = () => {
 					<h5 className="text-lg font-semibold">Activities</h5>
 
 					<div className="overflow-x-auto w-full">
-						<table>
-							<thead className="bg-primary text-white ">
-								<tr className="p-2">
-									<th>Date</th>
-									<th>Order(s)</th>
-									<th>Delivery type</th>
-									<th>Status</th>
-								</tr>
-							</thead>
-							<tbody>
-								{allOrders.orders.map((order) => (
-									<tr
-										key={order.id}
-										role="button"
-										onClick={() => handleOrderClick(order.id)}
-										className="hover:bg-gray-100 "
-									>
-										<td>{format(parseISO(order?.updated_at), 'd MMMM ')}</td>
-										<td>{order?.title}</td>
-										<td>Boonfu delivery</td>
-										<td>
-											{order.price && order.paid === 0
-												? 'Order Quoted'
-												: order.price && order.paid === 1
-												? 'Order placed'
-												: !order.price && order.paid === 0
-												? 'Waiting for Quote'
-												: ''}
-										</td>
+						{allOrders?.orders?.length > 0 ? (
+							<table>
+								<thead className="bg-primary text-white ">
+									<tr className="p-2">
+										<th>Date</th>
+										<th>Order(s)</th>
+										<th>Delivery type</th>
+										<th>Status</th>
 									</tr>
-								))}
-							</tbody>
-						</table>
+								</thead>
+								<tbody>
+									{allOrders?.orders?.map((order) => (
+										<tr
+											key={order.id}
+											role="button"
+											onClick={() => handleOrderClick(order.id)}
+											className="hover:bg-gray-100 "
+										>
+											<td>{format(parseISO(order?.updated_at), 'd MMMM ')}</td>
+											<td>{order?.title}</td>
+											<td>Boonfu delivery</td>
+											<td>
+												{order.price && order.paid === 0
+													? 'Order Quoted'
+													: order.price && order.paid === 1
+													? 'Order placed'
+													: !order.price && order.paid === 0
+													? 'Waiting for Quote'
+													: ''}
+											</td>
+										</tr>
+									))}
+								</tbody>
+							</table>
+						) : (
+							<p>No activity to display</p>
+						)}
 					</div>
 				</div>
 			</div>
