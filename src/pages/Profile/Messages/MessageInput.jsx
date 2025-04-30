@@ -19,7 +19,6 @@ const MessageInput = ({ id }) => {
 		e.preventDefault();
 		queryClient.invalidateQueries(['messages', id]);
 		sendMessage(formData);
-		// console.log(formData);
 		setFormData({
 			chat_id: id,
 			content: '',

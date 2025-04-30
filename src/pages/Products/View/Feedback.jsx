@@ -17,7 +17,6 @@ const Feedback = ({ ad_id }) => {
 	const { data: response, isLoading, isError, error } = fetchFeedbacks(ad_id, enable);
 	if (isError) {
 		// redirect the user to login page
-		// console.log(error?.response?.status);
 		if (isLogin && error?.response?.status === 401) {
 			setRedirectLink(window.location.pathname);
 			clearLocalStorage();

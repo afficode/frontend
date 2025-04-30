@@ -63,7 +63,6 @@ const Sidebar = () => {
 					if (formData !== null)
 						mutate(formData, {
 							onSuccess: async (data) => {
-								// console.log('success data return', data);
 								if (user?.profile_image) {
 									let _publicId = user?.profile_image?.filename.split('.');
 									_publicId.pop();

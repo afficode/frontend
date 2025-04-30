@@ -20,7 +20,6 @@ const UrgentField = (props) => {
 			<div className="flex items-center gap-4 my-2 flex-wrap">
 				<Field name={name}>
 					{({ field, form }) => {
-						// console.log(field);
 						return (
 							<ToggleSwitch
 								name={name}

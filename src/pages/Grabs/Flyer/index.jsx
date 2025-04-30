@@ -34,7 +34,6 @@ const GrabFlyer = () => {
 					setIsLoading(false);
 				})
 				.catch((err) => {
-					// console.log(err);
 					notify('An error occured while trying to print', 'error');
 					setIsLoading(false);
 				});

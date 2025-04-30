@@ -1,7 +1,7 @@
 import { format } from 'date-fns';
 export const manipulateCategory = (category) => {
 	const categories = Object.groupBy(category, ({ category_id }) => category_id);
-	//console.log(categories)
+
 	return categories;
 };
 
@@ -117,7 +117,6 @@ export const convertKeyToName = (ad) => {
 			}
 		});
 	}
-	// console.log(overviews)
 	return overviews;
 };
 
@@ -140,7 +139,6 @@ export const removeNullObjectsValues = (productDetails) => {
 
 export const manipulatePrice = (price, category_id) => {
 	if (category_id.toString().startsWith('50')) {
-		// console.log(price)
 		switch (price) {
 			case '1500000':
 				const val = new Array('0', '1500000');
@@ -182,7 +180,6 @@ export const manipulateFilterForm = (values, category_id) => {
 	filteredValue = filteredValue?.price
 		? { ...filteredValue, price: manipulatePrice(filteredValue.price, category_id) }
 		: filteredValue;
-	// console.log(filteredValue);
 	return filteredValue;
 };
 

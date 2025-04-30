@@ -6,7 +6,6 @@ import RowContainer from './RowContainer';
 import { useProduct } from '../../hooks';
 const Home = () => {
 	const { data, isLoading, error } = useProduct();
-	// console.log(data);
 
 	return (
 		<>

@@ -6,7 +6,6 @@ import { GrabMobileSidebar } from '../../../layout';
 const GrabHeader = ({ text, size }) => {
 	const [showSidebar, setShowSidebar] = useState(false);
 	// const { user } = useAuth();
-	// console.log(user);
 
 	return (
 		<div className="flex justify-between py-2 border-b border-black/30 ">

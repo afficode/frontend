@@ -32,7 +32,6 @@ const BuyToken = ({ setIsOpen }) => {
 				notify(data?.message, 'success');
 			},
 			onError: (error) => {
-				// console.log(error?.response?.data.message);
 				notify(error?.response?.data.message, 'error');
 			},
 		});

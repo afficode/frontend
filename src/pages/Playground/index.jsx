@@ -23,7 +23,6 @@ const Playground = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		// console.log(formData);
 	};
 
 	const notifyToast = useNotify();
@@ -65,8 +64,6 @@ const Playground = () => {
 	const onSubmit = (values, { resetForm }) => {
 		setLoading(true);
 		setTimeout(() => {
-			// console.log('Form data', values);
-			// console.log('Saved data', JSON.parse(JSON.stringify(values)));
 			setLoading(false);
 			resetForm();
 		}, 3000);
@@ -83,9 +80,7 @@ const Playground = () => {
 
 	const formik = useFormik({
 		initialValues: initialFormValues,
-		onSubmit: (values) => {
-			// console.log(values);
-		},
+		onSubmit: (values) => {},
 		validate: (values) => {
 			let errors = {};
 

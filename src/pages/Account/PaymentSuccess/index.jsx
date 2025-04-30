@@ -6,10 +6,6 @@ const PaymentSuccess = () => {
 
 	const queryParams = new URLSearchParams(location.search);
 
-	// console.log('queryParams:', queryParams.get('amount'));
-	// console.log('queryParams:', queryParams.get('trxref'));
-	// console.log('queryParams:', queryParams.get('reference'));
-
 	const amount = queryParams.get('amount');
 	const reference = queryParams.get('reference');
 

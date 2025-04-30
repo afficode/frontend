@@ -9,8 +9,6 @@ const Details = ({ data }) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const returnRef = useRef(null);
 
-	console.log(data);
-
 	const handleScrollTo = (ref) => {
 		if (!isOpen) {
 			setIsOpen(true);

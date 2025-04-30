@@ -12,8 +12,6 @@ const Details = () => {
 	});
 	const { user } = useAuth();
 
-	// console.log(user);
-
 	const initialValues = {
 		email_address: user?.email,
 		password: '',
@@ -27,7 +25,6 @@ const Details = () => {
 	});
 
 	const handleSave = (values) => {
-		// console.log(values);
 		setToggleEdit(() => ({
 			contact: true,
 			business: true,

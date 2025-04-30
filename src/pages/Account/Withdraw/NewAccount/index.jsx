@@ -7,7 +7,6 @@ import { Cancel } from '../../../../assets/svgs';
 const NewAccount = () => {
 	const { data } = useBanks();
 
-	// console.log(data?.data);
 	const { mutate } = useAddBankAccount();
 	const allBanks = data?.data;
 
@@ -18,7 +17,6 @@ const NewAccount = () => {
 			: []), // Map only if allBanks is an array
 	];
 
-	// console.log(bankOptions);
 	const notify = useNotify();
 
 	// new account formik
@@ -36,15 +34,11 @@ const NewAccount = () => {
 			bank_code: Yup.string().required('Bank is required'),
 		}),
 		onSubmit: (values) => {
-			// console.log('Submitted values:', values);
-
 			mutate(values, {
 				onSuccess: (data) => {
-					// console.log('Account add successful:', data);
 					notify('Account added successfully', 'success');
 				},
 				onError: (error) => {
-					// console.log('Account add error:', error);
 					notify(error?.response?.data.message, 'error');
 				},
 			});

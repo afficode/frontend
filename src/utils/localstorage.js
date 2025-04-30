@@ -4,7 +4,6 @@ import { Approutes } from '../constants';
 
 // Set items to local storage
 export const setUser = (user) => {
-	// console.log("Localstorage user", user)
 	secureLocalStorage.setItem(userReducerOptions.USER, user);
 };
 

@@ -16,9 +16,7 @@ const Security = () => {
 			remember_password: false,
 			login_failure_alert: false,
 		},
-		onSubmit: (values) => {
-			// console.log(values);
-		},
+		onSubmit: (values) => {},
 	});
 
 	// loading screen timeout

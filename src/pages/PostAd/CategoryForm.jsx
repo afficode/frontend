@@ -3866,7 +3866,6 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 		} catch (error) {
 			notify(error?.response?.data?.message, 'error');
 			// notify('Error uploading your images.', 'error');
-			// console.log(error);
 			setSubmitting(false);
 			return;
 		}
@@ -3920,9 +3919,6 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				});
 			},
 		});
-
-		// console.log('Form data', formData);
-		// console.log('Saved data', JSON.parse(JSON.stringify(values)));
 	};
 
 	const { pathname } = useLocation();
@@ -4056,7 +4052,6 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 					}
 				}, [formik.values.price]);
 
-				// console.log(formik.values.feature);
 				return (
 					<Form>
 						{renderFields ? renderFields : <div className="text-center">No fields to display</div>}

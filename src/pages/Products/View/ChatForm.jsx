@@ -42,7 +42,6 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
 				notify(error?.response?.data?.message, 'error');
 			});
 	useEffect(() => {
-		// console.log(user, isLogin);
 		if (user) {
 			verifyChat();
 		}
@@ -71,15 +70,12 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
 			{ ad_id },
 			{
 				onError: (error) => {
-					// console.log("Char", error);
 					// we redirect the user to login
 					navigate('/auth', { replace: false });
 				},
 				onSuccess: ({ data }) => {
-					//console.log("returned", data);
 					if (data?.chat_id) {
 						const chat_id = data.chat_id;
-						// console.log("On success", data.chat_id);
 						sendMessage({ chat_id, content });
 					}
 				},

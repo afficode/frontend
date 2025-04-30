@@ -19,7 +19,6 @@ const Toggle = (props) => {
 			)}
 			<Field name={name}>
 				{({ field, form }) => {
-					// console.log(field);
 					return (
 						<ToggleSwitch
 							name={name}

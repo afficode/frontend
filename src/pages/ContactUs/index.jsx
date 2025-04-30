@@ -35,7 +35,6 @@ const ContactUs = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		// console.log(formData);
 		setLoading(true);
 
 		if (secureLocalStorage.getItem('contact_us')) {
@@ -46,7 +45,6 @@ const ContactUs = () => {
 
 		try {
 			const res = await api.post('/api/contact_us', formData);
-			// console.log(res.data);
 			secureLocalStorage.setItem('contact_us', res.data);
 			removeLocalStorageItem('contact_us', 1800000);
 			setLoading(false);

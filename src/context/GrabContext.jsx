@@ -19,9 +19,7 @@ export const GrabProvider = ({ children }) => {
 		},
 	});
 
-	socket.on('connect', () => {
-		// console.log("Grabber Socket Connected");
-	});
+	socket.on('connect', () => {});
 	socket.on('grabs', (grabs) => {
 		setGrabs(() => [...grabs]);
 	});

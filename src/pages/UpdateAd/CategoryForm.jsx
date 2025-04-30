@@ -100,7 +100,6 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 	const [otherScent, setOtherScent] = useState(false);
 	const [otherFurnitureFor, setOtherFurnitureFor] = useState(false);
 
-	// console.log(selectedElectronicsCategory);
 	const { data: cat } = useCategories();
 	const filteredCat = cat?.filter((item) => item.id >= 50 && item.id <= 63);
 	const { data: subCat } = useSubCategories(categoryId);
@@ -3853,7 +3852,6 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 
 		mutate(formData, {
 			onSuccess: (data) => {
-				// console.log(data);
 				notify(data.message, 'success');
 				navigate(Approutes.profile.adverts);
 			},
@@ -3876,8 +3874,6 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			},
 		});
 
-		// console.log('Updated form data', formData);
-		// console.log('Saved data', JSON.parse(JSON.stringify(values)));
 		setSubmitting(false);
 	};
 
@@ -3889,7 +3885,6 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			validationSchema={validationSchema[categoryName]}
 		>
 			{(formik) => {
-				// console.log(formik.handleReset);
 				useEffect(() => {
 					setStateId(() => formik.values.state_id);
 				}, [formik.values.state_id]);

@@ -35,8 +35,6 @@ const Navbar = () => {
 	const { data: saves, error } = getSaves(enable) || [];
 	const { unread } = useMessageContext();
 
-	// console.log(user);
-
 	// fetch categories
 	const { data } = useCategories();
 
@@ -73,7 +71,6 @@ const Navbar = () => {
 	const { pathname } = useLocation();
 
 	const handleSearch = useDebouncedCallback((query, stateId) => {
-		// console.log(stateId);
 		if (query || stateId) {
 			setSearchParams({
 				q: query || '',
@@ -548,7 +545,7 @@ const Navbar = () => {
 							{/* // dropdown for categories */}
 							<div className="dropdown ">
 								<button className="flex flex-col gap-0 px-5 mr-16 text-sm capitalize bg-white border-none max-lg:hidden btn btn-sm hover:bg-white text-primary cat-btn">
-									Categories
+									Browse by Categories
 								</button>
 
 								<ul
@@ -569,15 +566,6 @@ const Navbar = () => {
 							</div>
 							{/* bottom nav lists */}
 							<ul className="flex items-center justify-between w-full">
-								<li className={`${listStyles}`} title="Click to set up a shop">
-									SET UP A SHOP
-								</li>
-								<li className={mobileListStyles} title="Click to set up a shop">
-									<BsShop size={25} />
-								</li>
-
-								<span className="border border-r-4 border-white h-[2rem]" />
-
 								<li className="dropdown dropdown-hover">
 									<a href={`${Approutes.product.category}/${btoa(50)}`} tabIndex={0} className={listStyles}>
 										CARS & VEHICLES

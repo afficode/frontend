@@ -20,8 +20,6 @@ const Deposit = () => {
 			amount: Yup.number().required('Amount is required').min(500, 'Minimum amount is 500'),
 		}),
 		onSubmit: (values, { setSubmitting }) => {
-			// console.log('Submitted values:', values);
-
 			mutate(values, {
 				onSuccess: (data) => {
 					window.location.replace(data?.url);
