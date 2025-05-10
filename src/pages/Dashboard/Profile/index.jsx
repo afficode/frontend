@@ -10,8 +10,6 @@ import { toSelectOptions } from '../../../utils';
 import useAuth from '../../../context/UserContext.jsx';
 import { useStates } from '../../../hooks/index.js';
 
-import { uploadImage, deleteImages } from '../../../utils/index.js';
-
 import { userUpdate } from '../../../hooks/index.js';
 import { useNotify } from '../../../hooks/index.js';
 
@@ -62,29 +60,22 @@ const Profile = () => {
 			delete values.established;
 			delete values.name;
 
-			if (values?.cover_image) {
-				// TODO: Delete Old image if new one is uploaded.
-				// deleteImages(user?.cover_image.filename.split('.')[0]);
-				profile_image = await uploadImage(values?.cover_image, 'cover_image');
-				values = { ...values, cover_image: profile_image };
-			} else {
-				delete values.cover_image;
-			}
 			if (values.phone.toString().substring(0, 1) !== '0') {
 				values.phone = '0' + values.phone.toString();
 			}
-			await mutate(values, {
+			const formData = new FormData();
+			Object.entries(values).forEach(([key, value]) => {
+				console.log(key, value);
+				formData.append(key, value);
+			});
+			console.log("FormData", formData);
+			await mutate(formData, {
 				onSuccess: async (data) => {
-					if (values?.cover_image && user?.cover_image) {
-						let _publicId = user?.cover_image?.filename?.split('.');
-						_publicId.pop();
-						let publicId = _publicId.join('.');
-						await deleteImages(publicId);
-					}
 					updateUserInfo(data?.user);
 					notify(data?.message, 'success');
 				},
 				onError: (error) => {
+					console.log(error);
 					notify(error?.message, 'error');
 				},
 			});
