@@ -14,8 +14,6 @@ import { userUpdate } from '../../../hooks/index.js';
 import { useNotify } from '../../../hooks/index.js';
 
 const Profile = () => {
-	const { data: states } = useStates();
-	const statesOptions = toSelectOptions(states, 'states', 'Select your state');
 	const [toggleEdit, setToggleEdit] = useState({
 		about: true,
 		bio: true,
@@ -55,7 +53,6 @@ const Profile = () => {
 
 	const handleSave = async (values) => {
 		try {
-			let profile_image;
 			delete values.email;
 			delete values.established;
 			delete values.name;
@@ -65,7 +62,6 @@ const Profile = () => {
 			}
 			const formData = new FormData();
 			Object.entries(values).forEach(([key, value]) => {
-				console.log(key, value);
 				formData.append(key, value);
 			});
 			console.log("FormData", formData);
@@ -75,7 +71,6 @@ const Profile = () => {
 					notify(data?.message, 'success');
 				},
 				onError: (error) => {
-					console.log(error);
 					notify(error?.message, 'error');
 				},
 			});
@@ -119,11 +114,11 @@ const Profile = () => {
 			notify('Only image files are allowed', 'error');
 		}
 	};
-
-	const handleRemoveFile = () => {
-		formik.setFieldValue('cover_image', null);
-		setToggleEdit((prev) => ({ ...prev, cover_image: false }));
-	};
+	//
+	// const handleRemoveFile = () => {
+	// 	formik.setFieldValue('cover_image', null);
+	// 	setToggleEdit((prev) => ({ ...prev, cover_image: false }));
+	// };
 
 	useEffect(() => {
 		setTimeout(() => {
