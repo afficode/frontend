@@ -44,39 +44,25 @@ const Sidebar = () => {
 		const file = event.currentTarget.files[0];
 
 		try {
-			let profile_image;
-			let formData;
+			const formData = new FormData();
 			setUploadingImage(true);
 
 			if (file && file.type.startsWith('image/')) {
 				if (file.size <= 1024 * 1024) {
-					// TODO: Delete Old image if new one is uploaded.
-
-					profile_image = await uploadImage(file, 'profile_image');
-
 					setUploadingImage(false);
 
 					formik.setFieldValue('profile_image', file);
+					formData.append('profile_image', file);
+					mutate(formData, {
+						onSuccess: async (data) => {
+							updateUserInfo(data?.user);
+							notify(data?.message, 'success');
+						},
+						onError: (error) => {
+							notify(error?.message, 'error');
+						},
+					});
 
-					formData = { ...formik.values, profile_image: JSON.stringify(profile_image) };
-
-					if (formData !== null)
-						mutate(formData, {
-							onSuccess: async (data) => {
-								// console.log('success data return', data);
-								if (user?.profile_image) {
-									let _publicId = user?.profile_image?.filename.split('.');
-									_publicId.pop();
-									let publicId = _publicId.join('.');
-									await deleteImages(publicId);
-								}
-								updateUserInfo(data?.user);
-								notify(data?.message, 'success');
-							},
-							onError: (error) => {
-								notify(error?.message, 'error');
-							},
-						});
 				} else {
 					notify('File size must be less than 1MB', 'error');
 					setUploadingImage(false);

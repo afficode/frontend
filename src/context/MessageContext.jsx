@@ -132,7 +132,7 @@ export const MessageProvider = ({ children }) => {
   }, [socket]);
 
   useEffect(() => {
-    fetchChats();
+    isLogin ? fetchChats() : [];
 
   }, []);
 
