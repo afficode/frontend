@@ -10,14 +10,10 @@ import { toSelectOptions } from '../../../utils';
 import useAuth from '../../../context/UserContext.jsx';
 import { useStates } from '../../../hooks/index.js';
 
-import { uploadImage, deleteImages } from '../../../utils/index.js';
-
 import { userUpdate } from '../../../hooks/index.js';
 import { useNotify } from '../../../hooks/index.js';
 
 const Profile = () => {
-	const { data: states } = useStates();
-	const statesOptions = toSelectOptions(states, 'states', 'Select your state');
 	const [toggleEdit, setToggleEdit] = useState({
 		about: true,
 		bio: true,
@@ -57,30 +53,20 @@ const Profile = () => {
 
 	const handleSave = async (values) => {
 		try {
-			let profile_image;
 			delete values.email;
 			delete values.established;
 			delete values.name;
 
-			if (values?.cover_image) {
-				// TODO: Delete Old image if new one is uploaded.
-				// deleteImages(user?.cover_image.filename.split('.')[0]);
-				profile_image = await uploadImage(values?.cover_image, 'cover_image');
-				values = { ...values, cover_image: profile_image };
-			} else {
-				delete values.cover_image;
-			}
 			if (values.phone.toString().substring(0, 1) !== '0') {
 				values.phone = '0' + values.phone.toString();
 			}
-			await mutate(values, {
+			const formData = new FormData();
+			Object.entries(values).forEach(([key, value]) => {
+				formData.append(key, value);
+			});
+			console.log("FormData", formData);
+			await mutate(formData, {
 				onSuccess: async (data) => {
-					if (values?.cover_image && user?.cover_image) {
-						let _publicId = user?.cover_image?.filename?.split('.');
-						_publicId.pop();
-						let publicId = _publicId.join('.');
-						await deleteImages(publicId);
-					}
 					updateUserInfo(data?.user);
 					notify(data?.message, 'success');
 				},
@@ -128,11 +114,11 @@ const Profile = () => {
 			notify('Only image files are allowed', 'error');
 		}
 	};
-
-	const handleRemoveFile = () => {
-		formik.setFieldValue('cover_image', null);
-		setToggleEdit((prev) => ({ ...prev, cover_image: false }));
-	};
+	//
+	// const handleRemoveFile = () => {
+	// 	formik.setFieldValue('cover_image', null);
+	// 	setToggleEdit((prev) => ({ ...prev, cover_image: false }));
+	// };
 
 	useEffect(() => {
 		setTimeout(() => {
