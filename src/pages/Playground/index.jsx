@@ -1,12 +1,11 @@
 import { useState } from 'react';
-import { Button, InputGroup, Notification } from '../../ui';
-import { ActionBar, FormControl, GrabUpdateTable } from '../../components';
+import { Button, Notification } from '../../ui';
+import { FormControl, GrabUpdateTable } from '../../components';
 import { Form, Formik, useFormik } from 'formik';
 import * as Yup from 'yup';
 import { ToggleSwitch } from 'flowbite-react';
-import { useNotify } from '../../hooks';
+import { useCreateAd, useNotify } from '../../hooks';
 import InquiryChat from '../Grabs/GrabbedProduct/Modals/InquiryChat';
-import DatePicker from '../../components/FormComponents/DatePicker';
 
 const Playground = () => {
 	const [loading, setLoading] = useState(false);
@@ -16,6 +15,9 @@ const Playground = () => {
 		response: '',
 		reschedule_date: '',
 	});
+
+	// const notify = useNotify();
+	const { mutate } = useCreateAd();
 
 	const handleChange = (e) => {
 		setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -172,11 +174,6 @@ const Playground = () => {
 					</div>
 
 					<div>
-						<h5 className="text-center">Action bar for grabber backend</h5>
-						<ActionBar />
-					</div>
-
-					<div>
 						<h5 className="text-center">Grab update table</h5>
 						<GrabUpdateTable />
 					</div>
@@ -187,47 +184,6 @@ const Playground = () => {
 
 					<div>
 						<h3>InputGroup</h3>
-
-						<div>
-							<form onSubmit={formik.handleSubmit}>
-								<InputGroup
-									name="name"
-									value={formik.values.name}
-									onBlur={formik.handleBlur}
-									onChange={formik.handleChange}
-									errorMsg={formik.touched.name && formik.errors.name ? formik.errors.name : null}
-								/>
-								<InputGroup
-									name="description"
-									value={formik.values.description}
-									onBlur={formik.handleBlur}
-									onChange={formik.handleChange}
-									errorMsg={
-										formik.touched.description && formik.errors.description ? formik.errors.description : null
-									}
-								/>
-							</form>
-							<form onSubmit={formik.handleSubmit}>
-								<InputGroup
-									name="bio"
-									value={formik.values.bio}
-									onBlur={formik.handleBlur}
-									onChange={formik.handleChange}
-									errorMsg={formik.touched.bio && formik.errors.bio ? formik.errors.bio : null}
-								/>
-								<InputGroup
-									name="age"
-									value={formik.values.age}
-									onBlur={formik.handleBlur}
-									onChange={formik.handleChange}
-									errorMsg={formik.touched.age && formik.errors.age ? formik.errors.age : null}
-								/>
-							</form>
-
-							<Button variant={'primary'} onClick={formik.handleSubmit} type="submit">
-								Submit
-							</Button>
-						</div>
 					</div>
 
 					<div>

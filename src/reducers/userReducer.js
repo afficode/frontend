@@ -95,7 +95,6 @@ const userReducer = (state, action) => {
 	switch (type) {
 		case userReducerOptions.LOGIN_USER:
 			const userStatus = setUpUser(payload, state);
-			// console.log("reducer login", userStatus)
 			setUser(userStatus);
 			payload?.token && setToken(payload?.token);
 			payload?.refreshToken && setRefreshToken(payload?.refreshToken);

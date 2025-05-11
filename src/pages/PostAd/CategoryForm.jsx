@@ -11,7 +11,7 @@ import {
 	useNotify,
 	useCategories,
 } from '../../hooks';
-import { deleteImages, toOptions, toSelectOptions, uploadImage } from '../../utils';
+import { toOptions, toSelectOptions, uploadImage } from '../../utils';
 import {
 	agricultureTypes,
 	babiesBrands,
@@ -3857,19 +3857,6 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 	const onSubmit = async (values, { setSubmitting, resetForm }) => {
 		setSubmitting(true);
 
-		let images = [];
-		try {
-			for (let i = 0; i < values?.images.length; i++) {
-				const data = await uploadImage(values.images[i]);
-				images.push(data);
-			}
-		} catch (error) {
-			notify(error?.response?.data?.message, 'error');
-			// notify('Error uploading your images.', 'error');
-			setSubmitting(false);
-			return;
-		}
-
 		// Function to convert string values in an object to lowercase
 		const convertObjectValuesToLowerCase = (obj) => {
 			const newObj = {};
@@ -3881,15 +3868,28 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			return newObj;
 		};
 
-		const formData = {
-			// ...values,
+		const preparedData = {
 			...convertObjectValuesToLowerCase(values),
 			category: parseInt(values.category),
 			state_id: parseInt(values.state_id),
 			lga_id: parseInt(values.lga_id),
-			images: images,
 			address: address,
+			negotiable: values.negotiable === true ? 1 : 0,
 		};
+
+		const formData = new FormData();
+
+		Object.entries(preparedData).forEach(([key, value]) => {
+			if (key !== 'images') {
+				formData.append(key, value);
+			}
+		});
+
+		if (values.images && values.images.length > 0) {
+			values.images.forEach((file) => {
+				formData.append('images', file);
+			});
+		}
 
 		mutate(formData, {
 			onSuccess: (data) => {
@@ -3900,18 +3900,6 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				navigate(`${Approutes.postSuccess}/${encodeProductId(data.ad_id)}`);
 			},
 			onError: async (error) => {
-				try {
-					const filteredImages = images.map((image) => {
-						return image.filename.slice(0, image.filename.lastIndexOf('.'));
-					});
-
-					for (let i = 0; i < filteredImages.length; i++) {
-						await deleteImages(filteredImages[i]);
-					}
-				} catch (error) {
-					notify(error?.response?.data?.message, 'error');
-				}
-
 				setPaymentWindow(false);
 				setSubmitting(false);
 				notify(error?.response.data.message, 'error', {
@@ -4053,7 +4041,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				}, [formik.values.price]);
 
 				return (
-					<Form>
+					<Form encType="multipart/form-data">
 						{renderFields ? renderFields : <div className="text-center">No fields to display</div>}
 
 						{/* submit button  */}
@@ -4192,12 +4180,3 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 };
 
 export default CategoryForm;
-
-// const vehicles = [];
-
-// const agriculture = [];
-
-// const categoryField = {
-// 	vehicles,
-// 	argriculture,
-// };
