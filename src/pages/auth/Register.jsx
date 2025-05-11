@@ -65,7 +65,6 @@ const Register = ({ id }) => {
 			} else {
 				// notifyErr(submit.message);
 				notify(submit.message, 'error');
-				// console.log(submit.message);
 			}
 			setIsLoading(false);
 		}, 3000);

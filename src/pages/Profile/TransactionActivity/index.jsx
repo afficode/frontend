@@ -14,9 +14,6 @@ const TransactionActivity = () => {
 		enabled: !!orderId,
 	});
 
-	// console.log('all orders', data);
-	// console.log('order', order);
-
 	const handleOrderClick = (id) => {
 		setOrderId(id);
 		setOrderModal(true);

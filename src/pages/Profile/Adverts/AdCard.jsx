@@ -8,7 +8,6 @@ const AdCard = ({ title, images, active, price, subscribe, views, adId }) => {
 
 	const handleEdit = (adId) => {
 		navigate(`/update-ad/${adId}`);
-		// console.log(adId);
 	};
 
 	return (

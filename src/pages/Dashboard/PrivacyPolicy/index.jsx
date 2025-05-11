@@ -14,9 +14,7 @@ const PrivacyPolicy = () => {
 		contact_access: Yup.string().required('Required'),
 	});
 
-	const onSubmit = (values) => {
-		// console.log(values);
-	};
+	const onSubmit = (values) => {};
 
 	return (
 		<div>

@@ -7,7 +7,6 @@ import { Approutes } from '../../constants';
 import { Button, InputGroup } from '../../ui';
 import useAuth from '../../context/UserContext';
 import { useNotify, userUpdate } from '../../hooks';
-import { deleteImages, uploadImage } from '../../utils';
 import { useState } from 'react';
 
 const Sidebar = () => {
@@ -62,7 +61,6 @@ const Sidebar = () => {
 							notify(error?.message, 'error');
 						},
 					});
-
 				} else {
 					notify('File size must be less than 1MB', 'error');
 					setUploadingImage(false);

@@ -38,6 +38,8 @@ const index = () => {
 	const { data, isLoading: saveLoading } = getSaves();
 	const notify = useNotify();
 
+	console.log(result);
+
 	useEffect(() => {
 		if (result?.data) {
 			setItems(() => [
@@ -163,11 +165,11 @@ const index = () => {
 					<div className="w-full mb-2 pl-2">
 						{/* ad name and options */}
 						<div className="flex items-center justify-between w-full mb-2 font-bold uppercase text-md md:text-2xl xl:text-3xl">
-							<span className="">{result.data?.title}</span>
+							<span className="">{result?.data?.title}</span>
 							<span className=" flex items-center gap-2 lg:gap-8 my-auto mr-4 lg:mr-0">
-								<NegotiableIcon negotiable={result.data?.negotiable} />
+								<NegotiableIcon negotiable={result?.data?.negotiable} />
 
-								{((isLogin && parseInt(result.data?.owner) !== parseInt(user?.id)) || !isLogin) && (
+								{((isLogin && parseInt(result?.data?.owner) !== parseInt(user?.id)) || !isLogin) && (
 									<>
 										<SaveProduct ads_id={decodeProductId(id)} />
 									</>
@@ -179,30 +181,30 @@ const index = () => {
 						<div className="flex items-center justify-between">
 							<p className="w-full">
 								<Link
-									to={`/products/search?lga=${result.data?.lga_id}`}
+									to={`/products/search?lga=${result?.data?.lga_id}`}
 									className="text-primary hover:underline"
 								>
-									{result.data?.location.split(',')[0]}
+									{result?.data?.location.split(',')[0]}
 								</Link>{' '}
 								|{' '}
 								<Link
-									to={`/products/search?state_id=${result.data?.state_id}`}
+									to={`/products/search?state_id=${result?.data?.state_id}`}
 									className="text-primary hover:underline"
 								>
-									{result.data?.location.split(',')[1]}
+									{result?.data?.location.split(',')[1]}
 								</Link>
 							</p>
 							<p className="flex items-center justify-end w-full pr-2 font-bold">
 								<TbCurrencyNaira className="font-bold text-black" />
-								{numberWithCommas(result.data?.price)}
+								{numberWithCommas(result?.data?.price)}
 							</p>
 						</div>
 					</div>{' '}
 					{/* ad images */}
 					<div className="relative w-full h-full mx-auto mt-1  rounded-none ">
-						{result.data?.images.length > 0 ? (
+						{result?.data?.images.length > 0 ? (
 							<Carousel className="h-[250px] md:min-h-[650px] rounded-none">
-								{result.data?.images.map((img, index) => (
+								{result?.data?.images.map((img, index) => (
 									<img
 										src={img.path}
 										alt={img.filename}
@@ -221,17 +223,17 @@ const index = () => {
 						<div className="absolute bottom-0 flex w-full h-10 my-0 py-2 pl-6 text-white rounded-none bg-black/50">
 							<span className="flex px-2 my-auto border-2 border-white">
 								<FaCamera className="mt-1 text-sm" />
-								&nbsp; &nbsp; <span className="my-auto text-sm"> {result.data?.images.length}</span>
+								&nbsp; &nbsp; <span className="my-auto text-sm"> {result?.data?.images.length}</span>
 							</span>
 						</div>
 					</div>
 				</main>
 
 				<aside className="w-full h-full md:w-[40%] xl:w-[30%] border-2 border-gray-400 max-lg:p-2 lg:px-4 lg:pt-4 flex flex-col">
-					<h2 className="w-full text-lg font-bold md:text-xl 2xl:text-3xl">{result.data?.firstname}</h2>
+					<h2 className="w-full text-lg font-bold md:text-xl 2xl:text-3xl">{result?.data?.firstname}</h2>
 					<p className="text-lg">
 						Since{' '}
-						{formatDistance(new Date(new Date(`${result.data?.joined_on}`)), Date.now(), {
+						{formatDistance(new Date(new Date(`${result?.data?.joined_on}`)), Date.now(), {
 							includeSeconds: true,
 							addSuffix: true,
 						})}
@@ -241,12 +243,12 @@ const index = () => {
 
 					{result?.data.feature !== '3' && (
 						<div className="w-full text-lg tracking-tighter lg:text-xl">
-							<p className="w-full">Contact {result.data?.firstname} </p>
+							<p className="w-full">Contact {result?.data?.firstname} </p>
 							{result?.data?.contact_type.includes('phone') && (
 								<div className="flex items-center justify-between">
 									<p className="my-2 text-xl lg:text-2xl ">
 										<span className="text-xl font-bold">
-											{revealNumber ? result.data?.number : `${result.data?.number.substring(0, 3)}XXXXXXXX`}
+											{revealNumber ? result?.data?.number : `${result?.data?.number.substring(0, 3)}XXXXXXXX`}
 										</span>
 									</p>
 
@@ -280,11 +282,11 @@ const index = () => {
 										className={`my-2 w-full overflow-x-scroll ${
 											revealEmail ? 'tooltip tooltip-primary' : ''
 										}`}
-										data-tip={revealEmail ? result.data?.email : ''}
+										data-tip={revealEmail ? result?.data?.email : ''}
 									>
 										<span className="pr-1 text-xl font-bold">
-											{revealEmail && result.data?.email !== null
-												? result.data?.email
+											{revealEmail && result?.data?.email !== null
+												? result?.data?.email
 												: `${result?.data?.email.substring(0, 3)}XXXXXXXX`}
 										</span>
 									</p>

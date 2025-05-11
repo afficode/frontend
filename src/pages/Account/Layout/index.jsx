@@ -8,9 +8,7 @@ import { useAccountBalance } from '../../../hooks';
 const AccountLayout = () => {
 	const location = useLocation();
 
-	// localStorage.setItem('account-balance', data?.account.balance);
 	const balance = useAccountBalance();
-	// console.log(balance);
 
 	return (
 		<div className="min-h-screen p-8">

@@ -3,29 +3,6 @@ import TextError from './TextError';
 
 const PriceInput = (props) => {
 	const { label, name, required, type, className, ...rest } = props;
-	// const [isOpen, setIsOpen] = useState(false);
-	// const [touched, setTouched] = useState(false);
-	// const { values } = useFormikContext();
-	// const [priceFocus, setPriceFocus] = useState(false);
-	// const { token, updateToken } = useTokenContext();
-	// const [prevToken, setPrevToken] = useState(0);
-
-	// useEffect(() => {
-	// 	console.log(prevToken, '  ', priceToToken(values.price));
-
-	// 	if (values.price != '' && values.price != null && values.price != undefined) {
-	// 		if (prevToken > priceToToken(values.price)) {
-	// 			updateToken(token - priceToToken(values.price));
-	// 			setPrevToken(priceToToken(values.price));
-	// 		} else if (prevToken < priceToToken(values.price)) {
-	// 			updateToken(token + priceToToken(values.price));
-	// 			setPrevToken(priceToToken(values.price));
-	// 		}
-	// 	} else {
-	// 		updateToken(token);
-	// 	}
-	// }, [values.price]);
-
 	return (
 		<div className={className ? '' : 'formControlClass'}>
 			{label && (

@@ -8,13 +8,12 @@ import { Approutes } from '../../../constants';
 const Hero = () => {
 	const firstTimer = true;
 	const { user } = useAuth();
-	// console.log(user);
 
 	return (
 		<section className="flex flex-col gap-12 px-2 py-12 my-2 rounded-md bg-primary sm:px-8">
 			<h1 className="text-white max-sm:text-center">Welcome, {user?.firstname}</h1>
 			<span className="block text-base text-center text-white md:text-xl">
-				Tons of opportunities await you!. <br />
+				Tons of DEALS await you!. <br />
 				Please choose your next action below.
 			</span>
 

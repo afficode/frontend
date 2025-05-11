@@ -56,8 +56,6 @@ const PerformanceCharts = ({ adsData }) => {
 		}),
 	];
 
-	// console.log(data[0]);
-
 	const option = {
 		tooltip: {},
 		// legend: {},
@@ -115,7 +113,7 @@ const PerformanceCharts = ({ adsData }) => {
 				queryClient.invalidateQueries({ queryKey: ['getUserAds'] });
 				notify(res?.data.message, 'success');
 			})
-			.catch((error) => console.log(err));
+			.catch((error) => {});
 	};
 
 	return (

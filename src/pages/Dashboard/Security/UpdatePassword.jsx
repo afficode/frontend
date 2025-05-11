@@ -29,11 +29,8 @@ const UpdatePassword = ({ setIsOpen }) => {
 	});
 
 	const onSubmit = (values, { setSubmitting, resetForm }) => {
-		// console.log(values);
-
 		mutate(values, {
 			onSuccess: (data) => {
-				// console.log(data);
 				notify(data.message, 'success');
 				resetForm();
 				setSubmitting(false);

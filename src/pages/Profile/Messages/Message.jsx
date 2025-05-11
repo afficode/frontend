@@ -5,8 +5,6 @@ import { TiTick } from 'react-icons/ti';
 const Message = ({ message, time }) => {
 	const { user } = useAuth();
 
-	// console.log(message);
-
 	return (
 		<div className="bg-gray-200 px-3 py-1 rounded-l-2xl rounded-t-2xl min-w-[8rem] flex flex-col justify-between relative ">
 			<span

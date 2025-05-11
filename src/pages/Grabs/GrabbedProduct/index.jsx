@@ -21,15 +21,34 @@ const GrabbedProduct = () => {
 	}
 
 	const { data: result, isLoading } = fetchProduct(ad_id);
-	const { data: checkOrder, isError, error, isLoading: checking } = useCheckOrder(Number(ad_id));
+	const { data: checkOrder, isError, isLoading: checking } = useCheckOrder(Number(ad_id));
 	const { user } = useAuth();
 
 	if (isError) {
 		return (
 			<div className="flex items-center justify-center w-full h-[70vh]">
-				<h1 className="text-2xl font-bold text-red-500 max-w-lg text-center">
-					{error.response.data.message}
-				</h1>
+				<div className="flex flex-col gap-4 w-full h-max max-w-[600px] text-center p-4 bg-white">
+					<div className="bg-secondary p-4 space-y-2">
+						<h3>🔒 Restricted Access Notice</h3>
+
+						<p>
+							This ad is currently locked due to an active transaction. To protect both buyers and sellers,
+							listings become temporarily unavailable once a purchase is in progress.
+						</p>
+					</div>
+
+					<div className="space-y-4 text-start">
+						<h4 className="text-center">What You Can Do:</h4>
+
+						<ul>
+							<li>✅ Browse similar available items</li>
+							<li>✅ Check back in 24-48 hours if the deal falls through</li>
+							<li>✅ Contact support@boonfu.com for urgent inquiries</li>
+						</ul>
+
+						<p>Thank you for understanding our secure transaction process!</p>
+					</div>
+				</div>
 			</div>
 		);
 	}

@@ -38,9 +38,7 @@ const ActionBar = (ad) => {
 				notify(res?.data.message, 'success');
 				navigate(Approutes.dashboard.initial);
 			})
-			.catch((error) => {
-				// console.log(error)
-			});
+			.catch((error) => {});
 
 		setIsDeleting(false);
 	};

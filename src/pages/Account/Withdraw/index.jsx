@@ -28,11 +28,8 @@ const Withdraw = () => {
 			amount: Yup.number().required('Amount is required').min(500, 'Minimum amount is 500'),
 		}),
 		onSubmit: (values, { setSubmitting, resetForm }) => {
-			// console.log('Submitted values:', values);
-
 			mutate(values, {
 				onSuccess: (data) => {
-					// console.log('Withdraw data:', data);
 					notify(data.message, 'success');
 					queryClient.invalidateQueries('account-balance');
 					queryClient.invalidateQueries('all-transactions');
@@ -41,14 +38,12 @@ const Withdraw = () => {
 				},
 				onError: (error) => {
 					setSubmitting(false);
-					// console.log(error);
 					notify(error.response.data.message, 'error');
 				},
 			});
 		},
 	});
 	const handleWithdrawChange = (bank) => {
-		// console.log(bank);
 		setSelectedBank(bank);
 		formikWithdraw.setFieldValue('preferred_payout', bank);
 	};

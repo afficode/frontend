@@ -52,7 +52,6 @@ const AdFeatures = (props) => {
 							return ( */}
 							<Field name={name}>
 								{({ field }) => {
-									// console.log(field);
 									return featureList?.map((option) => {
 										return (
 											<tr key={option.value} className="flex">
@@ -181,7 +180,12 @@ const AdFeatures = (props) => {
 																</label> */}
 
 																	<div className="w-full flex items-end justify-end pt-4">
-																		<Button variant={'primary'} size={'small'}>
+																		<Button
+																			variant={'primary'}
+																			size={'small'}
+																			type="button"
+																			onClick={() => setGrabModal(false)}
+																		>
 																			Submit to continue
 																		</Button>
 																	</div>
