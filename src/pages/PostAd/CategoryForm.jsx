@@ -2033,7 +2033,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				type: 'radio',
 				options: [
 					{ key: 'Used', value: 'used' },
-					{ key: 'Brand New', value: 'brand new' },
+					{ key: 'New', value: 'new' },
 					{ key: 'Refurbished', value: 'refurbished' },
 				],
 			},
@@ -2564,9 +2564,9 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				name: 'ad_condition',
 				type: 'radio',
 				options: [
-					{ key: 'Nigerian Used', value: 'Nigerian Used' },
-					{ key: 'Foreign Used ', value: 'Foreign Used' },
-					{ key: 'Brand New', value: 'Brand New' },
+					{ key: 'Nigerian Used', value: 'nigerian use' },
+					{ key: 'Foreign Used ', value: 'foreign use' },
+					{ key: 'New', value: 'New' },
 				],
 			},
 			!['6002', '6003'].includes(selectedPetCategory) && {
