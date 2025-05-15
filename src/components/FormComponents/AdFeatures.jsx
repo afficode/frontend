@@ -3,7 +3,7 @@ import { InfoYellow, Naira } from '../../assets/svgs';
 import { Field } from 'formik';
 import { Button, InputGroup, Modal } from '../../ui';
 import { useEffect, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import {
 	grabbableCategories,
 	inspectableCategories,
@@ -12,10 +12,9 @@ import {
 import { getCommission, toMoney } from '../../utils';
 
 const AdFeatures = (props) => {
-	const { name, price, subCat, address, setAddress, ...rest } = props;
+	const { name, price, subCat, address, setAddress, categoryId, ...rest } = props;
 	const [showGrab, setShowGrab] = useState(false);
 	const { hash } = useLocation();
-	const { categoryId } = useParams();
 	const [grabModal, setGrabModal] = useState(false);
 
 	const { boonfuCommission } = getCommission(price);

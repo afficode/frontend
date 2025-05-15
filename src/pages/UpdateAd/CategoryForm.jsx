@@ -11,11 +11,12 @@ import {
 	useUpdateAd,
 	useCategories,
 } from '../../hooks';
-import { deleteImages, toOptions, toSelectOptions, uploadImage } from '../../utils';
+import { toOptions, toSelectOptions } from '../../utils';
 import {
 	Approutes,
 	agricultureTypes,
 	babiesBrands,
+	babiesSizes,
 	babiesTypes,
 	carMake,
 	carModels,
@@ -28,11 +29,13 @@ import {
 	fashionMaterials,
 	fashionSizes,
 	fashionTypes,
+	furnitureFor,
 	gameGenre,
 	healthBrands,
 	healthProductFormulation,
 	healthTypes,
 	homeBrands,
+	homeChemicals,
 	homeMaterials,
 	homeTypes,
 	motorbikeMake,
@@ -55,16 +58,15 @@ import {
 	storageSize,
 	storageType,
 	tradesmanArea,
+	tradesmanForms,
 	tradesmanType,
 	tutorialTopics,
 	vehicleAccessoriesType,
 	years,
 } from '../../constants';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId }) => {
-	const [stateId, setStateId] = useState(null);
-	const [selectedCarMake, setSelectedCarMake] = useState(null);
 	const [selectedHealthCategory, setSelectedHealthCategory] = useState(null);
 	const [selectedFashionCategory, setSelectedFashionCategory] = useState(null);
 	const [selectedSoftwareCategory, setSelectedSoftwareCategory] = useState(null);
@@ -79,6 +81,10 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 	const [selectedPropertyCategory, setSelectedPropertyCategory] = useState(null);
 	const [selectedServicesCategory, setSelectedServicesCategory] = useState(null);
 	const [selectedTradesmanCategory, setSelectedTradesmanCategory] = useState(null);
+
+	if (['5001', '5003', '5007', '5004'].includes(selectedVehicleCategory)) {
+		// create a state to track if the category is amongst fix commision categories or   percentage commission
+	}
 
 	// if other option is selected
 	const [otherMake, setOtherMake] = useState(false);
@@ -100,11 +106,13 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 	const [otherScent, setOtherScent] = useState(false);
 	const [otherFurnitureFor, setOtherFurnitureFor] = useState(false);
 
+	const [formValues, setFormValues] = useState({ state_id: '', make: '' });
+
 	const { data: cat } = useCategories();
 	const filteredCat = cat?.filter((item) => item.id >= 50 && item.id <= 63);
 	const { data: subCat } = useSubCategories(categoryId);
 	const { data: states } = useStates();
-	const { data: lga } = useLga(stateId);
+	const { data: lga } = useLga(formValues.state_id);
 
 	const categoriesOptions = toSelectOptions(filteredCat, 'category', 'Choose from list');
 	const subCategoriesOptions = toSelectOptions(subCat, 'subcategory', 'Choose from list');
@@ -116,7 +124,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 	// vehicle category
 	const carMakeOptions = toSelectOptions(carMake, 'carMake', 'Select your car make');
 	const carModelOptions = toSelectOptions(
-		carModels(selectedCarMake),
+		carModels(formValues.make),
 		'carModel',
 		'Select your car model'
 	);
@@ -173,6 +181,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			: tradesmanArea[selectedTradesmanCategory],
 		'area'
 	);
+	const tradesmanFormOptions = toOptions(tradesmanForms[selectedTradesmanCategory], 'form');
 
 	// fashion category
 	const fashionTypesOptions = toSelectOptions(
@@ -224,6 +233,8 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 		'homeMaterial',
 		'Select material type here'
 	);
+	const furnitureForOptions = toSelectOptions(furnitureFor, 'furnitureFor', 'Select furniture for');
+	const homeFormOptions = toSelectOptions(homeChemicals, 'homeForm', 'Select form here');
 
 	//software category
 	const softwarePlatformOptions = toSelectOptions(
@@ -255,6 +266,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 		'babiesType',
 		'Select type here'
 	);
+	const babiesSizeOptions = toSelectOptions(babiesSizes, 'babiesSize', 'Select size here');
 
 	// electronics category
 	const displaySizeOptions = toSelectOptions(displaySizes, 'displaySize', 'Select size here');
@@ -326,7 +338,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 		'Select type here'
 	);
 	const healthFormulationOptions = toSelectOptions(
-		healthProductFormulation,
+		healthProductFormulation[selectedHealthCategory],
 		'healthFormulation',
 		'Select formulation here'
 	);
@@ -387,10 +399,12 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			},
 			{
 				control: 'imageinput',
-				label: '',
+				label: 'Images',
 				name: 'images',
 				type: 'file',
-				required: true,
+				// required: true,
+				images: adImages,
+				edit: true,
 			},
 			{
 				control: 'select',
@@ -676,10 +690,12 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			},
 			{
 				control: 'imageinput',
-				label: '',
+				label: 'Images',
 				name: 'images',
 				type: 'file',
-				required: true,
+				// required: true,
+				images: adImages,
+				edit: true,
 			},
 			{
 				control: 'textarea',
@@ -1077,10 +1093,12 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			},
 			{
 				control: 'imageinput',
-				label: '',
+				label: 'Images',
 				name: 'images',
 				type: 'file',
-				required: true,
+				// required: true,
+				images: adImages,
+				edit: true,
 			},
 			{
 				control: 'input',
@@ -1220,10 +1238,12 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			},
 			{
 				control: 'imageinput',
-				label: '',
+				label: 'Images',
 				name: 'images',
 				type: 'file',
-				required: true,
+				// required: true,
+				images: adImages,
+				edit: true,
 			},
 			{
 				control: 'input',
@@ -1509,10 +1529,12 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			},
 			{
 				control: 'imageinput',
-				label: '',
+				label: 'Images',
 				name: 'images',
 				type: 'file',
-				required: true,
+				// required: true,
+				images: adImages,
+				edit: true,
 			},
 			{
 				control: 'input',
@@ -1714,10 +1736,12 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			},
 			{
 				control: 'imageinput',
-				label: '',
+				label: 'Images',
 				name: 'images',
 				type: 'file',
-				required: true,
+				// required: true,
+				images: adImages,
+				edit: true,
 			},
 			{
 				control: 'input',
@@ -1919,10 +1943,12 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			},
 			{
 				control: 'imageinput',
-				label: '',
+				label: 'Images',
 				name: 'images',
 				type: 'file',
-				required: true,
+				// required: true,
+				images: adImages,
+				edit: true,
 			},
 			{
 				control: 'input',
@@ -2099,10 +2125,12 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			},
 			{
 				control: 'imageinput',
-				label: '',
+				label: 'Images',
 				name: 'images',
 				type: 'file',
-				required: true,
+				// required: true,
+				images: adImages,
+				edit: true,
 			},
 			{
 				control: 'input',
@@ -2288,10 +2316,12 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			},
 			{
 				control: 'imageinput',
-				label: '',
+				label: 'Images',
 				name: 'images',
 				type: 'file',
-				required: true,
+				// required: true,
+				images: adImages,
+				edit: true,
 			},
 			{
 				control: 'input',
@@ -2466,10 +2496,12 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			},
 			{
 				control: 'imageinput',
-				label: '',
+				label: 'Images',
 				name: 'images',
 				type: 'file',
-				required: true,
+				// required: true,
+				images: adImages,
+				edit: true,
 			},
 			{
 				control: 'input',
@@ -2636,10 +2668,12 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			},
 			{
 				control: 'imageinput',
-				label: '',
+				label: 'Images',
 				name: 'images',
 				type: 'file',
-				required: true,
+				// required: true,
+				images: adImages,
+				edit: true,
 			},
 			{
 				control: 'input',
@@ -2822,10 +2856,12 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			},
 			{
 				control: 'imageinput',
-				label: '',
+				label: 'Images',
 				name: 'images',
 				type: 'file',
-				required: true,
+				// required: true,
+				images: adImages,
+				edit: true,
 			},
 			{
 				control: 'input',
@@ -3011,10 +3047,12 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			},
 			{
 				control: 'imageinput',
-				label: '',
+				label: 'Images',
 				name: 'images',
 				type: 'file',
-				required: true,
+				// required: true,
+				images: adImages,
+				edit: true,
 			},
 			{
 				control: 'select',
@@ -3191,10 +3229,12 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			},
 			{
 				control: 'imageinput',
-				label: '',
+				label: 'Images',
 				name: 'images',
 				type: 'file',
-				required: true,
+				// required: true,
+				images: adImages,
+				edit: true,
 			},
 			{
 				control: 'input',
@@ -3311,10 +3351,12 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			},
 			{
 				control: 'imageinput',
-				label: '',
+				label: 'Images',
 				name: 'images',
 				type: 'file',
-				required: true,
+				// required: true,
+				images: adImages,
+				edit: true,
 			},
 			{
 				control: 'input',
@@ -3413,8 +3455,6 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			},
 		],
 	};
-
-	const fields = categoryFields[categoryName] || [];
 
 	const validationSchema = {
 		vehicles: Yup.object().shape({
@@ -3788,21 +3828,36 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 		}),
 	};
 
+	const fields = categoryFields[categoryName] || [];
+	const [priceValue, setPriceValue] = useState(null);
+	const [address, setAddress] = useState('');
+
 	const renderFields =
 		fields &&
 		fields?.map((field, index) => (
 			<FormControl
+				categoryId={categoryId}
 				key={index}
 				control={field.control}
 				name={field.name}
 				type={field.type}
+				maxLength={field.maxLength}
 				placeholder={field.placeholder}
 				label={field.label}
 				options={field.options}
-				maxLength={field.maxLength}
 				required={field.required}
+				price={priceValue}
+				address={address}
 				images={field.images}
 				edit={field.edit}
+				setAddress={setAddress}
+				subCat={
+					selectedVehicleCategory ||
+					selectedPropertyCategory ||
+					selectedAgricultureCategory ||
+					selectedMotorbikeCategory ||
+					selectedElectronicsCategory
+				}
 			/>
 		));
 
@@ -3810,25 +3865,8 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 	const notify = useNotify();
 	const { mutate } = useUpdateAd(adId);
 
-	const onSubmit = async (values, { setSubmitting, resetForm }) => {
+	const onSubmit = async (values, { setSubmitting }) => {
 		setSubmitting(true);
-
-		let images = [];
-		try {
-			if (values?.images?.length > 0) {
-				for (let i = 0; i < values?.images.length; i++) {
-					const data = await uploadImage(values.images[i]);
-					images.push(data);
-				}
-			} else {
-				images = [...adImages];
-			}
-		} catch (error) {
-			notify(error?.response?.data?.message, 'error');
-			// notify('Error uploading your images.', 'error');
-			setSubmitting(false);
-			return;
-		}
 
 		// Function to convert string values in an object to lowercase
 		const convertObjectValuesToLowerCase = (obj) => {
@@ -3841,41 +3879,49 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			return newObj;
 		};
 
-		const formData = {
-			// ...values,
+		const preparedData = {
 			...convertObjectValuesToLowerCase(values),
 			category: parseInt(values.category),
 			state_id: parseInt(values.state_id),
 			lga_id: parseInt(values.lga_id),
-			images: images.length > 0 ? images : adImages,
+			address: address,
+			negotiable: values.negotiable === true ? 1 : 0,
+			images: adImages,
 		};
+
+		const formData = new FormData();
+
+		Object.entries(preparedData).forEach(([key, value]) => {
+			if (value === null || value === undefined) {
+				return;
+			}
+			formData.append(key, value);
+		});
+
+		if (values.images && values.images.length > 0) {
+			values.images.forEach((file) => {
+				formData.append('new_images', file);
+			});
+		}
+
+		formData.delete('images');
 
 		mutate(formData, {
 			onSuccess: (data) => {
 				notify(data.message, 'success');
 				navigate(Approutes.profile.adverts);
+				setSubmitting(false);
 			},
-			onError: async (error) => {
-				try {
-					const filteredImages = images.map((image) => {
-						return image.filename.slice(0, image.filename.lastIndexOf('.'));
-					});
-
-					for (let i = 0; i < filteredImages.length; i++) {
-						await deleteImages(filteredImages[i]);
-					}
-				} catch (error) {
-					notify(error?.response?.data?.message, 'error');
-				}
-
-				notify(error?.response.data.message, 'error', {
-					toastId: 'create-ad-error',
+			onError: (error) => {
+				setSubmitting(false);
+				notify(error?.response?.data?.message, 'error', {
+					toastId: 'update-ad-error',
 				});
 			},
 		});
-
-		setSubmitting(false);
 	};
+
+	const { pathname } = useLocation();
 
 	return (
 		<Formik
@@ -3885,170 +3931,118 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			validationSchema={validationSchema[categoryName]}
 		>
 			{(formik) => {
+				// let adToken = priceToToken(formik.values.price);
 				useEffect(() => {
-					setStateId(() => formik.values.state_id);
-				}, [formik.values.state_id]);
-				useEffect(() => {
-					setSelectedCarMake(() => formik.values.make);
-				}, [formik.values.make]);
-				if (categoryId === '50') {
-					useEffect(() => {
-						setSelectedVehicleCategory(() => formik.values.category);
-					}, [formik.values.category]);
-				} else if (categoryId === '51') {
-					useEffect(() => {
-						setSelectedPropertyCategory(() => formik.values.category);
-					}, [formik.values.category]);
-				} else if (categoryId === '52') {
-					useEffect(() => {
-						setSelectedServicesCategory(() => formik.values.category);
-					}, [formik.values.category]);
-				} else if (categoryId === '53') {
-					useEffect(() => {
-						setSelectedAgricultureCategory(() => formik.values.category);
-					}, [formik.values.category]);
-				} else if (categoryId === '54') {
-					useEffect(() => {
-						setSelectedElectronicsCategory(() => formik.values.category);
-					}, [formik.values.category]);
-				} else if (categoryId === '56') {
-					useEffect(() => {
-						setSelectedHealthCategory(() => formik.values.category);
-					}, [formik.values.category]);
-				} else if (categoryId === '55') {
-					useEffect(() => {
-						setSelectedFashionCategory(() => formik.values.category);
-					}, [formik.values.category]);
-				} else if (categoryId === '57') {
-					useEffect(() => {
-						setSelectedHomeCategory(() => formik.values.category);
-					}, [formik.values.category]);
-				} else if (categoryId === '58') {
-					useEffect(() => {
-						setSelectedTradesmanCategory(() => formik.values.category);
-					}, [formik.values.category]);
-				} else if (categoryId === '59') {
-					useEffect(() => {
-						setSelectedSoftwareCategory(() => formik.values.category);
-					}, [formik.values.category]);
-				} else if (categoryId === '60') {
-					useEffect(() => {
-						setSelectedPetCategory(() => formik.values.category);
-					}, [formik.values.category]);
-				} else if (categoryId === '61') {
-					useEffect(() => {
-						setSelectedBabiesCategory(() => formik.values.category);
-					}, [formik.values.category]);
-				} else if (categoryId === '62') {
-					useEffect(() => {
-						setSelectedSportsCategory(() => formik.values.category);
-					}, [formik.values.category]);
-				} else if (categoryId === '63') {
-					useEffect(() => {
-						setSelectedMotorbikeCategory(() => formik.values.category);
-					}, [formik.values.category]);
-				}
+					setFormValues({
+						state_id: formik.values.state_id,
+						make: formik.values.make,
+					});
 
-				// check if other option is selected
-				useEffect(() => {
 					if (formik.values.make === 'other') {
 						setOtherMake(true);
 					}
-				}, [formik.values.make]);
-				useEffect(() => {
 					if (formik.values.brand === 'other') {
 						setOtherBrand(true);
 					}
-				}, [formik.values.brand]);
-				useEffect(() => {
 					if (formik.values.type === 'other') {
 						setOtherType(true);
 					}
-				}, [formik.values.type]);
-				useEffect(() => {
 					if (formik.values.material === 'other') {
 						setOtherMaterial(true);
 					}
-				}, [formik.values.material]);
-				useEffect(() => {
 					if (formik.values.size === 'other') {
 						setOtherSize(true);
 					}
-				}, [formik.values.size]);
-				useEffect(() => {
 					if (formik.values.formulation === 'other') {
 						setOtherFormulation(true);
 					}
-				}, [formik.values.formulation]);
-				useEffect(() => {
 					if (formik.values.breed === 'other') {
 						setOtherBreed(true);
 					}
-				}, [formik.values.breed]);
-				useEffect(() => {
 					if (formik.values.platform === 'other') {
 						setOtherPlatform(true);
 					}
-				}, [formik.values.platform]);
-				useEffect(() => {
 					if (formik.values.format === 'other') {
 						setOtherFormat(true);
 					}
-				}, [formik.values.format]);
-				useEffect(() => {
 					if (formik.values.game_genre === 'other') {
 						setOtherGenre(true);
 					}
-				}, [formik.values.game_genre]);
-				useEffect(() => {
 					if (formik.values.color === 'other') {
 						setOtherColor(true);
 					}
-				}, [formik.values.color]);
-				useEffect(() => {
 					if (formik.values.expertise === 'other') {
 						setOtherExpertise(true);
 					}
-				}, [formik.values.expertise]);
-				useEffect(() => {
 					if (formik.values.room_bathroom === 'other') {
 						setOtherRoom(true);
 					}
-				}, [formik.values.room_bathroom]);
-				useEffect(() => {
 					if (formik.values.property_use === 'other') {
 						setOtherUse(true);
 					}
-				}, [formik.values.property_use]);
-				useEffect(() => {
 					if (formik.values.ad_condition === 'other') {
 						setOtherCondition(true);
 					}
-				}, [formik.values.ad_condition]);
-				useEffect(() => {
 					if (formik.values.processor === 'other') {
 						setOtherProcessor(true);
 					}
-				}, [formik.values.processor]);
-				useEffect(() => {
 					if (formik.values.scent_type === 'other') {
 						setOtherScent(true);
 					}
-				}, [formik.values.scent_type]);
-				useEffect(() => {
 					if (formik.values.furniture_for === 'other') {
 						setOtherFurnitureFor(true);
 					}
-				}, [formik.values.furniture_for]);
+				}, [formik.values]);
+
+				useEffect(() => {
+					if (pathname === '/post-ad/50') {
+						setSelectedVehicleCategory(() => formik.values.category);
+					} else if (pathname === '/post-ad/51') {
+						setSelectedPropertyCategory(() => formik.values.category);
+					} else if (pathname === '/post-ad/52') {
+						setSelectedServicesCategory(() => formik.values.category);
+					} else if (pathname === '/post-ad/53') {
+						setSelectedAgricultureCategory(() => formik.values.category);
+					} else if (pathname === '/post-ad/54') {
+						setSelectedElectronicsCategory(() => formik.values.category);
+					} else if (pathname === '/post-ad/56') {
+						setSelectedHealthCategory(() => formik.values.category);
+					} else if (pathname === '/post-ad/55') {
+						setSelectedFashionCategory(() => formik.values.category);
+					} else if (pathname === '/post-ad/57') {
+						setSelectedHomeCategory(() => formik.values.category);
+					} else if (pathname === '/post-ad/58') {
+						setSelectedTradesmanCategory(() => formik.values.category);
+					} else if (pathname === '/post-ad/59') {
+						setSelectedSoftwareCategory(() => formik.values.category);
+					} else if (pathname === '/post-ad/60') {
+						setSelectedPetCategory(() => formik.values.category);
+					} else if (pathname === '/post-ad/61') {
+						setSelectedBabiesCategory(() => formik.values.category);
+					} else if (pathname === '/post-ad/62') {
+						setSelectedSportsCategory(() => formik.values.category);
+					} else if (pathname === '/post-ad/63') {
+						setSelectedMotorbikeCategory(() => formik.values.category);
+					}
+				}, [formik.values.category]);
+
+				useEffect(() => {
+					if (formik.values.price) {
+						setPriceValue(formik.values.price);
+					}
+				}, [formik.values.price]);
+
 				return (
-					<Form>
+					<Form encType="multipart/form-data">
 						{renderFields ? renderFields : <div className="text-center">No fields to display</div>}
 
 						<Button
 							type="submit"
+							onClick={formik.handleSubmit}
 							loading={formik.isSubmitting}
 							variant="primary"
 							size="full"
+							disabled={!(formik.isValid && formik.dirty) || formik.values.feature === '-1'}
 							className={'mt-10 text-lg font-bold rounded-md'}
 						>
 							Update My Ad
