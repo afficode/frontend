@@ -1,7 +1,6 @@
 export * from './axios';
 export * from './dataManipulations';
 export * from './generateUrl';
-export * from './imageUpload';
 export * from './localstorage';
 export * from './toFormOptions';
 export { default as getCommission } from './getCommission';

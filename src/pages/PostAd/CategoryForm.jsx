@@ -11,7 +11,7 @@ import {
 	useNotify,
 	useCategories,
 } from '../../hooks';
-import { toOptions, toSelectOptions, uploadImage } from '../../utils';
+import { toOptions, toSelectOptions } from '../../utils';
 import {
 	agricultureTypes,
 	babiesBrands,

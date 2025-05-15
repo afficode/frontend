@@ -6,7 +6,6 @@ import { useNotify } from '../../hooks';
 import { useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
-import { deleteImages } from '../../utils';
 
 const ImageInput = (props) => {
 	const { label, name, required, edit = false, images, ...rest } = props;
@@ -16,19 +15,7 @@ const ImageInput = (props) => {
 
 	const notify = useNotify();
 
-	const handleEdit = async () => {
-		try {
-			const filteredImages = images.map((image) => {
-				return image.filename.slice(0, image.filename.lastIndexOf('.'));
-			});
-
-			for (let i = 0; i < filteredImages.length; i++) {
-				await deleteImages(filteredImages[i]);
-			}
-		} catch (error) {
-			notify(error?.response?.data?.message, 'error');
-		}
-
+	const handleEdit = () => {
 		setEditMode(false);
 	};
 	return (
