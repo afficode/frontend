@@ -6,7 +6,7 @@ import { Approutes } from '../../../constants';
 import { encodeProductId } from '../../../utils/dataManipulations';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 // import { MdEditNote } from 'react-icons/md';
-import { deleteImages, privateAxios } from '../../../utils';
+import { privateAxios } from '../../../utils';
 import { useNotify } from '../../../hooks';
 import { useQueryClient } from 'react-query';
 
@@ -93,23 +93,10 @@ const PerformanceCharts = ({ adsData }) => {
 
 	const notify = useNotify();
 
-	const handleDelete = (id, images = []) => {
+	const handleDelete = (id) => {
 		privateAxios
 			.delete(`/ads/${id}`)
 			.then(async (res) => {
-				try {
-					if (images?.length > 0) {
-						const filteredImages = images.map((image) => {
-							return image.filename.slice(0, image.filename.lastIndexOf('.'));
-						});
-
-						for (let i = 0; i < filteredImages.length; i++) {
-							await deleteImages(filteredImages[i]);
-						}
-					}
-				} catch (error) {
-					notify(error?.response?.data?.message, 'error');
-				}
 				queryClient.invalidateQueries({ queryKey: ['getUserAds'] });
 				notify(res?.data.message, 'success');
 			})
@@ -164,7 +151,7 @@ const PerformanceCharts = ({ adsData }) => {
 												</span>{' '}
 												|
 												<span className="text-red-600 ">
-													<FaTrash className="cursor-pointer" onClick={() => handleDelete(ad?.id, ad?.images)} />
+													<FaTrash className="cursor-pointer" onClick={() => handleDelete(ad?.id)} />
 												</span>
 											</td>
 										</tr>
