@@ -1,29 +1,20 @@
-import React from 'react';
+import { feature_basic, feature_feature, feature_spotlight} from "../../../assets/images/index.js";
 
 const Feature = ({ feature }) => {
 	return (
 		<div
-			className={`w-[70%] absolute top-5 -ml-0.5  text-center uppercase text-black rounded-r-sm font-semibold`}
+			className={`w-[70%] absolute top-3 -left-2 -ml-0.5  text-center uppercase text-black rounded-r-sm font-semibold`}
 		>
 			<div className="relative">
-				<svg
-					width="100%"
-					height="100%"
-					viewBox="0 0 2234 363"
-					fill="none"
-					xmlns="http://www.w3.org/2000/svg"
-					className=""
-				>
-					<path
-						d="M1819.3 186.812L2185.34 352.5H10.5V10.5H2183.21L1819.46 167.607L1797.67 177.021L1819.3 186.812Z"
-						fill="#EBBA16"
-						stroke="black"
-						strokeWidth="21"
-					/>
-				</svg>
-				<span className="text-left absolute top-1 left-0 ml-3">
-					{feature == '1' ? 'FEATURED' : 'SPOTLIGHT'}
-				</span>
+				{feature == '0' &&
+					<img src={feature_basic} alt={"basic feature"} className="h-12" />
+				}
+				{feature == '1' &&
+					<img src={feature_feature} alt={"feature"} className="h-12" />
+				}
+				{feature == '2' &&
+					<img src={feature_spotlight} alt={"spotlight feature"} className="h-12" />
+				}
 			</div>
 		</div>
 	);
