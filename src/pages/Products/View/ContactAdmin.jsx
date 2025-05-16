@@ -1,5 +1,5 @@
 import { HiEye } from 'react-icons/hi';
-import { deleteImages, privateAxios } from '../../../utils';
+import { privateAxios } from '../../../utils';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { Timeline } from '../../../components';
@@ -18,22 +18,11 @@ export default function ContactAdmin({ ads_id, images }) {
 
 	const notify = useNotify();
 
-	const handleDelete = async (id, images = []) => {
+	const handleDelete = async (id) => {
 		await privateAxios
 			.delete(`/ads/${id}`)
 			.then(async (res) => {
-				try {
-					if (images?.length > 0) {
-						const filteredImages = images.map((image) => {
-							return image.filename.slice(0, image.filename.lastIndexOf('.'));
-						});
-						for (let i = 0; i < filteredImages.length; i++) {
-							await deleteImages(filteredImages[i]);
-						}
-					}
-				} catch (error) {
-					notify(error?.response?.data?.message, 'error');
-				}
+				notify(res?.data.message, 'success');
 			})
 
 			.catch((error) => {
@@ -94,7 +83,7 @@ export default function ContactAdmin({ ads_id, images }) {
 				<button
 					type="button"
 					className="rounded-lg border border-red-700 bg-transparent px-3 py-1.5 text-center text-xs font-medium text-red-700 hover:bg-red-800 hover:text-white focus:ring-4 focus:ring-red-300 dark:border-red-800 dark:text-red-800 dark:hover:text-white"
-					onClick={() => handleDelete(ads_id, images)}
+					onClick={() => handleDelete(ads_id)}
 				>
 					Delete Ad
 				</button>

@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { Approutes } from '../../constants';
-import { deleteImages, privateAxios } from '../../utils';
+import { privateAxios } from '../../utils';
 import { useNotify } from '../../hooks';
 import { useQueryClient } from 'react-query';
 import { useState } from 'react';
@@ -13,26 +13,12 @@ const ActionBar = (ad) => {
 
 	const [isDeleting, setIsDeleting] = useState(false);
 
-	const handleDelete = (id, images = []) => {
+	const handleDelete = (id) => {
 		setIsDeleting(true);
 
 		privateAxios
 			.delete(`/ads/${id}`)
 			.then(async (res) => {
-				setIsDeleting(true);
-				try {
-					if (images?.length > 0) {
-						const filteredImages = images.map((image) => {
-							return image.filename.slice(0, image.filename.lastIndexOf('.'));
-						});
-
-						for (let i = 0; i < filteredImages.length; i++) {
-							await deleteImages(filteredImages[i]);
-						}
-					}
-				} catch (error) {
-					setIsDeleting(false);
-				}
 				setIsDeleting(false);
 				queryClient.invalidateQueries({ queryKey: ['getUserAds'] });
 				notify(res?.data.message, 'success');
@@ -79,10 +65,7 @@ const ActionBar = (ad) => {
 				</div>
 
 				<div className="flex gap-6 ">
-					<button
-						onClick={() => handleDelete(ad?.ad?.id, ad?.ad?.images)}
-						className="text-[#D60949] font-bold"
-					>
+					<button onClick={() => handleDelete(ad?.ad?.id)} className="text-[#D60949] font-bold">
 						{isDeleting ? 'Deleting...' : 'Delete'}
 					</button>
 				</div>
