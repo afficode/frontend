@@ -1,6 +1,5 @@
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import { noimage } from '../../../assets/images';
-import { useChats, useMessages } from '../../../hooks';
 import ChatWindow from './ChatWindow';
 import useAuth from '../../../context/UserContext';
 import useMessageContext from '../../../context/MessageContext';
@@ -8,7 +7,6 @@ import { IoIosChatboxes } from 'react-icons/io';
 import { useEffect } from 'react';
 
 const Messages = () => {
-
 	const { chats, onlineUsers, readMessage } = useMessageContext();
 
 	const { user } = useAuth();

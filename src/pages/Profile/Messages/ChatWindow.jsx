@@ -7,6 +7,7 @@ import useAuth from '../../../context/UserContext';
 import { useEffect, useLayoutEffect, useRef } from 'react';
 import useMessageContext from '../../../context/MessageContext';
 import { useMessages } from '../../../hooks';
+import { encodeProductId } from '../../../utils';
 
 const ChatWindow = ({ chat_id, chat_data, title }) => {
 	const { user } = useAuth();
@@ -28,7 +29,7 @@ const ChatWindow = ({ chat_id, chat_data, title }) => {
 		<div className="bg-primary min-w-[380px] sm:w-full h-[calc(100vh-15rem)] overflow-x-auto rounded-xl pt-1 pb-4 px-1 flex flex-col justify-between ">
 			{/* chat window header  */}
 			<div className="flex justify-between w-full px-1 py-1 bg-gray-100 shadow-lg sm:py-2 rounded-xl">
-				<Link>
+				<Link to={`/product/${encodeProductId(data?.ad_id)}`}>
 					<div className="flex gap-2 ">
 						<img
 							src={
