@@ -1128,7 +1128,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				placeholder: 'Enter type',
 				required: true,
 			},
-			!['5302'].includes(selectedAgricultureCategory) && {
+			['5303'].includes(selectedAgricultureCategory) && {
 				control: 'radio',
 				label: 'Condition',
 				name: 'ad_condition',
@@ -3826,6 +3826,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 		fields?.map((field, index) => (
 			<FormControl
 				key={index}
+				categoryId={categoryId}
 				control={field.control}
 				name={field.name}
 				type={field.type}
