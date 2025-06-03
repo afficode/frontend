@@ -22,12 +22,14 @@ const Delivery = () => {
 	const [quoteLoading, setQuoteLoading] = useState(false);
 	const orderId = uuidv4();
 
-	const { data: checkOrder, isLoading: checking } = useCheckOrder(ad_id);
+	const { data: checkOrder, isLoading: checking, isError, error } = useCheckOrder(ad_id);
+
+	console.log('checkOrder', checkOrder);
 
 	const stage = useMemo(() => {
-		if (checkOrder?.ad_orders[0]?.price && checkOrder?.ad_orders[0]?.paid === 0) {
+		if (checkOrder?.data?.price && checkOrder?.data?.paid === 0) {
 			return 2;
-		} else if (checkOrder?.ad_orders[0]?.price && checkOrder?.ad_orders[0]?.paid === 1) {
+		} else if (checkOrder?.data?.price && checkOrder?.data?.paid === 1) {
 			return 3;
 		} else {
 			return 1;
@@ -87,6 +89,39 @@ const Delivery = () => {
 				<SpinnerSkeleton />
 			</div>
 		);
+
+	if (isError) {
+		if (error?.response?.status === 403) {
+			return (
+				<div className="flex items-center justify-center w-full h-[70vh]">
+					<div className="flex flex-col gap-4 w-full h-max max-w-[600px] text-center p-4 bg-white">
+						<div className="bg-secondary p-4 space-y-2">
+							<h3>🔒 Restricted Access Notice</h3>
+
+							<p>
+								This ad is currently locked due to an active transaction. To protect both buyers and
+								sellers, listings become temporarily unavailable once a purchase is in progress.
+							</p>
+						</div>
+
+						<div className="space-y-4 text-start">
+							<h4 className="text-center">What You Can Do:</h4>
+
+							<ul>
+								<li>✅ Browse similar available items</li>
+								<li>✅ Check back in 24-48 hours if the deal falls through</li>
+								<li>✅ Contact support@boonfu.com for urgent inquiries</li>
+							</ul>
+
+							<p>Thank you for understanding our secure transaction process!</p>
+						</div>
+					</div>
+				</div>
+			);
+		} else if (error?.response?.status === 401) {
+			location.replace(Approutes.auth.initial);
+		}
+	}
 
 	return (
 		<section className="mx-6 my-4">
@@ -259,13 +294,13 @@ const Delivery = () => {
 								<div>
 									<p>From: </p>
 									<div className="bg-gray-300 text-black text-start p-2">
-										{checkOrder?.ad_orders[0]?.seller_address}
+										{checkOrder?.data?.seller_address}
 									</div>
 								</div>
 								<div>
 									<p>To: </p>
 									<div className="bg-gray-300 text-black text-start p-2">
-										{checkOrder?.ad_orders[0]?.buyer_address}
+										{checkOrder?.data?.buyer_address}
 									</div>
 								</div>
 							</div>
@@ -274,7 +309,7 @@ const Delivery = () => {
 						</div>
 
 						<div className="border-y border-white py-1 font-semibold mb-4">
-							Cost: {checkOrder?.ad_orders[0]?.price ? '₦' + toMoney(checkOrder?.ad_orders[0]?.price) : ''}
+							Cost: {checkOrder?.data?.price ? '₦' + toMoney(checkOrder?.data?.price) : ''}
 						</div>
 
 						<div className="flex items-center  justify-center gap-2 my-2 max-w-full">
@@ -333,8 +368,8 @@ const Delivery = () => {
 			>
 				<PaymentOption
 					result={result}
-					quotePrice={checkOrder?.ad_orders[0]?.price}
-					orderId={checkOrder?.ad_orders[0]?.id}
+					quotePrice={checkOrder?.data?.price}
+					orderId={checkOrder?.data?.order_id}
 				/>
 			</Modal>
 		</section>

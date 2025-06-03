@@ -43,8 +43,7 @@ export const useGetOrder = (id) => {
 };
 
 export const useCheckOrder = (ad_id) => {
-	const checkOrder = () =>
-		privateAxios.get(`${backendLink}order/ad/${ad_id}`).then((res) => res?.data);
+	const checkOrder = () => privateAxios.get(`${backendLink}order/ad/${ad_id}`).then((res) => res);
 
 	return useQuery(['check-order', ad_id], checkOrder, {
 		refetchOnWindowFocus: false,

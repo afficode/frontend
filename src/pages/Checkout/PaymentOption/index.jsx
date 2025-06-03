@@ -17,7 +17,7 @@ const PaymentOption = ({ result, quotePrice, orderId }) => {
 
 	const escrow_type = pathname.split('/')[2];
 
-	const total = Number(result?.data?.price) + quotePrice;
+	const total = Number(result?.data?.price) + Number(quotePrice || 0);
 
 	const notify = useNotify();
 

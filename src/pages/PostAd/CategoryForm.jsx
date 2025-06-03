@@ -421,18 +421,18 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				placeholder: 'e.g. ES',
 				options: carModelOptions,
 			},
-			!['5002', '5005'].includes(selectedVehicleCategory) && {
-				control: 'select',
-				label: 'Trim',
-				name: 'trim',
-				placeholder: 'e.g. 350',
-				options: [
-					{ key: 'Select a trim', value: '' },
-					{ key: '350', value: '350' },
-					{ key: '450', value: '450' },
-					{ key: '550', value: '550' },
-				],
-			},
+			// !['5002', '5005'].includes(selectedVehicleCategory) && {
+			// 	control: 'select',
+			// 	label: 'Trim',
+			// 	name: 'trim',
+			// 	placeholder: 'e.g. 350',
+			// 	options: [
+			// 		{ key: 'Select a trim', value: '' },
+			// 		{ key: '350', value: '350' },
+			// 		{ key: '450', value: '450' },
+			// 		{ key: '550', value: '550' },
+			// 	],
+			// },
 			['5005', '5007'].includes(selectedVehicleCategory) && {
 				control: 'select',
 				label: 'Type',
@@ -733,12 +733,12 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			['5101', '5102', '5103', '5104', '5107', '5108', '5109'].includes(selectedPropertyCategory) && {
 				control: 'radio',
 				label: 'Any Furnishing',
-				name: 'ad_condition',
+				name: 'furnished',
 				type: 'radio',
 				options: [
 					{ key: 'Furnished', value: 'furnished' },
-					{ key: 'Semi-furnished', value: 'semi-furnished' },
-					{ key: 'Unfurnished', value: 'Unfurnished' },
+					{ key: 'Semi-furnished', value: 'semi_furnished' },
+					{ key: 'Unfurnished', value: 'unfurnished' },
 				],
 			},
 			// ['5105'].includes(selectedPropertyCategory) && {
@@ -3480,7 +3480,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			title: Yup.string().required('Required'),
 			property_type: Yup.array(),
 			ad_condition: Yup.string(),
-			// property_use: Yup.string(),
+			furnished: Yup.string(),
 			time_period: Yup.string(),
 			furnished: Yup.string(),
 			room_bathroom: Yup.string(),

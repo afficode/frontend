@@ -21,37 +21,10 @@ const GrabbedProduct = () => {
 	}
 
 	const { data: result, isLoading } = fetchProduct(ad_id);
-	const { data: checkOrder, isError, isLoading: checking } = useCheckOrder(Number(ad_id));
+	const { data: checkOrder, isError, error, isLoading: checking } = useCheckOrder(Number(ad_id));
 	const { user } = useAuth();
 
-	if (isError) {
-		return (
-			<div className="flex items-center justify-center w-full h-[70vh]">
-				<div className="flex flex-col gap-4 w-full h-max max-w-[600px] text-center p-4 bg-white">
-					<div className="bg-secondary p-4 space-y-2">
-						<h3>🔒 Restricted Access Notice</h3>
-
-						<p>
-							This ad is currently locked due to an active transaction. To protect both buyers and sellers,
-							listings become temporarily unavailable once a purchase is in progress.
-						</p>
-					</div>
-
-					<div className="space-y-4 text-start">
-						<h4 className="text-center">What You Can Do:</h4>
-
-						<ul>
-							<li>✅ Browse similar available items</li>
-							<li>✅ Check back in 24-48 hours if the deal falls through</li>
-							<li>✅ Contact support@boonfu.com for urgent inquiries</li>
-						</ul>
-
-						<p>Thank you for understanding our secure transaction process!</p>
-					</div>
-				</div>
-			</div>
-		);
-	}
+	console.log('checkOrder', checkOrder);
 
 	if (isLoading || checking)
 		return (
@@ -60,12 +33,47 @@ const GrabbedProduct = () => {
 			</div>
 		);
 
-	if (checkOrder?.ad_orders.find((order) => order?.buyer_id === user?.id)) {
-		location.replace(`${Approutes.checkout.useDelivery(grabber_id, ad_id)}`);
+	if (isError) {
+		if (error?.response?.status === 403) {
+			return (
+				<div className="flex items-center justify-center w-full h-[70vh]">
+					<div className="flex flex-col gap-4 w-full h-max max-w-[600px] text-center p-4 bg-white">
+						<div className="bg-secondary p-4 space-y-2">
+							<h3>🔒 Restricted Access Notice</h3>
+
+							<p>
+								This ad is currently locked due to an active transaction. To protect both buyers and
+								sellers, listings become temporarily unavailable once a purchase is in progress.
+							</p>
+						</div>
+
+						<div className="space-y-4 text-start">
+							<h4 className="text-center">What You Can Do:</h4>
+
+							<ul>
+								<li>✅ Browse similar available items</li>
+								<li>✅ Check back in 24-48 hours if the deal falls through</li>
+								<li>✅ Contact support@boonfu.com for urgent inquiries</li>
+							</ul>
+
+							<p>Thank you for understanding our secure transaction process!</p>
+						</div>
+					</div>
+				</div>
+			);
+		} else if (error?.response?.status === 401) {
+			location.replace(Approutes.auth.initial);
+		}
 	}
 
-	if (checkOrder?.escrow.find((order) => order?.buyer_id === user?.id)) {
-		location.replace(`${Approutes.checkout.usePickup(grabber_id, ad_id)}`);
+	if (checkOrder?.status === 200) {
+		if (checkOrder?.data?.type === 'boonfu_delivery') {
+			location.replace(`${Approutes.checkout.useDelivery(grabber_id, ad_id)}`);
+		}
+
+		if (checkOrder?.data?.type === 'self_pickup') {
+			location.replace(`${Approutes.checkout.usePickup(grabber_id, ad_id)}`);
+		}
 	}
 
 	if (result) {

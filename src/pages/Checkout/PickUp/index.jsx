@@ -12,10 +12,10 @@ const PickUp = () => {
 	const { data: result, isLoading } = fetchProduct(ad_id);
 	const [paymentModal, setPaymentModal] = useState(false);
 
-	const { data: checkOrder, isLoading: checking } = useCheckOrder(ad_id);
+	const { data: checkOrder, isLoading: checking, isError, error } = useCheckOrder(ad_id);
 
 	const stage = useMemo(() => {
-		if (checkOrder?.escrow[0]?.status === 'success') {
+		if (checkOrder?.data.status === 'success') {
 			return 2;
 		} else {
 			return 1;
@@ -28,6 +28,39 @@ const PickUp = () => {
 				<SpinnerSkeleton />
 			</div>
 		);
+
+	if (isError) {
+		if (error?.response?.status === 403) {
+			return (
+				<div className="flex items-center justify-center w-full h-[70vh]">
+					<div className="flex flex-col gap-4 w-full h-max max-w-[600px] text-center p-4 bg-white">
+						<div className="bg-secondary p-4 space-y-2">
+							<h3>🔒 Restricted Access Notice</h3>
+
+							<p>
+								This ad is currently locked due to an active transaction. To protect both buyers and
+								sellers, listings become temporarily unavailable once a purchase is in progress.
+							</p>
+						</div>
+
+						<div className="space-y-4 text-start">
+							<h4 className="text-center">What You Can Do:</h4>
+
+							<ul>
+								<li>✅ Browse similar available items</li>
+								<li>✅ Check back in 24-48 hours if the deal falls through</li>
+								<li>✅ Contact support@boonfu.com for urgent inquiries</li>
+							</ul>
+
+							<p>Thank you for understanding our secure transaction process!</p>
+						</div>
+					</div>
+				</div>
+			);
+		} else if (error?.response?.status === 401) {
+			location.replace(Approutes.auth.initial);
+		}
+	}
 
 	return (
 		<section className="mx-6 my-4">
