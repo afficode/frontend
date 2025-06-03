@@ -51,7 +51,7 @@ const AdCard = ({ title, images, active, price, subscribe, views, adId }) => {
 							<span>Clicks:</span> <b>500</b>
 						</div>
 						<div>
-							<span>Phone Views:</span> <b>{views}</b>
+							<span>Views:</span> <b>{views}</b>
 						</div>
 						<div>
 							<span>Chats:</span> <b>20</b>
