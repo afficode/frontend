@@ -24,8 +24,6 @@ const GrabbedProduct = () => {
 	const { data: checkOrder, isError, error, isLoading: checking } = useCheckOrder(Number(ad_id));
 	const { user } = useAuth();
 
-	console.log('checkOrder', checkOrder);
-
 	if (isLoading || checking)
 		return (
 			<div className="h-screen">
