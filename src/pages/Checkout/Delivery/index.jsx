@@ -24,13 +24,11 @@ const Delivery = () => {
 
 	const { data: checkOrder, isLoading: checking, isError, error } = useCheckOrder(ad_id);
 
-	console.log('checkOrder', checkOrder);
-
 	const stage = useMemo(() => {
-		if (checkOrder?.data?.price && checkOrder?.data?.paid === 0) {
-			return 2;
-		} else if (checkOrder?.data?.price && checkOrder?.data?.paid === 1) {
+		if (checkOrder?.data?.paid === 1 && checkOrder?.data?.status) {
 			return 3;
+		} else if (checkOrder?.data?.price && checkOrder?.data?.paid === 1) {
+			return 2;
 		} else {
 			return 1;
 		}

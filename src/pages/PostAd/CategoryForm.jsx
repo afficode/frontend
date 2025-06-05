@@ -3480,7 +3480,6 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			title: Yup.string().required('Required'),
 			property_type: Yup.array(),
 			ad_condition: Yup.string(),
-			furnished: Yup.string(),
 			time_period: Yup.string(),
 			furnished: Yup.string(),
 			room_bathroom: Yup.string(),

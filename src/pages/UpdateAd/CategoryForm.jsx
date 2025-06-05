@@ -3508,7 +3508,6 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			ad_condition: Yup.string(),
 			furnished: Yup.string(),
 			time_period: Yup.string(),
-			furnished: Yup.string(),
 			room_bathroom: Yup.string(),
 			size: Yup.string(),
 			date_available: Yup.string(),
