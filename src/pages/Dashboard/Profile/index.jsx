@@ -64,7 +64,6 @@ const Profile = () => {
 			Object.entries(values).forEach(([key, value]) => {
 				formData.append(key, value);
 			});
-			console.log("FormData", formData);
 			await mutate(formData, {
 				onSuccess: async (data) => {
 					updateUserInfo(data?.user);
