@@ -12,8 +12,9 @@ import {
 import { getCommission, toMoney } from '../../utils';
 
 const AdFeatures = (props) => {
-	const { name, price, subCat, address, setAddress, categoryId, ...rest } = props;
-	const [showGrab, setShowGrab] = useState(false);
+	const { name, price, subCat, address, setAddress, categoryId, feature, ...rest } = props;
+
+	const [showGrab, setShowGrab] = useState(feature === '3' ? true : false);
 	const { hash } = useLocation();
 	const [grabModal, setGrabModal] = useState(false);
 

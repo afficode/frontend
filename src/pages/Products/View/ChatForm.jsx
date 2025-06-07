@@ -48,7 +48,7 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
 	}, []);
 
 	const { mutate: grabAd, isLoading } = useGrabAd();
-	const { mutate: creatingChat } = createChat();
+	const { mutate: creatingChat, isLoading: sendingChat } = createChat();
 	const { mutate, error } = useSendMessage();
 
 	const sendMessage = (message) => {
@@ -65,7 +65,7 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
 		});
 	};
 
-	const chatCreation = (content) => {
+	const chatCreation = (content, offer = false) => {
 		creatingChat(
 			{ ad_id },
 			{
@@ -76,7 +76,7 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
 				onSuccess: ({ data }) => {
 					if (data?.chat_id) {
 						const chat_id = data.chat_id;
-						sendMessage({ chat_id, content });
+						sendMessage({ chat_id, content, offer });
 					}
 				},
 			}
@@ -106,6 +106,13 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
 		}
 	};
 
+	const [offer, setOffer] = useState();
+
+	const handleOfferSubmit = () => {
+		const content = `I'm willing to pay: ₦${toMoney(offer)}`;
+		chatCreation(content, true);
+	};
+
 	return (
 		<div className={`} ${ad?.feature === '3' && 'md:mt-[6rem]'}     mt-4 h-full`}>
 			<Formik
@@ -117,7 +124,7 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
 					phone: chatId !== null ? 'Disabled... Please continue chat in the message section' : '',
 				}}
 				onSubmit={(values) => {
-					var content = values.message;
+					let content = values.message;
 					content += values.phone !== '' ? ` This is my phone number: ${values.phone}` : '';
 					chatCreation(content);
 				}}
@@ -326,8 +333,8 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
 															amount={'naira'}
 															autoComplete="off"
 															className={' customAmountInput '}
-															// value={formikWithdraw.values.amount}
-															// onChange={formikWithdraw.handleChange}
+															value={offer}
+															onChange={(e) => setOffer(e.target.value)}
 															// onBlur={formikWithdraw.handleBlur}
 															// errorMsg={
 															// 	formikWithdraw.touched.amount && formikWithdraw.errors.amount
@@ -336,9 +343,9 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
 															// }
 															cancelButton={
 																<button
-																	// onClick={() => {
-																	// 	formikWithdraw.resetForm();
-																	// }}
+																	onClick={() => {
+																		setOffer('');
+																	}}
 																	type="button"
 																	className="absolute right-2 inset-y-0 my-auto h-fit "
 																>
@@ -354,6 +361,9 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
 													size={'full'}
 													className={'py-2 font-semibold'}
 													type="button"
+													onClick={handleOfferSubmit}
+													disabled={!isLogin || blocked || offer === '' || sendingChat}
+													loading={sendingChat}
 												>
 													Send this offer
 												</Button>
