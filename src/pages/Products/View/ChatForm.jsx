@@ -109,7 +109,7 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
 	const [offer, setOffer] = useState();
 
 	const handleOfferSubmit = () => {
-		let content = `I'm willing to pay: ₦${toMoney(offer)}`;
+		const content = `I'm willing to pay: ₦${toMoney(offer)}`;
 		chatCreation(content, true);
 	};
 
