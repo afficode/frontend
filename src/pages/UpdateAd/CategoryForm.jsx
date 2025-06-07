@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Form, Formik } from 'formik';
 import { FormControl } from '../../components';
 import { Button } from '../../ui';
@@ -66,21 +66,28 @@ import {
 } from '../../constants';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId }) => {
-	const [selectedHealthCategory, setSelectedHealthCategory] = useState(null);
-	const [selectedFashionCategory, setSelectedFashionCategory] = useState(null);
-	const [selectedSoftwareCategory, setSelectedSoftwareCategory] = useState(null);
-	const [selectedMotorbikeCategory, setSelectedMotorbikeCategory] = useState(null);
-	const [selectedBabiesCategory, setSelectedBabiesCategory] = useState(null);
-	const [selectedElectronicsCategory, setSelectedElectronicsCategory] = useState(null);
-	const [selectedSportsCategory, setSelectedSportsCategory] = useState(null);
-	const [selectedPetCategory, setSelectedPetCategory] = useState(null);
-	const [selectedHomeCategory, setSelectedHomeCategory] = useState(null);
-	const [selectedAgricultureCategory, setSelectedAgricultureCategory] = useState(null);
-	const [selectedVehicleCategory, setSelectedVehicleCategory] = useState(null);
-	const [selectedPropertyCategory, setSelectedPropertyCategory] = useState(null);
-	const [selectedServicesCategory, setSelectedServicesCategory] = useState(null);
-	const [selectedTradesmanCategory, setSelectedTradesmanCategory] = useState(null);
+const CategoryForm = ({
+	categoryId,
+	subCategoryId,
+	categoryName,
+	initialValues,
+	adImages,
+	adId,
+}) => {
+	const [selectedHealthCategory, setSelectedHealthCategory] = useState(subCategoryId);
+	const [selectedFashionCategory, setSelectedFashionCategory] = useState(subCategoryId);
+	const [selectedSoftwareCategory, setSelectedSoftwareCategory] = useState(subCategoryId);
+	const [selectedMotorbikeCategory, setSelectedMotorbikeCategory] = useState(subCategoryId);
+	const [selectedBabiesCategory, setSelectedBabiesCategory] = useState(subCategoryId);
+	const [selectedElectronicsCategory, setSelectedElectronicsCategory] = useState(subCategoryId);
+	const [selectedSportsCategory, setSelectedSportsCategory] = useState(subCategoryId);
+	const [selectedPetCategory, setSelectedPetCategory] = useState(subCategoryId);
+	const [selectedHomeCategory, setSelectedHomeCategory] = useState(subCategoryId);
+	const [selectedAgricultureCategory, setSelectedAgricultureCategory] = useState(subCategoryId);
+	const [selectedVehicleCategory, setSelectedVehicleCategory] = useState(subCategoryId);
+	const [selectedPropertyCategory, setSelectedPropertyCategory] = useState(subCategoryId);
+	const [selectedServicesCategory, setSelectedServicesCategory] = useState(subCategoryId);
+	const [selectedTradesmanCategory, setSelectedTradesmanCategory] = useState(subCategoryId);
 
 	if (['5001', '5003', '5007', '5004'].includes(selectedVehicleCategory)) {
 		// create a state to track if the category is amongst fix commision categories or   percentage commission
@@ -327,21 +334,21 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 	);
 
 	//health category
-	const healthBrandOptions = toSelectOptions(
-		healthBrands[selectedHealthCategory],
-		'healthBrand',
-		'Select brand here'
-	);
+	const healthBrandOptions = useMemo(() => {
+		return toSelectOptions(healthBrands[selectedHealthCategory], 'healthBrand', 'Select brand here');
+	}, [selectedHealthCategory]);
 	const healthTypesOptions = toSelectOptions(
 		healthTypes[selectedHealthCategory],
 		'healthType',
 		'Select type here'
 	);
-	const healthFormulationOptions = toSelectOptions(
-		healthProductFormulation[selectedHealthCategory],
-		'healthFormulation',
-		'Select formulation here'
-	);
+	const healthFormulationOptions = useMemo(() => {
+		return toSelectOptions(
+			healthProductFormulation[selectedHealthCategory],
+			'healthFormulation',
+			'Select formulation here'
+		);
+	}, [selectedHealthCategory]);
 
 	const categoryFields = {
 		vehicles: [
@@ -372,7 +379,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				required: true,
 				options: lgaOptions,
 			},
-			!['5005'].includes(selectedVehicleCategory) && {
+			![5005].includes(selectedVehicleCategory) && {
 				control: 'radio',
 				label: 'Seller Type',
 				name: 'seller_type',
@@ -382,7 +389,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 					{ key: 'Private', value: 'private' },
 				],
 			},
-			!['5002', '5005'].includes(selectedVehicleCategory) && {
+			![5002, 5005].includes(selectedVehicleCategory) && {
 				control: 'input',
 				label: 'Vehicle Specification',
 				name: 'vehicle_specification',
@@ -420,28 +427,28 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				placeholder: 'e.g. ES',
 				options: carModelOptions,
 			},
-			!['5002', '5005'].includes(selectedVehicleCategory) && {
-				control: 'select',
-				label: 'Trim',
-				name: 'trim',
-				placeholder: 'e.g. 350',
-				options: [
-					{ key: 'Select a trim', value: '' },
-					{ key: '350', value: '350' },
-					{ key: '450', value: '450' },
-					{ key: '550', value: '550' },
-				],
-			},
-			['5005', '5007'].includes(selectedVehicleCategory) && {
+			// ![5002, 5005].includes(selectedVehicleCategory) && {
+			// 	control: 'select',
+			// 	label: 'Trim',
+			// 	name: 'trim',
+			// 	placeholder: 'e.g. 350',
+			// 	options: [
+			// 		{ key: 'Select a trim', value: '' },
+			// 		{ key: '350', value: '350' },
+			// 		{ key: '450', value: '450' },
+			// 		{ key: '550', value: '550' },
+			// 	],
+			// },
+			[5005, 5007].includes(selectedVehicleCategory) && {
 				control: 'select',
 				label: 'Type',
 				name: 'type',
 				type: 'text',
 				placeholder: 'Enter type here',
 				options:
-					selectedVehicleCategory === '5007' ? otherVehicleTypeOptions : vehicleAccessoriesTypeOptions,
+					selectedVehicleCategory === 5007 ? otherVehicleTypeOptions : vehicleAccessoriesTypeOptions,
 			},
-			['5005', '5007'].includes(selectedVehicleCategory) &&
+			[5005, 5007].includes(selectedVehicleCategory) &&
 				otherType && {
 					control: 'input',
 					label: 'Other Type',
@@ -450,7 +457,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 					placeholder: 'Enter type',
 					required: true,
 				},
-			!['5002', '5005'].includes(selectedVehicleCategory) && {
+			![5002, 5005].includes(selectedVehicleCategory) && {
 				control: 'checkbox',
 				type: 'checkbox',
 				label: 'Vehicle Features',
@@ -496,21 +503,21 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				],
 			},
 
-			!['5005'].includes(selectedVehicleCategory) && {
+			![5005].includes(selectedVehicleCategory) && {
 				control: 'select',
 				label: 'Year of Manufacture?',
 				name: 'year',
 				placeholder: 'e.g. 350',
 				options: yearOptions,
 			},
-			!['5002', '5005'].includes(selectedVehicleCategory) && {
+			![5002, 5005].includes(selectedVehicleCategory) && {
 				control: 'input',
 				label: 'Your Vehicle Mileage?',
 				name: 'millage',
 				type: 'text',
 				placeholder: 'Enter your mileage eg. 105,000miles',
 			},
-			!['5002', '5005'].includes(selectedVehicleCategory) && {
+			![5002, 5005].includes(selectedVehicleCategory) && {
 				control: 'radio',
 				type: 'radio',
 				label: 'Vehicle Body Type',
@@ -533,7 +540,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 					{ key: 'Roadster', value: 'roadster' },
 				],
 			},
-			!['5002', '5005'].includes(selectedVehicleCategory) && {
+			![5002, 5005].includes(selectedVehicleCategory) && {
 				control: 'radio',
 				type: 'radio',
 				label: 'Transmission',
@@ -557,7 +564,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				type: 'text',
 				placeholder: 'Enter colour',
 			},
-			!['5002', '5005'].includes(selectedVehicleCategory) && {
+			![5002, 5005].includes(selectedVehicleCategory) && {
 				control: 'select',
 				label: 'Number of Seats',
 				name: 'number_of_seat',
@@ -574,7 +581,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 					{ key: '10', value: '10' },
 				],
 			},
-			!['5002', '5005'].includes(selectedVehicleCategory) && {
+			![5002, 5005].includes(selectedVehicleCategory) && {
 				control: 'select',
 				label: 'Number of Doors',
 				name: 'number_of_door',
@@ -585,7 +592,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 					{ key: '5', value: '5' },
 				],
 			},
-			!['5005'].includes(selectedVehicleCategory) && {
+			![5005].includes(selectedVehicleCategory) && {
 				control: 'select',
 				label: 'Fuel Type',
 				name: 'fuel_type',
@@ -597,7 +604,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 					{ key: 'Hybrid', value: 'hybrid' },
 				],
 			},
-			!['5002', '5005'].includes(selectedVehicleCategory) && {
+			![5002, 5005].includes(selectedVehicleCategory) && {
 				control: 'select',
 				label: 'Engine Size',
 				name: 'engine_size',
@@ -720,7 +727,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				name: 'facilities',
 				options: propertyFacilityOptions,
 			},
-			!['5105'].includes(selectedPropertyCategory) && {
+			![5105].includes(selectedPropertyCategory) && {
 				control: 'radio',
 				label: 'Property Condition',
 				name: 'ad_condition',
@@ -731,7 +738,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 					{ key: 'Used', value: 'used' },
 				],
 			},
-			['5101', '5102', '5103', '5104', '5107', '5108', '5109'].includes(selectedPropertyCategory) && {
+			[5101, 5102, 5103, 5104, 5107, 5108, 5109].includes(selectedPropertyCategory) && {
 				control: 'radio',
 				label: 'Any Furnishing',
 				name: 'furnished',
@@ -761,7 +768,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				placeholder: 'Enter property use',
 				required: true,
 			},
-			!['5105', '5106', '5108', '5109'].includes(selectedPropertyCategory) && {
+			![5105, 5106, 5108, 5109].includes(selectedPropertyCategory) && {
 				control: 'select',
 				label: 'Rooms/Bathrooms',
 				name: 'room_bathroom',
@@ -787,23 +794,23 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				placeholder: 'Enter number of rooms/bathrooms',
 				required: true,
 			},
-			['5105', '5103', '5104', '5108', '5109'].includes(selectedPropertyCategory) && {
+			[5105, 5103, 5104, 5108, 5109].includes(selectedPropertyCategory) && {
 				control: 'input',
 				label: 'Property size in m^2',
 				name: 'size',
 				type: 'text',
 				placeholder: 'Enter property size',
 			},
-			['5104', '5109'].includes(selectedPropertyCategory) && {
+			[5104, 5109].includes(selectedPropertyCategory) && {
 				control: 'radio',
 				label: 'Time period',
 				name: 'time_period',
 				type: 'radio',
 				options: [
-					{ key: 'Period of 1 - 2 years', value: 'Period of 1 - 2 years' },
-					{ key: 'Period of 2 - 5 years', value: 'Period of 2 - 5 years' },
-					{ key: 'Period of 5 - 10 years', value: 'Period of 5 - 10 years' },
-					{ key: 'Period of 10 and more', value: 'Period of 10 and more' },
+					{ key: 'Period of 1 - 2 years', value: 'period of 1 - 2 years' },
+					{ key: 'Period of 2 - 5 years', value: 'period of 2 - 5 years' },
+					{ key: 'Period of 5 - 10 years', value: 'period of 5 - 10 years' },
+					{ key: 'Period of 10 and more', value: 'period of 10 and more' },
 				],
 			},
 			{
@@ -887,20 +894,9 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				required: true,
 			},
 			{
-				control: [
-					'5201',
-					'5202',
-					'5203',
-					'5204',
-					'5205',
-					'5206',
-					'5207',
-					'5209',
-					'5210',
-					'5211',
-					'5212',
-					'5213',
-				].includes(selectedServicesCategory)
+				control: [5201, 5202, 5203, 5204, 5205, 5206, 5207, 5209, 5210, 5211, 5212, 5213].includes(
+					selectedServicesCategory
+				)
 					? 'select'
 					: 'input',
 				label: 'Type',
@@ -916,13 +912,13 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				type: 'text',
 				placeholder: 'Enter type',
 			},
-			selectedServicesCategory === '5206' && {
+			selectedServicesCategory === 5206 && {
 				control: 'select',
 				label: 'Expertise',
 				name: 'expertise',
 				options: servicesExpertiseOptions,
 			},
-			selectedServicesCategory === '5206' &&
+			selectedServicesCategory === 5206 &&
 				otherExpertise && {
 					control: 'input',
 					label: 'Other Expertise',
@@ -931,7 +927,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 					placeholder: 'Enter expertise',
 				},
 
-			selectedServicesCategory === '5213' && {
+			selectedServicesCategory === 5213 && {
 				control: 'select',
 				label: 'Make of vehicle',
 				name: 'make',
@@ -944,7 +940,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 					{ key: 'Foton', value: 'foton' },
 					{ key: 'Goldoni', value: 'goldoni' },
 					{ key: 'Hyster', value: 'hyster' },
-					{ key: 'MAN', value: 'MAN' },
+					{ key: 'MAN', value: 'man' },
 					{ key: 'Toyota', value: 'toyota' },
 					{ key: '	Bomag', value: 'bomag' },
 					{ key: 'Fiat', value: 'fiat' },
@@ -1007,20 +1003,20 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 					{ key: 'other', value: 'other' },
 				],
 			},
-			['5204', '5207'].includes(selectedServicesCategory) && {
+			[5204, 5207].includes(selectedServicesCategory) && {
 				control: 'radio',
 				type: 'radio',
 				label: 'Level of Education',
 				name: 'level_of_education',
 				options: [
 					{ key: "O'level", value: "o'level" },
-					{ key: 'BSc', value: 'BSc' },
+					{ key: 'BSc', value: 'bsc' },
 					{ key: 'Masters', value: 'masters' },
 					{ key: 'Other qualification', value: 'other qualification' },
 					{ key: 'No Formal Education', value: 'no formal education' },
 				],
 			},
-			['5204', '5207'].includes(selectedServicesCategory) && {
+			[5204, 5207].includes(selectedServicesCategory) && {
 				control: 'radio',
 				type: 'radio',
 				label: 'Type of Employment',
@@ -1131,7 +1127,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				placeholder: 'Enter type',
 				required: true,
 			},
-			!['5302'].includes(selectedAgricultureCategory) && {
+			![5302].includes(selectedAgricultureCategory) && {
 				control: 'radio',
 				label: 'Condition',
 				name: 'ad_condition',
@@ -1141,7 +1137,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 					{ key: 'Used', value: 'used' },
 				],
 			},
-			!['5302'].includes(selectedAgricultureCategory) && {
+			![5302].includes(selectedAgricultureCategory) && {
 				control: 'radio',
 				type: 'radio',
 				label: 'Age',
@@ -1153,7 +1149,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 					{ key: '7 - 10', value: '7-10' },
 				],
 			},
-			['5301'].includes(selectedAgricultureCategory) && {
+			[5301].includes(selectedAgricultureCategory) && {
 				control: 'radio',
 				type: 'radio',
 				label: 'Gender',
@@ -1163,7 +1159,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 					{ key: 'Female', value: 'female' },
 				],
 			},
-			['5301'].includes(selectedAgricultureCategory) && {
+			[5301].includes(selectedAgricultureCategory) && {
 				control: 'select',
 				label: 'Colour',
 				name: 'color',
@@ -1271,7 +1267,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 					{ key: 'New', value: 'new' },
 					{ key: 'Used', value: 'used' },
 					{ key: 'Refurbished', value: 'refurbished' },
-					{ key: 'For Parts/Not Working', value: 'For Parts/Not Working' },
+					{ key: 'For Parts/Not Working', value: 'for parts/not working' },
 				],
 			},
 			{
@@ -1288,7 +1284,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				placeholder: 'Enter brand',
 				required: true,
 			},
-			['5404', '5405', '5407', '5408', '5410'].includes(selectedElectronicsCategory) && {
+			[5404, 5405, 5407, 5408, 5410].includes(selectedElectronicsCategory) && {
 				control: 'select',
 				label: 'Type',
 				name: 'type',
@@ -1297,7 +1293,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				options: electronicsTypeOptions,
 			},
 
-			['5404', '5405', '5407', '5408', '5410'].includes(selectedElectronicsCategory) &&
+			[5404, 5405, 5407, 5408, 5410].includes(selectedElectronicsCategory) &&
 				otherType && {
 					control: 'input',
 					label: 'Other Type',
@@ -1313,34 +1309,34 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				name: 'resolution',
 				options: resolutionOptions,
 			},
-			['5402', '5406', '5409', '5411'].includes(selectedElectronicsCategory) && {
+			[5402, 5406, 5409, 5411].includes(selectedElectronicsCategory) && {
 				control: 'select',
 				label: 'Display Size',
 				name: 'electronics_display_size',
 				options: displaySizeOptions,
 			},
-			selectedElectronicsCategory === '5402' && {
+			selectedElectronicsCategory === 5402 && {
 				control: 'checkbox',
 				label: 'Input mode',
 				name: 'input_mode',
 				type: 'checkbox',
 				options: [
 					{ key: 'Display Port', value: 'display port' },
-					{ key: 'DVI-D', value: 'DVI-D' },
-					{ key: 'HDMI', value: 'HDMI' },
-					{ key: 'USB 2.0', value: 'USB 2.0' },
-					{ key: 'USB 3.0 ', value: 'USB 3.0 ' },
-					{ key: 'VGA', value: 'VGA' },
+					{ key: 'DVI-D', value: 'dvi-d' },
+					{ key: 'HDMI', value: 'hdmi' },
+					{ key: 'USB 2.0', value: 'usb 2.0' },
+					{ key: 'USB 3.0 ', value: 'usb 3.0 ' },
+					{ key: 'VGA', value: 'vga' },
 				],
 			},
-			['5402', '5406'].includes(selectedElectronicsCategory) && {
+			[5402, 5406].includes(selectedElectronicsCategory) && {
 				control: 'checkbox',
 				label: 'Display technology',
 				name: 'display_technology',
 				type: 'checkbox',
 				options: displayTechnologyOptions,
 			},
-			selectedElectronicsCategory === '5403' && {
+			selectedElectronicsCategory === 5403 && {
 				control: 'radio',
 				label: 'Style',
 				name: 'electronics_style',
@@ -1351,7 +1347,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 					{ key: 'In-ear', value: 'in-ear' },
 				],
 			},
-			['5403', '5410'].includes(selectedElectronicsCategory) && {
+			[5403, 5410].includes(selectedElectronicsCategory) && {
 				control: 'radio',
 				label: 'Connectivity',
 				name: 'connectivity',
@@ -1359,75 +1355,75 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				options: [
 					{ key: 'Wireless', value: 'wireless' },
 					{ key: 'Wired', value: 'wired' },
-					{ key: 'Wired/Wireless', value: 'Wired/Wireless' },
+					{ key: 'Wired/Wireless', value: 'wired/wireless' },
 				],
 			},
-			selectedElectronicsCategory === '5403' && {
+			selectedElectronicsCategory === 5403 && {
 				control: 'checkbox',
 				label: 'Connectivity Interface',
 				name: 'connectivity_interface',
 				type: 'checkbox',
 				options: [
-					{ key: 'USB Type-C', value: 'USB Type-C' },
-					{ key: 'Bluetooth', value: 'Bluetooth' },
-					{ key: 'Mini USB / Bluetooth', value: 'Mini USB / Bluetooth' },
-					{ key: 'Micro USB / Bluetooth', value: 'Micro USB / Bluetooth' },
-					{ key: 'Lightning / Bluetooth ', value: 'Lightning / Bluetooth ' },
-					{ key: '2.5 mm / Bluetooth', value: '2.5 mm / Bluetooth' },
+					{ key: 'USB Type-C', value: 'usb type-c' },
+					{ key: 'Bluetooth', value: 'bluetooth' },
+					{ key: 'Mini USB / Bluetooth', value: 'mini usb / bluetooth' },
+					{ key: 'Micro USB / Bluetooth', value: 'micro usb / bluetooth' },
+					{ key: 'Lightning / Bluetooth ', value: 'lightning / bluetooth ' },
+					{ key: '2.5 mm / Bluetooth', value: '2.5 mm / bluetooth' },
 					{ key: '2.5 mm', value: '2.5 mm' },
-					{ key: 'USB Type-C / Bluetooth', value: 'USB Type-C / Bluetooth' },
-					{ key: 'Micro USB', value: 'Micro USB' },
-					{ key: '3.5 mm / Bluetooth', value: '3.5 mm / Bluetooth' },
+					{ key: 'USB Type-C / Bluetooth', value: 'usb type-c / bluetooth' },
+					{ key: 'Micro USB', value: 'micro usb' },
+					{ key: '3.5 mm / Bluetooth', value: '3.5 mm / bluetooth' },
 					{ key: 'Other', value: 'other' },
 				],
 			},
-			selectedElectronicsCategory === '5403' && {
+			selectedElectronicsCategory === 5403 && {
 				control: 'checkbox',
 				label: 'Features',
 				name: 'features',
 				type: 'checkbox',
 				options: [
-					{ key: 'Wireless Charging', value: 'Wireless Charging' },
-					{ key: 'Waterproof ', value: 'Waterproof ' },
-					{ key: 'NFC', value: 'NFC' },
-					{ key: 'Light Effects', value: 'Light Effects' },
-					{ key: 'Hi-Res Audio', value: 'Hi-Res Audio' },
-					{ key: 'Detachable Microphone', value: 'Detachable Microphone' },
-					{ key: 'AptX / AptX HD', value: 'AptX / AptX HD' },
-					{ key: 'Active Noise Cancellation', value: 'Active Noise Cancellation' },
+					{ key: 'Wireless Charging', value: 'wireless charging' },
+					{ key: 'Waterproof ', value: 'waterproof ' },
+					{ key: 'NFC', value: 'nfc' },
+					{ key: 'Light Effects', value: 'light effects' },
+					{ key: 'Hi-Res Audio', value: 'hi-res audio' },
+					{ key: 'Detachable Microphone', value: 'detachable microphone' },
+					{ key: 'AptX / AptX HD', value: 'aptX / aptX hd' },
+					{ key: 'Active Noise Cancellation', value: 'active noise cancellation' },
 				],
 			},
-			['5409', '5406'].includes(selectedElectronicsCategory) && {
+			[5409, 5406].includes(selectedElectronicsCategory) && {
 				control: 'select',
 				label: 'Size of Ram',
 				name: 'ram_size',
 				options: ramSizeOptions,
 			},
-			['5409', '5406'].includes(selectedElectronicsCategory) && {
+			[5409, 5406].includes(selectedElectronicsCategory) && {
 				control: 'select',
 				label: 'Storage',
 				name: 'storage',
 				options: storageSizeOptions,
 			},
-			selectedElectronicsCategory === '5409' && {
+			selectedElectronicsCategory === 5409 && {
 				control: 'select',
 				label: 'Storage type',
 				name: 'storage_type',
 				options: storageTypeOptions,
 			},
-			selectedElectronicsCategory === '5406' && {
+			selectedElectronicsCategory === 5406 && {
 				control: 'select',
 				label: 'SIM type',
 				name: 'sim_type',
 				options: simTypeOptions,
 			},
-			selectedElectronicsCategory === '5409' && {
+			selectedElectronicsCategory === 5409 && {
 				control: 'select',
 				label: 'Processor',
 				name: 'processor',
 				options: processorsOptions,
 			},
-			selectedElectronicsCategory === '5409' &&
+			selectedElectronicsCategory === 5409 &&
 				otherProcessor && {
 					control: 'input',
 					type: 'text',
@@ -1436,13 +1432,13 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 					placeholder: 'Enter other processor',
 					required: true,
 				},
-			selectedElectronicsCategory === '5409' && {
+			selectedElectronicsCategory === 5409 && {
 				control: 'select',
 				label: 'Operating System',
 				name: 'operating_system',
 				options: operatingSysOptions,
 			},
-			selectedElectronicsCategory === '5406' && {
+			selectedElectronicsCategory === 5406 && {
 				control: 'radio',
 				label: 'Exchange Possible?',
 				type: 'radio',
@@ -1761,7 +1757,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				required: true,
 			},
 
-			!['5608'].includes(selectedHealthCategory) && {
+			![5608].includes(selectedHealthCategory) && {
 				control: 'select',
 				label: 'Brand',
 				name: 'brand',
@@ -1793,7 +1789,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				placeholder: 'Enter type',
 				required: true,
 			},
-			!['5603', '5601', '5605', '5607', '5608', '5604', '5606'].includes(selectedHealthCategory) && {
+			![5603, 5601, 5605, 5607, 5608, 5604, 5606].includes(selectedHealthCategory) && {
 				control: 'radio',
 				label: 'Age Group',
 				name: 'age',
@@ -1807,7 +1803,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 					{ key: '50 - 60', value: '50-60' },
 				],
 			},
-			!['5608', '5602', '5604', '5606'].includes(selectedHealthCategory) && {
+			![5608, 5602, 5604, 5606].includes(selectedHealthCategory) && {
 				control: 'radio',
 				label: 'Gender',
 				name: 'gender',
@@ -1818,9 +1814,9 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 					{ key: 'Unisex', value: 'unisex' },
 				],
 			},
-			['5601', '5605'].includes(selectedHealthCategory) && {
+			[5601, 5605].includes(selectedHealthCategory) && {
 				control: 'select',
-				label: 'Colour',
+				label: 'Color',
 				name: 'color',
 				type: 'text',
 				placeholder: 'Type color here',
@@ -1828,12 +1824,12 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			},
 			otherColor && {
 				control: 'input',
-				label: 'Other Colour',
+				label: 'Other Color',
 				name: 'color',
 				type: 'text',
-				placeholder: 'Enter colour',
+				placeholder: 'Enter color',
 			},
-			!['5603', '5607', '5602', '5604', '5606'].includes(selectedHealthCategory) && {
+			![5603, 5607, 5602, 5604, 5606].includes(selectedHealthCategory) && {
 				control: 'radio',
 				label: 'Condition',
 				name: 'ad_condition',
@@ -1843,7 +1839,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 					{ key: 'Used', value: 'used' },
 				],
 			},
-			['5602', '5603'].includes(selectedHealthCategory) && {
+			[5602, 5603].includes(selectedHealthCategory) && {
 				control: 'select',
 				label: 'Formulation',
 				name: 'formulation',
@@ -1857,19 +1853,19 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				placeholder: 'Enter formulation',
 				required: true,
 			},
-			selectedHealthCategory === '5603' && {
+			selectedHealthCategory === 5603 && {
 				control: 'select',
 				label: 'Scent type',
 				name: 'scent_type',
 				options: [
 					{ key: 'Select scent type here', value: '' },
-					{ key: 'Spicy', value: 'Spicy' },
-					{ key: 'Citrus', value: 'Citrus' },
-					{ key: 'Floral', value: 'Floral' },
-					{ key: 'Oceanic', value: 'Oceanic' },
-					{ key: 'Oriental', value: 'Oriental' },
-					{ key: 'Fruity ', value: 'Fruity' },
-					{ key: 'Woody ', value: 'Woody' },
+					{ key: 'Spicy', value: 'spicy' },
+					{ key: 'Citrus', value: 'citrus' },
+					{ key: 'Floral', value: 'floral' },
+					{ key: 'Oceanic', value: 'oceanic' },
+					{ key: 'Oriental', value: 'oriental' },
+					{ key: 'Fruity ', value: 'fruity' },
+					{ key: 'Woody ', value: 'woody' },
 					{ key: 'Other ', value: 'other' },
 				],
 			},
@@ -1995,7 +1991,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				placeholder: 'Enter type',
 				required: true,
 			},
-			['5701'].includes(selectedHomeCategory) && {
+			[5701].includes(selectedHomeCategory) && {
 				control: 'select',
 				label: 'Material',
 				name: 'material',
@@ -2009,7 +2005,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				placeholder: 'Enter material',
 				required: true,
 			},
-			['5701'].includes(selectedHomeCategory) && {
+			[5701].includes(selectedHomeCategory) && {
 				control: 'select',
 				label: 'Furniture for',
 				name: 'furniture_for',
@@ -2023,7 +2019,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				placeholder: 'Enter furniture for',
 				required: true,
 			},
-			['5704'].includes(selectedHomeCategory) && {
+			[5704].includes(selectedHomeCategory) && {
 				control: 'select',
 				label: 'Form',
 				name: 'formulation',
@@ -2037,7 +2033,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				placeholder: 'Enter form',
 				required: true,
 			},
-			!['5704'].includes(selectedHomeCategory) && {
+			![5704].includes(selectedHomeCategory) && {
 				control: 'radio',
 				label: 'Condition',
 				name: 'ad_condition',
@@ -2048,9 +2044,9 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 					{ key: 'Refurbished', value: 'refurbished' },
 				],
 			},
-			['5701', '5702'].includes(selectedHomeCategory) && {
+			[5701, 5702].includes(selectedHomeCategory) && {
 				control: 'select',
-				label: 'Colour',
+				label: 'Color',
 				name: 'color',
 				type: 'text',
 				placeholder: 'Type color here',
@@ -2058,7 +2054,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			},
 			otherColor && {
 				control: 'input',
-				label: 'Other Colour',
+				label: 'Other Color',
 				name: 'color',
 				type: 'text',
 				placeholder: 'Enter colour',
@@ -2156,7 +2152,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				type: 'text',
 				placeholder: 'Enter company name here',
 			},
-			!['5802', '5803'].includes(selectedTradesmanCategory) && {
+			![5802, 5803].includes(selectedTradesmanCategory) && {
 				control: 'select',
 				label: 'Type',
 				name: 'type',
@@ -2170,14 +2166,14 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				placeholder: 'Enter type',
 				required: true,
 			},
-			!['5811', '5803', '5809'].includes(selectedTradesmanCategory) && {
+			![5811, 5803, 5809].includes(selectedTradesmanCategory) && {
 				control: 'radio',
 				label: 'Service Area',
 				name: 'service_area',
 				type: 'radio',
 				options: tradesmanAreaOptions,
 			},
-			!['5806', '5811', '5812'].includes(selectedTradesmanCategory) && {
+			![5806, 5811, 5812].includes(selectedTradesmanCategory) && {
 				control: 'checkbox',
 				label: 'Service Features',
 				name: 'service_features',
@@ -2187,40 +2183,40 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 					{ key: 'Home Visit', value: 'home visit' },
 				],
 			},
-			['5812'].includes(selectedTradesmanCategory) && {
+			[5812].includes(selectedTradesmanCategory) && {
 				control: 'radio',
 				label: 'Payment Terms',
 				name: 'payment_terms',
 				type: 'radio',
 				options: [
-					{ key: 'Pay per hour', value: 'Pay per hour' },
-					{ key: 'Pay per piece', value: 'Pay per piece' },
-					{ key: 'Daily payment', value: 'Daily payment' },
+					{ key: 'Pay per hour', value: 'pay per hour' },
+					{ key: 'Pay per piece', value: 'pay per piece' },
+					{ key: 'Daily payment', value: 'daily payment' },
 					{ key: 'Contract', value: 'Contract' },
 				],
 			},
-			['5812'].includes(selectedTradesmanCategory) && {
+			[5812].includes(selectedTradesmanCategory) && {
 				control: 'radio',
 				label: 'Mode of Transport',
 				name: 'mode_of_transport',
 				type: 'radio',
 				options: [
 					{ key: 'Road', value: 'road' },
-					{ key: 'Rail', value: 'Rail' },
-					{ key: 'Air', value: 'Air' },
-					{ key: 'Maritime', value: 'Maritime' },
-					{ key: 'Cycling and Pedestrian', value: 'Cycling and Pedestrian' },
-					{ key: 'Intermodal/modal Transportation', value: 'Intermodal/modal Transportation' },
+					{ key: 'Rail', value: 'rail' },
+					{ key: 'Air', value: 'air' },
+					{ key: 'Maritime', value: 'maritime' },
+					{ key: 'Cycling and Pedestrian', value: 'cycling and edestrian' },
+					{ key: 'Intermodal/modal Transportation', value: 'intermodal/modal transportation' },
 				],
 			},
-			['5803', '5811', '5809'].includes(selectedTradesmanCategory) && {
+			[5803, 5811, 5809].includes(selectedTradesmanCategory) && {
 				control: 'checkbox',
 				label: 'Form',
 				name: 'form',
 				type: 'checkbox',
 				options: tradesmanFormOptions,
 			},
-			['5804', '5810', '5813'].includes(selectedTradesmanCategory) && {
+			[5804, 5810, 5813].includes(selectedTradesmanCategory) && {
 				control: 'radio',
 				label: 'Years of Experience',
 				name: 'years_of_experience',
@@ -2234,7 +2230,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 					{ key: '20+', value: '20+' },
 				],
 			},
-			['5804'].includes(selectedTradesmanCategory) && {
+			[5804].includes(selectedTradesmanCategory) && {
 				control: 'radio',
 				label: 'Mode of Charges',
 				name: 'mode_of_charges',
@@ -2244,7 +2240,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 					{ key: 'TBD', value: 'tbd' },
 				],
 			},
-			!['5811', '5803', '5812', '5813'].includes(selectedTradesmanCategory) && {
+			![5811, 5803, 5812, 5813].includes(selectedTradesmanCategory) && {
 				control: 'radio',
 				label: 'Available to travel',
 				name: 'available_to_travel',
@@ -2340,7 +2336,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				placeholder: 'Enter as much information as possible. Please state IF any defects.',
 				required: true,
 			},
-			['5902', '5903'].includes(selectedSoftwareCategory) && {
+			[5902, 5903].includes(selectedSoftwareCategory) && {
 				control: 'radio',
 				label: 'Condition',
 				name: 'ad_condition',
@@ -2352,7 +2348,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 					{ key: 'For Parts/Not Working', value: 'for_parts_not_working' },
 				],
 			},
-			!['5903'].includes(selectedSoftwareCategory) && {
+			![5903].includes(selectedSoftwareCategory) && {
 				control: 'select',
 				label: 'Platform',
 				name: 'platform',
@@ -2366,7 +2362,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				placeholder: 'Enter platform',
 				required: true,
 			},
-			!['5903'].includes(selectedSoftwareCategory) && {
+			![5903].includes(selectedSoftwareCategory) && {
 				control: 'radio',
 				label: 'Format',
 				name: 'format',
@@ -2387,13 +2383,13 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				placeholder: 'Enter format',
 				required: true,
 			},
-			['5902'].includes(selectedSoftwareCategory) && {
+			[5902].includes(selectedSoftwareCategory) && {
 				control: 'select',
 				label: 'Release Year',
 				name: 'release_year',
 				options: yearOptions,
 			},
-			['5902'].includes(selectedSoftwareCategory) && {
+			[5902].includes(selectedSoftwareCategory) && {
 				control: 'select',
 				label: 'Game genre',
 				name: 'game_genre',
@@ -2407,7 +2403,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				placeholder: 'Enter Game genre',
 				required: true,
 			},
-			['5901'].includes(selectedSoftwareCategory) && {
+			[5901].includes(selectedSoftwareCategory) && {
 				control: 'select',
 				label: 'Software Type',
 				name: 'type',
@@ -2421,18 +2417,18 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				placeholder: 'Enter Software type',
 				required: true,
 			},
-			['5902'].includes(selectedSoftwareCategory) && {
+			[5902].includes(selectedSoftwareCategory) && {
 				control: 'radio',
 				label: 'Rating',
 				name: 'rating',
 				type: 'radio',
 				options: [
-					{ key: 'Everyone', value: 'Everyone' },
+					{ key: 'Everyone', value: 'everyone' },
 					{ key: '10+', value: '10+' },
-					{ key: 'Todler', value: 'Todler' },
-					{ key: 'Adults Only', value: 'Adults Only' },
-					{ key: 'Mature', value: 'Mature' },
-					{ key: 'Teenager', value: 'Teenager' },
+					{ key: 'Todler', value: 'todler' },
+					{ key: 'Adults Only', value: 'adults only' },
+					{ key: 'Mature', value: 'mature' },
+					{ key: 'Teenager', value: 'teenager' },
 				],
 			},
 			{
@@ -2520,7 +2516,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				placeholder: 'Enter as much information as possible. Please state IF any defects.',
 				required: true,
 			},
-			['6001', '6004'].includes(selectedPetCategory) && {
+			[6001, 6004].includes(selectedPetCategory) && {
 				control: 'select',
 				label: 'Breed',
 				name: 'breed',
@@ -2550,7 +2546,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				placeholder: 'Enter breed type',
 				required: true,
 			},
-			!['6002', '6003', '6004'].includes(selectedPetCategory) && {
+			![6002, 6003, 6004].includes(selectedPetCategory) && {
 				control: 'radio',
 				label: 'Gender',
 				name: 'gender',
@@ -2560,9 +2556,9 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 					{ key: 'Female ', value: 'female' },
 				],
 			},
-			!['6002', '6004', '6005'].includes(selectedPetCategory) && {
+			![6002, 6004, 6005].includes(selectedPetCategory) && {
 				control: 'select',
-				label: 'Colour',
+				label: 'Color',
 				name: 'color',
 				type: 'text',
 				placeholder: 'Type color here',
@@ -2575,7 +2571,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				type: 'text',
 				placeholder: 'Enter colour',
 			},
-			['6003'].includes(selectedPetCategory) && {
+			[6003].includes(selectedPetCategory) && {
 				control: 'radio',
 				label: 'Condition',
 				name: 'ad_condition',
@@ -2586,7 +2582,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 					{ key: 'New', value: 'New' },
 				],
 			},
-			!['6002', '6003'].includes(selectedPetCategory) && {
+			![6002, 6003].includes(selectedPetCategory) && {
 				control: 'radio',
 				label: 'Age',
 				name: 'age',
@@ -2620,7 +2616,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				placeholder: '₦0.00',
 				required: true,
 			},
-			['6002', '6003'].includes(selectedPetCategory) && {
+			[6002, 6003].includes(selectedPetCategory) && {
 				control: 'price',
 				label: 'Bulk price',
 				name: 'bulk_price',
@@ -2692,7 +2688,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				placeholder: 'Enter as much information as possible. Please state IF any defects.',
 				required: true,
 			},
-			!['6111'].includes(selectedBabiesCategory) && {
+			![6111].includes(selectedBabiesCategory) && {
 				control: 'radio',
 				label: 'Condition',
 				name: 'ad_condition',
@@ -2702,7 +2698,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 					{ key: 'Used', value: 'used' },
 				],
 			},
-			!['6106', '6101'].includes(selectedBabiesCategory) && {
+			![6106, 6101].includes(selectedBabiesCategory) && {
 				control: 'select',
 				label: 'Brand',
 				name: 'brand',
@@ -2716,7 +2712,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				placeholder: 'Enter brand',
 				required: true,
 			},
-			!['6111', '6105'].includes(selectedBabiesCategory) && {
+			![6111, 6105].includes(selectedBabiesCategory) && {
 				control: 'select',
 				label: 'Type',
 				name: 'type',
@@ -2730,7 +2726,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				placeholder: 'Enter type',
 				required: true,
 			},
-			!['6104', '6101', '6111', '6105', '6109'].includes(selectedBabiesCategory) && {
+			![6104, 6101, 6111, 6105, 6109].includes(selectedBabiesCategory) && {
 				control: 'radio',
 				label: 'Gender',
 				name: 'gender',
@@ -2740,9 +2736,9 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 					{ key: 'Female', value: 'female' },
 				],
 			},
-			!['6101', '6111'].includes(selectedBabiesCategory) && {
+			![6101, 6111].includes(selectedBabiesCategory) && {
 				control: 'select',
-				label: 'Colour',
+				label: 'Color',
 				name: 'color',
 				type: 'text',
 				placeholder: 'Type color here',
@@ -2755,20 +2751,20 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				type: 'text',
 				placeholder: 'Enter colour',
 			},
-			['6107'].includes(selectedBabiesCategory) && {
+			[6107].includes(selectedBabiesCategory) && {
 				control: 'radio',
 				label: 'Capacity',
 				name: 'capacity',
 				type: 'radio',
 				options: [
-					{ key: 'Double', value: 'Double' },
-					{ key: 'Single', value: 'Single' },
-					{ key: 'Triple', value: 'Triple' },
-					{ key: 'Quad', value: 'Quad' },
-					{ key: 'Other', value: 'Other' },
+					{ key: 'Double', value: 'double' },
+					{ key: 'Single', value: 'single' },
+					{ key: 'Triple', value: 'triple' },
+					{ key: 'Quad', value: 'quad' },
+					{ key: 'Other', value: 'other' },
 				],
 			},
-			!['6107', '6104', '6106'].includes(selectedBabiesCategory) && {
+			![6107, 6104, 6106].includes(selectedBabiesCategory) && {
 				control: 'radio',
 				label: 'Age',
 				name: 'age',
@@ -2781,7 +2777,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 					{ key: '8+', value: '8+' },
 				],
 			},
-			['6102'].includes(selectedBabiesCategory) && {
+			[6102].includes(selectedBabiesCategory) && {
 				control: 'select',
 				label: 'Size',
 				name: 'size',
@@ -2880,7 +2876,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				placeholder: 'Enter as much information as possible. Please state IF any defects.',
 				required: true,
 			},
-			!['6204'].includes(selectedSportsCategory) && {
+			![6204].includes(selectedSportsCategory) && {
 				control: 'radio',
 				label: 'Condition',
 				name: 'ad_condition',
@@ -2891,7 +2887,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 					{ key: 'Foreign Used', value: 'foreign use' },
 				],
 			},
-			!['6205', '6206', '6204', '6201', '6202', '6203'].includes(selectedSportsCategory) && {
+			![6205, 6206, 6204, 6201, 6202, 6203].includes(selectedSportsCategory) && {
 				control: 'radio',
 				label: 'Gender',
 				name: 'gender',
@@ -2901,7 +2897,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 					{ key: 'Female', value: 'female' },
 				],
 			},
-			['6202', '6203', '6206'].includes(selectedSportsCategory) && {
+			[6202, 6203, 6206].includes(selectedSportsCategory) && {
 				control: 'select',
 				label: 'Brand',
 				name: 'brand',
@@ -2917,7 +2913,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				placeholder: 'Enter brand',
 				required: true,
 			},
-			['6201', '6202', '6203', '6204', '6205'].includes(selectedSportsCategory) && {
+			[6201, 6202, 6203, 6204, 6205].includes(selectedSportsCategory) && {
 				control: 'select',
 				label: 'Type',
 				name: 'type',
@@ -2933,9 +2929,9 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				placeholder: 'Enter type',
 				required: true,
 			},
-			!['6205', '6204', '6201', '6202', '6203'].includes(selectedSportsCategory) && {
+			![6205, 6204, 6201, 6202, 6203].includes(selectedSportsCategory) && {
 				control: 'select',
-				label: 'Colour',
+				label: 'Color',
 				name: 'color',
 				type: 'text',
 				placeholder: 'Type color here',
@@ -2948,7 +2944,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				type: 'text',
 				placeholder: 'Enter colour',
 			},
-			['6205'].includes(selectedSportsCategory) && {
+			[6205].includes(selectedSportsCategory) && {
 				control: 'select',
 				label: 'Age',
 				name: 'age',
@@ -3069,7 +3065,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				placeholder: 'Enter make',
 				required: true,
 			},
-			selectedMotorbikeCategory === '6301' && {
+			selectedMotorbikeCategory === 6301 && {
 				control: 'select',
 				label: 'Type',
 				name: 'type',
@@ -3077,7 +3073,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				placeholder: 'e.g. Scooter, Touring, Tricycle',
 				options: motorbikeTypeOptions,
 			},
-			selectedMotorbikeCategory === '6301' &&
+			selectedMotorbikeCategory === 6301 &&
 				otherType && {
 					control: 'input',
 					label: 'Other Type',
@@ -3109,13 +3105,13 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 					{ key: 'Unpainted', value: 'unpainted' },
 				],
 			},
-			selectedMotorbikeCategory === '6302' && {
+			selectedMotorbikeCategory === 6302 && {
 				control: 'select',
 				label: 'Year of Manufacture?',
 				name: 'year',
 				options: yearOptions,
 			},
-			selectedMotorbikeCategory === '6302' && {
+			selectedMotorbikeCategory === 6302 && {
 				control: 'input',
 				label: 'Mileage?',
 				name: 'mileage',
@@ -3134,7 +3130,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			},
 			{
 				control: 'select',
-				label: 'Colour',
+				label: 'Color',
 				name: 'color',
 				type: 'text',
 				placeholder: 'Type color here',
@@ -3142,10 +3138,10 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			},
 			otherColor && {
 				control: 'input',
-				label: 'Other Colour',
+				label: 'Other Color',
 				name: 'color',
 				type: 'text',
-				placeholder: 'Enter colour',
+				placeholder: 'Enter color',
 			},
 			{
 				control: 'radio',
@@ -3268,7 +3264,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			},
 			{
 				control: 'select',
-				label: 'Colour',
+				label: 'Color',
 				name: 'color',
 				type: 'text',
 				placeholder: 'Type color here',
@@ -3276,10 +3272,10 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 			},
 			otherColor && {
 				control: 'input',
-				label: 'Other Colour',
+				label: 'Other Color',
 				name: 'color',
 				type: 'text',
-				placeholder: 'Enter colour',
+				placeholder: 'Enter color',
 			},
 			{
 				control: 'input',
@@ -3994,33 +3990,33 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				}, [formik.values]);
 
 				useEffect(() => {
-					if (pathname === '/post-ad/50') {
+					if (categoryId === 50) {
 						setSelectedVehicleCategory(() => formik.values.category);
-					} else if (pathname === '/post-ad/51') {
+					} else if (categoryId === 51) {
 						setSelectedPropertyCategory(() => formik.values.category);
-					} else if (pathname === '/post-ad/52') {
+					} else if (categoryId === 52) {
 						setSelectedServicesCategory(() => formik.values.category);
-					} else if (pathname === '/post-ad/53') {
+					} else if (categoryId === 53) {
 						setSelectedAgricultureCategory(() => formik.values.category);
-					} else if (pathname === '/post-ad/54') {
+					} else if (categoryId === 54) {
 						setSelectedElectronicsCategory(() => formik.values.category);
-					} else if (pathname === '/post-ad/56') {
+					} else if (categoryId === 56) {
 						setSelectedHealthCategory(() => formik.values.category);
-					} else if (pathname === '/post-ad/55') {
+					} else if (categoryId === 55) {
 						setSelectedFashionCategory(() => formik.values.category);
-					} else if (pathname === '/post-ad/57') {
+					} else if (categoryId === 57) {
 						setSelectedHomeCategory(() => formik.values.category);
-					} else if (pathname === '/post-ad/58') {
+					} else if (categoryId === 58) {
 						setSelectedTradesmanCategory(() => formik.values.category);
-					} else if (pathname === '/post-ad/59') {
+					} else if (categoryId === 59) {
 						setSelectedSoftwareCategory(() => formik.values.category);
-					} else if (pathname === '/post-ad/60') {
+					} else if (categoryId === 60) {
 						setSelectedPetCategory(() => formik.values.category);
-					} else if (pathname === '/post-ad/61') {
+					} else if (categoryId === 61) {
 						setSelectedBabiesCategory(() => formik.values.category);
-					} else if (pathname === '/post-ad/62') {
+					} else if (categoryId === 62) {
 						setSelectedSportsCategory(() => formik.values.category);
-					} else if (pathname === '/post-ad/63') {
+					} else if (categoryId === 63) {
 						setSelectedMotorbikeCategory(() => formik.values.category);
 					}
 				}, [formik.values.category]);
