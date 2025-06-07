@@ -37,7 +37,7 @@ const PostAd = () => {
 				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
 			price: ad?.price,
 			year: ad?.year,
-			mileage: ad?.mileage,
+			millage: ad?.millage,
 			transmission: ad?.transmission,
 			color: ad?.color,
 			number_of_seat: ad?.number_of_seat,
@@ -174,6 +174,7 @@ const PostAd = () => {
 			type: ad?.type,
 			age: ad?.age,
 			gender: ad?.gender,
+			color: ad?.color,
 			ad_condition: ad?.ad_condition,
 			formulation: ad?.formulation,
 			scent_type: ad?.scent_type,
@@ -390,6 +391,7 @@ const PostAd = () => {
 						adId={adId}
 						adImages={ad?.images}
 						categoryId={categoryId}
+						subCategoryId={ad.category}
 						categoryName={categoryName}
 						initialValues={initialValues[categoryId]}
 					/>
