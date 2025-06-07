@@ -73,7 +73,12 @@ const AdCard = ({ title, images, active, price, subscribe, views, adId }) => {
 						>
 							Close
 						</Button>
-						<Button variant={'secondary'} size={'small'} className={' rounded-lg '}>
+						<Button
+							variant={'secondary'}
+							size={'small'}
+							className={' rounded-lg '}
+							onClick={() => navigate(`/update-ad/${adId}#post-package`)}
+						>
 							Promote
 						</Button>
 					</div>
