@@ -3848,6 +3848,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues, adImages, adId 
 				price={priceValue}
 				address={address}
 				images={field.images}
+				feature={initialValues.feature}
 				edit={field.edit}
 				setAddress={setAddress}
 				subCat={

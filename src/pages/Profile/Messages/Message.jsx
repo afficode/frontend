@@ -6,7 +6,11 @@ const Message = ({ message, time }) => {
 	const { user } = useAuth();
 
 	return (
-		<div className="bg-gray-200 px-3 py-1 rounded-l-2xl rounded-t-2xl min-w-[8rem] flex flex-col justify-between relative ">
+		<div
+			className={`${
+				message.offer === 1 ? 'bg-secondary' : 'bg-gray-200'
+			} px-3 py-1 rounded-l-2xl rounded-t-2xl min-w-[8rem] flex flex-col justify-between relative `}
+		>
 			<span
 				className={` font-semibold text-sm text-black truncate ${
 					message.sender === user.id ? 'right-2' : 'left-1'

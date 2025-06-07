@@ -11,7 +11,7 @@ import PriceInput from './PriceInput';
 import AdFeatures from './AdFeatures';
 
 const FormControl = (props) => {
-	const { control, price, subCat, address, setAddress, categoryId, ...rest } = props;
+	const { control, price, subCat, address, setAddress, categoryId, feature, ...rest } = props;
 
 	switch (control) {
 		case 'input':
@@ -50,6 +50,7 @@ const FormControl = (props) => {
 					address={address}
 					setAddress={setAddress}
 					categoryId={categoryId}
+					feature={feature}
 					{...rest}
 				/>
 			);
