@@ -5,7 +5,6 @@ import { Button, InputGroup } from '../../../ui';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import LoadingScreen from './LoadingScreen';
-import { toSelectOptions } from '../../../utils';
 
 import useAuth from '../../../context/UserContext.jsx';
 import { useStates } from '../../../hooks/index.js';
