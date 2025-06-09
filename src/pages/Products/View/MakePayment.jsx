@@ -19,7 +19,6 @@ const MakePayment = ({ ad_id }) => {
     const handleDelete = (id) => {
         adDelete(id, {
             onSuccess: (data) => {
-                console.log(data);
                 notify(data?.message, 'success');
             },
             onError: (error) => {
@@ -32,7 +31,7 @@ const MakePayment = ({ ad_id }) => {
         <>
             <div className='mb-4 mt-2 text-red-700 dark:text-red-800'>
                 <ul className='list-disc ml-4'>
-                    <li>This Ad was posted and nof funds in your account.</li>
+                    <li>This Ad was posted and no funds in your account.</li>
                     <li>
                         {' '}
                         We could not take payment for this AD when posted, which
