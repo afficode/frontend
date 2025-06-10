@@ -15,7 +15,7 @@ const PickUp = () => {
 	const { data: checkOrder, isLoading: checking, isError, error } = useCheckOrder(ad_id);
 
 	const stage = useMemo(() => {
-		if (checkOrder?.data.status) {
+		if (checkOrder?.payment_status === 'success') {
 			return 2;
 		} else {
 			return 1;
@@ -136,8 +136,8 @@ const PickUp = () => {
 					</div>
 				</div>
 			) : (
-				<div className="space-y-4">
-					<p className="m">Dear Buyer,</p>
+				<div className="space-y-4 py-8 px-8 max-sm:px-4 ">
+					<p className="font-bold">Dear Buyer,</p>
 
 					<div>
 						<p>Thanks for your order, Kindly find the details of seller below.</p>
@@ -149,19 +149,19 @@ const PickUp = () => {
 							<p>Pick up address : </p>
 							<span className="col-span-2 flex items-center gap-2 p-2 rounded-md bg-[#333] text-white">
 								<img src={Location} alt="/" className="w-4" />
-								12b, Alade market avenue, Ikeja Lagos.
+								{checkOrder?.data.pickup_address}, {checkOrder?.data.pickup_state}.
 							</span>
 						</div>
 						<div className="grid items-center grid-cols-3">
 							<p>Mobile: </p>
 							<span className="col-span-2  flex items-center gap-2 p-2 rounded-md bg-[#333] text-white">
-								+234 8033456236
+								{checkOrder?.data.pickup_mobile}
 							</span>
 						</div>
 						<div className="grid items-center grid-cols-3">
 							<p>Name: </p>
 							<span className="col-span-2 flex items-center gap-2 p-2 rounded-md bg-[#333] text-white">
-								Mr Kunle Kalejaiye
+								{checkOrder?.data.ad_owner_name}
 							</span>
 						</div>
 					</div>

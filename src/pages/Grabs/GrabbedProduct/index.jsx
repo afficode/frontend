@@ -4,7 +4,7 @@ import { noimage } from '../../../assets/images';
 import { Carousel } from 'flowbite-react';
 import { FaCamera } from 'react-icons/fa';
 import OverviewPills from '../../Products/View/OverviewPills';
-import { convertKeyToName, numberWithCommas, ScrollToTop } from '../../../utils';
+import { convertKeyToName, encodeProductId, numberWithCommas, ScrollToTop } from '../../../utils';
 import Action from './Action';
 import { fetchProduct, useCheckOrder } from '../../../hooks';
 import { SpinnerSkeleton } from '../../../components';
@@ -30,6 +30,10 @@ const GrabbedProduct = () => {
 				<SpinnerSkeleton />
 			</div>
 		);
+
+	if (user?.id === result?.data?.user_id) {
+		location.replace(`${Approutes.product.initial}/${encodeProductId(ad_id)}`);
+	}
 
 	if (isError) {
 		if (error?.response?.status === 403) {
