@@ -1,16 +1,28 @@
 import { ArrowRightBlack, RedirectIcon, SuccessTick } from '../../../assets/svgs';
 import { PaymentSuccessful } from '../../../assets/images';
 import { Approutes } from '../../../constants';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 
-const PaymentSuccess = ({ grabber_id, ad_id, ad }) => {
+const PaymentSuccess = () => {
+	const [searchParams] = useSearchParams();
+	const transactionId = searchParams.get('transaction_id');
+	const adTitle = searchParams.get('ad_title');
+	const date = searchParams.get('date');
+	const typeOfTansaction = searchParams.get('type_of_transaction');
+	const deliveryType = searchParams.get('delivery_type');
+	const grabberId = searchParams.get('grabber_id');
+
 	return (
 		<div className="max-w-[720px] py-6 px-4 flex flex-col gap-8 m-auto ">
 			<div className="flex flex-col items-center gap-4">
 				<img src={PaymentSuccessful} className="w-[180px]" alt="Payment successful" />
 				<div className="space-y-2 text-center">
 					<h3>Payment Successful</h3>
-					<p>Successfully paid: {ad?.data?.price}</p>
+					<p>
+						Successfully paid:
+						{/* {ad?.data?.price} */}
+						{adTitle && adTitle}
+					</p>
 				</div>
 			</div>
 
@@ -20,27 +32,27 @@ const PaymentSuccess = ({ grabber_id, ad_id, ad }) => {
 					<tbody>
 						<tr>
 							<td>Transaction ID</td>
-							<td>1234567890</td>
+							<td>{transactionId && transactionId}</td>
 						</tr>
 						<tr>
 							<td>Item paid for</td>
-							<td>{ad?.data?.title}</td>
+							{/* <td>{ad?.data?.title}</td> */}
 						</tr>
 						<tr>
 							<td>Date</td>
-							<td>23 April, 2025</td>
+							<td>{date && date}</td>
 						</tr>
 						<tr>
 							<td>Type of transaction</td>
-							<td>Bank transfer</td>
+							<td>{typeOfTansaction && typeOfTansaction}</td>
 						</tr>
 						<tr>
 							<td>Delivery type</td>
-							<td>Boonfu Delivery</td>
+							<td>{deliveryType && deliveryType}</td>
 						</tr>
 						<tr>
 							<td>Grabber ID</td>
-							<td>12903BF</td>
+							<td>{grabberId && grabberId}</td>
 						</tr>
 						<tr>
 							<td>Status</td>

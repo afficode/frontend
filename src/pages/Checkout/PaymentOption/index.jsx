@@ -55,12 +55,14 @@ const PaymentOption = ({ result, quotePrice, orderId }) => {
 				payment_method: paymentOption === 'paystack' ? 'paystack' : 'wallet',
 				stage: 'init',
 				callback_url: 'https://boonfu.site/checkout/payment-success',
+				// callback_url: 'http://localhost:5173/checkout/payment-success',
 				escrow_type: escrow_type === 'delivery' ? 'boonfu_delivery' : 'self_pickup',
 			},
 			{
 				onSuccess: (data) => {
-					notify(data?.message, 'success');
-					// window.location.replace(data?.url);
+					// console.log(data);
+					// notify('Please pay', 'success');
+					window.location.replace(data?.url);
 					// setStage(2);
 				},
 				onError: (error) => {
