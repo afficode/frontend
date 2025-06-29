@@ -1,11 +1,11 @@
 import { useParams } from 'react-router-dom';
 import { fetchProduct, useCheckOrder } from '../../../hooks';
 import { useMemo, useState } from 'react';
-import { Location } from '../../../assets/svgs';
 import { toMoney } from '../../../utils';
 import { Button, Modal } from '../../../ui';
 import PaymentOption from '../PaymentOption';
 import { SpinnerSkeleton } from '../../../components';
+import ShowSellerContact from './ShowSellerContact';
 
 const PickUp = () => {
 	const { grabber_id, ad_id } = useParams();
@@ -136,46 +136,12 @@ const PickUp = () => {
 					</div>
 				</div>
 			) : (
-				<div className="space-y-4 py-8 px-8 max-sm:px-4 ">
-					<p className="font-bold">Dear Buyer,</p>
-
-					<div>
-						<p>Thanks for your order, Kindly find the details of seller below.</p>
-						<p>Please call right away to arrange a pick up.</p>
-					</div>
-
-					<div className="space-y-2">
-						<div className="grid items-center grid-cols-3">
-							<p>Pick up address : </p>
-							<span className="col-span-2 flex items-center gap-2 p-2 rounded-md bg-[#333] text-white">
-								<img src={Location} alt="/" className="w-4" />
-								{checkOrder?.data.pickup_address}, {checkOrder?.data.pickup_state}.
-							</span>
-						</div>
-						<div className="grid items-center grid-cols-3">
-							<p>Mobile: </p>
-							<span className="col-span-2  flex items-center gap-2 p-2 rounded-md bg-[#333] text-white">
-								{checkOrder?.data.pickup_mobile}
-							</span>
-						</div>
-						<div className="grid items-center grid-cols-3">
-							<p>Name: </p>
-							<span className="col-span-2 flex items-center gap-2 p-2 rounded-md bg-[#333] text-white">
-								{checkOrder?.data.ad_owner_name}
-							</span>
-						</div>
-					</div>
-
-					<p className="py-4">
-						Should you experience any difficulty in reaching the above contact, please chat at us @{' '}
-						<span className="text-primary">Boonfuchat</span>
-					</p>
-
-					<p>
-						Sales department, <br />
-						Boonfu
-					</p>
-				</div>
+				<ShowSellerContact
+					pickup_address={checkOrder?.data.pickup_address}
+					pickup_state={checkOrder?.data.pickup_state}
+					pickup_mobile={checkOrder?.data.pickup_mobile}
+					ad_owner_name={checkOrder?.data.ad_owner_name}
+				/>
 			)}
 
 			<Modal
