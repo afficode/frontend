@@ -35,10 +35,11 @@ const AdFeatures = (props) => {
 
 	return (
 		<div id="post-package" className="scroll-mt-[100px] bg-white py-8 my-4">
-			<div className="flex flex-col items-center py-2">
+			<div className="flex flex-col items-center py-2 text-center">
 				<h3 className="text-center">Select Suitable Posting package for your ad.</h3>
 				<h6>
-					( You have to select <b>ONLY ONE</b> option )
+					( You have to select <b>ONLY ONE</b> option. <b>NOTE: These packages keep your ads for 2weeks, after
+						which the site notifies you of renewal  or delete IF item is sold.</b> )
 				</h6>
 			</div>
 			<hr className="border-black" />
@@ -94,11 +95,10 @@ const AdFeatures = (props) => {
 
 					{/* grab feature */}
 					<div
-						className={`${
-							showGrab
-								? ' transform translate-x-[-1.2%] transition-all duration-500 opacity-100'
-								: ' transform translate-x-[150%] transition-all duration-500 opacity-0'
-						} space-y-6 p-8 absolute top-0 bg-white z-10 w-full `}
+						className={`${showGrab
+							? ' transform translate-x-[-1.2%] transition-all duration-500 opacity-100'
+							: ' transform translate-x-[150%] transition-all duration-500 opacity-0'
+							} space-y-6 p-8 absolute top-0 bg-white z-10 w-full `}
 					>
 						<div className="space-y-2">
 							<div className="flex items-center gap-2 ">
