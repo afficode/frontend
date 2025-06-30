@@ -78,7 +78,7 @@ export const Approutes = {
 
 //export const backendLink = process.env.NODE_ENV !== "sam" ? 'http://109.237.25.252:4000/' : 'http://localhost:4000/';
 export const backendLink =
-	import.meta.env.VITE_CHECK_ENV === 'sam_dev'
+	import.meta.env.VITE_CHECK_ENV === 'sam_devnm'
 		? 'http://localhost:4000/'
 		: 'https://api.boonfu.site/';
 
