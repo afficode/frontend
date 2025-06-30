@@ -1,13 +1,28 @@
 import { useRef, useState } from 'react';
 import { ArrowRightBlue } from '../../../../assets/svgs';
 import { Modal } from '../../../../ui';
-import { TermsAndCondition } from '../../../../components';
+import { SpinnerSkeleton, TermsAndCondition } from '../../../../components';
 import { toMoney } from '../../../../utils';
 import { format, parseISO } from 'date-fns';
+import { useNotify, useQuotedPay } from '../../../../hooks';
 
 const Details = ({ data }) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const returnRef = useRef(null);
+	const { mutateAsync: payQuoted, isLoading: quoteLoading } = useQuotedPay(data?.id);
+	const notify = useNotify();
+
+	const handlePay = async () => {
+
+		try {
+			const quotedPromise = await payQuoted({ ad_id: data?.ad_id });
+			notify(`${quotedPromise?.message ?? 'Payment initiated...'}`, 'success');
+		} catch (error) {
+			notify(error?.response?.data?.message ?? error?.message ?? 'Something went wrong', 'error');
+		}
+
+		// console.log(quotedPromise);
+	}
 
 	const handleScrollTo = (ref) => {
 		if (!isOpen) {
@@ -19,6 +34,14 @@ const Details = ({ data }) => {
 			ref.current.scrollIntoView({ behavior: 'smooth' });
 		}
 	};
+
+	if (quoteLoading) {
+		return <div className='flex items-center justify-center h-40'>
+			<SpinnerSkeleton />
+		</div>
+	}
+
+	console.log(data);
 
 	return (
 		<div className="max-w-[720px] mx-auto space-y-4 px-4">
@@ -46,7 +69,9 @@ const Details = ({ data }) => {
 								Order tracking <img src={ArrowRightBlue} className="w-2" alt="Arrow right" />
 							</h6>
 
-							<progress className="w-full bg-[#D9D9D9] !rounded-lg" value={20} max={100}></progress>
+							<progress className="w-full bg-[#D9D9D9] !rounded-lg" value={
+								data?.paid && data?.delivery_status === null ? 50 : data?.delivery_status === 'picked_up' ? 75 : data?.delivery_status === 'delivered' ? 100 : 25
+							} max={100}></progress>
 
 							<div className="flex items-start justify-between px-4">
 								<div className="flex flex-col gap-2 items-center text-center leading-4">
@@ -73,8 +98,8 @@ const Details = ({ data }) => {
 
 			<div className="space-y-4 border-b border-black/50 py-2 pb-4">
 				<div className="grid grid-cols-[repeat(auto-fit,_minmax(170px,_1fr))] gap-4">
-					<div className="space-y-2">
-						<p className="capitalize">{data.title}</p>
+					<div className="">
+						<p className="capitalize mb-2 text-primary font-bold">{data.title}</p>
 						<div className="flex items-center gap-1">
 							<p>Ad price:</p>
 							<p>₦{toMoney(data.ad_price)}</p>
@@ -85,6 +110,15 @@ const Details = ({ data }) => {
 								<p>₦{toMoney(data.price)}</p>
 							</div>
 						)}
+						{
+							data?.paid === 1 && (
+								<div className="flex items-center gap-1">
+									<button className='bg-primary hover:bg-green-400 p-2 px-4 text-white rounded-lg' onClick={() => handlePay()}>Continue to Payment</button>
+
+								</div>
+							)
+						}
+
 					</div>
 
 					<div>

@@ -26,8 +26,8 @@ export const useGetOrders = () => {
 	const fetchOrders = () => privateAxios.get(`${backendLink}order`).then((res) => res?.data);
 
 	return useQuery('all-orders', fetchOrders, {
-		refetchOnWindowFocus: false,
-		refetchOnMount: false,
+		refetchOnWindowFocus: true,
+		refetchOnMount: true,
 		refetchInterval: false,
 	});
 };
@@ -39,6 +39,17 @@ export const useGetOrder = (id) => {
 		refetchInterval: false,
 		refetchOnWindowFocus: false,
 		refetchIntervalInBackground: false,
+	});
+};
+
+export const useGetEscrowDetails = (id) => {
+	const getEscrowDetails = () => privateAxios.get(`${backendLink}escrow/pickup_details/${id}`).then((res) => res?.data);
+
+	return useQuery(['get-details', id], getEscrowDetails, {
+		refetchInterval: false,
+		refetchOnWindowFocus: false,
+		refetchIntervalInBackground: false,
+		enabled: !!id,
 	});
 };
 
