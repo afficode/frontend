@@ -57,6 +57,7 @@ import {
 	Delivery,
 	Pickup,
 	SafetyGuides,
+	ClosePickup,
 } from './pages';
 import { AppLayout, DashboardLayout } from './layout';
 import { Approutes } from './constants';
@@ -166,6 +167,7 @@ function App() {
 						<Route path={Approutes.checkout.checkout} element={<Checkout />} />
 						<Route path={Approutes.checkout.delivery} element={<Delivery />} />
 						<Route path={Approutes.checkout.pickup} element={<Pickup />} />
+						<Route path={Approutes.checkout.closePickup} element={<ClosePickup />} />
 						<Route path={Approutes.grab.inspectionLog} element={<InspectionLog />} />
 						<Route path={Approutes.welcome} element={<Welcome />} />
 						<Route path={`${Approutes.postDecision}`} element={<PostDecision />} />

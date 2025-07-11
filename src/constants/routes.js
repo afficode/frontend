@@ -37,6 +37,8 @@ export const Approutes = {
 		pickup: '/checkout/pickup/:grabber_id/:ad_id',
 		usePickup: (grabber_id, ad_id) => `/checkout/pickup/${grabber_id}/${ad_id}`,
 		paymentSuccess: '/checkout/payment-success',
+		closePickup: '/checkout/close-pickup/:escrow_id',
+		useClosePickup: (escrow_id) => `/checkout/close-pickup/${escrow_id}`,
 	},
 	contactUs: '/contact-us',
 	forgotPassword: '/forgot-password',
@@ -73,7 +75,7 @@ export const Approutes = {
 	updateAd: '/update-ad',
 	underConstruction: '/under-construction',
 	welcome: '/welcome',
-	refundForm: 'refund-form',
+	refundForm: '/refund-form',
 };
 
 //export const backendLink = process.env.NODE_ENV !== "sam" ? 'http://109.237.25.252:4000/' : 'http://localhost:4000/';
