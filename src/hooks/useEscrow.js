@@ -43,7 +43,8 @@ export const useGetOrder = (id) => {
 };
 
 export const useGetEscrowDetails = (id) => {
-	const getEscrowDetails = () => privateAxios.get(`${backendLink}escrow/pickup_details/${id}`).then((res) => res?.data);
+	const getEscrowDetails = () =>
+		privateAxios.get(`${backendLink}escrow/pickup_details/${id}`).then((res) => res?.data);
 
 	return useQuery(['get-details', id], getEscrowDetails, {
 		refetchInterval: false,
@@ -61,4 +62,25 @@ export const useCheckOrder = (ad_id) => {
 		refetchOnMount: false,
 		refetchInterval: false,
 	});
+};
+
+export const useRequestOtp = () => {
+	const request = (data) =>
+		privateAxios.post(`${backendLink}otp/request`, data).then((res) => res?.data);
+
+	return useMutation(['request-otp'], request);
+};
+
+export const useVerifyOtp = () => {
+	const verify = (data) =>
+		privateAxios.post(`${backendLink}otp/validate`, data).then((res) => res?.data);
+
+	return useMutation(['verify-otp'], verify);
+};
+
+export const useRefund = () => {
+	const refund = (data) =>
+		privateAxios.post(`${backendLink}escrow/refund_form`, data).then((res) => res?.data);
+
+	return useMutation(['refund'], refund);
 };

@@ -33,7 +33,6 @@ export { default as UnderConstuction } from './UnderConstruction';
 export { default as UpdateAd } from './UpdateAd';
 export { default as Welcome } from './Welcome';
 export { default as Withdraw } from './Account/Withdraw';
-export { default as RefundForm } from './RefundForm';
 
 // auth
 export { default as Auth } from './auth';

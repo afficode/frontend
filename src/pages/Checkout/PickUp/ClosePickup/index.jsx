@@ -1,18 +1,87 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { CloseIcon, Location, ThankYou } from '../../../../assets/svgs';
-import { Button, InputGroup } from '../../../../ui';
-import { Link } from 'react-router-dom';
+import { Button, InputGroup, Modal } from '../../../../ui';
+import { Link, useParams } from 'react-router-dom';
 import { Approutes } from '../../../../constants';
+import { useGetEscrowDetails, useNotify, useRequestOtp, useVerifyOtp } from '../../../../hooks';
+import { SpinnerSkeleton } from '../../../../components';
+import RefundForm from '../../RefundForm';
 
 const ClosePickup = () => {
-	const stage = 5;
+	const { escrow_id } = useParams();
+	const [stage, setStage] = useState(1);
+	const [timer, setTimer] = useState(300);
+	const [isExpired, setIsExpired] = useState(false);
+	const [refundModal, setRefundModal] = useState(false);
 	const inputLength = 6;
 	const [code, setCode] = useState(Array(inputLength).fill(''));
 	const inputsRef = useRef([]);
 	const [formData, setFormData] = useState({
-		cancel_reason: '',
+		escrow_reason: '',
 		other_reason: '',
 	});
+
+	const {
+		data: escrowDetails,
+		isLoading: escrowLoading,
+		isError: escrowError,
+		error: escrowErrorData,
+	} = useGetEscrowDetails(escrow_id);
+
+	useEffect(() => {
+		if (timer === 0) {
+			setIsExpired(true);
+			return;
+		}
+
+		const interval = setInterval(() => {
+			setTimer((prev) => prev - 1);
+		}, 1000);
+
+		return () => clearInterval(interval);
+	}, [timer]);
+
+	const notify = useNotify();
+	const { mutate: requestOtp, isLoading } = useRequestOtp();
+
+	const completePickup = () => {
+		const data = {
+			id: escrow_id,
+			service: 'self_pickup',
+			type: 'request',
+		};
+
+		requestOtp(data, {
+			onSuccess: (data) => {
+				notify(data?.message, 'success');
+				setTimer(300);
+				setIsExpired(false);
+				setStage(2);
+			},
+			onError: (error) => {
+				notify(error?.response.data.message, 'error');
+			},
+		});
+	};
+
+	const resendOtp = () => {
+		const data = {
+			id: escrow_id,
+			service: 'self_pickup',
+			type: 'resend',
+		};
+
+		requestOtp(data, {
+			onSuccess: (data) => {
+				notify(data?.message, 'success');
+				setTimer(300);
+				setIsExpired(false);
+			},
+			onError: (error) => {
+				notify(error?.response.data.message, 'error');
+			},
+		});
+	};
 
 	// Handle single key press/change
 	const handleOtpChange = (e, index) => {
@@ -60,45 +129,86 @@ const ClosePickup = () => {
 		}
 	};
 
+	const { mutate: verifyOtp, isLoading: isVerifying } = useVerifyOtp();
+
 	const handleOtpSubmit = (e) => {
 		e.preventDefault();
 		const joined = code.join('');
-		console.log('Submit to backend:', joined);
 		// Your API call here
+
+		const data = {
+			otp: joined,
+			service: 'self_pickup',
+		};
+
+		verifyOtp(data, {
+			onSuccess: (data) => {
+				notify(data?.message, 'success');
+				setStage(3);
+			},
+			onError: (error) => {
+				notify(error?.response.data.message, 'error');
+			},
+		});
 	};
 
-	const handleCancelOrder = () => {};
+	const handleCancelOrder = (e) => {
+		e.preventDefault();
+		console.log('Cancel Order Data:', formData);
+		if (formData.escrow_reason || formData.other_reason) {
+			setStage(5);
+		} else {
+			return;
+		}
+	};
+
+	if (escrowLoading) {
+		return (
+			<div className="flex items-center justify-center h-72">
+				<SpinnerSkeleton />
+			</div>
+		);
+	}
 
 	return (
 		<div className="py-10">
-			{stage === 1 ? (
+			{stage === 1 && (
 				<div className="border border-black py-6 px-12 w-max mx-auto text-center space-y-2">
 					<h2 className="text-2xl">Buyer Pick Up In Progress</h2>
 					<div className="flex flex-col items-center">
-						<h6 className="font-semibold text-base">Mukesh Stores.</h6>
+						<h6 className="font-semibold text-base">{escrowDetails?.escrow.ad_owner_name}.</h6>
 						<div className="flex items-center gap-1">
 							<img src={Location} alt="map" className="w-4 h-4" />
-							Oregun, Ikeja
+							{escrowDetails?.escrow.pickup_address}, {escrowDetails?.escrow.pickup_state}.
 						</div>
-						<p>+234(0) 8136145896</p>
+						<p>{escrowDetails?.escrow.pickup_mobile}</p>
 					</div>
 					<div className="border border-black py-4 px-8 flex flex-col gap-4">
-						<h6 className="text-base font-semibold">Iphone 14 Pro Max</h6>
+						<h6 className="text-base font-semibold capitalize">{escrowDetails?.escrow.ad_title}</h6>
 
 						<div className="flex flex-col gap-2">
-							<Button className={'bg-[#047F73] py-[.65rem] px-[2.8rem] text-white'}>
+							<Button
+								className={'bg-[#047F73] py-[.65rem] px-[2.8rem] text-white'}
+								onClick={completePickup}
+								loading={isLoading}
+								disabled={isLoading}
+							>
 								Complete and Pick Order
 							</Button>
-							<Button variant={'grey'}>Cancel Order</Button>
+							<Button variant={'grey'} onClick={() => setStage(4)}>
+								Cancel Order
+							</Button>
 						</div>
 					</div>
 				</div>
-			) : stage === 2 ? (
+			)}
+
+			{stage === 2 && (
 				<div className="border border-black p-6 w-max mx-auto  space-y-4 max-w-[450px]">
 					<h6 className="text-base font-semibold text-center">Complete and Pick-up Order</h6>
 					<div className="p-2 bg-gray-200 text-start">
 						<p>
-							Having Inspected this Item thorouhly, I can confirm that Item met my expectations and I am
+							Having Inspected this Item thoroughly, I can confirm that Item met my expectations and I am
 							happy to pick it up.
 						</p>
 					</div>
@@ -119,12 +229,32 @@ const ClosePickup = () => {
 								/>
 							))}
 						</div>
-						<Button type="submit" className={'bg-[#047F73] py-[.65rem] px-[2.8rem] text-white'}>
-							Finish to pick-up
-						</Button>
+						<div className="flex flex-col gap-2">
+							<Button
+								type="submit"
+								loading={isVerifying}
+								disabled={isVerifying}
+								className={'bg-[#047F73] py-[.65rem] px-[2.8rem] text-white'}
+							>
+								Finish to pick-up
+							</Button>
+							<Button
+								variant={'grey'}
+								onClick={resendOtp}
+								loading={isLoading}
+								disabled={!isExpired || isLoading}
+							>
+								Resend OTP
+							</Button>
+							<p className="text-center text-sm mt-4">
+								OTP expires in: {Math.floor(timer / 60)}:{(timer % 60).toString().padStart(2, '0')}
+							</p>
+						</div>
 					</form>
 				</div>
-			) : stage === 3 ? (
+			)}
+
+			{stage === 3 && (
 				<div className="border border-black p-6 w-max mx-auto  space-y-4 max-w-[450px] text-center relative">
 					<button className="absolute top-2 right-2" onClick={() => console.log('Close')}>
 						<img src={CloseIcon} alt="close" className="w-6" />
@@ -141,22 +271,24 @@ const ClosePickup = () => {
 						<p>@boonfu.com</p>
 					</div>
 				</div>
-			) : null}
+			)}
 
 			{stage === 4 && (
-				<div className="border border-black p-6 w-max mx-auto  space-y-4 max-w-[450px] text-center ">
+				<div className="border border-black p-6 w-max mx-auto  space-y-4 max-w-[450px] text-center relative ">
 					<h6 className="text-base font-semibold text-center">Cancel Order</h6>
+
+					<button className="absolute top-[-0.5rem] right-2" onClick={() => setStage(1)}>
+						<img src={CloseIcon} alt="close" className="w-6" />
+					</button>
 					<div className="p-2 bg-gray-200 text-start">
 						<p>Please select atleast one of the following reason(s) for the cancellation request.</p>
 					</div>
-
-					<form className="">
+					<form onSubmit={handleCancelOrder} className="">
 						<InputGroup
 							type={'radio'}
-							value={formData.cancel_reason}
+							value={formData.escrow_reason}
 							onChange={(e) => {
-								setFormData({ ...formData, cancel_reason: e.target.value });
-								console.log('Selected reason:', e.target.value);
+								setFormData({ ...formData, escrow_reason: e.target.value });
 							}}
 							optionLists={[
 								{ key: 'Item not as described', value: 'not_as_described' },
@@ -166,7 +298,7 @@ const ClosePickup = () => {
 							]}
 						/>
 
-						{formData.cancel_reason === 'other' && (
+						{formData.escrow_reason === 'other' && (
 							<InputGroup
 								type="text"
 								name="other_reason"
@@ -214,13 +346,22 @@ const ClosePickup = () => {
 					<div className="flex flex-col items-center space-y-4">
 						<h6 className="text-primary text-xl">To Initiate a refund, Please click the button below.</h6>
 
-						<Link to={Approutes.refundForm}>
-							<Button type="button" variant={'primary'} size={'small'}>
-								Refund Request Form
-							</Button>
-						</Link>
+						<Button type="button" variant={'primary'} size={'small'} onClick={() => setRefundModal(true)}>
+							Refund Request Form
+						</Button>
 					</div>
 				</div>
+			)}
+
+			{stage === 5 && (
+				<Modal
+					isOpen={refundModal}
+					setIsOpen={setRefundModal}
+					modalHeader={false}
+					className={' max-w-[720px] p-0 '}
+				>
+					<RefundForm escrowDetails={escrowDetails?.escrow} />
+				</Modal>
 			)}
 		</div>
 	);

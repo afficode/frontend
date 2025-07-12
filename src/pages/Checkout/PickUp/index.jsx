@@ -15,8 +15,6 @@ const PickUp = () => {
 
 	const { data: checkOrder, isLoading: checking, isError, error } = useCheckOrder(ad_id);
 
-	console.log('checkOrder', checkOrder);
-
 	const stage = useMemo(() => {
 		if (checkOrder?.payment_status === 'success') {
 			return 2;
@@ -188,7 +186,6 @@ const PickUp = () => {
 					pickup_state={checkOrder?.data.pickup_state}
 					pickup_mobile={checkOrder?.data.pickup_mobile}
 					ad_owner_name={checkOrder?.data.ad_owner_name}
-					escrow_id={checkOrder?.data.escrow_id}
 				/>
 			)}
 		</section>

@@ -52,7 +52,6 @@ import {
 	PaymentSuccess,
 	AdDetail,
 	TransactionActivity,
-	RefundForm,
 	GrabPaymentSuccess,
 	Delivery,
 	Pickup,
@@ -199,8 +198,6 @@ function App() {
 						</Route>
 					</Route>
 				</Route>
-
-				<Route path={Approutes.refundForm} element={<RefundForm />} />
 
 				<Route path="*" element={<PageNotFound />} />
 			</Routes>
