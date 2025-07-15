@@ -78,9 +78,9 @@ export const useVerifyOtp = () => {
 	return useMutation(['verify-otp'], verify);
 };
 
-export const useRefund = () => {
+export const useRefund = (id) => {
 	const refund = (data) =>
-		privateAxios.post(`${backendLink}escrow/refund_form`, data).then((res) => res?.data);
+		privateAxios.post(`${backendLink}escrow/refund/${id}`, data).then((res) => res?.data);
 
 	return useMutation(['refund'], refund);
 };

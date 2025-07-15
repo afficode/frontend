@@ -46,6 +46,7 @@ const InputGroup = ({
 						rows={rows ? rows : '10'}
 						placeholder={placeholder}
 						className={`${className ? className : ''}`}
+						value={value}
 						onBlur={(e) => {
 							if (typeof onChange === 'function') onBlur(e);
 						}}
@@ -66,6 +67,7 @@ const InputGroup = ({
 							name={name}
 							id={name}
 							className={`hidden ${className ? className : ''}`}
+							value={value}
 							onBlur={(e) => {
 								if (typeof onChange === 'function') onBlur(e);
 							}}
@@ -85,6 +87,7 @@ const InputGroup = ({
 						id={name}
 						placeholder={placeholder}
 						className={` ${className ? className : ''}`}
+						value={value}
 						onBlur={(e) => {
 							if (typeof onChange === 'function') onBlur(e);
 						}}
@@ -114,6 +117,7 @@ const InputGroup = ({
 							id={name}
 							placeholder={placeholder}
 							className={` ${className ? className : ''}`}
+							value={value}
 							onBlur={(e) => {
 								if (typeof onChange === 'function') onBlur(e);
 							}}
@@ -163,6 +167,7 @@ const InputGroup = ({
 							id={name}
 							placeholder={placeholder}
 							className={` ${className ? className : ''}`}
+							value={value}
 							onBlur={(e) => {
 								if (typeof onChange === 'function') onBlur(e);
 							}}

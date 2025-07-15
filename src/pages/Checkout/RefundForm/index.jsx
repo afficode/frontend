@@ -1,40 +1,52 @@
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Button, InputGroup } from '../../../ui';
-import { useNotify } from '../../../hooks';
+import { useNotify, useRefund } from '../../../hooks';
 import { ImageUpload } from '../../../assets/images';
 import useAuth from '../../../context/UserContext';
 
-const RefundForm = ({ escrowDetails }) => {
+const RefundForm = ({ escrowDetails, escrowReason }) => {
 	const { user } = useAuth();
-	console.log(escrowDetails);
 
 	const initialValues = {
-		order_date: '',
-		reason_for_rejection: '',
-		file: '',
-		company: '',
+		escrow_reason: escrowReason || '',
+		reason: '',
+		other_reason: '',
 		address: '',
-		email: '',
-		phone_number: '',
 		explanation: '',
+		image: '',
 	};
 
 	const notify = useNotify();
+	const { mutate: refundMutate, isLoading } = useRefund(escrowDetails?.id);
 
 	const validationSchema = Yup.object({
-		phone_number: Yup.number()
-			.typeError('Phone number must not contain +234, but start with 0XXXXXXXXXX')
-			.required()
-			.positive()
-			.integer()
-			.min(1000000000, 'Phone number must be 11 or 12 digit 08012345678')
-			.max(99999999999, 'Phone number must be 11 or 12 digit 08012345678'),
 		address: Yup.string().required('Required'),
+		reason: Yup.string(),
 		explanation: Yup.string(),
 	});
 
-	const handleSubmit = () => {};
+	const handleSubmit = (values) => {
+		const { other_reason, ...data } = values;
+
+		console.log('Submitting refund request with values:', data);
+
+		// const formData = new FormData();
+		// Object.entries(values).forEach(([key, value]) => {
+		// 	formData.append(key, value);
+		// 	console.log(`Appending ${key}:`, value);
+		// });
+
+		// refundMutate(formData, {
+		// 	onSuccess: (data) => {
+		// 		console.log(data);
+		// 	},
+		// 	onError: (error) => {
+		// 		console.error('Error submitting refund request:', error);
+		// 		notify(error?.response?.data?.message || 'An error occurred', 'error');
+		// 	},
+		// });
+	};
 
 	const formik = useFormik({
 		initialValues,
@@ -44,10 +56,10 @@ const RefundForm = ({ escrowDetails }) => {
 
 	const handleFileChange = (e) => {
 		const file = e.currentTarget.files[0];
-		formik.setFieldValue('file', null);
+		formik.setFieldValue('image', null);
 		if (file && file.type.startsWith('image/')) {
 			if (file.size <= 1024 * 1024) {
-				formik.setFieldValue('file', file);
+				formik.setFieldValue('image', file);
 			} else {
 				notify('File size must be less than 1MB', 'error');
 			}
@@ -59,7 +71,7 @@ const RefundForm = ({ escrowDetails }) => {
 	return (
 		<div className="min-h-screen p-4 max-md:p-2 pb-16">
 			<div className="space-y-4 max-w-[720px] mx-auto bg-white py-4 px-8 max-md:px-2 w-full">
-				<h2 className="text-black text-center">CUSTOMER REFUND REQUEST FORM </h2>
+				<h3 className="text-black text-center">CUSTOMER REFUND REQUEST FORM </h3>
 
 				<p className="text-black">Please fill and submit this refund request form. </p>
 
@@ -79,10 +91,9 @@ const RefundForm = ({ escrowDetails }) => {
 								name="order_details"
 								type="text"
 								placeholder="2389900000078TM"
-								className={``}
-								value={formik.values.order_details}
-								onChange={formik.handleChange}
-								disabled
+								className={`font-medium`}
+								value={escrowDetails?.id}
+								disabled={true}
 							/>
 							<span className="text-black text-sm ">
 								(e.g; ID of item, Item description, reference number. e.t.c)
@@ -94,9 +105,13 @@ const RefundForm = ({ escrowDetails }) => {
 							Choose a reason for rejection
 						</label>
 						<InputGroup
-							name="reason_for_rejection"
+							name="reason"
 							type="select"
 							optionLists={[
+								{
+									key: 'Select a reason',
+									value: '',
+								},
 								{
 									key: 'Incorrect items delivered.',
 									value: 'Incorrect items delivered.',
@@ -111,10 +126,26 @@ const RefundForm = ({ escrowDetails }) => {
 								},
 								{
 									key: 'Other reason(s), Please state in the box below.',
-									value: 'Other reason(s), Please state in the box below.',
+									value: 'other',
 								},
 							]}
+							value={formik.values.reason}
+							onChange={formik.handleChange}
+							onBlur={formik.handleBlur}
 						/>
+
+						{formik.values.reason === 'other' && (
+							<InputGroup
+								type="text"
+								name="other_reason"
+								id="other_reason"
+								placeholder="Please write here"
+								value={formik.values.other_reason}
+								onChange={formik.handleChange}
+								onBlur={formik.handleBlur}
+								className="mt-2"
+							/>
+						)}
 					</div>
 
 					<div className="flex flex-col !gap-[-1rem]">
@@ -127,13 +158,23 @@ const RefundForm = ({ escrowDetails }) => {
 							</span>
 						</div>
 						<div className="w-full max-w-sm ">
-							<InputGroup type="file" name="file" onChange={handleFileChange}>
+							<InputGroup type="file" name="image" onChange={handleFileChange}>
 								<div className="w-full h-52 flex flex-col text-center items-center justify-center border border-dashed border-gray-300 rounded-lg">
-									<img src={ImageUpload} alt="/" className="w-[3rem]" />
-									<div>
-										<p className="text-black">Drop your image here, or browse</p>
-										<span>Support; Jpeg, PNG</span>
-									</div>
+									{formik.values.image ? (
+										<img
+											src={URL.createObjectURL(formik.values.image)}
+											alt="/"
+											className="max-h-full w-fit"
+										/>
+									) : (
+										<>
+											<img src={ImageUpload} alt="/" className="w-[3rem]" />
+											<div>
+												<p className="text-black">Drop your image here, or browse</p>
+												<span>Support; Jpeg, PNG</span>
+											</div>
+										</>
+									)}
 								</div>
 							</InputGroup>
 						</div>
@@ -150,12 +191,12 @@ const RefundForm = ({ escrowDetails }) => {
 								<InputGroup
 									name="name"
 									type="text"
-									className={``}
 									value={user?.firstname + ' ' + user?.lastname}
+									className={`font-medium`}
 									disabled
 								/>
 							</div>
-							<div className="flex max-md:flex-col md:items-center md:gap-8">
+							{/* <div className="flex max-md:flex-col md:items-center md:gap-8">
 								<label className="max-md:text-sm max-md:mt-2 font-semibold text-black" htmlFor="company">
 									Company
 								</label>
@@ -166,7 +207,7 @@ const RefundForm = ({ escrowDetails }) => {
 									className={``}
 									value={formik.values.company}
 								/>
-							</div>
+							</div> */}
 							<div className="flex max-md:flex-col md:items-center md:gap-8">
 								<label className="max-md:text-sm max-md:mt-2 font-semibold text-black" htmlFor="address">
 									Address
@@ -177,6 +218,8 @@ const RefundForm = ({ escrowDetails }) => {
 									placeholder="1, Dipeolu street, Ajangbadi"
 									className={``}
 									value={formik.values.address}
+									onChange={formik.handleChange}
+									onBlur={formik.handleBlur}
 								/>
 							</div>
 							<div className="flex max-md:flex-col md:items-center md:gap-8">
@@ -187,8 +230,9 @@ const RefundForm = ({ escrowDetails }) => {
 									name="email"
 									type="email"
 									placeholder="gush@gmail.com"
-									className={``}
-									value={formik.values.email}
+									value={user?.email}
+									className={`font-medium`}
+									disabled
 								/>
 							</div>
 							<div className="flex max-md:flex-col md:items-center md:gap-8">
@@ -202,8 +246,9 @@ const RefundForm = ({ escrowDetails }) => {
 									name="phone_number"
 									type="text"
 									placeholder="+234890985894xxx"
-									className={``}
-									value={formik.values.phone_number}
+									value={user?.phone[0]?.number}
+									className={`font-medium`}
+									disabled
 								/>
 							</div>
 						</div>
@@ -221,7 +266,14 @@ const RefundForm = ({ escrowDetails }) => {
 							Please give detailed explanation in the box{' '}
 						</h6>
 
-						<InputGroup name="explanation" type="textarea" rows={'5'} value={formik.values.explanation} />
+						<InputGroup
+							name="explanation"
+							type="textarea"
+							rows={'5'}
+							value={formik.values.explanation}
+							onChange={formik.handleChange}
+							onBlur={formik.handleBlur}
+						/>
 					</div>
 
 					<div className="mb-16 px-4 sm:w-[200px] max-sm:mx-auto">
@@ -230,7 +282,8 @@ const RefundForm = ({ escrowDetails }) => {
 							variant="primary"
 							size="full"
 							onClick={formik.handleSubmit}
-							disabled={!formik.isValid}
+							loading={isLoading}
+							disabled={!formik.isValid || isLoading}
 						>
 							Submit
 						</Button>

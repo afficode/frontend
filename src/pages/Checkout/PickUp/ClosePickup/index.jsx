@@ -320,48 +320,59 @@ const ClosePickup = () => {
 			)}
 
 			{stage === 5 && (
-				<div className="flex flex-col items-center  space-y-12">
-					<div className="border border-black p-6 w-max mx-auto  space-y-4 max-w-[450px] text-center relative">
-						<button className="absolute top-2 right-2" onClick={() => console.log('Close')}>
-							<img src={CloseIcon} alt="close" className="w-6" />
-						</button>
-						<div className="flex items-center justify-center ">
-							<h5 className="border-b border-b-black font-semibold text-2xl">Thanks for the response</h5>
+				<>
+					<div className="flex flex-col items-center  space-y-12">
+						<div className="border border-black p-6 w-max mx-auto  space-y-4 max-w-[450px] text-center relative">
+							<button className="absolute top-2 right-2" onClick={() => setStage(4)}>
+								<img src={CloseIcon} alt="close" className="w-6" />
+							</button>
+							<div className="flex items-center justify-center ">
+								<h5 className="border-b border-b-black font-semibold text-2xl">Thanks for the response</h5>
+							</div>
+
+							<div>
+								<p>
+									We sincerely apologise that you had to cancel your order. This would be critically looked
+									into. IF resolution is a refund, It should hit your account within three (3) working days.
+								</p>
+
+								<p className="mt-2">
+									Kindly leave a review and tag us on Insta for a chance to get featured!
+								</p>
+
+								<p>@boonfu.com</p>
+							</div>
 						</div>
 
-						<div>
-							<p>
-								We sincerely apologise that you had to cancel your order. This would be critically looked
-								into. IF resolution is a refund, It should hit your account within three (3) working days.
-							</p>
+						<div className="flex flex-col items-center space-y-4">
+							<h6 className="text-primary text-xl">
+								To Initiate a refund, Please click the button below.
+							</h6>
 
-							<p className="mt-2">
-								Kindly leave a review and tag us on Insta for a chance to get featured!
-							</p>
-
-							<p>@boonfu.com</p>
+							<Button
+								type="button"
+								variant={'primary'}
+								size={'small'}
+								onClick={() => setRefundModal(true)}
+							>
+								Refund Request Form
+							</Button>
 						</div>
 					</div>
-
-					<div className="flex flex-col items-center space-y-4">
-						<h6 className="text-primary text-xl">To Initiate a refund, Please click the button below.</h6>
-
-						<Button type="button" variant={'primary'} size={'small'} onClick={() => setRefundModal(true)}>
-							Refund Request Form
-						</Button>
-					</div>
-				</div>
-			)}
-
-			{stage === 5 && (
-				<Modal
-					isOpen={refundModal}
-					setIsOpen={setRefundModal}
-					modalHeader={false}
-					className={' max-w-[720px] p-0 '}
-				>
-					<RefundForm escrowDetails={escrowDetails?.escrow} />
-				</Modal>
+					<Modal
+						isOpen={refundModal}
+						setIsOpen={setRefundModal}
+						modalHeader={false}
+						className={' max-w-[720px] p-0 '}
+					>
+						<RefundForm
+							escrowDetails={escrowDetails?.escrow}
+							escrowReason={
+								formData?.escrow_reason === '' ? formData.other_reason : formData.escrow_reason
+							}
+						/>
+					</Modal>
+				</>
 			)}
 		</div>
 	);
