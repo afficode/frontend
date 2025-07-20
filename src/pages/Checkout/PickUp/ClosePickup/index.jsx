@@ -1,8 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { CloseIcon, Location, ThankYou } from '../../../../assets/svgs';
 import { Button, InputGroup, Modal } from '../../../../ui';
-import { Link, useParams } from 'react-router-dom';
-import { Approutes } from '../../../../constants';
+import { useParams } from 'react-router-dom';
 import { useGetEscrowDetails, useNotify, useRequestOtp, useVerifyOtp } from '../../../../hooks';
 import { SpinnerSkeleton } from '../../../../components';
 import RefundForm from '../../RefundForm';
@@ -154,7 +153,6 @@ const ClosePickup = () => {
 
 	const handleCancelOrder = (e) => {
 		e.preventDefault();
-		console.log('Cancel Order Data:', formData);
 		if (formData.escrow_reason || formData.other_reason) {
 			setStage(5);
 		} else {
@@ -173,156 +171,229 @@ const ClosePickup = () => {
 	return (
 		<div className="py-10">
 			{stage === 1 && (
-				<div className="border border-black py-6 px-12 w-max mx-auto text-center space-y-2">
-					<h2 className="text-2xl">Buyer Pick Up In Progress</h2>
-					<div className="flex flex-col items-center">
-						<h6 className="font-semibold text-base">{escrowDetails?.escrow.ad_owner_name}.</h6>
-						<div className="flex items-center gap-1">
-							<img src={Location} alt="map" className="w-4 h-4" />
-							{escrowDetails?.escrow.pickup_address}, {escrowDetails?.escrow.pickup_state}.
+				<div className="px-4">
+					<div className="border border-black py-6 px-6 md:px-12 max-w-full sm:max-w-[450px]	 mx-auto text-center space-y-2">
+						<h2 className="text-2xl">Buyer Pick Up In Progress</h2>
+						<div className="flex flex-col items-center">
+							<h6 className="font-semibold text-base">{escrowDetails?.escrow.ad_owner_name}.</h6>
+							<div className="flex items-center gap-1">
+								<img src={Location} alt="map" className="w-4 h-4" />
+								{escrowDetails?.escrow.pickup_address}, {escrowDetails?.escrow.pickup_state}.
+							</div>
+							<p>{escrowDetails?.escrow.pickup_mobile}</p>
 						</div>
-						<p>{escrowDetails?.escrow.pickup_mobile}</p>
-					</div>
-					<div className="border border-black py-4 px-8 flex flex-col gap-4">
-						<h6 className="text-base font-semibold capitalize">{escrowDetails?.escrow.ad_title}</h6>
+						<div className="border border-black py-4 px-8 flex flex-col gap-4">
+							<h6 className="text-base font-semibold capitalize">{escrowDetails?.escrow.ad_title}</h6>
 
-						<div className="flex flex-col gap-2">
-							<Button
-								className={'bg-[#047F73] py-[.65rem] px-[2.8rem] text-white'}
-								onClick={completePickup}
-								loading={isLoading}
-								disabled={isLoading}
-							>
-								Complete and Pick Order
-							</Button>
-							<Button variant={'grey'} onClick={() => setStage(4)}>
-								Cancel Order
-							</Button>
+							<div className="flex flex-col gap-2">
+								<Button
+									className={'bg-[#047F73] py-[.65rem] sm:px-[2.8rem] text-white'}
+									onClick={completePickup}
+									loading={isLoading}
+									disabled={isLoading}
+								>
+									Complete and Pick Order
+								</Button>
+								<Button variant={'grey'} onClick={() => setStage(4)}>
+									Cancel Order
+								</Button>
+							</div>
 						</div>
 					</div>
 				</div>
 			)}
 
 			{stage === 2 && (
-				<div className="border border-black p-6 w-max mx-auto  space-y-4 max-w-[450px]">
-					<h6 className="text-base font-semibold text-center">Complete and Pick-up Order</h6>
-					<div className="p-2 bg-gray-200 text-start">
-						<p>
-							Having Inspected this Item thoroughly, I can confirm that Item met my expectations and I am
-							happy to pick it up.
-						</p>
-					</div>
-					<form onSubmit={handleOtpSubmit} className="flex flex-col items-center space-y-4">
-						<div className="flex mb-2 space-x-2 rtl:space-x-reverse">
-							{code.map((value, index) => (
-								<input
-									key={index}
-									type="text"
-									maxLength="1"
-									value={value}
-									onChange={(e) => handleOtpChange(e, index)}
-									onKeyUp={(e) => handleKeyUp(e, index)}
-									onPaste={index === 0 ? handlePaste : undefined}
-									ref={(el) => (inputsRef.current[index] = el)}
-									className="block w-9 h-9 py-3 text-sm font-extrabold text-center text-gray-900 bg-white border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
-									required
-								/>
-							))}
-						</div>
-						<div className="flex flex-col gap-2">
-							<Button
-								type="submit"
-								loading={isVerifying}
-								disabled={isVerifying}
-								className={'bg-[#047F73] py-[.65rem] px-[2.8rem] text-white'}
-							>
-								Finish to pick-up
-							</Button>
-							<Button
-								variant={'grey'}
-								onClick={resendOtp}
-								loading={isLoading}
-								disabled={!isExpired || isLoading}
-							>
-								Resend OTP
-							</Button>
-							<p className="text-center text-sm mt-4">
-								OTP expires in: {Math.floor(timer / 60)}:{(timer % 60).toString().padStart(2, '0')}
+				<div className="px-4">
+					<div className="border border-black p-6 w-max mx-auto  space-y-4 max-w-full sm:max-w-[450px]">
+						<h6 className="text-base font-semibold text-center">Complete and Pick-up Order</h6>
+						<div className="p-2 bg-gray-200 text-start">
+							<p>
+								Having Inspected this Item thoroughly, I can confirm that Item met my expectations and I am
+								happy to pick it up.
 							</p>
 						</div>
-					</form>
+						<form onSubmit={handleOtpSubmit} className="flex flex-col items-center space-y-4">
+							<div className="flex mb-2 space-x-2 rtl:space-x-reverse">
+								{code.map((value, index) => (
+									<input
+										key={index}
+										type="text"
+										maxLength="1"
+										value={value}
+										onChange={(e) => handleOtpChange(e, index)}
+										onKeyUp={(e) => handleKeyUp(e, index)}
+										onPaste={index === 0 ? handlePaste : undefined}
+										ref={(el) => (inputsRef.current[index] = el)}
+										className="block w-9 h-9 py-3 text-sm font-extrabold text-center text-gray-900 bg-white border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
+										required
+									/>
+								))}
+							</div>
+							<div className="flex flex-col gap-2">
+								<Button
+									type="submit"
+									loading={isVerifying}
+									disabled={isVerifying}
+									className={'bg-[#047F73] py-[.65rem] px-[2.8rem] text-white'}
+								>
+									Finish to pick-up
+								</Button>
+								<Button
+									variant={'grey'}
+									onClick={resendOtp}
+									loading={isLoading}
+									disabled={!isExpired || isLoading}
+								>
+									Resend OTP
+								</Button>
+								<p className="text-center text-sm mt-4">
+									OTP expires in: {Math.floor(timer / 60)}:{(timer % 60).toString().padStart(2, '0')}
+								</p>
+							</div>
+						</form>
+					</div>
 				</div>
 			)}
 
 			{stage === 3 && (
-				<div className="border border-black p-6 w-max mx-auto  space-y-4 max-w-[450px] text-center relative">
-					<button className="absolute top-2 right-2" onClick={() => console.log('Close')}>
-						<img src={CloseIcon} alt="close" className="w-6" />
-					</button>
-					<div className="flex items-center justify-center ">
-						<img src={ThankYou} alt="thank you" />
-					</div>
+				<div className="px-4">
+					<div className="border border-black p-6 w-max mx-auto  space-y-4 max-w-full sm:max-w-[450px] text-center relative">
+						<button className="absolute top-2 right-2" onClick={() => console.log('Close')}>
+							<img src={CloseIcon} alt="close" className="w-6" />
+						</button>
+						<div className="flex items-center justify-center ">
+							<img src={ThankYou} alt="thank you" />
+						</div>
 
-					<h6 className="text-primary border-b-2 border-secondary  pb-2">FOR YOUR PURCHASE</h6>
+						<h6 className="text-primary border-b-2 border-secondary  pb-2">FOR YOUR PURCHASE</h6>
 
-					<div>
-						<p>We hope you love it!.</p>
-						<p>Kindly leave a review and tag us on Insta for a chance to get featured!</p>
-						<p>@boonfu.com</p>
+						<div>
+							<p>We hope you love it!.</p>
+							<p>Kindly leave a review and tag us on Insta for a chance to get featured!</p>
+							<p>@boonfu.com</p>
+						</div>
 					</div>
 				</div>
 			)}
 
 			{stage === 4 && (
-				<div className="border border-black p-6 w-max mx-auto  space-y-4 max-w-[450px] text-center relative ">
-					<h6 className="text-base font-semibold text-center">Cancel Order</h6>
+				<div className="px-4">
+					<div className="border border-black p-6 w-max mx-auto   space-y-4 max-w-full sm:max-w-[450px] text-center relative ">
+						<h6 className="text-base font-semibold text-center">Cancel Order</h6>
 
-					<button className="absolute top-[-0.5rem] right-2" onClick={() => setStage(1)}>
-						<img src={CloseIcon} alt="close" className="w-6" />
-					</button>
-					<div className="p-2 bg-gray-200 text-start">
-						<p>Please select atleast one of the following reason(s) for the cancellation request.</p>
-					</div>
-					<form onSubmit={handleCancelOrder} className="">
-						<InputGroup
-							type={'radio'}
-							value={formData.escrow_reason}
-							onChange={(e) => {
-								setFormData({ ...formData, escrow_reason: e.target.value });
-							}}
-							optionLists={[
-								{ key: 'Item not as described', value: 'not_as_described' },
-								{ key: 'Seller did not show up', value: 'seller_no_show' },
-								{ key: 'Item damaged', value: 'item_damaged' },
-								{ key: 'Other', value: 'other' },
-							]}
-						/>
-
-						{formData.escrow_reason === 'other' && (
-							<InputGroup
-								type="text"
-								name="other_reason"
-								id="other_reason"
-								placeholder="Please write here"
-								value={formData.other_reason || ''}
-								onChange={(e) => setFormData({ ...formData, other_reason: e.target.value })}
-								className="mt-2"
-							/>
-						)}
-
-						<div className="mt-8">
-							<Button type="submit" className={'bg-[#047F73] py-[.65rem] px-[2.8rem] text-white'}>
-								Submit
-							</Button>
+						<button className="absolute top-[-0.5rem] right-2" onClick={() => setStage(1)}>
+							<img src={CloseIcon} alt="close" className="w-6" />
+						</button>
+						<div className="p-2 bg-gray-200 text-start">
+							<p>Please select atleast one of the following reason(s) for the cancellation request.</p>
 						</div>
-					</form>
+						<form onSubmit={handleCancelOrder} className="">
+							<div className="flex flex-col gap-2">
+								<label className="flex flex-row justify-between items-center text-start">
+									<span>Item is completely different from what I saw online</span>
+									<input
+										type="radio"
+										name="escrow_reason"
+										value="item_different"
+										checked={formData.escrow_reason === 'item_different'}
+										onChange={(e) => setFormData({ ...formData, escrow_reason: e.target.value })}
+									/>
+								</label>
+
+								<label className="flex flex-row justify-between items-center">
+									<span>I changed my mind</span>
+									<input
+										type="radio"
+										name="escrow_reason"
+										value="changed_mind"
+										checked={formData.escrow_reason === 'changed_mind'}
+										onChange={(e) => setFormData({ ...formData, escrow_reason: e.target.value })}
+									/>
+								</label>
+
+								<label className="flex flex-row justify-between items-center">
+									<span>Damaged or Defective Product</span>
+									<input
+										type="radio"
+										name="escrow_reason"
+										value="damaged"
+										checked={formData.escrow_reason === 'damaged'}
+										onChange={(e) => setFormData({ ...formData, escrow_reason: e.target.value })}
+									/>
+								</label>
+
+								<label className="flex flex-row justify-between items-center">
+									<span>Decided for alternative item</span>
+									<input
+										type="radio"
+										name="escrow_reason"
+										value="alternative_decision"
+										checked={formData.escrow_reason === 'alternative_decision'}
+										onChange={(e) => setFormData({ ...formData, escrow_reason: e.target.value })}
+									/>
+								</label>
+
+								<label className="flex flex-row justify-between items-center">
+									<span>Seller asked to cancel</span>
+									<input
+										type="radio"
+										name="escrow_reason"
+										value="seller_requested"
+										checked={formData.escrow_reason === 'seller_requested'}
+										onChange={(e) => setFormData({ ...formData, escrow_reason: e.target.value })}
+									/>
+								</label>
+
+								<label className="flex flex-row justify-between items-center">
+									<span>Seller’s attitude puts me off</span>
+									<input
+										type="radio"
+										name="escrow_reason"
+										value="seller_attitude"
+										checked={formData.escrow_reason === 'seller_attitude'}
+										onChange={(e) => setFormData({ ...formData, escrow_reason: e.target.value })}
+									/>
+								</label>
+
+								<label className="flex flex-row justify-between items-center">
+									<span>Other</span>
+									<input
+										type="radio"
+										name="escrow_reason"
+										value="other"
+										checked={formData.escrow_reason === 'other'}
+										onChange={(e) => setFormData({ ...formData, escrow_reason: e.target.value })}
+									/>
+								</label>
+							</div>
+
+							{formData.escrow_reason === 'other' && (
+								<InputGroup
+									type="text"
+									name="other_reason"
+									id="other_reason"
+									placeholder="Please write here"
+									value={formData.other_reason || ''}
+									onChange={(e) => setFormData({ ...formData, other_reason: e.target.value })}
+									className="mt-2"
+								/>
+							)}
+
+							<div className="mt-8">
+								<Button type="submit" className={'bg-[#047F73] py-[.65rem] px-[2.8rem] text-white'}>
+									Submit
+								</Button>
+							</div>
+						</form>
+					</div>
 				</div>
 			)}
 
 			{stage === 5 && (
 				<>
-					<div className="flex flex-col items-center  space-y-12">
-						<div className="border border-black p-6 w-max mx-auto  space-y-4 max-w-[450px] text-center relative">
+					<div className="flex flex-col items-center  space-y-12 px-4">
+						<div className="border border-black p-6 w-max mx-auto  space-y-4 max-w-full sm:max-w-[450px] text-center relative">
 							<button className="absolute top-2 right-2" onClick={() => setStage(4)}>
 								<img src={CloseIcon} alt="close" className="w-6" />
 							</button>

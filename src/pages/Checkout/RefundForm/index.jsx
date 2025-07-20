@@ -4,9 +4,12 @@ import { Button, InputGroup } from '../../../ui';
 import { useNotify, useRefund } from '../../../hooks';
 import { ImageUpload } from '../../../assets/images';
 import useAuth from '../../../context/UserContext';
+import { Approutes } from '../../../constants';
+import { useNavigate } from 'react-router-dom';
 
 const RefundForm = ({ escrowDetails, escrowReason }) => {
 	const { user } = useAuth();
+	const navigate = useNavigate();
 
 	const initialValues = {
 		escrow_reason: escrowReason || '',
@@ -29,23 +32,25 @@ const RefundForm = ({ escrowDetails, escrowReason }) => {
 	const handleSubmit = (values) => {
 		const { other_reason, ...data } = values;
 
-		console.log('Submitting refund request with values:', data);
+		const formData = new FormData();
 
-		// const formData = new FormData();
-		// Object.entries(values).forEach(([key, value]) => {
-		// 	formData.append(key, value);
-		// 	console.log(`Appending ${key}:`, value);
-		// });
+		Object.entries(data).forEach(([key, value]) => {
+			formData.append(key, value);
+		});
 
-		// refundMutate(formData, {
-		// 	onSuccess: (data) => {
-		// 		console.log(data);
-		// 	},
-		// 	onError: (error) => {
-		// 		console.error('Error submitting refund request:', error);
-		// 		notify(error?.response?.data?.message || 'An error occurred', 'error');
-		// 	},
-		// });
+		if (other_reason === 'other') {
+			formData.append('reason', other_reason);
+		}
+
+		refundMutate(formData, {
+			onSuccess: (data) => {
+				notify(data?.message, 'success');
+				navigate(Approutes.profile.transactions);
+			},
+			onError: (error) => {
+				notify(error?.response?.data?.message || 'An error occurred', 'error');
+			},
+		});
 	};
 
 	const formik = useFormik({
@@ -91,7 +96,7 @@ const RefundForm = ({ escrowDetails, escrowReason }) => {
 								name="order_details"
 								type="text"
 								placeholder="2389900000078TM"
-								className={`font-medium`}
+								className={`font-semibold`}
 								value={escrowDetails?.id}
 								disabled={true}
 							/>
@@ -114,15 +119,15 @@ const RefundForm = ({ escrowDetails, escrowReason }) => {
 								},
 								{
 									key: 'Incorrect items delivered.',
-									value: 'Incorrect items delivered.',
+									value: 'incorrect_item',
 								},
 								{
 									key: 'Damaged or defective items.',
-									value: 'Damaged or defective items.',
+									value: 'damaged',
 								},
 								{
 									key: 'Violation of agreed terms (e.g., missing components or wrong specifications).',
-									value: 'Violation of agreed terms (e.g., missing components or wrong specifications).',
+									value: 'violation',
 								},
 								{
 									key: 'Other reason(s), Please state in the box below.',
@@ -192,7 +197,7 @@ const RefundForm = ({ escrowDetails, escrowReason }) => {
 									name="name"
 									type="text"
 									value={user?.firstname + ' ' + user?.lastname}
-									className={`font-medium`}
+									className={`font-semibold`}
 									disabled
 								/>
 							</div>
@@ -231,7 +236,7 @@ const RefundForm = ({ escrowDetails, escrowReason }) => {
 									type="email"
 									placeholder="gush@gmail.com"
 									value={user?.email}
-									className={`font-medium`}
+									className={`font-semibold`}
 									disabled
 								/>
 							</div>
@@ -247,7 +252,7 @@ const RefundForm = ({ escrowDetails, escrowReason }) => {
 									type="text"
 									placeholder="+234890985894xxx"
 									value={user?.phone[0]?.number}
-									className={`font-medium`}
+									className={`font-semibold`}
 									disabled
 								/>
 							</div>

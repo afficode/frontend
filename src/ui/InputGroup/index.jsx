@@ -98,7 +98,7 @@ const InputGroup = ({
 					>
 						{optionLists?.map((option, i) => {
 							return (
-								<option key={i} value={option.value}>
+								<option key={i} value={option.value} className="whitespace-normal break-all">
 									{option.key}
 								</option>
 							);
