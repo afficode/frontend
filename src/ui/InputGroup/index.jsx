@@ -16,6 +16,7 @@ const InputGroup = ({
 	cancelButton,
 	moreInfo,
 	readOnly,
+	value,
 	...rest
 }) => {
 	return (
@@ -45,6 +46,7 @@ const InputGroup = ({
 						rows={rows ? rows : '10'}
 						placeholder={placeholder}
 						className={`${className ? className : ''}`}
+						value={value}
 						onBlur={(e) => {
 							if (typeof onChange === 'function') onBlur(e);
 						}}
@@ -65,6 +67,7 @@ const InputGroup = ({
 							name={name}
 							id={name}
 							className={`hidden ${className ? className : ''}`}
+							value={value}
 							onBlur={(e) => {
 								if (typeof onChange === 'function') onBlur(e);
 							}}
@@ -84,6 +87,7 @@ const InputGroup = ({
 						id={name}
 						placeholder={placeholder}
 						className={` ${className ? className : ''}`}
+						value={value}
 						onBlur={(e) => {
 							if (typeof onChange === 'function') onBlur(e);
 						}}
@@ -94,7 +98,7 @@ const InputGroup = ({
 					>
 						{optionLists?.map((option, i) => {
 							return (
-								<option key={i} value={option.value}>
+								<option key={i} value={option.value} className="whitespace-normal break-all">
 									{option.key}
 								</option>
 							);
@@ -113,6 +117,7 @@ const InputGroup = ({
 							id={name}
 							placeholder={placeholder}
 							className={` ${className ? className : ''}`}
+							value={value}
 							onBlur={(e) => {
 								if (typeof onChange === 'function') onBlur(e);
 							}}
@@ -135,6 +140,8 @@ const InputGroup = ({
 										type="radio"
 										name={option.value}
 										id={option.value}
+										value={option.value}
+										checked={option.value === value}
 										className={` ${className ? className : ''}`}
 										onBlur={(e) => {
 											if (typeof onChange === 'function') onBlur(e);
@@ -160,6 +167,7 @@ const InputGroup = ({
 							id={name}
 							placeholder={placeholder}
 							className={` ${className ? className : ''}`}
+							value={value}
 							onBlur={(e) => {
 								if (typeof onChange === 'function') onBlur(e);
 							}}

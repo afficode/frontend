@@ -1,11 +1,4 @@
 {
-    "cSpell.words": [
-        "Approutes",
-        "daisyui",
-        "firstname",
-        "flowbite",
-        "Formik",
-        "mytheme"
-    ],
-    "DockerRun.DisableDockerrc": true
+	"cSpell.words": ["Approutes", "Boonfu", "daisyui", "firstname", "flowbite", "Formik", "mytheme"],
+	"DockerRun.DisableDockerrc": true
 }

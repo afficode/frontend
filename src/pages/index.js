@@ -5,6 +5,7 @@ export { default as AdDetail } from './Profile/Adverts/AdDetails';
 export { default as AboutUs } from './AboutUs';
 export { default as BoonfuMedia } from './BoonfuMedia';
 export { default as Checkout } from './Checkout';
+export { default as ClosePickup } from './Checkout/PickUp/ClosePickup';
 export { default as Delivery } from './Checkout/Delivery';
 export { default as Pickup } from './Checkout/PickUp';
 export { default as ContactUs } from './ContactUs';
@@ -32,7 +33,6 @@ export { default as UnderConstuction } from './UnderConstruction';
 export { default as UpdateAd } from './UpdateAd';
 export { default as Welcome } from './Welcome';
 export { default as Withdraw } from './Account/Withdraw';
-export { default as RefundForm } from './RefundForm';
 
 // auth
 export { default as Auth } from './auth';

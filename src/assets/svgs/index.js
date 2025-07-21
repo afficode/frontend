@@ -13,6 +13,8 @@ export { default as CameraSmall } from './cameraSmall.svg';
 export { default as CameraWhite } from './cameraWhite.svg';
 export { default as Cancel } from './cancel.svg';
 export { default as Chat } from './chat.svg';
+export { default as CloseIcon } from './closeIcon.svg';
+export { default as ThankYou } from './ThankYou.svg';
 export { default as Commitment } from './Commitment.svg';
 export { default as CopyBlack } from './copyBlack.svg';
 export { default as DeliveryQuote } from './deliveryQuote.svg';
