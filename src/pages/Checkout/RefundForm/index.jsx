@@ -7,12 +7,13 @@ import useAuth from '../../../context/UserContext';
 import { Approutes } from '../../../constants';
 import { useNavigate } from 'react-router-dom';
 
-const RefundForm = ({ escrowDetails, escrowReason }) => {
+const RefundForm = ({ escrowDetails, escrowReason, otherEscrowReason }) => {
 	const { user } = useAuth();
 	const navigate = useNavigate();
 
 	const initialValues = {
 		escrow_reason: escrowReason || '',
+		other_escrow_reason: otherEscrowReason,
 		reason: '',
 		other_reason: '',
 		address: '',
@@ -30,7 +31,7 @@ const RefundForm = ({ escrowDetails, escrowReason }) => {
 	});
 
 	const handleSubmit = (values) => {
-		const { other_reason, ...data } = values;
+		const { other_reason, other_escrow_reason, ...data } = values;
 
 		const formData = new FormData();
 
@@ -38,8 +39,11 @@ const RefundForm = ({ escrowDetails, escrowReason }) => {
 			formData.append(key, value);
 		});
 
-		if (other_reason === 'other') {
-			formData.append('reason', other_reason);
+		if (data?.reason === 'other') {
+			formData.append('other_reason', other_reason);
+		}
+		if (data?.escrow_reason === 'other') {
+			formData.append('other_escrow_reason', other_escrow_reason);
 		}
 
 		refundMutate(formData, {
@@ -131,7 +135,7 @@ const RefundForm = ({ escrowDetails, escrowReason }) => {
 								},
 								{
 									key: 'Other reason(s), Please state in the box below.',
-									value: 'other',
+									value: 'others',
 								},
 							]}
 							value={formik.values.reason}
