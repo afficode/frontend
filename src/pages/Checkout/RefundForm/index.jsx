@@ -39,7 +39,7 @@ const RefundForm = ({ escrowDetails, escrowReason, otherEscrowReason }) => {
 			formData.append(key, value);
 		});
 
-		if (data?.reason === 'other') {
+		if (data?.reason === 'others') {
 			formData.append('other_reason', other_reason);
 		}
 		if (data?.escrow_reason === 'other') {
