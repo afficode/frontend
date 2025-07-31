@@ -17,7 +17,7 @@ const ClosePickup = () => {
 	const inputsRef = useRef([]);
 	const [formData, setFormData] = useState({
 		escrow_reason: '',
-		other_reason: '',
+		other_escrow_reason: '',
 	});
 
 	const {
@@ -153,7 +153,7 @@ const ClosePickup = () => {
 
 	const handleCancelOrder = (e) => {
 		e.preventDefault();
-		if (formData.escrow_reason || formData.other_reason) {
+		if (formData.escrow_reason || formData.other_escrow_reason) {
 			setStage(5);
 		} else {
 			return;
@@ -371,11 +371,11 @@ const ClosePickup = () => {
 							{formData.escrow_reason === 'other' && (
 								<InputGroup
 									type="text"
-									name="other_reason"
-									id="other_reason"
+									name="other_escrow_reason"
+									id="other_escrow_reason"
 									placeholder="Please write here"
-									value={formData.other_reason || ''}
-									onChange={(e) => setFormData({ ...formData, other_reason: e.target.value })}
+									value={formData.other_escrow_reason || ''}
+									onChange={(e) => setFormData({ ...formData, other_escrow_reason: e.target.value })}
 									className="mt-2"
 								/>
 							)}
@@ -438,9 +438,8 @@ const ClosePickup = () => {
 					>
 						<RefundForm
 							escrowDetails={escrowDetails?.escrow}
-							escrowReason={
-								formData?.escrow_reason === '' ? formData.other_reason : formData.escrow_reason
-							}
+							escrowReason={formData?.escrow_reason}
+							otherEscrowReason={formData?.other_escrow_reason}
 						/>
 					</Modal>
 				</>
