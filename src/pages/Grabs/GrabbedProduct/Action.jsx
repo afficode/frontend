@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Button, Modal as ModalUi } from '../../../ui';
 import {
@@ -17,6 +17,7 @@ import Modal from '../../Products/View/Modal.jsx';
 import ReportAd from '../../Products/View/ReportAd';
 import { BiSolidMessageRoundedDetail } from 'react-icons/bi';
 import useAuth from '../../../context/UserContext';
+import { TermsAndCondition } from '../../../components/index.js';
 
 const Action = ({ isGeneral, ad }) => {
 	const { data } = useGetSchedules();
@@ -32,6 +33,23 @@ const Action = ({ isGeneral, ad }) => {
 
 	// form modals
 	const [inspectionModalOpen, setInspectionModalOpen] = useState(false);
+	const ref = useRef(null);
+
+	//to scroll into terms and condition document
+	const [isOpen, setIsOpen] = useState(false);
+	const termsRef = useRef(null);
+
+	const handleScrollTo = (ref) => {
+		console.log('clicked');
+		if (!isOpen) {
+			setIsOpen(true);
+			setTimeout(() => {
+				ref.current.scrollIntoView({ behavior: 'smooth' });
+			}, 1000); // Add a delay to ensure the component is rendered before scrolling
+		} else {
+			ref.current.scrollIntoView({ behavior: 'smooth' });
+		}
+	};
 
 	// const [inquiryModal, setInquiryModal] = useState(false);
 
@@ -69,6 +87,7 @@ const Action = ({ isGeneral, ad }) => {
 													setFormData({ ...formData, delivery_option: e.target.value });
 												}}
 												className={``}
+												disabled
 											/>
 											<label htmlFor={'delivery'} className="flex items-center gap-2">
 												Boonfu Delivery
@@ -79,7 +98,9 @@ const Action = ({ isGeneral, ad }) => {
 														className="dropdown-content transform translate-y-[-25%] md:translate-y-[2%] translate-x-[-54%] md:translate-x-[-80%] lg:translate-x-[-70%]  bg-secondary border-4 p-4 w-screen max-w-[340px] sm:max-w-[580px] z-[100000]"
 													>
 														<div className="space-y-2 text-start">
-															<h4>Boonfu Delivery.</h4>
+															<h4>
+																Boonfu Delivery. <span className="text-sm ">(coming soon)</span>
+															</h4>
 															<p>
 																Delivery with boonfu is handled by our third-party logistic company. Delivery of a
 																particular product/item is done in the state where it is sold. NO inter-state
@@ -103,6 +124,7 @@ const Action = ({ isGeneral, ad }) => {
 														</div>
 													</div>
 												</div>
+												<span className="text-xs text-gray-500">(coming soon)</span>
 											</label>
 										</div>
 									)}
@@ -149,7 +171,11 @@ const Action = ({ isGeneral, ad }) => {
 										</label>
 									</div>
 
-									<button type="button" className="mt-2 font-medium text-black underline">
+									<button
+										onClick={() => handleScrollTo(termsRef)}
+										type="button"
+										className="mt-2 font-medium text-black underline"
+									>
 										T & C’s apply, please read!
 									</button>
 
@@ -199,6 +225,11 @@ const Action = ({ isGeneral, ad }) => {
 										/>
 									</div>
 								</form>
+
+								{/* terms and condition modal */}
+								<ModalUi isOpen={isOpen} setIsOpen={setIsOpen} headerText="Terms of Service">
+									<TermsAndCondition termsRef={termsRef} setIsOpen={setIsOpen} isOpen={isOpen} />
+								</ModalUi>
 
 								{/* <ModalUi
 									isOpen={inquiryModal}
