@@ -87,6 +87,7 @@ const PaymentOption = ({ result, quotePrice, orderId }) => {
 								id={'paystack'}
 								value={'paystack'}
 								checked={paymentOption === 'paystack'}
+								disabled
 								onChange={(e) => setPaymentOption(e.target.value)}
 								className={`mt-1 cursor-pointer`}
 							/>
