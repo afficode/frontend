@@ -54,7 +54,8 @@ export const Approutes = {
 		grabProduct: (ad_id) => `/grab/view/${ad_id}`,
 		grabbedProduct: (grabber_id, ad_id) => `/grab/view/${grabber_id}/${ad_id}`,
 		settings: '/grab/settings',
-		flyer: '/grab/flyer',
+		flyer: '/grab/flyer/:ad_id',
+		useFlyer: (ad_id) => `/grab/flyer/${ad_id}`,
 	},
 	account: {
 		initial: '/my-account/',
