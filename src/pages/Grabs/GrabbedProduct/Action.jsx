@@ -40,7 +40,6 @@ const Action = ({ isGeneral, ad }) => {
 	const termsRef = useRef(null);
 
 	const handleScrollTo = (ref) => {
-		console.log('clicked');
 		if (!isOpen) {
 			setIsOpen(true);
 			setTimeout(() => {
