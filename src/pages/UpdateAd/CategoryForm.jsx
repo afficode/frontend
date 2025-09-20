@@ -3883,6 +3883,7 @@ const CategoryForm = ({
 			address: address,
 			negotiable: values.negotiable === true ? 1 : 0,
 			images: adImages,
+			vehicle_id: initialValues.vehicle_id,
 		};
 
 		const formData = new FormData();

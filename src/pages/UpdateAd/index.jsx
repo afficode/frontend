@@ -27,6 +27,7 @@ const PostAd = () => {
 			trim: ad?.trim,
 			type: ad?.type,
 			description: ad?.description,
+			vehicle_id: ad?.vehicle_id,
 			vehicle_features:
 				typeof ad?.vehicle_features === 'string'
 					? ad?.vehicle_features.split(',')
