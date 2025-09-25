@@ -963,7 +963,7 @@ const CategoryForm = ({
 			{
 				control: 'radio',
 				label: 'Available to Travel',
-				name: 'available_to_travel',
+				name: 'available_for_travel',
 				type: 'radio',
 				options: [
 					{ key: 'Yes', value: 'yes' },
@@ -2243,7 +2243,7 @@ const CategoryForm = ({
 			![5811, 5803, 5812, 5813].includes(selectedTradesmanCategory) && {
 				control: 'radio',
 				label: 'Available to travel',
-				name: 'available_to_travel',
+				name: 'available_for_travel',
 				type: 'radio',
 				options: [
 					{ key: 'Yes', value: 'yes' },
@@ -3530,7 +3530,7 @@ const CategoryForm = ({
 			employment_status: Yup.string(),
 			level_of_education: Yup.string(),
 			employment_type: Yup.string(),
-			available_to_travel: Yup.string(),
+			available_for_travel: Yup.string(),
 			years_of_experience: Yup.string(),
 			description: Yup.string().required('Required'),
 			price: Yup.number().required('Required'),
@@ -3685,7 +3685,7 @@ const CategoryForm = ({
 			mode_of_charges: Yup.string(),
 			mode_of_transport: Yup.string(),
 			payment_terms: Yup.string(),
-			available_to_travel: Yup.string(),
+			available_for_travel: Yup.string(),
 			price: Yup.number().required('Required'),
 			negotiable: Yup.boolean(),
 			contact_type: Yup.array().min(1, 'At least one option is required').required('Required'),
