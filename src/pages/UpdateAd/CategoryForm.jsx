@@ -3885,6 +3885,10 @@ const CategoryForm = ({
 			images: adImages,
 		};
 
+		if (initialValues?.vehicle_id) {
+			preparedData.vehicle_id = initialValues.vehicle_id;
+		}
+
 		const formData = new FormData();
 
 		Object.entries(preparedData).forEach(([key, value]) => {
