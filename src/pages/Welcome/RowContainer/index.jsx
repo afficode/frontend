@@ -39,8 +39,8 @@ const RowContainer = ({ title, link }) => {
 				{title === 'Discover more...'
 					? product?.data?.ads.slice(0, 4).map((item) => <CardDetails key={item.id} {...item} />)
 					: title === 'Categories'
-					? categoriesData.map((item) => <Card key={item.title} {...item} />)
-					: shopsData.map((item) => <Card key={item.title} {...item} />)}
+						? categoriesData.map((item) => <Card key={item.title} {...item} />)
+						: shopsData.map((item) => <Card key={item.title} {...item} />)}
 			</div>
 		</section>
 	);
@@ -53,7 +53,7 @@ const CardDetails = ({ id, title, location, images, created_at, price, feature }
 	return (
 		<Link
 			to={`${Approutes.product.initial}/${encodeProductId(id)}`}
-			className=" w-[18rem] sm:max-w-[25rem] h-[22rem] border border-black/25 shadow-sm cursor-pointer hover:shadow-lg transition-all  ease-in-out"
+			className=" w-[18rem] sm:max-w-[25rem] h-[22rem] border border-black/25 shadow-sm cursor-pointer hover:shadow-lg transition-all  ease-in-out overflow-hidden"
 		>
 			<div className="relative ml-0.5">
 				{feature !== '0' && feature !== '3' && <Feature feature={feature} />}
