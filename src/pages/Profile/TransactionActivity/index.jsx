@@ -51,14 +51,14 @@ const TransactionActivity = () => {
 
 	return (
 		<section className="w-full flex flex-col items-center gap-6">
-			<div className="w-max mx-auto px-4 py-8 space-y-4 bg-[#D9D9D9] rounded-lg">
+			<div className="max-w-5xl w-full mx-auto px-4 py-8 space-y-4 bg-[#D9D9D9] rounded-lg">
 				<h3>Transaction Activity</h3>
 
-				<div className="bg-white rounded-lg p-4 space-y-2">
+				<div className="bg-white rounded-lg p-4 space-y-2 w-full">
 					<h5 className="text-lg font-semibold text-center">Activities</h5>
 					<div className="overflow-x-auto w-full">
 						{allOrders?.sortedOrders?.length > 0 ? (
-							<table>
+							<table className="min-w-max w-full ">
 								<thead className="bg-primary text-white w-full">
 									<tr className="p-2 w-full">
 										<th className="">
