@@ -38,8 +38,12 @@ const AdFeatures = (props) => {
 			<div className="flex flex-col items-center py-2 text-center">
 				<h3 className="text-center">Select Suitable Posting package for your ad.</h3>
 				<h6>
-					( You have to select <b>ONLY ONE</b> option. <b>NOTE: These packages keep your ads for 2weeks, after
-						which the site notifies you of renewal  or delete IF item is sold.</b> )
+					( You have to select <b>ONLY ONE</b> option.{' '}
+					<b>
+						NOTE: These packages keep your ads for 2weeks, after which the site notifies you of renewal or
+						delete IF item is sold.
+					</b>{' '}
+					)
 				</h6>
 			</div>
 			<hr className="border-black" />
@@ -95,21 +99,22 @@ const AdFeatures = (props) => {
 
 					{/* grab feature */}
 					<div
-						className={`${showGrab
-							? ' transform translate-x-[-1.2%] transition-all duration-500 opacity-100'
-							: ' transform translate-x-[150%] transition-all duration-500 opacity-0'
-							} space-y-6 p-8 absolute top-0 bg-white z-10 w-full `}
+						className={`${
+							showGrab
+								? ' transform translate-x-[-1.2%] transition-all duration-500 opacity-100'
+								: ' transform translate-x-[150%] transition-all duration-500 opacity-0'
+						} sm:space-y-6 space-y-6 sm:p-8 p-4 absolute top-0 max-sm:left-1 bg-white z-10 w-full `}
 					>
-						<div className="space-y-2">
+						<div className="space-y-3">
 							<div className="flex items-center gap-2 ">
 								<h4 className="text-primary ">Use “Grab Feature” ? </h4>
 
 								<button onClick={() => setGrabModal(true)}>
-									<img tabIndex={0} src={InfoYellow} className="w-4 cursor-pointer" alt="/" />
+									<img tabIndex={0} src={InfoYellow} className="w-4 cursor-pointer" alt="info" />
 								</button>
 							</div>
 
-							<div className="flex max-sm:flex-col md:items-center gap-6 ">
+							<div className="flex max-sm:flex-col md:items-center sm:gap-6 gap-2 ">
 								<Field name={name}>
 									{({ field }) => {
 										return grabOptions.map((option) => {
@@ -205,7 +210,7 @@ const AdFeatures = (props) => {
 							</div>
 						</div>
 
-						<div className="flex items-center flex-wrap gap-16">
+						<div className="flex items-center flex-wrap sm:gap-16 gap-8">
 							{!inspectableCategories.includes(parseInt(subCat)) && (
 								<div className="">
 									<h6 className="font-semibold">Price of item :</h6>
@@ -219,11 +224,11 @@ const AdFeatures = (props) => {
 							)}
 
 							{inspectableCategories.includes(parseInt(subCat)) ? (
-								<div>
+								<div className="space-y-2">
 									<h6 className="font-semibold ">To pay: Fixed Commission:</h6>
 									<div className=" flex items-center gap-2 max-w-[22rem] ">
 										<span className="flex items-center gap-3 border border-black bg-[#D9D9D9] p-2 w-full font-bold text-xl">
-											<img src={Coin} alt="/" className="w-8 h-8" />
+											<img src={Coin} alt="Coin symbol" className="w-8 h-8" />
 											10
 										</span>
 									</div>
@@ -236,7 +241,7 @@ const AdFeatures = (props) => {
 											%
 										</span>
 										<span className="flex items-center gap-1 border-2 border-primary p-2 w-full font-bold text-xl">
-											<img src={Naira} alt="/" />
+											<img src={Naira} alt="Naira symbol" />
 											{boonfuCommission && toMoney(boonfuCommission)}
 										</span>
 									</div>
