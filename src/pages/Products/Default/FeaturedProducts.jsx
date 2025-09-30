@@ -2,7 +2,7 @@ import { Carousel } from 'flowbite-react';
 import { FaCamera, FaMapMarkerAlt } from 'react-icons/fa';
 import { TbCurrencyNaira } from 'react-icons/tb';
 import { noimage } from '../../../assets/images';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { encodeProductId } from '../../../utils/dataManipulations';
 import { numberWithCommas } from '../../../utils/dataManipulations';
 import { formatDistance } from 'date-fns';
@@ -13,11 +13,14 @@ import { GrabIcon } from '../../../ui';
 import Feature from './Feature';
 const FeaturedProducts = ({ product }) => {
 	const { isLogin, user } = useAuth();
+
+	const navigate = useNavigate();
+
 	return (
 		<>
 			{product.map((ad, index) => (
-				<Link
-					to={`/product/${encodeProductId(ad.id)}`}
+				<div
+					onClick={() => navigate(`/product/${encodeProductId(ad.id)}`)}
 					key={index}
 					className="overflow-hidden min-w-[18rem] md:w-[18rem] sm:w-full min-h-[12rem] md:h-[22rem] bg-white border border-gray-200 rounded-lg shadow-sm cursor-pointer hover:shadow-lg transition-all  ease-in-out"
 				>
@@ -112,7 +115,7 @@ const FeaturedProducts = ({ product }) => {
 							</span>
 						</p>
 					</div>
-				</Link>
+				</div>
 			))}
 		</>
 	);
