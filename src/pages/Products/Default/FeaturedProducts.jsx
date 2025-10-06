@@ -2,7 +2,7 @@ import { Carousel } from 'flowbite-react';
 import { FaCamera, FaMapMarkerAlt } from 'react-icons/fa';
 import { TbCurrencyNaira } from 'react-icons/tb';
 import { noimage } from '../../../assets/images';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { encodeProductId } from '../../../utils/dataManipulations';
 import { numberWithCommas } from '../../../utils/dataManipulations';
 import { formatDistance } from 'date-fns';
@@ -14,16 +14,34 @@ import Feature from './Feature';
 const FeaturedProducts = ({ product }) => {
 	const { isLogin, user } = useAuth();
 
+	const navigate = useNavigate();
+
 	return (
 		<>
 			{product.map((ad, index) => (
 				<div
+					onClick={() => navigate(`/product/${encodeProductId(ad.id)}`)}
 					key={index}
 					className="overflow-hidden min-w-[18rem] md:w-[18rem] sm:w-full min-h-[12rem] md:h-[22rem] bg-white border border-gray-200 rounded-lg shadow-sm cursor-pointer hover:shadow-lg transition-all  ease-in-out"
 				>
-					<div className="relative rounded-none">
+					<div
+						onClick={(e) => {
+							const target = e.target;
+							if (!target) return;
+
+							const isArrow = target.closest(
+								'button[data-testid="carousel-right-control"], button[data-testid="carousel-left-control"]'
+							);
+
+							if (isArrow) {
+								e.stopPropagation();
+								e.preventDefault();
+							}
+						}}
+						className="relative rounded-none"
+					>
 						{ad.images.length > 0 ? (
-							<Carousel className="h-[180px] md:h-[230px] rounded-none">
+							<Carousel className="h-[200px] md:h-[230px] rounded-none">
 								{ad.images.map((img, index) => (
 									<img
 										src={img.path}
@@ -34,27 +52,27 @@ const FeaturedProducts = ({ product }) => {
 								))}
 							</Carousel>
 						) : (
-							<div className="h-[180px] md:h-[230px] rounded-none">
+							<div className="h-[120px] md:h-[230px] rounded-none">
 								<img src={noimage} alt="no image" className="w-full h-full mx-auto rounded-none" />
 							</div>
 						)}
+
 						{ad?.feature !== '0' && ad?.feature !== '3' && <Feature feature={ad?.feature} />}
 
 						{((isLogin && parseInt(ad?.owner) !== parseInt(user?.id)) || !isLogin) && (
 							<SaveProduct
 								ads_id={ad.id}
-								className="absolute w-10 h-12 p-1 px-2 bg-gray-200 rounded shadow-2xl top-4 right-4 hover:bg-white"
+								className="absolute w-10 h-12 p-1 px-2 bg-gray-200 rounded shadow-2xl top-4 right-4 hover:bg-white "
 							/>
 						)}
+
 						<div className="absolute bottom-0 flex w-full h-10 pt-2 pl-2 text-white rounded-none bg-black/50">
 							<FaCamera className="my-auto text-lg" />
 							&emsp; <span className="my-auto"> {ad?.images.length}</span>
 						</div>
 					</div>
-					<Link
-						to={`/product/${encodeProductId(ad.id)}`}
-						className="w-full p-2 tracking-tighter tooltip tooltip-secondary line-clamp-1 hover:bg-gray-200"
-					>
+
+					<div className="w-full p-2 tracking-tighter tooltip tooltip-secondary line-clamp-1 hover:bg-gray-200">
 						<p className="flex items-start justify-start h-6 overflow-hidden text-xl font-semibold uppercase lg:h-8 ">
 							{ad.title.toString().trimEnd().trim()}{' '}
 						</p>
@@ -96,7 +114,7 @@ const FeaturedProducts = ({ product }) => {
 								)}
 							</span>
 						</p>
-					</Link>
+					</div>
 				</div>
 			))}
 		</>
