@@ -1,11 +1,9 @@
-import React from 'react';
 import FormControl from './FormControl';
-import Input from '../../../../components/FormComponents/Input';
 import { Field } from 'formik';
 
 const FilterCard = ({ field, setfieldvalue }) => {
 	return (
-		<div className="w-full  my-4 border-2 border-gray-300 rounded-sm p-2 relative tracking-tighter line-clamp-1 ">
+		<div className=" w-full  my-4 border-2 border-gray-300 rounded-sm p-2 relative tracking-tighter line-clamp-1 ">
 			<header className=" font-bold text-lg md:text-lg lg:text-xl xl:text-2xl block sticky">
 				{field.title}
 			</header>
