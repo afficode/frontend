@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Drawer = ({ items, icon }) => {
 	return (
 		<div className="drawer z-[2000] ">
@@ -18,7 +16,7 @@ const Drawer = ({ items, icon }) => {
 			</div>
 			<div className="drawer-side ">
 				<label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
-				<ul className="menu p-4 w-80 min-h-full bg-white z-[20000000000000]">
+				<ul className="menu p-4 w-80 min-h-full bg-white ">
 					{/* Sidebar content here */}
 					{items}
 				</ul>
