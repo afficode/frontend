@@ -37,8 +37,8 @@ const GrabFlyer = () => {
 				height, // natural height
 				style: {
 					height: `${height}px`,
-					transform: 'none', 
-					maxWidth: 'unset', 
+					transform: 'none',
+					maxWidth: 'unset',
 				},
 			})
 				.then((dataUrl) => {
@@ -70,7 +70,7 @@ const GrabFlyer = () => {
 	return (
 		<section className="px-8 py-24 bg-gray-200 ">
 			<div className="w-full h-full lg:w-[800px] mx-auto">
-				<div ref={contentRef} className="flex flex-1  flex-col  bg-primary px-8 py-4">
+				<div ref={contentRef} className="flex flex-1  flex-col  bg-primary px-8 py-4 ">
 					<div className="mb-6">
 						<img src={BoonfuLogo} className="w-16" alt="Boonfu Logo" />
 					</div>
@@ -80,7 +80,7 @@ const GrabFlyer = () => {
 							<h3 className="font-bold uppercase">{ad?.data?.title}</h3>
 						</div>
 
-						<div className="bg-white w-max h-max flex items-center justify-center border-2 border-secondary ">
+						<div className="bg-white w-max h-max max-sm:w-full max-sm:h-full flex items-center justify-center border-2 border-secondary ">
 							<img
 								src={ad?.data?.images[0]?.path}
 								className="h-[347px] w-full max-sm:h-full max-sm:w-full  object-cover"
