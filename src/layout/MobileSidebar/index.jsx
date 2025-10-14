@@ -109,6 +109,6 @@ const navList = [
 ];
 
 const showStyles =
-	'fixed top-0 left-0 z-50 w-full h-full bg-primary/50 transition-left duration-300 ease-in-out grid place-items-left';
+	'fixed top-0 left-0 z-[10000] w-full h-full bg-primary/50 transition-left duration-300 ease-in-out grid place-items-left';
 const closeStyles =
 	'fixed top-0 left-[-100vw] z-50 w-full h-full bg-transparent transition-left duration-300 ease-in-out';
