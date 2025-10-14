@@ -122,7 +122,7 @@ export const MessageProvider = ({ children }) => {
 			// console.error("Socket connection error:", error?.message);
 			if (error?.message === 'Unauthorized!') {
 				//
-				notify('Please try to login again to continue!', 'error');
+				// notify('Please try to login again to continue!', 'error');
 			}
 		});
 
