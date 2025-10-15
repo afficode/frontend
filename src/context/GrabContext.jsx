@@ -59,7 +59,7 @@ export const GrabProvider = ({ children }) => {
 			//console.error("Grab Socket connection error:", error?.message);
 			if (error?.message === 'Unauthorized!') {
 				//
-				notify('Please try to login again to continue!', 'error');
+				// notify('Please try to login again to continue!', 'error');
 			}
 		});
 

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ScrollToTop, getToken } from '../../utils';
+import {ScrollToTop, getRefreshToken} from '../../utils';
 import { backendLink } from '../../constants';
 import { api } from '../../utils/axios';
 import useAuth from '../../context/UserContext';
@@ -23,7 +23,7 @@ const Logout = () => {
 			await api
 				.get(`${backendLink}auth/logout`, {
 					headers: {
-						Authorization: `Bearer ${getToken()}`,
+						Authorization: `Bearer ${getRefreshToken()}`,
 						'Content-Type': 'application/json',
 						Accept: 'application/json',
 					},

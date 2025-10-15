@@ -54,7 +54,10 @@ privateAxios.interceptors.response.use(
 				// return Promise.reject(error);
 			}
 		}
-		// return window.location.assign(Approutes.auth.initial);
+		if(error.response.status === 401) {
+            setRedirectLink(window.location.pathname);
+            return window.location.assign(Approutes.auth.initial);
+        }
 		return Promise.reject(error);
 	}
 );
