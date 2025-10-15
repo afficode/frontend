@@ -12,6 +12,8 @@ import { encodeProductId } from '../../../utils';
 const ChatWindow = ({ chat_id, chat_data, title }) => {
 	const { user } = useAuth();
 
+	// console.log(user);
+
 	const data = chat_data?.find((chat) => chat.chat_id === chat_id);
 	const { data: messageData } = useMessages(chat_id);
 	// ref to scroll to latest message
@@ -24,6 +26,8 @@ const ChatWindow = ({ chat_id, chat_data, title }) => {
 			});
 		}
 	}, [messageData]);
+
+	// console.log(messageData);
 
 	return (
 		<div className="bg-primary min-w-[380px] sm:w-full h-[calc(100vh-15rem)] overflow-x-auto rounded-xl pt-1 pb-4 px-1 flex flex-col justify-between ">
