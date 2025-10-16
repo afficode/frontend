@@ -23,8 +23,6 @@ import { SpinnerSkeleton } from '../../../components';
 import useAuth from '../../../context/UserContext';
 import useGrabContext from '../../../context/GrabContext';
 import { useQueryClient } from 'react-query';
-import { toast } from 'react-toastify';
-// import { FcCancel } from 'react-icons/fc';
 
 const GrabProduct = () => {
 	const notify = useNotify();
@@ -81,8 +79,8 @@ const GrabProduct = () => {
 		a.download = !img.filename
 			? `download.${urlExt}`
 			: /\.[a-zA-Z0-9]+$/.test(img.filename)
-			? img.filename
-			: `${img.filename}.${urlExt}`;
+				? img.filename
+				: `${img.filename}.${urlExt}`;
 		document.body.appendChild(a);
 		a.click();
 		document.body.removeChild(a);
