@@ -7,7 +7,8 @@ import useAuth from '../../../context/UserContext';
 import { useEffect, useLayoutEffect, useRef } from 'react';
 import useMessageContext from '../../../context/MessageContext';
 import { useMessages } from '../../../hooks';
-import { encodeProductId } from '../../../utils';
+import { encodeProductId, toMoney } from '../../../utils';
+import { Button } from '../../../ui';
 
 const ChatWindow = ({ chat_id, chat_data, title }) => {
 	const { user } = useAuth();
@@ -27,30 +28,40 @@ const ChatWindow = ({ chat_id, chat_data, title }) => {
 		}
 	}, [messageData]);
 
-	// console.log(messageData);
+	console.log(data);
 
 	return (
-		<div className="bg-primary min-w-[380px] sm:w-full h-[calc(100vh-15rem)] overflow-x-auto rounded-xl pt-1 pb-4 px-1 flex flex-col justify-between ">
+		<div className="bg-primary min-w-[380px] sm:w-full h-[calc(100vh-15rem)] overflow-x-auto rounded-xl pt-1 pb-4 px-1 flex flex-col  ">
 			{/* chat window header  */}
-			<div className="flex justify-between w-full px-1 py-1 bg-gray-100 shadow-lg sm:py-2 rounded-xl">
+			<h5 className="text-center p-2 text-base font-semibold text-white">{data?.user_b_name}</h5>
+			<div className="flex justify-between items-center w-full px-2 py-1 bg-gray-100 shadow-lg sm:py-2 rounded-xl">
 				<Link to={`/product/${encodeProductId(data?.ad_id)}`}>
-					<div className="flex gap-2 ">
+					<div className="flex gap-2 items-center">
 						<img
 							src={
 								data?.image[0].filename?.startsWith('vehicles') ? noimage : data?.image[0].path || noimage
 							}
-							alt={'/'}
+							alt={data?.title || 'product'}
 							className="w-[3rem] h-[3rem]  object-fit rounded-full "
 						/>
-						<div className="py-2 ">
-							<h6 className="font-medium capitalize">{data?.title ? data.title : title}</h6>
+						<div className=" flex flex-col ">
+							<h6 className=" capitalize text-base leading-4">{data?.title ? data.title : title}</h6>
+							<h5 className="font-semibold text-sm">₦{toMoney(data?.price, true)}</h5>
 						</div>
 					</div>
 				</Link>
+
+				<Button
+					variant={'primary'}
+					size={'small'}
+					className={'!py-[0.125rem] px-[1rem] h-max leading-6 rounded-md text-sm'}
+				>
+					View contact
+				</Button>
 			</div>
 
 			{/* chat window */}
-			<div className="flex flex-col py-3 pr-3 overflow-x-hidden overflow-y-auto scrollbar-thin scrollbar-track-white scrollbar-thumb-rounded-md scrollbar-thumb-secondary scrollbar-track-rounded-md ">
+			<div className="mt-auto flex flex-col py-3 pr-3 overflow-x-hidden overflow-y-auto scrollbar-thin scrollbar-track-white scrollbar-thumb-rounded-md scrollbar-thumb-secondary scrollbar-track-rounded-md ">
 				{messageData?.messages.map((message, i) => (
 					<div
 						key={i}

@@ -371,3 +371,7 @@ td {
 	background-repeat: no-repeat;
 	background-size: cover;
 }
+
+img {
+	@apply !text-xs;
+}
