@@ -5,8 +5,8 @@ import { useEffect, useState } from 'react';
 import { Button, InputGroup } from '../../../ui';
 import { EditPencil, UploadDoc } from '../../../assets/svgs';
 import LoadingScreen from './LoadingScreen';
-import { toast } from 'react-toastify';
 import { MdClose } from 'react-icons/md';
+import { useNotify } from '../../../hooks';
 
 const Settings = () => {
 	const [isLoading, setIsLoading] = useState(true);
@@ -15,7 +15,7 @@ const Settings = () => {
 		account: true,
 	});
 	const allowedExtensions = ['.pdf', '.doc', '.docx', '.txt'];
-
+	const notify = useNotify();
 	// formData values and validation
 	const initialValues = {
 		page_name: 'Kola Autos',
@@ -60,7 +60,7 @@ const Settings = () => {
 			!file.type.startsWith('image/') &&
 			!allowedExtensions.some((ext) => file.name.toLowerCase().endsWith(ext))
 		) {
-			toast.error('Invalid file type. Please select an image or a document.');
+			notify('Invalid file type. Please select an image or a document.', 'error');
 		} else {
 			formik.setFieldValue('id_document', file);
 		}

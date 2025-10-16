@@ -3,9 +3,10 @@ import FilterCard from './FilterCard';
 import { formToDisplay } from '../../../../constants/CategoryFilterFormData';
 
 import { manipulateFilterForm } from '../../../../utils/dataManipulations';
-import { toast } from 'react-toastify';
+import { useNotify } from '../../../../hooks';
 
 const FilterForm = ({ setSearchParams, categoryId }) => {
+	const notify = useNotify();
 	return (
 		<div className="my-2">
 			<Formik
@@ -19,7 +20,7 @@ const FilterForm = ({ setSearchParams, categoryId }) => {
 							...filteredValues,
 						}));
 					} else {
-						toast.info('No filter option selected');
+						notify('No filter option selected', 'info');
 					}
 				}}
 			>
