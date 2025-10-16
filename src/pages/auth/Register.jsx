@@ -14,6 +14,7 @@ const Register = ({ id }) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const { data: states } = useStates();
 	const statesOptions = toSelectOptions(states, 'states', 'Location');
+	console.log(statesOptions);
 
 	const navigate = useNavigate();
 	const inputClass =
@@ -26,6 +27,7 @@ const Register = ({ id }) => {
 		password: '',
 		confirmPassword: '',
 		phone: '',
+		location: '',
 	};
 
 	const validationSchema = Yup.object({
@@ -52,6 +54,7 @@ const Register = ({ id }) => {
 		confirmPassword: Yup.string()
 			.oneOf([Yup.ref('password'), null], 'Must match "password" field value')
 			.required(),
+		location: Yup.string().required('Location is required'),
 	});
 	const notify = useNotify();
 	const onSubmit = async (values, { setSubmitting }) => {
@@ -176,6 +179,13 @@ const Register = ({ id }) => {
 											{...formik.getFieldProps('confirmPassword')}
 										/>
 									</div>
+									<div className="form-control">
+										<select name="location" id="location" className={`${inputClass}`} {...formik.getFieldProps('location')}>
+											{statesOptions.map((state, index) => (
+												<option key={state.value} value={state.value} >{state.key}</option>
+											))}
+										</select>
+									</div>
 									<div className=" form-control">
 										{/* <Button
                   type="submit"
@@ -192,11 +202,10 @@ const Register = ({ id }) => {
 											type="submit"
 											tabIndex="-1"
 											aria-disabled="true"
-											className={`text-white text-normal lg:text-lg border-0 bg-primary btn-md lg:btn-lg hover:bg-primary/80 ${
-												!formik.isValid || !formik.dirty || formik.isSubmitting
-													? 'cursor-not-allowed'
-													: 'cursor-pointer'
-											}`}
+											className={`text-white text-normal lg:text-lg border-0 bg-primary btn-md lg:btn-lg hover:bg-primary/80 ${!formik.isValid || !formik.dirty || formik.isSubmitting
+												? 'cursor-not-allowed'
+												: 'cursor-pointer'
+												}`}
 											disabled={!formik.isValid || !formik.dirty ? 'disabled' : ''}
 										>
 											{formik.isSubmitting ? (
