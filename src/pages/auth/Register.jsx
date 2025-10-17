@@ -14,7 +14,6 @@ const Register = ({ id }) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const { data: states } = useStates();
 	const statesOptions = toSelectOptions(states, 'states', 'Location');
-	console.log(statesOptions);
 
 	const navigate = useNavigate();
 	const inputClass =
