@@ -187,3 +187,8 @@ export const formatCardNumber = (cardNumber, spacing = 4) => {
 	const regex = new RegExp(`(\\d{${spacing}})(?=\\d)`, 'g');
 	return cardNumber.replace(regex, `$1 `);
 };
+
+export const getInitials = (name) => {
+	const initials = name.split(' ').map((word) => word[0]).join('').toUpperCase();
+	return initials;
+};
