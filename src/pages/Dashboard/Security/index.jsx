@@ -16,7 +16,7 @@ const Security = () => {
 			remember_password: false,
 			login_failure_alert: false,
 		},
-		onSubmit: (values) => {},
+		onSubmit: (values) => { },
 	});
 
 	// loading screen timeout
@@ -66,7 +66,7 @@ const Security = () => {
 						</div>
 					</div>
 
-					<div className="flex items-center w-full gap-2 my-4 sm:gap-8">
+					{/* <div className="flex items-center w-full gap-2 my-4 sm:gap-8">
 						<img src={LoginLock} alt="/" className="w-6 sm:w-[2.5rem]" />
 						<div>
 							<h6 className="font-medium">Save your login info</h6>
@@ -82,10 +82,10 @@ const Security = () => {
 								className={formik.values.remember_password ? 'custom-toggle' : ''}
 							/>
 						</div>
-					</div>
+					</div> */}
 				</div>
 
-				<div className="pb-4 my-4 border-b border-black/30">
+				{/* <div className="pb-4 my-4 border-b border-black/30">
 					<div className="w-full px-4 py-2 my-4 bg-gray-200">
 						<h5 className="font-semibold">Setting Up Extra Security</h5>
 					</div>
@@ -107,9 +107,9 @@ const Security = () => {
 							/>
 						</div>
 					</div>
-				</div>
+				</div> */}
 
-				<div className="sm:w-[200px] px-4 mt-8">
+				{/* <div className="sm:w-[200px] px-4 mt-8">
 					<Button
 						variant="primary"
 						size={'full'}
@@ -119,7 +119,7 @@ const Security = () => {
 					>
 						Save
 					</Button>
-				</div>
+				</div> */}
 			</div>
 
 			<Modal
