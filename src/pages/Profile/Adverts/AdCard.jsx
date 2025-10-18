@@ -2,13 +2,49 @@ import { useNavigate } from 'react-router-dom';
 import { CameraWhite } from '../../../assets/svgs';
 import { Button } from '../../../ui';
 import { toMoney } from '../../../utils';
+import { useNotify, useUpdateAd, makeAdPayment } from '../../../hooks';
+import { useQueryClient } from 'react-query';
+import { FaUnlock } from "react-icons/fa";
 
-const AdCard = ({ title, images, active, price, subscribe, views, adId }) => {
+
+const AdCard = ({ title, images, active, price, subscribe, views, adId, chats, paid }) => {
 	const navigate = useNavigate();
+	const notify = useNotify();
+	const { mutate } = useUpdateAd(adId);
+	const { mutate: makePaymentMutate } = makeAdPayment();
+	const queryClient = useQueryClient();
 
 	const handleEdit = (adId) => {
 		navigate(`/update-ad/${adId}`);
 	};
+
+	const closeAdvert = () => {
+		const formData = new FormData();
+		formData.append('active', '2');
+		mutate(formData, {
+			onSuccess: (data) => {
+				console.log(data)
+				notify('Advert closed successfully', 'success');
+				queryClient.invalidateQueries({ queryKey: ['getUserAds'] });
+			},
+			onError: () => {
+				notify('Error closing Ad. If this error persist, please contact Admin with the contact us form.', 'error');
+			}
+		})
+	}
+
+	const makePayment = () => {
+		makePaymentMutate(adId, {
+			onSuccess: (data) => {
+				console.log(data)
+				notify(data?.message || 'Payment Queued. You will be notified by email when payment is done.', 'success');
+				queryClient.invalidateQueries({ queryKey: ['getUserAds'] });
+			},
+			onError: () => {
+				notify('Error making payment. If this error persist, please contact Admin with the contact us form.', 'error');
+			}
+		});
+	}
 
 	return (
 		<div className="bg-gray-200 w-[18rem] sm:w-[20rem]">
@@ -23,6 +59,16 @@ const AdCard = ({ title, images, active, price, subscribe, views, adId }) => {
 					<span className="absolute top-4 right-4 text-white font-semibold bg-[#047F73] py-1 px-2 rounded-xl text-center border-4 border-white max-sm:text-sm">
 						Active
 					</span>
+				)}
+				{active === '2' && (
+					<span className="absolute top-4 right-4 text-white font-semibold bg-primary py-1 px-2 rounded-xl text-center border-4 border-white max-sm:text-sm">
+						Closed
+					</span>
+				)}
+				{active === '0' && (
+					<div className="absolute top-4 right-4 text-white font-semibold bg-red-500 py-1 px-2 rounded-xl text-center border-4 border-white max-sm:text-sm">
+						{paid === 0 ? <span className='flex items-center justify-center cursor-pointer' onClick={() => makePayment()}>Payment Required &emsp; <FaUnlock /></span> : <span>Blocked</span>}
+					</div>
 				)}
 			</div>
 
@@ -54,7 +100,7 @@ const AdCard = ({ title, images, active, price, subscribe, views, adId }) => {
 							<span>Views:</span> <b>{views}</b>
 						</div>
 						<div>
-							<span>Chats:</span> <b>20</b>
+							<span>Chats:</span> <b>{chats}</b>
 						</div>
 					</div>
 					<div className="flex flex-col justify-between max-sm:text-sm">
@@ -70,6 +116,7 @@ const AdCard = ({ title, images, active, price, subscribe, views, adId }) => {
 							variant={'plain'}
 							size={'small'}
 							className={'text-primary rounded-lg shadow-none hover:shadow-md'}
+							onClick={() => closeAdvert()}
 						>
 							Close
 						</Button>
