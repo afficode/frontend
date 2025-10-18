@@ -18,32 +18,32 @@ const Logout = () => {
   const MESSAGE = 'Backend Logout finished and tokens destroyed';
   useEffect(() => {
     const logoutBackend = async () => {
-      await api
-        .post(
-          `${backendLink}auth/logout`,
-          {
-            refreshToken: getRefreshToken(),
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${getRefreshToken()}`,
-              'Content-Type': 'application/json',
-              Accept: 'application/json',
+      try {
+        await api
+          .post(
+            `${backendLink}auth/logout`,
+            {
+              refreshToken: getRefreshToken(),
             },
-          }
-        )
-        .then(() => {
-          notify(MESSAGE, 'success');
-          return;
-        })
-        .catch(({ response }) => {
-          notify(MESSAGE, 'success');
-        });
+            {
+              headers: {
+                Authorization: `Bearer ${getRefreshToken()}`,
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+              },
+            }
+          );
+        notify(MESSAGE, 'success');
+
+      } catch (error) {
+        notify(MESSAGE, 'success');
+      }
       // remove the user details from localStorage
       //clearLocalStorage();
       logout();
       disconnect_socket();
       navigate('/', { replace: 'true' });
+      return
     };
     setTimeout(() => {
       logoutBackend();
