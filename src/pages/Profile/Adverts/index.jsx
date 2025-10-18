@@ -13,7 +13,7 @@ const Adverts = () => {
 	const { data: ads, isLoading } = useMyAds();
 
 	const adsData = ads?.active_ads.sort((a, b) => b.id - a.id);
-	console.log(ads);
+
 
 	return (
 		<div className="max-w-[1224px] mx-auto px-4 my-10">
