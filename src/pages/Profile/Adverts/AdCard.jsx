@@ -23,7 +23,6 @@ const AdCard = ({ title, images, active, price, subscribe, views, adId, chats, p
 		formData.append('active', '2');
 		mutate(formData, {
 			onSuccess: (data) => {
-				console.log(data)
 				notify('Advert closed successfully', 'success');
 				queryClient.invalidateQueries({ queryKey: ['getUserAds'] });
 			},
@@ -36,7 +35,6 @@ const AdCard = ({ title, images, active, price, subscribe, views, adId, chats, p
 	const makePayment = () => {
 		makePaymentMutate(adId, {
 			onSuccess: (data) => {
-				console.log(data)
 				notify(data?.message || 'Payment Queued. You will be notified by email when payment is done.', 'success');
 				queryClient.invalidateQueries({ queryKey: ['getUserAds'] });
 			},
