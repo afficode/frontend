@@ -75,7 +75,7 @@ const Footer = () => {
 					</div>
 
 					{/* footer lists  */}
-					<div className="grid grid-cols-2 lg:grid-cols-5 gap-6">
+					<div className="grid max-[450px]:grid-cols-1 grid-cols-2 lg:grid-cols-5 gap-6">
 						<ul className="flex flex-col ">
 							<h6 className="px-2 md:px-8 text-2xl opacity-[.7] font-normal whitespace-nowrap mb-3">
 								About US
