@@ -102,14 +102,14 @@ const index = () => {
 
                                 {((isLogin &&
                                     parseInt(result.data?.owner) !==
-                                        parseInt(user?.id)) ||
+                                    parseInt(user?.id)) ||
                                     !isLogin) && (
-                                    <>
-                                        <SaveProduct
-                                            ads_id={decodeProductId(id)}
-                                        />
-                                    </>
-                                )}
+                                        <>
+                                            <SaveProduct
+                                                ads_id={decodeProductId(id)}
+                                            />
+                                        </>
+                                    )}
                             </span>
                         </div>
 
@@ -121,7 +121,7 @@ const index = () => {
                             </p>
 
                             {result?.data?.paid === 0 &&
-                            user.id === result?.data.owner ? (
+                                user.id === result?.data.owner ? (
                                 <span
                                     className={
                                         'px-2 py-1 rounded-lg text-white bg-red-700 w'
@@ -147,7 +147,7 @@ const index = () => {
                                 </span>
                             ) : null}
                             {result?.data?.active === '0' &&
-                            result?.data.paid === 1 ? (
+                                result?.data.paid === 1 ? (
                                 <span
                                     className={
                                         'px-4 py-1 rounded-lg text-white bg-red-700  '
@@ -262,14 +262,14 @@ const index = () => {
 
                                 {((isLogin &&
                                     parseInt(result?.data?.owner) !==
-                                        parseInt(user?.id)) ||
+                                    parseInt(user?.id)) ||
                                     !isLogin) && (
-                                    <>
-                                        <SaveProduct
-                                            ads_id={decodeProductId(id)}
-                                        />
-                                    </>
-                                )}
+                                        <>
+                                            <SaveProduct
+                                                ads_id={decodeProductId(id)}
+                                            />
+                                        </>
+                                    )}
                             </span>
                         </div>
 
@@ -277,14 +277,14 @@ const index = () => {
                         <div className='flex items-center justify-between'>
                             <p className='w-full'>
                                 <Link
-                                    to={`/products/search?lga=${result?.data?.lga_id}`}
+                                    to={`/product/?q=&state_id=${result?.data?.state_id}&lga_id=${result?.data?.lga_id}`}
                                     className='text-primary hover:underline'
                                 >
                                     {result?.data?.location.split(',')[0]}
                                 </Link>{' '}
                                 |{' '}
                                 <Link
-                                    to={`/products/search?state_id=${result?.data?.state_id}`}
+                                    to={`/product/?q=&state_id=${result?.data?.state_id}`}
                                     className='text-primary hover:underline'
                                 >
                                     {result?.data?.location.split(',')[1]}
@@ -359,17 +359,16 @@ const index = () => {
                                             {revealNumber
                                                 ? result?.data?.number
                                                 : `${result?.data?.number.substring(
-                                                      0,
-                                                      3
-                                                  )}XXXXXXXX`}
+                                                    0,
+                                                    3
+                                                )}XXXXXXXX`}
                                         </span>
                                     </p>
 
                                     <button
-                                        className={`font-bold text-black bg-white rounded-none btn btn-sm hover:bg-primary hover:text-white hover:border-0 hover:rounded-sm ${
-                                            !isLogin &&
+                                        className={`font-bold text-black bg-white rounded-none btn btn-sm hover:bg-primary hover:text-white hover:border-0 hover:rounded-sm ${!isLogin &&
                                             'bg-gray-100 cursor-not-allowed'
-                                        }`}
+                                            }`}
                                         onClick={() => {
                                             if (
                                                 isLogin &&
@@ -400,11 +399,10 @@ const index = () => {
                             {result?.data?.contact_type.includes('email') && (
                                 <div className='flex items-center justify-between w-full'>
                                     <p
-                                        className={`my-2 w-full overflow-x-scroll ${
-                                            revealEmail
-                                                ? 'tooltip tooltip-primary'
-                                                : ''
-                                        }`}
+                                        className={`my-2 w-full overflow-x-scroll ${revealEmail
+                                            ? 'tooltip tooltip-primary'
+                                            : ''
+                                            }`}
                                         data-tip={
                                             revealEmail
                                                 ? result?.data?.email
@@ -413,29 +411,28 @@ const index = () => {
                                     >
                                         <span className='pr-1 text-xl font-bold'>
                                             {revealEmail &&
-                                            result?.data?.email !== null
+                                                result?.data?.email !== null
                                                 ? result?.data?.email
                                                 : `${result?.data?.email.substring(
-                                                      0,
-                                                      3
-                                                  )}XXXXXXXX`}
+                                                    0,
+                                                    3
+                                                )}XXXXXXXX`}
                                         </span>
                                     </p>
 
                                     <button
-                                        className={`font-bold text-black bg-white rounded-none btn btn-sm hover:bg-primary hover:text-white hover:border-0 hover:rounded-sm ${
-                                            !isLogin &&
+                                        className={`font-bold text-black bg-white rounded-none btn btn-sm hover:bg-primary hover:text-white hover:border-0 hover:rounded-sm ${!isLogin &&
                                             'bg-gray-100 cursor-not-allowed'
-                                        } `}
+                                            } `}
                                         onClick={() => {
                                             isLogin &&
-                                            result?.data?.contact_type.includes(
-                                                'email'
-                                            )
+                                                result?.data?.contact_type.includes(
+                                                    'email'
+                                                )
                                                 ? setRevealEmail(!revealEmail)
                                                 : notify(
-                                                      'Please login to reveal Ads owner email'
-                                                  );
+                                                    'Please login to reveal Ads owner email'
+                                                );
                                         }}
                                     >
                                         {!revealEmail ? (
