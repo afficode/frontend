@@ -88,6 +88,20 @@ export const convertKeyToName = (ad) => {
 		'number_of_door',
 		'fuel_type',
 		'engine_size',
+		'storage',
+		'storage_type',
+		'ram_size',
+		'electronics_display_size',
+		'processor',
+		'operating_system',
+		'resolution',
+		'input_mode',
+		'display_technology',
+		'electronics_style',
+		'connectivity',
+		'connectivity_interface',
+		'sim_type',
+		'exchange_possible',
 	];
 	var overviews = [];
 	if (ad === null || undefined) {
