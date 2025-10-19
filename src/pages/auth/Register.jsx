@@ -25,8 +25,7 @@ const Register = ({ id }) => {
 		location: '',
 		password: '',
 		confirmPassword: '',
-		phone: '',
-		location: '',
+		phone: ''
 	};
 
 	const validationSchema = Yup.object({
@@ -53,7 +52,7 @@ const Register = ({ id }) => {
 		confirmPassword: Yup.string()
 			.oneOf([Yup.ref('password'), null], 'Must match "password" field value')
 			.required(),
-		location: Yup.string().required('Location is required'),
+		location: Yup.number().required('Location is required'),
 	});
 	const notify = useNotify();
 	const onSubmit = async (values, { setSubmitting }) => {
