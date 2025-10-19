@@ -8,6 +8,7 @@ import { Button, InputGroup } from '../../ui';
 import useAuth from '../../context/UserContext';
 import { useNotify, userUpdate } from '../../hooks';
 import { useState } from 'react';
+import { getInitials } from '../../utils';
 
 const Sidebar = () => {
 	const { mutate, isLoading } = userUpdate('dashboard/update_user');
@@ -95,7 +96,13 @@ const Sidebar = () => {
 							className="w-full h-full mx-auto rounded-full object-fit "
 						/>
 					) : (
-						<img src={ManSmiling} alt="" className="w-full h-full mx-auto rounded-full object-fit " />
+						<div className="w-full">
+							<div className="avatar avatar-placeholder">
+								<div className="bg-gray-400 text-black w-40 rounded-full">
+									<div className="md:text-6xl sm:text-4xl flex items-center justify-center h-full">{getInitials(user?.firstname + ' ' + user?.lastname)}</div>
+								</div>
+							</div>
+						</div>
 					)}
 
 					<form encType="multipart/form-data">
@@ -118,7 +125,6 @@ const Sidebar = () => {
 					<h4 className="capitalize">
 						{user.firstname} {user.lastname}
 					</h4>
-					<p className="font-semibold capitalize">Auto Dealer</p>
 				</div>
 			</div>
 

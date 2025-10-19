@@ -8,7 +8,6 @@ import { MdLogin } from 'react-icons/md';
 import { LoginHook } from '../../hooks/AuthHook';
 import { Apple, Facebook, Google } from '../../assets/svgs';
 import { Button } from '../../ui';
-// import { toast } from 'react-toastify';
 import { Approutes } from '../../constants';
 import { Button as FlowbiteButton } from 'flowbite-react';
 import useAuth from '../../context/UserContext';

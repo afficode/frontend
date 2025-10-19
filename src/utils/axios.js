@@ -54,10 +54,6 @@ privateAxios.interceptors.response.use(
 				// return Promise.reject(error);
 			}
 		}
-		if(error.response.status === 401) {
-            setRedirectLink(window.location.pathname);
-            return window.location.assign(Approutes.auth.initial);
-        }
 		return Promise.reject(error);
 	}
 );
