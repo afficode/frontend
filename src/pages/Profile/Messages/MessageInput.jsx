@@ -32,7 +32,7 @@ const MessageInput = ({ id }) => {
 					htmlFor={`chat_${id}`}
 					className="absolute w-4 transform -translate-y-1/2 top-1/2 left-2"
 				>
-					<img src={EditPencilBlack} alt="/" />
+					<img src={EditPencilBlack} alt="type" />
 				</label>
 				<input
 					type="text"
@@ -46,7 +46,11 @@ const MessageInput = ({ id }) => {
 				/>
 			</div>
 
-			<button type="submit" className="mx-4 text-white transition-all hover:text-secondary">
+			<button
+				type="submit"
+				className="mx-4 text-white transition-all hover:text-secondary"
+				disabled={!formData.content.trim().length}
+			>
 				<AiOutlineSend size={30} />
 			</button>
 		</form>

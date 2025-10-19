@@ -1,37 +1,35 @@
 import { format } from 'date-fns';
 import useAuth from '../../../context/UserContext';
-import { TiTick } from 'react-icons/ti';
+import { IoCheckmarkDoneSharp } from 'react-icons/io5';
 
 const Message = ({ message, time }) => {
 	const { user } = useAuth();
 
 	return (
-		<div
-			className={`${
-				message.offer === 1 ? 'bg-secondary' : 'bg-gray-200'
-			} px-3 py-1 rounded-l-2xl rounded-t-2xl min-w-[8rem] flex flex-col justify-between relative `}
-		>
-			<span
-				className={` font-semibold text-sm text-black truncate ${
-					message.sender === user.id ? 'right-2' : 'left-1'
-				}`}
+		<div className="flex items-center gap-1">
+			{message.sender === user.id && (
+				<span className=" text-xs font-light text-white">{format(new Date(time), 'HH:mm')}</span>
+			)}
+			<div
+				className={`${message.offer === 1 ? 'bg-secondary' : 'bg-gray-200'}  ${
+					message.sender === user.id ? 'rounded-l-2xl rounded-t-2xl' : 'rounded-r-2xl rounded-b-2xl'
+				} px-3 py-1  min-w-[8rem] flex gap-2 justify-between relative `}
 			>
-				{message.sender === user.id ? 'You' : message.sender_name}
-			</span>
-			<p className="self-start whitespace-normal break-all">{message.content}</p>
-			<div className="ml-auto flex items-center">
-				<span className=" text-xs font-light">{format(new Date(time), 'dd-MMM-yyyy HH:mm')}</span>
-				{message.sender === user.id && (
-					<span>
-						{
-							<TiTick
-								size={18}
-								className={message.read_status === 0 ? 'text-gray-600' : 'text-green-400'}
-							/>
-						}
-					</span>
-				)}
+				<p className="self-start whitespace-normal break-all text-base font-light">{message.content}</p>
 			</div>
+			{message.sender === user.id && (
+				<span className="h-full self-end">
+					{
+						<IoCheckmarkDoneSharp
+							size={18}
+							className={message.read_status === 0 ? 'text-gray-600' : 'text-green-400'}
+						/>
+					}
+				</span>
+			)}
+			{message.sender !== user.id && (
+				<span className="text-white text-xs font-light">{format(new Date(time), 'HH:mm')}</span>
+			)}
 		</div>
 	);
 };

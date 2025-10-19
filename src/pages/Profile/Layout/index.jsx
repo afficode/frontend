@@ -13,10 +13,10 @@ const ProfileLayout = () => {
 						<NavLink
 							key={item.name}
 							to={item.link}
-							className=" flex-1 my-1 py-4 bg-gray-200 text-center text-black/50 mx-[.15rem] "
+							className=" flex-1 my-1 py-4 bg-gray-200 text-center text-black/50 mx-[.15rem]"
 							title={item.title}
 						>
-							<li className="hidden text-sm font-medium md:text-lg sm:block">{item.name}</li>
+							<li className="hidden text-sm font-medium lg:text-lg sm:block ">{item.name}</li>
 							<li className="flex justify-center text-center  sm:hidden active:!text-white">
 								{item.icon}
 							</li>
