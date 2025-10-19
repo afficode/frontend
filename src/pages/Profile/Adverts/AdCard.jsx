@@ -115,6 +115,7 @@ const AdCard = ({ title, images, active, price, subscribe, views, adId, chats, p
 							size={'small'}
 							className={'text-primary rounded-lg shadow-none hover:shadow-md'}
 							onClick={() => closeAdvert()}
+                            disabled={active === '2'}
 						>
 							Close
 						</Button>
