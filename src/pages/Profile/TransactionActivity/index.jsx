@@ -51,7 +51,7 @@ const TransactionActivity = () => {
 
 	return (
 		<section className="w-full flex flex-col items-center gap-6">
-			<div className="max-w-5xl w-full mx-auto px-4 py-8 space-y-4 bg-[#D9D9D9] rounded-lg">
+			<div className="max-w-6xl w-full mx-auto px-4 py-8 space-y-4 bg-[#D9D9D9] rounded-lg">
 				<h3>Transaction Activity</h3>
 
 				<div className="bg-white rounded-lg p-4 space-y-2 w-full">
@@ -105,7 +105,11 @@ const TransactionActivity = () => {
 													handleOrderClick(order.id);
 												}
 
-												if (order.escrow_type === 'self_pickup' && order.stage === 'init') {
+												if (
+													order.escrow_type === 'self_pickup' &&
+													order.stage === 'init' &&
+													order?.delivery_status.toLowerCase() === 'in discussion'
+												) {
 													handleEscrowSelfPickUp(order.id);
 												}
 
@@ -114,9 +118,9 @@ const TransactionActivity = () => {
 												}
 											}}
 											className={`hover:bg-gray-100 ${
-												(order.escrow_type === 'self_pickup' && order.stage === 'init') ||
-												order.escrow_type === 'boonfu_delivery' ||
-												(order.escrow_type === 'self_pickup' && order.paid == '0')
+												order.escrow_type === 'self_pickup' &&
+												order.stage === 'init' &&
+												order?.delivery_status.toLowerCase() === 'in discussion'
 													? 'cursor-pointer'
 													: 'cursor-not-allowed'
 											}`}

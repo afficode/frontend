@@ -23,8 +23,8 @@ const ShowSellerContact = ({
 				<div className="grid items-center grid-cols-3">
 					<p>Pick up address : </p>
 					<span className="col-span-2 flex items-center gap-2 p-2 rounded-md bg-[#333] text-white">
-						<img src={Location} alt="/" className="w-4" />
-						{pickup_address}, {pickup_state}.
+						<img src={Location} alt="address" className="w-4" />
+						{pickup_address && `${pickup_address},`} {pickup_state}.
 					</span>
 				</div>
 				<div className="grid items-center grid-cols-3">
