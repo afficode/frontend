@@ -105,7 +105,11 @@ const TransactionActivity = () => {
 													handleOrderClick(order.id);
 												}
 
-												if (order.escrow_type === 'self_pickup' && order.stage === 'init') {
+												if (
+													order.escrow_type === 'self_pickup' &&
+													order.stage === 'init' &&
+													order?.delivery_status.toLowerCase() === 'in discussion'
+												) {
 													handleEscrowSelfPickUp(order.id);
 												}
 
@@ -114,9 +118,9 @@ const TransactionActivity = () => {
 												}
 											}}
 											className={`hover:bg-gray-100 ${
-												(order.escrow_type === 'self_pickup' && order.stage === 'init') ||
-												order.escrow_type === 'boonfu_delivery' ||
-												(order.escrow_type === 'self_pickup' && order.paid == '0')
+												order.escrow_type === 'self_pickup' &&
+												order.stage === 'init' &&
+												order?.delivery_status.toLowerCase() === 'in discussion'
 													? 'cursor-pointer'
 													: 'cursor-not-allowed'
 											}`}
