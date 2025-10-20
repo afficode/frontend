@@ -51,7 +51,7 @@ const TransactionActivity = () => {
 
 	return (
 		<section className="w-full flex flex-col items-center gap-6">
-			<div className="max-w-5xl w-full mx-auto px-4 py-8 space-y-4 bg-[#D9D9D9] rounded-lg">
+			<div className="max-w-6xl w-full mx-auto px-4 py-8 space-y-4 bg-[#D9D9D9] rounded-lg">
 				<h3>Transaction Activity</h3>
 
 				<div className="bg-white rounded-lg p-4 space-y-2 w-full">
