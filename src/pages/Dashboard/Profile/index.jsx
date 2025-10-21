@@ -33,10 +33,10 @@ const Profile = () => {
 	const { mutate, isLoading: isUpdating } = userUpdate('dashboard/update_user');
 	const notify = useNotify();
 
-	const phoneDetails = user?.phone.filter((num) => num.isDefault === '1')[0].number
+	const phoneDetails = user?.phone.filter((num) => num.isDefault === '1')[0]
 
 	const initialValues = {
-		phone: phoneDetails || 1000000000,
+		phone: phoneDetails.number || 1000000000,
 		location: user?.location || '',
 		bio: user?.bio || '',
 	};
@@ -205,8 +205,8 @@ const Profile = () => {
 						/>
 					</div>
 					<div className="flex max-md:flex-col md:items-center md:justify-between  border-b border-black/10">
-						<label className="max-md:text-sm max-md:mt-2" htmlFor="phone">
-							Contact Number <VerifyPhoneNumber phoneDetails={phoneDetails} />
+						<label className="max-md:text-sm max-md:mt-2 inline-flex" htmlFor="phone">
+							<span className="my-auto mr-4">Contact Number</span> <VerifyPhoneNumber phoneDetails={phoneDetails} />
 						</label>
 						{toggleEdit?.about ? (
 							<InputGroup
