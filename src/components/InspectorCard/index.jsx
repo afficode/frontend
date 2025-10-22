@@ -45,16 +45,18 @@ const InspectorCard = ({ data }) => {
 			};
 		}
 
-		mutate(formData, {
-			onSuccess: (data) => {
-				notify(data?.message, 'success');
-				queryClient.invalidateQueries('get-schedule');
-				resetForm();
-			},
-			onError: (error) => {
-				notify(error?.response.data.message, 'error');
-			},
-		});
+		console.log(formData);
+
+		// mutate(formData, {
+		// 	onSuccess: (data) => {
+		// 		notify(data?.message, 'success');
+		// 		queryClient.invalidateQueries('get-schedule');
+		// 		resetForm();
+		// 	},
+		// 	onError: (error) => {
+		// 		notify(error?.response.data.message, 'error');
+		// 	},
+		// });
 	};
 
 	const formik = useFormik({
@@ -238,8 +240,12 @@ export default InspectorCard;
 const sellerResponseOptions = [
 	{ value: '', key: 'Select a response' },
 	{
-		key: 'I can do this time and date (reschedule now).',
+		key: 'I can do this time and date.',
 		value: 'reschedule',
+	},
+	{
+		key: 'Confirmed',
+		value: 'confirmed',
 	},
 	{ value: 'withdrawn', key: 'Withdrawn from site' },
 	{ value: 'not_available', key: 'Item no longer available' },
