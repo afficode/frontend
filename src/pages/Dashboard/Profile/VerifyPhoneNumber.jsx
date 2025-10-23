@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { TbPhoneCheck } from "react-icons/tb";
-import { useNotify, useVerifyOtp, useVerifyPhoneNumber } from "../../../hooks";
+import { useNotify, useVerifyPhoneNumber } from "../../../hooks";
 import { Button, Modal } from "flowbite-react";
 import { BsAlarmFill } from "react-icons/bs";
 
@@ -118,8 +118,6 @@ const ConfirmPhoneNumber = ({ phoneDetails, sendOtp, setOpenModal }) => {
         }
     };
 
-    const { mutate: verifyOtp, isLoading: isVerifying } = useVerifyOtp();
-
     const handleOtpSubmit = (e) => {
         e.preventDefault();
         const joined = code.join('');
@@ -177,7 +175,6 @@ const ConfirmPhoneNumber = ({ phoneDetails, sendOtp, setOpenModal }) => {
                     <div className="flex gap-2 items-center justify-between">
                         <Button
                             type="submit"
-                            loading={isLoading}
                             disabled={isLoading}
                             className={'bg-[#047F73]  text-white'}
                         >
