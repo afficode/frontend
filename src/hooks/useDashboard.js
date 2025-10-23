@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { useQuery, useMutation } from 'react-query';
 import { privateAxios } from '../utils';
 
 export const useUserAds = (params) => {
@@ -9,4 +9,10 @@ export const useUserAds = (params) => {
 		refetchIntervalInBackground: false,
 		refetchOnWindowFocus: false,
 	});
+};
+
+export const useVerifyPhoneNumber = (method) => {
+	const sendPhoneNumberCode = (data) => privateAxios[method]('auth/verify_phone', data).then((res) => res?.data);
+
+	return useMutation(['verify-phone-number'], sendPhoneNumberCode);
 };
