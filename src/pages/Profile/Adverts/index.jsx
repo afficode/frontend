@@ -14,7 +14,6 @@ const Adverts = () => {
 
 	const adsData = ads?.active_ads.sort((a, b) => b.id - a.id);
 
-	console.log(ads);
 	return (
 		<div className="max-w-[1224px] mx-auto px-4 my-10">
 			<div className="px-2 py-6 mb-12 space-y-8 border lg:px-8 border-black/30 rounded-3xl">
@@ -35,7 +34,7 @@ const Adverts = () => {
 							: 'text-green-500 lg:py-2 lg:px-6 py-1 px-4'
 							} cursor-pointer max-sm:text-sm`}
 					>
-						Active <span>[{ads?.active_ads?.length || 0}]</span>
+						Active <span>[{ads?.active_ads.length || 0}]</span>
 					</div>
 					<div
 						onClick={() => setFilteredAd('processing')}
@@ -44,7 +43,7 @@ const Adverts = () => {
 							: 'text-secondary lg:py-2 lg:px-6 py-1 px-4'
 							} cursor-pointer max-sm:text-sm`}
 					>
-						Processing <span>[{ads?.processing_ads?.length || 0}]</span>
+						Processing <span>[{ads?.processing_ads.filter(ad => ad.active === '0' && ad.available === 0 && ad.paid === 1).length || 0}]</span>
 					</div>
 					<div
 						onClick={() => setFilteredAd('blocked')}
@@ -53,17 +52,17 @@ const Adverts = () => {
 							: 'text-[#D60949] lg:py-2 lg:px-6 py-1 px-4'
 							} cursor-pointer max-sm:text-sm`}
 					>
-						Blocked <span>[{ads?.blocked_ads?.length || 0}]</span>
+						Blocked <span>[{ads?.blocked_ads.length || 0}]</span>
 					</div>
-					{/* <div
-						onClick={() => setFilteredAd('draft')}
-						className={`${filteredAd === 'draft'
+					<div
+						onClick={() => setFilteredAd('payment_required')}
+						className={`${filteredAd === 'payment_required'
 							? 'bg-primary text-white lg:py-2 lg:px-6 py-1 px-4'
-							: ' lg:py-2 lg:px-6 py-1 px-4'
+							: ' lg:py-2 lg:px-6 py-1 px-4 text-orange-500'
 							} cursor-pointer max-sm:text-sm`}
 					>
-						Draft <span>[2]</span>
-					</div> */}
+						Payment Required <span>[{ads?.processing_ads.filter(ad => ad.active === '0' && ad.available === 0 && ad.paid === 0).length || 0}]</span>
+					</div>
 					<div
 						onClick={() => setFilteredAd('sold')}
 						className={`${filteredAd === 'sold'
@@ -71,7 +70,7 @@ const Adverts = () => {
 							: 'text-black/50 lg:py-2 lg:px-6 py-1 px-4'
 							} cursor-pointer max-sm:text-sm`}
 					>
-						Closed <span>[{ads?.sold_ads?.length || 0}]</span>
+						Closed <span>[{ads?.sold_ads.length || 0}]</span>
 					</div>
 				</div>
 				<div className="max-w-[400px] mx-auto">
@@ -86,81 +85,96 @@ const Adverts = () => {
 				<LoadingScreen />
 			) : (
 				<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 place-items-center">
-					{(ads && ads?.total_ads > 0) ? (filteredAd === 'active' ? adsData?.map((ad) => (
+					{(ads && ads.total_ads > 0) ? (filteredAd === 'active' ? adsData.map((ad) => (
 						<AdCard
-							key={ad?.id}
-							title={ad?.title}
-							images={ad?.images}
-							active={ad?.active}
-							price={ad?.price}
+							key={ad.id}
+							title={ad.title}
+							images={ad.images}
+							active={ad.active}
+							price={ad.price}
 							views={ad.views}
-							subscribe={ad?.subscribe}
-							adId={ad?.id}
-							chats={ad?.chats}
-							paid={ad?.paid}
-							available={ad?.available}
+							subscribe={ad.subscribe}
+							adId={ad.id}
+							chats={ad.chats}
+							paid={ad.paid}
+							available={ad.available}
 						/>
-					)) : filteredAd === 'processing' ? ads?.processing_ads?.map((ad) => (
+					)) : filteredAd === 'processing' ? ads.processing_ads.filter(ad => ad.active === '0' && ad.available === 0 && ad.paid === 1).sort((a, b) => b.id - a.id).map((ad) => (
 						<AdCard
-							key={ad?.id}
-							title={ad?.title}
-							images={ad?.images}
-							active={ad?.active}
-							price={ad?.price}
+							key={ad.id}
+							title={ad.title}
+							images={ad.images}
+							active={ad.active}
+							price={ad.price}
 							views={ad.views}
-							subscribe={ad?.subscribe}
-							adId={ad?.id}
-							chats={ad?.chats}
-							paid={ad?.paid}
-							available={ad?.available}
+							subscribe={ad.subscribe}
+							adId={ad.id}
+							chats={ad.chats}
+							paid={ad.paid}
+							available={ad.available}
 
 						/>
-					)) : filteredAd === 'blocked' ? ads?.blocked_ads?.map((ad) => (
+					)) : filteredAd === 'blocked' ? ads.blocked_ads.sort((a, b) => b.id - a.id).map((ad) => (
 						<AdCard
-							key={ad?.id}
-							title={ad?.title}
-							images={ad?.images}
-							active={ad?.active}
-							price={ad?.price}
+							key={ad.id}
+							title={ad.title}
+							images={ad.images}
+							active={ad.active}
+							price={ad.price}
 							views={ad.views}
-							subscribe={ad?.subscribe}
-							adId={ad?.id}
-							chats={ad?.chats}
-							paid={ad?.paid}
-							available={ad?.available}
+							subscribe={ad.subscribe}
+							adId={ad.id}
+							chats={ad.chats}
+							paid={ad.paid}
+							available={ad.available}
 
 						/>
-					)) : filteredAd === 'sold' ? ads?.sold_ads?.map((ad) => (
+					)) : filteredAd === 'payment_required' ? ads.processing_ads.filter(ad => ad.active === '0' && ad.available === 0 && ad.paid === 0).sort((a, b) => b.id - a.id).map((ad) => (
 						<AdCard
-							key={ad?.id}
-							title={ad?.title}
-							images={ad?.images}
-							active={ad?.active}
-							price={ad?.price}
+							key={ad.id}
+							title={ad.title}
+							images={ad.images}
+							active={ad.active}
+							price={ad.price}
 							views={ad.views}
-							subscribe={ad?.subscribe}
-							adId={ad?.id}
-							chats={ad?.chats}
-							paid={ad?.paid}
-							available={ad?.available}
+							subscribe={ad.subscribe}
+							adId={ad.id}
+							chats={ad.chats}
+							paid={ad.paid}
+							available={ad.available}
+
 						/>
-					)) : [...(ads?.sold_ads ?? []),
-					...(ads?.active_ads ?? []),
-					...(ads?.blocked_ads ?? []),
-					...(ads?.processing_ads ?? [])
+					)) : filteredAd === 'sold' ? ads.sold_ads.sort((a, b) => b.id - a.id).map((ad) => (
+						<AdCard
+							key={ad.id}
+							title={ad.title}
+							images={ad.images}
+							active={ad.active}
+							price={ad.price}
+							views={ad.views}
+							subscribe={ad.subscribe}
+							adId={ad.id}
+							chats={ad.chats}
+							paid={ad.paid}
+							available={ad.available}
+						/>
+					)) : [...(ads.sold_ads ?? []),
+					...(ads.active_ads ?? []),
+					...(ads.blocked_ads ?? []),
+					...(ads.processing_ads ?? [])
 					].sort((a, b) => b.id - a.id).map((ad) => (
 						<AdCard
-							key={ad?.id}
-							title={ad?.title}
-							images={ad?.images}
-							active={ad?.active}
-							price={ad?.price}
+							key={ad.id}
+							title={ad.title}
+							images={ad.images}
+							active={ad.active}
+							price={ad.price}
 							views={ad.views}
-							subscribe={ad?.subscribe}
-							adId={ad?.id}
-							chats={ad?.chats}
-							paid={ad?.paid}
-							available={ad?.available}
+							subscribe={ad.subscribe}
+							adId={ad.id}
+							chats={ad.chats}
+							paid={ad.paid}
+							available={ad.available}
 						/>
 					))) : (
 						<div>

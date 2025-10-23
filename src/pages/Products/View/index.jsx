@@ -53,7 +53,7 @@ const index = () => {
         <ViewProduct />
     ) : user?.id === result?.data?.user_id ? (
         <section className='w-full px-4 py-2 lg:py-4 lg:px-8'>
-            {result?.data?.paid === 0 && user.id === result?.data.owner ? (
+            {(result?.data?.paid === 0 && user.id === result?.data.owner) ? (
                 <div className='w-[90%] lg:w-[70%] my-3 mx-auto'>
                     <Alert
                         additionalContent={
@@ -68,6 +68,29 @@ const index = () => {
                         </span>{' '}
                     </Alert>
                 </div>
+            ) : result?.data?.paid === 1 && result?.data?.available === 0 ? (
+                <div className='w-[90%] lg:w-[70%] my-3 mx-auto'>
+                    <Alert
+                        // additionalContent={<ContactAdmin />}
+                        color='info'
+                    >
+                        <h5 className='font-medium text-red-600'>
+                            Ad Post successfully:{' '}
+                        </h5>{' '}
+                        <div className=''>
+                            {' '}
+                            This Ad is been processed ATM. Processing time is less than 24 hours. If this takes more than 24 hours please reach out to Admin with the contact form with the below details.
+                            <ul className='list-disc list-inside font-bold '>
+                                <li className='text-sm'>Ad Title</li>
+                                <li className='text-sm'>Your email address</li>
+                                <li className='text-sm'>Date Posted</li>
+                            </ul>
+                            <div className="w-full font-bold my-2 bg-secondary text-white p-2">
+                                Please ensure the Ad title matches exactly what you have in your Ad. This will facilitate the response to your request.
+                            </div>
+                        </div>
+                    </Alert>
+                </div>
             ) : (
                 result?.data.active === '0' &&
                 user.id === result?.data.owner && (
@@ -77,13 +100,15 @@ const index = () => {
                             color='warning'
                             icon={HiInformationCircle}
                         >
-                            <span className='font-medium text-red-600'>
-                                Ad Blocked:{' '}
-                            </span>{' '}
-                            <span className='underline'>
-                                {' '}
-                                Change a few things up and try submitting again.
-                            </span>
+                            <div>
+                                <span className='font-medium text-red-600'>
+                                    Ad Blocked:{' '}<span className='underline'>
+                                        {' '}
+                                        Change a few things up and try submitting again.
+                                    </span>
+                                </span>{' '}
+
+                            </div>
                         </Alert>
                     </div>
                 )
@@ -224,23 +249,6 @@ const index = () => {
         </section>
     ) : (
         <section className='w-full p-2 lg:p-4'>
-            {result?.data.active === '0' && user.id === result?.data.owner && (
-                <div className='w-[90%] lg:w-[70%] my-3 mx-auto'>
-                    <Alert
-                        additionalContent={<ContactAdmin />}
-                        color='warning'
-                        icon={HiInformationCircle}
-                    >
-                        <span className='font-medium text-red-600'>
-                            Ad Blocked:{' '}
-                        </span>{' '}
-                        <span className='underline'>
-                            {' '}
-                            Change a few things up and try submitting again.
-                        </span>
-                    </Alert>
-                </div>
-            )}
             <header className='w-full'>
                 <Breadcrumb
                     items={items}
