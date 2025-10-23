@@ -242,6 +242,7 @@ const PostAd = () => {
 			platform: ad?.platform,
 			type: ad?.type,
 			format: ad?.format,
+			format_other: ad?.format_other,
 			release_year: ad?.release_year,
 			game_genre: ad?.game_genre,
 			rating: ad?.rating,
