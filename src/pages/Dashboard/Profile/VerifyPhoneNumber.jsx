@@ -181,9 +181,7 @@ const ConfirmPhoneNumber = ({ phoneDetails, sendOtp, setOpenModal }) => {
                             Verify OTP
                         </Button>
                         <Button
-                            variant={'grey'}
                             onClick={resendOtp}
-                            loading={isLoading}
                             disabled={!isExpired || isLoading}
                             className="bg-primary"
                         >
