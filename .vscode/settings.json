@@ -1,4 +1,5 @@
 {
 	"cSpell.words": ["Approutes", "Boonfu", "daisyui", "firstname", "flowbite", "Formik", "mytheme"],
-	"DockerRun.DisableDockerrc": true
+	"DockerRun.DisableDockerrc": true,
+	"postman.settings.dotenv-detection-notification-visibility": false
 }

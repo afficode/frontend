@@ -2378,7 +2378,7 @@ const CategoryForm = ({
 			otherFormat && {
 				control: 'input',
 				label: 'Other Format',
-				name: 'format',
+				name: 'format_other',
 				type: 'text',
 				placeholder: 'Enter format',
 				required: true,

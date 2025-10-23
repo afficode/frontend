@@ -2367,7 +2367,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			otherFormat && {
 				control: 'input',
 				label: 'Other Format',
-				name: 'format',
+				name: 'format_other',
 				type: 'text',
 				placeholder: 'Enter format',
 				required: true,
@@ -3848,7 +3848,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 		));
 
 	const notify = useNotify();
-	const { mutate } = useCreateAd();
+	const { mutate, isPending } = useCreateAd();
 	const navigate = useNavigate();
 
 	// payment window modal
@@ -4056,7 +4056,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 							<Button
 								onClick={() => setPaymentWindow(true)}
 								type="button"
-								loading={formik.isSubmitting}
+								loading={formik.isSubmitting || isPending}
 								variant="primary"
 								size="full"
 								// token < adToken ||
@@ -4069,7 +4069,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 							<Button
 								onClick={formik.handleSubmit}
 								type="button"
-								loading={formik.isSubmitting}
+								loading={formik.isSubmitting || isPending}
 								variant="primary"
 								size="full"
 								// token < adToken ||
