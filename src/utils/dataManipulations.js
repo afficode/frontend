@@ -103,34 +103,43 @@ export const convertKeyToName = (ad) => {
 		'sim_type',
 		'exchange_possible',
 	];
-	var overviews = [];
-	if (ad === null || undefined) {
-		return [];
-	} else {
-		keys.forEach((key) => {
-			if (key in ad) {
-				if (key.includes('_')) {
-					const name = key
-						.split('_')
-						.map((val) => val[0].toUpperCase() + val.substring(1))
-						.join(' ');
-					overviews.push({
-						name,
-						param: key,
-						value: key === 'date_available' ? format(new Date(ad[key]), 'PP') : ad[key],
-					});
-				} else {
-					// it does not contain _
-					const name = key[0].toUpperCase() + key.substring(1);
-					overviews.push({
-						name,
-						param: key,
-						value: ad[key],
-					});
-				}
-			}
-		});
-	}
+
+	if (!ad) return [];
+
+	const overviews = [];
+
+	keys.forEach((key) => {
+		if (!(key in ad)) return;
+
+		const displayName = key
+			.split('_')
+			.map((val) => val[0].toUpperCase() + val.slice(1))
+			.join(' ');
+
+		let value = ad[key];
+
+		// Handle "other" case
+		if (value === 'other') {
+			const otherKey = `${key}_other`;
+			const otherValue = ad[otherKey];
+
+			// Skip if no corresponding *_other field or it's empty
+			if (!otherValue) return;
+
+			value = otherValue;
+		}
+
+		// Skip if value is null, undefined, or empty string
+		if (value == null || value === '') return;
+
+		// Format date
+		if (key === 'date_available') {
+			value = format(new Date(value), 'PP');
+		}
+
+		overviews.push({ name: displayName, param: key, value });
+	});
+
 	return overviews;
 };
 
@@ -203,6 +212,10 @@ export const formatCardNumber = (cardNumber, spacing = 4) => {
 };
 
 export const getInitials = (name) => {
-	const initials = name.split(' ').map((word) => word[0]).join('').toUpperCase();
+	const initials = name
+		.split(' ')
+		.map((word) => word[0])
+		.join('')
+		.toUpperCase();
 	return initials;
 };
