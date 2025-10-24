@@ -20,8 +20,10 @@ import useAuth from '../../../context/UserContext';
 import { TermsAndCondition } from '../../../components/index.js';
 
 const Action = ({ isGeneral, ad }) => {
-	const { data } = useGetSchedules();
 	const { isLogin, user } = useAuth();
+	const { data } = useGetSchedules({
+		enabled: !!user,
+	});
 	const category = ad?.category.toString();
 	const { grabber_id, ad_id } = useParams();
 
@@ -153,7 +155,7 @@ const Action = ({ isGeneral, ad }) => {
 														<p>Dear Buyer,</p>
 														<p>
 															Please note that seller’s information is ONLY revealed and released to you upon the
-															recipt of your payment
+															reciept of your payment
 														</p>
 														<p>
 															Thorough inspection of the item is to be done by YOU onsite of item’s pick up, after
@@ -311,16 +313,18 @@ const Action = ({ isGeneral, ad }) => {
 							)}
 
 							{/* inspection ModalUi  */}
-							<ModalUi
-								isOpen={inspectionModalOpen}
-								setIsOpen={setInspectionModalOpen}
-								headerText={'Welcome to : Inspection scheduling'}
-								headerStye={'text-start capitalize '}
-								headerSize={'small'}
-								className={'bg-secondary max-w-[600px]'}
-							>
-								<InspectionSchedule setInspectionModalOpen={setInspectionModalOpen} ad={ad} />
-							</ModalUi>
+							{isLogin && (
+								<ModalUi
+									isOpen={inspectionModalOpen}
+									setIsOpen={setInspectionModalOpen}
+									headerText={'Welcome to : Inspection scheduling'}
+									headerStye={'text-start capitalize '}
+									headerSize={'small'}
+									className={'bg-secondary max-w-[600px]'}
+								>
+									<InspectionSchedule setInspectionModalOpen={setInspectionModalOpen} ad={ad} />
+								</ModalUi>
+							)}
 						</div>
 
 						<div className="mt-3">

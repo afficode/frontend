@@ -16,17 +16,18 @@ export const useUpdateSchedule = (schedule_id) => {
 	return useMutation(['update-schedule', schedule_id], updateSchedule);
 };
 
-export const useGetSchedules = () => {
+export const useGetSchedules = (options) => {
 	const getSchedules = () => privateAxios.get(`${backendLink}schedule`).then((res) => res?.data);
 
 	return useQuery(['get-schedules'], getSchedules, {
 		refetchInterval: false,
 		refetchOnWindowFocus: false,
 		refetchIntervalInBackground: false,
+		...options,
 	});
 };
 
-export const useGetSchedule = (ad_id) => {
+export const useGetSchedule = (ad_id, options) => {
 	const getSchedule = () =>
 		privateAxios.get(`${backendLink}schedule/${ad_id}`).then((res) => res?.data);
 
@@ -34,6 +35,7 @@ export const useGetSchedule = (ad_id) => {
 		refetchInterval: false,
 		refetchOnWindowFocus: false,
 		refetchIntervalInBackground: false,
+		...options,
 	});
 };
 

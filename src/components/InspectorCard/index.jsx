@@ -45,18 +45,16 @@ const InspectorCard = ({ data }) => {
 			};
 		}
 
-		console.log(formData);
-
-		// mutate(formData, {
-		// 	onSuccess: (data) => {
-		// 		notify(data?.message, 'success');
-		// 		queryClient.invalidateQueries('get-schedule');
-		// 		resetForm();
-		// 	},
-		// 	onError: (error) => {
-		// 		notify(error?.response.data.message, 'error');
-		// 	},
-		// });
+		mutate(formData, {
+			onSuccess: (data) => {
+				notify(data?.message, 'success');
+				queryClient.invalidateQueries('get-schedule');
+				resetForm();
+			},
+			onError: (error) => {
+				notify(error?.response.data.message, 'error');
+			},
+		});
 	};
 
 	const formik = useFormik({

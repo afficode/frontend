@@ -13,50 +13,48 @@ html *::after {
 
 body {
 	/* font-family: 'Rubik', sans-serif; */
-	font-family: 'Work Sans', sans-serif;
+	/* font-family: 'Work Sans', sans-serif; */
+	font-family: 'Inter', sans-serif;
 	color: #000;
 }
 
 /* typography  */
 h1 {
-	@apply text-5xl;
-	@apply max-sm:text-4xl;
+	@apply text-4xl;
+	font-family: 'Montserrat', sans-serif;
 }
 
 h2 {
-	@apply text-4xl font-semibold;
-	@apply max-sm:text-3xl;
+	@apply text-3xl font-semibold;
+	font-family: 'Montserrat', sans-serif;
 }
 
 h3 {
-	@apply text-3xl font-semibold;
-	@apply max-sm:text-2xl;
+	@apply text-2xl font-semibold;
+	font-family: 'Montserrat', sans-serif;
 }
 
 h4 {
-	@apply text-2xl font-semibold;
-	@apply max-sm:text-xl;
+	@apply text-xl font-semibold;
+	font-family: 'Montserrat', sans-serif;
 }
 
 h5 {
-	@apply text-xl;
-	@apply max-sm:text-lg;
+	@apply text-lg;
 }
 
 h6 {
-	@apply text-lg;
-	@apply max-sm:text-base;
+	@apply text-base;
 }
 
 p,
 li {
-	@apply text-base;
-	@apply max-sm:text-sm !important;
+	@apply text-sm !important;
 }
 
 .p-lg {
-	@apply text-lg;
-	@apply max-sm:text-base !important;
+	@apply text-base;
+	@apply max-sm:text-sm !important;
 	@apply leading-6 !important;
 	@apply -tracking-normal !important;
 }

@@ -19,10 +19,17 @@ const GrabbedProduct = () => {
 	if (grabber_id) {
 		grabberId = grabber_id.slice(2);
 	}
+	const { user } = useAuth();
 
 	const { data: result, isLoading } = fetchProduct(ad_id);
-	const { data: checkOrder, isError, error, isLoading: checking } = useCheckOrder(Number(ad_id));
-	const { user } = useAuth();
+	const {
+		data: checkOrder,
+		isError,
+		error,
+		isLoading: checking,
+	} = useCheckOrder(Number(ad_id), {
+		enabled: !!user,
+	});
 
 	if (isLoading || checking)
 		return (

@@ -33,16 +33,18 @@ const InspectionLog = () => {
 				<h3 className="uppercase">INSPECTION LOG </h3>
 
 				<div className="space-y-4">
-					{data?.schedules.map((schedule) => (
-						<InspectionCard
-							onClick={() => handleClick(schedule.id)}
-							image={schedule.ad_details.images[0].path}
-							title={schedule.ad_details.title}
-							location={schedule.ad_details.location}
-							condition={schedule.ad_details.ad_condition}
-							key={schedule.id}
-						/>
-					))}
+					{data?.schedules
+						.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+						.map((schedule) => (
+							<InspectionCard
+								onClick={() => handleClick(schedule.id)}
+								image={schedule.ad_details.images[0].path}
+								title={schedule.ad_details.title}
+								location={schedule.ad_details.location}
+								condition={schedule.ad_details.ad_condition}
+								key={schedule.id}
+							/>
+						))}
 				</div>
 			</div>
 
@@ -64,13 +66,13 @@ const InspectionCard = ({ image, location, condition, title, onClick }) => {
 	return (
 		<div
 			onClick={onClick}
-			className="flex max-sm:flex-col gap-4 p-4 bg-gray-300 max-w-full h-fit md:h-[250px] mx-auto cursor-pointer"
+			className="flex max-sm:flex-col gap-4 p-4 bg-gray-300 max-w-full h-fit md:h-[200px] mx-auto cursor-pointer"
 		>
-			<div className=" h-[210px] md:h-full md:w-[300px]">
+			<div className=" h-[150px] w-[150px] max-sm:w-full max-sm:h-[200]  md:h-full md:w-[200px]">
 				{image ? (
-					<img src={image} alt="/" className="object-cover w-full h-full rounded-xl" />
+					<img src={image} alt={title} className="object-cover w-full h-full rounded-xl" />
 				) : (
-					<img src={noimage} alt="/" className="object-cover w-full h-full rounded-xl" />
+					<img src={noimage} alt={'default'} className="object-cover w-full h-full rounded-xl" />
 				)}
 			</div>
 
@@ -91,14 +93,14 @@ const InspectionCard = ({ image, location, condition, title, onClick }) => {
 							)}
 						</div>
 
-						<div className="flex gap-4 items-center max-md:my-2 mt-auto">
+						{/* <div className="flex gap-4 items-center max-md:my-2 ">
 							<p className="flex items-center gap-2 ">
-								<img src={GrabIcon} alt="/" className="w-5" /> 21-times
+								<img src={GrabIcon} alt="grabbers" className="w-5" /> 21-times
 							</p>
 							<p className="flex items-center gap-2 ">
-								<img src={InspectionCalender} alt="/" className="w-5" /> 4
+								<img src={InspectionCalender} alt="calender" className="w-5" /> 4
 							</p>
-						</div>
+						</div> */}
 					</div>
 					{/* <div className="md:ml-auto flex flex-col gap-2">
 						<Button variant={'primary'} size={'large'} className={'rounded-2xl font-semibold'}>
