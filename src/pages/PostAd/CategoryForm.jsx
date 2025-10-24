@@ -752,14 +752,14 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			// 		{ key: 'Other', value: 'other' },
 			// 	],
 			// },
-			otherUse && {
-				control: 'input',
-				label: 'Other Property Use',
-				name: 'property_use',
-				type: 'text',
-				placeholder: 'Enter property use',
-				required: true,
-			},
+			// otherUse && {
+			// 	control: 'input',
+			// 	label: 'Other Property Use',
+			// 	name: 'property_use',
+			// 	type: 'text',
+			// 	placeholder: 'Enter property use',
+			// 	required: true,
+			// },
 			!['5105', '5106', '5108', '5109'].includes(selectedPropertyCategory) && {
 				control: 'select',
 				label: 'Rooms/Bathrooms',
@@ -781,7 +781,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			otherRoom && {
 				control: 'input',
 				label: 'Other Rooms/Bathrooms',
-				name: 'room_bathroom',
+				name: 'room_bathroom_other',
 				type: 'text',
 				placeholder: 'Enter number of rooms/bathrooms',
 				required: true,
@@ -959,7 +959,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				otherMake && {
 					control: 'input',
 					label: 'Other Make of vehicle',
-					name: 'make',
+					name: 'make_other',
 					type: 'text',
 					placeholder: 'Enter make',
 				},
@@ -1003,7 +1003,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 					{ key: 'Employed', value: 'employed' },
 					{ key: 'Unemployed', value: 'unemployed' },
 					{ key: 'Self-Employed', value: 'self-employed' },
-					{ key: 'other', value: 'other' },
+					// { key: 'other', value: 'other' },
 				],
 			},
 			['5204', '5207'].includes(selectedServicesCategory) && {
@@ -1427,7 +1427,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 					control: 'input',
 					type: 'text',
 					label: 'Other Processor',
-					name: 'processor',
+					name: 'processor_other',
 					placeholder: 'Enter other processor',
 					required: true,
 				},
@@ -1554,7 +1554,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				options: [
 					{ key: 'Business', value: 'business' },
 					{ key: 'Casual', value: 'casual' },
-					{ key: 'Sport', value: 'other' },
+					{ key: 'Sport', value: 'sport' },
 				],
 			},
 			{
@@ -1657,7 +1657,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				placeholder: 'Enter material',
 				required: true,
 			},
-			selectedFashionCategory === '5306' && {
+			selectedFashionCategory === '5506' && {
 				control: 'radio',
 				label: 'Display',
 				name: 'display',
@@ -1867,7 +1867,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			otherScent && {
 				control: 'input',
 				label: 'Other Scent type',
-				name: 'scent_type',
+				name: 'scent_type_other',
 				type: 'text',
 				placeholder: 'Enter scent type',
 				required: true,
@@ -3366,7 +3366,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 					{ key: 'Foreign Used', value: 'foreign use' },
 					{ key: 'Nigerian Used', value: 'nigerian use' },
 					{ key: 'Refurbished', value: 'refurbished' },
-					{ key: 'Other', value: 'other' },
+					{ key: 'None', value: 'none' },
 				],
 			},
 			otherCondition && {
