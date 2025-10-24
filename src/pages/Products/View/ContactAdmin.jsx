@@ -37,11 +37,11 @@ export default function ContactAdmin({ ads_id, images }) {
 			const timelineData =
 				data?.data?.remark?.length > 0
 					? data?.data?.remark?.map((el) => ({
-							date: el?.date,
-							title: el?.name,
-							body: el?.text,
-							user: el?.user_id,
-					  }))
+						date: el?.date,
+						title: el?.name,
+						body: el?.text,
+						user: el?.user_id,
+					}))
 					: [];
 			setRemark(() => timelineData);
 		};
@@ -53,7 +53,7 @@ export default function ContactAdmin({ ads_id, images }) {
 	return (
 		<>
 			<div className="mb-4 mt-2 text-red-700 dark:text-red-800">
-				<p className="w-full p-2 bg-white my-4 pt-4">
+				<p className="w-full p-2 pt-4">
 					<Timeline data={remark} />
 				</p>
 				<ul className="list-disc ml-4">

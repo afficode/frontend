@@ -1,8 +1,12 @@
-import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FaMoneyBillTrendUp } from 'react-icons/fa6';
 import { makeAdPayment, deleteAd } from '../../../hooks';
 import { useNotify } from '../../../hooks';
+import { useQueryClient } from 'react-query';
+import { Approutes } from '../../../constants';
 const MakePayment = ({ ad_id }) => {
+    const queryClient = useQueryClient();
+    const navigate = useNavigate();
     const notify = useNotify();
     const { mutate, isLoading } = makeAdPayment();
     const { mutate: adDelete, isLoading: deleteAdLoading } = deleteAd();
@@ -10,6 +14,7 @@ const MakePayment = ({ ad_id }) => {
         mutate(id, {
             onSuccess: (data) => {
                 notify(data?.message, 'success');
+                queryClient.invalidateQueries({ queryKey: ['fetch-product', ad_id] });
             },
             onError: (error) => {
                 notify('Error paying for this AD', 'error');
@@ -20,8 +25,10 @@ const MakePayment = ({ ad_id }) => {
         adDelete(id, {
             onSuccess: (data) => {
                 notify(data?.message, 'success');
+                navigate(Approutes.dashboard.initial);
+
             },
-            onError: (error) => {
+            onError: () => {
                 notify('Error deleting this AD', 'error');
             },
         });
