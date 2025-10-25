@@ -4180,3 +4180,30 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 };
 
 export default CategoryForm;
+
+/*
+	Display field
+
+``` 
+enum(
+  'analog',
+  'digital',
+  'analog and digital'
+)
+
+```
+
+time_period
+
+``` 
+enum(
+  'Period of 1 - 2 years',
+  'Period of 2 - 5 years',
+  'Period of 5 - 10 years',
+  'Period of 10 and more'
+)
+
+```
+
+
+*/
