@@ -1,4 +1,5 @@
 import { format } from 'date-fns';
+import { getUserFromLocalStorage, setUser } from './localstorage';
 export const manipulateCategory = (category) => {
 	const categories = Object.groupBy(category, ({ category_id }) => category_id);
 
@@ -143,8 +144,7 @@ export const convertKeyToName = (ad) => {
 	return overviews;
 };
 
-export const arrayRange = (start, stop, step) =>
-	Array.from({ length: (stop - start) / step + 1 }, (value, index) => start + index * step);
+export const arrayRange = (start, stop, step) => Array.from({ length: (stop - start) / step + 1 }, (value, index) => start + index * step);
 
 export const getStateLGA = (lga, state_id) => {
 	const state_lga = lga.filter((val) => val.state_id === state_id);
@@ -200,9 +200,7 @@ export const manipulatePrice = (price, category_id) => {
 export const manipulateFilterForm = (values, category_id) => {
 	// remove all the empty of null fields
 	var filteredValue = removeNullObjectsValues(values);
-	filteredValue = filteredValue?.price
-		? { ...filteredValue, price: manipulatePrice(filteredValue.price, category_id) }
-		: filteredValue;
+	filteredValue = filteredValue?.price ? { ...filteredValue, price: manipulatePrice(filteredValue.price, category_id) } : filteredValue;
 	return filteredValue;
 };
 
@@ -218,4 +216,33 @@ export const getInitials = (name) => {
 		.join('')
 		.toUpperCase();
 	return initials;
+};
+
+export const setNestedValueForUser = (path, value) => {
+	const keys = path.split('.');
+	const user = getUserFromLocalStorage();
+	let ref = user;
+
+	while (keys.length > 1) {
+		const key = keys.shift();
+		ref = ref[key] = ref[key] || {};
+	}
+
+	ref[keys[0]] = value;
+	setUser(user);
+};
+
+export const updateUserPhoneVerified = (value) => {
+	const user = getUserFromLocalStorage();
+	if (!Array.isArray(user?.phone)) {
+		return;
+	}
+
+	const index = user.phone.findIndex((num) => num.isDefault === '1');
+	if (index === -1) {
+		return;
+	}
+
+	user.phone[index].isVerified = value;
+	setUser(user);
 };

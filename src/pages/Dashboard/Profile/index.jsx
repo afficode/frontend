@@ -33,7 +33,8 @@ const Profile = () => {
 	const { mutate, isLoading: isUpdating } = userUpdate('dashboard/update_user');
 	const notify = useNotify();
 
-	const phoneDetails = user?.phone.filter((num) => num.isDefault === '1')[0]
+	const index = user?.phone.findIndex((num) => num.isDefault === '1');
+	const phoneDetails = user?.phone[index];
 
 	const initialValues = {
 		phone: phoneDetails.number || 1000000000,
@@ -59,14 +60,23 @@ const Profile = () => {
 			delete values.established;
 			delete values.name;
 
-			if (values.phone.toString().substring(0, 1) !== '0') {
+			const payload = Object.assign({}, values);
+
+			if (payload.phone.toString().substring(0, 1) !== '0') {
+				payload.phone = '0' + payload.phone.toString();
 				values.phone = '0' + values.phone.toString();
 			}
+
+			if (payload.phone === phoneDetails.number) {
+				delete payload.phone;
+			}
+
 			const formData = new FormData();
-			Object.entries(values).forEach(([key, value]) => {
+			Object.entries(payload).forEach(([key, value]) => {
 				formData.append(key, value);
 			});
-			await mutate(formData, {
+
+			mutate(formData, {
 				onSuccess: async (data) => {
 					updateUserInfo(data?.user);
 					notify(data?.message, 'success');
