@@ -12,8 +12,6 @@ html *::after {
 }
 
 body {
-	/* font-family: 'Rubik', sans-serif; */
-	/* font-family: 'Work Sans', sans-serif; */
 	font-family: 'Inter', sans-serif;
 	color: #000;
 }

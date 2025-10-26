@@ -1,14 +1,16 @@
 import { useState } from 'react';
 import { noimage } from '../../../assets/images';
-import { GrabIcon, InspectionCalender, Location } from '../../../assets/svgs';
+import { Location } from '../../../assets/svgs';
 import { Modal } from '../../../ui';
 import { InspectorCard, SpinnerSkeleton } from '../../../components';
 import { useGetSchedule, useGetSchedules } from '../../../hooks';
+import useAuth from '../../../context/UserContext';
 
 const InspectionLog = () => {
 	const [adId, setAdId] = useState(null);
 	const [inspectionModal, setInspectionModal] = useState(false);
 	const { data, isLoading } = useGetSchedules();
+	const user = useAuth();
 
 	const { data: schedule, isLoading: scheduleLoading } = useGetSchedule(adId, {
 		enabled: !!adId,
@@ -21,7 +23,7 @@ const InspectionLog = () => {
 
 	if (isLoading) {
 		return (
-			<div className="h-[100vh - 100px] flex items-center justify-center">
+			<div className="h-52 flex items-center justify-center">
 				<SpinnerSkeleton />
 			</div>
 		);
@@ -32,20 +34,27 @@ const InspectionLog = () => {
 			<div className="space-y-8 p-6 sm:px-16">
 				<h3 className="uppercase">INSPECTION LOG </h3>
 
-				<div className="space-y-4">
-					{data?.schedules
-						.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
-						.map((schedule) => (
-							<InspectionCard
-								onClick={() => handleClick(schedule.id)}
-								image={schedule.ad_details.images[0].path}
-								title={schedule.ad_details.title}
-								location={schedule.ad_details.location}
-								condition={schedule.ad_details.ad_condition}
-								key={schedule.id}
-							/>
-						))}
-				</div>
+				{data?.schedules.filter((item) => item.owner !== user.id).length > 0 ? (
+					<div className="space-y-4">
+						{data?.schedules
+							.filter((item) => item.owner !== user.id)
+							.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+							.map((schedule) => (
+								<InspectionCard
+									onClick={() => handleClick(schedule.id)}
+									image={schedule.ad_details.images[0].path}
+									title={schedule.ad_details.title}
+									location={schedule.ad_details.location}
+									condition={schedule.ad_details.ad_condition}
+									key={schedule.id}
+								/>
+							))}
+					</div>
+				) : (
+					<div className="flex items-center justify-center text-primary py-8">
+						You haven't booked an inspection yet
+					</div>
+				)}
 			</div>
 
 			<Modal
@@ -83,11 +92,11 @@ const InspectionCard = ({ image, location, condition, title, onClick }) => {
 					<div className="h-full flex flex-col items-start justify-between gap-6  md:gap-28">
 						<div className="flex flex-col gap-1">
 							<p className="flex gap-2">
-								<img src={Location} alt="/" className="w-3" />
+								<img src={Location} alt="location" className="w-3" />
 								{location}
 							</p>
 							{condition && (
-								<span className="bg-white py-1 px-2 rounded-lg max-sm:text-sm capitalize w-max">
+								<span className="bg-white p-1 rounded-lg text-sm max-sm:text-xs capitalize w-max">
 									{condition}
 								</span>
 							)}

@@ -14,8 +14,6 @@ const Inspections = ({ ad }) => {
 		enabled: !!adId,
 	});
 
-	console.log(schedule);
-
 	const handleClick = (id) => {
 		setAdId(id);
 		setInspectionModal(true);
@@ -31,7 +29,7 @@ const Inspections = ({ ad }) => {
 				padding={false}
 				className={'max-w-fit px-4'}
 			>
-				<InspectorCard data={schedule} isLoading={scheduleLoading} />
+				<InspectorCard data={schedule} ad_id={ad?.id} isLoading={scheduleLoading} />
 			</Modal>
 
 			<div className="w-full border border-black/30 overflow-x-auto">

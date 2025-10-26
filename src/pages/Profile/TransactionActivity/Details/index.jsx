@@ -13,7 +13,6 @@ const Details = ({ data }) => {
 	const notify = useNotify();
 
 	const handlePay = async () => {
-
 		try {
 			const quotedPromise = await payQuoted({ ad_id: data?.ad_id });
 			notify(`${quotedPromise?.message ?? 'Payment initiated...'}`, 'success');
@@ -22,7 +21,7 @@ const Details = ({ data }) => {
 		}
 
 		// console.log(quotedPromise);
-	}
+	};
 
 	const handleScrollTo = (ref) => {
 		if (!isOpen) {
@@ -36,12 +35,12 @@ const Details = ({ data }) => {
 	};
 
 	if (quoteLoading) {
-		return <div className='flex items-center justify-center h-40'>
-			<SpinnerSkeleton />
-		</div>
+		return (
+			<div className="flex items-center justify-center h-40">
+				<SpinnerSkeleton />
+			</div>
+		);
 	}
-
-	console.log(data);
 
 	return (
 		<div className="max-w-[720px] mx-auto space-y-4 px-4">
@@ -69,9 +68,19 @@ const Details = ({ data }) => {
 								Order tracking <img src={ArrowRightBlue} className="w-2" alt="Arrow right" />
 							</h6>
 
-							<progress className="w-full bg-[#D9D9D9] !rounded-lg" value={
-								data?.paid && data?.delivery_status === null ? 50 : data?.delivery_status === 'picked_up' ? 75 : data?.delivery_status === 'delivered' ? 100 : 25
-							} max={100}></progress>
+							<progress
+								className="w-full bg-[#D9D9D9] !rounded-lg"
+								value={
+									data?.paid && data?.delivery_status === null
+										? 50
+										: data?.delivery_status === 'picked_up'
+										? 75
+										: data?.delivery_status === 'delivered'
+										? 100
+										: 25
+								}
+								max={100}
+							></progress>
 
 							<div className="flex items-start justify-between px-4">
 								<div className="flex flex-col gap-2 items-center text-center leading-4">
@@ -110,15 +119,16 @@ const Details = ({ data }) => {
 								<p>₦{toMoney(data.price)}</p>
 							</div>
 						)}
-						{
-							data?.paid === 1 && (
-								<div className="flex items-center gap-1">
-									<button className='bg-primary hover:bg-green-400 p-2 px-4 text-white rounded-lg' onClick={() => handlePay()}>Continue to Payment</button>
-
-								</div>
-							)
-						}
-
+						{data?.paid === 1 && (
+							<div className="flex items-center gap-1">
+								<button
+									className="bg-primary hover:bg-green-400 p-2 px-4 text-white rounded-lg"
+									onClick={() => handlePay()}
+								>
+									Continue to Payment
+								</button>
+							</div>
+						)}
 					</div>
 
 					<div>

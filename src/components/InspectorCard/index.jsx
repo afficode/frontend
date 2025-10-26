@@ -6,8 +6,10 @@ import { format, parse, parseISO } from 'date-fns';
 import { useNotify, useUpdateSchedule } from '../../hooks';
 import useAuth from '../../context/UserContext';
 import { useQueryClient } from 'react-query';
+import { BiPhoneCall } from 'react-icons/bi';
+import SpinnerSkeleton from '../SpinnersUi';
 
-const InspectorCard = ({ data }) => {
+const InspectorCard = ({ data, ad_id, isLoading }) => {
 	const { mutate, isLoading: submitting } = useUpdateSchedule(data?.schedules?.id);
 
 	const latest = data?.schedules?.bookings.length - 1;
@@ -49,6 +51,7 @@ const InspectorCard = ({ data }) => {
 			onSuccess: (data) => {
 				notify(data?.message, 'success');
 				queryClient.invalidateQueries('get-schedule');
+				queryClient.invalidateQueries(['get-ads-schedule', { ad_id: ad_id }]);
 				resetForm();
 			},
 			onError: (error) => {
@@ -73,15 +76,23 @@ const InspectorCard = ({ data }) => {
 	const from = parse(formik.values.time.from, 'HH:mm', new Date());
 	const to = parse(formik.values.time.to, 'HH:mm', new Date());
 
+	if (isLoading) {
+		return (
+			<div className="h-48 w-[300px]">
+				<SpinnerSkeleton />
+			</div>
+		);
+	}
+
 	return (
-		<div className="max-w-[500px] border  p-4">
+		<div className="max-w-[400px] border  p-4">
 			<div className="flex items-center justify-between">
 				{user?.id === data?.schedules?.owner ? (
 					<h4 className="">Inspector’s schedule :</h4>
 				) : (
-					<h4 className="">Response from: {data?.schedules?.ad_details.title}</h4>
+					<h4 className="capitalize">Response from: {data?.schedules?.ad_details.title}</h4>
 				)}
-				<img src={Inspector} alt="/" className="w-12" />
+				<img src={Inspector} alt="inspector" className="w-12" />
 			</div>
 
 			<div className="space-y-2">
@@ -108,6 +119,22 @@ const InspectorCard = ({ data }) => {
 									</>
 								) : null}
 							</div>
+
+							{booking.remark === 'view_contact' && (
+								<a
+									href={`tel:${
+										user?.id === data?.schedules?.owner
+											? data?.schedules?.phone_details?.buyer_phone
+											: data?.schedules?.phone_details?.owner_phone
+									}`}
+									className="text-white text-sm hover:underline flex items-center gap-1"
+								>
+									<BiPhoneCall />
+									{user?.id === data?.schedules?.owner
+										? data?.schedules?.phone_details?.buyer_phone
+										: data?.schedules?.phone_details?.owner_phone}
+								</a>
+							)}
 
 							<div className="flex items-center gap-2">
 								<p>For:</p>
@@ -211,7 +238,7 @@ const InspectorCard = ({ data }) => {
 						</>
 					)}
 
-					{latestBooking?.user_id === user?.id ? (
+					{/* {latestBooking?.user_id === user?.id ? (
 						<Button
 							onClick={() => {
 								notify("You can't send another response, patiently wait for a reply", 'error');
@@ -222,11 +249,11 @@ const InspectorCard = ({ data }) => {
 						>
 							Send
 						</Button>
-					) : (
-						<Button variant={'primary'} type="submit" loading={submitting} className={'rounded-lg mt-4'}>
-							Send
-						</Button>
-					)}
+					) : ( */}
+					<Button variant={'primary'} type="submit" loading={submitting} className={'rounded-lg mt-4'}>
+						Send
+					</Button>
+					{/* )} */}
 				</form>
 			</div>
 		</div>

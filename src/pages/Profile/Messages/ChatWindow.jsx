@@ -7,6 +7,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useMessages } from '../../../hooks';
 import { encodeProductId, toMoney } from '../../../utils';
 import { Button } from '../../../ui';
+import { BiPhoneCall } from 'react-icons/bi';
 
 const ChatWindow = ({ chat_id, chat_data, title }) => {
 	const { user } = useAuth();
@@ -57,7 +58,7 @@ const ChatWindow = ({ chat_id, chat_data, title }) => {
 							alt={data?.title || 'product'}
 							className="w-[3rem] h-[3rem]  object-fit rounded-full "
 						/>
-						<div className=" flex flex-col w-full">
+						<div className=" flex flex-col gap-1 w-full">
 							<h6 className=" capitalize text-base leading-4 break-all break-words">
 								{data?.title ? data.title : title}
 							</h6>
@@ -67,9 +68,14 @@ const ChatWindow = ({ chat_id, chat_data, title }) => {
 				</Link>
 
 				{showContact ? (
-					<p className="text-primary pr-2 font-medium">
+					<a
+						href={`tel:${user?.id === data?.user_a ? data?.user_b_phone : data?.user_a_phone}`}
+						className="text-primary pr-2 font-medium text-sm hover:underline flex items-center gap-1"
+					>
+						<BiPhoneCall />
+
 						{user?.id === data?.user_a ? data?.user_b_phone : data?.user_a_phone}
-					</p>
+					</a>
 				) : (
 					<Button
 						onClick={() => setShowContact(true)}

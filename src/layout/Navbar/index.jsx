@@ -44,7 +44,8 @@ const Navbar = () => {
 		vehicleCat: [],
 		propertyCat: [],
 		servicesCat: [],
-		dealsCat: [],
+		agricCat: [],
+		electCat: [],
 	};
 	if (isLogin && error) {
 		const { status } = error?.response;
@@ -63,8 +64,10 @@ const Navbar = () => {
 				filteredCategories.propertyCat.push(item);
 			} else if (item.id >= 5200 && item.id < 5300) {
 				filteredCategories.servicesCat.push(item);
-			} else if (item.id >= 6500 && item.id < 6600) {
-				filteredCategories.dealsCat.push(item);
+			} else if (item.id >= 5300 && item.id < 5400) {
+				filteredCategories.agricCat.push(item);
+			} else if (item.id >= 5400 && item.id < 5500) {
+				filteredCategories.electCat.push(item);
 			}
 		});
 	}
@@ -611,30 +614,30 @@ const Navbar = () => {
 
 								<span className="border border-r-4 border-white h-[2rem]" />
 
-								<li className="">
-									<Link to={Approutes.underConstruction} tabIndex={0} className={listStyles}>
-										DEALS
-									</Link>
-									<NavLink to={Approutes.underConstruction} className={mobileListStyles}>
+								<li className="dropdown dropdown-hover ">
+									<a href={`${Approutes.product.category}/${btoa(53)}`} tabIndex={0} className={listStyles}>
+										AGRICULTURE
+									</a>
+									<a href={`${Approutes.product.category}/${btoa(53)}`} className={mobileListStyles}>
 										<FaRegHandshake size={25} />
-									</NavLink>
-									{/* {filteredCategories?.dealsCat && (
-										<CategoryDropdown category={'DEALS'} subCategories={filteredCategories?.dealsCat} />
-									)} */}
+									</a>
+									{filteredCategories?.agricCat && (
+										<CategoryDropdown category={'AGRICULTURE'} subCategories={filteredCategories?.agricCat} />
+									)}
 								</li>
 
 								<span className="border border-r-4 border-white h-[2rem]" />
 
-								<li className="mr-4">
-									<Link to={Approutes.underConstruction} tabIndex={0} className={listStyles}>
-										REQUESTS
-									</Link>
-									<NavLink to={Approutes.underConstruction} className={mobileListStyles}>
+								<li className="dropdown dropdown-hover mr-4">
+									<a href={`${Approutes.product.category}/${btoa(54)}`} tabIndex={0} className={listStyles}>
+										ELECTRONICS
+									</a>
+									<a href={`${Approutes.product.category}/${btoa(54)}`} className={mobileListStyles}>
 										<VscGitPullRequestGoToChanges size={25} />
-									</NavLink>
-									{/* {filteredCategories?.dealsCat && (
-										<CategoryDropdown category={'REQUESTS'} subCategories={filteredCategories?.dealsCat} />
-									)} */}
+									</a>
+									{filteredCategories?.electCat && (
+										<CategoryDropdown category={'ELECTRONICS'} subCategories={filteredCategories?.electCat} />
+									)}
 								</li>
 							</ul>
 						</div>
