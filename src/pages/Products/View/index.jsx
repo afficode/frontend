@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Approutes } from '../../../constants';
 import { fetchProduct } from '../../../hooks';
@@ -96,7 +96,7 @@ const index = () => {
                 user.id === result?.data.owner && (
                     <div className='w-[90%] lg:w-[70%] my-3 mx-auto'>
                         <Alert
-                            additionalContent={<ContactAdmin />}
+                            additionalContent={<ContactAdmin ads_id={decodeProductId(id)} />}
                             color='warning'
                             icon={HiInformationCircle}
                         >
