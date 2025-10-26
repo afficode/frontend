@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Approutes } from '../../../constants';
 import { fetchProduct } from '../../../hooks';
@@ -49,6 +49,7 @@ const index = () => {
 		}
 	}, [isLoading, saveLoading]);
 
+<<<<<<< HEAD
 	return isLoading ? (
 		<ViewProduct />
 	) : user?.id === result?.data?.user_id ? (
@@ -76,6 +77,72 @@ const index = () => {
 					</div>
 				)
 			)}
+=======
+    return isLoading ? (
+        <ViewProduct />
+    ) : user?.id === result?.data?.user_id ? (
+        <section className='w-full px-4 py-2 lg:py-4 lg:px-8'>
+            {(result?.data?.paid === 0 && user.id === result?.data.owner) ? (
+                <div className='w-[90%] lg:w-[70%] my-3 mx-auto'>
+                    <Alert
+                        additionalContent={
+                            <MakePayment ad_id={result?.data?.id} />
+                        }
+                        color='warning'
+                        icon={HiInformationCircle}
+                    >
+                        <span className='font-medium text-yellow-700'>
+                            Ad Not Available ATM, you need to make some
+                            payment.:{' '}
+                        </span>{' '}
+                    </Alert>
+                </div>
+            ) : result?.data?.paid === 1 && result?.data?.available === 0 ? (
+                <div className='w-[90%] lg:w-[70%] my-3 mx-auto'>
+                    <Alert
+                        // additionalContent={<ContactAdmin />}
+                        color='info'
+                    >
+                        <h5 className='font-medium text-red-600'>
+                            Ad Post successfully:{' '}
+                        </h5>{' '}
+                        <div className=''>
+                            {' '}
+                            This Ad is been processed ATM. Processing time is less than 24 hours. If this takes more than 24 hours please reach out to Admin with the contact form with the below details.
+                            <ul className='list-disc list-inside font-bold '>
+                                <li className='text-sm'>Ad Title</li>
+                                <li className='text-sm'>Your email address</li>
+                                <li className='text-sm'>Date Posted</li>
+                            </ul>
+                            <div className="w-full font-bold my-2 bg-secondary text-white p-2">
+                                Please ensure the Ad title matches exactly what you have in your Ad. This will facilitate the response to your request.
+                            </div>
+                        </div>
+                    </Alert>
+                </div>
+            ) : (
+                result?.data.active === '0' &&
+                user.id === result?.data.owner && (
+                    <div className='w-[90%] lg:w-[70%] my-3 mx-auto'>
+                        <Alert
+                            additionalContent={<ContactAdmin ads_id={decodeProductId(id)} />}
+                            color='warning'
+                            icon={HiInformationCircle}
+                        >
+                            <div>
+                                <span className='font-medium text-red-600'>
+                                    Ad Blocked:{' '}<span className='underline'>
+                                        {' '}
+                                        Change a few things up and try submitting again.
+                                    </span>
+                                </span>{' '}
+
+                            </div>
+                        </Alert>
+                    </div>
+                )
+            )}
+>>>>>>> ee7f4eaabbefb8e4cdb08f3c0837582c79eb8ee9
 
 			<section className="flex flex-col w-full gap-2 md:flex-row md:gap-8 line-clamp-1">
 				<main className="w-full flex flex-col">
@@ -152,6 +219,7 @@ const index = () => {
 				<div className="flex flex-col items-start justify-start w-full gap-2 my-2">
 					<h2 className="text-xl tracking-tighter lg:tracking-normal">Overview</h2>
 
+<<<<<<< HEAD
 					<div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 						{convertKeyToName(result?.data).map((val, index) => (
 							<OverviewPills overview={val} ad={result?.data} key={index} />
@@ -174,6 +242,29 @@ const index = () => {
 			<header className="w-full">
 				<Breadcrumb items={items} className={'text-md breadcrumbs text-primary'} />
 			</header>
+=======
+                    <div className='grid w-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
+                        {convertKeyToName(result?.data).map((val, index) => (
+                            <OverviewPills
+                                overview={val}
+                                ad={result?.data}
+                                key={index}
+                            />
+                        ))}
+                    </div>
+                </div>
+            </section>
+            <ScrollToTop />
+        </section>
+    ) : (
+        <section className='w-full p-2 lg:p-4'>
+            <header className='w-full'>
+                <Breadcrumb
+                    items={items}
+                    className={'text-md breadcrumbs text-primary'}
+                />
+            </header>
+>>>>>>> ee7f4eaabbefb8e4cdb08f3c0837582c79eb8ee9
 
 			<section className="flex flex-col  h-full w-full gap-2 md:flex-row md:items-stretch md:gap-8 line-clamp-1">
 				<main className="w-full h-full  md:w-[60%] xl:w-[70%] flex flex-col justify-between lg:py-4 border-2 border-transparent">

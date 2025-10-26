@@ -7,7 +7,7 @@ import { useQueryClient } from 'react-query';
 import { FaUnlock } from "react-icons/fa";
 
 
-const AdCard = ({ title, images, active, price, subscribe, views, adId, chats, paid }) => {
+const AdCard = ({ title, images, active, price, subscribe, views, adId, chats, paid, available }) => {
 	const navigate = useNavigate();
 	const notify = useNotify();
 	const { mutate } = useUpdateAd(adId);
@@ -24,7 +24,9 @@ const AdCard = ({ title, images, active, price, subscribe, views, adId, chats, p
 		mutate(formData, {
 			onSuccess: (data) => {
 				notify('Advert closed successfully', 'success');
-				queryClient.invalidateQueries({ queryKey: ['getUserAds'] });
+				setTimeout(() => {
+					queryClient.invalidateQueries({ queryKey: ['getUserAds'] });
+				}, 3000);
 			},
 			onError: () => {
 				notify('Error closing Ad. If this error persist, please contact Admin with the contact us form.', 'error');
@@ -36,7 +38,9 @@ const AdCard = ({ title, images, active, price, subscribe, views, adId, chats, p
 		makePaymentMutate(adId, {
 			onSuccess: (data) => {
 				notify(data?.message || 'Payment Queued. You will be notified by email when payment is done.', 'success');
-				queryClient.invalidateQueries({ queryKey: ['getUserAds'] });
+				setTimeout(() => {
+					queryClient.invalidateQueries({ queryKey: ['getUserAds'] });
+				}, 3000);
 			},
 			onError: () => {
 				notify('Error making payment. If this error persist, please contact Admin with the contact us form.', 'error');
@@ -63,9 +67,14 @@ const AdCard = ({ title, images, active, price, subscribe, views, adId, chats, p
 						Closed
 					</span>
 				)}
-				{active === '0' && (
+				{(active === '0' && available === 0) && (
+					<div className={`absolute top-4 right-4 text-white font-semibold ${paid === 0 ? 'bg-orange-500' : 'bg-secondary'} py-1 px-2 rounded-xl text-center border-4 border-white max-sm:text-sm`}>
+						{paid === 0 ? <span className='flex items-center justify-center cursor-pointer' onClick={() => makePayment()}>Payment Required &emsp; <FaUnlock /></span> : <span>Processing</span>}
+					</div>
+				)}
+				{(active === '0' && available === 1) && (
 					<div className="absolute top-4 right-4 text-white font-semibold bg-red-500 py-1 px-2 rounded-xl text-center border-4 border-white max-sm:text-sm">
-						{paid === 0 ? <span className='flex items-center justify-center cursor-pointer' onClick={() => makePayment()}>Payment Required &emsp; <FaUnlock /></span> : <span>Blocked</span>}
+						Blocked
 					</div>
 				)}
 			</div>
@@ -115,7 +124,7 @@ const AdCard = ({ title, images, active, price, subscribe, views, adId, chats, p
 							size={'small'}
 							className={'text-primary rounded-lg shadow-none hover:shadow-md'}
 							onClick={() => closeAdvert()}
-                            disabled={active === '2'}
+							disabled={active === '2'}
 						>
 							Close
 						</Button>

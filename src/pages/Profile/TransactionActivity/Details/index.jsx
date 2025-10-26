@@ -19,8 +19,6 @@ const Details = ({ data }) => {
 		} catch (error) {
 			notify(error?.response?.data?.message ?? error?.message ?? 'Something went wrong', 'error');
 		}
-
-		// console.log(quotedPromise);
 	};
 
 	const handleScrollTo = (ref) => {

@@ -23,6 +23,7 @@ import { useDebouncedCallback } from 'use-debounce';
 import { getSaves } from '../../hooks/useSaves';
 import { toSelectOptions } from '../../utils';
 import { NotificationBell } from '../../assets/svgs';
+import VerifyPhoneNumber from '../../pages/Dashboard/Profile/VerifyPhoneNumber';
 // import { AccountHistory } from '../../components';
 
 const Navbar = () => {
@@ -240,16 +241,26 @@ const Navbar = () => {
 									tabIndex={0}
 									className={`dropdown-content transform -translate-x-2/3 min-h-fit w-fit  z-[10] px-4 py-6 bg-white shadow-md rounded-md `}
 								>
-									<h4 className="font-semibold whitespace-nowrap">Post Ad in</h4>
-									<ul className="flex flex-col menu max-h-full w-full z-[10] py-4 ">
-										{filteredCategories?.allCat?.map((category) => (
-											<Link to={`${Approutes.postAd}/${category.id}`} key={category.id}>
-												<li className="text-lg capitalize max-sm:text-base lg:pr-12 hover:underline whitespace-nowrap">
-													{category.name}
-												</li>
-											</Link>
-										))}
-									</ul>
+
+									{!user?.phone[0]?.isVerified
+										? <div className="flex flex-col gap-4 justify-center items-center">
+											<p className="w-[18rem] text-justify">Please verify your phone number before you can post an AD.</p>
+											<VerifyPhoneNumber phoneDetails={user?.phone[0]} />
+										</div>
+										: <>
+											<h4 className="font-semibold whitespace-nowrap">Post Ad in</h4>
+											<ul className="flex flex-col menu max-h-full w-full z-[10] py-4 ">
+												{filteredCategories?.allCat?.map((category) => (
+													<Link to={`${Approutes.postAd}/${category.id}`} key={category.id}>
+														<li className="text-lg capitalize max-sm:text-base lg:pr-12 hover:underline whitespace-nowrap">
+															{category.name}
+														</li>
+													</Link>
+												))}
+											</ul>
+										</>
+
+									}
 								</ul>
 							</div>
 							{!isLogin ? (
