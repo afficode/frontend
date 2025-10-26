@@ -20,8 +20,6 @@ const Details = ({ data }) => {
 		} catch (error) {
 			notify(error?.response?.data?.message ?? error?.message ?? 'Something went wrong', 'error');
 		}
-
-		// console.log(quotedPromise);
 	}
 
 	const handleScrollTo = (ref) => {
@@ -40,8 +38,6 @@ const Details = ({ data }) => {
 			<SpinnerSkeleton />
 		</div>
 	}
-
-	console.log(data);
 
 	return (
 		<div className="max-w-[720px] mx-auto space-y-4 px-4">

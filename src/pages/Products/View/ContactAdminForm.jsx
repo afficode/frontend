@@ -1,11 +1,9 @@
-import React from "react";
 import { Formik } from "formik";
 import TextArea from "../../../components/FormComponents/TextArea";
 import { postRemark, useNotify } from "../../../hooks";
-import { data, info } from "autoprefixer";
 import { useQueryClient } from "react-query";
 
-export const ContactAdminForm = ({ ads_id }) => {
+export const ContactAdminForm = ({ ads_id, setIsOpen }) => {
   const notify = useNotify();
   const queryClient = useQueryClient();
   const initialValue = { text: "" };
@@ -14,12 +12,13 @@ export const ContactAdminForm = ({ ads_id }) => {
     mutation.mutate(
       { ...values, ads_id },
       {
-        onSuccess: (data) => {
-          notify(`Admin is now notify. We strive to serve you better.`, info);
+        onSuccess: () => {
+          setIsOpen(false);
+          notify(`Admin is now notify. We strive to serve you better.`, 'success');
+          queryClient.invalidateQueries(["remarks", ads_id]);
         },
-        onError: (error) => {
-          notify("Error contacting Admin. Try again", error);
-          queryClient.invalidateQueries(["remark", ads_id]);
+        onError: () => {
+          notify("Error contacting Admin. Try again", 'error');
         },
       }
     );
