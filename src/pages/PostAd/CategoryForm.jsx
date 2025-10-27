@@ -554,7 +554,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			otherColor && {
 				control: 'input',
 				label: 'Other Colour',
-				name: 'color',
+				name: 'color_other',
 				type: 'text',
 				placeholder: 'Enter colour',
 			},
@@ -1123,7 +1123,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			otherType && {
 				control: 'input',
 				label: 'Other Type',
-				name: 'type',
+				name: 'type_other',
 				type: 'text',
 				placeholder: 'Enter type',
 				required: true,
@@ -1163,13 +1163,13 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			['5301'].includes(selectedAgricultureCategory) && {
 				control: 'select',
 				label: 'Colour',
-				name: 'color',
+				name: 'color_other',
 				options: colorOptions,
 			},
 			otherColor && {
 				control: 'input',
 				label: 'Other Colour',
-				name: 'color',
+				name: 'color_other',
 				type: 'text',
 				placeholder: 'Enter colour',
 			},
@@ -1278,7 +1278,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			otherBand && {
 				control: 'input',
 				label: 'Other Brand',
-				name: 'brand',
+				name: 'brand_other',
 				type: 'text',
 				placeholder: 'Enter brand',
 				required: true,
@@ -1450,7 +1450,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			{
 				control: 'select',
 				label: 'Colour',
-				name: 'color',
+				name: 'color_other',
 				type: 'text',
 				placeholder: 'Type color here',
 				options: colorOptions,
@@ -1458,7 +1458,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			otherColor && {
 				control: 'input',
 				label: 'Other Colour',
-				name: 'color',
+				name: 'color_other',
 				type: 'text',
 				placeholder: 'Enter colour',
 			},
@@ -1586,7 +1586,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			{
 				control: 'select',
 				label: 'Colour',
-				name: 'color',
+				name: 'color_other',
 				type: 'text',
 				placeholder: 'Type color here',
 				options: colorOptions,
@@ -1594,7 +1594,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			otherColor && {
 				control: 'input',
 				label: 'Other Colour',
-				name: 'color',
+				name: 'color_other',
 				type: 'text',
 				placeholder: 'Enter colour',
 			},
@@ -1621,7 +1621,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			otherType && {
 				control: 'input',
 				label: 'Other Type',
-				name: 'type',
+				name: 'type_other',
 				type: 'text',
 				placeholder: 'Enter type',
 				required: true,
@@ -1637,7 +1637,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			otherBand && {
 				control: 'input',
 				label: 'Other Brand',
-				name: 'brand',
+				name: 'brand_other',
 				type: 'text',
 				placeholder: 'Enter brand',
 				required: true,
@@ -1763,7 +1763,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			otherBand && {
 				control: 'input',
 				label: 'Other Brand',
-				name: 'brand',
+				name: 'brand_other',
 				type: 'text',
 				placeholder: 'Enter brand',
 				required: true,
@@ -1779,7 +1779,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			otherType && {
 				control: 'input',
 				label: 'Other Type',
-				name: 'type',
+				name: 'type_other',
 				type: 'text',
 				placeholder: 'Enter type',
 				required: true,
@@ -1812,7 +1812,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			['5601', '5605'].includes(selectedHealthCategory) && {
 				control: 'select',
 				label: 'Colour',
-				name: 'color',
+				name: 'color_other',
 				type: 'text',
 				placeholder: 'Type color here',
 				options: colorOptions,
@@ -1820,7 +1820,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			otherColor && {
 				control: 'input',
 				label: 'Other Colour',
-				name: 'color',
+				name: 'color_other',
 				type: 'text',
 				placeholder: 'Enter colour',
 			},
@@ -1843,7 +1843,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			otherFormulation && {
 				control: 'input',
 				label: 'Other Formulation',
-				name: 'formulation',
+				name: 'formulation_other',
 				type: 'text',
 				placeholder: 'Enter formulation',
 				required: true,
@@ -1965,7 +1965,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			otherBand && {
 				control: 'input',
 				label: 'Other Brand',
-				name: 'brand',
+				name: 'brand_other',
 				type: 'text',
 				placeholder: 'Enter brand',
 				required: true,
@@ -1979,7 +1979,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			otherType && {
 				control: 'input',
 				label: 'Other Type',
-				name: 'type',
+				name: 'type_other',
 				type: 'text',
 				placeholder: 'Enter type',
 				required: true,
@@ -1993,7 +1993,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			otherMaterial && {
 				control: 'input',
 				label: 'Other Material',
-				name: 'material',
+				name: 'material_other',
 				type: 'text',
 				placeholder: 'Enter material',
 				required: true,
@@ -2007,7 +2007,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			otherFurnitureFor && {
 				control: 'input',
 				label: 'Other Furniture for',
-				name: 'furniture_for',
+				name: 'furniture_for_other',
 				type: 'text',
 				placeholder: 'Enter furniture for',
 				required: true,
@@ -2021,7 +2021,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			otherFormulation && {
 				control: 'input',
 				label: 'Other Form',
-				name: 'formulation',
+				name: 'formulation_other',
 				type: 'text',
 				placeholder: 'Enter form',
 				required: true,
@@ -2040,7 +2040,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			['5701', '5702'].includes(selectedHomeCategory) && {
 				control: 'select',
 				label: 'Colour',
-				name: 'color',
+				name: 'color_other',
 				type: 'text',
 				placeholder: 'Type color here',
 				options: colorOptions,
@@ -2048,7 +2048,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			otherColor && {
 				control: 'input',
 				label: 'Other Colour',
-				name: 'color',
+				name: 'color_other',
 				type: 'text',
 				placeholder: 'Enter colour',
 			},
@@ -2152,7 +2152,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			otherType && {
 				control: 'input',
 				label: 'Other Type',
-				name: 'type',
+				name: 'type_other',
 				type: 'text',
 				placeholder: 'Enter type',
 				required: true,
@@ -2514,7 +2514,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			otherBreed && {
 				control: 'input',
 				label: 'Other Breed',
-				name: 'breed',
+				name: 'breed_other',
 				type: 'text',
 				placeholder: 'Enter breed',
 				required: true,
@@ -2546,7 +2546,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			!['6002', '6004', '6005'].includes(selectedPetCategory) && {
 				control: 'select',
 				label: 'Colour',
-				name: 'color',
+				name: 'color_other',
 				type: 'text',
 				placeholder: 'Type color here',
 				options: colorOptions,
@@ -2554,7 +2554,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			otherColor && {
 				control: 'input',
 				label: 'Other Colour',
-				name: 'color',
+				name: 'color_other',
 				type: 'text',
 				placeholder: 'Enter colour',
 			},
@@ -2692,7 +2692,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			otherBand && {
 				control: 'input',
 				label: 'Other Brand',
-				name: 'brand',
+				name: 'brand_other',
 				type: 'text',
 				placeholder: 'Enter brand',
 				required: true,
@@ -2706,7 +2706,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			otherType && {
 				control: 'input',
 				label: 'Other Type',
-				name: 'type',
+				name: 'type_other',
 				type: 'text',
 				placeholder: 'Enter type',
 				required: true,
@@ -2724,7 +2724,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			!['6101', '6111'].includes(selectedBabiesCategory) && {
 				control: 'select',
 				label: 'Colour',
-				name: 'color',
+				name: 'color_other',
 				type: 'text',
 				placeholder: 'Type color here',
 				options: colorOptions,
@@ -2732,7 +2732,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			otherColor && {
 				control: 'input',
 				label: 'Other Colour',
-				name: 'color',
+				name: 'color_other',
 				type: 'text',
 				placeholder: 'Enter colour',
 			},
@@ -2891,7 +2891,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			otherBand && {
 				control: 'input',
 				label: 'Other Brand',
-				name: 'brand',
+				name: 'brand_other',
 				type: 'text',
 				placeholder: 'Enter brand',
 				required: true,
@@ -2907,7 +2907,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			otherType && {
 				control: 'input',
 				label: 'Other Type',
-				name: 'type',
+				name: 'type_other',
 				type: 'text',
 				placeholder: 'Enter type',
 				required: true,
@@ -2915,7 +2915,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			!['6205', '6204', '6201', '6202', '6203'].includes(selectedSportsCategory) && {
 				control: 'select',
 				label: 'Colour',
-				name: 'color',
+				name: 'color_other',
 				type: 'text',
 				placeholder: 'Type color here',
 				options: colorOptions,
@@ -2923,7 +2923,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			otherColor && {
 				control: 'input',
 				label: 'Other Colour',
-				name: 'color',
+				name: 'color_other',
 				type: 'text',
 				placeholder: 'Enter colour',
 			},
@@ -3112,7 +3112,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			{
 				control: 'select',
 				label: 'Colour',
-				name: 'color',
+				name: 'color_other',
 				type: 'text',
 				placeholder: 'Type color here',
 				options: colorOptions,
@@ -3120,7 +3120,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			otherColor && {
 				control: 'input',
 				label: 'Other Colour',
-				name: 'color',
+				name: 'color_other',
 				type: 'text',
 				placeholder: 'Enter colour',
 			},
@@ -3244,7 +3244,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			{
 				control: 'select',
 				label: 'Colour',
-				name: 'color',
+				name: 'color_other',
 				type: 'text',
 				placeholder: 'Type color here',
 				options: colorOptions,
@@ -3252,7 +3252,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			otherColor && {
 				control: 'input',
 				label: 'Other Colour',
-				name: 'color',
+				name: 'color_other',
 				type: 'text',
 				placeholder: 'Enter colour',
 			},
@@ -4180,30 +4180,3 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 };
 
 export default CategoryForm;
-
-/*
-	Display field
-
-``` 
-enum(
-  'analog',
-  'digital',
-  'analog and digital'
-)
-
-```
-
-time_period
-
-``` 
-enum(
-  'Period of 1 - 2 years',
-  'Period of 2 - 5 years',
-  'Period of 5 - 10 years',
-  'Period of 10 and more'
-)
-
-```
-
-
-*/

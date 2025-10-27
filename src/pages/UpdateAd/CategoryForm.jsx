@@ -558,7 +558,7 @@ const CategoryForm = ({
 			otherColor && {
 				control: 'input',
 				label: 'Other Colour',
-				name: 'color',
+				name: 'color_other',
 				type: 'text',
 				placeholder: 'Enter colour',
 			},
@@ -1127,7 +1127,7 @@ const CategoryForm = ({
 			otherType && {
 				control: 'input',
 				label: 'Other Type',
-				name: 'type',
+				name: 'type_other',
 				type: 'text',
 				placeholder: 'Enter type',
 				required: true,
@@ -1173,7 +1173,7 @@ const CategoryForm = ({
 			otherColor && {
 				control: 'input',
 				label: 'Other Colour',
-				name: 'color',
+				name: 'color_other',
 				type: 'text',
 				placeholder: 'Enter colour',
 			},
@@ -1282,7 +1282,7 @@ const CategoryForm = ({
 			otherBand && {
 				control: 'input',
 				label: 'Other Brand',
-				name: 'brand',
+				name: 'brand_other',
 				type: 'text',
 				placeholder: 'Enter brand',
 				required: true,
@@ -1462,7 +1462,7 @@ const CategoryForm = ({
 			otherColor && {
 				control: 'input',
 				label: 'Other Colour',
-				name: 'color',
+				name: 'color_other',
 				type: 'text',
 				placeholder: 'Enter colour',
 			},
@@ -1598,7 +1598,7 @@ const CategoryForm = ({
 			otherColor && {
 				control: 'input',
 				label: 'Other Colour',
-				name: 'color',
+				name: 'color_other',
 				type: 'text',
 				placeholder: 'Enter colour',
 			},
@@ -1625,7 +1625,7 @@ const CategoryForm = ({
 			otherType && {
 				control: 'input',
 				label: 'Other Type',
-				name: 'type',
+				name: 'type_other',
 				type: 'text',
 				placeholder: 'Enter type',
 				required: true,
@@ -1641,7 +1641,7 @@ const CategoryForm = ({
 			otherBand && {
 				control: 'input',
 				label: 'Other Brand',
-				name: 'brand',
+				name: 'brand_other',
 				type: 'text',
 				placeholder: 'Enter brand',
 				required: true,
@@ -1656,7 +1656,7 @@ const CategoryForm = ({
 			otherMaterial && {
 				control: 'input',
 				label: 'Other Material',
-				name: 'material',
+				name: 'material_other',
 				type: 'text',
 				placeholder: 'Enter material',
 				required: true,
@@ -1767,7 +1767,7 @@ const CategoryForm = ({
 			otherBand && {
 				control: 'input',
 				label: 'Other Brand',
-				name: 'brand',
+				name: 'brand_other',
 				type: 'text',
 				placeholder: 'Enter brand',
 				required: true,
@@ -1783,7 +1783,7 @@ const CategoryForm = ({
 			otherType && {
 				control: 'input',
 				label: 'Other Type',
-				name: 'type',
+				name: 'type_other',
 				type: 'text',
 				placeholder: 'Enter type',
 				required: true,
@@ -1824,7 +1824,7 @@ const CategoryForm = ({
 			otherColor && {
 				control: 'input',
 				label: 'Other Colour',
-				name: 'color',
+				name: 'color_other',
 				type: 'text',
 				placeholder: 'Enter colour',
 			},
@@ -1969,7 +1969,7 @@ const CategoryForm = ({
 			otherBand && {
 				control: 'input',
 				label: 'Other Brand',
-				name: 'brand',
+				name: 'brand_other',
 				type: 'text',
 				placeholder: 'Enter brand',
 				required: true,
@@ -1983,7 +1983,7 @@ const CategoryForm = ({
 			otherType && {
 				control: 'input',
 				label: 'Other Type',
-				name: 'type',
+				name: 'type_other',
 				type: 'text',
 				placeholder: 'Enter type',
 				required: true,
@@ -1997,7 +1997,7 @@ const CategoryForm = ({
 			otherMaterial && {
 				control: 'input',
 				label: 'Other Material',
-				name: 'material',
+				name: 'material_other',
 				type: 'text',
 				placeholder: 'Enter material',
 				required: true,
@@ -2011,7 +2011,7 @@ const CategoryForm = ({
 			otherFurnitureFor && {
 				control: 'input',
 				label: 'Other Furniture for',
-				name: 'furniture_for',
+				name: 'furniture_for_other',
 				type: 'text',
 				placeholder: 'Enter furniture for',
 				required: true,
@@ -2025,7 +2025,7 @@ const CategoryForm = ({
 			otherFormulation && {
 				control: 'input',
 				label: 'Other Form',
-				name: 'formulation',
+				name: 'formulation_other',
 				type: 'text',
 				placeholder: 'Enter form',
 				required: true,
@@ -2052,7 +2052,7 @@ const CategoryForm = ({
 			otherColor && {
 				control: 'input',
 				label: 'Other Colour',
-				name: 'color',
+				name: 'color_other',
 				type: 'text',
 				placeholder: 'Enter colour',
 			},
@@ -2156,7 +2156,7 @@ const CategoryForm = ({
 			otherType && {
 				control: 'input',
 				label: 'Other Type',
-				name: 'type',
+				name: 'type_other',
 				type: 'text',
 				placeholder: 'Enter type',
 				required: true,
@@ -2558,7 +2558,7 @@ const CategoryForm = ({
 			otherColor && {
 				control: 'input',
 				label: 'Other Colour',
-				name: 'color',
+				name: 'color_other',
 				type: 'text',
 				placeholder: 'Enter colour',
 			},
@@ -2696,7 +2696,7 @@ const CategoryForm = ({
 			otherBand && {
 				control: 'input',
 				label: 'Other Brand',
-				name: 'brand',
+				name: 'brand_other',
 				type: 'text',
 				placeholder: 'Enter brand',
 				required: true,
@@ -2710,7 +2710,7 @@ const CategoryForm = ({
 			otherType && {
 				control: 'input',
 				label: 'Other Type',
-				name: 'type',
+				name: 'type_other',
 				type: 'text',
 				placeholder: 'Enter type',
 				required: true,
@@ -2736,7 +2736,7 @@ const CategoryForm = ({
 			otherColor && {
 				control: 'input',
 				label: 'Other Colour',
-				name: 'color',
+				name: 'color_other',
 				type: 'text',
 				placeholder: 'Enter colour',
 			},
@@ -2895,7 +2895,7 @@ const CategoryForm = ({
 			otherBand && {
 				control: 'input',
 				label: 'Other Brand',
-				name: 'brand',
+				name: 'brand_other',
 				type: 'text',
 				placeholder: 'Enter brand',
 				required: true,
@@ -2911,7 +2911,7 @@ const CategoryForm = ({
 			otherType && {
 				control: 'input',
 				label: 'Other Type',
-				name: 'type',
+				name: 'type_other',
 				type: 'text',
 				placeholder: 'Enter type',
 				required: true,
@@ -2927,7 +2927,7 @@ const CategoryForm = ({
 			otherColor && {
 				control: 'input',
 				label: 'Other Colour',
-				name: 'color',
+				name: 'color_other',
 				type: 'text',
 				placeholder: 'Enter colour',
 			},
@@ -3124,7 +3124,7 @@ const CategoryForm = ({
 			otherColor && {
 				control: 'input',
 				label: 'Other Colour',
-				name: 'color',
+				name: 'color_other',
 				type: 'text',
 				placeholder: 'Enter colour',
 			},
@@ -3256,7 +3256,7 @@ const CategoryForm = ({
 			otherColor && {
 				control: 'input',
 				label: 'Other Colour',
-				name: 'color',
+				name: 'color_other',
 				type: 'text',
 				placeholder: 'Enter colour',
 			},
