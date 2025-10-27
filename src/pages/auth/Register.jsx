@@ -17,7 +17,7 @@ const Register = ({ id }) => {
 
 	const navigate = useNavigate();
 	const inputClass =
-		'input input-bordered border-black w-full bg-gray-100 text-black text-lg lg:text-xl rounded-none my-2 input-md lg:input-lg';
+		'input input-bordered border-black w-full bg-gray-100 text-black text-sm lg:text-base rounded-none my-2 input-md lg:input-lg';
 	const initialValues = {
 		firstname: '',
 		lastname: '',
@@ -25,7 +25,7 @@ const Register = ({ id }) => {
 		location: '',
 		password: '',
 		confirmPassword: '',
-		phone: ''
+		phone: '',
 	};
 
 	const validationSchema = Yup.object({
@@ -178,9 +178,16 @@ const Register = ({ id }) => {
 										/>
 									</div>
 									<div className="form-control">
-										<select name="location" id="location" className={`${inputClass}`} {...formik.getFieldProps('location')}>
+										<select
+											name="location"
+											id={`${id}-register-location`}
+											className={`${inputClass}`}
+											{...formik.getFieldProps('location')}
+										>
 											{statesOptions.map((state, index) => (
-												<option key={state.value} value={state.value} >{state.key}</option>
+												<option key={state.value} value={state.value}>
+													{state.key}
+												</option>
 											))}
 										</select>
 									</div>
@@ -200,10 +207,11 @@ const Register = ({ id }) => {
 											type="submit"
 											tabIndex="-1"
 											aria-disabled="true"
-											className={`text-white text-normal lg:text-lg border-0 bg-primary btn-md lg:btn-lg hover:bg-primary/80 ${!formik.isValid || !formik.dirty || formik.isSubmitting
-												? 'cursor-not-allowed'
-												: 'cursor-pointer'
-												}`}
+											className={`text-white text-normal lg:text-lg border-0 bg-primary btn-md lg:btn-lg hover:bg-primary/80 ${
+												!formik.isValid || !formik.dirty || formik.isSubmitting
+													? 'cursor-not-allowed'
+													: 'cursor-pointer'
+											}`}
 											disabled={!formik.isValid || !formik.dirty ? 'disabled' : ''}
 										>
 											{formik.isSubmitting ? (
@@ -211,7 +219,7 @@ const Register = ({ id }) => {
 													<Spinner color={'secondary'} /> Submitting Data{' '}
 												</>
 											) : (
-												<span className="text-lg w-full flex lg:text-2xl">
+												<span className="text-lg w-full flex text-base lg:text-lg">
 													Register &nbsp; <MdAppRegistration className="text-lg my-auto lg:text-2xl" />
 												</span>
 											)}
