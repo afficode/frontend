@@ -3,6 +3,7 @@ import { TbPhoneCheck } from "react-icons/tb";
 import { useNotify, useVerifyPhoneNumber } from "../../../hooks";
 import { Button, Modal } from "flowbite-react";
 import { BsAlarmFill } from "react-icons/bs";
+import { updateUserPhoneVerified } from "../../../utils";
 
 // call back end api and verify otp is sent then activate modal
 const VerifyPhoneNumber = ({ phoneDetails }) => {
@@ -130,6 +131,7 @@ const ConfirmPhoneNumber = ({ phoneDetails, sendOtp, setOpenModal }) => {
 
         mutate(data, {
             onSuccess: (data) => {
+                updateUserPhoneVerified(1);
                 notify(data?.message, 'success');
                 setOpenModal(false);
             },
