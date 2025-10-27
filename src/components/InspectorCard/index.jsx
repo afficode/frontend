@@ -88,9 +88,11 @@ const InspectorCard = ({ data, ad_id, isLoading }) => {
 		<div className="max-w-[400px] border  p-4">
 			<div className="flex items-center justify-between">
 				{user?.id === data?.schedules?.owner ? (
-					<h4 className="">Inspector’s schedule :</h4>
+					<h5 className="font-semibold">Inspector’s schedule :</h5>
 				) : (
-					<h4 className="capitalize">Response from: {data?.schedules?.ad_details.title}</h4>
+					<h5 className="capitalize font-semibold">
+						Response from: {data?.schedules?.ad_details.title}
+					</h5>
 				)}
 				<img src={Inspector} alt="inspector" className="w-12" />
 			</div>
@@ -98,7 +100,12 @@ const InspectorCard = ({ data, ad_id, isLoading }) => {
 			<div className="space-y-2">
 				{data?.schedules?.bookings.map((booking) => {
 					return (
-						<div key={booking.id} className="bg-secondary px-2 py-4 sm:p-4 rounded-lg italic	sm:mr-6">
+						<div
+							key={booking.id}
+							className={`${
+								booking?.user_id === data?.schedules?.owner ? 'bg-primary/80' : 'bg-secondary'
+							} px-2 py-4 sm:p-4 rounded-lg italic sm:mr-6`}
+						>
 							<div className="flex items-center gap-2">
 								{booking?.remark === 'reschedule' ? (
 									<p>Rescheduled Date & Time.</p>
@@ -173,11 +180,11 @@ const InspectorCard = ({ data, ad_id, isLoading }) => {
 
 			<div className=" border-t border-black/40 py-4 mt-4">
 				{user?.id === data?.schedules?.owner ? (
-					<h4 className="capitalize">
+					<h5 className="capitalize font-semibold">
 						{data?.schedules?.ad_details.title} <span className="lowercase">reply</span>:
-					</h4>
+					</h5>
 				) : (
-					<h4>Inspector's reply:</h4>
+					<h5 className="font-semibold">Inspector's reply:</h5>
 				)}
 
 				<form onSubmit={formik.handleSubmit}>

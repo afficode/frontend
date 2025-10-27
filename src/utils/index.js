@@ -8,3 +8,4 @@ export { default as ScrollToTop } from './scrollToTop';
 export { default as toMoney } from './toMoney';
 export { default as priceToToken } from './priceToToken';
 export { default as formatAdId } from './formatAdId';
+export { default as getRemarkMessage } from './getRemarkMessage';

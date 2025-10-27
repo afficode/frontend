@@ -3,6 +3,7 @@ import { useGetAdsSchedule, useGetSchedule } from '../../../hooks';
 import { format, parse, parseISO } from 'date-fns';
 import { useState } from 'react';
 import InspectorCard from '../../InspectorCard';
+import { getRemarkMessage } from '../../../utils';
 
 const Inspections = ({ ad }) => {
 	const { data: schedulesResult } = useGetAdsSchedule(ad?.id);
@@ -50,27 +51,6 @@ const Inspections = ({ ad }) => {
 							{schedulesResult?.schedules.map((schedule, i) => {
 								const latest = schedule?.bookings.length - 1;
 								const latestBooking = schedule?.bookings[latest];
-
-								const getRemarkMessage = (remark) => {
-									switch (remark) {
-										case 'reschedule':
-											return 'Reschedule';
-										case 'confirmed':
-											return 'Confirmed Date & Time.';
-										case 'not_interested':
-											return 'Not interested in the inspection.';
-										case 'withdrawn':
-											return 'Withdrawn from the site.';
-										case 'not_available':
-											return 'Item no longer available.';
-										case 'view_contact':
-											return 'You can view the contact now.';
-										case 'ok':
-											return 'Ok';
-										default:
-											return '';
-									}
-								};
 								return (
 									<tr key={i}>
 										<td>{format(parseISO(latestBooking.date), 'EEEE d, MMMM yyyy')}</td>
