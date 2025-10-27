@@ -15,7 +15,7 @@ const Home = () => {
 			<RowContainer
 				title={'Featured Products'}
 				link={Approutes.product.initial}
-				data={data?.ads.slice(0, 12)}
+				data={data?.ads?.slice(0, 12)}
 			/>
 		</>
 	);

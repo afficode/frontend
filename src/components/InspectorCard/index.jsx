@@ -6,8 +6,10 @@ import { format, parse, parseISO } from 'date-fns';
 import { useNotify, useUpdateSchedule } from '../../hooks';
 import useAuth from '../../context/UserContext';
 import { useQueryClient } from 'react-query';
+import { BiPhoneCall } from 'react-icons/bi';
+import SpinnerSkeleton from '../SpinnersUi';
 
-const InspectorCard = ({ data }) => {
+const InspectorCard = ({ data, ad_id, isLoading }) => {
 	const { mutate, isLoading: submitting } = useUpdateSchedule(data?.schedules?.id);
 
 	const latest = data?.schedules?.bookings.length - 1;
@@ -49,6 +51,7 @@ const InspectorCard = ({ data }) => {
 			onSuccess: (data) => {
 				notify(data?.message, 'success');
 				queryClient.invalidateQueries('get-schedule');
+				queryClient.invalidateQueries(['get-ads-schedule', { ad_id: ad_id }]);
 				resetForm();
 			},
 			onError: (error) => {
@@ -73,21 +76,44 @@ const InspectorCard = ({ data }) => {
 	const from = parse(formik.values.time.from, 'HH:mm', new Date());
 	const to = parse(formik.values.time.to, 'HH:mm', new Date());
 
+	if (isLoading) {
+		return (
+			<div className="h-48 w-[300px]">
+				<SpinnerSkeleton />
+			</div>
+		);
+	}
+
 	return (
-		<div className="max-w-[500px] border  p-4">
+		<div className="max-w-[400px] border  p-4">
 			<div className="flex items-center justify-between">
 				{user?.id === data?.schedules?.owner ? (
-					<h4 className="">Inspector’s schedule :</h4>
+					<h5 className="font-semibold">Inspector’s schedule :</h5>
 				) : (
-					<h4 className="">Response from: {data?.schedules?.ad_details.title}</h4>
+					<h5 className="capitalize font-semibold">
+						Response from: {data?.schedules?.ad_details.title}
+					</h5>
 				)}
-				<img src={Inspector} alt="/" className="w-12" />
+				<img src={Inspector} alt="inspector" className="w-12" />
 			</div>
 
 			<div className="space-y-2">
 				{data?.schedules?.bookings.map((booking) => {
 					return (
-						<div key={booking.id} className="bg-secondary px-2 py-4 sm:p-4 rounded-lg italic	sm:mr-6">
+						<div
+							key={booking.id}
+							className={`${
+								booking?.user_id === data?.schedules?.owner ? 'bg-primary/80' : 'bg-secondary'
+							} px-2 pb-4 pt-6  rounded-lg italic sm:mr-6 relative`}
+						>
+							<div className="absolute top-1 right-1 bg-white rounded-lg px-1  py-[0.15rem] leading-3 text-[10px]">
+								{booking.user_id === user.id
+									? 'You'
+									: booking?.user_id === data?.schedules?.owner
+									? 'Ad owner'
+									: 'Inspector'}
+							</div>
+
 							<div className="flex items-center gap-2">
 								{booking?.remark === 'reschedule' ? (
 									<p>Rescheduled Date & Time.</p>
@@ -108,6 +134,22 @@ const InspectorCard = ({ data }) => {
 									</>
 								) : null}
 							</div>
+
+							{booking.remark === 'view_contact' && (
+								<a
+									href={`tel:${
+										user?.id === data?.schedules?.owner
+											? data?.schedules?.phone_details?.buyer_phone
+											: data?.schedules?.phone_details?.owner_phone
+									}`}
+									className="text-white text-sm hover:underline flex items-center gap-1"
+								>
+									<BiPhoneCall />
+									{user?.id === data?.schedules?.owner
+										? data?.schedules?.phone_details?.buyer_phone
+										: data?.schedules?.phone_details?.owner_phone}
+								</a>
+							)}
 
 							<div className="flex items-center gap-2">
 								<p>For:</p>
@@ -146,11 +188,11 @@ const InspectorCard = ({ data }) => {
 
 			<div className=" border-t border-black/40 py-4 mt-4">
 				{user?.id === data?.schedules?.owner ? (
-					<h4 className="capitalize">
+					<h5 className="capitalize font-semibold">
 						{data?.schedules?.ad_details.title} <span className="lowercase">reply</span>:
-					</h4>
+					</h5>
 				) : (
-					<h4>Inspector's reply:</h4>
+					<h5 className="font-semibold">Inspector's reply:</h5>
 				)}
 
 				<form onSubmit={formik.handleSubmit}>
@@ -211,7 +253,7 @@ const InspectorCard = ({ data }) => {
 						</>
 					)}
 
-					{latestBooking?.user_id === user?.id ? (
+					{/* {latestBooking?.user_id === user?.id ? (
 						<Button
 							onClick={() => {
 								notify("You can't send another response, patiently wait for a reply", 'error');
@@ -222,11 +264,11 @@ const InspectorCard = ({ data }) => {
 						>
 							Send
 						</Button>
-					) : (
-						<Button variant={'primary'} type="submit" loading={submitting} className={'rounded-lg mt-4'}>
-							Send
-						</Button>
-					)}
+					) : ( */}
+					<Button variant={'primary'} type="submit" loading={submitting} className={'rounded-lg mt-4'}>
+						Send
+					</Button>
+					{/* )} */}
 				</form>
 			</div>
 		</div>
@@ -238,8 +280,12 @@ export default InspectorCard;
 const sellerResponseOptions = [
 	{ value: '', key: 'Select a response' },
 	{
-		key: 'I can do this time and date (reschedule now).',
+		key: 'I can do this time and date.',
 		value: 'reschedule',
+	},
+	{
+		key: 'Confirmed',
+		value: 'confirmed',
 	},
 	{ value: 'withdrawn', key: 'Withdrawn from site' },
 	{ value: 'not_available', key: 'Item no longer available' },

@@ -4,7 +4,7 @@ import GrabHeader from '../GrabHeader';
 import { Link } from 'react-router-dom';
 import { Approutes } from '../../../constants';
 import { ScrollToTop } from '../../../utils';
-import { useGetGrabs, useNotify } from '../../../hooks';
+import { useGetGrabs } from '../../../hooks';
 import { SpinnerSkeleton } from '../../../components';
 import useGrabContext from '../../../context/GrabContext';
 import { useQueryClient } from 'react-query';
@@ -39,10 +39,10 @@ const GrabProducts = () => {
 					// <Link key={ad.ads_id} to={Approutes.grab.product(ad.ads_id)}>
 					<div className="relative flex mx-auto flex-col w-[250px] bg-white border ">
 						<button>
-							<img src={GrabSave} alt="/" className="absolute w-8 top-2 left-2" />
+							<img src={GrabSave} alt="save" className="absolute w-8 top-2 left-2" />
 						</button>
 						<button onClick={() => handleUnGrab(ad)}>
-							<img src={GrabIcon} alt="/" className="absolute w-8 top-2 right-2" />
+							<img src={GrabIcon} alt="grab" className="absolute w-8 top-2 right-2" />
 						</button>
 						<img
 							src={ad?.images[0]?.path ? ad?.images[0]?.path : noimage}

@@ -96,8 +96,11 @@ function App() {
 					<Route path={Approutes.product.category} element={<Categories />} />
 					<Route path={Approutes.product.viewCategoryId} element={<Category />} />
 					<Route path={Approutes.underConstruction} element={<UnderConstruction />} />
+					<Route
+						path={Approutes.grab.grabbedProduct(':grabber_id', ':ad_id')}
+						element={<GrabbedProduct />}
+					/>
 				</Route>
-
 				{/* Protected page routes */}
 				<Route element={<RequireAuth />}>
 					{/* Use NavBar and Footer layout  */}
@@ -158,10 +161,7 @@ function App() {
 						<Route path={Approutes.grab.register} element={ <GrabRegister />} />
 						<Route path={Approutes.grab.home} element={<GrabHome />} />
 						<Route path={Approutes.grab.product} element={<GrabProduct />} /> */}
-						<Route
-							path={Approutes.grab.grabbedProduct(':grabber_id', ':ad_id')}
-							element={<GrabbedProduct />}
-						/>
+
 						<Route path={Approutes.grab.grabProduct(':ad_id')} element={<GrabbedProduct />} />
 						<Route path={Approutes.checkout.checkout} element={<Checkout />} />
 						<Route path={Approutes.checkout.delivery} element={<Delivery />} />

@@ -116,7 +116,7 @@ const Login = ({ id }) => {
 													<span className="my-auto text-xl">Submitting Data...</span>{' '}
 												</>
 											) : (
-												<span className="flex w-full text-lg lg:text-2xl">
+												<span className="flex w-full text-base lg:text-lg">
 													Login &nbsp; <MdLogin className="my-auto text-lg lg:text-2xl" />
 												</span>
 											)}
@@ -125,7 +125,7 @@ const Login = ({ id }) => {
 								</Form>
 							)}
 						</Formik>
-						<div className="w-full my-2 font-bold text-center lg:my-8 hover:underline text-primary text-md lg:text-2xl">
+						<div className="w-full my-2 font-bold text-center lg:my-8 hover:underline text-primary text-base lg:text-lg">
 							<Link to={Approutes.forgotPassword}>Forgot your Password?</Link>
 						</div>
 					</div>
@@ -159,4 +159,4 @@ const Login = ({ id }) => {
 export default Login;
 
 const inputClass =
-	'input input-bordered border-black w-full bg-gray-100 text-black text-lg lg:text-xl rounded-none my-2 input-md lg:input-lg';
+	'input input-bordered border-black w-full bg-gray-100 text-black text-sm lg:text-base rounded-none my-2 input-md lg:input-lg';
