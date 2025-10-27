@@ -104,15 +104,15 @@ const InspectorCard = ({ data, ad_id, isLoading }) => {
 							key={booking.id}
 							className={`${
 								booking?.user_id === data?.schedules?.owner ? 'bg-primary/80' : 'bg-secondary'
-							} px-4  ${
-								booking.user_id === user.id ? ' pb-4 pt-5' : 'py-4'
-							}  rounded-lg italic sm:mr-6 relative`}
+							} px-2 pb-4 pt-6  rounded-lg italic sm:mr-6 relative`}
 						>
-							{booking.user_id === user.id && (
-								<div className="absolute top-1 right-1 bg-white rounded-lg px-1  py-[0.15rem] leading-3 text-[10px] font-semibold">
-									You
-								</div>
-							)}
+							<div className="absolute top-1 right-1 bg-white rounded-lg px-1  py-[0.15rem] leading-3 text-[10px]">
+								{booking.user_id === user.id
+									? 'You'
+									: booking?.user_id === data?.schedules?.owner
+									? 'Ad owner'
+									: 'Inspector'}
+							</div>
 
 							<div className="flex items-center gap-2">
 								{booking?.remark === 'reschedule' ? (
