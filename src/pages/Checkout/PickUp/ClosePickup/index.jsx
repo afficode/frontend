@@ -259,7 +259,7 @@ const ClosePickup = () => {
 			{stage === 3 && (
 				<div className="px-4">
 					<div className="border border-black p-6 w-max mx-auto  space-y-4 max-w-full sm:max-w-[450px] text-center relative">
-						<button className="absolute top-2 right-2" onClick={() => console.log('Close')}>
+						<button className="absolute top-2 right-2">
 							<img src={CloseIcon} alt="close" className="w-6" />
 						</button>
 						<div className="flex items-center justify-center ">

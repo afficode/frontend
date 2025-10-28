@@ -22,7 +22,7 @@ const FeaturedProducts = ({ product }) => {
 				<div
 					onClick={() => navigate(`/product/${encodeProductId(ad.id)}`)}
 					key={index}
-					className="overflow-hidden min-w-[18rem] md:w-[18rem] sm:w-full min-h-[12rem] md:h-[22rem] bg-white border border-gray-200 rounded-lg shadow-sm cursor-pointer hover:shadow-lg transition-all  ease-in-out"
+					className="overflow-hidden min-w-[18rem] md:w-[18rem] sm:w-full min-h-[12rem] md:h-[22rem] bg-white hover:bg-gray-200 border border-gray-200 rounded-lg shadow-sm cursor-pointer hover:shadow-lg transition-all  ease-in-out"
 				>
 					<div
 						onClick={(e) => {
@@ -72,7 +72,7 @@ const FeaturedProducts = ({ product }) => {
 						</div>
 					</div>
 
-					<div className="w-full p-2 tracking-tighter tooltip tooltip-secondary line-clamp-1 hover:bg-gray-200">
+					<div className="w-full p-2 tracking-tighter tooltip tooltip-secondary line-clamp-1 ">
 						<p className="flex items-start justify-start h-6 overflow-hidden text-xl font-semibold uppercase lg:h-8 ">
 							{ad.title.toString().trimEnd().trim()}{' '}
 						</p>

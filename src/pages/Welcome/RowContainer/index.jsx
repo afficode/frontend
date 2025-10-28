@@ -37,10 +37,10 @@ const RowContainer = ({ title, link }) => {
 			</div>
 			<div className="grid grid-cols-1 gap-4 place-items-center sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 				{title === 'Discover more...'
-					? product?.data?.ads.slice(0, 4).map((item) => <CardDetails key={item.id} {...item} />)
+					? product?.data?.ads?.slice(0, 4).map((item) => <CardDetails key={item.id} {...item} />)
 					: title === 'Categories'
-						? categoriesData.map((item) => <Card key={item.title} {...item} />)
-						: shopsData.map((item) => <Card key={item.title} {...item} />)}
+					? categoriesData.map((item) => <Card key={item.title} {...item} />)
+					: shopsData.map((item) => <Card key={item.title} {...item} />)}
 			</div>
 		</section>
 	);
@@ -58,18 +58,15 @@ const CardDetails = ({ id, title, location, images, created_at, price, feature }
 			<div className="relative ml-0.5">
 				{feature !== '0' && feature !== '3' && <Feature feature={feature} />}
 			</div>
-			<img className=" min-w-full h-[70%] object-cover" src={img} alt="/" />
+			<img className=" min-w-full h-[70%] object-cover" src={img} alt={title && title} />
 
 			<div className="px-2 py-2">
 				<span className="flex justify-between font-semibold tracking-tighter">
 					<p className="p-lg uppercase line-clamp-1 truncate">{title}</p>
 				</span>
-				<div className="block w-full mt-4 text-start text-ellipsis truncate flex-nowrap line-clamp-1 text-sm">
-					<FaMapMarkerAlt className="mb-1 inline-block" />{' '}
-					<span className="hidden md:inline">&nbsp;</span>
-					<span className="text-xs md:text-md lg:text-lg tracking-tighter line-clamp-1 inline">
-						{location}
-					</span>
+				<div className="block w-full mt-2 text-start text-ellipsis truncate flex-nowrap line-clamp-1 text-sm">
+					<FaMapMarkerAlt className=" inline-block text-sm" />{' '}
+					<p className=" tracking-tighter line-clamp-1 inline">{location}</p>
 				</div>
 				<p className="flex justify-between tracking-tighter line-clamp-1 ">
 					<span className="flex">
