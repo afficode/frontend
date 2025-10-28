@@ -41,7 +41,7 @@ const Login = ({ id }) => {
 	const onSubmit = async (values, { setSubmitting }) => {
 		setIsLoading(true);
 		setTimeout(async () => {
-			const submit = await LoginHook(values, setSubmitting);
+			const submit = await LoginHook({ ...values, type: 'user' }, setSubmitting);
 			if (submit?.success) {
 				// the login from the useAuth tied to a context hook, will update localStorage and set user to Login
 				login(submit);
@@ -105,9 +105,8 @@ const Login = ({ id }) => {
 										<FlowbiteButton
 											type="submit"
 											aria-disabled="true"
-											className={` text-white text-normal lg:text-lg border-0 bg-primary btn-md lg:btn-lg hover:bg-primary/80 ${
-												!formik.isValid || !formik.dirty ? 'cursor-not-allowed' : 'cursor-pointer'
-											}`}
+											className={` text-white text-normal lg:text-lg border-0 bg-primary btn-md lg:btn-lg hover:bg-primary/80 ${!formik.isValid || !formik.dirty ? 'cursor-not-allowed' : 'cursor-pointer'
+												}`}
 											disabled={!formik.isValid || !formik.dirty ? 'disabled' : ''}
 										>
 											{formik.isSubmitting ? (
