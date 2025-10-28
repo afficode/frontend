@@ -238,13 +238,15 @@ const Navbar = () => {
 									tabIndex={0}
 									className={`dropdown-content transform -translate-x-2/3 min-h-fit w-fit  z-[10] px-4 py-6 bg-white shadow-md rounded-md `}
 								>
-
-									{!user?.phone[0]?.isVerified
-										? <div className="flex flex-col gap-4 justify-center items-center">
-											<p className="w-[18rem] text-justify">Please verify your phone number before you can post an AD.</p>
+									{!user?.phone[0]?.isVerified ? (
+										<div className="flex flex-col gap-4 justify-center items-center">
+											<p className="w-[18rem] text-justify">
+												Please verify your phone number before you can post an AD.
+											</p>
 											<VerifyPhoneNumber phoneDetails={user?.phone[0]} />
 										</div>
-										: <>
+									) : (
+										<>
 											<h4 className="font-semibold whitespace-nowrap">Post Ad in</h4>
 											<ul className="flex flex-col menu max-h-full w-full z-[10] py-4 ">
 												{filteredCategories?.allCat?.map((category) => (
@@ -256,8 +258,7 @@ const Navbar = () => {
 												))}
 											</ul>
 										</>
-
-									}
+									)}
 								</ul>
 							</div>
 							{!isLogin ? (
@@ -300,7 +301,7 @@ const Navbar = () => {
 										</Link>
 										<ul
 											tabIndex={0}
-											className={`dropdown-content transform -translate-x-[50%] sm:-translate-x-[74%] min-h-fit w-[15rem]  z-[10] p-4 bg-white shadow-md rounded-2xl`}
+											className={`dropdown-content transform -translate-x-[50%] sm:-translate-x-[84%] min-h-fit w-[15rem]  z-[10] p-4 bg-white shadow-md rounded-2xl`}
 										>
 											<ul className="flex flex-col gap-[0.4rem] menu max-h-full w-full z-[10] ">
 												{/* <NavLink to={'/'}>

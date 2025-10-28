@@ -4,21 +4,34 @@ import { formToDisplay } from '../../../../constants/CategoryFilterFormData';
 
 import { manipulateFilterForm } from '../../../../utils/dataManipulations';
 import { useNotify } from '../../../../hooks';
+import { getPreviousSearchParams } from '../../../../utils';
+import { useSearchParams } from 'react-router-dom';
 
-const FilterForm = ({ setSearchParams, categoryId }) => {
+const FilterForm = ({ categoryId }) => {
 	const notify = useNotify();
+	const [searchParams, setSearchParams] = useSearchParams();
+
 	return (
 		<div className="my-2">
 			<Formik
 				initialValues={{}}
 				onSubmit={async (values) => {
 					const filteredValues = manipulateFilterForm(values, categoryId);
+					console.log(filteredValues, 'filteredValues');
 					if (filteredValues && Object.entries(filteredValues).length > 0) {
-						setSearchParams((prev) => ({
-							page: prev.page || 0,
-							category: categoryId,
+						let previousParams = getPreviousSearchParams(searchParams);
+
+						previousParams = {
+							...previousParams,
 							...filteredValues,
-						}));
+						};
+
+						setSearchParams(previousParams, { replace: true });
+						// setSearchParams((prev) => ({
+						// 	page: prev.page || 0,
+						// 	category: categoryId,
+						// 	...filteredValues,
+						// }));
 					} else {
 						notify('No filter option selected', 'info');
 					}

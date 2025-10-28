@@ -1,8 +1,14 @@
+import { useSearchParams } from 'react-router-dom';
 import FilterForm from './FilterForm';
 import { useQueryClient } from 'react-query';
+import { queryStrings } from '../../../../constants';
+import { getPreviousSearchParams } from '../../../../utils';
 
-const SideBar = ({ displayCategories, categoryId, setCategoryId, setSearchParams }) => {
-	const queryClient = useQueryClient();
+const SideBar = ({ displayCategories, categoryId, setCategoryId }) => {
+	// const queryClient = useQueryClient();
+	const [searchParams, setSearchParams] = useSearchParams();
+	console.log(searchParams);
+
 	return (
 		<div className="">
 			<div className="">
@@ -14,15 +20,23 @@ const SideBar = ({ displayCategories, categoryId, setCategoryId, setSearchParams
 						displayCategories?.map((cat, index) => (
 							<span
 								key={index}
-								className={`hover:text-primary hover:underline hover:font-bold ease-in cursor-pointer tracking-tighter line-clamp-1 ${
+								className={`border border-red-500 hover:text-primary hover:underline hover:font-bold ease-in cursor-pointer tracking-tighter line-clamp-1 ${
 									cat.category === categoryId ? 'text-primary font-semibold' : ''
 								}`}
 								onClick={() => {
 									setCategoryId(cat.category);
-									setSearchParams({ category: cat.category });
-									queryClient.invalidateQueries({
-										queryKey: ['all-product'],
-									});
+
+									let previousParams = getPreviousSearchParams(searchParams);
+
+									previousParams = {
+										...previousParams,
+										[queryStrings.subCategory]: cat.category,
+									};
+
+									setSearchParams(previousParams, { replace: true });
+									// queryClient.invalidateQueries({
+									// 	queryKey: ['all-product'],
+									// });
 								}}
 							>
 								{cat.name} ({cat.amount})
@@ -32,9 +46,9 @@ const SideBar = ({ displayCategories, categoryId, setCategoryId, setSearchParams
 			</div>
 
 			<FilterForm
-				setSearchParams={setSearchParams}
+				// setSearchParams={setSearchParams}
+				// setCategoryId={setCategoryId}
 				categoryId={categoryId}
-				setCategoryId={setCategoryId}
 			/>
 		</div>
 	);

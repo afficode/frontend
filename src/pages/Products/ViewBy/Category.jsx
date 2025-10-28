@@ -1,29 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { ProductSkeleton } from '../../../components';
 import { useProduct } from '../../../hooks/useProduct';
 import { fetchCategorySummary } from '../../../hooks';
-import { Approutes } from '../../../constants';
+import { Approutes, queryStrings } from '../../../constants';
 import FeaturedProducts from '../Default/FeaturedProducts';
 import Breadcrumb from '../../../components/Breadcrumb';
 import NotFound from '../NotFound';
 import SideBar from './FilterComponents/SideBar';
 import { Drawer } from '../../../ui';
 import { VscMenu } from 'react-icons/vsc';
-import { ScrollToTop } from '../../../utils';
+import { getPreviousSearchParams, getSearchParamsObject, ScrollToTop } from '../../../utils';
 import { useSearchParams } from 'react-router-dom';
 
 const Category = () => {
-	const [query, setQuery] = useSearchParams();
+	const [searchParams, setSearchParams] = useSearchParams();
+	// console.log('searchParams', getSearchParamsObject(searchParams));
 	const { id } = useParams();
+	// console.log(id);
 	const catId = atob(id);
+	// console.log(catId);
 	const [categoryId, setCategoryId] = useState(catId);
 	const [displayCategories, setDisplayCategories] = useState();
 	const [items, setItems] = useState(null);
-	const [searchParams, setSearchParams] = useState({
-		category: categoryId,
-		q: query.get('q') || '',
-	});
+
+	const { sub, ...params } = getSearchParamsObject(searchParams);
 
 	const location = useLocation();
 
@@ -32,17 +33,18 @@ const Category = () => {
 	}, [location.pathname]);
 
 	const { data, isLoading, error } = useProduct({
-		...searchParams,
-		q: query.get('q') || '',
+		...params,
 	});
 	const { data: categories, isLoading: categoryIsLoading } = fetchCategorySummary(categoryId);
+	console.log(categories, 'categories');
+
 	useEffect(() => {
 		if (categories) {
 			let name = '';
-			const categoriesData = categories?.summary.filter((cat) =>
-				cat.category.toString().startsWith(catId.toString().substring(0, 2))
-			);
-			categoriesData.forEach((cat) => {
+			// const categoriesData = categories?.summary.filter((cat) =>
+			// 	cat.category.toString().startsWith(catId.toString().substring(0, 2))
+			// );
+			categories?.summary.forEach((cat) => {
 				if (cat.category == categoryId) {
 					name = cat.name;
 				}
@@ -53,9 +55,8 @@ const Category = () => {
 				{ name: 'Categories', link: Approutes.product.category },
 				{ name: name },
 			]);
-			setSearchParams({ category: categoryId, q: query.get('q') || '' });
 
-			setDisplayCategories(() => [...categoriesData]);
+			setDisplayCategories(() => [...categories?.summary]);
 		}
 	}, [categoryIsLoading, categoryId]);
 
@@ -111,14 +112,15 @@ const Category = () => {
 							<div className="join mx-auto mt-4 bg-primary text-white">
 								<button
 									onClick={() => {
-										setSearchParams((prev) => ({
-											...prev,
-											page: data?.prev,
-											q: query.get('q') || '',
-										}));
-										// window.location.reload();
+										let previousParams = getPreviousSearchParams(searchParams);
+
+										previousParams = {
+											...previousParams,
+											[queryStrings.page]: data?.prev,
+										};
+
+										setSearchParams(previousParams, { replace: true });
 									}}
-									// to={`${Approutes.product.initial}?page=${product?.prev}`}
 									className={`${
 										data?.prev === null ? 'hidden' : ''
 									} join-item btn bg-primary text-white border-gray-300 hover:bg-secondary hover:text-black hover:border-gray-300`}
@@ -127,14 +129,15 @@ const Category = () => {
 									Prev
 								</button>
 								<button
-									// to={`${Approutes.product.initial}?page=${product?.next}`}
 									onClick={() => {
-										setSearchParams((prev) => ({
-											...prev,
-											page: data?.next,
-											q: query.get('q') || '',
-										}));
-										// window.location.reload();
+										let previousParams = getPreviousSearchParams(searchParams);
+
+										previousParams = {
+											...previousParams,
+											[queryStrings.page]: data?.next,
+										};
+
+										setSearchParams(previousParams, { replace: true });
 									}}
 									className={`${
 										data?.next === null ? 'hidden' : ''
