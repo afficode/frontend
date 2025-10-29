@@ -3,10 +3,8 @@ import { Field } from 'formik';
 
 const FilterCard = ({ field, setfieldvalue }) => {
 	return (
-		<div className=" w-full  my-4 border-2 border-gray-300 rounded-sm p-2 relative tracking-tighter line-clamp-1 ">
-			<header className=" font-bold text-lg md:text-lg lg:text-xl xl:text-2xl block sticky">
-				{field.title}
-			</header>
+		<div className=" w-full  my-4 border-2 border-gray-300 rounded-sm p-2 relative tracking-tighter line-clamp-1 overflow-auto">
+			<header className=" font-bold text-sm md:text-base block sticky">{field.title}</header>
 			{field?.options && (
 				<div className="flex items-center justify-between my-2">
 					{/* if more than 2, use the map function and make the index output a span with the to when index value is 0 */}
@@ -16,7 +14,7 @@ const FilterCard = ({ field, setfieldvalue }) => {
 						placeholder={field.options[0].placeholder}
 						className={field.options[0].className}
 					/>{' '}
-					<span className=" antialiased text-lg">to </span>
+					<span className=" antialiased text-sm">to </span>
 					<Field
 						type={field.options[1].type}
 						name={field.options[1].name}
@@ -32,7 +30,7 @@ const FilterCard = ({ field, setfieldvalue }) => {
 						type={field.type}
 						content={content}
 						key={index}
-						className="hover:bg-primary ml-1"
+						className="hover:bg-primary ml-2 "
 						setfieldvalue={setfieldvalue}
 					/>
 				))}

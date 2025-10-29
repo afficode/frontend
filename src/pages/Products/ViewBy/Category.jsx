@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useState, useEffect, useMemo } from 'react';
+import { useParams } from 'react-router-dom';
 import { ProductSkeleton } from '../../../components';
 import { useProduct } from '../../../hooks/useProduct';
 import { fetchCategorySummary } from '../../../hooks';
@@ -15,37 +15,33 @@ import { useSearchParams } from 'react-router-dom';
 
 const Category = () => {
 	const [searchParams, setSearchParams] = useSearchParams();
-	// console.log('searchParams', getSearchParamsObject(searchParams));
 	const { id } = useParams();
-	// console.log(id);
-	const catId = atob(id);
-	// console.log(catId);
-	const [categoryId, setCategoryId] = useState(catId);
+
+	const mainCategoryId = useMemo(() => atob(id), [id]);
+
 	const [displayCategories, setDisplayCategories] = useState();
 	const [items, setItems] = useState(null);
 
-	const { sub, ...params } = getSearchParamsObject(searchParams);
+	const allParams = getSearchParamsObject(searchParams);
+	const { [queryStrings.subCategory]: sub, [queryStrings.page]: page, ...filterParams } = allParams;
 
-	const location = useLocation();
+	const currentCategoryId = sub || mainCategoryId;
 
-	useEffect(() => {
-		setCategoryId(catId);
-	}, [location.pathname]);
+	const apiParams = {
+		category: currentCategoryId,
+		...(page && { [queryStrings.page]: page }),
+		...filterParams,
+	};
 
-	const { data, isLoading, error } = useProduct({
-		...params,
-	});
-	const { data: categories, isLoading: categoryIsLoading } = fetchCategorySummary(categoryId);
-	console.log(categories, 'categories');
+	const { data, isLoading, error } = useProduct(apiParams);
+	const { data: categories, isLoading: categoryIsLoading } = fetchCategorySummary(mainCategoryId);
 
 	useEffect(() => {
 		if (categories) {
 			let name = '';
-			// const categoriesData = categories?.summary.filter((cat) =>
-			// 	cat.category.toString().startsWith(catId.toString().substring(0, 2))
-			// );
+
 			categories?.summary.forEach((cat) => {
-				if (cat.category == categoryId) {
+				if (cat.category == currentCategoryId) {
 					name = cat.name;
 				}
 			});
@@ -58,17 +54,12 @@ const Category = () => {
 
 			setDisplayCategories(() => [...categories?.summary]);
 		}
-	}, [categoryIsLoading, categoryId]);
+	}, [categoryIsLoading, currentCategoryId, categories]);
 
 	return (
 		<section className="flex gap-x-2">
 			<div className="p-2 hidden md:block w-[30%] lg:w-[25%] ">
-				<SideBar
-					displayCategories={displayCategories}
-					setCategoryId={setCategoryId}
-					setSearchParams={setSearchParams}
-					categoryId={categoryId}
-				/>
+				<SideBar displayCategories={displayCategories} currentCategoryId={Number(currentCategoryId)} />
 			</div>
 			<main className="p-2 w-full md:w-[70%] lg:w-[75%]">
 				<div className="w-full md:hidden ">
@@ -77,9 +68,7 @@ const Category = () => {
 						items={
 							<SideBar
 								displayCategories={displayCategories}
-								setCategoryId={setCategoryId}
-								setSearchParams={setSearchParams}
-								categoryId={categoryId}
+								currentCategoryId={Number(currentCategoryId)}
 							/>
 						}
 					/>
