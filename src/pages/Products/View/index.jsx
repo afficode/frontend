@@ -65,7 +65,27 @@ const index = () => {
 						</span>{' '}
 					</Alert>
 				</div>
-			) : result?.data?.paid === 1 && result?.data?.available === 0 ? (
+			) : result?.data?.paid === 1 && result?.data?.active === '2' ? (
+                <div className="w-[90%] lg:w-1/2 my-3 mx-auto">
+                    <Alert
+                        // additionalContent={<ContactAdmin />}
+                        color="success"
+                    >
+                        <h5 className="font-medium text-red-600">This Ad is marked as closed: </h5>{' '}
+                        <div className="">
+                            {' '}
+                            This Ad is marked as closed and is not displayed for customers to see.
+                            <ul className="list-disc list-inside font-bold my-4">
+                                <li className="text-sm">You can choose to delete this Ad or it will be VACUMMED during our daily cleanup.</li>
+                                <li className="text-sm">Closed Ad are deleted after 48 hours of closure from our policy.</li>
+                            </ul>
+                            <span className="font-bold mt-4 bg-white text-green-500 p-2">
+                                Thanks for using Boonfu!
+                            </span>
+                        </div>
+                    </Alert>
+                </div>
+            ) : result?.data?.paid === 1 && result?.data?.available === 0 ? (
 				<div className="w-[90%] lg:w-[70%] my-3 mx-auto">
 					<Alert
 						// additionalContent={<ContactAdmin />}
