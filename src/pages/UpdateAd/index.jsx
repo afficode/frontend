@@ -26,6 +26,7 @@ const PostAd = () => {
 			model: ad?.model,
 			trim: ad?.trim,
 			type: ad?.type,
+			type_other: ad?.type_other,
 			description: ad?.description,
 			vehicle_id: ad?.vehicle_id,
 			vehicle_features:
@@ -345,6 +346,7 @@ const PostAd = () => {
 			images: [],
 			make: ad?.make,
 			type: ad?.type,
+			type_other: ad?.type_other,
 			description: ad?.description,
 			ad_condition:
 				typeof ad?.ad_condition === 'string' ? ad?.ad_condition?.split(',') : ad?.ad_condition,

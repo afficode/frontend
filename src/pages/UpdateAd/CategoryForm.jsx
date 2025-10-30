@@ -450,7 +450,7 @@ const CategoryForm = ({
 				otherType && {
 					control: 'input',
 					label: 'Other Type',
-					name: 'type',
+					name: 'type_other',
 					type: 'text',
 					placeholder: 'Enter type',
 					required: true,
@@ -3062,7 +3062,7 @@ const CategoryForm = ({
 				otherType && {
 					control: 'input',
 					label: 'Other Type',
-					name: 'type',
+					name: 'type_other',
 					type: 'text',
 					placeholder: 'Enter type',
 					required: true,
