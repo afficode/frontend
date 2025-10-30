@@ -54,13 +54,14 @@ export const useGetEscrowDetails = (id) => {
 	});
 };
 
-export const useCheckOrder = (ad_id) => {
+export const useCheckOrder = (ad_id, options) => {
 	const checkOrder = () => privateAxios.get(`${backendLink}order/ad/${ad_id}`).then((res) => res);
 
 	return useQuery(['check-order', ad_id], checkOrder, {
 		refetchOnWindowFocus: false,
 		refetchOnMount: false,
 		refetchInterval: false,
+		...options,
 	});
 };
 

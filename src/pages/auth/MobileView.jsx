@@ -1,13 +1,10 @@
-'use client';
-import React, { useState } from 'react';
-import { Tabs, Banner } from 'flowbite-react';
+import { useState } from 'react';
+import { Tabs } from 'flowbite-react';
 import { MdAppRegistration, MdLogin } from 'react-icons/md';
 import Register from './Register';
 import Login from './Login';
 
 const MobileView = () => {
-	const [tab, setTab] = useState(0);
-
 	return (
 		<div className="w-full">
 			<Tabs.Group aria-label="Full width tabs" style="fullWidth">
