@@ -144,7 +144,8 @@ export const convertKeyToName = (ad) => {
 	return overviews;
 };
 
-export const arrayRange = (start, stop, step) => Array.from({ length: (stop - start) / step + 1 }, (value, index) => start + index * step);
+export const arrayRange = (start, stop, step) =>
+	Array.from({ length: (stop - start) / step + 1 }, (value, index) => start + index * step);
 
 export const getStateLGA = (lga, state_id) => {
 	const state_lga = lga.filter((val) => val.state_id === state_id);
@@ -200,7 +201,40 @@ export const manipulatePrice = (price, category_id) => {
 export const manipulateFilterForm = (values, category_id) => {
 	// remove all the empty of null fields
 	var filteredValue = removeNullObjectsValues(values);
-	filteredValue = filteredValue?.price ? { ...filteredValue, price: manipulatePrice(filteredValue.price, category_id) } : filteredValue;
+
+	// Normalize min_price/max_price that may come formatted with commas for display
+	if (filteredValue.min_price !== undefined) {
+		const raw = filteredValue.min_price?.toString().replace(/[^0-9]/g, '');
+		filteredValue.min_price = raw ? raw : '';
+		if (filteredValue.min_price === '') delete filteredValue.min_price;
+	}
+	if (filteredValue.max_price !== undefined) {
+		const raw = filteredValue.max_price?.toString().replace(/[^0-9]/g, '');
+		filteredValue.max_price = raw ? raw : '';
+		if (filteredValue.max_price === '') delete filteredValue.max_price;
+	}
+
+	if (filteredValue.min_price || filteredValue.max_price) {
+		if ('price' in filteredValue) delete filteredValue.price;
+	} else if ('price' in filteredValue) {
+		const priceValue = filteredValue.price;
+		const isEmptyPrice =
+			priceValue === '' ||
+			priceValue == null ||
+			(Array.isArray(priceValue) && priceValue.length === 0);
+
+		if (isEmptyPrice) {
+			delete filteredValue.price;
+		} else {
+			filteredValue = {
+				...filteredValue,
+				price: manipulatePrice(filteredValue.price, category_id),
+			};
+			if ('min_price' in filteredValue) delete filteredValue.min_price;
+			if ('max_price' in filteredValue) delete filteredValue.max_price;
+		}
+	}
+
 	return filteredValue;
 };
 
