@@ -24,7 +24,7 @@ const Action = ({ isGeneral, ad }) => {
 	const { data } = useGetSchedules({
 		enabled: !!user,
 	});
-	const category = ad?.category.toString();
+	// const category = ad?.category.toString();
 	const { grabber_id, ad_id } = useParams();
 
 	const [formData, setFormData] = useState({
@@ -35,7 +35,6 @@ const Action = ({ isGeneral, ad }) => {
 
 	// form modals
 	const [inspectionModalOpen, setInspectionModalOpen] = useState(false);
-	const ref = useRef(null);
 
 	//to scroll into terms and condition document
 	const [isOpen, setIsOpen] = useState(false);
@@ -76,7 +75,7 @@ const Action = ({ isGeneral, ad }) => {
 								<p className="font-semibold">Select delivery option:</p>
 
 								<form className="mt-1">
-									{category.startsWith(54) ? null : (
+									{/* {category.startsWith(54) ? null : (
 										<div className="flex items-center space-x-4">
 											<input
 												type="radio"
@@ -128,7 +127,7 @@ const Action = ({ isGeneral, ad }) => {
 												<span className="text-xs text-gray-500">(coming soon)</span>
 											</label>
 										</div>
-									)}
+									)} */}
 
 									<div className="flex items-center space-x-4">
 										<input
