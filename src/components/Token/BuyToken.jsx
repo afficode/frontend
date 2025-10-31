@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Button, InputGroup } from '../../ui';
 import { useBuyCoin, useNotify } from '../../hooks';
 import { useQueryClient } from 'react-query';
+import { toMoney } from '../../utils';
 
 const BuyToken = ({ setIsOpen }) => {
 	const [formData, setFormData] = useState({
@@ -39,14 +40,15 @@ const BuyToken = ({ setIsOpen }) => {
 
 	return (
 		<div className="space-y-4 text-center">
-			<form onSubmit={handleSubmit}>
+			<form onSubmit={handleSubmit} className="px-4">
 				<label htmlFor="coin_value" className="text-lg font-semibold">
-					Enter coin amount to buy
+					Enter token amount to buy
 				</label>
 				<InputGroup
 					name={'coin_value'}
+					id={'coin_value'}
 					type={'number'}
-					placeholder={'₦000'}
+					placeholder={'00'}
 					value={formData.coin_value}
 					onChange={handleChange}
 				/>
@@ -58,7 +60,7 @@ const BuyToken = ({ setIsOpen }) => {
 					className={'mt-4'}
 				>
 					{' '}
-					Pay <b>{formData.coin_value > 0 && `${formData.coin_value * 1000}`}</b>{' '}
+					Pay <b>{formData.coin_value > 0 && `₦${toMoney(formData.coin_value * 1000, false)}`}</b>{' '}
 				</Button>
 			</form>
 		</div>

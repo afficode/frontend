@@ -16,7 +16,7 @@ const Performance = () => {
 	const [date, setDate] = useState(null);
 	const [filteredDateResult, setFilteredDateResult] = useState('');
 
-	const { data, isLoading, isError } = useUserAds({
+	const { data, isLoading } = useUserAds({
 		created_at: filteredDateResult,
 	});
 
@@ -72,12 +72,12 @@ const Performance = () => {
 				<div className="flex items-center gap-4 ml-auto max-sm:flex-col">
 					<DateView
 						placeholderText="Select dates"
-						className="border-transparent shadow-lg rounded-md w-[10rem]"
+						className="border-transparent shadow-lg rounded-md w-[10rem] text-sm"
 						selected={date}
 						onChange={(val) => setDate(val)}
 					/>
 					<Link to={Approutes.postDecision}>
-						<Button variant="primary" size="small" className="font-medium rounded-md">
+						<Button variant="primary" size="small" className="font-medium rounded-md text-sm">
 							+ Add Product
 						</Button>
 					</Link>
@@ -93,7 +93,7 @@ const Performance = () => {
 							filteredDate === 'all'
 								? 'bg-primary text-white border-transparent'
 								: 'bg-white text-black/50 border border-black/40'
-						} cursor-pointer py-[.5rem] px-6 rounded-md font-semibold max-sm:text-sm`}
+						} cursor-pointer py-[.5rem] px-6 rounded-md font-semibold text-sm`}
 					>
 						All dates
 					</span>
@@ -106,7 +106,7 @@ const Performance = () => {
 							filteredDate === '12 months'
 								? 'bg-primary text-white border-transparent'
 								: 'bg-white text-black/50 border border-black/40'
-						} cursor-pointer py-[.5rem] px-6 rounded-md font-semibold max-sm:text-sm `}
+						} cursor-pointer py-[.5rem] px-6 rounded-md font-semibold text-sm `}
 					>
 						12 months{' '}
 					</span>
@@ -119,7 +119,7 @@ const Performance = () => {
 							filteredDate === '30 days'
 								? 'bg-primary text-white border-transparent'
 								: 'bg-white text-black/50 border border-black/40'
-						} cursor-pointer py-[.5rem] px-6 rounded-md font-semibold max-sm:text-sm `}
+						} cursor-pointer py-[.5rem] px-6 rounded-md font-semibold text-sm `}
 					>
 						30 days
 					</span>
@@ -132,7 +132,7 @@ const Performance = () => {
 							filteredDate === '7 days'
 								? 'bg-primary text-white border-transparent'
 								: 'bg-white text-black/50 border border-black/40'
-						} cursor-pointer py-[.5rem] px-6 rounded-md font-semibold max-sm:text-sm `}
+						} cursor-pointer py-[.5rem] px-6 rounded-md font-semibold text-sm `}
 					>
 						7 days
 					</span>
@@ -145,7 +145,7 @@ const Performance = () => {
 							filteredDate === '24 hours'
 								? 'bg-primary text-white border-transparent'
 								: 'bg-white text-black/50 border border-black/40'
-						} cursor-pointer py-[.5rem] px-6 rounded-md font-semibold max-sm:text-sm `}
+						} cursor-pointer py-[.5rem] px-6 rounded-md font-semibold text-sm `}
 					>
 						24-hours
 					</span>

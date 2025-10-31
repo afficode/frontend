@@ -51,11 +51,15 @@ const Modal = ({
 				{modalHeader && (
 					<div className={`flex justify-between items-center pb-6`}>
 						{headerSize === 'small' ? (
-							<h4 className={` text-center text-black uppercase ${headerStye}`}>{headerText}</h4>
+							<h4 className={` text-center text-black max-sm:text-base uppercase ${headerStye}`}>
+								{headerText}
+							</h4>
 						) : headerSize === 'text' ? (
 							<p className={`text-black ${headerStye}`}>{headerText}</p>
 						) : (
-							<h3 className={` text-center text-black uppercase ${headerStye}`}>{headerText}</h3>
+							<h3 className={` text-center text-black uppercase max-sm:text-lg ${headerStye}`}>
+								{headerText}
+							</h3>
 						)}
 						<div className="cursor-pointer modal-close" onClick={() => setIsOpen(false)}>
 							<ImCancelCircle size={25} />

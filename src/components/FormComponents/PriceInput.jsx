@@ -1,8 +1,37 @@
-import { Field, ErrorMessage } from 'formik';
+import { Field, ErrorMessage, useField, useFormikContext } from 'formik';
 import TextError from './TextError';
 
 const PriceInput = (props) => {
 	const { label, name, required, type, className, ...rest } = props;
+	const [field] = useField(name);
+	const formik = useFormikContext();
+
+	const handleMoneyChange = (event) => {
+		const inputValue = event.target.value;
+		const inputName = event.target.name || name;
+
+		// Remove all non-numeric characters except decimal point
+		let raw = String(inputValue).replace(/[^0-9.]/g, '');
+
+		// If empty, set empty string
+		if (!raw) {
+			formik.setFieldValue(inputName, '');
+			return;
+		}
+
+		// Handle decimal part
+		const [intPart, decimalPart] = raw.split('.');
+		let formatted = new Intl.NumberFormat('en-US').format(Number(intPart || '0'));
+
+		// If there's a decimal part, append it
+		if (decimalPart !== undefined) {
+			formatted += '.' + decimalPart;
+		}
+
+		// Update the form field with formatted value
+		formik.setFieldValue(inputName, formatted);
+	};
+
 	return (
 		<div className={className ? '' : 'formControlClass'}>
 			{label && (
@@ -18,8 +47,10 @@ const PriceInput = (props) => {
 			<Field
 				name={name}
 				id={name}
-				type={type}
+				type="text"
 				min="0"
+				value={field.value || ''}
+				onChange={handleMoneyChange}
 				onKeyDown={(e) => {
 					if (e.code === 'Minus') {
 						e.preventDefault();
@@ -27,8 +58,6 @@ const PriceInput = (props) => {
 				}}
 				className={className}
 				{...rest}
-				// onFocus={() => setTouched(true)}
-				// onBlur={() => setTouched(false)}
 				autoComplete="off"
 			/>
 			<ErrorMessage name={name} component={TextError} />

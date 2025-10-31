@@ -11,7 +11,7 @@ import {
 	useUpdateAd,
 	useCategories,
 } from '../../hooks';
-import { toOptions, toSelectOptions } from '../../utils';
+import { fromMoney, toOptions, toSelectOptions } from '../../utils';
 import {
 	Approutes,
 	agricultureTypes,
@@ -3297,7 +3297,7 @@ const CategoryForm = ({
 			},
 
 			{
-				control: 'input',
+				control: 'price',
 				label: 'Price Offering?',
 				name: 'min_price',
 				type: 'number',
@@ -3305,7 +3305,7 @@ const CategoryForm = ({
 				required: true,
 			},
 			{
-				control: 'input',
+				control: 'price',
 				name: 'max_price',
 				type: 'number',
 				placeholder: '₦ max',
@@ -3315,6 +3315,11 @@ const CategoryForm = ({
 				control: 'toggle',
 				label: 'Negotiable?',
 				name: 'negotiable	',
+			},
+			{
+				control: 'feature',
+				name: 'feature',
+				type: 'radio',
 			},
 		],
 		deals: [
@@ -3479,7 +3484,13 @@ const CategoryForm = ({
 			ad_condition: Yup.string(),
 			vehicle_body: Yup.string(),
 			contact_type: Yup.array().min(1, 'At least one option is required').required('Required'),
-			price: Yup.number().required('Required'),
+			price: Yup.string()
+				.required('Required')
+				.test('is-valid-money', 'Please enter a valid price', (value) => {
+					if (!value) return false;
+					const numericValue = fromMoney(value);
+					return numericValue > 0 && !isNaN(numericValue);
+				}),
 			negotiable: Yup.boolean(),
 			urgent: Yup.boolean(),
 			images: Yup.array(),
@@ -3509,7 +3520,13 @@ const CategoryForm = ({
 			date_available: Yup.string(),
 			facilities: Yup.array(),
 			description: Yup.string().required('Required'),
-			price: Yup.number().required('Required'),
+			price: Yup.string()
+				.required('Required')
+				.test('is-valid-money', 'Please enter a valid price', (value) => {
+					if (!value) return false;
+					const numericValue = fromMoney(value);
+					return numericValue > 0 && !isNaN(numericValue);
+				}),
 			negotiable: Yup.boolean(),
 			contact_type: Yup.array().min(1, 'At least one option is required').required('Required'),
 			urgent: Yup.boolean(),
@@ -3533,7 +3550,13 @@ const CategoryForm = ({
 			available_for_travel: Yup.string(),
 			years_of_experience: Yup.string(),
 			description: Yup.string().required('Required'),
-			price: Yup.number().required('Required'),
+			price: Yup.string()
+				.required('Required')
+				.test('is-valid-money', 'Please enter a valid price', (value) => {
+					if (!value) return false;
+					const numericValue = fromMoney(value);
+					return numericValue > 0 && !isNaN(numericValue);
+				}),
 			contact_type: Yup.array().min(1, 'At least one option is required').required('Required'),
 			negotiable: Yup.boolean(),
 			urgent: Yup.boolean(),
@@ -3550,7 +3573,13 @@ const CategoryForm = ({
 			age: Yup.string(),
 			gender: Yup.string(),
 			color: Yup.string(),
-			price: Yup.number().required('Required'),
+			price: Yup.string()
+				.required('Required')
+				.test('is-valid-money', 'Please enter a valid price', (value) => {
+					if (!value) return false;
+					const numericValue = fromMoney(value);
+					return numericValue > 0 && !isNaN(numericValue);
+				}),
 			negotiable: Yup.boolean(),
 			contact_type: Yup.array().min(1, 'At least one option is required').required('Required'),
 			urgent: Yup.boolean(),
@@ -3562,7 +3591,13 @@ const CategoryForm = ({
 			images: Yup.array(),
 			title: Yup.string().required('Required'),
 			description: Yup.string().required('Required'),
-			price: Yup.number().required('Required'),
+			price: Yup.string()
+				.required('Required')
+				.test('is-valid-money', 'Please enter a valid price', (value) => {
+					if (!value) return false;
+					const numericValue = fromMoney(value);
+					return numericValue > 0 && !isNaN(numericValue);
+				}),
 			ad_condition: Yup.string(),
 			brand: Yup.string(),
 			...(['5404', '5405', '5407', '5408'].includes(selectedElectronicsCategory) && {
@@ -3622,7 +3657,13 @@ const CategoryForm = ({
 			...(selectedFashionCategory === '5506' && {
 				display: Yup.string(),
 			}),
-			price: Yup.number().required('Required'),
+			price: Yup.string()
+				.required('Required')
+				.test('is-valid-money', 'Please enter a valid price', (value) => {
+					if (!value) return false;
+					const numericValue = fromMoney(value);
+					return numericValue > 0 && !isNaN(numericValue);
+				}),
 			negotiable: Yup.boolean(),
 			contact_type: Yup.array().min(1, 'At least one option is required').required('Required'),
 			urgent: Yup.boolean(),
@@ -3641,7 +3682,13 @@ const CategoryForm = ({
 			ad_condition: Yup.string(),
 			formulation: Yup.string(),
 			scent_type: Yup.string(),
-			price: Yup.number().required('Required'),
+			price: Yup.string()
+				.required('Required')
+				.test('is-valid-money', 'Please enter a valid price', (value) => {
+					if (!value) return false;
+					const numericValue = fromMoney(value);
+					return numericValue > 0 && !isNaN(numericValue);
+				}),
 			negotiable: Yup.boolean(),
 			contact_type: Yup.array().min(1, 'At least one option is required').required('Required'),
 			urgent: Yup.boolean(),
@@ -3653,7 +3700,13 @@ const CategoryForm = ({
 			images: Yup.array(),
 			title: Yup.string().required('Required'),
 			description: Yup.string().required('Required'),
-			price: Yup.number().required('Required'),
+			price: Yup.string()
+				.required('Required')
+				.test('is-valid-money', 'Please enter a valid price', (value) => {
+					if (!value) return false;
+					const numericValue = fromMoney(value);
+					return numericValue > 0 && !isNaN(numericValue);
+				}),
 			ad_condition: Yup.string(),
 			brand: Yup.string(),
 			type: Yup.string(),
@@ -3686,7 +3739,13 @@ const CategoryForm = ({
 			mode_of_transport: Yup.string(),
 			payment_terms: Yup.string(),
 			available_for_travel: Yup.string(),
-			price: Yup.number().required('Required'),
+			price: Yup.string()
+				.required('Required')
+				.test('is-valid-money', 'Please enter a valid price', (value) => {
+					if (!value) return false;
+					const numericValue = fromMoney(value);
+					return numericValue > 0 && !isNaN(numericValue);
+				}),
 			negotiable: Yup.boolean(),
 			contact_type: Yup.array().min(1, 'At least one option is required').required('Required'),
 			urgent: Yup.boolean(),
@@ -3705,7 +3764,13 @@ const CategoryForm = ({
 			release_year: Yup.string(),
 			game_genre: Yup.string(),
 			software_type: Yup.string(),
-			price: Yup.number().required('Required'),
+			price: Yup.string()
+				.required('Required')
+				.test('is-valid-money', 'Please enter a valid price', (value) => {
+					if (!value) return false;
+					const numericValue = fromMoney(value);
+					return numericValue > 0 && !isNaN(numericValue);
+				}),
 			negotiable: Yup.boolean(),
 			contact_type: Yup.array().min(1, 'At least one option is required').required('Required'),
 			urgent: Yup.boolean(),
@@ -3719,7 +3784,13 @@ const CategoryForm = ({
 			title: Yup.string().required('Required'),
 			breed: Yup.string(),
 			type: Yup.string(),
-			price: Yup.number().required('Required'),
+			price: Yup.string()
+				.required('Required')
+				.test('is-valid-money', 'Please enter a valid price', (value) => {
+					if (!value) return false;
+					const numericValue = fromMoney(value);
+					return numericValue > 0 && !isNaN(numericValue);
+				}),
 			gender: Yup.string(),
 			age: Yup.string(),
 			color: Yup.string(),
@@ -3735,8 +3806,18 @@ const CategoryForm = ({
 			images: Yup.array(),
 			title: Yup.string().required('Required'),
 			description: Yup.string().required('Required'),
-			price: Yup.number().required('Required'),
-			bulk_price: Yup.number(),
+			price: Yup.string()
+				.required('Required')
+				.test('is-valid-money', 'Please enter a valid price', (value) => {
+					if (!value) return false;
+					const numericValue = fromMoney(value);
+					return numericValue > 0 && !isNaN(numericValue);
+				}),
+			bulk_price: Yup.string().test('is-valid-money', 'Please enter a valid price', (value) => {
+				if (!value) return true; // Optional field
+				const numericValue = fromMoney(value);
+				return numericValue > 0 && !isNaN(numericValue);
+			}),
 			ad_condition: Yup.string(),
 			brand: Yup.string(),
 			type: Yup.string(),
@@ -3755,7 +3836,13 @@ const CategoryForm = ({
 			images: Yup.array(),
 			title: Yup.string().required('Required'),
 			description: Yup.string().required('Required'),
-			price: Yup.number().required('Required'),
+			price: Yup.string()
+				.required('Required')
+				.test('is-valid-money', 'Please enter a valid price', (value) => {
+					if (!value) return false;
+					const numericValue = fromMoney(value);
+					return numericValue > 0 && !isNaN(numericValue);
+				}),
 			ad_condition: Yup.string(),
 			brand: Yup.string(),
 			type: Yup.string(),
@@ -3784,7 +3871,13 @@ const CategoryForm = ({
 			fuel_type: Yup.string(),
 			// engine_size: Yup.number(),
 			contact_type: Yup.array().min(1, 'At least one option is required').required('Required'),
-			price: Yup.number().required('Required'),
+			price: Yup.string()
+				.required('Required')
+				.test('is-valid-money', 'Please enter a valid price', (value) => {
+					if (!value) return false;
+					const numericValue = fromMoney(value);
+					return numericValue > 0 && !isNaN(numericValue);
+				}),
 			negotiable: Yup.boolean(),
 			urgent: Yup.boolean(),
 			images: Yup.array(),
@@ -3799,8 +3892,20 @@ const CategoryForm = ({
 			ad_condition: Yup.string(),
 			color: Yup.string(),
 			type: Yup.string(),
-			min_price: Yup.number().required('Required'),
-			max_price: Yup.number().required('Required'),
+			min_price: Yup.string()
+				.required('Required')
+				.test('is-valid-money', 'Please enter a valid price', (value) => {
+					if (!value) return false;
+					const numericValue = fromMoney(value);
+					return numericValue > 0 && !isNaN(numericValue);
+				}),
+			max_price: Yup.string()
+				.required('Required')
+				.test('is-valid-money', 'Please enter a valid price', (value) => {
+					if (!value) return false;
+					const numericValue = fromMoney(value);
+					return numericValue > 0 && !isNaN(numericValue);
+				}),
 			negotiable: Yup.boolean(),
 			contact_type: Yup.array().min(1, 'At least one option is required').required('Required'),
 			urgent: Yup.boolean(),
@@ -3816,7 +3921,13 @@ const CategoryForm = ({
 			ad_condition: Yup.string(),
 			defects: Yup.string(),
 			defects_detail: Yup.string(),
-			price: Yup.number().required('Required'),
+			price: Yup.string()
+				.required('Required')
+				.test('is-valid-money', 'Please enter a valid price', (value) => {
+					if (!value) return false;
+					const numericValue = fromMoney(value);
+					return numericValue > 0 && !isNaN(numericValue);
+				}),
 			negotiable: Yup.boolean(),
 			contact_type: Yup.array().min(1, 'At least one option is required').required('Required'),
 			urgent: Yup.boolean(),
@@ -3841,7 +3952,7 @@ const CategoryForm = ({
 				label={field.label}
 				options={field.options}
 				required={field.required}
-				price={priceValue}
+				price={fromMoney(priceValue)}
 				address={address}
 				images={field.images}
 				feature={initialValues.feature}
@@ -3882,6 +3993,10 @@ const CategoryForm = ({
 			lga_id: parseInt(values.lga_id),
 			address: address,
 			negotiable: values.negotiable === true ? 1 : 0,
+			price: fromMoney(values.price),
+			...(values.bulk_price && { bulk_price: fromMoney(values.bulk_price) }),
+			...(values.min_price && { min_price: fromMoney(values.min_price) }),
+			...(values.max_price && { max_price: fromMoney(values.max_price) }),
 			images: adImages,
 		};
 

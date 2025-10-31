@@ -141,7 +141,7 @@ const AdFeatures = (props) => {
 															isOpen={grabModal}
 															setIsOpen={setGrabModal}
 															padding={false}
-															className={'bg-secondary max-w-fit px-4'}
+															className={'bg-secondary max-w-[600px] px-4'}
 															modalHeader={false}
 														>
 															<div className=" text-black space-y-3">
