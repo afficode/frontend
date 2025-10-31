@@ -58,7 +58,6 @@ const FilterForm = ({ categoryId }) => {
 							}
 						});
 
-						// Delete min_price/max_price if they're not in filteredValues
 						if (!('min_price' in filteredValues)) {
 							delete previousParams.min_price;
 						}
@@ -82,17 +81,14 @@ const FilterForm = ({ categoryId }) => {
 						setSearchParams(previousParams, { replace: true });
 						notify('Filters applied', 'success');
 					} else {
-						// When all filters are cleared, update params to remove filters
 						let previousParams = getPreviousSearchParams(searchParams);
 
-						// Delete all filter fields
 						filterFieldNames.forEach((fieldName) => {
 							if (fieldName in previousParams) {
 								delete previousParams[fieldName];
 							}
 						});
 
-						// Always delete price-related fields when no filters
 						delete previousParams.price;
 						delete previousParams.min_price;
 						delete previousParams.max_price;
