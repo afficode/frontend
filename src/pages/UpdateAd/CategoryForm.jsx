@@ -379,7 +379,7 @@ const CategoryForm = ({
 				required: true,
 				options: lgaOptions,
 			},
-			![5005].includes(selectedVehicleCategory) && {
+			!['5005'].includes(selectedVehicleCategory) && {
 				control: 'radio',
 				label: 'Seller Type',
 				name: 'seller_type',
@@ -389,7 +389,7 @@ const CategoryForm = ({
 					{ key: 'Private', value: 'private' },
 				],
 			},
-			![5002, 5005].includes(selectedVehicleCategory) && {
+			!['5002', '5005'].includes(selectedVehicleCategory) && {
 				control: 'input',
 				label: 'Vehicle Specification',
 				name: 'vehicle_specification',
@@ -406,12 +406,10 @@ const CategoryForm = ({
 			},
 			{
 				control: 'imageinput',
-				label: 'Images',
+				label: '',
 				name: 'images',
 				type: 'file',
-				// required: true,
-				images: adImages,
-				edit: true,
+				required: true,
 			},
 			{
 				control: 'select',
@@ -427,7 +425,7 @@ const CategoryForm = ({
 				placeholder: 'e.g. ES',
 				options: carModelOptions,
 			},
-			// ![5002, 5005].includes(selectedVehicleCategory) && {
+			// !['5002', '5005'].includes(selectedVehicleCategory) && {
 			// 	control: 'select',
 			// 	label: 'Trim',
 			// 	name: 'trim',
@@ -439,25 +437,25 @@ const CategoryForm = ({
 			// 		{ key: '550', value: '550' },
 			// 	],
 			// },
-			[5005, 5007].includes(selectedVehicleCategory) && {
+			['5005', '5007'].includes(selectedVehicleCategory) && {
 				control: 'select',
 				label: 'Type',
 				name: 'type',
 				type: 'text',
 				placeholder: 'Enter type here',
 				options:
-					selectedVehicleCategory === 5007 ? otherVehicleTypeOptions : vehicleAccessoriesTypeOptions,
+					selectedVehicleCategory === '5007' ? otherVehicleTypeOptions : vehicleAccessoriesTypeOptions,
 			},
-			[5005, 5007].includes(selectedVehicleCategory) &&
+			['5005', '5007'].includes(selectedVehicleCategory) &&
 				otherType && {
 					control: 'input',
 					label: 'Other Type',
-					name: 'type',
+					name: 'type_other',
 					type: 'text',
 					placeholder: 'Enter type',
 					required: true,
 				},
-			![5002, 5005].includes(selectedVehicleCategory) && {
+			!['5002', '5005'].includes(selectedVehicleCategory) && {
 				control: 'checkbox',
 				type: 'checkbox',
 				label: 'Vehicle Features',
@@ -503,21 +501,21 @@ const CategoryForm = ({
 				],
 			},
 
-			![5005].includes(selectedVehicleCategory) && {
+			!['5005'].includes(selectedVehicleCategory) && {
 				control: 'select',
 				label: 'Year of Manufacture?',
 				name: 'year',
 				placeholder: 'e.g. 350',
 				options: yearOptions,
 			},
-			![5002, 5005].includes(selectedVehicleCategory) && {
+			!['5002', '5005'].includes(selectedVehicleCategory) && {
 				control: 'input',
 				label: 'Your Vehicle Mileage?',
 				name: 'millage',
 				type: 'text',
 				placeholder: 'Enter your mileage eg. 105,000miles',
 			},
-			![5002, 5005].includes(selectedVehicleCategory) && {
+			!['5002', '5005'].includes(selectedVehicleCategory) && {
 				control: 'radio',
 				type: 'radio',
 				label: 'Vehicle Body Type',
@@ -540,7 +538,7 @@ const CategoryForm = ({
 					{ key: 'Roadster', value: 'roadster' },
 				],
 			},
-			![5002, 5005].includes(selectedVehicleCategory) && {
+			!['5002', '5005'].includes(selectedVehicleCategory) && {
 				control: 'radio',
 				type: 'radio',
 				label: 'Transmission',
@@ -560,11 +558,11 @@ const CategoryForm = ({
 			otherColor && {
 				control: 'input',
 				label: 'Other Colour',
-				name: 'color',
+				name: 'color_other',
 				type: 'text',
 				placeholder: 'Enter colour',
 			},
-			![5002, 5005].includes(selectedVehicleCategory) && {
+			!['5002', '5005'].includes(selectedVehicleCategory) && {
 				control: 'select',
 				label: 'Number of Seats',
 				name: 'number_of_seat',
@@ -581,7 +579,7 @@ const CategoryForm = ({
 					{ key: '10', value: '10' },
 				],
 			},
-			![5002, 5005].includes(selectedVehicleCategory) && {
+			!['5002', '5005'].includes(selectedVehicleCategory) && {
 				control: 'select',
 				label: 'Number of Doors',
 				name: 'number_of_door',
@@ -592,7 +590,7 @@ const CategoryForm = ({
 					{ key: '5', value: '5' },
 				],
 			},
-			![5005].includes(selectedVehicleCategory) && {
+			!['5005'].includes(selectedVehicleCategory) && {
 				control: 'select',
 				label: 'Fuel Type',
 				name: 'fuel_type',
@@ -604,7 +602,7 @@ const CategoryForm = ({
 					{ key: 'Hybrid', value: 'hybrid' },
 				],
 			},
-			![5002, 5005].includes(selectedVehicleCategory) && {
+			!['5002', '5005'].includes(selectedVehicleCategory) && {
 				control: 'select',
 				label: 'Engine Size',
 				name: 'engine_size',
@@ -697,12 +695,10 @@ const CategoryForm = ({
 			},
 			{
 				control: 'imageinput',
-				label: 'Images',
+				label: '',
 				name: 'images',
 				type: 'file',
-				// required: true,
-				images: adImages,
-				edit: true,
+				required: true,
 			},
 			{
 				control: 'textarea',
@@ -727,7 +723,7 @@ const CategoryForm = ({
 				name: 'facilities',
 				options: propertyFacilityOptions,
 			},
-			![5105].includes(selectedPropertyCategory) && {
+			!['5105'].includes(selectedPropertyCategory) && {
 				control: 'radio',
 				label: 'Property Condition',
 				name: 'ad_condition',
@@ -738,7 +734,7 @@ const CategoryForm = ({
 					{ key: 'Used', value: 'used' },
 				],
 			},
-			[5101, 5102, 5103, 5104, 5107, 5108, 5109].includes(selectedPropertyCategory) && {
+			['5101', '5102', '5103', '5104', '5107', '5108', '5109'].includes(selectedPropertyCategory) && {
 				control: 'radio',
 				label: 'Any Furnishing',
 				name: 'furnished',
@@ -760,15 +756,15 @@ const CategoryForm = ({
 			// 		{ key: 'Other', value: 'other' },
 			// 	],
 			// },
-			otherUse && {
-				control: 'input',
-				label: 'Other Property Use',
-				name: 'property_use',
-				type: 'text',
-				placeholder: 'Enter property use',
-				required: true,
-			},
-			![5105, 5106, 5108, 5109].includes(selectedPropertyCategory) && {
+			// otherUse && {
+			// 	control: 'input',
+			// 	label: 'Other Property Use',
+			// 	name: 'property_use',
+			// 	type: 'text',
+			// 	placeholder: 'Enter property use',
+			// 	required: true,
+			// },
+			!['5105', '5106', '5108', '5109'].includes(selectedPropertyCategory) && {
 				control: 'select',
 				label: 'Rooms/Bathrooms',
 				name: 'room_bathroom',
@@ -789,28 +785,28 @@ const CategoryForm = ({
 			otherRoom && {
 				control: 'input',
 				label: 'Other Rooms/Bathrooms',
-				name: 'room_bathroom',
+				name: 'room_bathroom_other',
 				type: 'text',
 				placeholder: 'Enter number of rooms/bathrooms',
 				required: true,
 			},
-			[5105, 5103, 5104, 5108, 5109].includes(selectedPropertyCategory) && {
+			['5105', '5103', '5104', '5108', '5109'].includes(selectedPropertyCategory) && {
 				control: 'input',
 				label: 'Property size in m^2',
 				name: 'size',
 				type: 'text',
 				placeholder: 'Enter property size',
 			},
-			[5104, 5109].includes(selectedPropertyCategory) && {
+			['5104', '5109'].includes(selectedPropertyCategory) && {
 				control: 'radio',
 				label: 'Time period',
 				name: 'time_period',
 				type: 'radio',
 				options: [
-					{ key: 'Period of 1 - 2 years', value: 'period of 1 - 2 years' },
-					{ key: 'Period of 2 - 5 years', value: 'period of 2 - 5 years' },
-					{ key: 'Period of 5 - 10 years', value: 'period of 5 - 10 years' },
-					{ key: 'Period of 10 and more', value: 'period of 10 and more' },
+					{ key: 'Period of 1 - 2 years', value: 'Period of 1 - 2 years' },
+					{ key: 'Period of 2 - 5 years', value: 'Period of 2 - 5 years' },
+					{ key: 'Period of 5 - 10 years', value: 'Period of 5 - 10 years' },
+					{ key: 'Period of 10 and more', value: 'Period of 10 and more' },
 				],
 			},
 			{
@@ -894,9 +890,20 @@ const CategoryForm = ({
 				required: true,
 			},
 			{
-				control: [5201, 5202, 5203, 5204, 5205, 5206, 5207, 5209, 5210, 5211, 5212, 5213].includes(
-					selectedServicesCategory
-				)
+				control: [
+					'5201',
+					'5202',
+					'5203',
+					'5204',
+					'5205',
+					'5206',
+					'5207',
+					'5209',
+					'5210',
+					'5211',
+					'5212',
+					'5213',
+				].includes(selectedServicesCategory)
 					? 'select'
 					: 'input',
 				label: 'Type',
@@ -912,13 +919,13 @@ const CategoryForm = ({
 				type: 'text',
 				placeholder: 'Enter type',
 			},
-			selectedServicesCategory === 5206 && {
+			selectedServicesCategory === '5206' && {
 				control: 'select',
 				label: 'Expertise',
 				name: 'expertise',
 				options: servicesExpertiseOptions,
 			},
-			selectedServicesCategory === 5206 &&
+			selectedServicesCategory === '5206' &&
 				otherExpertise && {
 					control: 'input',
 					label: 'Other Expertise',
@@ -927,7 +934,7 @@ const CategoryForm = ({
 					placeholder: 'Enter expertise',
 				},
 
-			selectedServicesCategory === 5213 && {
+			selectedServicesCategory === '5213' && {
 				control: 'select',
 				label: 'Make of vehicle',
 				name: 'make',
@@ -940,7 +947,7 @@ const CategoryForm = ({
 					{ key: 'Foton', value: 'foton' },
 					{ key: 'Goldoni', value: 'goldoni' },
 					{ key: 'Hyster', value: 'hyster' },
-					{ key: 'MAN', value: 'man' },
+					{ key: 'MAN', value: 'MAN' },
 					{ key: 'Toyota', value: 'toyota' },
 					{ key: '	Bomag', value: 'bomag' },
 					{ key: 'Fiat', value: 'fiat' },
@@ -956,7 +963,7 @@ const CategoryForm = ({
 				otherMake && {
 					control: 'input',
 					label: 'Other Make of vehicle',
-					name: 'make',
+					name: 'make_other',
 					type: 'text',
 					placeholder: 'Enter make',
 				},
@@ -1000,23 +1007,23 @@ const CategoryForm = ({
 					{ key: 'Employed', value: 'employed' },
 					{ key: 'Unemployed', value: 'unemployed' },
 					{ key: 'Self-Employed', value: 'self-employed' },
-					{ key: 'other', value: 'other' },
+					// { key: 'other', value: 'other' },
 				],
 			},
-			[5204, 5207].includes(selectedServicesCategory) && {
+			['5204', '5207'].includes(selectedServicesCategory) && {
 				control: 'radio',
 				type: 'radio',
 				label: 'Level of Education',
 				name: 'level_of_education',
 				options: [
 					{ key: "O'level", value: "o'level" },
-					{ key: 'BSc', value: 'bsc' },
+					{ key: 'BSc', value: 'BSc' },
 					{ key: 'Masters', value: 'masters' },
 					{ key: 'Other qualification', value: 'other qualification' },
 					{ key: 'No Formal Education', value: 'no formal education' },
 				],
 			},
-			[5204, 5207].includes(selectedServicesCategory) && {
+			['5204', '5207'].includes(selectedServicesCategory) && {
 				control: 'radio',
 				type: 'radio',
 				label: 'Type of Employment',
@@ -1089,12 +1096,10 @@ const CategoryForm = ({
 			},
 			{
 				control: 'imageinput',
-				label: 'Images',
+				label: '',
 				name: 'images',
 				type: 'file',
-				// required: true,
-				images: adImages,
-				edit: true,
+				required: true,
 			},
 			{
 				control: 'input',
@@ -1122,12 +1127,12 @@ const CategoryForm = ({
 			otherType && {
 				control: 'input',
 				label: 'Other Type',
-				name: 'type',
+				name: 'type_other',
 				type: 'text',
 				placeholder: 'Enter type',
 				required: true,
 			},
-			![5302].includes(selectedAgricultureCategory) && {
+			['5303'].includes(selectedAgricultureCategory) && {
 				control: 'radio',
 				label: 'Condition',
 				name: 'ad_condition',
@@ -1137,7 +1142,7 @@ const CategoryForm = ({
 					{ key: 'Used', value: 'used' },
 				],
 			},
-			![5302].includes(selectedAgricultureCategory) && {
+			!['5302'].includes(selectedAgricultureCategory) && {
 				control: 'radio',
 				type: 'radio',
 				label: 'Age',
@@ -1149,7 +1154,7 @@ const CategoryForm = ({
 					{ key: '7 - 10', value: '7-10' },
 				],
 			},
-			[5301].includes(selectedAgricultureCategory) && {
+			['5301'].includes(selectedAgricultureCategory) && {
 				control: 'radio',
 				type: 'radio',
 				label: 'Gender',
@@ -1159,7 +1164,7 @@ const CategoryForm = ({
 					{ key: 'Female', value: 'female' },
 				],
 			},
-			[5301].includes(selectedAgricultureCategory) && {
+			['5301'].includes(selectedAgricultureCategory) && {
 				control: 'select',
 				label: 'Colour',
 				name: 'color',
@@ -1168,7 +1173,7 @@ const CategoryForm = ({
 			otherColor && {
 				control: 'input',
 				label: 'Other Colour',
-				name: 'color',
+				name: 'color_other',
 				type: 'text',
 				placeholder: 'Enter colour',
 			},
@@ -1234,12 +1239,10 @@ const CategoryForm = ({
 			},
 			{
 				control: 'imageinput',
-				label: 'Images',
+				label: '',
 				name: 'images',
 				type: 'file',
-				// required: true,
-				images: adImages,
-				edit: true,
+				required: true,
 			},
 			{
 				control: 'input',
@@ -1267,7 +1270,7 @@ const CategoryForm = ({
 					{ key: 'New', value: 'new' },
 					{ key: 'Used', value: 'used' },
 					{ key: 'Refurbished', value: 'refurbished' },
-					{ key: 'For Parts/Not Working', value: 'for parts/not working' },
+					{ key: 'For Parts/Not Working', value: 'For Parts/Not Working' },
 				],
 			},
 			{
@@ -1279,12 +1282,12 @@ const CategoryForm = ({
 			otherBand && {
 				control: 'input',
 				label: 'Other Brand',
-				name: 'brand',
+				name: 'brand_other',
 				type: 'text',
 				placeholder: 'Enter brand',
 				required: true,
 			},
-			[5404, 5405, 5407, 5408, 5410].includes(selectedElectronicsCategory) && {
+			['5404', '5405', '5407', '5408', '5410'].includes(selectedElectronicsCategory) && {
 				control: 'select',
 				label: 'Type',
 				name: 'type',
@@ -1293,7 +1296,7 @@ const CategoryForm = ({
 				options: electronicsTypeOptions,
 			},
 
-			[5404, 5405, 5407, 5408, 5410].includes(selectedElectronicsCategory) &&
+			['5404', '5405', '5407', '5408', '5410'].includes(selectedElectronicsCategory) &&
 				otherType && {
 					control: 'input',
 					label: 'Other Type',
@@ -1309,34 +1312,34 @@ const CategoryForm = ({
 				name: 'resolution',
 				options: resolutionOptions,
 			},
-			[5402, 5406, 5409, 5411].includes(selectedElectronicsCategory) && {
+			['5402', '5406', '5409', '5411'].includes(selectedElectronicsCategory) && {
 				control: 'select',
 				label: 'Display Size',
 				name: 'electronics_display_size',
 				options: displaySizeOptions,
 			},
-			selectedElectronicsCategory === 5402 && {
+			selectedElectronicsCategory === '5402' && {
 				control: 'checkbox',
 				label: 'Input mode',
 				name: 'input_mode',
 				type: 'checkbox',
 				options: [
 					{ key: 'Display Port', value: 'display port' },
-					{ key: 'DVI-D', value: 'dvi-d' },
-					{ key: 'HDMI', value: 'hdmi' },
-					{ key: 'USB 2.0', value: 'usb 2.0' },
-					{ key: 'USB 3.0 ', value: 'usb 3.0 ' },
-					{ key: 'VGA', value: 'vga' },
+					{ key: 'DVI-D', value: 'DVI-D' },
+					{ key: 'HDMI', value: 'HDMI' },
+					{ key: 'USB 2.0', value: 'USB 2.0' },
+					{ key: 'USB 3.0 ', value: 'USB 3.0 ' },
+					{ key: 'VGA', value: 'VGA' },
 				],
 			},
-			[5402, 5406].includes(selectedElectronicsCategory) && {
+			['5402', '5406'].includes(selectedElectronicsCategory) && {
 				control: 'checkbox',
 				label: 'Display technology',
 				name: 'display_technology',
 				type: 'checkbox',
 				options: displayTechnologyOptions,
 			},
-			selectedElectronicsCategory === 5403 && {
+			selectedElectronicsCategory === '5403' && {
 				control: 'radio',
 				label: 'Style',
 				name: 'electronics_style',
@@ -1347,7 +1350,7 @@ const CategoryForm = ({
 					{ key: 'In-ear', value: 'in-ear' },
 				],
 			},
-			[5403, 5410].includes(selectedElectronicsCategory) && {
+			['5403', '5410'].includes(selectedElectronicsCategory) && {
 				control: 'radio',
 				label: 'Connectivity',
 				name: 'connectivity',
@@ -1355,90 +1358,90 @@ const CategoryForm = ({
 				options: [
 					{ key: 'Wireless', value: 'wireless' },
 					{ key: 'Wired', value: 'wired' },
-					{ key: 'Wired/Wireless', value: 'wired/wireless' },
+					{ key: 'Wired/Wireless', value: 'Wired/Wireless' },
 				],
 			},
-			selectedElectronicsCategory === 5403 && {
+			selectedElectronicsCategory === '5403' && {
 				control: 'checkbox',
 				label: 'Connectivity Interface',
 				name: 'connectivity_interface',
 				type: 'checkbox',
 				options: [
-					{ key: 'USB Type-C', value: 'usb type-c' },
-					{ key: 'Bluetooth', value: 'bluetooth' },
-					{ key: 'Mini USB / Bluetooth', value: 'mini usb / bluetooth' },
-					{ key: 'Micro USB / Bluetooth', value: 'micro usb / bluetooth' },
-					{ key: 'Lightning / Bluetooth ', value: 'lightning / bluetooth ' },
-					{ key: '2.5 mm / Bluetooth', value: '2.5 mm / bluetooth' },
+					{ key: 'USB Type-C', value: 'USB Type-C' },
+					{ key: 'Bluetooth', value: 'Bluetooth' },
+					{ key: 'Mini USB / Bluetooth', value: 'Mini USB / Bluetooth' },
+					{ key: 'Micro USB / Bluetooth', value: 'Micro USB / Bluetooth' },
+					{ key: 'Lightning / Bluetooth ', value: 'Lightning / Bluetooth ' },
+					{ key: '2.5 mm / Bluetooth', value: '2.5 mm / Bluetooth' },
 					{ key: '2.5 mm', value: '2.5 mm' },
-					{ key: 'USB Type-C / Bluetooth', value: 'usb type-c / bluetooth' },
-					{ key: 'Micro USB', value: 'micro usb' },
-					{ key: '3.5 mm / Bluetooth', value: '3.5 mm / bluetooth' },
+					{ key: 'USB Type-C / Bluetooth', value: 'USB Type-C / Bluetooth' },
+					{ key: 'Micro USB', value: 'Micro USB' },
+					{ key: '3.5 mm / Bluetooth', value: '3.5 mm / Bluetooth' },
 					{ key: 'Other', value: 'other' },
 				],
 			},
-			selectedElectronicsCategory === 5403 && {
+			selectedElectronicsCategory === '5403' && {
 				control: 'checkbox',
 				label: 'Features',
 				name: 'features',
 				type: 'checkbox',
 				options: [
-					{ key: 'Wireless Charging', value: 'wireless charging' },
-					{ key: 'Waterproof ', value: 'waterproof ' },
-					{ key: 'NFC', value: 'nfc' },
-					{ key: 'Light Effects', value: 'light effects' },
-					{ key: 'Hi-Res Audio', value: 'hi-res audio' },
-					{ key: 'Detachable Microphone', value: 'detachable microphone' },
-					{ key: 'AptX / AptX HD', value: 'aptX / aptX hd' },
-					{ key: 'Active Noise Cancellation', value: 'active noise cancellation' },
+					{ key: 'Wireless Charging', value: 'Wireless Charging' },
+					{ key: 'Waterproof ', value: 'Waterproof ' },
+					{ key: 'NFC', value: 'NFC' },
+					{ key: 'Light Effects', value: 'Light Effects' },
+					{ key: 'Hi-Res Audio', value: 'Hi-Res Audio' },
+					{ key: 'Detachable Microphone', value: 'Detachable Microphone' },
+					{ key: 'AptX / AptX HD', value: 'AptX / AptX HD' },
+					{ key: 'Active Noise Cancellation', value: 'Active Noise Cancellation' },
 				],
 			},
-			[5409, 5406].includes(selectedElectronicsCategory) && {
+			['5409', '5406'].includes(selectedElectronicsCategory) && {
 				control: 'select',
 				label: 'Size of Ram',
 				name: 'ram_size',
 				options: ramSizeOptions,
 			},
-			[5409, 5406].includes(selectedElectronicsCategory) && {
+			['5409', '5406'].includes(selectedElectronicsCategory) && {
 				control: 'select',
 				label: 'Storage',
 				name: 'storage',
 				options: storageSizeOptions,
 			},
-			selectedElectronicsCategory === 5409 && {
+			selectedElectronicsCategory === '5409' && {
 				control: 'select',
 				label: 'Storage type',
 				name: 'storage_type',
 				options: storageTypeOptions,
 			},
-			selectedElectronicsCategory === 5406 && {
+			selectedElectronicsCategory === '5406' && {
 				control: 'select',
 				label: 'SIM type',
 				name: 'sim_type',
 				options: simTypeOptions,
 			},
-			selectedElectronicsCategory === 5409 && {
+			selectedElectronicsCategory === '5409' && {
 				control: 'select',
 				label: 'Processor',
 				name: 'processor',
 				options: processorsOptions,
 			},
-			selectedElectronicsCategory === 5409 &&
+			selectedElectronicsCategory === '5409' &&
 				otherProcessor && {
 					control: 'input',
 					type: 'text',
 					label: 'Other Processor',
-					name: 'processor',
+					name: 'processor_other',
 					placeholder: 'Enter other processor',
 					required: true,
 				},
-			selectedElectronicsCategory === 5409 && {
+			selectedElectronicsCategory === '5409' && {
 				control: 'select',
 				label: 'Operating System',
 				name: 'operating_system',
 				options: operatingSysOptions,
 			},
-			selectedElectronicsCategory === 5406 && {
+			selectedElectronicsCategory === '5406' && {
 				control: 'radio',
 				label: 'Exchange Possible?',
 				type: 'radio',
@@ -1459,7 +1462,7 @@ const CategoryForm = ({
 			otherColor && {
 				control: 'input',
 				label: 'Other Colour',
-				name: 'color',
+				name: 'color_other',
 				type: 'text',
 				placeholder: 'Enter colour',
 			},
@@ -1525,12 +1528,10 @@ const CategoryForm = ({
 			},
 			{
 				control: 'imageinput',
-				label: 'Images',
+				label: '',
 				name: 'images',
 				type: 'file',
-				// required: true,
-				images: adImages,
-				edit: true,
+				required: true,
 			},
 			{
 				control: 'input',
@@ -1557,7 +1558,7 @@ const CategoryForm = ({
 				options: [
 					{ key: 'Business', value: 'business' },
 					{ key: 'Casual', value: 'casual' },
-					{ key: 'Sport', value: 'other' },
+					{ key: 'Sport', value: 'sport' },
 				],
 			},
 			{
@@ -1597,7 +1598,7 @@ const CategoryForm = ({
 			otherColor && {
 				control: 'input',
 				label: 'Other Colour',
-				name: 'color',
+				name: 'color_other',
 				type: 'text',
 				placeholder: 'Enter colour',
 			},
@@ -1624,7 +1625,7 @@ const CategoryForm = ({
 			otherType && {
 				control: 'input',
 				label: 'Other Type',
-				name: 'type',
+				name: 'type_other',
 				type: 'text',
 				placeholder: 'Enter type',
 				required: true,
@@ -1640,7 +1641,7 @@ const CategoryForm = ({
 			otherBand && {
 				control: 'input',
 				label: 'Other Brand',
-				name: 'brand',
+				name: 'brand_other',
 				type: 'text',
 				placeholder: 'Enter brand',
 				required: true,
@@ -1655,12 +1656,12 @@ const CategoryForm = ({
 			otherMaterial && {
 				control: 'input',
 				label: 'Other Material',
-				name: 'material',
+				name: 'material_other',
 				type: 'text',
 				placeholder: 'Enter material',
 				required: true,
 			},
-			selectedFashionCategory === '5306' && {
+			selectedFashionCategory === '5506' && {
 				control: 'radio',
 				label: 'Display',
 				name: 'display',
@@ -1732,12 +1733,10 @@ const CategoryForm = ({
 			},
 			{
 				control: 'imageinput',
-				label: 'Images',
+				label: '',
 				name: 'images',
 				type: 'file',
-				// required: true,
-				images: adImages,
-				edit: true,
+				required: true,
 			},
 			{
 				control: 'input',
@@ -1757,7 +1756,7 @@ const CategoryForm = ({
 				required: true,
 			},
 
-			![5608].includes(selectedHealthCategory) && {
+			!['5608'].includes(selectedHealthCategory) && {
 				control: 'select',
 				label: 'Brand',
 				name: 'brand',
@@ -1768,7 +1767,7 @@ const CategoryForm = ({
 			otherBand && {
 				control: 'input',
 				label: 'Other Brand',
-				name: 'brand',
+				name: 'brand_other',
 				type: 'text',
 				placeholder: 'Enter brand',
 				required: true,
@@ -1784,12 +1783,12 @@ const CategoryForm = ({
 			otherType && {
 				control: 'input',
 				label: 'Other Type',
-				name: 'type',
+				name: 'type_other',
 				type: 'text',
 				placeholder: 'Enter type',
 				required: true,
 			},
-			![5603, 5601, 5605, 5607, 5608, 5604, 5606].includes(selectedHealthCategory) && {
+			!['5603', '5601', '5605', '5607', '5608', '5604', '5606'].includes(selectedHealthCategory) && {
 				control: 'radio',
 				label: 'Age Group',
 				name: 'age',
@@ -1803,7 +1802,7 @@ const CategoryForm = ({
 					{ key: '50 - 60', value: '50-60' },
 				],
 			},
-			![5608, 5602, 5604, 5606].includes(selectedHealthCategory) && {
+			!['5608', '5602', '5604', '5606'].includes(selectedHealthCategory) && {
 				control: 'radio',
 				label: 'Gender',
 				name: 'gender',
@@ -1814,9 +1813,9 @@ const CategoryForm = ({
 					{ key: 'Unisex', value: 'unisex' },
 				],
 			},
-			[5601, 5605].includes(selectedHealthCategory) && {
+			['5601', '5605'].includes(selectedHealthCategory) && {
 				control: 'select',
-				label: 'Color',
+				label: 'Colour',
 				name: 'color',
 				type: 'text',
 				placeholder: 'Type color here',
@@ -1824,12 +1823,12 @@ const CategoryForm = ({
 			},
 			otherColor && {
 				control: 'input',
-				label: 'Other Color',
-				name: 'color',
+				label: 'Other Colour',
+				name: 'color_other',
 				type: 'text',
-				placeholder: 'Enter color',
+				placeholder: 'Enter colour',
 			},
-			![5603, 5607, 5602, 5604, 5606].includes(selectedHealthCategory) && {
+			!['5603', '5607', '5602', '5604', '5606'].includes(selectedHealthCategory) && {
 				control: 'radio',
 				label: 'Condition',
 				name: 'ad_condition',
@@ -1839,7 +1838,7 @@ const CategoryForm = ({
 					{ key: 'Used', value: 'used' },
 				],
 			},
-			[5602, 5603].includes(selectedHealthCategory) && {
+			['5602', '5603'].includes(selectedHealthCategory) && {
 				control: 'select',
 				label: 'Formulation',
 				name: 'formulation',
@@ -1853,26 +1852,26 @@ const CategoryForm = ({
 				placeholder: 'Enter formulation',
 				required: true,
 			},
-			selectedHealthCategory === 5603 && {
+			selectedHealthCategory === '5603' && {
 				control: 'select',
 				label: 'Scent type',
 				name: 'scent_type',
 				options: [
 					{ key: 'Select scent type here', value: '' },
-					{ key: 'Spicy', value: 'spicy' },
-					{ key: 'Citrus', value: 'citrus' },
-					{ key: 'Floral', value: 'floral' },
-					{ key: 'Oceanic', value: 'oceanic' },
-					{ key: 'Oriental', value: 'oriental' },
-					{ key: 'Fruity ', value: 'fruity' },
-					{ key: 'Woody ', value: 'woody' },
+					{ key: 'Spicy', value: 'Spicy' },
+					{ key: 'Citrus', value: 'Citrus' },
+					{ key: 'Floral', value: 'Floral' },
+					{ key: 'Oceanic', value: 'Oceanic' },
+					{ key: 'Oriental', value: 'Oriental' },
+					{ key: 'Fruity ', value: 'Fruity' },
+					{ key: 'Woody ', value: 'Woody' },
 					{ key: 'Other ', value: 'other' },
 				],
 			},
 			otherScent && {
 				control: 'input',
 				label: 'Other Scent type',
-				name: 'scent_type',
+				name: 'scent_type_other',
 				type: 'text',
 				placeholder: 'Enter scent type',
 				required: true,
@@ -1939,12 +1938,10 @@ const CategoryForm = ({
 			},
 			{
 				control: 'imageinput',
-				label: 'Images',
+				label: '',
 				name: 'images',
 				type: 'file',
-				// required: true,
-				images: adImages,
-				edit: true,
+				required: true,
 			},
 			{
 				control: 'input',
@@ -1972,7 +1969,7 @@ const CategoryForm = ({
 			otherBand && {
 				control: 'input',
 				label: 'Other Brand',
-				name: 'brand',
+				name: 'brand_other',
 				type: 'text',
 				placeholder: 'Enter brand',
 				required: true,
@@ -1986,12 +1983,12 @@ const CategoryForm = ({
 			otherType && {
 				control: 'input',
 				label: 'Other Type',
-				name: 'type',
+				name: 'type_other',
 				type: 'text',
 				placeholder: 'Enter type',
 				required: true,
 			},
-			[5701].includes(selectedHomeCategory) && {
+			['5701'].includes(selectedHomeCategory) && {
 				control: 'select',
 				label: 'Material',
 				name: 'material',
@@ -2000,12 +1997,12 @@ const CategoryForm = ({
 			otherMaterial && {
 				control: 'input',
 				label: 'Other Material',
-				name: 'material',
+				name: 'material_other',
 				type: 'text',
 				placeholder: 'Enter material',
 				required: true,
 			},
-			[5701].includes(selectedHomeCategory) && {
+			['5701'].includes(selectedHomeCategory) && {
 				control: 'select',
 				label: 'Furniture for',
 				name: 'furniture_for',
@@ -2014,12 +2011,12 @@ const CategoryForm = ({
 			otherFurnitureFor && {
 				control: 'input',
 				label: 'Other Furniture for',
-				name: 'furniture_for',
+				name: 'furniture_for_other',
 				type: 'text',
 				placeholder: 'Enter furniture for',
 				required: true,
 			},
-			[5704].includes(selectedHomeCategory) && {
+			['5704'].includes(selectedHomeCategory) && {
 				control: 'select',
 				label: 'Form',
 				name: 'formulation',
@@ -2028,12 +2025,12 @@ const CategoryForm = ({
 			otherFormulation && {
 				control: 'input',
 				label: 'Other Form',
-				name: 'formulation',
+				name: 'formulation_other',
 				type: 'text',
 				placeholder: 'Enter form',
 				required: true,
 			},
-			![5704].includes(selectedHomeCategory) && {
+			!['5704'].includes(selectedHomeCategory) && {
 				control: 'radio',
 				label: 'Condition',
 				name: 'ad_condition',
@@ -2044,9 +2041,9 @@ const CategoryForm = ({
 					{ key: 'Refurbished', value: 'refurbished' },
 				],
 			},
-			[5701, 5702].includes(selectedHomeCategory) && {
+			['5701', '5702'].includes(selectedHomeCategory) && {
 				control: 'select',
-				label: 'Color',
+				label: 'Colour',
 				name: 'color',
 				type: 'text',
 				placeholder: 'Type color here',
@@ -2054,8 +2051,8 @@ const CategoryForm = ({
 			},
 			otherColor && {
 				control: 'input',
-				label: 'Other Color',
-				name: 'color',
+				label: 'Other Colour',
+				name: 'color_other',
 				type: 'text',
 				placeholder: 'Enter colour',
 			},
@@ -2121,12 +2118,10 @@ const CategoryForm = ({
 			},
 			{
 				control: 'imageinput',
-				label: 'Images',
+				label: '',
 				name: 'images',
 				type: 'file',
-				// required: true,
-				images: adImages,
-				edit: true,
+				required: true,
 			},
 			{
 				control: 'input',
@@ -2152,7 +2147,7 @@ const CategoryForm = ({
 				type: 'text',
 				placeholder: 'Enter company name here',
 			},
-			![5802, 5803].includes(selectedTradesmanCategory) && {
+			!['5802', '5803'].includes(selectedTradesmanCategory) && {
 				control: 'select',
 				label: 'Type',
 				name: 'type',
@@ -2161,19 +2156,19 @@ const CategoryForm = ({
 			otherType && {
 				control: 'input',
 				label: 'Other Type',
-				name: 'type',
+				name: 'type_other',
 				type: 'text',
 				placeholder: 'Enter type',
 				required: true,
 			},
-			![5811, 5803, 5809].includes(selectedTradesmanCategory) && {
+			!['5811', '5803', '5809'].includes(selectedTradesmanCategory) && {
 				control: 'radio',
 				label: 'Service Area',
 				name: 'service_area',
 				type: 'radio',
 				options: tradesmanAreaOptions,
 			},
-			![5806, 5811, 5812].includes(selectedTradesmanCategory) && {
+			!['5806', '5811', '5812'].includes(selectedTradesmanCategory) && {
 				control: 'checkbox',
 				label: 'Service Features',
 				name: 'service_features',
@@ -2183,40 +2178,40 @@ const CategoryForm = ({
 					{ key: 'Home Visit', value: 'home visit' },
 				],
 			},
-			[5812].includes(selectedTradesmanCategory) && {
+			['5812'].includes(selectedTradesmanCategory) && {
 				control: 'radio',
 				label: 'Payment Terms',
 				name: 'payment_terms',
 				type: 'radio',
 				options: [
-					{ key: 'Pay per hour', value: 'pay per hour' },
-					{ key: 'Pay per piece', value: 'pay per piece' },
-					{ key: 'Daily payment', value: 'daily payment' },
+					{ key: 'Pay per hour', value: 'Pay per hour' },
+					{ key: 'Pay per piece', value: 'Pay per piece' },
+					{ key: 'Daily payment', value: 'Daily payment' },
 					{ key: 'Contract', value: 'Contract' },
 				],
 			},
-			[5812].includes(selectedTradesmanCategory) && {
+			['5812'].includes(selectedTradesmanCategory) && {
 				control: 'radio',
 				label: 'Mode of Transport',
 				name: 'mode_of_transport',
 				type: 'radio',
 				options: [
 					{ key: 'Road', value: 'road' },
-					{ key: 'Rail', value: 'rail' },
-					{ key: 'Air', value: 'air' },
-					{ key: 'Maritime', value: 'maritime' },
-					{ key: 'Cycling and Pedestrian', value: 'cycling and edestrian' },
-					{ key: 'Intermodal/modal Transportation', value: 'intermodal/modal transportation' },
+					{ key: 'Rail', value: 'Rail' },
+					{ key: 'Air', value: 'Air' },
+					{ key: 'Maritime', value: 'Maritime' },
+					{ key: 'Cycling and Pedestrian', value: 'Cycling and Pedestrian' },
+					{ key: 'Intermodal/modal Transportation', value: 'Intermodal/modal Transportation' },
 				],
 			},
-			[5803, 5811, 5809].includes(selectedTradesmanCategory) && {
+			['5803', '5811', '5809'].includes(selectedTradesmanCategory) && {
 				control: 'checkbox',
 				label: 'Form',
 				name: 'form',
 				type: 'checkbox',
 				options: tradesmanFormOptions,
 			},
-			[5804, 5810, 5813].includes(selectedTradesmanCategory) && {
+			['5804', '5810', '5813'].includes(selectedTradesmanCategory) && {
 				control: 'radio',
 				label: 'Years of Experience',
 				name: 'years_of_experience',
@@ -2230,7 +2225,7 @@ const CategoryForm = ({
 					{ key: '20+', value: '20+' },
 				],
 			},
-			[5804].includes(selectedTradesmanCategory) && {
+			['5804'].includes(selectedTradesmanCategory) && {
 				control: 'radio',
 				label: 'Mode of Charges',
 				name: 'mode_of_charges',
@@ -2240,7 +2235,7 @@ const CategoryForm = ({
 					{ key: 'TBD', value: 'tbd' },
 				],
 			},
-			![5811, 5803, 5812, 5813].includes(selectedTradesmanCategory) && {
+			!['5811', '5803', '5812', '5813'].includes(selectedTradesmanCategory) && {
 				control: 'radio',
 				label: 'Available to travel',
 				name: 'available_for_travel',
@@ -2312,12 +2307,10 @@ const CategoryForm = ({
 			},
 			{
 				control: 'imageinput',
-				label: 'Images',
+				label: '',
 				name: 'images',
 				type: 'file',
-				// required: true,
-				images: adImages,
-				edit: true,
+				required: true,
 			},
 			{
 				control: 'input',
@@ -2336,7 +2329,7 @@ const CategoryForm = ({
 				placeholder: 'Enter as much information as possible. Please state IF any defects.',
 				required: true,
 			},
-			[5902, 5903].includes(selectedSoftwareCategory) && {
+			['5902', '5903'].includes(selectedSoftwareCategory) && {
 				control: 'radio',
 				label: 'Condition',
 				name: 'ad_condition',
@@ -2348,7 +2341,7 @@ const CategoryForm = ({
 					{ key: 'For Parts/Not Working', value: 'for_parts_not_working' },
 				],
 			},
-			![5903].includes(selectedSoftwareCategory) && {
+			!['5903'].includes(selectedSoftwareCategory) && {
 				control: 'select',
 				label: 'Platform',
 				name: 'platform',
@@ -2362,7 +2355,7 @@ const CategoryForm = ({
 				placeholder: 'Enter platform',
 				required: true,
 			},
-			![5903].includes(selectedSoftwareCategory) && {
+			!['5903'].includes(selectedSoftwareCategory) && {
 				control: 'radio',
 				label: 'Format',
 				name: 'format',
@@ -2383,13 +2376,13 @@ const CategoryForm = ({
 				placeholder: 'Enter format',
 				required: true,
 			},
-			[5902].includes(selectedSoftwareCategory) && {
+			['5902'].includes(selectedSoftwareCategory) && {
 				control: 'select',
 				label: 'Release Year',
 				name: 'release_year',
 				options: yearOptions,
 			},
-			[5902].includes(selectedSoftwareCategory) && {
+			['5902'].includes(selectedSoftwareCategory) && {
 				control: 'select',
 				label: 'Game genre',
 				name: 'game_genre',
@@ -2403,7 +2396,7 @@ const CategoryForm = ({
 				placeholder: 'Enter Game genre',
 				required: true,
 			},
-			[5901].includes(selectedSoftwareCategory) && {
+			['5901'].includes(selectedSoftwareCategory) && {
 				control: 'select',
 				label: 'Software Type',
 				name: 'type',
@@ -2417,18 +2410,18 @@ const CategoryForm = ({
 				placeholder: 'Enter Software type',
 				required: true,
 			},
-			[5902].includes(selectedSoftwareCategory) && {
+			['5902'].includes(selectedSoftwareCategory) && {
 				control: 'radio',
 				label: 'Rating',
 				name: 'rating',
 				type: 'radio',
 				options: [
-					{ key: 'Everyone', value: 'everyone' },
+					{ key: 'Everyone', value: 'Everyone' },
 					{ key: '10+', value: '10+' },
-					{ key: 'Todler', value: 'todler' },
-					{ key: 'Adults Only', value: 'adults only' },
-					{ key: 'Mature', value: 'mature' },
-					{ key: 'Teenager', value: 'teenager' },
+					{ key: 'Todler', value: 'Todler' },
+					{ key: 'Adults Only', value: 'Adults Only' },
+					{ key: 'Mature', value: 'Mature' },
+					{ key: 'Teenager', value: 'Teenager' },
 				],
 			},
 			{
@@ -2492,12 +2485,10 @@ const CategoryForm = ({
 			},
 			{
 				control: 'imageinput',
-				label: 'Images',
+				label: '',
 				name: 'images',
 				type: 'file',
-				// required: true,
-				images: adImages,
-				edit: true,
+				required: true,
 			},
 			{
 				control: 'input',
@@ -2516,7 +2507,7 @@ const CategoryForm = ({
 				placeholder: 'Enter as much information as possible. Please state IF any defects.',
 				required: true,
 			},
-			[6001, 6004].includes(selectedPetCategory) && {
+			['6001', '6004'].includes(selectedPetCategory) && {
 				control: 'select',
 				label: 'Breed',
 				name: 'breed',
@@ -2546,7 +2537,7 @@ const CategoryForm = ({
 				placeholder: 'Enter breed type',
 				required: true,
 			},
-			![6002, 6003, 6004].includes(selectedPetCategory) && {
+			!['6002', '6003', '6004'].includes(selectedPetCategory) && {
 				control: 'radio',
 				label: 'Gender',
 				name: 'gender',
@@ -2556,9 +2547,9 @@ const CategoryForm = ({
 					{ key: 'Female ', value: 'female' },
 				],
 			},
-			![6002, 6004, 6005].includes(selectedPetCategory) && {
+			!['6002', '6004', '6005'].includes(selectedPetCategory) && {
 				control: 'select',
-				label: 'Color',
+				label: 'Colour',
 				name: 'color',
 				type: 'text',
 				placeholder: 'Type color here',
@@ -2567,11 +2558,11 @@ const CategoryForm = ({
 			otherColor && {
 				control: 'input',
 				label: 'Other Colour',
-				name: 'color',
+				name: 'color_other',
 				type: 'text',
 				placeholder: 'Enter colour',
 			},
-			[6003].includes(selectedPetCategory) && {
+			['6003'].includes(selectedPetCategory) && {
 				control: 'radio',
 				label: 'Condition',
 				name: 'ad_condition',
@@ -2579,10 +2570,10 @@ const CategoryForm = ({
 				options: [
 					{ key: 'Nigerian Used', value: 'Nigerian Used' },
 					{ key: 'Foreign Used ', value: 'Foreign Used' },
-					{ key: 'New', value: 'New' },
+					{ key: 'New', value: 'new' },
 				],
 			},
-			![6002, 6003].includes(selectedPetCategory) && {
+			!['6002', '6003'].includes(selectedPetCategory) && {
 				control: 'radio',
 				label: 'Age',
 				name: 'age',
@@ -2616,7 +2607,7 @@ const CategoryForm = ({
 				placeholder: '₦0.00',
 				required: true,
 			},
-			[6002, 6003].includes(selectedPetCategory) && {
+			['6002', '6003'].includes(selectedPetCategory) && {
 				control: 'price',
 				label: 'Bulk price',
 				name: 'bulk_price',
@@ -2664,12 +2655,10 @@ const CategoryForm = ({
 			},
 			{
 				control: 'imageinput',
-				label: 'Images',
+				label: '',
 				name: 'images',
 				type: 'file',
-				// required: true,
-				images: adImages,
-				edit: true,
+				required: true,
 			},
 			{
 				control: 'input',
@@ -2688,7 +2677,7 @@ const CategoryForm = ({
 				placeholder: 'Enter as much information as possible. Please state IF any defects.',
 				required: true,
 			},
-			![6111].includes(selectedBabiesCategory) && {
+			!['6111'].includes(selectedBabiesCategory) && {
 				control: 'radio',
 				label: 'Condition',
 				name: 'ad_condition',
@@ -2698,7 +2687,7 @@ const CategoryForm = ({
 					{ key: 'Used', value: 'used' },
 				],
 			},
-			![6106, 6101].includes(selectedBabiesCategory) && {
+			!['6106', '6101'].includes(selectedBabiesCategory) && {
 				control: 'select',
 				label: 'Brand',
 				name: 'brand',
@@ -2707,12 +2696,12 @@ const CategoryForm = ({
 			otherBand && {
 				control: 'input',
 				label: 'Other Brand',
-				name: 'brand',
+				name: 'brand_other',
 				type: 'text',
 				placeholder: 'Enter brand',
 				required: true,
 			},
-			![6111, 6105].includes(selectedBabiesCategory) && {
+			!['6111', '6105'].includes(selectedBabiesCategory) && {
 				control: 'select',
 				label: 'Type',
 				name: 'type',
@@ -2721,12 +2710,12 @@ const CategoryForm = ({
 			otherType && {
 				control: 'input',
 				label: 'Other Type',
-				name: 'type',
+				name: 'type_other',
 				type: 'text',
 				placeholder: 'Enter type',
 				required: true,
 			},
-			![6104, 6101, 6111, 6105, 6109].includes(selectedBabiesCategory) && {
+			!['6104', '6101', '6111', '6105', '6109'].includes(selectedBabiesCategory) && {
 				control: 'radio',
 				label: 'Gender',
 				name: 'gender',
@@ -2736,9 +2725,9 @@ const CategoryForm = ({
 					{ key: 'Female', value: 'female' },
 				],
 			},
-			![6101, 6111].includes(selectedBabiesCategory) && {
+			!['6101', '6111'].includes(selectedBabiesCategory) && {
 				control: 'select',
-				label: 'Color',
+				label: 'Colour',
 				name: 'color',
 				type: 'text',
 				placeholder: 'Type color here',
@@ -2747,24 +2736,24 @@ const CategoryForm = ({
 			otherColor && {
 				control: 'input',
 				label: 'Other Colour',
-				name: 'color',
+				name: 'color_other',
 				type: 'text',
 				placeholder: 'Enter colour',
 			},
-			[6107].includes(selectedBabiesCategory) && {
+			['6107'].includes(selectedBabiesCategory) && {
 				control: 'radio',
 				label: 'Capacity',
 				name: 'capacity',
 				type: 'radio',
 				options: [
-					{ key: 'Double', value: 'double' },
-					{ key: 'Single', value: 'single' },
-					{ key: 'Triple', value: 'triple' },
-					{ key: 'Quad', value: 'quad' },
-					{ key: 'Other', value: 'other' },
+					{ key: 'Double', value: 'Double' },
+					{ key: 'Single', value: 'Single' },
+					{ key: 'Triple', value: 'Triple' },
+					{ key: 'Quad', value: 'Quad' },
+					{ key: 'Other', value: 'Other' },
 				],
 			},
-			![6107, 6104, 6106].includes(selectedBabiesCategory) && {
+			!['6107', '6104', '6106'].includes(selectedBabiesCategory) && {
 				control: 'radio',
 				label: 'Age',
 				name: 'age',
@@ -2777,7 +2766,7 @@ const CategoryForm = ({
 					{ key: '8+', value: '8+' },
 				],
 			},
-			[6102].includes(selectedBabiesCategory) && {
+			['6102'].includes(selectedBabiesCategory) && {
 				control: 'select',
 				label: 'Size',
 				name: 'size',
@@ -2852,12 +2841,10 @@ const CategoryForm = ({
 			},
 			{
 				control: 'imageinput',
-				label: 'Images',
+				label: '',
 				name: 'images',
 				type: 'file',
-				// required: true,
-				images: adImages,
-				edit: true,
+				required: true,
 			},
 			{
 				control: 'input',
@@ -2876,7 +2863,7 @@ const CategoryForm = ({
 				placeholder: 'Enter as much information as possible. Please state IF any defects.',
 				required: true,
 			},
-			![6204].includes(selectedSportsCategory) && {
+			!['6204'].includes(selectedSportsCategory) && {
 				control: 'radio',
 				label: 'Condition',
 				name: 'ad_condition',
@@ -2887,7 +2874,7 @@ const CategoryForm = ({
 					{ key: 'Foreign Used', value: 'foreign use' },
 				],
 			},
-			![6205, 6206, 6204, 6201, 6202, 6203].includes(selectedSportsCategory) && {
+			!['6205', '6206', '6204', '6201', '6202', '6203'].includes(selectedSportsCategory) && {
 				control: 'radio',
 				label: 'Gender',
 				name: 'gender',
@@ -2897,7 +2884,7 @@ const CategoryForm = ({
 					{ key: 'Female', value: 'female' },
 				],
 			},
-			[6202, 6203, 6206].includes(selectedSportsCategory) && {
+			['6202', '6203', '6206'].includes(selectedSportsCategory) && {
 				control: 'select',
 				label: 'Brand',
 				name: 'brand',
@@ -2908,12 +2895,12 @@ const CategoryForm = ({
 			otherBand && {
 				control: 'input',
 				label: 'Other Brand',
-				name: 'brand',
+				name: 'brand_other',
 				type: 'text',
 				placeholder: 'Enter brand',
 				required: true,
 			},
-			[6201, 6202, 6203, 6204, 6205].includes(selectedSportsCategory) && {
+			['6201', '6202', '6203', '6204', '6205'].includes(selectedSportsCategory) && {
 				control: 'select',
 				label: 'Type',
 				name: 'type',
@@ -2924,14 +2911,14 @@ const CategoryForm = ({
 			otherType && {
 				control: 'input',
 				label: 'Other Type',
-				name: 'type',
+				name: 'type_other',
 				type: 'text',
 				placeholder: 'Enter type',
 				required: true,
 			},
-			![6205, 6204, 6201, 6202, 6203].includes(selectedSportsCategory) && {
+			!['6205', '6204', '6201', '6202', '6203'].includes(selectedSportsCategory) && {
 				control: 'select',
-				label: 'Color',
+				label: 'Colour',
 				name: 'color',
 				type: 'text',
 				placeholder: 'Type color here',
@@ -2940,11 +2927,11 @@ const CategoryForm = ({
 			otherColor && {
 				control: 'input',
 				label: 'Other Colour',
-				name: 'color',
+				name: 'color_other',
 				type: 'text',
 				placeholder: 'Enter colour',
 			},
-			[6205].includes(selectedSportsCategory) && {
+			['6205'].includes(selectedSportsCategory) && {
 				control: 'select',
 				label: 'Age',
 				name: 'age',
@@ -3043,12 +3030,10 @@ const CategoryForm = ({
 			},
 			{
 				control: 'imageinput',
-				label: 'Images',
+				label: '',
 				name: 'images',
 				type: 'file',
-				// required: true,
-				images: adImages,
-				edit: true,
+				required: true,
 			},
 			{
 				control: 'select',
@@ -3065,7 +3050,7 @@ const CategoryForm = ({
 				placeholder: 'Enter make',
 				required: true,
 			},
-			selectedMotorbikeCategory === 6301 && {
+			selectedMotorbikeCategory === '6301' && {
 				control: 'select',
 				label: 'Type',
 				name: 'type',
@@ -3073,11 +3058,11 @@ const CategoryForm = ({
 				placeholder: 'e.g. Scooter, Touring, Tricycle',
 				options: motorbikeTypeOptions,
 			},
-			selectedMotorbikeCategory === 6301 &&
+			selectedMotorbikeCategory === '6301' &&
 				otherType && {
 					control: 'input',
 					label: 'Other Type',
-					name: 'type',
+					name: 'type_other',
 					type: 'text',
 					placeholder: 'Enter type',
 					required: true,
@@ -3105,13 +3090,13 @@ const CategoryForm = ({
 					{ key: 'Unpainted', value: 'unpainted' },
 				],
 			},
-			selectedMotorbikeCategory === 6302 && {
+			selectedMotorbikeCategory === '6302' && {
 				control: 'select',
 				label: 'Year of Manufacture?',
 				name: 'year',
 				options: yearOptions,
 			},
-			selectedMotorbikeCategory === 6302 && {
+			selectedMotorbikeCategory === '6302' && {
 				control: 'input',
 				label: 'Mileage?',
 				name: 'mileage',
@@ -3130,7 +3115,7 @@ const CategoryForm = ({
 			},
 			{
 				control: 'select',
-				label: 'Color',
+				label: 'Colour',
 				name: 'color',
 				type: 'text',
 				placeholder: 'Type color here',
@@ -3138,10 +3123,10 @@ const CategoryForm = ({
 			},
 			otherColor && {
 				control: 'input',
-				label: 'Other Color',
-				name: 'color',
+				label: 'Other Colour',
+				name: 'color_other',
 				type: 'text',
-				placeholder: 'Enter color',
+				placeholder: 'Enter colour',
 			},
 			{
 				control: 'radio',
@@ -3225,12 +3210,10 @@ const CategoryForm = ({
 			},
 			{
 				control: 'imageinput',
-				label: 'Images',
+				label: '',
 				name: 'images',
 				type: 'file',
-				// required: true,
-				images: adImages,
-				edit: true,
+				required: true,
 			},
 			{
 				control: 'input',
@@ -3264,7 +3247,7 @@ const CategoryForm = ({
 			},
 			{
 				control: 'select',
-				label: 'Color',
+				label: 'Colour',
 				name: 'color',
 				type: 'text',
 				placeholder: 'Type color here',
@@ -3272,10 +3255,10 @@ const CategoryForm = ({
 			},
 			otherColor && {
 				control: 'input',
-				label: 'Other Color',
-				name: 'color',
+				label: 'Other Colour',
+				name: 'color_other',
 				type: 'text',
-				placeholder: 'Enter color',
+				placeholder: 'Enter colour',
 			},
 			{
 				control: 'input',
@@ -3352,12 +3335,10 @@ const CategoryForm = ({
 			},
 			{
 				control: 'imageinput',
-				label: 'Images',
+				label: '',
 				name: 'images',
 				type: 'file',
-				// required: true,
-				images: adImages,
-				edit: true,
+				required: true,
 			},
 			{
 				control: 'input',
@@ -3394,7 +3375,7 @@ const CategoryForm = ({
 					{ key: 'Foreign Used', value: 'foreign use' },
 					{ key: 'Nigerian Used', value: 'nigerian use' },
 					{ key: 'Refurbished', value: 'refurbished' },
-					{ key: 'Other', value: 'other' },
+					{ key: 'None', value: 'none' },
 				],
 			},
 			otherCondition && {
