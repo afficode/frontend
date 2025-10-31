@@ -1793,7 +1793,7 @@ export const propertyType = {
 		'Commercial Land',
 		'Farmland',
 		'Industrial Land',
-		'Mixed-Use Land',
+		'Mixed-Use-Land',
 		'Quarry',
 		'Residential Land',
 	],
