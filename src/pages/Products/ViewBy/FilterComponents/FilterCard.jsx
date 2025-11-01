@@ -1,28 +1,54 @@
 import FormControl from './FormControl';
-import { Field } from 'formik';
+import { Field, useFormikContext } from 'formik';
+import { toMoney } from '../../../../utils';
 
 const FilterCard = ({ field, setfieldvalue }) => {
+	const { values } = useFormikContext();
+
+	const formatMoneyInput = (value) => {
+		const numeric = (value || '').toString().replace(/[^0-9]/g, '');
+		if (!numeric) return '';
+		return toMoney(numeric, true); // use app's util for formatting
+	};
+
+	const handleMoneyChange = (name) => (e) => {
+		const formatted = formatMoneyInput(e.target.value);
+		setfieldvalue(name, formatted);
+	};
+
 	return (
-		<div className=" w-full  my-4 border-2 border-gray-300 rounded-sm p-2 relative tracking-tighter line-clamp-1 ">
-			<header className=" font-bold text-lg md:text-lg lg:text-xl xl:text-2xl block sticky">
-				{field.title}
-			</header>
+		<div className=" w-full  my-4 border-2 border-gray-300 rounded-sm p-2 relative tracking-tighter line-clamp-1 overflow-auto">
+			<header className=" font-bold text-sm md:text-base block sticky">{field.title}</header>
 			{field?.options && (
 				<div className="flex items-center justify-between my-2">
 					{/* if more than 2, use the map function and make the index output a span with the to when index value is 0 */}
-					<Field
-						type={field.options[0].type}
-						name={field.options[0].name}
-						placeholder={field.options[0].placeholder}
-						className={field.options[0].className}
-					/>{' '}
-					<span className=" antialiased text-lg">to </span>
-					<Field
-						type={field.options[1].type}
-						name={field.options[1].name}
-						placeholder={field.options[1].placeholder}
-						className={field.options[1].className}
-					/>{' '}
+					{(() => {
+						const minName = field.options[0].name;
+						const maxName = field.options[1].name;
+						const minDisplay = formatMoneyInput(values?.[minName]);
+						const maxDisplay = formatMoneyInput(values?.[maxName]);
+						return (
+							<>
+								<Field
+									type={field.options[0].type}
+									name={minName}
+									placeholder={field.options[0].placeholder}
+									className={field.options[0].className}
+									value={minDisplay}
+									onChange={handleMoneyChange(minName)}
+								/>{' '}
+								<span className=" antialiased text-sm">to </span>
+								<Field
+									type={field.options[1].type}
+									name={maxName}
+									placeholder={field.options[1].placeholder}
+									className={field.options[1].className}
+									value={maxDisplay}
+									onChange={handleMoneyChange(maxName)}
+								/>{' '}
+							</>
+						);
+					})()}
 				</div>
 			)}
 
@@ -32,7 +58,7 @@ const FilterCard = ({ field, setfieldvalue }) => {
 						type={field.type}
 						content={content}
 						key={index}
-						className="hover:bg-primary ml-1"
+						className="hover:bg-primary ml-2 "
 						setfieldvalue={setfieldvalue}
 					/>
 				))}

@@ -1,49 +1,47 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useState, useEffect, useMemo } from 'react';
+import { useParams } from 'react-router-dom';
 import { ProductSkeleton } from '../../../components';
 import { useProduct } from '../../../hooks/useProduct';
 import { fetchCategorySummary } from '../../../hooks';
-import { Approutes } from '../../../constants';
+import { Approutes, queryStrings } from '../../../constants';
 import FeaturedProducts from '../Default/FeaturedProducts';
 import Breadcrumb from '../../../components/Breadcrumb';
 import NotFound from '../NotFound';
 import SideBar from './FilterComponents/SideBar';
 import { Drawer } from '../../../ui';
 import { VscMenu } from 'react-icons/vsc';
-import { ScrollToTop } from '../../../utils';
+import { getPreviousSearchParams, getSearchParamsObject, ScrollToTop } from '../../../utils';
 import { useSearchParams } from 'react-router-dom';
 
 const Category = () => {
-	const [query, setQuery] = useSearchParams();
+	const [searchParams, setSearchParams] = useSearchParams();
 	const { id } = useParams();
-	const catId = atob(id);
-	const [categoryId, setCategoryId] = useState(catId);
+
+	const mainCategoryId = useMemo(() => atob(id), [id]);
+
 	const [displayCategories, setDisplayCategories] = useState();
 	const [items, setItems] = useState(null);
-	const [searchParams, setSearchParams] = useState({
-		category: categoryId,
-		q: query.get('q') || '',
-	});
 
-	const location = useLocation();
+	const allParams = getSearchParamsObject(searchParams);
+	const { [queryStrings.subCategory]: sub, [queryStrings.page]: page, ...filterParams } = allParams;
 
-	useEffect(() => {
-		setCategoryId(catId);
-	}, [location.pathname]);
+	const currentCategoryId = sub || mainCategoryId;
 
-	const { data, isLoading, error } = useProduct({
-		...searchParams,
-		q: query.get('q') || '',
-	});
-	const { data: categories, isLoading: categoryIsLoading } = fetchCategorySummary(categoryId);
+	const apiParams = {
+		category: currentCategoryId,
+		...(page && { [queryStrings.page]: page }),
+		...filterParams,
+	};
+
+	const { data, isLoading, error } = useProduct(apiParams);
+	const { data: categories, isLoading: categoryIsLoading } = fetchCategorySummary(mainCategoryId);
+
 	useEffect(() => {
 		if (categories) {
 			let name = '';
-			const categoriesData = categories?.summary.filter((cat) =>
-				cat.category.toString().startsWith(catId.toString().substring(0, 2))
-			);
-			categoriesData.forEach((cat) => {
-				if (cat.category == categoryId) {
+
+			categories?.summary.forEach((cat) => {
+				if (cat.category == currentCategoryId) {
 					name = cat.name;
 				}
 			});
@@ -53,21 +51,15 @@ const Category = () => {
 				{ name: 'Categories', link: Approutes.product.category },
 				{ name: name },
 			]);
-			setSearchParams({ category: categoryId, q: query.get('q') || '' });
 
-			setDisplayCategories(() => [...categoriesData]);
+			setDisplayCategories(() => [...categories?.summary]);
 		}
-	}, [categoryIsLoading, categoryId]);
+	}, [categoryIsLoading, currentCategoryId, categories]);
 
 	return (
 		<section className="flex gap-x-2">
 			<div className="p-2 hidden md:block w-[30%] lg:w-[25%] ">
-				<SideBar
-					displayCategories={displayCategories}
-					setCategoryId={setCategoryId}
-					setSearchParams={setSearchParams}
-					categoryId={categoryId}
-				/>
+				<SideBar displayCategories={displayCategories} currentCategoryId={Number(currentCategoryId)} />
 			</div>
 			<main className="p-2 w-full md:w-[70%] lg:w-[75%]">
 				<div className="w-full md:hidden ">
@@ -76,9 +68,7 @@ const Category = () => {
 						items={
 							<SideBar
 								displayCategories={displayCategories}
-								setCategoryId={setCategoryId}
-								setSearchParams={setSearchParams}
-								categoryId={categoryId}
+								currentCategoryId={Number(currentCategoryId)}
 							/>
 						}
 					/>
@@ -111,14 +101,15 @@ const Category = () => {
 							<div className="join mx-auto mt-4 bg-primary text-white">
 								<button
 									onClick={() => {
-										setSearchParams((prev) => ({
-											...prev,
-											page: data?.prev,
-											q: query.get('q') || '',
-										}));
-										// window.location.reload();
+										let previousParams = getPreviousSearchParams(searchParams);
+
+										previousParams = {
+											...previousParams,
+											[queryStrings.page]: data?.prev,
+										};
+
+										setSearchParams(previousParams, { replace: true });
 									}}
-									// to={`${Approutes.product.initial}?page=${product?.prev}`}
 									className={`${
 										data?.prev === null ? 'hidden' : ''
 									} join-item btn bg-primary text-white border-gray-300 hover:bg-secondary hover:text-black hover:border-gray-300`}
@@ -127,14 +118,15 @@ const Category = () => {
 									Prev
 								</button>
 								<button
-									// to={`${Approutes.product.initial}?page=${product?.next}`}
 									onClick={() => {
-										setSearchParams((prev) => ({
-											...prev,
-											page: data?.next,
-											q: query.get('q') || '',
-										}));
-										// window.location.reload();
+										let previousParams = getPreviousSearchParams(searchParams);
+
+										previousParams = {
+											...previousParams,
+											[queryStrings.page]: data?.next,
+										};
+
+										setSearchParams(previousParams, { replace: true });
 									}}
 									className={`${
 										data?.next === null ? 'hidden' : ''
