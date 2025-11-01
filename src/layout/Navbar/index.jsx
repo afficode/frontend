@@ -252,7 +252,7 @@ const Navbar = () => {
 										<>
 											<h4 className="font-semibold whitespace-nowrap">Post Ad in</h4>
 											<ul className="flex flex-col menu max-h-full w-full z-[10] py-4 ">
-												{filteredCategories?.allCat?.map((category) => (
+												{filteredCategories?.allCat?.slice(0, 14)?.map((category) => (
 													<Link to={`${Approutes.postAd}/${category.id}`} key={category.id}>
 														<li className="text-lg capitalize max-sm:text-base lg:pr-12 hover:underline whitespace-nowrap">
 															{category.name}
@@ -569,7 +569,7 @@ const Navbar = () => {
 								>
 									<h4 className="font-semibold whitespace-nowrap">Categories</h4>
 									<ul className="flex flex-col menu max-h-full w-full z-[10] py-4 ">
-										{filteredCategories?.allCat?.map((category) => (
+										{filteredCategories?.allCat?.slice(0, 14)?.map((category) => (
 											<NavLink to={`${Approutes.product.category}/${btoa(category.id)}`} key={category.id}>
 												<li className="text-lg capitalize max-sm:text-base lg:pr-12 hover:underline whitespace-nowrap">
 													{category.name}
