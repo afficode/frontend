@@ -10,25 +10,20 @@ const PriceInput = (props) => {
 		const inputValue = event.target.value;
 		const inputName = event.target.name || name;
 
-		// Remove all non-numeric characters except decimal point
 		let raw = String(inputValue).replace(/[^0-9.]/g, '');
 
-		// If empty, set empty string
 		if (!raw) {
 			formik.setFieldValue(inputName, '');
 			return;
 		}
 
-		// Handle decimal part
 		const [intPart, decimalPart] = raw.split('.');
 		let formatted = new Intl.NumberFormat('en-US').format(Number(intPart || '0'));
 
-		// If there's a decimal part, append it
 		if (decimalPart !== undefined) {
 			formatted += '.' + decimalPart;
 		}
 
-		// Update the form field with formatted value
 		formik.setFieldValue(inputName, formatted);
 	};
 
