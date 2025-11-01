@@ -5,6 +5,8 @@ export * from './localstorage';
 export * from './toFormOptions';
 export * from './toMoney';
 export { default as getCommission } from './getCommission';
+export { default as getPreviousSearchParams } from './getPreviousSearchParams';
+export { default as getSearchParamsObject } from './getSearchParamsObject';
 export { default as ScrollToTop } from './scrollToTop';
 export { default as priceToToken } from './priceToToken';
 export { default as formatAdId } from './formatAdId';

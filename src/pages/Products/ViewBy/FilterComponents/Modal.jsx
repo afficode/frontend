@@ -1,18 +1,36 @@
-import { useState } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { fetchLGA, fetchStates } from '../../../../hooks/useLocation';
 import { createPortal } from 'react-dom';
+import { useSearchParams } from 'react-router-dom';
 
 const Modal = ({ setfieldvalue }) => {
+	const [searchParams] = useSearchParams();
 	const [selectedState, setSelectedState] = useState({});
 	const [stateId, setStateId] = useState(null);
 	const [buttonDisplay, setButtonDisplay] = useState('');
-	const { data: state, error: stateError, isLoading: stateLoading } = fetchStates();
-	const { data: lga, isLoading: lgaLoading, error: lgaError } = fetchLGA();
+	const { data: state } = fetchStates();
+	const { data: lga } = fetchLGA();
 	// null means nothing has been done, and should be empty or show skeleton
 	// true means we can show state but not lga.
 	// false means we want to show the lga and remove state
 	const [showState, setShowState] = useState(null);
 	const [lgaId, setLgaId] = useState(null);
+
+	const locationCleared = useMemo(() => {
+		const stateIdParam = searchParams.get('state_id');
+		const lgaIdParam = searchParams.get('lga_id');
+		return !stateIdParam && !lgaIdParam;
+	}, [searchParams]);
+
+	useEffect(() => {
+		if (locationCleared) {
+			setButtonDisplay('');
+			setStateId(null);
+			setLgaId(null);
+			setSelectedState({});
+			setShowState(null);
+		}
+	}, [locationCleared]);
 
 	const setState = (state) => {
 		setStateId(state.state_id);
@@ -43,7 +61,7 @@ const Modal = ({ setfieldvalue }) => {
 			<button
 				className={`${
 					buttonDisplay ? ' text-start' : 'text-center'
-				} w-full border-1 border-gray-50 p-1 py-3 bg-gray-50 pl-2 mt-2`}
+				} w-full border-1 border-gray-50 p-1 py-3 bg-gray-50 pl-2 mt-2 text-sm`}
 				onClick={() => {
 					// document.getElementById('location').showModal();
 					resetModal();
