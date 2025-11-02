@@ -39,9 +39,8 @@ const SidebarUI = ({ items }) => {
 										</Sidebar.Item>
 									))}
 								</Sidebar.Collapse>
-							) : (
-								<Sidebar.Item href="#">{`${name}`}</Sidebar.Item>
-							)}
+							) : // <Sidebar.Item href="#">{`${name}`}</Sidebar.Item>
+							null}
 						</div>
 					))}
 				</Sidebar.ItemGroup>

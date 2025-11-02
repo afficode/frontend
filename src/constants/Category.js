@@ -86,16 +86,16 @@ export const categoryData = [
 		name: 'Motorbike and Scooters',
 		image: motorbike,
 	},
-	{
-		id: 64,
-		name: 'Requests',
-		image: requests,
-	},
-	{
-		id: 65,
-		name: 'Deals',
-		image: deals,
-	},
+	// {
+	// 	id: 64,
+	// 	name: 'Requests',
+	// 	image: requests,
+	// },
+	// {
+	// 	id: 65,
+	// 	name: 'Deals',
+	// 	image: deals,
+	// },
 ];
 
 export const inspectableCategories = [

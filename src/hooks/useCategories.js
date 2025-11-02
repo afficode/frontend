@@ -6,7 +6,7 @@ export const useCategories = () => {
 	const fetchCategories = () => axios.get(`${backendLink}categories`).then((res) => res?.data);
 
 	return useQuery('all-categories', fetchCategories, {
-		refetchInterval: false
+		refetchInterval: false,
 	});
 };
 
@@ -18,16 +18,16 @@ export const useSubCategories = (category_id) => {
 	return useQuery(['subcategories', category_id], fetchSubCategories, {
 		refetchInterval: false,
 		refetchIntervalInBackground: false,
-		refetchOnWindowFocus: false
+		refetchOnWindowFocus: false,
 	});
 };
 
 export const useCategory = (id) => {
 	const fetchCategory = () => axios.get(`${backendLink}categories/${id}`).then((res) => res?.data);
 
-	return useQuery(['category', id], fetchCategory,  {
+	return useQuery(['category', id], fetchCategory, {
 		refetchInterval: false,
 		refetchIntervalInBackground: false,
-		refetchOnWindowFocus: false
+		refetchOnWindowFocus: false,
 	});
 };
