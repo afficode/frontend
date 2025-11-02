@@ -3,7 +3,7 @@ import CategoryForm from './CategoryForm';
 import { useGetAd } from '../../hooks';
 import { PropertyHeader } from '../../assets/images';
 import LoadingScreen from './LoadingScreen';
-import { ScrollToTop } from '../../utils';
+import { ScrollToTop, toMoney } from '../../utils';
 
 const PostAd = () => {
 	const { adId } = useParams();
@@ -37,7 +37,7 @@ const PostAd = () => {
 			vehicle_body: ad?.vehicle_body,
 			contact_type:
 				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
-			price: ad?.price,
+			price: toMoney(ad?.price, false),
 			year: ad?.year,
 			millage: ad?.millage,
 			transmission: ad?.transmission,
@@ -67,7 +67,7 @@ const PostAd = () => {
 			facilities: typeof ad?.facilities === 'string' ? ad?.facilities?.split(',') : ad?.facilities,
 			images: [],
 			description: ad?.description,
-			price: ad?.price,
+			price: toMoney(ad?.price, false),
 			negotiable: ad?.negotiable,
 			contact_type:
 				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
@@ -91,7 +91,7 @@ const PostAd = () => {
 			level_of_education: ad?.level_of_education,
 			employment_type: ad?.employment_type,
 			description: ad?.description,
-			price: ad?.price,
+			price: toMoney(ad?.price, false),
 			negotiable: ad?.negotiable,
 			contact_type:
 				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
@@ -105,11 +105,12 @@ const PostAd = () => {
 			title: ad?.title,
 			description: ad?.description,
 			type: ad?.type,
+			type_other: ad?.type_other,
 			ad_condition: ad?.ad_condition,
 			age: ad?.age,
 			gender: ad?.gender,
 			color: ad?.color,
-			price: ad?.price,
+			price: toMoney(ad?.price, false),
 			negotiable: ad?.negotiable,
 			contact_type:
 				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
@@ -144,7 +145,7 @@ const PostAd = () => {
 			processor_other: ad?.processor_other,
 			operating_system: ad?.operating_system,
 			color: ad?.color,
-			price: ad?.price,
+			price: toMoney(ad?.price, false),
 			negotiable: ad?.negotiable,
 			contact_type:
 				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
@@ -169,7 +170,7 @@ const PostAd = () => {
 			material: ad?.material,
 			material_other: ad?.material_other,
 			display: ad?.display,
-			price: ad?.price,
+			price: toMoney(ad?.price, false),
 			negotiable: ad?.negotiable,
 			contact_type:
 				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
@@ -192,8 +193,8 @@ const PostAd = () => {
 			ad_condition: ad?.ad_condition,
 			formulation: ad?.formulation,
 			scent_type: ad?.scent_type,
+			price: toMoney(ad?.price, false),
 			scent_type_other: ad?.scent_type_other,
-			price: ad?.price,
 			negotiable: ad?.negotiable,
 			contact_type:
 				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
@@ -209,6 +210,7 @@ const PostAd = () => {
 			ad_condition: ad?.ad_condition,
 			brand: ad?.brand,
 			type: ad?.type,
+			type_other: ad?.type_other,
 			material: ad?.material,
 			material_other: ad?.material_other,
 			furniture_for: ad?.furniture_for,
@@ -216,8 +218,8 @@ const PostAd = () => {
 			formulation: ad?.formulation,
 			formulation_other: ad?.formulation_other,
 			color: ad?.color,
+			price: toMoney(ad?.price, false),
 			color_other: ad?.color_other,
-			price: ad?.price,
 			negotiable: ad?.negotiable,
 			contact_type:
 				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
@@ -244,7 +246,7 @@ const PostAd = () => {
 			years_of_experience: ad?.years_of_experience,
 			mode_of_charges: ad?.mode_of_charges,
 			available_to_travel: ad?.available_to_travel,
-			price: ad?.price,
+			price: toMoney(ad?.price, false),
 			negotiable: ad?.negotiable,
 			contact_type:
 				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
@@ -260,12 +262,13 @@ const PostAd = () => {
 			ad_condition: ad?.ad_condition,
 			platform: ad?.platform,
 			type: ad?.type,
+			type_other: ad?.type_other,
 			format: ad?.format,
 			format_other: ad?.format_other,
 			release_year: ad?.release_year,
 			game_genre: ad?.game_genre,
 			rating: ad?.rating,
-			price: ad?.price,
+			price: toMoney(ad?.price, false),
 			negotiable: ad?.negotiable,
 			contact_type:
 				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
@@ -286,7 +289,7 @@ const PostAd = () => {
 			color: ad?.color,
 			ad_condition: ad?.ad_condition,
 			age: ad?.age,
-			price: ad?.price,
+			price: toMoney(ad?.price, false),
 			negotiable: ad?.negotiable,
 			contact_type:
 				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
@@ -309,8 +312,8 @@ const PostAd = () => {
 			capacity: ad?.capacity,
 			age: ad?.age,
 			size: ad?.size,
-			price: ad?.price,
-			bulk_price: ad?.bulk_price,
+			price: toMoney(ad?.price, false),
+			bulk_price: toMoney(ad?.bulk_price, false),
 			contact_type:
 				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
 			feature: ad?.feature,
@@ -330,7 +333,7 @@ const PostAd = () => {
 			type_other: ad?.type_other,
 			color: ad?.color,
 			age: ad?.age,
-			price: ad?.price,
+			price: toMoney(ad?.price, false),
 			negotiable: ad?.negotiable,
 			contact_type:
 				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
@@ -356,7 +359,7 @@ const PostAd = () => {
 			color: ad?.color,
 			fuel_type: ad?.fuel_type,
 			// engine_size: ad?.engine_size,
-			price: ad?.price,
+			price: toMoney(ad?.price, false),
 			negotiable: ad?.negotiable,
 			contact_type:
 				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
@@ -372,8 +375,8 @@ const PostAd = () => {
 			ad_condition: ad?.ad_condition,
 			color: ad?.color,
 			type: ad?.type,
-			min_price: ad?.min_price,
-			max_price: ad?.max_price,
+			min_price: toMoney(ad?.min_price, false),
+			max_price: toMoney(ad?.max_price, false),
 			negotiable: ad?.negotiable,
 			contact_type:
 				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
@@ -391,7 +394,7 @@ const PostAd = () => {
 			other_ad_condition: ad?.other_ad_condition,
 			defects: ad?.defects,
 			defects_detail: ad?.defects_detail,
-			price: ad?.price,
+			price: toMoney(ad?.price, false),
 			negotiable: ad?.negotiable,
 			contact_type:
 				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,

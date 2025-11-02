@@ -1,22 +1,17 @@
-// import React, { useState } from 'react';
 import { Coin, NigFlag } from '../../assets/images';
 import Button from '../Button';
-// import { AccountHistory } from '../../components';
-// import Modal from '../Modal';
-// import { IoIosMenu } from 'react-icons/io';
 import { BiSolidDownArrow } from 'react-icons/bi';
 import { Approutes } from '../../constants';
 import { Link, useNavigate } from 'react-router-dom';
 import { toMoney } from '../../utils';
 import { useAccountBalance, useTotalCoin } from '../../hooks';
 import useAuth from '../../context/UserContext';
-import { useMemo } from 'react';
-// import useTokenContext from '../../context/TokenContext';
+import { useMemo, useState } from 'react';
+import { TokenPurchase } from '../../components';
 
 const WalletDropdown = () => {
-	// const [walletOpen, setWalletOpen] = useState(false);
+	const [isOpen, setIsOpen] = useState(false);
 	const navigate = useNavigate();
-	// const { token } = useTokenContext();
 
 	const { data: token } = useTotalCoin();
 	const bal = useAccountBalance();
@@ -46,6 +41,8 @@ const WalletDropdown = () => {
 				</div>
 			</div>
 
+			<TokenPurchase isOpen={isOpen} setIsOpen={setIsOpen} />
+
 			<div className="flex justify-between lg:divide-x-2 lg:divide-white max-lg:flex-col ">
 				<div className="flex-1 ">
 					<div className="flex items-center justify-between gap-1 p-2 bg-black/30 h-14">
@@ -67,15 +64,6 @@ const WalletDropdown = () => {
 						>
 							Account History
 						</Button>
-						{/* <Modal
-							modalHeader={false}
-							isOpen={walletOpen}
-							setIsOpen={setWalletOpen}
-							padding={false}
-							className={'px-0'}
-						>
-							<AccountHistory className={''} isOpen={walletOpen} setIsOpen={setWalletOpen} />
-						</Modal> */}
 					</div>
 
 					<div className="lg:mt-[4.22rem] mt-3 pb-3 flex flex-col px-4">
@@ -97,25 +85,30 @@ const WalletDropdown = () => {
 
 				<div className="flex-1">
 					<div className="flex items-center justify-center bg-black/30 lg:h-14">
-						<h6 className="text-white max-lg:p-2">Coin Wallet</h6>
+						<h6 className="text-white max-lg:p-2">Token Wallet</h6>
 					</div>
 
 					<img src={Coin} className="lg:w-16 w-12  pt-2 mx-auto" alt="/" />
 
 					<div className="flex justify-between px-8">
 						<div className="flex flex-col items-center">
-							<span className="mb-2 text-white/70 ">Total coin(s)</span>
+							<span className="mb-2 text-white/70 ">Total token(s)</span>
 							<span className="text-lg font-semibold text-white sm:text-xl">{token?.coin?.token}</span>
 						</div>
 
 						<div className="flex flex-col items-center">
-							<span className="mb-2 text-white/70 ">Usable coin(s)</span>
+							<span className="mb-2 text-white/70 ">Usable token(s)</span>
 							<span className="text-lg font-semibold text-white sm:text-xl">0.00</span>
 						</div>
 					</div>
 
 					<div className="text-center mt-4 lg:mt-[2.25rem] max-lg:mb-2">
-						<Button variant={'secondary'} size={'small'} className={'border-none '}>
+						<Button
+							variant={'secondary'}
+							size={'small'}
+							className={'border-none '}
+							onClick={() => setIsOpen(true)}
+						>
 							Top Up
 						</Button>
 					</div>

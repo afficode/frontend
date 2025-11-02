@@ -6,7 +6,6 @@ import { useState } from 'react';
 import { Approutes } from '../../constants';
 import { Link } from 'react-router-dom';
 import { Coin } from '../../assets/images';
-import { Modal } from '../../ui';
 import useMessageContext from '../../context/MessageContext';
 import useAuth from '../../context/UserContext';
 import TokenPurchase from '../Token';
@@ -30,9 +29,7 @@ const DashboardHeader = () => {
 					<b>{data?.coin.token}</b>
 				</button>
 
-				<Modal isOpen={isOpen} setIsOpen={setIsOpen}>
-					<TokenPurchase isOpen={isOpen} setIsOpen={setIsOpen} />
-				</Modal>
+				<TokenPurchase isOpen={isOpen} setIsOpen={setIsOpen} />
 
 				<Link to={Approutes.profile.messages}>
 					<div className="relative">

@@ -20,7 +20,7 @@ import { useGrabAd } from '../../../hooks/useGrab.js';
 import { ArrowDown, Cancel, Naira } from '../../../assets/svgs/index.js';
 import { InputGroup } from '../../../ui/index.js';
 import { inspectableCategories } from '../../../constants/Category.js';
-import toMoney from '../../../utils/toMoney.js';
+import { toMoney } from '../../../utils';
 
 const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
 	const navigate = useNavigate();
