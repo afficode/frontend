@@ -1,4 +1,7 @@
 export { default as Avatar } from './Avatar.png';
+export { default as Boonfu1 } from './Boonfu1.png';
+export { default as Boonfu2 } from './Boonfu2.png';
+export { default as Boonfu3 } from './Boonfu3.png';
 export { default as BoonfuLogo } from './boonfuLogo.png';
 export { default as Car } from './car.png';
 export { default as CarBlack } from './carBlack.png';
@@ -33,4 +36,4 @@ export { default as Vehicles } from './vehicles.png';
 export { default as noimage } from './noimage.png';
 export { default as feature_basic } from './basic.png';
 export { default as feature_feature } from './feature.png';
-export { default as feature_spotlight } from  './spotlight.png'
+export { default as feature_spotlight } from './spotlight.png';
