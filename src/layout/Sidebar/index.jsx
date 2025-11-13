@@ -99,7 +99,9 @@ const Sidebar = () => {
 						<div className="w-full">
 							<div className="avatar avatar-placeholder">
 								<div className="bg-gray-400 text-black w-40 rounded-full">
-									<div className="md:text-6xl sm:text-4xl flex items-center justify-center h-full">{getInitials(user?.firstname + ' ' + user?.lastname)}</div>
+									<div className="md:text-6xl sm:text-4xl flex items-center justify-center h-full">
+										{getInitials(user?.firstname + ' ' + user?.lastname)}
+									</div>
 								</div>
 							</div>
 						</div>
@@ -174,7 +176,7 @@ const navList = [
 
 	{
 		name: 'Privacy/Policy',
-		link: Approutes.dashboard.privacyPolicy,
+		link: Approutes.dashboard.dashboardPrivacyPolicy,
 	},
 	{
 		name: 'Help',

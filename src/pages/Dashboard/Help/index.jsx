@@ -23,7 +23,7 @@ const Help = () => {
 					<p className="p-lg">
 						For optimum experience on our platform, kindly see our blogs, articles, tips and more on{' '}
 						<Link to={'/'} className="text-primary">
-							Boonfu.ng blog
+							Boonfu.com blog
 						</Link>{' '}
 					</p>
 				</div>

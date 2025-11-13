@@ -64,9 +64,9 @@ const Footer = () => {
 							<Link to={Approutes.media}>
 								<li className={listStyles}>Media</li>
 							</Link>
-							<li onClick={() => handleScrollTo(privacyRef)} className={listStyles}>
-								Privacy Policy
-							</li>
+							<Link to={Approutes.privacyPolicy}>
+								<li className={listStyles}>Privacy Policy</li>
+							</Link>
 							<li onClick={() => handleScrollTo(termsRef)} className={listStyles}>
 								Terms & Conditions
 							</li>
@@ -137,7 +137,7 @@ const Footer = () => {
 					<p className="text-center md:text-start">
 						&copy; Copyright 2025{' '}
 						<b>
-							<Link to={'/'}>Boonfu.ng</Link>
+							<Link to={'/'}>Boonfu.com</Link>
 						</b>
 						. All rights reserved.
 					</p>

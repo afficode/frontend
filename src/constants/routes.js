@@ -11,7 +11,7 @@ export const Approutes = {
 		profile: '/dashboard/profile',
 		settings: '/dashboard/settings',
 		security: '/dashboard/security-login',
-		privacyPolicy: '/dashboard/privacy-policy',
+		dashboardPrivacyPolicy: '/dashboard/privacy-policy',
 		help: '/dashboard/help',
 	},
 	profile: {
@@ -29,6 +29,7 @@ export const Approutes = {
 		viewCategoryId: '/product/category/:id',
 	},
 	aboutUs: '/about-us',
+	privacyPolicy: '/privacy-policy',
 	checkout: {
 		checkout: '/checkout/:grabber_id/:ad_id',
 		useCheckout: (grabber_id, ad_id) => `/checkout/${grabber_id}/${ad_id}`,
