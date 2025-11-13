@@ -13,7 +13,7 @@ import {
 	Notifications,
 	Performance,
 	Playground,
-	PrivacyPolicy,
+	DashboardPrivacyPolicy,
 	Profile,
 	ProfileLayout,
 	Products,
@@ -57,6 +57,7 @@ import {
 	Pickup,
 	SafetyGuides,
 	ClosePickup,
+	PrivacyPolicy,
 } from './pages';
 import { AppLayout, DashboardLayout } from './layout';
 import { Approutes } from './constants';
@@ -82,6 +83,7 @@ function App() {
 				<Route element={<AppLayout />}>
 					<Route path={Approutes.home} element={isLogin ? <Welcome /> : <Home />} />
 					<Route path={Approutes.aboutUs} element={<AboutUs />} />
+					<Route path={Approutes.privacyPolicy} element={<PrivacyPolicy />} />
 					<Route path={Approutes.media} element={<BoonfuMedia />} />
 					<Route path={Approutes.safety} element={<SafetyGuides />} />
 					<Route path={Approutes.contactUs} element={<ContactUs />} />
@@ -114,7 +116,10 @@ function App() {
 							<Route path={Approutes.dashboard.profile} element={<Profile />} />
 							<Route path={Approutes.dashboard.settings} element={<Settings />} />
 							<Route path={Approutes.dashboard.security} element={<Security />} />
-							<Route path={Approutes.dashboard.privacyPolicy} element={<PrivacyPolicy />} />
+							<Route
+								path={Approutes.dashboard.dashboardPrivacyPolicy}
+								element={<DashboardPrivacyPolicy />}
+							/>
 							<Route path={Approutes.dashboard.help} element={<Help />} />
 						</Route>
 						<Route element={<GrabLayout />}>

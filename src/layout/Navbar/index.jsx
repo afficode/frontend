@@ -123,7 +123,7 @@ const Navbar = () => {
 						{/* logo */}
 						<div className="flex items-center bg-white rounded-full p-[2px]">
 							<NavLink to={'/'}>
-								<img src={BoonfuLogo} className="w-[2.9rem]" alt="Boonfu.ng" />
+								<img src={BoonfuLogo} className="w-[2.9rem]" alt="Boonfu.com" />
 							</NavLink>
 						</div>
 

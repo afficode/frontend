@@ -28,6 +28,7 @@ export { default as Playground } from './Playground';
 export { default as PostAd } from './PostAd';
 export { default as PostDecision } from './PostDecision';
 export { default as PostSuccess } from './PostSuccess';
+export { default as PrivacyPolicy } from './PrivacyPolicy';
 export { default as SafetyGuides } from './SafetyGuides';
 export { default as UnderConstuction } from './UnderConstruction';
 export { default as UpdateAd } from './UpdateAd';
@@ -47,7 +48,7 @@ export { default as Performance } from './Dashboard/Performance';
 export { default as Profile } from './Dashboard/Profile';
 export { default as Settings } from './Dashboard/Settings';
 export { default as Security } from './Dashboard/Security';
-export { default as PrivacyPolicy } from './Dashboard/PrivacyPolicy';
+export { default as DashboardPrivacyPolicy } from './Dashboard/PrivacyPolicy';
 export { default as Help } from './Dashboard/Help';
 
 //profile
