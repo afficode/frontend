@@ -1,3 +1,5 @@
+/// <reference types="vite-plugin-svgr/client" />
+
 export { default as Advertise } from './advertise.svg';
 export { default as Apple } from './appleLogo.svg';
 export { default as ArrowRight } from './arrowRight.svg';
@@ -48,6 +50,7 @@ export { default as Location } from './location.svg';
 export { default as LoginLock } from './loginLock.svg';
 export { default as New } from './new.svg';
 export { default as Naira } from './naira.svg';
+export { default as Naira2 } from './Naira2.svg?react';
 export { default as NotificationCheck } from './notificationCheck.svg';
 export { default as NotificationBell } from './notificationBell.svg';
 export { default as NotificationInfo } from './notificationInfo.svg';
@@ -64,6 +67,8 @@ export { default as Twitter } from './twitter.svg';
 export { default as UnderConstruction } from './underConstruction.svg';
 export { default as UploadDoc } from './uploadDoc.svg';
 export { default as Visa } from './visa.svg';
+export { default as ViewTransaction } from './ViewTransaction.svg?react';
 export { default as Warning } from './Warning.svg';
 export { default as Web } from './web.svg';
+export { default as WalletIcon } from './WalletIcon.svg?react';
 export { default as Whatsapp } from './whatsapp.svg';

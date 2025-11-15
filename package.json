@@ -15,7 +15,6 @@
 		"@wojtekmaj/react-datetimerange-picker": "^6.0.0",
 		"axios": "^1.5.0",
 		"crypto-js": "^4.2.0",
-		"daisyui": "^3.7.6",
 		"date-fns": "^2.30.0",
 		"dotenv": "^16.4.1",
 		"dotenv-expand": "^10.0.0",
@@ -43,6 +42,7 @@
 		"tailwind-scrollbar": "^3.0.5",
 		"use-debounce": "^10.0.0",
 		"uuid": "^9.0.1",
+		"vite-plugin-svgr": "^4.5.0",
 		"yup": "^1.2.0"
 	},
 	"devDependencies": {
@@ -50,6 +50,7 @@
 		"@types/react-dom": "^18.2.7",
 		"@vitejs/plugin-react": "^4.0.3",
 		"autoprefixer": "^10.4.15",
+		"daisyui": "^5.5.5",
 		"eslint": "^8.45.0",
 		"eslint-plugin-react": "^7.32.2",
 		"eslint-plugin-react-hooks": "^4.6.0",
