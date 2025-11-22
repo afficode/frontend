@@ -24,7 +24,7 @@ const Messages = () => {
 		}
 	};
 
-	useEffect(() => {}, [onlineUsers]);
+	useEffect(() => { }, [onlineUsers]);
 
 	const [chatsUi, setChatsUi] = useState(false);
 
@@ -45,9 +45,8 @@ const Messages = () => {
 						{chats?.map((ad, i) => (
 							<div
 								key={i}
-								className={`px-4 py-2 transition-all border-t-2 border-gray-200 cursor-pointer h-5rem hover:bg-primary/30 ${
-									ad.chat_id === Number(searchParams.get(queryStrings.chat)) ? 'bg-primary/30' : ''
-								}`}
+								className={`px-4 py-2 transition-all border-t-2 border-gray-200 cursor-pointer h-5rem hover:bg-primary/30 ${ad.chat_id === searchParams.get(queryStrings.chat) ? 'bg-primary/30' : ''
+									}`}
 								onClick={() => {
 									setSearchParams({ [queryStrings.chat]: ad.chat_id });
 									chat_viewed(ad.chat_id);
@@ -127,9 +126,8 @@ const Messages = () => {
 					{chats?.map((ad, i) => (
 						<div
 							key={i}
-							className={`px-4 py-2 transition-all border-t-2 border-gray-200 cursor-pointer h-5rem hover:bg-primary/30 ${
-								ad.chat_id === Number(searchParams.get(queryStrings.chat)) ? 'bg-primary/30' : ''
-							}`}
+							className={`px-4 py-2 transition-all border-t-2 border-gray-200 cursor-pointer h-5rem hover:bg-primary/30 ${ad.chat_id === searchParams.get(queryStrings.chat) ? 'bg-primary/30' : ''
+								}`}
 							onClick={() => {
 								chat_viewed(ad.chat_id);
 								setSearchParams({ [queryStrings.chat]: ad.chat_id });

@@ -16,7 +16,7 @@ import { Link } from 'react-router-dom';
 import { useProduct } from '../../../hooks';
 import { Approutes } from '../../../constants';
 import { TbCurrencyNaira } from 'react-icons/tb';
-import { encodeProductId, numberWithCommas } from '../../../utils/dataManipulations';
+import { numberWithCommas } from '../../../utils/index.js';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import { formatDistance } from 'date-fns';
 import Feature from '../../Products/Default/Feature';
@@ -52,7 +52,7 @@ const CardDetails = ({ id, title, location, images, created_at, price, feature }
 	const img = images[0]?.path || noimage;
 	return (
 		<Link
-			to={`${Approutes.product.initial}/${encodeProductId(id)}`}
+			to={`${Approutes.product.initial}/${id}`}
 			className=" w-[18rem] sm:max-w-[25rem] h-[22rem] border border-black/25 shadow-sm cursor-pointer hover:shadow-lg transition-all  ease-in-out overflow-hidden"
 		>
 			<div className="relative ml-0.5">

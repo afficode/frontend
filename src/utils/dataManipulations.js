@@ -1,35 +1,8 @@
-import { format } from 'date-fns';
-import { getUserFromLocalStorage, setUser } from './localstorage';
+import {format} from 'date-fns';
+import {getUserFromLocalStorage, setUser} from './localstorage';
+
 export const manipulateCategory = (category) => {
-	const categories = Object.groupBy(category, ({ category_id }) => category_id);
-
-	return categories;
-};
-
-export const randomString = () => {
-	//define a variable consisting alphabets in small and capital letter
-	var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz1234567890';
-
-	//specify the length for the new string
-	var lenString = 35;
-	var randString = '';
-
-	//loop to select a new character in each iteration
-	for (var i = 0; i < lenString; i++) {
-		var rnum = Math.floor(Math.random() * characters.length);
-		randString += characters.substring(rnum, rnum + 1);
-	}
-	return randString;
-};
-
-export const encodeProductId = (ad_id) => {
-	const encodedId = window.btoa(ad_id);
-	return encodedId + randomString();
-};
-
-export const decodeProductId = (encodedId) => {
-	const ad_id = window.atob(encodedId.slice(0, 4));
-	return ad_id;
+    return Object.groupBy(category, ({category_id}) => category_id);
 };
 
 export const numberWithCommas = (x) => {
@@ -166,8 +139,7 @@ export const convertKeyToName = (ad) => {
 	return overviews;
 };
 
-export const arrayRange = (start, stop, step) =>
-	Array.from({ length: (stop - start) / step + 1 }, (value, index) => start + index * step);
+export const arrayRange = (start, stop, step) => Array.from({ length: (stop - start) / step + 1 }, (value, index) => start + index * step);
 
 export const getStateLGA = (lga, state_id) => {
 	const state_lga = lga.filter((val) => val.state_id === state_id);
@@ -240,10 +212,7 @@ export const manipulateFilterForm = (values, category_id) => {
 		if ('price' in filteredValue) delete filteredValue.price;
 	} else if ('price' in filteredValue) {
 		const priceValue = filteredValue.price;
-		const isEmptyPrice =
-			priceValue === '' ||
-			priceValue == null ||
-			(Array.isArray(priceValue) && priceValue.length === 0);
+		const isEmptyPrice = priceValue === '' || priceValue == null || (Array.isArray(priceValue) && priceValue.length === 0);
 
 		if (isEmptyPrice) {
 			delete filteredValue.price;
