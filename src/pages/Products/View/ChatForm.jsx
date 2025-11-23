@@ -29,7 +29,7 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
 	const { isLogin, user } = useAuth();
 	const { grabs, unGrabAd, grabAd: socketGrabAd } = useGrabContext();
 
-	const [blocked, setBlocked] = useState(active === '0');
+	const [blocked, _] = useState(active === '0');
 	const [chatId, setChatId] = useState(null);
 
 	const verifyChat = async () =>
@@ -49,7 +49,7 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
 
 	const { mutate: grabAd, isLoading } = useGrabAd();
 	const { mutate: creatingChat, isLoading: sendingChat } = createChat();
-	const { mutate, error } = useSendMessage();
+	const { mutate } = useSendMessage();
 
 	const sendMessage = (message) => {
 		mutate(message, {
@@ -69,8 +69,7 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
 		creatingChat(
 			{ ad_id },
 			{
-				onError: (error) => {
-					// we redirect the user to login
+				onError: () => {
 					navigate('/auth', { replace: false });
 				},
 				onSuccess: ({ data }) => {
@@ -88,7 +87,7 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
 			grabAd(
 				{ ads_id: ad_id },
 				{
-					onSuccess: (data) => {
+					onSuccess: () => {
 						notify('Item Grabbed, View on Grab Page', 'success', Approutes.grab.product(ad?.id));
 						socketGrabAd(ad_id);
 					},

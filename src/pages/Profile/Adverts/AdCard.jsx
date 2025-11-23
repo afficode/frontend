@@ -1,4 +1,4 @@
-import {Link, useNavigate} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { CameraWhite } from '../../../assets/svgs';
 import { Button } from '../../../ui';
 import { toMoney } from '../../../utils';
@@ -8,48 +8,48 @@ import { FaUnlock } from "react-icons/fa";
 
 
 const AdCard = ({ title, images, active, price, subscribe, views, adId, chats, paid, available }) => {
-	const navigate = useNavigate();
-	const notify = useNotify();
-	const { mutate } = useUpdateAd(adId);
-	const { mutate: makePaymentMutate } = makeAdPayment();
-	const queryClient = useQueryClient();
+    const navigate = useNavigate();
+    const notify = useNotify();
+    const { mutate } = useUpdateAd(adId);
+    const { mutate: makePaymentMutate } = makeAdPayment();
+    const queryClient = useQueryClient();
 
-	const handleEdit = (adId) => {
-		navigate(`/update-ad/${adId}`);
-	};
+    const handleEdit = (adId) => {
+        navigate(`/update-ad/${adId}`);
+    };
 
-	const closeAdvert = () => {
-		const formData = new FormData();
-		formData.append('active', '2');
-		mutate(formData, {
-			onSuccess: (data) => {
-				notify('Advert closed successfully', 'success');
-				setTimeout(() => {
-					queryClient.invalidateQueries({ queryKey: ['getUserAds'] });
-				}, 3000);
-			},
-			onError: () => {
-				notify('Error closing Ad. If this error persist, please contact Admin with the contact us form.', 'error');
-			}
-		})
-	}
+    const closeAdvert = () => {
+        const formData = new FormData();
+        formData.append('active', '2');
+        mutate(formData, {
+            onSuccess: (data) => {
+                notify('Advert closed successfully', 'success');
+                setTimeout(() => {
+                    queryClient.invalidateQueries({ queryKey: ['getUserAds'] });
+                }, 3000);
+            },
+            onError: () => {
+                notify('Error closing Ad. If this error persist, please contact Admin with the contact us form.', 'error');
+            }
+        })
+    }
 
-	const makePayment = () => {
-		makePaymentMutate(adId, {
-			onSuccess: (data) => {
-				notify(data?.message || 'Payment Queued. You will be notified by email when payment is done.', 'success');
-				setTimeout(() => {
-					queryClient.invalidateQueries({ queryKey: ['getUserAds'] });
-				}, 3000);
-			},
-			onError: () => {
-				notify('Error making payment. If this error persist, please contact Admin with the contact us form.', 'error');
-			}
-		});
-	}
+    const makePayment = () => {
+        makePaymentMutate(adId, {
+            onSuccess: (data) => {
+                notify(data?.message || 'Payment Queued. You will be notified by email when payment is done.', 'success');
+                setTimeout(() => {
+                    queryClient.invalidateQueries({ queryKey: ['getUserAds'] });
+                }, 3000);
+            },
+            onError: () => {
+                notify('Error making payment. If this error persist, please contact Admin with the contact us form.', 'error');
+            }
+        });
+    }
 
-	return (
-        <Link to={`/product/${btoa(adId)}`}>
+    return (
+        <Link to={`/product/${adId}`}>
             <div className="bg-gray-200 w-[18rem] sm:w-[20rem]">
                 {/* image  */}
                 <div className="w-full h-[13rem]  sm:h-[15rem] relative border border-gray-300">
@@ -60,13 +60,13 @@ const AdCard = ({ title, images, active, price, subscribe, views, adId, chats, p
                     </div>
                     {active === '1' && (
                         <span className="absolute top-4 right-4 text-white font-semibold bg-[#047F73] py-1 px-2 rounded-xl text-center border-4 border-white max-sm:text-sm">
-						Active
-					</span>
+                            Active
+                        </span>
                     )}
                     {active === '2' && (
                         <span className="absolute top-4 right-4 text-white font-semibold bg-primary py-1 px-2 rounded-xl text-center border-4 border-white max-sm:text-sm">
-						Closed
-					</span>
+                            Closed
+                        </span>
                     )}
                     {(active === '0' && available === 0) && (
                         <div className={`absolute top-4 right-4 text-white font-semibold ${paid === 0 ? 'bg-orange-500' : 'bg-secondary'} py-1 px-2 rounded-xl text-center border-4 border-white max-sm:text-sm`}>
@@ -87,12 +87,12 @@ const AdCard = ({ title, images, active, price, subscribe, views, adId, chats, p
                         <span className="block font-semibold text-primary max-sm:text-sm">₦{toMoney(price)}</span>
                         {subscribe === '1' ? (
                             <span className="mt-3 max-sm:text-sm">
-							Promoted till: <b>01/10</b>
-						</span>
+                                Promoted till: <b>01/10</b>
+                            </span>
                         ) : (
                             <span className="mt-3 max-sm:text-sm">
-							Promoted till: <b>None</b>
-						</span>
+                                Promoted till: <b>None</b>
+                            </span>
                         )}
                     </div>
 
@@ -142,7 +142,7 @@ const AdCard = ({ title, images, active, price, subscribe, views, adId, chats, p
                 </div>
             </div>
         </Link>
-	);
+    );
 };
 
 export default AdCard;
