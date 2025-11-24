@@ -11,11 +11,7 @@ import { FaCamera } from 'react-icons/fa';
 import useAuth from '../../../context/UserContext';
 import ChatForm from './ChatForm';
 import ViewProduct from '../../../components/Skeleton/ViewProduct';
-import {
-	numberWithCommas,
-	decodeProductId,
-	convertKeyToName,
-} from '../../../utils/dataManipulations';
+import { numberWithCommas, convertKeyToName } from '../../../utils/index.js';
 import OverviewPills from './OverviewPills';
 import { formatDistance } from 'date-fns';
 import { ScrollToTop } from '../../../utils';
@@ -35,7 +31,7 @@ const index = () => {
 	const [revealNumber, setRevealNumber] = useState(false);
 	const [revealEmail, setRevealEmail] = useState(false);
 	const { isLogin, user } = useAuth();
-	const { data: result, isLoading } = fetchProduct(decodeProductId(id));
+	const { data: result, isLoading } = fetchProduct(id);
 	const { data, isLoading: saveLoading } = getSaves();
 	const notify = useNotify();
 
@@ -113,7 +109,7 @@ const index = () => {
 				user.id === result?.data.owner && (
 					<div className="w-[90%] lg:w-[70%] my-3 mx-auto">
 						<Alert
-							additionalContent={<ContactAdmin ads_id={decodeProductId(id)} />}
+							additionalContent={<ContactAdmin ads_id={id} />}
 							color="warning"
 							icon={HiInformationCircle}
 						>
@@ -139,7 +135,7 @@ const index = () => {
 
 								{((isLogin && parseInt(result.data?.owner) !== parseInt(user?.id)) || !isLogin) && (
 									<>
-										<SaveProduct ads_id={decodeProductId(id)} />
+										<SaveProduct ads_id={id} />
 									</>
 								)}
 							</span>
@@ -230,7 +226,7 @@ const index = () => {
 
 								{((isLogin && parseInt(result?.data?.owner) !== parseInt(user?.id)) || !isLogin) && (
 									<>
-										<SaveProduct ads_id={decodeProductId(id)} />
+										<SaveProduct ads_id={id} />
 									</>
 								)}
 							</span>
