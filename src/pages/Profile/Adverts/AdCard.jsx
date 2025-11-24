@@ -116,7 +116,12 @@ const AdCard = ({ title, images, active, price, subscribe, views, adId, chats, p
                                 variant={'plain'}
                                 size={'small'}
                                 className={'text-primary rounded-lg shadow-none hover:shadow-md'}
-                                onClick={() => handleEdit(adId)}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    e.preventDefault();
+
+                                    handleEdit(adId)
+                                }}
                             >
                                 Edit
                             </Button>
@@ -124,7 +129,12 @@ const AdCard = ({ title, images, active, price, subscribe, views, adId, chats, p
                                 variant={'plain'}
                                 size={'small'}
                                 className={'text-primary rounded-lg shadow-none hover:shadow-md'}
-                                onClick={() => closeAdvert()}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    e.preventDefault();
+
+                                    closeAdvert()
+                                }}
                                 disabled={active === '2'}
                             >
                                 Close
@@ -133,7 +143,12 @@ const AdCard = ({ title, images, active, price, subscribe, views, adId, chats, p
                                 variant={'secondary'}
                                 size={'small'}
                                 className={' rounded-lg '}
-                                onClick={() => navigate(`/update-ad/${adId}#post-package`)}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    e.preventDefault();
+
+                                    navigate(`/update-ad/${adId}#post-package`);
+                                }}
                             >
                                 Promote
                             </Button>

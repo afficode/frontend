@@ -70,7 +70,7 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
 			{ ad_id },
 			{
 				onError: () => {
-					navigate('/auth', { replace: false });
+					notify('Error creating chat. If the error persist, please contact Admin.', 'error');
 				},
 				onSuccess: ({ data }) => {
 					if (data?.chat_id) {
