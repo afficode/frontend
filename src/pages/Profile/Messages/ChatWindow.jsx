@@ -5,7 +5,6 @@ import MessageInput from './MessageInput';
 import useAuth from '../../../context/UserContext';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useMessages } from '../../../hooks';
-import { encodeProductId, toMoney } from '../../../utils';
 import { Button } from '../../../ui';
 import { BiPhoneCall } from 'react-icons/bi';
 
@@ -18,9 +17,9 @@ const ChatWindow = ({ chat_id, chat_data, title }) => {
 		setShowContact(false);
 	}, [chat_id]);
 
-	const data = chat_data?.find((chat) => chat.chat_id === Number(chat_id));
+	const data = chat_data?.find((chat) => chat.chat_id === chat_id);
 
-	const { data: messageData } = useMessages(Number(chat_id));
+	const { data: messageData } = useMessages(chat_id);
 	// ref to scroll to latest message
 	const latestMessageRef = useRef(null);
 	useLayoutEffect(() => {
@@ -49,7 +48,7 @@ const ChatWindow = ({ chat_id, chat_data, title }) => {
 				{user?.id === data?.user_a ? data?.user_b_name : data?.user_a_name}
 			</h5>
 			<div className="flex gap-2 justify-between items-center flex-wrap w-full px-2 py-1 bg-gray-100 shadow-lg sm:py-2 rounded-xl">
-				<Link to={`/product/${encodeProductId(data?.ad_id)}`} className="max-w-max w-full">
+				<Link to={`/product/${data?.ad_id}`} className="max-w-max w-full">
 					<div className="flex gap-2 items-center">
 						<img
 							src={
@@ -110,7 +109,7 @@ const ChatWindow = ({ chat_id, chat_data, title }) => {
 
 			{/* chat input */}
 			<div className="ml-auto w-full sm:w-[70%] mt-3 ">
-				<MessageInput id={Number(chat_id)} />
+				<MessageInput id={chat_id} />
 			</div>
 		</div>
 	);

@@ -65,7 +65,6 @@ import {
 	Approutes,
 } from '../../constants';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { encodeProductId } from '../../utils/dataManipulations';
 import { Coin } from '../../assets/images';
 import { inspectableCategories } from '../../constants/Category';
 
@@ -4012,7 +4011,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 				setPaymentWindow(false);
 				resetForm();
 				notify(data.message, 'success');
-				navigate(`${Approutes.postSuccess}/${encodeProductId(data.ad_id)}`);
+				navigate(`${Approutes.postSuccess}/${data.ad_id}`);
 			},
 			onError: async (error) => {
 				setPaymentWindow(false);

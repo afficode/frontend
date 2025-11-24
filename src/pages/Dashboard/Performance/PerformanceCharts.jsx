@@ -3,7 +3,6 @@ import { PerformanceArrowUp } from '../../../assets/svgs';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Approutes } from '../../../constants';
-import { encodeProductId } from '../../../utils/dataManipulations';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 // import { MdEditNote } from 'react-icons/md';
 import { privateAxios } from '../../../utils';
@@ -100,7 +99,7 @@ const PerformanceCharts = ({ adsData }) => {
 				queryClient.invalidateQueries({ queryKey: ['getUserAds'] });
 				notify(res?.data.message, 'success');
 			})
-			.catch((error) => {});
+			.catch((error) => { });
 	};
 
 	return (
@@ -133,7 +132,7 @@ const PerformanceCharts = ({ adsData }) => {
 										<tr key={ad.id} className="font-medium whitespace-nowrap hover:bg-gray-200">
 											<td className="capitalize hover:underline hover:underline-offset-4">
 												<Link
-													to={`${Approutes.product.initial}/${encodeProductId(ad.id)}`}
+													to={`${Approutes.product.initial}/${ad.id}`}
 													target="_blank"
 													rel="noopener noreferrer"
 												>

@@ -9,7 +9,6 @@ import { noimage } from '../../../assets/images';
 import { HiStar } from 'react-icons/hi';
 import { BsFastForwardFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
-import { encodeProductId } from '../../../utils/dataManipulations';
 
 const RowContainer = ({ title, link, data }) => {
 	return (
@@ -77,7 +76,7 @@ const ShopsCard = () => {
 const FeaturedProductsCard = ({ product }) => {
 	return (
 		<Link
-			to={`${Approutes.product.initial}/${encodeProductId(product?.id)}`}
+			to={`${Approutes.product.initial}/${product?.id}`}
 			className="max-w-[11rem] max-h-[14rem]  sm:w-[13rem] sm:h-[16rem] flex flex-col items-center justify-center rounded-lg bg-white "
 		>
 			<img
