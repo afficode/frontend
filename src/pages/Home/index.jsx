@@ -5,17 +5,21 @@ import Hero from './Hero';
 import RowContainer from './RowContainer';
 import { useProduct } from '../../hooks';
 const Home = () => {
-	const { data, isLoading, error } = useProduct();
+	const { data } = useProduct();
 
 	return (
 		<>
 			<Banner />
 			<Hero />
-			<RowContainer title={'Shops'} />
+			<RowContainer
+				title={'Trending Ads'}
+				link={Approutes.product.initial}
+				data={data?.ads?.slice(0, 12)}
+			/>
 			<RowContainer
 				title={'Featured Products'}
 				link={Approutes.product.initial}
-				data={data?.ads?.slice(0, 12)}
+				data={data?.ads?.filter((ad) => ad.feature === '3')?.slice(0, 12)}
 			/>
 		</>
 	);

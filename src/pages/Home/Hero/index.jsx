@@ -16,7 +16,7 @@ const Hero = () => {
 							// onClick={Approutes.underConstruction}
 							className="w-full text-lg capitalize border-none btn text-white hover:bg-secondary hover:border-black/50 hover:border-solid bg-secondary rounded-3xl sm:text-xl "
 						>
-							Set up a Shop Today!
+							View Ads
 						</button>
 					</Link>
 				</div>
