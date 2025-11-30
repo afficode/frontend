@@ -7,8 +7,10 @@ import { EditPencil, UploadDoc } from '../../../assets/svgs';
 import LoadingScreen from './LoadingScreen';
 import { MdClose } from 'react-icons/md';
 import { useNotify } from '../../../hooks';
+import useAuth from '../../../context/UserContext';
 
 const Settings = () => {
+	const { user } = useAuth();
 	const [isLoading, setIsLoading] = useState(true);
 	const [toggleEdit, setToggleEdit] = useState({
 		profile: true,
@@ -18,18 +20,13 @@ const Settings = () => {
 	const notify = useNotify();
 	// formData values and validation
 	const initialValues = {
-		page_name: 'Kola Autos',
-		username: 'affi.ng/adeolalawal',
-		display_name: 'Kols Wheels',
-		third_party_management: 'Instruction for third-party manageent',
-		shop_owner_name: 'Kolawole Amope',
-		personal_contact: 'sijuadelawal@gmail.com',
+		display_name: `${user?.firstname} ${user?.lastname}` || 'Please Login',
+		personal_contact: user?.email || 'Please Login',
 		id_type: 'State your means of ID.',
 		id_document: '',
 	};
 
 	const validationSchema = Yup.object({
-		page_name: Yup.string().required('Required'),
 		username: Yup.string().required('Required'),
 		display_name: Yup.string().required('Required'),
 		third_party_management: Yup.string().required('Required'),
@@ -105,38 +102,6 @@ const Settings = () => {
 				{/* max-md:flex-col md:items-center md:justify-between */}
 				<form className="w-full lg:w-[600px]">
 					<div className="flex max-md:flex-col md:items-center md:justify-between  border-b border-black/10">
-						<label className="max-md:text-sm mt-2" htmlFor="page_name">
-							Page name
-						</label>
-						<InputGroup
-							name="page_name"
-							type="text"
-							className={`${toggleEdit.profile && inputStyle} `}
-							disabled={toggleEdit.profile}
-							value={formik.values.page_name}
-							onChange={formik.handleChange}
-							onBlur={formik.handleBlur}
-							errorMsg={
-								formik.touched.page_name && formik.errors.page_name ? formik.errors.page_name : null
-							}
-						/>
-					</div>
-					<div className="flex max-md:flex-col md:items-center md:justify-between  border-b border-black/10">
-						<label className="max-md:text-sm mt-2" htmlFor="username">
-							Username
-						</label>
-						<InputGroup
-							name="username"
-							type="text"
-							className={`${toggleEdit.profile && inputStyle} `}
-							disabled={toggleEdit.profile}
-							value={formik.values.username}
-							onChange={formik.handleChange}
-							onBlur={formik.handleBlur}
-							errorMsg={formik.touched.username && formik.errors.username ? formik.errors.username : null}
-						/>
-					</div>
-					<div className="flex max-md:flex-col md:items-center md:justify-between  border-b border-black/10">
 						<label className="max-md:text-sm mt-2" htmlFor="display_name">
 							Display name
 						</label>
@@ -151,25 +116,6 @@ const Settings = () => {
 							errorMsg={
 								formik.touched.display_name && formik.errors.display_name
 									? formik.errors.display_name
-									: null
-							}
-						/>
-					</div>
-					<div className="flex max-md:flex-col md:items-center md:justify-between  border-b border-black/10">
-						<label className="max-md:text-sm mt-2" htmlFor="third_party_management">
-							Third-Party Management{' '}
-						</label>
-						<InputGroup
-							name="third_party_management"
-							type="text"
-							className={`${toggleEdit.profile && inputStyle} `}
-							disabled={toggleEdit.profile}
-							value={formik.values.third_party_management}
-							onChange={formik.handleChange}
-							onBlur={formik.handleBlur}
-							errorMsg={
-								formik.touched.third_party_management && formik.errors.third_party_management
-									? formik.errors.third_party_management
 									: null
 							}
 						/>
@@ -191,25 +137,6 @@ const Settings = () => {
 				</div>
 
 				<form className="w-full lg:w-[600px]">
-					<div className="flex max-md:flex-col md:items-center md:justify-between  border-b border-black/10">
-						<label className="max-md:text-sm mt-2" htmlFor="shop_owner_name">
-							Shop Owner’s Name
-						</label>
-						<InputGroup
-							name="shop_owner_name"
-							type="text"
-							className={`${toggleEdit.account && inputStyle} `}
-							disabled={toggleEdit.account}
-							value={formik.values.shop_owner_name}
-							onChange={formik.handleChange}
-							onBlur={formik.handleBlur}
-							errorMsg={
-								formik.touched.shop_owner_name && formik.errors.shop_owner_name
-									? formik.errors.shop_owner_name
-									: null
-							}
-						/>
-					</div>
 					<div className="flex max-md:flex-col md:items-center md:justify-between  border-b border-black/10">
 						<label className="max-md:text-sm mt-2" htmlFor="personal_contact">
 							Personal Contact
@@ -237,7 +164,8 @@ const Settings = () => {
 							name="id_type"
 							type="text"
 							className={`${toggleEdit.account && inputStyle} `}
-							disabled={toggleEdit.account}
+							// disabled={toggleEdit.account}
+							disabled={true}
 							value={formik.values.id_type}
 							onChange={formik.handleChange}
 							onBlur={formik.handleBlur}
@@ -260,7 +188,7 @@ const Settings = () => {
 										<MdClose size={12} onClick={handleRemoveFile} />
 									</div>
 								</div>
-								<InputGroup name="id_document" type="file" onChange={handleFileChange}>
+								<InputGroup name="id_document" type="file" onChange={handleFileChange} disabled={true}>
 									<img src={UploadDoc} alt="/" className="w-12 " />
 								</InputGroup>
 							</div>
