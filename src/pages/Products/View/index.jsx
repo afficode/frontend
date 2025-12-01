@@ -17,7 +17,6 @@ import { formatDistance } from 'date-fns';
 import { ScrollToTop } from '../../../utils';
 import { HiInformationCircle } from 'react-icons/hi';
 import ContactAdmin from './ContactAdmin';
-import MakePayment from './MakePayment';
 import { Alert } from 'flowbite-react';
 import SaveProduct from '../Default/SaveProduct';
 import { getSaves } from '../../../hooks/useSaves';
@@ -49,39 +48,29 @@ const index = () => {
 		<ViewProduct />
 	) : user?.id === result?.data?.user_id ? (
 		<section className="w-full px-4 py-2 lg:py-4 lg:px-8">
-			{result?.data?.paid === 0 && user.id === result?.data.owner ? (
-				<div className="w-[90%] lg:w-[70%] my-3 mx-auto">
+			{result?.data?.paid === 1 && result?.data?.active === '2' ? (
+				<div className="w-[90%] lg:w-1/2 my-3 mx-auto">
 					<Alert
-						additionalContent={<MakePayment ad_id={result?.data?.id} />}
-						color="warning"
-						icon={HiInformationCircle}
+						// additionalContent={<ContactAdmin />}
+						color="success"
 					>
-						<span className="font-medium text-yellow-700">
-							Ad Not Available ATM, you need to make some payment.:{' '}
-						</span>{' '}
+						<h5 className="font-medium text-red-600">This Ad is marked as closed: </h5>{' '}
+						<div className="">
+							{' '}
+							This Ad is marked as closed and is not displayed for customers to see.
+							<ul className="list-disc list-inside font-bold my-4">
+								<li className="text-sm">
+									You can choose to delete this Ad or it will be VACUMMED during our daily cleanup.
+								</li>
+								<li className="text-sm">
+									Closed Ad are deleted after 48 hours of closure from our policy.
+								</li>
+							</ul>
+							<span className="font-bold mt-4 bg-white text-green-500 p-2">Thanks for using Boonfu!</span>
+						</div>
 					</Alert>
 				</div>
-			) : result?.data?.paid === 1 && result?.data?.active === '2' ? (
-                <div className="w-[90%] lg:w-1/2 my-3 mx-auto">
-                    <Alert
-                        // additionalContent={<ContactAdmin />}
-                        color="success"
-                    >
-                        <h5 className="font-medium text-red-600">This Ad is marked as closed: </h5>{' '}
-                        <div className="">
-                            {' '}
-                            This Ad is marked as closed and is not displayed for customers to see.
-                            <ul className="list-disc list-inside font-bold my-4">
-                                <li className="text-sm">You can choose to delete this Ad or it will be VACUMMED during our daily cleanup.</li>
-                                <li className="text-sm">Closed Ad are deleted after 48 hours of closure from our policy.</li>
-                            </ul>
-                            <span className="font-bold mt-4 bg-white text-green-500 p-2">
-                                Thanks for using Boonfu!
-                            </span>
-                        </div>
-                    </Alert>
-                </div>
-            ) : result?.data?.paid === 1 && result?.data?.available === 0 ? (
+			) : result?.data?.paid === 1 && result?.data?.available === 0 ? (
 				<div className="w-[90%] lg:w-[70%] my-3 mx-auto">
 					<Alert
 						// additionalContent={<ContactAdmin />}

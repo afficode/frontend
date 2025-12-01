@@ -83,12 +83,6 @@ export const postRemark = () => {
 	});
 };
 
-export const makeAdPayment = () => {
-	return useMutation({
-		mutationFn: (ads_id) => privateAxios.put(`/ads/pay/${ads_id}`).then((res) => res?.data),
-	});
-};
-
 export const deleteAd = () => {
 	return useMutation({
 		mutationFn: (ads_id) => privateAxios.delete(`/ads/${ads_id}`).then((res) => res?.data),
