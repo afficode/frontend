@@ -34,6 +34,8 @@ const index = () => {
 	const { data, isLoading: saveLoading } = getSaves();
 	const notify = useNotify();
 
+	console.log('result', result);
+
 	useEffect(() => {
 		if (result?.data) {
 			setItems(() => [
@@ -137,9 +139,7 @@ const index = () => {
 								{numberWithCommas(result.data?.price)}
 							</p>
 
-							{result?.data?.paid === 0 && user.id === result?.data.owner ? (
-								<span className={'px-2 py-1 rounded-lg text-white bg-red-700 w'}>Unavailable</span>
-							) : result?.data?.active === '1' ? (
+							{result?.data?.active === '1' ? (
 								<span className={'px-4 py-1 rounded-lg text-white bg-green-700  '}>Active</span>
 							) : result?.data?.active === '2' ? (
 								<span className={'px-4 py-1 rounded-lg text-white bg-gray-700  '}>Closed</span>
