@@ -1,16 +1,5 @@
 import { BsFastForwardFill } from 'react-icons/bs';
-import {
-	SportCar,
-	Furniture,
-	HairDryer,
-	House,
-	KitchenTools,
-	Spa,
-	Store,
-	Tailor,
-	Toyota,
-	noimage,
-} from '../../../assets/images';
+import { SportCar, Furniture, House, Tailor, noimage } from '../../../assets/images';
 import { Card } from '../../../components';
 import { Link } from 'react-router-dom';
 import { useProduct } from '../../../hooks';
@@ -40,7 +29,7 @@ const RowContainer = ({ title, link }) => {
 					? product?.data?.ads?.slice(0, 4).map((item) => <CardDetails key={item.id} {...item} />)
 					: title === 'Categories'
 					? categoriesData.map((item) => <Card key={item.title} {...item} />)
-					: shopsData.map((item) => <Card key={item.title} {...item} />)}
+					: null}
 			</div>
 		</section>
 	);
@@ -85,8 +74,6 @@ const CardDetails = ({ id, title, location, images, created_at, price, feature }
 	);
 };
 
-// ₦
-
 const categoriesData = [
 	{
 		img: SportCar,
@@ -107,56 +94,5 @@ const categoriesData = [
 		img: Tailor,
 		title: 'Fashion',
 		link: `${Approutes.product.category}/${btoa(55)}`,
-	},
-];
-
-const shopsData = [
-	{
-		img: Tailor,
-		title: 'Tasha Stitches',
-	},
-	{
-		img: Spa,
-		title: 'Wendy’s SPA',
-	},
-	{
-		img: Store,
-		title: 'K & K Kiddies Store.',
-	},
-	{
-		img: Store,
-		title: 'K & K.',
-	},
-];
-
-const discoverMoreData = [
-	{
-		img: HairDryer,
-		title: 'Hair dryer.',
-		price: '₦60,000',
-		location: 'Idumota, Lagos.',
-	},
-	{
-		img: Toyota,
-		title: 'Toyota Corola',
-		price: '₦60,000',
-		location: 'Idumota, Lagos.',
-		car: {
-			year: '2008',
-			mileage: '120,000 miles',
-			fuel: 'Petrol',
-		},
-	},
-	{
-		img: KitchenTools,
-		title: 'Kitchen Ware',
-		price: '₦60,000',
-		location: 'Abuja.',
-	},
-	{
-		img: KitchenTools,
-		title: 'Kitchen',
-		price: '₦60,000',
-		location: 'Abuja.',
 	},
 ];

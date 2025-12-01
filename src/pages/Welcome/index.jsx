@@ -9,7 +9,6 @@ const Welcome = () => {
 			<Banner />
 			<Hero />
 			<RowContainer title={'Categories'} link={Approutes.product.category} />
-			<RowContainer title={'Shops'} link={Approutes.underConstruction} />
 			<RowContainer title={'Discover more...'} link={Approutes.product.initial} />
 		</>
 	);

@@ -12,14 +12,9 @@ const Home = () => {
 			<Banner />
 			<Hero />
 			<RowContainer
-				title={'Trending Ads'}
+				title={'Featured Ads'}
 				link={Approutes.product.initial}
 				data={data?.ads?.slice(0, 12)}
-			/>
-			<RowContainer
-				title={'Featured Products'}
-				link={Approutes.product.initial}
-				data={data?.ads?.filter((ad) => ad.feature === '3')?.slice(0, 12)}
 			/>
 		</>
 	);
