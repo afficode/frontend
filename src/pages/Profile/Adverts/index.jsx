@@ -20,55 +20,41 @@ const Adverts = () => {
 				<div className="flex flex-wrap items-center justify-between">
 					<div
 						onClick={() => setFilteredAd('all')}
-						className={`${filteredAd === 'all'
-							? 'bg-primary text-white lg:py-2 lg:px-6 py-1 px-4'
-							: 'lg:py-2 lg:px-6 py-1 px-4'
-							} cursor-pointer max-sm:text-sm`}
+						className={`${
+							filteredAd === 'all'
+								? 'bg-primary text-white lg:py-2 lg:px-6 py-1 px-4'
+								: 'lg:py-2 lg:px-6 py-1 px-4'
+						} cursor-pointer max-sm:text-sm`}
 					>
 						All <span>[{ads?.total_ads}]</span>
 					</div>
 					<div
 						onClick={() => setFilteredAd('active')}
-						className={`${filteredAd === 'active'
-							? 'bg-primary text-white lg:py-2 lg:px-6 py-1 px-4'
-							: 'text-green-500 lg:py-2 lg:px-6 py-1 px-4'
-							} cursor-pointer max-sm:text-sm`}
+						className={`${
+							filteredAd === 'active'
+								? 'bg-primary text-white lg:py-2 lg:px-6 py-1 px-4'
+								: 'text-green-500 lg:py-2 lg:px-6 py-1 px-4'
+						} cursor-pointer max-sm:text-sm`}
 					>
 						Active <span>[{ads?.active_ads.length || 0}]</span>
 					</div>
 					<div
-						onClick={() => setFilteredAd('processing')}
-						className={`${filteredAd === 'processing'
-							? 'bg-primary text-white lg:py-2 lg:px-6 py-1 px-4'
-							: 'text-secondary lg:py-2 lg:px-6 py-1 px-4'
-							} cursor-pointer max-sm:text-sm`}
-					>
-						Processing <span>[{ads?.processing_ads.filter(ad => ad.active === '0' && ad.available === 0 && ad.paid === 1).length || 0}]</span>
-					</div>
-					<div
 						onClick={() => setFilteredAd('blocked')}
-						className={`${filteredAd === 'blocked'
-							? 'bg-primary text-white lg:py-2 lg:px-6 py-1 px-4'
-							: 'text-[#D60949] lg:py-2 lg:px-6 py-1 px-4'
-							} cursor-pointer max-sm:text-sm`}
+						className={`${
+							filteredAd === 'blocked'
+								? 'bg-primary text-white lg:py-2 lg:px-6 py-1 px-4'
+								: 'text-[#D60949] lg:py-2 lg:px-6 py-1 px-4'
+						} cursor-pointer max-sm:text-sm`}
 					>
 						Blocked <span>[{ads?.blocked_ads.length || 0}]</span>
 					</div>
 					<div
-						onClick={() => setFilteredAd('payment_required')}
-						className={`${filteredAd === 'payment_required'
-							? 'bg-primary text-white lg:py-2 lg:px-6 py-1 px-4'
-							: ' lg:py-2 lg:px-6 py-1 px-4 text-orange-500'
-							} cursor-pointer max-sm:text-sm`}
-					>
-						Payment Required <span>[{ads?.processing_ads.filter(ad => ad.active === '0' && ad.available === 0 && ad.paid === 0).length || 0}]</span>
-					</div>
-					<div
 						onClick={() => setFilteredAd('sold')}
-						className={`${filteredAd === 'sold'
-							? 'bg-primary text-white lg:py-2 lg:px-6 py-1 px-4'
-							: 'text-black/50 lg:py-2 lg:px-6 py-1 px-4'
-							} cursor-pointer max-sm:text-sm`}
+						className={`${
+							filteredAd === 'sold'
+								? 'bg-primary text-white lg:py-2 lg:px-6 py-1 px-4'
+								: 'text-black/50 lg:py-2 lg:px-6 py-1 px-4'
+						} cursor-pointer max-sm:text-sm`}
 					>
 						Closed <span>[{ads?.sold_ads.length || 0}]</span>
 					</div>
@@ -85,101 +71,90 @@ const Adverts = () => {
 				<LoadingScreen />
 			) : (
 				<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 place-items-center">
-					{(ads && ads.total_ads > 0) ? (filteredAd === 'active' ? adsData.map((ad) => (
-						<AdCard
-							key={ad.id}
-							title={ad.title}
-							images={ad.images}
-							active={ad.active}
-							price={ad.price}
-							views={ad.views}
-							subscribe={ad.subscribe}
-							adId={ad.id}
-							chats={ad.chats}
-							paid={ad.paid}
-							available={ad.available}
-						/>
-					)) : filteredAd === 'processing' ? ads.processing_ads.filter(ad => ad.active === '0' && ad.available === 0 && ad.paid === 1).sort((a, b) => b.id - a.id).map((ad) => (
-						<AdCard
-							key={ad.id}
-							title={ad.title}
-							images={ad.images}
-							active={ad.active}
-							price={ad.price}
-							views={ad.views}
-							subscribe={ad.subscribe}
-							adId={ad.id}
-							chats={ad.chats}
-							paid={ad.paid}
-							available={ad.available}
-
-						/>
-					)) : filteredAd === 'blocked' ? ads.blocked_ads.sort((a, b) => b.id - a.id).map((ad) => (
-						<AdCard
-							key={ad.id}
-							title={ad.title}
-							images={ad.images}
-							active={ad.active}
-							price={ad.price}
-							views={ad.views}
-							subscribe={ad.subscribe}
-							adId={ad.id}
-							chats={ad.chats}
-							paid={ad.paid}
-							available={ad.available}
-
-						/>
-					)) : filteredAd === 'payment_required' ? ads.processing_ads.filter(ad => ad.active === '0' && ad.available === 0 && ad.paid === 0).sort((a, b) => b.id - a.id).map((ad) => (
-						<AdCard
-							key={ad.id}
-							title={ad.title}
-							images={ad.images}
-							active={ad.active}
-							price={ad.price}
-							views={ad.views}
-							subscribe={ad.subscribe}
-							adId={ad.id}
-							chats={ad.chats}
-							paid={ad.paid}
-							available={ad.available}
-
-						/>
-					)) : filteredAd === 'sold' ? ads.sold_ads.sort((a, b) => b.id - a.id).map((ad) => (
-						<AdCard
-							key={ad.id}
-							title={ad.title}
-							images={ad.images}
-							active={ad.active}
-							price={ad.price}
-							views={ad.views}
-							subscribe={ad.subscribe}
-							adId={ad.id}
-							chats={ad.chats}
-							paid={ad.paid}
-							available={ad.available}
-						/>
-					)) : [...(ads.sold_ads ?? []),
-					...(ads.active_ads ?? []),
-					...(ads.blocked_ads ?? []),
-					...(ads.processing_ads ?? [])
-					].sort((a, b) => b.id - a.id).map((ad) => (
-						<AdCard
-							key={ad.id}
-							title={ad.title}
-							images={ad.images}
-							active={ad.active}
-							price={ad.price}
-							views={ad.views}
-							subscribe={ad.subscribe}
-							adId={ad.id}
-							chats={ad.chats}
-							paid={ad.paid}
-							available={ad.available}
-						/>
-					))) : (
+					{ads && ads.total_ads > 0 ? (
+						filteredAd === 'active' ? (
+							adsData.map((ad) => (
+								<AdCard
+									key={ad.id}
+									title={ad.title}
+									images={ad.images}
+									active={ad.active}
+									price={ad.price}
+									views={ad.views}
+									subscribe={ad.subscribe}
+									adId={ad.id}
+									chats={ad.chats}
+									paid={ad.paid}
+									available={ad.available}
+								/>
+							))
+						) : filteredAd === 'blocked' ? (
+							ads.blocked_ads
+								.sort((a, b) => b.id - a.id)
+								.map((ad) => (
+									<AdCard
+										key={ad.id}
+										title={ad.title}
+										images={ad.images}
+										active={ad.active}
+										price={ad.price}
+										views={ad.views}
+										subscribe={ad.subscribe}
+										adId={ad.id}
+										chats={ad.chats}
+										paid={ad.paid}
+										available={ad.available}
+									/>
+								))
+						) : filteredAd === 'sold' ? (
+							ads.sold_ads
+								.sort((a, b) => b.id - a.id)
+								.map((ad) => (
+									<AdCard
+										key={ad.id}
+										title={ad.title}
+										images={ad.images}
+										active={ad.active}
+										price={ad.price}
+										views={ad.views}
+										subscribe={ad.subscribe}
+										adId={ad.id}
+										chats={ad.chats}
+										paid={ad.paid}
+										available={ad.available}
+									/>
+								))
+						) : (
+							[
+								...(ads.sold_ads ?? []),
+								...(ads.active_ads ?? []),
+								...(ads.blocked_ads ?? []),
+								...(ads.processing_ads ?? []),
+							]
+								.sort((a, b) => b.id - a.id)
+								.map((ad) => (
+									<AdCard
+										key={ad.id}
+										title={ad.title}
+										images={ad.images}
+										active={ad.active}
+										price={ad.price}
+										views={ad.views}
+										subscribe={ad.subscribe}
+										adId={ad.id}
+										chats={ad.chats}
+										paid={ad.paid}
+										available={ad.available}
+									/>
+								))
+						)
+					) : (
 						<div>
-							<p className="text-center font-bold">Sorry, You don't have any Advert yet. Please post one.</p>
-						</div>)}
+							<p className="text-center font-bold">
+								Sorry, You don't have any Advert yet. Please post one.
+							</p>
+						</div>
+					)}
 				</div>
 			)}
 
@@ -189,22 +164,3 @@ const Adverts = () => {
 };
 
 export default Adverts;
-
-// status, images, item_name, price, promoted_till, reach, clicks, phone_views, chats
-
-// adverts page data format from backend
-/*
-	[
-		{
-			item_name: '',
-			price: '',
-			status: '',
-			item_images: [],
-			promoted_till: '',
-			reach: '',
-			clicks: '',
-			phone_views: '',
-			chats: '',
-		},
-	]
-*/
