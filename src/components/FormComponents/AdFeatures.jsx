@@ -4,20 +4,14 @@ import { Field } from 'formik';
 import { Button, InputGroup, Modal } from '../../ui';
 import { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
-import {
-	grabbableCategories,
-	inspectableCategories,
-	pickupCategories,
-} from '../../constants/Category';
+import { inspectableCategories, pickupCategories } from '../../constants/Category';
 import { getCommission, toMoney } from '../../utils';
 
 const AdFeatures = (props) => {
 	const { name, price, subCat, address, setAddress, categoryId, feature, ...rest } = props;
 
 	const { categoryId: id } = useParams();
-	console.log('ad id in features', id);
 
-	const [showGrab, setShowGrab] = useState(feature === '3' ? true : false);
 	const { hash } = useLocation();
 	const [grabModal, setGrabModal] = useState(false);
 
@@ -108,7 +102,7 @@ const AdFeatures = (props) => {
 							<div className="flex items-center gap-2 ">
 								<h4 className="text-primary ">Use “Grab Feature” ? </h4>
 
-								<button onClick={() => setGrabModal(true)}>
+								<button type="button" onClick={() => setGrabModal(true)}>
 									<img tabIndex={0} src={InfoYellow} className="w-4 cursor-pointer" alt="info" />
 								</button>
 							</div>
@@ -310,7 +304,7 @@ const AdFeatures = (props) => {
 								<div className="">
 									<h6 className="font-semibold">Price of item :</h6>
 									<div className="border border-black flex items-center gap-2 max-w-[22rem] ">
-										<span className="flex items-center gap-1  p-2 w-full font-bold text-xl">
+										<span className="flex items-center gap-1  p-2 w-full font-bold text-base">
 											<img src={Naira} alt="/" />
 											{price ? toMoney(price) : '00'}
 										</span>
@@ -322,7 +316,7 @@ const AdFeatures = (props) => {
 								<div className="space-y-2">
 									<h6 className="font-semibold ">To pay: Fixed Commission:</h6>
 									<div className=" flex items-center gap-2 max-w-[22rem] ">
-										<span className="flex items-center gap-3 border border-black bg-[#D9D9D9] p-2 w-full font-bold text-xl">
+										<span className="flex items-center gap-3 border border-black bg-[#D9D9D9] p-2 w-full font-bold text-base">
 											<img src={Coin} alt="Coin symbol" className="w-8 h-8" />
 											10
 										</span>
@@ -332,7 +326,7 @@ const AdFeatures = (props) => {
 								<div className="">
 									<h6 className="font-semibold ">Grab listing fee</h6>
 									<div className=" flex items-center gap-2 max-w-[22rem] ">
-										<span className="flex items-center gap-1 border-2 border-primary p-2 w-full font-bold text-xl">
+										<span className="flex items-center gap-1 border-2 border-primary p-2 w-full font-bold text-base">
 											<img src={Naira} alt="Naira symbol" />
 											{boonfuCommission && toMoney(boonfuCommission)}
 										</span>
