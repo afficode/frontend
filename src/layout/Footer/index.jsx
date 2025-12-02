@@ -93,12 +93,6 @@ const Footer = () => {
 							<Link to={Approutes.grab.home}>
 								<li className={listStyles}>Grab System</li>
 							</Link>
-							<Link to={'https://logistic.boonfu.site/'} target="_blank" rel="noreferrer">
-								<li className={listStyles}>Logistics Services</li>
-							</Link>
-							<Link to={Approutes.underConstruction}>
-								<li className={listStyles}>My Shop</li>
-							</Link>
 						</ul>
 						<ul className="flex flex-col ">
 							<h6 className="px-2 md:px-8 text-2xl opacity-[.7] font-normal whitespace-nowrap mb-3">

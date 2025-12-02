@@ -2,7 +2,6 @@ import { TbCurrencyNaira } from 'react-icons/tb';
 import OverviewPills from '../../../Products/View/OverviewPills';
 import { FaCamera } from 'react-icons/fa6';
 import { ScrollToTop } from '../../../../utils';
-import { Link } from 'react-router-dom';
 import { CarBlack } from '../../../../assets/images';
 import { Carousel } from 'flowbite-react';
 import { ActionBar, GrabUpdateTable } from '../../../../components';

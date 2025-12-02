@@ -18,7 +18,7 @@ const PostSuccess = () => {
 				className="mx-auto flex items-center gap-6 max-sm:flex-col
 			"
 			>
-				<Link to={`${Approutes.product.initial}/${adId}}`}>
+				<Link to={`${Approutes.product.initial}/${adId}`}>
 					<Button variant={'secondary'}>View ad</Button>
 				</Link>
 				<Link to={Approutes.postDecision}>

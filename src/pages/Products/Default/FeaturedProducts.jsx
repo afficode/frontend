@@ -3,8 +3,7 @@ import { FaCamera, FaMapMarkerAlt } from 'react-icons/fa';
 import { TbCurrencyNaira } from 'react-icons/tb';
 import { noimage } from '../../../assets/images';
 import { useNavigate } from 'react-router-dom';
-import { encodeProductId } from '../../../utils/dataManipulations';
-import { numberWithCommas } from '../../../utils/dataManipulations';
+import { numberWithCommas } from '../../../utils/index.js';
 import { formatDistance } from 'date-fns';
 import SaveProduct from './SaveProduct';
 import useAuth from '../../../context/UserContext';
@@ -20,7 +19,7 @@ const FeaturedProducts = ({ product }) => {
 		<>
 			{product.map((ad, index) => (
 				<div
-					onClick={() => navigate(`/product/${encodeProductId(ad.id)}`)}
+					onClick={() => navigate(`/product/${ad.id}`)}
 					key={index}
 					className="overflow-hidden min-w-[18rem] md:w-[18rem] sm:w-full min-h-[12rem] md:h-[22rem] bg-white hover:bg-gray-200 border border-gray-200 rounded-lg shadow-sm cursor-pointer hover:shadow-lg transition-all  ease-in-out"
 				>
@@ -59,7 +58,7 @@ const FeaturedProducts = ({ product }) => {
 
 						{ad?.feature !== '0' && ad?.feature !== '3' && <Feature feature={ad?.feature} />}
 
-						{((isLogin && parseInt(ad?.owner) !== parseInt(user?.id)) || !isLogin) && (
+						{((isLogin && ad?.owner !== user?.id) || !isLogin) && (
 							<SaveProduct
 								ads_id={ad.id}
 								className="absolute w-10 h-12 p-1 px-2 bg-gray-200 rounded shadow-2xl top-4 right-4 hover:bg-white "
@@ -88,7 +87,7 @@ const FeaturedProducts = ({ product }) => {
 							<span className="flex justify-around gap-2 my-auto text-xl font-bold">
 								<NegotiableIcon negotiable={ad?.negotiable} />
 								{ad?.feature == '3' &&
-									((isLogin && parseInt(ad?.owner) !== parseInt(user?.id)) || !isLogin) && (
+									((isLogin && ad?.owner !== user?.id) || !isLogin) && (
 										<GrabIcon className="text-secondary" />
 									)}
 							</span>{' '}

@@ -4,13 +4,12 @@ import { AiOutlineClose } from "react-icons/ai";
 import { noimage } from "../../../assets/images";
 import { Link } from "react-router-dom";
 import { Approutes } from "../../../constants";
-import { encodeProductId } from "../../../utils/dataManipulations";
 import { useQueryClient } from "react-query";
 import { useNotify } from "../../../hooks";
 import { useQuery } from "react-query";
 import { useState } from "react";
 import { unSaveAd } from "../../../hooks/useSaves";
-import { numberWithCommas } from "../../../utils/dataManipulations";
+import { numberWithCommas } from "../../../utils/index.js";
 
 const ItemContainer = ({
   name,
@@ -31,16 +30,16 @@ const ItemContainer = ({
     onSuccess: (data) => {
       notify(data?.message, "success");
       queryClient.invalidateQueries({ queryKey: ["saved"] });
-      setUnSave(false); // set the query to false, to avoid refetching.
+      setUnSave(false);
     },
     onError: (error) => {
       notify(error?.response?.message, "error");
-      setUnSave(false); // set the query to false, to avoid refetching.
+      setUnSave(false);
     },
   });
 
   return (
-    <Link to={`${Approutes.product.initial}/${encodeProductId(ads_id)}`}>
+    <Link to={`${Approutes.product.initial}/${ads_id}`}>
       <div className="bg-gray-200 rounded-sm cursor-pointer">
         <div className="flex ">
           {/* image  */}

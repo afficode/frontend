@@ -3,18 +3,15 @@ import { InfoYellow, Naira } from '../../assets/svgs';
 import { Field } from 'formik';
 import { Button, InputGroup, Modal } from '../../ui';
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import {
-	grabbableCategories,
-	inspectableCategories,
-	pickupCategories,
-} from '../../constants/Category';
+import { useLocation, useParams } from 'react-router-dom';
+import { inspectableCategories, pickupCategories } from '../../constants/Category';
 import { getCommission, toMoney } from '../../utils';
 
 const AdFeatures = (props) => {
 	const { name, price, subCat, address, setAddress, categoryId, feature, ...rest } = props;
 
-	const [showGrab, setShowGrab] = useState(feature === '3' ? true : false);
+	const { categoryId: id } = useParams();
+
 	const { hash } = useLocation();
 	const [grabModal, setGrabModal] = useState(false);
 
@@ -99,17 +96,13 @@ const AdFeatures = (props) => {
 
 					{/* grab feature */}
 					<div
-						className={`${
-							showGrab
-								? ' transform translate-x-[-1.2%] transition-all duration-500 opacity-100'
-								: ' transform translate-x-[150%] transition-all duration-500 opacity-0'
-						} sm:space-y-6 space-y-6 sm:p-8 p-4 absolute top-0 max-sm:left-1 bg-white z-10 w-full `}
+						className={`${' transform translate-x-[-1.2%] transition-all duration-500 opacity-100'} sm:space-y-6 space-y-6 sm:p-8 p-4 absolute top-0 max-sm:left-1 bg-white z-10 w-full `}
 					>
 						<div className="space-y-3">
 							<div className="flex items-center gap-2 ">
 								<h4 className="text-primary ">Use “Grab Feature” ? </h4>
 
-								<button onClick={() => setGrabModal(true)}>
+								<button type="button" onClick={() => setGrabModal(true)}>
 									<img tabIndex={0} src={InfoYellow} className="w-4 cursor-pointer" alt="info" />
 								</button>
 							</div>
@@ -147,14 +140,127 @@ const AdFeatures = (props) => {
 															<div className=" text-black space-y-3">
 																<h3>Grab Feature</h3>
 
-																<p>
-																	The Grab Feature is a secure escrow system where the platform holds payment until
-																	the buyer confirms satisfactory pick-up or delivery of the item. Sellers provide
-																	the pick-up location in advance (belwo), ensuring transparency and efficiency. Once
-																	the buyer approves the transaction, funds are released to the seller, offering
-																	peace of mind for buyers and guaranteed payments for sellers. This feature builds
-																	trust, streamlines transactions and enhances security for all parties involved.
-																</p>
+																{parseInt(id) === 50 ? (
+																	<ol>
+																		<div>
+																			<span className="flex items-center gap-1">
+																				💰 <li className="list-decimal ml-4 font-semibold !text-base">How It Works</li>
+																			</span>
+																			<p className="ml-10">
+																				To use the Grab Feature, you need to fund your wallet with 1% of your Item’s
+																				price. Example: If your item costs ₦10,000,000, you’ll deposit ₦100,000. This 1%
+																				serves as the Grab Feature commission.
+																			</p>
+																		</div>
+																		<div>
+																			<span className="flex items-center gap-1">
+																				📅 <li className="list-decimal ml-4 font-semibold !text-base">Duration</li>
+																			</span>
+																			<p className="ml-10">
+																				Your advert will be aggressively promoted by our Grabbers for 1 month.
+																			</p>
+																		</div>
+																		<div>
+																			<span className="flex items-center gap-1">
+																				💵{' '}
+																				<li className="list-decimal ml-4 font-semibold !text-base">
+																					If the Item Doesn’t Sell
+																				</li>
+																			</span>
+																			<p className="ml-10">
+																				If:
+																				<ul className="ml-6">
+																					<li className="list-disc"> Our Grabbers don’t sell your item, or </li>
+																					<li className="list-disc">You sell it outside this platform, </li>
+																				</ul>
+																				you’ll get 90% of your deposit back, while 5% is charged as administrative fee.
+																			</p>
+																		</div>
+																		<div>
+																			<span className="flex items-center gap-1">
+																				🎉{' '}
+																				<li className="list-decimal ml-4 font-semibold !text-base">
+																					If the Item Is Sold by a Grabber
+																				</li>
+																			</span>
+																			<p className="ml-10">
+																				If a Grabber sells your item, your 1% deposit becomes the sales commission. (No
+																				refund applies in this case.)
+																			</p>
+																		</div>
+																		<div>
+																			<span className="flex items-center gap-1">
+																				🚫
+																				<li className="list-decimal ml-4 font-semibold !text-base">
+																					If You Cancel Your Advert
+																				</li>
+																			</span>
+																			<p className="ml-10">
+																				If you choose to withdraw your advert, 5% of your deposit will be charged as
+																				administrative fee, and the balance will be made available as “withdrawable”
+																			</p>
+																		</div>
+																		<div>
+																			<span className="flex items-center gap-1">
+																				🔒
+																				<li className="list-decimal ml-4 font-semibold !text-base">
+																					Withdrawing Funds
+																				</li>
+																			</span>
+																			<p className="ml-10">
+																				You can’t request a withdrawal while your advert is still active. Please close
+																				the advert first, then place your withdrawal request
+																			</p>
+																		</div>
+																	</ol>
+																) : (
+																	<ol>
+																		<div>
+																			<li className="list-decimal ml-4 font-semibold !text-base">Grab Listing Fee</li>
+																			<p className="ml-4">
+																				The required Grab Listing Fee will be automatically deducted from your Boonfu
+																				Wallet Balance. You must fund your wallet with the required amount before you
+																				can publish an advert using the Grab Feature.
+																			</p>
+																		</div>
+																		<div>
+																			<li className="list-decimal ml-4 font-semibold !text-base">
+																				Marketing & Promotion Duration
+																			</li>
+																			<p className="ml-4">
+																				Items listed with the Grab Feature receive intensive marketing and promotion
+																				both within and outside the Boonfu platform.This premium promotion runs for a
+																				period of one (1) month.
+																			</p>
+																		</div>
+																		<div>
+																			<li className="list-decimal ml-4 font-semibold !text-base">
+																				If the Item Does Not Sell Within 1 Month
+																			</li>
+																			<p className="ml-4">
+																				If your item is not sold within the 1-month Grab period, you have two options:
+																			</p>
+																			<ol className="ml-4">
+																				<div>
+																					<li className="list-decimal ml-4 font-semibold">Downgrade to Basic Listing</li>
+																					<p className="ml-4">
+																						You can switch the advert from Grab to a standard Basic Listing while
+																						maintaining the original price of item for another one month.
+																					</p>
+																				</div>
+																				<div>
+																					<li className="list-decimal ml-4 font-semibold">
+																						Review the Price for Another 1 Months
+																					</li>
+																					<p className="ml-4">
+																						IF you adjust (reduce) the item’s price by at least 10%, it qualifies for an
+																						additional one (1) month promotion with Grab feature.
+																					</p>
+																				</div>
+																			</ol>
+																		</div>
+																	</ol>
+																)}
 
 																<form autoComplete="off" className="flex flex-col space-y-2">
 																	<label htmlFor="seller_address" className="flex flex-col space-y-1 font-medium">
@@ -170,19 +276,6 @@ const AdFeatures = (props) => {
 																			onChange={handleAddressChange}
 																		/>
 																	</label>
-																	{/* <label htmlFor="seller_address" className="flex flex-col space-y-1 font-medium">
-																	<span className="flex items-center ">City</span>
-																	<InputGroup
-																		type="text"
-																		name="city"
-																		id="city"
-																		autoComplete={'off'}
-																		className={'w-full '}
-																		required
-																		// value={quoteFormData.seller_address}
-																		// onChange={handleQuoteFormChange}
-																	/>
-																</label> */}
 
 																	<div className="w-full flex items-end justify-end pt-4">
 																		<Button
@@ -203,10 +296,6 @@ const AdFeatures = (props) => {
 										});
 									}}
 								</Field>
-
-								{/* <div className=" bg-secondary border-4 p-4 ">
-									Using the grab feature? Please read the terms and condition
-								</div> */}
 							</div>
 						</div>
 
@@ -215,7 +304,7 @@ const AdFeatures = (props) => {
 								<div className="">
 									<h6 className="font-semibold">Price of item :</h6>
 									<div className="border border-black flex items-center gap-2 max-w-[22rem] ">
-										<span className="flex items-center gap-1  p-2 w-full font-bold text-xl">
+										<span className="flex items-center gap-1  p-2 w-full font-bold text-base">
 											<img src={Naira} alt="/" />
 											{price ? toMoney(price) : '00'}
 										</span>
@@ -227,7 +316,7 @@ const AdFeatures = (props) => {
 								<div className="space-y-2">
 									<h6 className="font-semibold ">To pay: Fixed Commission:</h6>
 									<div className=" flex items-center gap-2 max-w-[22rem] ">
-										<span className="flex items-center gap-3 border border-black bg-[#D9D9D9] p-2 w-full font-bold text-xl">
+										<span className="flex items-center gap-3 border border-black bg-[#D9D9D9] p-2 w-full font-bold text-base">
 											<img src={Coin} alt="Coin symbol" className="w-8 h-8" />
 											10
 										</span>
@@ -235,12 +324,9 @@ const AdFeatures = (props) => {
 								</div>
 							) : (
 								<div className="">
-									<h6 className="font-semibold ml-14">To pay: Grab Commission:</h6>
+									<h6 className="font-semibold ">Grab listing fee</h6>
 									<div className=" flex items-center gap-2 max-w-[22rem] ">
-										<span className="flex items-center space-x-2 border-2 border-primary p-2 font-bold text-xl">
-											%
-										</span>
-										<span className="flex items-center gap-1 border-2 border-primary p-2 w-full font-bold text-xl">
+										<span className="flex items-center gap-1 border-2 border-primary p-2 w-full font-bold text-base">
 											<img src={Naira} alt="Naira symbol" />
 											{boonfuCommission && toMoney(boonfuCommission)}
 										</span>
@@ -251,35 +337,6 @@ const AdFeatures = (props) => {
 					</div>
 				</div>
 			</div>
-
-			{grabbableCategories.includes(parseInt(categoryId)) && (
-				<div
-					className={
-						showGrab
-							? 'flex justify-between items-center w-full mt-[8rem] sm:mt-[6rem] px-8'
-							: 'flex justify-center w-full mt-[8rem] sm:mt-[6rem] px-8'
-					}
-				>
-					<Button
-						type="button"
-						variant={'primary'}
-						className="bg-red-600 text-white text-center font-semibold"
-						onClick={() => setShowGrab(!showGrab)}
-					>
-						{showGrab ? 'Back' : 'Need to sell Urgently?'}
-					</Button>
-					{/* {showGrab && (
-						<Button
-							type="button"
-							variant={'primary'}
-							className=" text-white text-center font-semibold"
-							// onClick={() => setShowGrab(!showGrab)}
-						>
-							Pay to Continue
-						</Button>
-					)} */}
-				</div>
-			)}
 		</div>
 	);
 };

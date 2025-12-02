@@ -11,17 +11,12 @@ import { FaCamera } from 'react-icons/fa';
 import useAuth from '../../../context/UserContext';
 import ChatForm from './ChatForm';
 import ViewProduct from '../../../components/Skeleton/ViewProduct';
-import {
-	numberWithCommas,
-	decodeProductId,
-	convertKeyToName,
-} from '../../../utils/dataManipulations';
+import { numberWithCommas, convertKeyToName } from '../../../utils/index.js';
 import OverviewPills from './OverviewPills';
 import { formatDistance } from 'date-fns';
 import { ScrollToTop } from '../../../utils';
 import { HiInformationCircle } from 'react-icons/hi';
 import ContactAdmin from './ContactAdmin';
-import MakePayment from './MakePayment';
 import { Alert } from 'flowbite-react';
 import SaveProduct from '../Default/SaveProduct';
 import { getSaves } from '../../../hooks/useSaves';
@@ -35,9 +30,11 @@ const index = () => {
 	const [revealNumber, setRevealNumber] = useState(false);
 	const [revealEmail, setRevealEmail] = useState(false);
 	const { isLogin, user } = useAuth();
-	const { data: result, isLoading } = fetchProduct(decodeProductId(id));
+	const { data: result, isLoading } = fetchProduct(id);
 	const { data, isLoading: saveLoading } = getSaves();
 	const notify = useNotify();
+
+	console.log('result', result);
 
 	useEffect(() => {
 		if (result?.data) {
@@ -53,39 +50,29 @@ const index = () => {
 		<ViewProduct />
 	) : user?.id === result?.data?.user_id ? (
 		<section className="w-full px-4 py-2 lg:py-4 lg:px-8">
-			{result?.data?.paid === 0 && user.id === result?.data.owner ? (
-				<div className="w-[90%] lg:w-[70%] my-3 mx-auto">
+			{result?.data?.paid === 1 && result?.data?.active === '2' ? (
+				<div className="w-[90%] lg:w-1/2 my-3 mx-auto">
 					<Alert
-						additionalContent={<MakePayment ad_id={result?.data?.id} />}
-						color="warning"
-						icon={HiInformationCircle}
+						// additionalContent={<ContactAdmin />}
+						color="success"
 					>
-						<span className="font-medium text-yellow-700">
-							Ad Not Available ATM, you need to make some payment.:{' '}
-						</span>{' '}
+						<h5 className="font-medium text-red-600">This Ad is marked as closed: </h5>{' '}
+						<div className="">
+							{' '}
+							This Ad is marked as closed and is not displayed for customers to see.
+							<ul className="list-disc list-inside font-bold my-4">
+								<li className="text-sm">
+									You can choose to delete this Ad or it will be VACUMMED during our daily cleanup.
+								</li>
+								<li className="text-sm">
+									Closed Ad are deleted after 48 hours of closure from our policy.
+								</li>
+							</ul>
+							<span className="font-bold mt-4 bg-white text-green-500 p-2">Thanks for using Boonfu!</span>
+						</div>
 					</Alert>
 				</div>
-			) : result?.data?.paid === 1 && result?.data?.active === '2' ? (
-                <div className="w-[90%] lg:w-1/2 my-3 mx-auto">
-                    <Alert
-                        // additionalContent={<ContactAdmin />}
-                        color="success"
-                    >
-                        <h5 className="font-medium text-red-600">This Ad is marked as closed: </h5>{' '}
-                        <div className="">
-                            {' '}
-                            This Ad is marked as closed and is not displayed for customers to see.
-                            <ul className="list-disc list-inside font-bold my-4">
-                                <li className="text-sm">You can choose to delete this Ad or it will be VACUMMED during our daily cleanup.</li>
-                                <li className="text-sm">Closed Ad are deleted after 48 hours of closure from our policy.</li>
-                            </ul>
-                            <span className="font-bold mt-4 bg-white text-green-500 p-2">
-                                Thanks for using Boonfu!
-                            </span>
-                        </div>
-                    </Alert>
-                </div>
-            ) : result?.data?.paid === 1 && result?.data?.available === 0 ? (
+			) : result?.data?.paid === 1 && result?.data?.available === 0 ? (
 				<div className="w-[90%] lg:w-[70%] my-3 mx-auto">
 					<Alert
 						// additionalContent={<ContactAdmin />}
@@ -113,7 +100,7 @@ const index = () => {
 				user.id === result?.data.owner && (
 					<div className="w-[90%] lg:w-[70%] my-3 mx-auto">
 						<Alert
-							additionalContent={<ContactAdmin ads_id={decodeProductId(id)} />}
+							additionalContent={<ContactAdmin ads_id={id} />}
 							color="warning"
 							icon={HiInformationCircle}
 						>
@@ -139,7 +126,7 @@ const index = () => {
 
 								{((isLogin && parseInt(result.data?.owner) !== parseInt(user?.id)) || !isLogin) && (
 									<>
-										<SaveProduct ads_id={decodeProductId(id)} />
+										<SaveProduct ads_id={id} />
 									</>
 								)}
 							</span>
@@ -152,9 +139,7 @@ const index = () => {
 								{numberWithCommas(result.data?.price)}
 							</p>
 
-							{result?.data?.paid === 0 && user.id === result?.data.owner ? (
-								<span className={'px-2 py-1 rounded-lg text-white bg-red-700 w'}>Unavailable</span>
-							) : result?.data?.active === '1' ? (
+							{result?.data?.active === '1' ? (
 								<span className={'px-4 py-1 rounded-lg text-white bg-green-700  '}>Active</span>
 							) : result?.data?.active === '2' ? (
 								<span className={'px-4 py-1 rounded-lg text-white bg-gray-700  '}>Closed</span>
@@ -230,7 +215,7 @@ const index = () => {
 
 								{((isLogin && parseInt(result?.data?.owner) !== parseInt(user?.id)) || !isLogin) && (
 									<>
-										<SaveProduct ads_id={decodeProductId(id)} />
+										<SaveProduct ads_id={id} />
 									</>
 								)}
 							</span>
