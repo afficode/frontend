@@ -40,6 +40,7 @@
 		"tailwind-scrollbar": "3.0.5",
 		"use-debounce": "10.0.0",
 		"uuid": "13.0.0",
+		"vite-plugin-svgr": "4.5.0",
 		"yup": "1.2.0"
 	},
 	"devDependencies": {

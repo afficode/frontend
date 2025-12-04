@@ -1,35 +1,20 @@
-const getCommission = (value) => {
-	let boonfuCommission;
-	let grabberCommission;
+import { inspectableCategories } from '../constants/Category';
 
-	if (value <= 20000 && value > 0) {
-		boonfuCommission = 1000;
-		grabberCommission = 1000 / 2;
-	} else if (value > 20000 && value <= 50000) {
-		boonfuCommission = 2500;
-		grabberCommission = 2500 / 2;
-	} else if (value > 50000 && value <= 100000) {
-		boonfuCommission = 5000;
-		grabberCommission = 5000 / 2;
-	} else if (value > 100000 && value <= 500000) {
-		boonfuCommission = 7000;
-		grabberCommission = 7000 / 2;
-	} else if (value > 500000 && value <= 1000000) {
-		boonfuCommission = 8500;
-		grabberCommission = 8500 / 2;
-	} else if (value > 1000000 && value <= 5000000) {
-		boonfuCommission = 10000;
-		grabberCommission = 10000 / 2;
-	} else if (value > 5000000 && value <= 10000000) {
-		boonfuCommission = 15000;
-		grabberCommission = 15000 / 2;
-	} else if (value > 10000000 && value <= 15000000) {
-		boonfuCommission = 15000;
-		grabberCommission = 15000 / 2;
-	} else if (value > 20000000) {
-		boonfuCommission = 30000;
-		grabberCommission = 30000 / 2;
+const getCommission = (price, subCat) => {
+	if (!price || price <= 0) {
+		return { boonfuCommission: 0, grabberCommission: 0 };
 	}
+
+	const subCategoryId = Number(subCat);
+	const isInspectable = inspectableCategories.includes(subCategoryId);
+
+	const rate = isInspectable ? 0.01 : 0.1;
+
+	let boonfuCommission = price * rate;
+	let grabberCommission = boonfuCommission / 2;
+
+	boonfuCommission = Math.round(boonfuCommission);
+	grabberCommission = Math.round(grabberCommission);
 
 	return { boonfuCommission, grabberCommission };
 };

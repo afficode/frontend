@@ -10,7 +10,5 @@ export { default as ProductSkeleton } from './Skeleton/ProductSkeleton';
 export { default as RequireAuth } from './RequireAuth';
 export { default as SpinnerSkeleton } from './SpinnersUi';
 export { default as Spinner } from './Spinners';
-export { default as Success } from './Token/Success';
 export { default as TermsAndCondition } from './TermsAndCondition';
-export { default as TokenPurchase } from './Token';
 export { default as Timeline } from './TimelineComponent';

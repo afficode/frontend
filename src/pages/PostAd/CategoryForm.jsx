@@ -67,6 +67,7 @@ import {
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Coin } from '../../assets/images';
 import { inspectableCategories } from '../../constants/Category';
+import { useQueryClient } from 'react-query';
 
 const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 	const [selectedHealthCategory, setSelectedHealthCategory] = useState(null);
@@ -3960,9 +3961,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 	const notify = useNotify();
 	const { mutate, isPending } = useCreateAd();
 	const navigate = useNavigate();
-
-	// payment window modal
-	const [paymentWindow, setPaymentWindow] = useState(false);
+	const queryClient = useQueryClient();
 
 	const onSubmit = async (values, { setSubmitting, resetForm }) => {
 		setSubmitting(true);
@@ -4008,13 +4007,12 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 		mutate(formData, {
 			onSuccess: (data) => {
 				setSubmitting(false);
-				setPaymentWindow(false);
+				queryClient.invalidateQueries({ queryKey: ['account-balance'] });
 				resetForm();
 				notify(data.message, 'success');
 				navigate(`${Approutes.postSuccess}/${data.ad_id}`);
 			},
 			onError: async (error) => {
-				setPaymentWindow(false);
 				setSubmitting(false);
 				notify(error?.response.data.message, 'error', {
 					toastId: 'create-ad-error',
@@ -4024,7 +4022,6 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 	};
 
 	const { pathname } = useLocation();
-	// const { token } = useTokenContext();
 
 	//to scroll into terms and condition document
 	const [isOpen, setIsOpen] = useState(false);
@@ -4043,8 +4040,6 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 		}
 	};
 
-	// const [tokenModal, setTokenModal] = useState(false);
-
 	return (
 		<Formik
 			enableReinitialize={true}
@@ -4053,7 +4048,6 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			validationSchema={validationSchema[categoryName]}
 		>
 			{(formik) => {
-				// let adToken = priceToToken(formik.values.price);
 				useEffect(() => {
 					setFormValues({
 						state_id: formik.values.state_id,
@@ -4159,40 +4153,18 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 						{renderFields ? renderFields : <div className="text-center">No fields to display</div>}
 
 						{/* submit button  */}
-						{inspectableCategories.includes(
-							parseInt(
-								selectedVehicleCategory ||
-									selectedPropertyCategory ||
-									selectedAgricultureCategory ||
-									selectedMotorbikeCategory
-							)
-						) ? (
-							<Button
-								onClick={() => setPaymentWindow(true)}
-								type="button"
-								loading={formik.isSubmitting || isPending}
-								variant="primary"
-								size="full"
-								// token < adToken ||
-								disabled={!(formik.isValid && formik.dirty) || formik.values.feature === '-1'}
-								className={'mt-10 text-lg font-bold rounded-md'}
-							>
-								Post My Ad
-							</Button>
-						) : (
-							<Button
-								onClick={formik.handleSubmit}
-								type="button"
-								loading={formik.isSubmitting || isPending}
-								variant="primary"
-								size="full"
-								// token < adToken ||
-								disabled={!(formik.isValid && formik.dirty) || formik.values.feature === '-1'}
-								className={'mt-10 text-lg font-bold rounded-md'}
-							>
-								Post My Ad
-							</Button>
-						)}
+
+						<Button
+							onClick={formik.handleSubmit}
+							type="button"
+							loading={formik.isSubmitting || isPending}
+							variant="primary"
+							size="full"
+							disabled={!(formik.isValid && formik.dirty) || formik.values.feature === '-1'}
+							className={'mt-10 text-lg font-bold rounded-md'}
+						>
+							Post My Ad
+						</Button>
 
 						{/* terms and conditions */}
 						<p className="mt-4 text-center">
@@ -4220,77 +4192,6 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 								setIsOpen={setIsOpen}
 								isOpen={isOpen}
 							/>
-						</Modal>
-
-						{/* payment summary  */}
-						<Modal
-							isOpen={paymentWindow}
-							setIsOpen={setPaymentWindow}
-							headerText={'Payment Summary'}
-							className={'max-w-[600px]'}
-						>
-							<div className="space-y-4">
-								<div className="flex justify-between items-center mb-3">
-									<h4 className="max-sm:text-base">Package Selected</h4>
-									<div className="flex items-center">
-										<h4 className="max-sm:text-base">Cost</h4>{' '}
-										<img src={Coin} alt="coin" className="w-[1.8rem] mx-2" />
-									</div>
-								</div>
-								<div>
-									<div className="flex justify-between items-center">
-										<h6>
-											{formik.values.feature === '0'
-												? 'Basic feature'
-												: formik.values.feature === '1'
-												? 'Featured AD'
-												: formik.values.feature === '2'
-												? 'Spotlight Feature'
-												: 'Grab feature'}
-										</h6>
-										<h6>
-											{formik.values.feature === '0'
-												? '3.5'
-												: formik.values.feature === '1'
-												? '5'
-												: formik.values.feature === '2'
-												? '7'
-												: '10'}
-										</h6>
-									</div>
-									<div className="flex justify-between items-center">
-										<h6>VAT</h6>
-										<h6>0</h6>
-									</div>
-								</div>
-
-								<hr />
-
-								<div>
-									<div className="flex justify-between text-primary items-center">
-										<h4>Payment Total: </h4>
-										<h4>
-											{formik.values.feature === '0'
-												? '3.5'
-												: formik.values.feature === '1'
-												? '5'
-												: formik.values.feature === '2'
-												? '7'
-												: '10'}
-										</h4>
-									</div>
-									<h6>Payment total includes VAT</h6>
-								</div>
-
-								<Button
-									onClick={formik.handleSubmit}
-									loading={formik.isSubmitting}
-									variant={'primary'}
-									type="submit"
-								>
-									Proceed
-								</Button>
-							</div>
 						</Modal>
 					</Form>
 				);
