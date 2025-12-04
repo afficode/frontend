@@ -34,8 +34,6 @@ const index = () => {
 	const { data, isLoading: saveLoading } = getSaves();
 	const notify = useNotify();
 
-	console.log('result', result);
-
 	useEffect(() => {
 		if (result?.data) {
 			setItems(() => [

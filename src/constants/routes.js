@@ -73,7 +73,6 @@ export const Approutes = {
 	postAd: '/post-ad',
 	postDecision: '/post-decision',
 	postSuccess: '/post-success',
-	tokenSuccess: '/purchase-successful',
 	updateAd: '/update-ad',
 	underConstruction: '/under-construction',
 	welcome: '/welcome',

@@ -1,20 +1,15 @@
-import { Coin, NigFlag } from '../../assets/images';
 import Button from '../Button';
-import { BiSolidDownArrow } from 'react-icons/bi';
 import { Approutes } from '../../constants';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { toMoney } from '../../utils';
-import { useAccountBalance, useTotalCoin } from '../../hooks';
+import { useAccountBalance } from '../../hooks';
 import useAuth from '../../context/UserContext';
-import { useMemo, useState } from 'react';
-import { TokenPurchase } from '../../components';
+import { useMemo } from 'react';
 import { Naira, Naira2, ViewTransaction, WalletIcon } from '../../assets/svgs';
 
 const WalletDropdown = () => {
-	const [isOpen, setIsOpen] = useState(false);
 	const navigate = useNavigate();
 
-	const { data: token } = useTotalCoin();
 	const bal = useAccountBalance();
 	const balance = useMemo(() => {
 		return bal;
@@ -77,13 +72,47 @@ const WalletDropdown = () => {
 				</div>
 			</div>
 
-			<hr className="my-4" />
+			{user?.isGrabber ? (
+				<div className="px-6 sm:px-8 py-4 space-y-2">
+					<h4>Grab Earnings</h4>
+					<div className="w-full border border-black/20  overflow-x-auto">
+						<table className="w-full table table-fixed overflow-x-auto">
+							<thead>
+								<tr className=" text-center font-bold text-base text-black">
+									<th>Date</th>
+
+									<th>Description</th>
+
+									<th>Commission (₦)</th>
+								</tr>
+							</thead>
+							<tbody className="text-center">
+								<tr>
+									<td>25.12.2024</td>
+									<td>Toyota Corolla</td>
+									<td className="font-bold">100,000.00</td>
+								</tr>
+								<tr>
+									<td>25.12.2024</td>
+									<td>Shoe</td>
+									<td className="font-bold">10,000.00</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			) : (
+				<hr className="my-4" />
+			)}
 
 			<div className="px-6 sm:px-8 pt-2 lg:pb-4 mb-4 flex flex-col gap-4">
 				<h4>Quick Actions</h4>
 
 				<div className="flex items-center justify-between">
-					<button className="flex items-center gap-1  text-sm">
+					<button
+						className="flex items-center gap-1  text-sm"
+						onClick={() => navigate(Approutes.account.initial)}
+					>
 						<ViewTransaction className="w-4 h-4" />
 						View Transaction History
 					</button>

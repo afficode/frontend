@@ -65,6 +65,7 @@ import {
 	years,
 } from '../../constants';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useQueryClient } from 'react-query';
 
 const CategoryForm = ({
 	categoryId,
@@ -3952,6 +3953,7 @@ const CategoryForm = ({
 	const navigate = useNavigate();
 	const notify = useNotify();
 	const { mutate } = useUpdateAd(adId);
+	const queryClient = useQueryClient();
 
 	const onSubmit = async (values, { setSubmitting }) => {
 		setSubmitting(true);
@@ -4006,6 +4008,7 @@ const CategoryForm = ({
 			onSuccess: (data) => {
 				notify(data.message, 'success');
 				navigate(Approutes.profile.adverts);
+				queryClient.invalidateQueries({ queryKey: ['account-balance'] });
 				setSubmitting(false);
 			},
 			onError: (error) => {
@@ -4021,13 +4024,11 @@ const CategoryForm = ({
 
 	return (
 		<Formik
-			// enableReinitialize={true}
 			initialValues={initialValues}
 			onSubmit={onSubmit}
 			validationSchema={validationSchema[categoryName]}
 		>
 			{(formik) => {
-				// let adToken = priceToToken(formik.values.price);
 				useEffect(() => {
 					setFormValues({
 						state_id: formik.values.state_id,

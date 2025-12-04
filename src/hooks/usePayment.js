@@ -59,21 +59,3 @@ export const useAccountBalance = () => {
 		refetchInterval: false,
 	});
 };
-
-// coins
-export const useBuyCoin = () => {
-	const buyCoin = (data) =>
-		privateAxios.post(`${backendLink}payment/buy_coin`, data).then((res) => res?.data);
-
-	return useMutation(['buy_coin'], buyCoin);
-};
-
-export const useTotalCoin = () => {
-	const fetchTotalCoin = () => privateAxios.get(`token/total_coin`).then((res) => res.data);
-
-	return useQuery(['total-coin'], fetchTotalCoin, {
-		refetchOnWindowFocus: false,
-		refetchOnMount: false,
-		refetchInterval: false,
-	});
-};

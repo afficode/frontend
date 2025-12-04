@@ -62,7 +62,7 @@ const GrabProduct = () => {
 			});
 	};
 
-	const { grabberCommission } = getCommission(result?.data?.price);
+	const { grabberCommission } = getCommission(result?.data?.price, result?.data?.category);
 	const [isDownloading, setIsDownloading] = useState(false);
 
 	const forceDownloadUrl = (url) => {

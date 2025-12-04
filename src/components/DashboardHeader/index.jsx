@@ -5,32 +5,19 @@ import MobileSidebar from '../../layout/MobileSidebar';
 import { useState } from 'react';
 import { Approutes } from '../../constants';
 import { Link } from 'react-router-dom';
-import { Coin } from '../../assets/images';
 import useMessageContext from '../../context/MessageContext';
 import useAuth from '../../context/UserContext';
-import TokenPurchase from '../Token';
-import { useTotalCoin } from '../../hooks';
 
 const DashboardHeader = () => {
 	const [showSidebar, setShowSidebar] = useState(false);
-	const [isOpen, setIsOpen] = useState(false);
 	const { unread } = useMessageContext();
 	const { isLogin } = useAuth();
-
-	const { data } = useTotalCoin();
 
 	return (
 		<div className="flex justify-between py-2 border-b border-black/30">
 			<h3>Dashboard</h3>
 
 			<div className="flex items-center gap-2 sm:gap-4">
-				<button className="flex items-center " onClick={() => setIsOpen(true)}>
-					<img src={Coin} alt="/" className="w-[1.8rem] mx-2" />
-					<b>{data?.coin.token}</b>
-				</button>
-
-				<TokenPurchase isOpen={isOpen} setIsOpen={setIsOpen} />
-
 				<Link to={Approutes.profile.messages}>
 					<div className="relative">
 						<BiEnvelope size={28} />

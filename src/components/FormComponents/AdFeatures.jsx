@@ -3,19 +3,17 @@ import { InfoYellow, Naira } from '../../assets/svgs';
 import { Field } from 'formik';
 import { Button, InputGroup, Modal } from '../../ui';
 import { useEffect, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
-import { inspectableCategories, pickupCategories } from '../../constants/Category';
+import { useLocation } from 'react-router-dom';
+import { inspectableCategories } from '../../constants/Category';
 import { getCommission, toMoney } from '../../utils';
 
 const AdFeatures = (props) => {
 	const { name, price, subCat, address, setAddress, categoryId, feature, ...rest } = props;
 
-	const { categoryId: id } = useParams();
-
 	const { hash } = useLocation();
 	const [grabModal, setGrabModal] = useState(false);
 
-	const { boonfuCommission } = getCommission(price);
+	const { boonfuCommission } = getCommission(price, subCat);
 
 	useEffect(() => {
 		if (hash) {
@@ -75,22 +73,16 @@ const AdFeatures = (props) => {
 												</td>
 												<td className="flex-1">{option.info}</td>
 												<td className="flex justify-end items-end">
-													{/* onClick={() => setTokenModal(true)} */}
 													<div className="flex items-center ">
 														<img src={Coin} alt="/" className="w-[1.8rem] mx-2" />
 														<b className="w-8">{option.coin}</b>
 													</div>
-
-													{/* <Modal isOpen={tokenModal} setIsOpen={setTokenModal}>
-																<TokenPurchase />
-															</Modal> */}
 												</td>
 											</tr>
 										);
 									});
 								}}
 							</Field>
-							{/* // })} */}
 						</tbody>
 					</table>
 
@@ -121,26 +113,22 @@ const AdFeatures = (props) => {
 														value={option.value}
 														checked={option.value === field.value}
 														className={``}
-														onClick={
-															option.value === '3' && !pickupCategories.includes(parseInt(subCat))
-																? () => setGrabModal(true)
-																: () => setGrabModal(false)
-														}
+														onClick={option.value === '3' ? () => setGrabModal(true) : () => setGrabModal(false)}
 													/>
 													<label htmlFor={option.value}>{option.key}</label>
 
-													{option.value === '3' && !pickupCategories.includes(parseInt(subCat)) && (
+													{option.value === '3' && (
 														<Modal
 															isOpen={grabModal}
 															setIsOpen={setGrabModal}
 															padding={false}
-															className={'bg-secondary max-w-[600px] px-4'}
+															className={'bg-secondary max-w-[720px] px-4'}
 															modalHeader={false}
 														>
 															<div className=" text-black space-y-3">
 																<h3>Grab Feature</h3>
 
-																{parseInt(id) === 50 ? (
+																{inspectableCategories.includes(parseInt(subCat)) ? (
 																	<ol>
 																		<div>
 																			<span className="flex items-center gap-1">
@@ -300,39 +288,25 @@ const AdFeatures = (props) => {
 						</div>
 
 						<div className="flex items-center flex-wrap sm:gap-16 gap-8">
-							{!inspectableCategories.includes(parseInt(subCat)) && (
-								<div className="">
-									<h6 className="font-semibold">Price of item :</h6>
-									<div className="border border-black flex items-center gap-2 max-w-[22rem] ">
-										<span className="flex items-center gap-1  p-2 w-full font-bold text-base">
-											<img src={Naira} alt="/" />
-											{price ? toMoney(price) : '00'}
-										</span>
-									</div>
+							<div className="">
+								<h6 className="font-semibold">Price of item :</h6>
+								<div className="border border-black flex items-center gap-2 max-w-[22rem] ">
+									<span className="flex items-center gap-1  p-2 w-full font-bold text-base">
+										<img src={Naira} alt="/" />
+										{price ? toMoney(price) : '00'}
+									</span>
 								</div>
-							)}
+							</div>
 
-							{inspectableCategories.includes(parseInt(subCat)) ? (
-								<div className="space-y-2">
-									<h6 className="font-semibold ">To pay: Fixed Commission:</h6>
-									<div className=" flex items-center gap-2 max-w-[22rem] ">
-										<span className="flex items-center gap-3 border border-black bg-[#D9D9D9] p-2 w-full font-bold text-base">
-											<img src={Coin} alt="Coin symbol" className="w-8 h-8" />
-											10
-										</span>
-									</div>
+							<div className="">
+								<h6 className="font-semibold ">Grab listing fee</h6>
+								<div className=" flex items-center gap-2 max-w-[22rem] ">
+									<span className="flex items-center gap-1 border-2 border-primary p-2 w-full font-bold text-base">
+										<img src={Naira} alt="Naira symbol" />
+										{boonfuCommission && toMoney(boonfuCommission)}
+									</span>
 								</div>
-							) : (
-								<div className="">
-									<h6 className="font-semibold ">Grab listing fee</h6>
-									<div className=" flex items-center gap-2 max-w-[22rem] ">
-										<span className="flex items-center gap-1 border-2 border-primary p-2 w-full font-bold text-base">
-											<img src={Naira} alt="Naira symbol" />
-											{boonfuCommission && toMoney(boonfuCommission)}
-										</span>
-									</div>
-								</div>
-							)}
+							</div>
 						</div>
 					</div>
 				</div>
