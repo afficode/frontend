@@ -12,6 +12,7 @@ const AdFeatures = (props) => {
 
 	const { hash } = useLocation();
 	const [grabModal, setGrabModal] = useState(false);
+	const [showCalc, setShowCalc] = useState(false);
 
 	const { boonfuCommission } = getCommission(price, subCat);
 
@@ -28,63 +29,54 @@ const AdFeatures = (props) => {
 		setAddress(e.target.value);
 	};
 
-	return (
-		<div id="post-package" className="scroll-mt-[100px] bg-white py-8 my-4">
-			<div className="flex flex-col items-center py-2 text-center">
-				<h3 className="text-center">Select Suitable Posting package for your ad.</h3>
-				<h6>
-					( You have to select <b>ONLY ONE</b> option.{' '}
-					<b>
-						NOTE: These packages keep your ads for 2weeks, after which the site notifies you of renewal or
-						delete IF item is sold.
-					</b>{' '}
-					)
-				</h6>
-			</div>
-			<hr className="border-black" />
+	const otherFeature = false;
 
+	return (
+		<div id="post-package" className="scroll-mt-[100px] bg-white mb-32">
 			{/* other posting package */}
 			<div className="relative">
 				<div className="overflow-auto px-3 py-8 ">
-					<table className="table-fixed border-collapse border-spacing-0 min-w-[600px] w-full posting-package-table">
-						<tbody>
-							{/* {featureList?.map((option) => {
+					{otherFeature && (
+						<table className="table-fixed border-collapse border-spacing-0 min-w-[600px] w-full posting-package-table">
+							<tbody>
+								{/* {featureList?.map((option) => {
 							return ( */}
-							<Field name={name}>
-								{({ field }) => {
-									return featureList?.map((option) => {
-										return (
-											<tr key={option.value} className="flex">
-												<td className="flex items-center gap-4">
-													<input
-														{...field}
-														{...rest}
-														type="radio"
-														id={option.value}
-														value={option.value}
-														checked={field.value === option.value}
-													/>
-													<label
-														htmlFor={option.value}
-														className={`${option.color} uppercase flex justify-center w-[10rem] py-1`}
-													>
-														{option.key}
-													</label>
-												</td>
-												<td className="flex-1">{option.info}</td>
-												<td className="flex justify-end items-end">
-													<div className="flex items-center ">
-														<img src={Coin} alt="/" className="w-[1.8rem] mx-2" />
-														<b className="w-8">{option.coin}</b>
-													</div>
-												</td>
-											</tr>
-										);
-									});
-								}}
-							</Field>
-						</tbody>
-					</table>
+								<Field name={name}>
+									{({ field }) => {
+										return featureList?.map((option) => {
+											return (
+												<tr key={option.value} className="flex">
+													<td className="flex items-center gap-4">
+														<input
+															{...field}
+															{...rest}
+															type="radio"
+															id={option.value}
+															value={option.value}
+															checked={field.value === option.value}
+														/>
+														<label
+															htmlFor={option.value}
+															className={`${option.color} uppercase flex justify-center w-[10rem] py-1`}
+														>
+															{option.key}
+														</label>
+													</td>
+													<td className="flex-1">{option.info}</td>
+													<td className="flex justify-end items-end">
+														<div className="flex items-center ">
+															<img src={Coin} alt="/" className="w-[1.8rem] mx-2" />
+															<b className="w-8">{option.coin}</b>
+														</div>
+													</td>
+												</tr>
+											);
+										});
+									}}
+								</Field>
+							</tbody>
+						</table>
+					)}
 
 					{/* grab feature */}
 					<div
@@ -113,7 +105,17 @@ const AdFeatures = (props) => {
 														value={option.value}
 														checked={option.value === field.value}
 														className={``}
-														onClick={option.value === '3' ? () => setGrabModal(true) : () => setGrabModal(false)}
+														onClick={
+															option.value === '3'
+																? () => {
+																		setGrabModal(true);
+																		setShowCalc(true);
+																  }
+																: () => {
+																		setGrabModal(false);
+																		setShowCalc(false);
+																  }
+														}
 													/>
 													<label htmlFor={option.value}>{option.key}</label>
 
@@ -250,32 +252,34 @@ const AdFeatures = (props) => {
 																	</ol>
 																)}
 
-																<form autoComplete="off" className="flex flex-col space-y-2">
-																	<label htmlFor="seller_address" className="flex flex-col space-y-1 font-medium">
-																		<span className="flex items-center ">Address of item pick up</span>
-																		<InputGroup
-																			type="text"
-																			name="address"
-																			id="address"
-																			autoComplete={'off'}
-																			className={'w-full '}
-																			required
-																			value={address}
-																			onChange={handleAddressChange}
-																		/>
-																	</label>
+																{!inspectableCategories.includes(parseInt(subCat)) && (
+																	<form autoComplete="off" className="flex flex-col space-y-2">
+																		<label htmlFor="seller_address" className="flex flex-col space-y-1 font-medium">
+																			<span className="flex items-center ">Address of item pick up</span>
+																			<InputGroup
+																				type="text"
+																				name="address"
+																				id="address"
+																				autoComplete={'off'}
+																				className={'w-full '}
+																				required
+																				value={address}
+																				onChange={handleAddressChange}
+																			/>
+																		</label>
 
-																	<div className="w-full flex items-end justify-end pt-4">
-																		<Button
-																			variant={'primary'}
-																			size={'small'}
-																			type="button"
-																			onClick={() => setGrabModal(false)}
-																		>
-																			Submit to continue
-																		</Button>
-																	</div>
-																</form>
+																		<div className="w-full flex items-end justify-end pt-4">
+																			<Button
+																				variant={'primary'}
+																				size={'small'}
+																				type="button"
+																				onClick={() => setGrabModal(false)}
+																			>
+																				Submit to continue
+																			</Button>
+																		</div>
+																	</form>
+																)}
 															</div>
 														</Modal>
 													)}
@@ -287,27 +291,29 @@ const AdFeatures = (props) => {
 							</div>
 						</div>
 
-						<div className="flex items-center flex-wrap sm:gap-16 gap-8">
-							<div className="">
-								<h6 className="font-semibold">Price of item :</h6>
-								<div className="border border-black flex items-center gap-2 max-w-[22rem] ">
-									<span className="flex items-center gap-1  p-2 w-full font-bold text-base">
-										<img src={Naira} alt="/" />
-										{price ? toMoney(price) : '00'}
-									</span>
+						{showCalc && (
+							<div className="flex items-center flex-wrap sm:gap-16 gap-8">
+								<div className="">
+									<h6 className="font-semibold">Price of item :</h6>
+									<div className="border border-black flex items-center gap-2 max-w-[22rem] ">
+										<span className="flex items-center gap-1  p-2 w-full font-bold text-base">
+											<img src={Naira} alt="/" />
+											{price ? toMoney(price) : '00'}
+										</span>
+									</div>
 								</div>
-							</div>
 
-							<div className="">
-								<h6 className="font-semibold ">Grab listing fee</h6>
-								<div className=" flex items-center gap-2 max-w-[22rem] ">
-									<span className="flex items-center gap-1 border-2 border-primary p-2 w-full font-bold text-base">
-										<img src={Naira} alt="Naira symbol" />
-										{boonfuCommission && toMoney(boonfuCommission)}
-									</span>
+								<div className="">
+									<h6 className="font-semibold ">Grab listing fee</h6>
+									<div className=" flex items-center gap-2 max-w-[22rem] ">
+										<span className="flex items-center gap-1 border-2 border-primary p-2 w-full font-bold text-base">
+											<img src={Naira} alt="Naira symbol" />
+											{boonfuCommission && toMoney(boonfuCommission)}
+										</span>
+									</div>
 								</div>
 							</div>
-						</div>
+						)}
 					</div>
 				</div>
 			</div>

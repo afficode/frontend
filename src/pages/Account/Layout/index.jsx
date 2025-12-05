@@ -1,20 +1,19 @@
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import { Button } from '../../../ui';
 import { Approutes } from '../../../constants';
-// import { useAccountBalance } from '../../../hooks';
 import { toMoney } from '../../../utils';
 import { useAccountBalance } from '../../../hooks';
 
 const AccountLayout = () => {
 	const location = useLocation();
 
-	const balance = useAccountBalance();
+	const { data } = useAccountBalance();
 
 	return (
 		<div className="min-h-screen p-8">
 			<h2>My Account</h2>
 			<h6 className="font-light">
-				Balance: <b className="font-bold">₦ {toMoney(balance)}</b>
+				Balance: <b className="font-bold">₦ {toMoney(data?.account?.balance)}</b>
 			</h6>
 			<div className="flex max-md:justify-between sm:gap-6 items-center max-w-sm my-6">
 				<Link to={Approutes.account.initial}>
