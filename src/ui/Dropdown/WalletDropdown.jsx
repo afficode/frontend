@@ -68,7 +68,7 @@ const WalletDropdown = () => {
 				</div>
 			</div>
 
-			{user?.isGrabber ? (
+			{data?.account?.grabbers_commissions?.length > 0 ? (
 				<div className="px-6 sm:px-8 py-4 space-y-2">
 					<h4>Grab Earnings</h4>
 					<div className="w-full border border-black/20  overflow-x-auto">
