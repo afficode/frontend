@@ -39,7 +39,7 @@ const WalletDropdown = () => {
 					<div className="py-1 px-2 bg-red-600">
 						<h6 className="flex items-center gap-1 font-bold text-white">
 							<Naira2 />
-							{toMoney(data?.account?.locked_money_history?.amount, false)}
+							{toMoney(data?.account?.total_locked_money, false)}
 						</h6>
 					</div>
 				</div>
