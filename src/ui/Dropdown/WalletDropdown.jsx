@@ -5,6 +5,7 @@ import { toMoney } from '../../utils';
 import useAuth from '../../context/UserContext';
 import { Naira, Naira2, ViewTransaction, WalletIcon } from '../../assets/svgs';
 import { useAccountBalance } from '../../hooks';
+import { format } from 'date-fns';
 
 const WalletDropdown = () => {
 	const navigate = useNavigate();
@@ -83,16 +84,13 @@ const WalletDropdown = () => {
 								</tr>
 							</thead>
 							<tbody className="text-center">
-								<tr>
-									<td>25.12.2024</td>
-									<td>Toyota Corolla</td>
-									<td className="font-bold">100,000.00</td>
-								</tr>
-								<tr>
-									<td>25.12.2024</td>
-									<td>Shoe</td>
-									<td className="font-bold">10,000.00</td>
-								</tr>
+								{data?.account?.grabbers_commissions?.map((commission) => (
+									<tr key={commission?.reference_id}>
+										<td>{format(new Date(commission?.date), 'dd/MM/yyyy')}</td>
+										<td>{commission?.ad_title}</td>
+										<td className="font-bold">{toMoney(commission?.amount, false)}</td>
+									</tr>
+								))}
 							</tbody>
 						</table>
 					</div>
