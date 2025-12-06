@@ -18,15 +18,15 @@ const GrabDashboard = () => {
 			<div className="flex flex-wrap items-center justify-between gap-6 p-4 my-8 bg-gray-300 rounded-xl">
 				<div className="flex-1 p-4 space-y-3 text-center text-white bg-red-500 whitespace-nowrap">
 					<h4>Total Grabs</h4>
-					<h4>[{data?.dashboard?.stats?.total_grabs}]</h4>
+					<h4>[{data?.dashboard?.stats?.total_grabs || '0'}]</h4>
 				</div>
 				<div className="flex-1 p-4 space-y-3 text-center bg-secondary whitespace-nowrap">
 					<h4>Sales from link</h4>
-					<h4>[{data?.dashboard?.stats?.commission_count}]</h4>
+					<h4>[{data?.dashboard?.stats?.commission_count || '0'}]</h4>
 				</div>
 				<div className="flex-1 p-4 space-y-3 text-center text-white bg-green-400 whitespace-nowrap">
 					<h4>Pageviews via link</h4>
-					<h4>[{data?.dashboard?.stats?.page_view_via_link}]</h4>
+					<h4>[{data?.dashboard?.stats?.page_view_via_link || '0'}]</h4>
 				</div>
 			</div>
 
