@@ -2,18 +2,14 @@ import Button from '../Button';
 import { Approutes } from '../../constants';
 import { useNavigate } from 'react-router-dom';
 import { toMoney } from '../../utils';
-import { useAccountBalance } from '../../hooks';
 import useAuth from '../../context/UserContext';
-import { useMemo } from 'react';
 import { Naira, Naira2, ViewTransaction, WalletIcon } from '../../assets/svgs';
+import { useAccountBalance } from '../../hooks';
 
 const WalletDropdown = () => {
 	const navigate = useNavigate();
 
-	const bal = useAccountBalance();
-	const balance = useMemo(() => {
-		return bal;
-	}, [bal]);
+	const { data } = useAccountBalance();
 
 	const { user } = useAuth();
 
@@ -35,7 +31,7 @@ const WalletDropdown = () => {
 					<span>Available Balance</span>
 					<h6 className="flex items-center gap-1 font-bold">
 						<img src={Naira} alt="Naira" />
-						{toMoney(balance, false)}
+						{toMoney(data?.account?.balance, false)}
 					</h6>
 				</div>
 				<div className="flex flex-col gap-1">
@@ -43,7 +39,7 @@ const WalletDropdown = () => {
 					<div className="py-1 px-2 bg-red-600">
 						<h6 className="flex items-center gap-1 font-bold text-white">
 							<Naira2 />
-							{toMoney(balance, false)}
+							{toMoney(data?.account?.total_locked_money, false)}
 						</h6>
 					</div>
 				</div>
@@ -60,9 +56,9 @@ const WalletDropdown = () => {
 						Withdraw
 					</Button>
 					<Button
-						variant={'grey'}
+						variant={'primary'}
 						className={
-							'rounded-xl !shadow-sm bg-black text-white font-semibold max-sm:text-sm whitespace-nowrap max-sm:px-1'
+							'rounded-xl !shadow-sm  text-white font-semibold max-sm:text-sm whitespace-nowrap max-sm:px-1'
 						}
 						size={'full'}
 						onClick={() => navigate(Approutes.account.deposit)}
@@ -72,7 +68,7 @@ const WalletDropdown = () => {
 				</div>
 			</div>
 
-			{user?.isGrabber ? (
+			{data?.account?.grabbers_commissions?.length > 0 ? (
 				<div className="px-6 sm:px-8 py-4 space-y-2">
 					<h4>Grab Earnings</h4>
 					<div className="w-full border border-black/20  overflow-x-auto">
