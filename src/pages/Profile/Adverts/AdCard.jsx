@@ -55,11 +55,17 @@ const AdCard = ({ title, images, active, price, subscribe, views, adId, chats, a
 						</span>
 					)}
 
-					{active === '0' && available === 1 && (
+					{active === '0' && available == '1' && (
 						<div className="absolute top-4 right-4 text-white font-semibold bg-red-500 py-1 px-2 rounded-xl text-center border-4 border-white max-sm:text-sm">
 							Blocked
 						</div>
 					)}
+
+                    {active === '1' && available == '0' && (
+                        <div className="absolute top-4 right-4 text-white font-semibold bg-primary py-1 px-2 rounded-xl text-center border-4 border-white max-sm:text-sm">
+                            In Review
+                        </div>
+                    )}
 				</div>
 
 				{/* details  */}
