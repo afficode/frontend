@@ -7,8 +7,11 @@ export const useBanks = () => {
 	const fetchBanks = () => axios.get(`${backendLink}api/banks`).then((res) => res?.data);
 
 	return useQuery('all-banks', fetchBanks, {
+		staleTime: 60 * 60 * 1000, // 1 hour
+		cacheTime: 2 * 60 * 60 * 1000, // 2 hours
 		refetchOnWindowFocus: false,
 		refetchOnMount: false,
+		refetchOnReconnect: false,
 		refetchInterval: false,
 	});
 };
@@ -18,11 +21,11 @@ export const useTransactions = (params) => {
 		privateAxios.get(`payment/transactions`, { params }).then((res) => res?.data);
 
 	return useQuery(['all-transactions', params], fetchTransactions, {
-		// staleTime: 1000 * 60 * 60, // 1 hour, or set it longer as needed
-		// cacheTime: 1000 * 60 * 60 * 24, // Keep the data in the cache for 24 hours
-		refetchOnWindowFocus: false, // Disable automatic refetching when the window is focused
-		refetchOnReconnect: false,
+		staleTime: Infinity,
+		cacheTime: 30 * 60 * 1000,
+		refetchOnWindowFocus: false,
 		refetchOnMount: false,
+		refetchOnReconnect: false,
 		refetchInterval: false,
 	});
 };
@@ -51,11 +54,11 @@ export const useAccountBalance = () => {
 	const fetchAccountBalance = () => privateAxios.get(`payment/account`).then((res) => res.data);
 
 	return useQuery(['account-balance'], fetchAccountBalance, {
-		// staleTime: 1000 * 60 * 60, // 1 hour, or set it longer as needed
-		// cacheTime: 1000 * 60 * 60 * 24, // Keep the data in the cache for 24 hours
-		refetchOnWindowFocus: false, // Disable automatic refetching when the window is focused
-		refetchOnReconnect: false,
+		staleTime: Infinity,
+		cacheTime: 30 * 60 * 1000,
+		refetchOnWindowFocus: false,
 		refetchOnMount: false,
+		refetchOnReconnect: false,
 		refetchInterval: false,
 	});
 };
