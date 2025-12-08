@@ -12,7 +12,7 @@ const Adverts = () => {
 
 	const { data: ads, isLoading } = useMyAds();
 
-	const adsData = ads?.active_ads.sort((a, b) => b.id - a.id);
+	const adsData = ads?.active_ads.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
 	return (
 		<div className="max-w-[1224px] mx-auto px-4 my-10">
@@ -38,6 +38,16 @@ const Adverts = () => {
 					>
 						Active <span>[{ads?.active_ads.length || 0}]</span>
 					</div>
+                    <div
+                        onClick={() => setFilteredAd('in_review')}
+                        className={`${
+                            filteredAd === 'in_review'
+                                ? 'bg-primary text-white lg:py-2 lg:px-6 py-1 px-4'
+                                : 'text-primary lg:py-2 lg:px-6 py-1 px-4'
+                        } cursor-pointer max-sm:text-sm`}
+                    >
+                        In Review <span>[{ads?.processing_ads.length || 0}]</span>
+                    </div>
 					<div
 						onClick={() => setFilteredAd('blocked')}
 						className={`${
@@ -73,7 +83,9 @@ const Adverts = () => {
 				<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 place-items-center">
 					{ads && ads.total_ads > 0 ? (
 						filteredAd === 'active' ? (
-							adsData.map((ad) => (
+							adsData
+                                .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+                                .map((ad) => (
 								<AdCard
 									key={ad.id}
 									title={ad.title}
@@ -90,7 +102,7 @@ const Adverts = () => {
 							))
 						) : filteredAd === 'blocked' ? (
 							ads.blocked_ads
-								.sort((a, b) => b.id - a.id)
+								.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
 								.map((ad) => (
 									<AdCard
 										key={ad.id}
@@ -106,9 +118,27 @@ const Adverts = () => {
 										available={ad.available}
 									/>
 								))
-						) : filteredAd === 'sold' ? (
+						) :  filteredAd === 'in_review' ? (
+                            ads.processing_ads
+                                .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+                                .map((ad) => (
+                                    <AdCard
+                                        key={ad.id}
+                                        title={ad.title}
+                                        images={ad.images}
+                                        active={ad.active}
+                                        price={ad.price}
+                                        views={ad.views}
+                                        subscribe={ad.subscribe}
+                                        adId={ad.id}
+                                        chats={ad.chats}
+                                        paid={ad.paid}
+                                        available={ad.available}
+                                    />
+                                ))
+                        ) : filteredAd === 'sold' ? (
 							ads.sold_ads
-								.sort((a, b) => b.id - a.id)
+								.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
 								.map((ad) => (
 									<AdCard
 										key={ad.id}
@@ -131,7 +161,7 @@ const Adverts = () => {
 								...(ads.blocked_ads ?? []),
 								...(ads.processing_ads ?? []),
 							]
-								.sort((a, b) => b.id - a.id)
+								.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
 								.map((ad) => (
 									<AdCard
 										key={ad.id}

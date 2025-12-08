@@ -7,7 +7,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useMessages } from '../../../hooks';
 import { Button } from '../../../ui';
 import { BiPhoneCall } from 'react-icons/bi';
-import { toMoney } from '../../../utils';
+import {toMoney} from "../../../utils/index.js";
 
 const ChatWindow = ({ chat_id, chat_data, title }) => {
 	const { user } = useAuth();
