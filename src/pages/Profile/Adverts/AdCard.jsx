@@ -44,7 +44,7 @@ const AdCard = ({ title, images, active, price, subscribe, views, adId, chats, a
 						<img src={CameraWhite} alt="/" className="w-4" />
 						<span className="text-white">{images.length}</span>
 					</div>
-					{active === '1' && (
+					{active === '1' && available == '1' && (
 						<span className="absolute top-4 right-4 text-white font-semibold bg-[#047F73] py-1 px-2 rounded-xl text-center border-4 border-white max-sm:text-sm">
 							Active
 						</span>
