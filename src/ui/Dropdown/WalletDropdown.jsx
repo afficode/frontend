@@ -86,7 +86,7 @@ const WalletDropdown = () => {
 							<tbody className="text-center">
 								{data?.account?.grabbers_commissions?.map((commission) => (
 									<tr key={commission?.reference_id}>
-										<td>{format(new Date(commission?.date), 'dd/MM/yyyy')}</td>
+										<td>{format(new Date(commission?.date), 'MMM dd, yyyy')}</td>
 										<td>{commission?.ad_title}</td>
 										<td className="font-bold">{toMoney(commission?.amount, false)}</td>
 									</tr>
