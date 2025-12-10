@@ -6,13 +6,14 @@ import { toPng } from 'html-to-image';
 import { ScrollToTop, toMoney } from '../../../utils';
 import { fetchProduct, useNotify } from '../../../hooks';
 import { SpinnerSkeleton } from '../../../components';
+import { ArrowDown2 } from '../../../assets/svgs';
 
 const GrabFlyer = () => {
 	const { ad_id } = useParams();
 	const contentRef = useRef(null);
 	const notify = useNotify();
 	const [isLoading, setIsLoading] = useState(false);
-	const { data: ad, isAdLoading, isError } = fetchProduct(ad_id);
+	const { data: ad, isLoading: isAdLoading, isError } = fetchProduct(ad_id);
 
 	const handlePrint = useCallback(() => {
 		setIsLoading(true);
@@ -23,19 +24,20 @@ const GrabFlyer = () => {
 
 		const node = contentRef.current;
 
-		// 3.6 inches at 300 DPI = 1080px
-		const targetSize = 600;
-
 		const timeout = setTimeout(() => {
 			toPng(node, {
 				cacheBust: true,
-				width: targetSize,
-				height: targetSize,
-				pixelRatio: 1,
+				width: 1500,
+				height: 1605,
+				pixelRatio: 3,
+				quality: 1.0,
 				style: {
-					width: `${targetSize}px`,
-					height: `${targetSize}px`,
+					width: '500px',
+					height: '535px',
+					transform: 'scale(3)',
+					transformOrigin: 'top left',
 				},
+				fontEmbedCSS: '',
 			})
 				.then((dataUrl) => {
 					const link = document.createElement('a');
@@ -44,10 +46,9 @@ const GrabFlyer = () => {
 					link.click();
 					setIsLoading(false);
 				})
-				.catch((err) => {
+				.catch((_) => {
 					notify('An error occured while trying to print', 'error');
 					setIsLoading(false);
-					console.error(err);
 				});
 		}, 4000);
 
@@ -65,64 +66,111 @@ const GrabFlyer = () => {
 	}
 
 	return (
-		<section className="px-8 py-24 bg-gray-200 min-h-screen flex items-center justify-center">
-			<div className="w-full max-w-2xl mx-auto">
+		<section className="px-4 sm:px-8 py-8 bg-gray-200 min-h-screen flex items-center justify-center ">
+			<div className="max-w-full max-sm:py-6  mx-auto overflow-x-auto">
 				<div
 					ref={contentRef}
-					className="flex flex-col bg-primary p-4"
-					style={{ width: '600px', height: '600px' }}
+					className="relative flex flex-col bg-white border-b border-b-secondary rounded-tl-[50px] rounded-br-[50px] p-4"
+					style={{ width: '500px', height: '535px', fontFamily: 'Inter' }}
 				>
 					{/* Logo - Compact */}
-					<div className="mb-2">
-						<img src={BoonfuLogo} className="w-10 h-10" alt="Boonfu Logo" />
+					<div className="mb-2 absolute top-4 left-4">
+						<img src={BoonfuLogo} className="w-16 h-16 object-cover" alt="Boonfu Logo" />
 					</div>
 
-					{/* Title - Compact */}
-					<div className="w-full text-center bg-white border-2 border-secondary rounded-2xl py-1 px-2 mb-2">
-						<h3 className="font-bold uppercase text-sm leading-tight">{ad?.data?.title}</h3>
-					</div>
+					<div className="w-[350px] mx-auto flex flex-col gap-2 mt-8 ">
+						<div className="w-[300px] flex flex-col gap-2 mx-auto">
+							{/* Title/Subcategory - Compact */}
+							<div className="flex flex-col items-center justify-center">
+								<div className="bg-primary  rounded-lg p-2 w-full rotate-6  z-10">
+									<h3
+										style={{ fontFamily: 'Inter, sans-serif' }}
+										className="font-bold uppercase text-center text-xl leading-tight text-white truncate max-w-[300px]"
+									>
+										{['59', '62', '63'].some((prefix) => String(ad?.data?.category).startsWith(prefix))
+											? ad?.data?.category_name
+											: ad?.data?.title}
+									</h3>
+								</div>
+								<div className="bg-white border border-secondary rounded-lg p-2 w-full  rotate-6 mr-3 -mt-[2.2rem] z-1 ">
+									<h3
+										style={{ fontFamily: 'Inter, sans-serif' }}
+										className="font-bold uppercase text-center text-xl leading-tight text-transparent max-w-[300px] truncate"
+									>
+										{['59', '62', '63'].some((prefix) => String(ad?.data?.category).startsWith(prefix))
+											? ad?.data?.category_name
+											: ad?.data?.title}
+									</h3>
+								</div>
+							</div>
+							{/* Condition/Type/Title - Prominent */}
+							<div className="flex flex-col items-center justify-center ">
+								<div className="bg-secondary  rounded-lg p-2 w-full -rotate-6  z-10">
+									<h3
+										style={{ fontFamily: 'Inter, sans-serif' }}
+										className="font-bold uppercase text-center text-xl leading-tight text-white max-w-[300px] truncate"
+									>
+										{['59', '62', '63'].some((prefix) => String(ad?.data?.category).startsWith(prefix))
+											? ad?.data?.title
+											: ['50', '51'].some((prefix) => String(ad?.data?.category).startsWith(prefix))
+											? ad?.data?.ad_condition
+											: ad?.data?.type || ad?.data?.title}
+									</h3>
+								</div>
+								<div className="bg-white border border-primary rounded-lg p-2 w-full -rotate-6 mr-3 -mt-[2.2rem] z-1 ">
+									<h3
+										style={{ fontFamily: 'Inter, sans-serif' }}
+										className="font-bold uppercase text-center text-xl leading-tight text- max-w-[300px] truncate"
+									>
+										{['59', '62', '63'].some((prefix) => String(ad?.data?.category).startsWith(prefix))
+											? ad?.data?.title
+											: ['50', '51'].some((prefix) => String(ad?.data?.category).startsWith(prefix))
+											? ad?.data?.ad_condition
+											: ad?.data?.type || ad?.data?.title}
+									</h3>
+								</div>
+							</div>
 
-					{/* Main Image - Takes most space */}
-					<div
-						className="bg-white flex items-center justify-center border-2 border-secondary mb-2"
-						style={{ height: '340px' }}
-					>
-						<img
-							src={ad?.data?.images[0]?.path}
-							className="w-full h-full object-cover"
-							alt={ad?.data?.title}
-						/>
-					</div>
-
-					{/* Details Section - Compact two columns */}
-					<div className="flex gap-2 mb-2">
-						<div className="flex-1 text-white space-y-0.5">
-							<p className="font-bold text-xs leading-tight capitalize">{ad?.data?.ad_condition}</p>
-							<p className="font-bold text-xs leading-tight capitalize">{ad?.data?.transmission}</p>
-							<p className="font-bold text-xs leading-tight capitalize">
-								{ad?.data?.mileage
-									? `${toMoney(ad?.data?.mileage)}km`
-									: ad?.data?.vehicle_features
-									? ad?.data?.vehicle_features[0]
-									: ad?.data?.make}
-							</p>
+							{/* Main Image - Takes most space */}
+							<div className="bg-white flex items-center justify-center mt-4" style={{ height: '200px' }}>
+								<img
+									src={ad?.data?.images[0]?.path}
+									className="w-full h-full object-cover bg-transparent "
+									alt={ad?.data?.title}
+									crossOrigin="anonymous"
+								/>
+							</div>
 						</div>
-						<div className="flex-1 text-white space-y-0.5">
-							<p className="px-2 py-0.5 border border-white font-bold text-xs leading-tight">
-								₦{toMoney(ad?.data?.price, true)}
-							</p>
-							<p className="font-bold text-xs leading-tight capitalize">{ad?.data?.color}</p>
+
+						{/* Price - Prominent */}
+						<div className="flex flex-col items-center justify-center">
+							<h3
+								style={{ fontFamily: 'Inter, sans-serif !important' }}
+								className="text-xl font-bold max-w-[300px] truncate"
+							>
+								₦{toMoney(ad?.data?.price, false)}
+							</h3>
 						</div>
-					</div>
 
-					{/* Description - Compact */}
-					<div className="bg-gray-200 py-1 px-2 text-center text-xs mb-2">
-						100% Accident free, xSE Fullest option
-					</div>
+						<div className="flex items-center w-full">
+							<span className="w-2 h-2 rounded-full bg-black" />
+							<hr className="w-full  border-1 border-black" />
+							<span className="w-2 h-2 rounded-full bg-black" />
+						</div>
 
-					{/* Footer - Compact */}
-					<div className="text-center text-white">
-						<p className="text-xs leading-tight">Visit: www.boonfu.com</p>
+						{/* Footer - Compact */}
+						<div className="flex flex-col">
+							<p style={{ fontFamily: 'Inter, sans-serif' }} className="italic text-xs text-center">
+								Click the link below to learn more about this item
+							</p>
+							<div className="relative flex flex-col items-center justify-end mt-2">
+								<ArrowDown2 className="w-12 h-12" />
+
+								<span style={{ fontFamily: 'Inter, sans-serif' }} className="absolute -right-10 text-xs">
+									www.boonfu.com
+								</span>
+							</div>
+						</div>
 					</div>
 				</div>
 

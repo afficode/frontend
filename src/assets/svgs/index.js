@@ -6,6 +6,7 @@ export { default as ArrowRight } from './arrowRight.svg';
 export { default as ArrowRightBlue } from './arrowRightBlue.svg';
 export { default as ArrowRightBlack } from './arrowRightBlack.svg';
 export { default as ArrowDown } from './arrowDown.svg';
+export { default as ArrowDown2 } from './ArrowDown2.svg?react';
 export { default as ArrowScrollDown } from './arrowScrollDown.svg';
 export { default as ArrowDownWhite } from './arrowDownWhite.svg';
 export { default as BankTransfer } from './bankTransfer.svg';

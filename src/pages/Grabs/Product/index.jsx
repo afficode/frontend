@@ -174,7 +174,7 @@ const GrabProduct = () => {
 
 					<aside className="w-full h-max min-h-[350px]  xl:w-[45%] border-2 border-gray-400 p-2 lg:p-4 flex flex-col justify-between">
 						<div className="">
-							<h6 className="w-full text-lg font-bold text-center md:text-xl 2xl:text-3xl">
+							<h6 className="w-full text-base font-bold text-center ">
 								Product ID: {formatAdId(result.data?.id)}
 							</h6>
 
