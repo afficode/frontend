@@ -1,30 +1,32 @@
 import { useState } from 'react';
 import { GrabIcon, InspectionTick, New } from '../../../assets/svgs';
 import { GrabMobileSidebar } from '../../../layout';
-import { ScrollToTop } from '../../../utils';
+import { ScrollToTop, toMoney } from '../../../utils';
 import GrabHeader from '../GrabHeader';
+import { format } from 'date-fns';
+import { useGrabDashboard } from '../../../hooks';
 
 const GrabDashboard = () => {
 	const [showSidebar, setShowSidebar] = useState(false);
 
+	const { data } = useGrabDashboard();
+
 	return (
 		<section className="w-full">
-			{/* <div className="lg:hidden"> */}
 			<GrabHeader text={"Grabber's Dashboard"} />
-			{/* </div> */}
 
 			<div className="flex flex-wrap items-center justify-between gap-6 p-4 my-8 bg-gray-300 rounded-xl">
 				<div className="flex-1 p-4 space-y-3 text-center text-white bg-red-500 whitespace-nowrap">
 					<h4>Total Grabs</h4>
-					<h4>[200]</h4>
+					<h4>[{data?.dashboard?.stats?.total_grabs || '0'}]</h4>
 				</div>
 				<div className="flex-1 p-4 space-y-3 text-center bg-secondary whitespace-nowrap">
 					<h4>Sales from link</h4>
-					<h4>[20]</h4>
+					<h4>[{data?.dashboard?.stats?.commission_count || '0'}]</h4>
 				</div>
 				<div className="flex-1 p-4 space-y-3 text-center text-white bg-green-400 whitespace-nowrap">
 					<h4>Pageviews via link</h4>
-					<h4>[1,200]</h4>
+					<h4>[{data?.dashboard?.stats?.page_view_via_link || '0'}]</h4>
 				</div>
 			</div>
 
@@ -40,34 +42,22 @@ const GrabDashboard = () => {
 								<th>Product(s)</th>
 								<th className="text-center">Grabbed date</th>
 								<th className="text-center">Status</th>
-								<th className="text-center">Commision in (₦)</th>
+								<th className="text-center">Commission in (₦)</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr className="text-sm whitespace-nowrap font-medium  hover:bg-gray-200">
-								<td className="capitalize hover:underline hover:underline-offset-4">Toyota Corolla</td>
-								<td className="text-center text-primary">Mar 25. 2024</td>
-								<td className="text-center text-red-500">Sold</td>
-								<td className="text-center ">₦ 250k</td>
-							</tr>
-							<tr className="text-sm whitespace-nowrap font-medium  hover:bg-gray-200">
-								<td className="capitalize hover:underline hover:underline-offset-4">Shoe</td>
-								<td className="text-center text-primary">Mar 20. 2024</td>
-								<td className="text-center text-green-500">Active</td>
-								<td className="text-center ">₦ 2k</td>
-							</tr>
-							<tr className="text-sm whitespace-nowrap font-medium  hover:bg-gray-200">
-								<td className="capitalize hover:underline hover:underline-offset-4">Iphone 15</td>
-								<td className="text-center text-primary">Mar 15. 2024</td>
-								<td className="text-center text-green-500">Active</td>
-								<td className="text-center ">₦ 250k</td>
-							</tr>
-							<tr className="text-sm whitespace-nowrap font-medium  hover:bg-gray-200">
-								<td className="capitalize hover:underline hover:underline-offset-4">Toyota Corolla</td>
-								<td className="text-center text-primary">Mar 25. 2024</td>
-								<td className="text-center text-red-500">Sold</td>
-								<td className="text-center ">₦ 250k</td>
-							</tr>
+							{data?.dashboard?.details?.map((det) => (
+								<tr key={det?.ads_id} className="text-sm whitespace-nowrap font-medium  hover:bg-gray-200">
+									<td className="capitalize hover:underline hover:underline-offset-4">{det?.title}</td>
+									<td className="text-center text-primary">
+										{format(new Date(det?.grabbed_date), 'MMM dd, yyyy')}
+									</td>
+									<td className={`text-center ${det?.sold === 0 ? 'text-green-500' : 'text-red-500'}`}>
+										{det?.sold === 0 ? 'Active' : 'Sold'}
+									</td>
+									<td className="text-center ">₦{toMoney(det?.commission)}</td>
+								</tr>
+							))}
 						</tbody>
 					</table>
 				</div>

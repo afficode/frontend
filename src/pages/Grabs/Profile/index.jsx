@@ -9,6 +9,8 @@ import useAuth from '../../../context/UserContext';
 const GrabProfile = () => {
 	const { user } = useAuth();
 
+	console.log(user);
+
 	return (
 		<div>
 			<GrabHeader text="Grabber's Profile" />
@@ -23,9 +25,9 @@ const GrabProfile = () => {
 			<div className="flex max-lg:flex-col gap-6 mt-8">
 				<div className=" w-full rounded-2xl border-4 border-gray-400 flex flex-col items-center mx-auto p-4">
 					<img
-						src={ManSmiling}
+						src={user?.profile_image?.path}
 						className="w-[150px] h-[150px] md:w-[200px]  rounded-full md:h-[200px] border-2 border-primary"
-						alt="/"
+						alt={user?.firstname}
 					/>
 					<h4>
 						{user?.firstname} {user?.lastname}
@@ -40,7 +42,7 @@ const GrabProfile = () => {
 						<HiOutlineStar size={26} className="text-primary" /> */}
 					</div>
 					<div className="flex items-center gap-2">
-						<img src={Location} alt="/" className="w-3" />
+						<img src={Location} alt="location" className="w-3" />
 						<p className="">{user?.grabber.current_location}</p>
 					</div>
 					<div className="flex items-center gap-2 mt-4">

@@ -104,10 +104,7 @@ const GrabSettings = () => {
 			link_visited: settings?.link_visited === 1 ? true : false,
 			purchase_from_link: settings?.purchase_from_link === 1 ? true : false,
 			commission_credited: settings?.commission_credited === 1 ? true : false,
-			coin_low: settings?.coin_low === 1 ? true : false,
 			news_update: settings?.news_update === 1 ? true : false,
-			sms_notification: settings?.sms_notification === 1 ? true : false,
-			email_notification: settings?.email_notification === 1 ? true : false,
 			subscription_package: settings?.subscription_package === 1 ? true : false,
 			feedback_message: settings?.feedback_message === 1 ? true : false,
 		},
@@ -386,21 +383,6 @@ const GrabSettings = () => {
 
 				<div className="flex items-center justify-between p-6 bg-gray-300">
 					<div className="text-lg font-semibold">
-						<span className="text-primary">Turn notification for:</span> Coins below one (1.00)
-					</div>
-
-					<ToggleSwitch
-						checked={formik2.values.coin_low}
-						name="coin_low"
-						onChange={(e) => {
-							formik2.setFieldValue('coin_low', e);
-						}}
-						className={formik2.values.coin_low ? 'custom-toggle' : ''}
-					/>
-				</div>
-
-				<div className="flex items-center justify-between p-6 bg-gray-300">
-					<div className="text-lg font-semibold">
 						<span className="text-primary">Turn notification for:</span> Grabbers News and Updates
 					</div>
 
@@ -428,35 +410,6 @@ const GrabSettings = () => {
 					/>
 				</div>
 
-				<div className="flex items-center justify-between p-6 bg-gray-300">
-					<div className="text-lg font-semibold">
-						<span className="text-primary">Turn notification for:</span> Email notifications
-					</div>
-
-					<ToggleSwitch
-						checked={formik2.values.email_notification}
-						name="email_notification"
-						onChange={(e) => {
-							formik2.setFieldValue('email_notification', e);
-						}}
-						className={formik2.values.email_notification ? 'custom-toggle' : ''}
-					/>
-				</div>
-
-				<div className="flex items-center justify-between p-6 bg-gray-300">
-					<div className="text-lg font-semibold">
-						<span className="text-primary">Turn notification for:</span> Subscription package
-					</div>
-
-					<ToggleSwitch
-						checked={formik2.values.subscription_package}
-						name="subscription_package"
-						onChange={(e) => {
-							formik2.setFieldValue('subscription_package', e);
-						}}
-						className={formik2.values.subscription_package ? 'custom-toggle' : ''}
-					/>
-				</div>
 				<div className="flex items-center justify-between p-6 bg-gray-300">
 					<div className="text-lg font-semibold">
 						<span className="text-primary">Turn notification for:</span> Feedback messages
