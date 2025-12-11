@@ -212,14 +212,14 @@ const Register = ({ id }) => {
 													? 'cursor-not-allowed'
 													: 'cursor-pointer'
 											}`}
-											disabled={!formik.isValid || !formik.dirty ? 'disabled' : ''}
+											disabled={!formik.isValid || formik.isSubmitting}
 										>
 											{formik.isSubmitting ? (
 												<>
 													<Spinner color={'secondary'} /> Submitting Data{' '}
 												</>
 											) : (
-												<span className="text-lg w-full flex text-base lg:text-lg">
+												<span className=" w-full flex text-base lg:text-lg">
 													Register &nbsp; <MdAppRegistration className="text-lg my-auto lg:text-2xl" />
 												</span>
 											)}

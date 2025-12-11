@@ -75,7 +75,7 @@ const PickUp = () => {
 							<h5 className="py-2 px-4 font-bold bg-gray-300">Review Item</h5>
 
 							<div className="px-4 pt-2 pb-6">
-								<h6 className="text-black/60 py-2">Grabber ID: {grabber_id}</h6>
+								{grabber_id && <h6 className="text-black/60 py-2">Grabber ID: {grabber_id}</h6>}
 								<div className="flex gap-6">
 									<img
 										src={result?.data?.images[0]?.path}
