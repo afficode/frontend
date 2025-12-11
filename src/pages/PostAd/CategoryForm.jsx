@@ -11,7 +11,7 @@ import {
 	useNotify,
 	useCategories,
 } from '../../hooks';
-import { fromMoney, toOptions, toSelectOptions } from '../../utils';
+import { addWatermarkToImage, fromMoney, toOptions, toSelectOptions } from '../../utils';
 import {
 	agricultureTypes,
 	babiesBrands,
@@ -3999,7 +3999,11 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 		});
 
 		if (values.images && values.images.length > 0) {
-			values.images.forEach((file) => {
+			const watermarkedImages = await Promise.all(
+				values.images.map((file) => addWatermarkToImage(file))
+			);
+
+			watermarkedImages.forEach((file) => {
 				formData.append('images', file);
 			});
 		}
@@ -4160,7 +4164,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 							loading={formik.isSubmitting || isPending}
 							variant="primary"
 							size="full"
-							disabled={!(formik.isValid && formik.dirty) || formik.values.feature === '-1'}
+							disabled={!(formik.isValid && formik.dirty)}
 							className={'mt-10 text-lg font-bold rounded-md'}
 						>
 							Post My Ad

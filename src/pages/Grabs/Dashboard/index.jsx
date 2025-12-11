@@ -5,6 +5,8 @@ import { ScrollToTop, toMoney } from '../../../utils';
 import GrabHeader from '../GrabHeader';
 import { format } from 'date-fns';
 import { useGrabDashboard } from '../../../hooks';
+import { Link } from 'react-router-dom';
+import { Approutes } from '../../../constants';
 
 const GrabDashboard = () => {
 	const [showSidebar, setShowSidebar] = useState(false);
@@ -48,7 +50,9 @@ const GrabDashboard = () => {
 						<tbody>
 							{data?.dashboard?.details?.map((det) => (
 								<tr key={det?.ads_id} className="text-sm whitespace-nowrap font-medium  hover:bg-gray-200">
-									<td className="capitalize hover:underline hover:underline-offset-4">{det?.title}</td>
+									<td className="capitalize hover:underline hover:underline-offset-4">
+										<Link to={Approutes.grab.product(det.ads_id)}>{det?.title}</Link>
+									</td>
 									<td className="text-center text-primary">
 										{format(new Date(det?.grabbed_date), 'MMM dd, yyyy')}
 									</td>

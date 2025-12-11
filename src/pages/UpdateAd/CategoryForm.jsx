@@ -3997,7 +3997,11 @@ const CategoryForm = ({
 		});
 
 		if (values.images && values.images.length > 0) {
-			values.images.forEach((file) => {
+			const watermarkedImages = await Promise.all(
+				values.images.map((file) => addWatermarkToImage(file))
+			);
+
+			watermarkedImages.forEach((file) => {
 				formData.append('new_images', file);
 			});
 		}
@@ -4139,7 +4143,7 @@ const CategoryForm = ({
 							loading={formik.isSubmitting}
 							variant="primary"
 							size="full"
-							disabled={!(formik.isValid && formik.dirty) || formik.values.feature === '-1'}
+							disabled={!(formik.isValid && formik.dirty)}
 							className={'mt-10 text-lg font-bold rounded-md'}
 						>
 							Update My Ad

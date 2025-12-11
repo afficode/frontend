@@ -79,8 +79,8 @@ const GrabProduct = () => {
 		a.download = !img.filename
 			? `download.${urlExt}`
 			: /\.[a-zA-Z0-9]+$/.test(img.filename)
-				? img.filename
-				: `${img.filename}.${urlExt}`;
+			? img.filename
+			: `${img.filename}.${urlExt}`;
 		document.body.appendChild(a);
 		a.click();
 		document.body.removeChild(a);
@@ -174,7 +174,7 @@ const GrabProduct = () => {
 
 					<aside className="w-full h-max min-h-[350px]  xl:w-[45%] border-2 border-gray-400 p-2 lg:p-4 flex flex-col justify-between">
 						<div className="">
-							<h6 className="w-full text-lg font-bold text-center md:text-xl 2xl:text-3xl">
+							<h6 className="w-full text-base font-bold text-center ">
 								Product ID: {formatAdId(result.data?.id)}
 							</h6>
 
@@ -220,16 +220,15 @@ const GrabProduct = () => {
 									<img src={GrabIcon} alt="/" className=" w-8 " />
 									Remove Item
 								</Button>
-								<Button
-									onClick={handleDownloadAll}
-									loading={isDownloading}
-									disabled={isDownloading}
-									variant={'primary'}
-									size={'full'}
-									className={'flex items-center justify-center gap-4 rounded-xl'}
-								>
-									<img src={Download} alt="/" className="w-8" /> Download images
-								</Button>
+								<Link to={Approutes.grab.useFlyer(ad_id)} target="_blank" className="flex-1">
+									<Button
+										variant={'primary'}
+										size={'full'}
+										className={'!bg-[#047F73] text-white rounded-xl'}
+									>
+										Generate Post Now
+									</Button>
+								</Link>
 							</div>
 						</div>
 					</aside>
@@ -258,11 +257,18 @@ const GrabProduct = () => {
 
 				{/* bottom buttons  */}
 				<div className="flex gap-6 my-8 max-sm:flex-col">
-					<Link to={Approutes.grab.useFlyer(ad_id)} target="_blank" className="flex-1">
-						<Button className={'bg-[#047F73] text-white px-8 py-[.75rem] w-full  font-semibold text-xl'}>
-							Generate Post Now
-						</Button>
-					</Link>
+					<Button
+						onClick={handleDownloadAll}
+						loading={isDownloading}
+						disabled={isDownloading}
+						variant={'primary'}
+						className={
+							'flex  flex-1 items-center justify-center gap-4 px-8 py-[.75rem] w-full  font-semibold text-xl '
+						}
+					>
+						<img src={Download} alt="/" className="w-8" /> Download images
+					</Button>
+
 					<Link to={Approutes.grab.products} className="flex-1">
 						<Button variant={'grey'} className={' w-full h-full font-semibold text-xl'}>
 							Close
