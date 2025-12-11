@@ -87,9 +87,9 @@ const GrabFlyer = () => {
 										style={{ fontFamily: 'Inter, sans-serif' }}
 										className="font-bold uppercase text-center text-xl leading-tight text-white truncate max-w-[300px]"
 									>
-										{['59', '62', '63'].some((prefix) => String(ad?.data?.category).startsWith(prefix))
-											? ad?.data?.category_name
-											: ad?.data?.title}
+										{['59', '62', '63'].some((prefix) => String(ad.data.category).startsWith(prefix))
+											? ad.data.category_name
+											: ad.data.title}
 									</h3>
 								</div>
 								<div className="bg-white border border-secondary rounded-lg p-2 w-full  rotate-6 mr-3 -mt-[2.2rem] z-1 ">
@@ -97,9 +97,9 @@ const GrabFlyer = () => {
 										style={{ fontFamily: 'Inter, sans-serif' }}
 										className="font-bold uppercase text-center text-xl leading-tight text-transparent max-w-[300px] truncate"
 									>
-										{['59', '62', '63'].some((prefix) => String(ad?.data?.category).startsWith(prefix))
-											? ad?.data?.category_name
-											: ad?.data?.title}
+										{['59', '62', '63'].some((prefix) => String(ad.data.category).startsWith(prefix))
+											? ad.data.category_name
+											: ad.data.title}
 									</h3>
 								</div>
 							</div>
@@ -110,11 +110,11 @@ const GrabFlyer = () => {
 										style={{ fontFamily: 'Inter, sans-serif' }}
 										className="font-bold uppercase text-center text-xl leading-tight text-white max-w-[300px] truncate"
 									>
-										{['59', '62', '63'].some((prefix) => String(ad?.data?.category).startsWith(prefix))
-											? ad?.data?.title
-											: ['50', '51'].some((prefix) => String(ad?.data?.category).startsWith(prefix))
-											? ad?.data?.ad_condition
-											: ad?.data?.type || ad?.data?.title}
+										{['59', '62', '63'].some((prefix) => String(ad.data.category).startsWith(prefix))
+											? ad.data.title
+											: ['50', '51'].some((prefix) => String(ad.data.category).startsWith(prefix))
+											? ad.data.ad_condition
+											: ad.data.type || ad.data.title}
 									</h3>
 								</div>
 								<div className="bg-white border border-primary rounded-lg p-2 w-full -rotate-6 mr-3 -mt-[2.2rem] z-1 ">
@@ -122,11 +122,11 @@ const GrabFlyer = () => {
 										style={{ fontFamily: 'Inter, sans-serif' }}
 										className="font-bold uppercase text-center text-xl leading-tight text- max-w-[300px] truncate"
 									>
-										{['59', '62', '63'].some((prefix) => String(ad?.data?.category).startsWith(prefix))
-											? ad?.data?.title
-											: ['50', '51'].some((prefix) => String(ad?.data?.category).startsWith(prefix))
-											? ad?.data?.ad_condition
-											: ad?.data?.type || ad?.data?.title}
+										{['59', '62', '63'].some((prefix) => String(ad.data.category).startsWith(prefix))
+											? ad.data.title
+											: ['50', '51'].some((prefix) => String(ad.data.category).startsWith(prefix))
+											? ad.data.ad_condition
+											: ad.data.type || ad.data.title}
 									</h3>
 								</div>
 							</div>
@@ -134,9 +134,9 @@ const GrabFlyer = () => {
 							{/* Main Image - Takes most space */}
 							<div className="bg-white flex items-center justify-center mt-4" style={{ height: '200px' }}>
 								<img
-									src={ad?.data?.images[0]?.path}
+									src={ad.data.images[0].path}
 									className="w-full h-full object-cover bg-transparent "
-									alt={ad?.data?.title}
+									alt={ad.data.title}
 									crossOrigin="anonymous"
 								/>
 							</div>
@@ -148,7 +148,7 @@ const GrabFlyer = () => {
 								style={{ fontFamily: 'Inter, sans-serif !important' }}
 								className="text-xl font-bold max-w-[300px] truncate"
 							>
-								₦{toMoney(ad?.data?.price, false)}
+								₦{toMoney(ad.data.price, false)}
 							</h3>
 						</div>
 
