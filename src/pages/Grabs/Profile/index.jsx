@@ -9,8 +9,6 @@ import useAuth from '../../../context/UserContext';
 const GrabProfile = () => {
 	const { user } = useAuth();
 
-	console.log(user);
-
 	return (
 		<div>
 			<GrabHeader text="Grabber's Profile" />

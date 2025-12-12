@@ -348,5 +348,5 @@ const featureList = [
 ];
 const grabOptions = [
 	{ key: 'Yes', value: '3' },
-	{ key: 'No', value: '-1' },
+	{ key: 'No', value: '0' },
 ];
