@@ -8,20 +8,6 @@ export const useEscrow = () => {
 	return useMutation(['escrow-pay'], pay);
 };
 
-export const useQuotedPay = (id) => {
-	const pay = (data) =>
-		privateAxios.post(`${backendLink}order/pay/${id}`, data).then((res) => res?.data);
-
-	return useMutation(['quoted-pay'], pay);
-};
-
-export const useSendOrder = () => {
-	const sendOrder = (data) =>
-		privateAxios.post(`${backendLink}order`, data).then((res) => res?.data);
-
-	return useMutation(['send-order'], sendOrder);
-};
-
 export const useGetOrders = () => {
 	const fetchOrders = () => privateAxios.get(`${backendLink}order`).then((res) => res?.data);
 

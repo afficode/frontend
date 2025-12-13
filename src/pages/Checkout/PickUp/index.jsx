@@ -101,7 +101,7 @@ const PickUp = () => {
 											involving self pick-up:
 											<ol className="list-decimal ml-4 pl-4">
 												<li>
-													<h4 className="">Self Pick-Up Responsibility:</h4>
+													<h5 className="font-semibold ">Self Pick-Up Responsibility:</h5>
 													<p className="">
 														When a buyer opts for self pick-up after making payment for an item, it is the buyer's
 														responsibility to initiate contact with the seller and arrange for pick-up within 24
@@ -109,14 +109,14 @@ const PickUp = () => {
 													</p>
 												</li>
 												<li>
-													<h4 className="">Failure to Arrange Pick-Up:</h4>
+													<h5 className="font-semibold ">Failure to Arrange Pick-Up:</h5>
 													<p className="">
 														If the buyer fails to arrange or complete the pick-up within the 24-hour window, the
 														transaction will be considered unfulfilled.
 													</p>
 												</li>
 												<li>
-													<h4 className="">Refund Process and Administrative Fee:</h4>
+													<h5 className="font-semibold ">Refund Process and Administrative Fee:</h5>
 													<div className="">
 														<span className="block">In such cases:</span>
 														<ul>
