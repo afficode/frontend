@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Approutes } from '../../../constants';
 import { fetchProduct } from '../../../hooks';
 import Breadcrumb from '../../../components/Breadcrumb';
@@ -33,6 +33,7 @@ const index = () => {
 	const { data: result, isLoading } = fetchProduct(id);
 	const { _, isLoading: saveLoading } = getSaves();
 	const notify = useNotify();
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		if (result?.data) {
@@ -44,17 +45,30 @@ const index = () => {
 		}
 	}, [isLoading, saveLoading]);
 
+	useEffect(() => {
+		if (result?.data?.available === 0 && user?.id !== result?.data?.user_id) {
+			window.location.replace(Approutes.product.initial);
+		}
+	}, [isLoading, result]);
+
 	if (isLoading) return <ViewProduct />;
 
-	if (result?.data?.available === 0 && user?.id !== result?.data?.user_id) {
+	if (result?.data?.available === 0 && user?.id === result?.data?.user_id) {
 		return (
 			<div className="flex items-center justify-center w-full h-[70vh]">
 				<div className="flex flex-col gap-4 w-full h-max max-w-[600px] text-center p-4 bg-white">
 					<div className="bg-secondary p-4 space-y-6">
 						<h4>⏳ Ad is under review by Admin </h4>
 
-						<Button variant={'primary'} size={'small'} className={'w-max mx-auto text-sm'}>
-							<Link to={Approutes.product.initial}>View Other Ads</Link>
+						<Button
+							onClick={() => {
+								navigate(-1);
+							}}
+							variant={'primary'}
+							size={'small'}
+							className={'w-max mx-auto text-sm'}
+						>
+							Go back
 						</Button>
 					</div>
 				</div>
@@ -135,7 +149,7 @@ const index = () => {
 						{/* ad title  */}
 						<div className="flex items-center justify-between w-full my-2 font-bold uppercase text-md md:text-2xl xl:text-3xl">
 							<span className="">{result.data?.title}</span>
-							<span className=" flex items-center gap-2 lg:gap-8 my-auto mr-4 lg:mr-0">
+							<span className=" flex items-center gap-2 lg:gap-8 my-auto ">
 								<NegotiableIcon negotiable={result.data?.negotiable} />
 
 								{isLogin && result?.data?.owner !== user?.id && (
