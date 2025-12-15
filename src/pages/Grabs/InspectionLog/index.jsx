@@ -15,7 +15,6 @@ const InspectionLog = () => {
 	const { data: schedule, isLoading: scheduleLoading } = useGetSchedule(scheduleId, {
 		enabled: !!scheduleId,
 	});
-	console.log(data)
 
 	const handleClick = (id) => {
 		setScheduleId(id);
