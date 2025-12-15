@@ -7,10 +7,12 @@ import { Approutes } from '../../constants';
 import { Link } from 'react-router-dom';
 import useMessageContext from '../../context/MessageContext';
 import useAuth from '../../context/UserContext';
+import { useNotifications } from '../../context/Notification';
 
 const DashboardHeader = () => {
 	const [showSidebar, setShowSidebar] = useState(false);
 	const { unread } = useMessageContext();
+	const { unread: unreadNotification } = useNotifications();
 	const { isLogin } = useAuth();
 
 	return (
@@ -33,7 +35,7 @@ const DashboardHeader = () => {
 					<div className="relative">
 						<AiOutlineBell size={28} />
 						<span className="py-[.5] px-1 bg-[#D60949] text-white text-center text-xs font-medium rounded-full absolute right-[-10%] top-0">
-							1
+							{unreadNotification}
 						</span>
 					</div>
 				</Link>
@@ -47,12 +49,3 @@ const DashboardHeader = () => {
 };
 
 export default DashboardHeader;
-
-// DashboardHeader data
-
-/*	
- {
-	undread_messages: 4,
-	undread_notifications: 1,
- }
-*/

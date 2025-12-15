@@ -9,15 +9,13 @@ export const useEscrow = () => {
 };
 
 export const useQuotedPay = (id) => {
-	const pay = (data) =>
-		privateAxios.post(`${backendLink}order/pay/${id}`, data).then((res) => res?.data);
+	const pay = (data) => privateAxios.post(`${backendLink}order/pay/${id}`, data).then((res) => res?.data);
 
 	return useMutation(['quoted-pay'], pay);
 };
 
 export const useSendOrder = () => {
-	const sendOrder = (data) =>
-		privateAxios.post(`${backendLink}order`, data).then((res) => res?.data);
+	const sendOrder = (data) => privateAxios.post(`${backendLink}order`, data).then((res) => res?.data);
 
 	return useMutation(['send-order'], sendOrder);
 };
@@ -43,8 +41,7 @@ export const useGetOrder = (id) => {
 };
 
 export const useGetEscrowDetails = (id) => {
-	const getEscrowDetails = () =>
-		privateAxios.get(`${backendLink}escrow/pickup_details/${id}`).then((res) => res?.data);
+	const getEscrowDetails = () => privateAxios.get(`${backendLink}escrow/pickup_details/${id}`).then((res) => res?.data);
 
 	return useQuery(['get-details', id], getEscrowDetails, {
 		refetchInterval: false,
@@ -66,22 +63,19 @@ export const useCheckOrder = (ad_id, options) => {
 };
 
 export const useRequestOtp = () => {
-	const request = (data) =>
-		privateAxios.post(`${backendLink}otp/request`, data).then((res) => res?.data);
+	const request = (data) => privateAxios.post(`${backendLink}otp/request`, data).then((res) => res?.data);
 
 	return useMutation(['request-otp'], request);
 };
 
 export const useVerifyOtp = () => {
-	const verify = (data) =>
-		privateAxios.post(`${backendLink}otp/validate`, data).then((res) => res?.data);
+	const verify = (data) => privateAxios.post(`${backendLink}otp/validate`, data).then((res) => res?.data);
 
 	return useMutation(['verify-otp'], verify);
 };
 
 export const useRefund = (id) => {
-	const refund = (data) =>
-		privateAxios.post(`${backendLink}escrow/refund/${id}`, data).then((res) => res?.data);
+	const refund = (data) => privateAxios.post(`${backendLink}escrow/refund/${id}`, data).then((res) => res?.data);
 
 	return useMutation(['refund'], refund);
 };

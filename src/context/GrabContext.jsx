@@ -19,7 +19,7 @@ export const GrabProvider = ({ children }) => {
 		},
 	});
 
-	socket.on('connect', () => {});
+	socket.on('connect', () => { });
 	socket.on('grabs', (grabs) => {
 		setGrabs(() => [...grabs]);
 	});
@@ -47,19 +47,11 @@ export const GrabProvider = ({ children }) => {
 	useEffect(() => {
 		if (isLogin && !socket.active) {
 			socket.connect();
-			// connecting socket
 		}
 
-		socket.on('error', (error) => {
-			// console.error("Grab Socket connection error:");
-			// Handle the error (e.g., display a message to the user)
-		});
-
 		socket.on('connect_error', (error) => {
-			//console.error("Grab Socket connection error:", error?.message);
 			if (error?.message === 'Unauthorized!') {
-				//
-				// notify('Please try to login again to continue!', 'error');
+				notify('Please try to login again to continue!', 'error');
 			}
 		});
 
