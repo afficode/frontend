@@ -53,17 +53,13 @@ export const GrabProvider = ({ children }) => {
 			socket.connect();
 		}
 
-		const handleError = (error) => {
-			console.error("Grab Socket connection error:", error);
-		};
-
 		const handleConnectError = (error) => {
 			if (error?.message === "Unauthorized!") {
 				notify("Please try to login again to continue!", "error");
 			}
 		};
 
-		socket.on("error", handleError);
+		socket.on("error", handleConnectError);
 		socket.on("connect_error", handleConnectError);
 
 		return () => {
