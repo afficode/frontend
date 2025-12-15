@@ -14,9 +14,8 @@ const PickUp = () => {
 	const [agreed, setAgreed] = useState(false);
 
 	const { data: checkOrder, isLoading: checking, isError, error } = useCheckOrder(ad_id);
-
 	const stage = useMemo(() => {
-		if (checkOrder?.payment_status === 'success') {
+		if (checkOrder?.data?.payment_status === 'success') {
 			return 2;
 		} else {
 			return 1;
