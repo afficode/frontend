@@ -45,18 +45,28 @@ export const GrabProvider = ({ children }) => {
 	};
 
 	useEffect(() => {
-		if (isLogin && !socket.active) {
+		if (!isLogin) {
+			return;
+		}
+
+		if (!socket.active) {
 			socket.connect();
 		}
 
-		socket.on('connect_error', (error) => {
-			if (error?.message === 'Unauthorized!') {
-				notify('Please try to login again to continue!', 'error');
+		const handleConnectError = (error) => {
+			if (error?.message === "Unauthorized!") {
+				notify("Please try to login again to continue!", "error");
 			}
-		});
+		};
 
-		return () => socket.disconnect();
-	}, [socket]);
+		socket.on("error", handleConnectError);
+		socket.on("connect_error", handleConnectError);
+
+		return () => {
+			socket.off("error", handleError);
+			socket.off("connect_error", handleConnectError);
+		};
+	}, [isLogin]);
 
 	return (
 		<GrabContext.Provider

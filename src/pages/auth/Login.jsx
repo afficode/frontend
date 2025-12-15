@@ -55,6 +55,7 @@ const Login = ({ id }) => {
 				notify(submit.message, 'error');
 			}
 			setIsLoading(false);
+
 		}, 3000);
 	};
 	return (
