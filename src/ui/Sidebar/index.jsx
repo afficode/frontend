@@ -7,7 +7,7 @@ const SidebarUI = ({ items }) => {
 	return (
 		<Sidebar
 			aria-label="Sidebar for categories"
-			className="min-h-[1000px] bg-black w-full tracking-tighter line-clamp-1"
+			className="min-h-[96vh] h-full md:min-h-[1000px]  w-full tracking-tighter line-clamp-1"
 		>
 			<Sidebar.Items>
 				<Sidebar.ItemGroup>
@@ -22,11 +22,13 @@ const SidebarUI = ({ items }) => {
 										const IconComponent = open ? HiOutlineMinusSm : HiOutlinePlusSm;
 
 										return (
-											<IconComponent
-												key={index}
-												aria-hidden
-												className={twMerge(theme.label.icon.open[open ? 'on' : 'off'])}
-											/>
+											<div>
+												<IconComponent
+													key={index}
+													aria-hidden
+													className={twMerge(theme.label.icon.open[open ? 'on' : 'off'])}
+												/>
+											</div>
 										);
 									}}
 								>
