@@ -45,6 +45,12 @@ const index = () => {
 		}
 	}, [isLoading, saveLoading]);
 
+	useEffect(() => {
+		if (result?.data?.available === 0 && user?.id !== result?.data?.user_id) {
+			window.location.replace(Approutes.product.initial);
+		}
+	}, [isLoading, result]);
+
 	return isLoading ? (
 		<ViewProduct />
 	) : user?.id === result?.data?.user_id ? (
