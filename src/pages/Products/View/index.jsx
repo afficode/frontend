@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Approutes } from '../../../constants';
 import { fetchProduct } from '../../../hooks';
 import Breadcrumb from '../../../components/Breadcrumb';
@@ -20,7 +20,7 @@ import ContactAdmin from './ContactAdmin';
 import { Alert } from 'flowbite-react';
 import SaveProduct from '../Default/SaveProduct';
 import { getSaves } from '../../../hooks/useSaves';
-import { NegotiableIcon } from '../../../ui';
+import { Button, NegotiableIcon } from '../../../ui';
 import { useNotify } from '../../../hooks';
 import { ActionBar, GrabUpdateTable } from '../../../components';
 
@@ -31,8 +31,9 @@ const index = () => {
 	const [revealEmail, setRevealEmail] = useState(false);
 	const { isLogin, user } = useAuth();
 	const { data: result, isLoading } = fetchProduct(id);
-	const { data, isLoading: saveLoading } = getSaves();
+	const { _, isLoading: saveLoading } = getSaves();
 	const notify = useNotify();
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		if (result?.data) {
@@ -44,9 +45,38 @@ const index = () => {
 		}
 	}, [isLoading, saveLoading]);
 
-	return isLoading ? (
-		<ViewProduct />
-	) : user?.id === result?.data?.user_id ? (
+	useEffect(() => {
+		if (result?.data?.available === 0 && user?.id !== result?.data?.user_id) {
+			window.location.replace(Approutes.product.initial);
+		}
+	}, [isLoading, result]);
+
+	if (isLoading) return <ViewProduct />;
+
+	if (result?.data?.available === 0 && user?.id === result?.data?.user_id) {
+		return (
+			<div className="flex items-center justify-center w-full h-[70vh]">
+				<div className="flex flex-col gap-4 w-full h-max max-w-[600px] text-center p-4 bg-white">
+					<div className="bg-secondary p-4 space-y-6">
+						<h4>⏳ Ad is under review by Admin </h4>
+
+						<Button
+							onClick={() => {
+								navigate(-1);
+							}}
+							variant={'primary'}
+							size={'small'}
+							className={'w-max mx-auto text-sm'}
+						>
+							Go back
+						</Button>
+					</div>
+				</div>
+			</div>
+		);
+	}
+
+	return user?.id === result?.data?.user_id ? (
 		<section className="w-full px-4 py-2 lg:py-4 lg:px-8">
 			{result?.data?.paid === 1 && result?.data?.active === '2' ? (
 				<div className="w-[90%] lg:w-1/2 my-3 mx-auto">
@@ -119,10 +149,10 @@ const index = () => {
 						{/* ad title  */}
 						<div className="flex items-center justify-between w-full my-2 font-bold uppercase text-md md:text-2xl xl:text-3xl">
 							<span className="">{result.data?.title}</span>
-							<span className=" flex items-center gap-2 lg:gap-8 my-auto mr-4 lg:mr-0">
+							<span className=" flex items-center gap-2 lg:gap-8 my-auto ">
 								<NegotiableIcon negotiable={result.data?.negotiable} />
 
-								{((isLogin && parseInt(result.data?.owner) !== parseInt(user?.id)) || !isLogin) && (
+								{isLogin && result?.data?.owner !== user?.id && (
 									<>
 										<SaveProduct ads_id={id} />
 									</>
@@ -211,7 +241,7 @@ const index = () => {
 							<span className=" flex items-center gap-2 lg:gap-8 my-auto mr-4 lg:mr-0">
 								<NegotiableIcon negotiable={result?.data?.negotiable} />
 
-								{((isLogin && parseInt(result?.data?.owner) !== parseInt(user?.id)) || !isLogin) && (
+								{isLogin && result?.data?.owner !== user?.id && (
 									<>
 										<SaveProduct ads_id={id} />
 									</>
@@ -288,7 +318,7 @@ const index = () => {
 							<p className="w-full">Contact {result?.data?.firstname} </p>
 							{result?.data?.contact_type.includes('phone') && (
 								<div className="flex items-center justify-between">
-									<p className="my-2 text-lg  ">
+									<p className="my-2 text-lg  text-start">
 										<span className=" font-bold">
 											{revealNumber ? result?.data?.number : `${result?.data?.number.substring(0, 3)}XXXXXXXX`}
 										</span>
@@ -321,7 +351,7 @@ const index = () => {
 							{result?.data?.contact_type.includes('email') && (
 								<div className="flex items-center justify-between w-full">
 									<p
-										className={`my-2 w-full overflow-x-scroll ${
+										className={`my-2 w-full overflow-x-scroll  text-start ${
 											revealEmail ? 'tooltip tooltip-primary' : ''
 										}`}
 										data-tip={revealEmail ? result?.data?.email : ''}

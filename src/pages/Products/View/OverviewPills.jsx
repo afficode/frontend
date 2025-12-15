@@ -5,7 +5,7 @@ const OverviewPills = ({ overview, ad }) => {
 				{overview?.name}:{' '}
 			</h6>{' '}
 			&emsp;
-			<span className="my-auto tracking-tighter capitalize text-sm">
+			<span className="my-auto tracking-tighter capitalize text-sm break-words overflow-wrap-anywhere flex-1 min-w-0">
 				{Array.isArray(overview?.value) ? (
 					<ul className="ml-1 tracking-tighter list-disc list-inside lg:tracking-normal">
 						{overview?.value.map((val, index) => (
