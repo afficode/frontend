@@ -102,16 +102,15 @@ const InspectorCard = ({ data, ad_id, isLoading }) => {
 					return (
 						<div
 							key={booking.id}
-							className={`${
-								booking?.user_id === data?.schedules?.owner ? 'bg-primary/80' : 'bg-secondary'
-							} px-2 pb-4 pt-6  rounded-lg italic sm:mr-6 relative`}
+							className={`${booking?.user_id === data?.schedules?.owner ? 'bg-primary/80' : 'bg-secondary'
+								} px-2 pb-4 pt-6  rounded-lg italic sm:mr-6 relative`}
 						>
 							<div className="absolute top-1 right-1 bg-white rounded-lg px-1  py-[0.15rem] leading-3 text-[10px]">
 								{booking.user_id === user.id
 									? 'You'
 									: booking?.user_id === data?.schedules?.owner
-									? 'Ad owner'
-									: 'Inspector'}
+										? 'Ad owner'
+										: 'Inspector'}
 							</div>
 
 							<div className="flex items-center gap-2">
@@ -137,11 +136,10 @@ const InspectorCard = ({ data, ad_id, isLoading }) => {
 
 							{booking.remark === 'view_contact' && (
 								<a
-									href={`tel:${
-										user?.id === data?.schedules?.owner
+									href={`tel:${user?.id === data?.schedules?.owner
 											? data?.schedules?.phone_details?.buyer_phone
 											: data?.schedules?.phone_details?.owner_phone
-									}`}
+										}`}
 									className="text-white text-sm hover:underline flex items-center gap-1"
 								>
 									<BiPhoneCall />
@@ -158,8 +156,8 @@ const InspectorCard = ({ data, ad_id, isLoading }) => {
 							<div className="flex items-center gap-2">
 								<p>
 									{latestBooking?.remark === 'reschedule' &&
-									booking?.remark === 'reschedule' &&
-									latestBooking?.id === booking?.id
+										booking?.remark === 'reschedule' &&
+										latestBooking?.id === booking?.id
 										? 'New'
 										: null}{' '}
 									Date:
@@ -170,8 +168,8 @@ const InspectorCard = ({ data, ad_id, isLoading }) => {
 							<div className="flex items-center gap-2">
 								<p>
 									{latestBooking?.remark === 'reschedule' &&
-									booking?.remark === 'reschedule' &&
-									latestBooking?.id === booking?.id
+										booking?.remark === 'reschedule' &&
+										latestBooking?.id === booking?.id
 										? 'New'
 										: null}{' '}
 									Time:
