@@ -53,8 +53,8 @@ const InspectionSchedule = ({ setInspectionModalOpen, ad }) => {
 		initialValues: {
 			date: '',
 			time: {
-				from: '',
-				to: '',
+				from: '00:00',
+				to: '00:00',
 			},
 		},
 		onSubmit: handleInspectionSubmit,
@@ -141,7 +141,10 @@ const InspectionSchedule = ({ setInspectionModalOpen, ad }) => {
 						</Button>
 						<Button
 							type="button"
-							onClick={() => setInspectionModalOpen(false)}
+							onClick={() => {
+								setInspectionModalOpen(false);
+								formik.resetForm();
+							}}
 							variant={'plain'}
 							size={'small'}
 						>
