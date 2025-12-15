@@ -51,32 +51,9 @@ const index = () => {
 		}
 	}, [isLoading, result]);
 
-	if (isLoading) return <ViewProduct />;
-
-	if (result?.data?.available === 0 && user?.id === result?.data?.user_id) {
-		return (
-			<div className="flex items-center justify-center w-full h-[70vh]">
-				<div className="flex flex-col gap-4 w-full h-max max-w-[600px] text-center p-4 bg-white">
-					<div className="bg-secondary p-4 space-y-6">
-						<h4>⏳ Ad is under review by Admin </h4>
-
-						<Button
-							onClick={() => {
-								navigate(-1);
-							}}
-							variant={'primary'}
-							size={'small'}
-							className={'w-max mx-auto text-sm'}
-						>
-							Go back
-						</Button>
-					</div>
-				</div>
-			</div>
-		);
-	}
-
-	return user?.id === result?.data?.user_id ? (
+	return isLoading ? (
+		<ViewProduct />
+	) : user?.id === result?.data?.user_id ? (
 		<section className="w-full px-4 py-2 lg:py-4 lg:px-8">
 			{result?.data?.paid === 1 && result?.data?.active === '2' ? (
 				<div className="w-[90%] lg:w-1/2 my-3 mx-auto">
@@ -325,9 +302,8 @@ const index = () => {
 									</p>
 
 									<button
-										className={`font-bold  text-black bg-white rounded-none btn btn-sm hover:bg-primary hover:text-white hover:border-0 hover:rounded-sm ${
-											!isLogin && 'bg-gray-100 cursor-not-allowed'
-										}`}
+										className={`font-bold  text-black bg-white rounded-none btn btn-sm hover:bg-primary hover:text-white hover:border-0 hover:rounded-sm ${!isLogin && 'bg-gray-100 cursor-not-allowed'
+											}`}
 										onClick={() => {
 											if (isLogin && result?.data?.contact_type.includes('phone')) {
 												setRevealNumber(!revealNumber);
@@ -351,9 +327,8 @@ const index = () => {
 							{result?.data?.contact_type.includes('email') && (
 								<div className="flex items-center justify-between w-full">
 									<p
-										className={`my-2 w-full overflow-x-scroll  text-start ${
-											revealEmail ? 'tooltip tooltip-primary' : ''
-										}`}
+										className={`my-2 w-full overflow-x-scroll  text-start ${revealEmail ? 'tooltip tooltip-primary' : ''
+											}`}
 										data-tip={revealEmail ? result?.data?.email : ''}
 									>
 										<span className="pr-1 text-lg font-bold">
@@ -364,9 +339,8 @@ const index = () => {
 									</p>
 
 									<button
-										className={`font-bold text-black bg-white rounded-none btn btn-sm hover:bg-primary hover:text-white hover:border-0 hover:rounded-sm ${
-											!isLogin && 'bg-gray-100 cursor-not-allowed'
-										} `}
+										className={`font-bold text-black bg-white rounded-none btn btn-sm hover:bg-primary hover:text-white hover:border-0 hover:rounded-sm ${!isLogin && 'bg-gray-100 cursor-not-allowed'
+											} `}
 										onClick={() => {
 											isLogin && result?.data?.contact_type.includes('email')
 												? setRevealEmail(!revealEmail)

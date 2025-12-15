@@ -63,8 +63,7 @@ export const GrabProvider = ({ children }) => {
 		socket.on("connect_error", handleConnectError);
 
 		return () => {
-			socket.off("error", handleError);
-			socket.off("connect_error", handleConnectError);
+			socket.disconnect();
 		};
 	}, [isLogin]);
 
