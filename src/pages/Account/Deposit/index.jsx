@@ -4,6 +4,7 @@ import { Cancel } from '../../../assets/svgs';
 import { Button, InputGroup } from '../../../ui';
 import { useDeposit, useNotify } from '../../../hooks';
 import { Approutes } from '../../../constants';
+import { ScrollToTop } from '../../../utils';
 
 const Deposit = () => {
 	const { mutate } = useDeposit();
@@ -83,6 +84,8 @@ const Deposit = () => {
 					Top Up Now
 				</Button>
 			</form>
+
+			<ScrollToTop />
 		</div>
 	);
 };

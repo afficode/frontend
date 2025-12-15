@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { fetchProduct, useCheckOrder } from '../../../hooks';
 import { useMemo, useState } from 'react';
-import { toMoney } from '../../../utils';
+import { ScrollToTop, toMoney } from '../../../utils';
 import { Button, InputGroup, Modal } from '../../../ui';
 import PaymentOption from '../PaymentOption';
 import { SpinnerSkeleton } from '../../../components';
@@ -26,6 +26,8 @@ const PickUp = () => {
 		return (
 			<div className="h-screen">
 				<SpinnerSkeleton />
+
+				<ScrollToTop />
 			</div>
 		);
 
@@ -187,6 +189,8 @@ const PickUp = () => {
 					ad_owner_name={checkOrder?.data.ad_owner_name}
 				/>
 			)}
+
+			<ScrollToTop />
 		</section>
 	);
 };

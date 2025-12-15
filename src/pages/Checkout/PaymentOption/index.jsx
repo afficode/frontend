@@ -1,8 +1,9 @@
 import { toMoney } from '../../../utils';
 import { Button } from '../../../ui';
 import { useEscrow, useNotify } from '../../../hooks';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import useAuth from '../../../context/UserContext';
+import { Approutes } from '../../../constants';
 
 const PaymentOption = ({ result }) => {
 	const { mutate: pay, isLoading } = useEscrow();
@@ -13,6 +14,7 @@ const PaymentOption = ({ result }) => {
 	const adPrice = Number(result?.data?.price);
 
 	const notify = useNotify();
+	const navigate = useNavigate();
 
 	const handlePickupPay = () => {
 		pay(
@@ -28,10 +30,13 @@ const PaymentOption = ({ result }) => {
 			},
 			{
 				onSuccess: (data) => {
-					console.log(data);
-					// notify('Please pay', 'success');
-					// window.location.replace(data?.url);
-					// setStage(2);
+					notify(data?.message, 'success');
+					if (data?.payment_payload) {
+						navigate(
+							Approutes.checkout.paymentSuccess +
+								`?transaction_id=${data?.payment_payload?.payment_id}&ad_title=${data?.payment_payload?.ad_title}`
+						);
+					}
 				},
 				onError: (error) => {
 					notify(error?.response?.data?.message, 'error');

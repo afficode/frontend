@@ -9,7 +9,7 @@ import SaveProduct from './SaveProduct';
 import useAuth from '../../../context/UserContext';
 import { NegotiableIcon } from '../../../ui';
 import { GrabIcon } from '../../../ui';
-import Feature from './Feature';
+
 const FeaturedProducts = ({ product }) => {
 	const { isLogin, user } = useAuth();
 
@@ -56,8 +56,6 @@ const FeaturedProducts = ({ product }) => {
 							</div>
 						)}
 
-						{ad?.feature !== '0' && ad?.feature !== '3' && <Feature feature={ad?.feature} />}
-
 						{((isLogin && ad?.owner !== user?.id) || !isLogin) && (
 							<SaveProduct
 								ads_id={ad.id}
@@ -86,10 +84,9 @@ const FeaturedProducts = ({ product }) => {
 							</span>
 							<span className="flex justify-around gap-2 my-auto text-xl font-bold">
 								<NegotiableIcon negotiable={ad?.negotiable} />
-								{ad?.feature == '3' &&
-									((isLogin && ad?.owner !== user?.id) || !isLogin) && (
-										<GrabIcon className="text-secondary" />
-									)}
+								{ad?.feature == '3' && ((isLogin && ad?.owner !== user?.id) || !isLogin) && (
+									<GrabIcon className="text-secondary" />
+								)}
 							</span>{' '}
 							&nbsp;
 							<span className="tracking-tighter">

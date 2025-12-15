@@ -8,63 +8,67 @@ import { SpinnerSkeleton } from '../../components';
 import { useNotify } from '../../hooks';
 
 import useMessageContext from '../../context/MessageContext';
+import { useQueryClient } from 'react-query';
 
 const Logout = () => {
-  const notify = useNotify();
-  const { logout } = useAuth();
-  const navigate = useNavigate();
-  const { disconnect_socket } = useMessageContext();
+	const notify = useNotify();
+	const { logout } = useAuth();
+	const navigate = useNavigate();
+	const { disconnect_socket } = useMessageContext();
+	const queryClient = useQueryClient();
 
-  const MESSAGE = 'Backend Logout finished and tokens destroyed';
-  useEffect(() => {
-    const logoutBackend = async () => {
-      try {
-        await api
-          .post(
-            `${backendLink}auth/logout`,
-            {
-              refreshToken: getRefreshToken(),
-            },
-            {
-              headers: {
-                Authorization: `Bearer ${getRefreshToken()}`,
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-              },
-            }
-          );
-        notify(MESSAGE, 'success');
+	const MESSAGE = 'Backend Logout finished and tokens destroyed';
+	useEffect(() => {
+		const logoutBackend = async () => {
+			try {
+				await api.post(
+					`${backendLink}auth/logout`,
+					{
+						refreshToken: getRefreshToken(),
+					},
+					{
+						headers: {
+							Authorization: `Bearer ${getRefreshToken()}`,
+							'Content-Type': 'application/json',
+							Accept: 'application/json',
+						},
+					}
+				);
+				notify(MESSAGE, 'success');
+			} catch (error) {
+				notify(MESSAGE, 'success');
+			}
+			// remove the user details from localStorage
+			//clearLocalStorage();
+			logout();
+			disconnect_socket();
+			queryClient.clear();
+			navigate('/auth', { replace: 'true' });
 
-      } catch (error) {
-        notify(MESSAGE, 'success');
-      }
-      // remove the user details from localStorage
-      //clearLocalStorage();
-      logout();
-      disconnect_socket();
-      navigate('/', { replace: 'true' });
-      return
-    };
-    setTimeout(() => {
-      logoutBackend();
-    }, 4000);
+			return;
+		};
+		setTimeout(() => {
+			logoutBackend();
+		}, 4000);
 
-    return;
-  }, []);
+		return;
+	}, []);
 
-  return (
-    <div className='my-16 lg:my-20'>
-      <SpinnerSkeleton
-        heading={'Logout in Process...'}
-        body={'Our Logout is done securely. We are cleaning up your space to keep you safe from Hackers. We hope to see you soon. Bye 🙋‍♂️'}
-        type={'spin'}
-        color={'#2686CE'}
-        height={250}
-        width={250}
-      />
-      <ScrollToTop />
-    </div>
-  );
+	return (
+		<div className="my-16 lg:my-20">
+			<SpinnerSkeleton
+				heading={'Logout in Process...'}
+				body={
+					'Our Logout is done securely. We are cleaning up your space to keep you safe from Hackers. We hope to see you soon. Bye 🙋‍♂️'
+				}
+				type={'spin'}
+				color={'#2686CE'}
+				height={250}
+				width={250}
+			/>
+			<ScrollToTop />
+		</div>
+	);
 };
 
 export default Logout;
