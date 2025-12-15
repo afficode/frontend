@@ -56,11 +56,8 @@ export const NotificationProvider = ({ children }) => {
         socket.on("notifications", handleNotifications);
         socket.on("connect_error", handleConnectError);
 
-        // socket.emit("get_notifications");
-
         return () => {
-            socket.off("notifications", handleNotifications);
-            socket.off("connect_error", handleConnectError);
+            socket.disconnect();
         };
     }, [isLogin]);
 
