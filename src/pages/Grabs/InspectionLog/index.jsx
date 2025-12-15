@@ -7,17 +7,18 @@ import { useGetSchedule, useGetSchedules } from '../../../hooks';
 import useAuth from '../../../context/UserContext';
 
 const InspectionLog = () => {
-	const [adId, setAdId] = useState(null);
+	const [scheduleId, setScheduleId] = useState(null);
 	const [inspectionModal, setInspectionModal] = useState(false);
 	const { data, isLoading } = useGetSchedules();
 	const user = useAuth();
 
-	const { data: schedule, isLoading: scheduleLoading } = useGetSchedule(adId, {
-		enabled: !!adId,
+	const { data: schedule, isLoading: scheduleLoading } = useGetSchedule(scheduleId, {
+		enabled: !!scheduleId,
 	});
+	console.log(data)
 
 	const handleClick = (id) => {
-		setAdId(id);
+		setScheduleId(id);
 		setInspectionModal(true);
 	};
 

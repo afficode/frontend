@@ -137,8 +137,8 @@ const InspectorCard = ({ data, ad_id, isLoading }) => {
 							{booking.remark === 'view_contact' && (
 								<a
 									href={`tel:${user?.id === data?.schedules?.owner
-											? data?.schedules?.phone_details?.buyer_phone
-											: data?.schedules?.phone_details?.owner_phone
+										? data?.schedules?.phone_details?.buyer_phone
+										: data?.schedules?.phone_details?.owner_phone
 										}`}
 									className="text-white text-sm hover:underline flex items-center gap-1"
 								>
@@ -163,7 +163,7 @@ const InspectorCard = ({ data, ad_id, isLoading }) => {
 									Date:
 								</p>
 
-								<p> {format(parseISO(booking?.date), 'EEEE d, MMMM yyyy')}</p>
+								<p> {booking?.date && format(parseISO(booking?.date), 'EEEE d, MMMM yyyy')}</p>
 							</div>
 							<div className="flex items-center gap-2">
 								<p>
@@ -175,8 +175,8 @@ const InspectorCard = ({ data, ad_id, isLoading }) => {
 									Time:
 								</p>
 								<p className="lowercase">
-									{format(parse(booking.time.from, 'HH:mm', new Date()), 'h:mma')} to{' '}
-									{format(parse(booking.time.to, 'HH:mm', new Date()), 'h:mma')}
+									{booking?.time?.from && format(parse(booking.time.from, 'HH:mm', new Date()), 'h:mma')}
+									{booking?.time?.to && <>to{' '} {format(parse(booking.time.to, 'HH:mm', new Date()), 'h:mma')}</>}
 								</p>
 							</div>
 						</div>
