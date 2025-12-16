@@ -64,13 +64,6 @@ const PaymentSuccess = () => {
 			</div>
 
 			<div className="space-y-6">
-				{/* <div className="flex items-center justify-between border-b border-black/50">
-					<button className="flex items-center gap-2">
-						<img src={RedirectIcon} className="w-4" alt="rethinking?" />
-						Change delivery type
-					</button>
-					<img src={ArrowRightBlack} className="w-2" alt="Arrow right" />
-				</div> */}
 				<div className="flex items-center justify-between border-b border-black/50">
 					<Link to={Approutes.profile.transactions}>
 						<button className="flex items-center gap-2 text-primary">

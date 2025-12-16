@@ -38,8 +38,6 @@ const Logout = () => {
 			} catch (error) {
 				notify(MESSAGE, 'success');
 			}
-			// remove the user details from localStorage
-			//clearLocalStorage();
 			logout();
 			disconnect_socket();
 			queryClient.clear();
