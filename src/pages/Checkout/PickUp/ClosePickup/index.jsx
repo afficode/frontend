@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { useGetEscrowDetails, useNotify, useRequestOtp, useVerifyOtp } from '../../../../hooks';
 import { SpinnerSkeleton } from '../../../../components';
 import RefundForm from '../../RefundForm';
+import { ScrollToTop } from '../../../../utils';
 
 const ClosePickup = () => {
 	const { escrow_id } = useParams();
@@ -178,7 +179,8 @@ const ClosePickup = () => {
 							<h6 className="font-semibold text-base">{escrowDetails?.escrow.ad_owner_name}.</h6>
 							<div className="flex items-center gap-1">
 								<img src={Location} alt="map" className="w-4 h-4" />
-								{escrowDetails?.escrow.pickup_address}, {escrowDetails?.escrow.pickup_state}.
+								{escrowDetails?.escrow.pickup_address && `${escrowDetails?.escrow.pickup_address},`}{' '}
+								{escrowDetails?.escrow.pickup_state}.
 							</div>
 							<p>{escrowDetails?.escrow.pickup_mobile}</p>
 						</div>
@@ -444,6 +446,8 @@ const ClosePickup = () => {
 					</Modal>
 				</>
 			)}
+
+			<ScrollToTop />
 		</div>
 	);
 };
