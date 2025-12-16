@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
-import Details from './Details';
-import { useGetOrder, useGetOrders, useGetEscrowDetails } from '../../../hooks';
+import { useState } from 'react';
+import { useGetOrders, useGetEscrowDetails } from '../../../hooks';
 import { Modal } from '../../../ui';
 import { format, parseISO } from 'date-fns';
 import { SpinnerSkeleton } from '../../../components';
-
 import { IoCalendarSharp, IoReorderFourSharp } from 'react-icons/io5';
 import { TbTruckDelivery, TbStatusChange } from 'react-icons/tb';
 import { BsCashCoin } from 'react-icons/bs';
@@ -12,17 +10,10 @@ import ShowSellerContact from '../../Checkout/PickUp/ShowSellerContact';
 import NavigatePayment from './NavigatePayment';
 
 const TransactionActivity = () => {
-	const [orderModal, setOrderModal] = useState(false);
-	const [orderId, setOrderId] = useState(null);
-
 	const [pickupEscrowModal, setPickupEscrowModal] = useState(false);
 	const [pickupEscrowOrderId, setPickupEscrowOrderId] = useState(null);
 
 	const { data: allOrders, isLoading } = useGetOrders();
-
-	const { data: order, isLoading: orderLoading } = useGetOrder(orderId ?? '', {
-		enabled: !!orderId,
-	});
 
 	const {
 		data: escrowDetails,
@@ -30,11 +21,6 @@ const TransactionActivity = () => {
 		isError: escrowError,
 		error: escrowErrorData,
 	} = useGetEscrowDetails(pickupEscrowOrderId);
-
-	const handleOrderClick = (id) => {
-		setOrderId(id);
-		setOrderModal(true);
-	};
 
 	const handleEscrowSelfPickUp = (id) => {
 		setPickupEscrowOrderId(id);
@@ -101,10 +87,6 @@ const TransactionActivity = () => {
 											key={order.id}
 											role="button"
 											onClick={() => {
-												if (order.escrow_type === 'boonfu_delivery') {
-													handleOrderClick(order.id);
-												}
-
 												if (
 													order.escrow_type === 'self_pickup' &&
 													order.stage === 'init' &&
@@ -145,21 +127,12 @@ const TransactionActivity = () => {
 															: 'badge-success'
 													}`}
 												>
-													{order.escrow_type === 'boonfu_delivery' && order.price && order.paid === 0
-														? 'Order Quoted'
-														: order.escrow_type === 'boonfu_delivery' && order.price && order.paid === 1
-														? 'Order placed'
-														: order.escrow_type === 'boonfu_delivery' && !order.price && order.paid === 0
-														? 'Waiting for Quote'
-														: order.escrow_type === 'self_pickup' && order.paid === 1
+													{order.escrow_type === 'self_pickup' && order.paid === 1
 														? (order?.stage === 'init' ? 'Paid' : order?.stage) ?? 'escrow_service'
 														: `${order?.stage}` ?? 'escrow_service'}
 												</span>
 											</td>
 											<td className="w-max text-center">
-												{order?.escrow_type === 'boonfu_delivery' && order?.paid === 1 && (
-													<span className={`capitalize badge badge-lg badge-success`}>Paid</span>
-												)}
 												{order?.escrow_type === 'self_pickup' && (
 													<>
 														{order?.escrow_type === 'self_pickup' && order?.status === 'success' ? (
@@ -196,23 +169,6 @@ const TransactionActivity = () => {
 					</div>
 				</div>
 			</div>
-
-			{orderId && (
-				<Modal
-					isOpen={orderModal}
-					setIsOpen={setOrderModal}
-					modalHeader={false}
-					className={' max-w-[720px] p-0'}
-				>
-					{orderLoading ? (
-						<div className="flex items-center justify-center h-40">
-							<SpinnerSkeleton />
-						</div>
-					) : (
-						<Details data={order} />
-					)}
-				</Modal>
-			)}
 
 			{pickupEscrowOrderId && (
 				<Modal
