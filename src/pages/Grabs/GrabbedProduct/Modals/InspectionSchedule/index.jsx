@@ -1,10 +1,12 @@
-import { Button } from '../../../../../ui';
+import { Button, DatePickerInput } from '../../../../../ui';
 import useAuth from '../../../../../context/UserContext';
 import { Approutes } from '../../../../../constants';
 import { useFormik } from 'formik';
 import { useCreateSchedule, useNotify } from '../../../../../hooks';
 import { format, parse } from 'date-fns';
 import { useNavigate } from 'react-router-dom';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const InspectionSchedule = ({ setInspectionModalOpen, ad }) => {
 	const { user } = useAuth();
@@ -53,12 +55,19 @@ const InspectionSchedule = ({ setInspectionModalOpen, ad }) => {
 		initialValues: {
 			date: '',
 			time: {
-				from: '00:00',
-				to: '00:00',
+				from: '',
+				to: '',
 			},
 		},
 		onSubmit: handleInspectionSubmit,
 	});
+
+	const timeFromDate = formik.values.time.from
+		? parse(formik.values.time.from, 'HH:mm', new Date())
+		: null;
+	const timeToDate = formik.values.time.to
+		? parse(formik.values.time.to, 'HH:mm', new Date())
+		: null;
 
 	const from = parse(formik.values.time.from, 'HH:mm', new Date());
 	const to = parse(formik.values.time.to, 'HH:mm', new Date());
@@ -78,7 +87,7 @@ const InspectionSchedule = ({ setInspectionModalOpen, ad }) => {
 					/>
 				</label>
 				<label htmlFor="date" className="flex flex-col font-medium">
-					Select inspectation date
+					Select inspection date
 					<input
 						type="date"
 						name="date"
@@ -94,23 +103,51 @@ const InspectionSchedule = ({ setInspectionModalOpen, ad }) => {
 					<label htmlFor="start_time" className="flex flex-col font-medium">
 						Time (From - To)
 						<div className="flex items-center gap-4">
-							<input
-								type="time"
-								name="time.from"
-								id="time"
-								placeholder="11 : 00am"
-								value={formik.values.time.from}
-								onChange={formik.handleChange}
-								onBlur={formik.handleBlur}
+							<DatePicker
+								selected={timeFromDate}
+								onChange={(date) => {
+									if (!date) {
+										formik.setFieldValue('time.from', '');
+										return;
+									}
+									formik.setFieldValue('time.from', format(date, 'HH:mm'));
+								}}
+								showTimeSelect
+								showTimeSelectOnly
+								timeIntervals={1}
+								timeCaption="Time"
+								dateFormat="h:mm aa"
+								popperPlacement="top"
+								placeholderText="11:00 AM"
+								customInput={
+									<DatePickerInput
+										name="time.from"
+										value={formik.values.time.from ? format(from, 'h:mm a') : undefined}
+									/>
+								}
 							/>
-							<input
-								type="time"
-								name="time.to"
-								id="time"
-								placeholder="1 : 00pm"
-								value={formik.values.time.to}
-								onChange={formik.handleChange}
-								onBlur={formik.handleBlur}
+							<DatePicker
+								selected={timeToDate}
+								onChange={(date) => {
+									if (!date) {
+										formik.setFieldValue('time.to', '');
+										return;
+									}
+									formik.setFieldValue('time.to', format(date, 'HH:mm'));
+								}}
+								showTimeSelect
+								showTimeSelectOnly
+								timeIntervals={1}
+								timeCaption="Time"
+								dateFormat="h:mm aa"
+								popperPlacement="top"
+								placeholderText="1:00 PM"
+								customInput={
+									<DatePickerInput
+										name="time.to"
+										value={formik.values.time.to ? format(from, 'h:mm a') : undefined}
+									/>
+								}
 							/>
 						</div>
 					</label>
@@ -135,7 +172,13 @@ const InspectionSchedule = ({ setInspectionModalOpen, ad }) => {
 							variant={'primary'}
 							size={'small'}
 							loading={formik.isSubmitting || isLoading}
-							disabled={!formik.dirty || formik.isSubmitting}
+							disabled={
+								!formik.dirty ||
+								formik.isSubmitting ||
+								formik.values.time.from === '' ||
+								formik.values.time.to === '' ||
+								formik.values.date === ''
+							}
 						>
 							Submit
 						</Button>

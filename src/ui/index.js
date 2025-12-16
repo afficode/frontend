@@ -1,6 +1,7 @@
 export * from './ErrorToast';
 export { default as Button } from './Button';
 export { default as CategoryDropdown } from './Dropdown/CategoryDropdown';
+export { default as DatePickerInput } from './DatePickerInput';
 export { default as WalletDropdown } from './Dropdown/WalletDropdown';
 export { default as InputGroup } from './InputGroup';
 export { default as Modal } from './Modal';
