@@ -22,6 +22,7 @@ const ActionBar = (ad) => {
 				data: {
 					applyPolicy: 'close',
 					owner: user.id,
+					created_at: ad?.ad.created_at,
 				}
 			})
 			.then(async (res) => {

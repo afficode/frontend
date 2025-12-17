@@ -6,7 +6,7 @@ import { useNotify, useUpdateAd } from '../../../hooks';
 import { useQueryClient } from 'react-query';
 import useAuth from '../../../context/UserContext';
 
-const AdCard = ({ title, images, active, price, subscribe, views, adId, chats, available, feature }) => {
+const AdCard = ({ title, images, active, price, subscribe, views, adId, chats, available, feature, created_at }) => {
 	const navigate = useNavigate();
 	const notify = useNotify();
 	const { user } = useAuth();
@@ -24,6 +24,7 @@ const AdCard = ({ title, images, active, price, subscribe, views, adId, chats, a
 		if (feature === '3') {
 			formData.append('applyPolicy', 'close');
 			formData.append('owner', user.id);
+			formData.append('created_at', created_at);
 		}
 		mutate(formData, {
 			onSuccess: (data) => {
