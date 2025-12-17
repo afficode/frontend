@@ -1,13 +1,20 @@
 import { Link, useLocation } from 'react-router-dom';
 import { BoonfuLogo } from '../../../assets/images';
+import { useEffect } from 'react';
+import { useQueryClient } from 'react-query';
 
 const PaymentSuccess = () => {
 	const location = useLocation();
 
 	const queryParams = new URLSearchParams(location.search);
 
+	const queryClient = useQueryClient();
 	const amount = queryParams.get('amount');
 	const reference = queryParams.get('reference');
+
+	useEffect(() => {
+		queryClient.invalidateQueries(['account-balance']);
+	}, []);
 
 	return (
 		<div className="h-screen flex flex-col items-center justify-center space-y-6 text-center px-4">

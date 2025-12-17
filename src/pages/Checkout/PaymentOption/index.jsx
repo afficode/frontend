@@ -4,6 +4,7 @@ import { useEscrow, useNotify } from '../../../hooks';
 import { useNavigate, useParams } from 'react-router-dom';
 import useAuth from '../../../context/UserContext';
 import { Approutes } from '../../../constants';
+import { useQueryClient } from 'react-query';
 
 const PaymentOption = ({ result }) => {
 	const { mutate: pay, isLoading } = useEscrow();
@@ -13,6 +14,7 @@ const PaymentOption = ({ result }) => {
 
 	const adPrice = Number(result?.data?.price);
 
+	const queryClient = useQueryClient();
 	const notify = useNotify();
 	const navigate = useNavigate();
 
@@ -31,6 +33,7 @@ const PaymentOption = ({ result }) => {
 			{
 				onSuccess: (data) => {
 					notify(data?.message, 'success');
+					queryClient.invalidateQueries(['account-balance']);
 					if (data?.payment_payload) {
 						navigate(
 							Approutes.checkout.paymentSuccess +

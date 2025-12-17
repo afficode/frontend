@@ -210,6 +210,9 @@ function App() {
 				autoClose={3500}
 				newestOnTop={true}
 				closeButton={false}
+				closeOnClick={true}
+				draggable
+				pauseOnHover
 				position="top-center"
 				hideProgressBar={true}
 			/>

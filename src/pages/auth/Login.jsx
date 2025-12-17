@@ -46,7 +46,6 @@ const Login = ({ id }) => {
 				// the login from the useAuth tied to a context hook, will update localStorage and set user to Login
 				login(submit);
 				updateToken(submit?.coin);
-				notify('Welcome to Boonfu, This is HELPFUL', 'success');
 				navigate(getRedirectLink() || Approutes.home, {
 					replace: true,
 				});
@@ -55,7 +54,6 @@ const Login = ({ id }) => {
 				notify(submit.message, 'error');
 			}
 			setIsLoading(false);
-
 		}, 3000);
 	};
 	return (

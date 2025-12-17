@@ -58,11 +58,11 @@ export const useRequestOtp = () => {
 	return useMutation(['request-otp'], request);
 };
 
-export const useVerifyOtp = () => {
-	const verify = (data) =>
-		privateAxios.post(`${backendLink}otp/validate`, data).then((res) => res?.data);
+export const useEscrowRelease = () => {
+	const release = (data) =>
+		privateAxios.post(`${backendLink}escrow/release`, data).then((res) => res?.data);
 
-	return useMutation(['verify-otp'], verify);
+	return useMutation(['escrow-release'], release);
 };
 
 export const useRefund = (id) => {
