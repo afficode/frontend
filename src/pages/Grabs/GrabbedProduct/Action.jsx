@@ -1,11 +1,14 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Button, Modal as ModalUi } from '../../../ui';
 import {
+	AmountSold,
 	BankTransfer,
 	Info,
-	InfoYellow,
+	Location2,
+	Members,
 	Paypal,
+	Seller,
 	SingleArrowRight,
 	Visa,
 } from '../../../assets/svgs';
@@ -17,7 +20,7 @@ import Modal from '../../Products/View/Modal.jsx';
 import ReportAd from '../../Products/View/ReportAd';
 import { BiSolidMessageRoundedDetail } from 'react-icons/bi';
 import useAuth from '../../../context/UserContext';
-import { TermsAndCondition } from '../../../components/index.js';
+import { format, parseISO } from 'date-fns';
 
 const Action = ({ isGeneral, ad }) => {
 	const { isLogin, user } = useAuth();
@@ -27,31 +30,10 @@ const Action = ({ isGeneral, ad }) => {
 	// const category = ad?.category.toString();
 	const { grabber_id, ad_id } = useParams();
 
-	const [formData, setFormData] = useState({
-		delivery_option: '',
-	});
-
 	const hasBookedSchedule = data?.schedules.some((schedule) => schedule.ad_id === ad.id);
 
 	// form modals
 	const [inspectionModalOpen, setInspectionModalOpen] = useState(false);
-
-	//to scroll into terms and condition document
-	const [isOpen, setIsOpen] = useState(false);
-	const termsRef = useRef(null);
-
-	const handleScrollTo = (ref) => {
-		if (!isOpen) {
-			setIsOpen(true);
-			setTimeout(() => {
-				ref.current.scrollIntoView({ behavior: 'smooth' });
-			}, 1000); // Add a delay to ensure the component is rendered before scrolling
-		} else {
-			ref.current.scrollIntoView({ behavior: 'smooth' });
-		}
-	};
-
-	// const [inquiryModal, setInquiryModal] = useState(false);
 
 	return (
 		<>
@@ -64,111 +46,54 @@ const Action = ({ isGeneral, ad }) => {
 			>
 				{isGeneral ? (
 					<>
-						<p className="pb-2 border-b border-black/40 border-1">
-							NOTE:{' '}
-							<span className="italic text-primary">
-								This Item does not deliver outside of seller’s state.
-							</span>
-						</p>
 						<div className="pb-4 space-y-4 border-b border-black/40 border-1">
-							<div>
-								<p className="font-semibold">Select delivery option:</p>
-
-								<div className="mt-1">
-									<form>
-										<div className="flex items-center space-x-4">
-											<input
-												type="radio"
-												name={'pickup'}
-												id={'pickup'}
-												value={'pickup'}
-												checked={formData.delivery_option === 'pickup'}
-												onChange={(e) => {
-													setFormData({ ...formData, delivery_option: e.target.value });
-												}}
-												className={``}
-											/>
-											<label htmlFor={'pickup'} className="flex items-center gap-2">
-												Pick up by self{' '}
-												<div className="dropdown dropdown-hover">
-													<img tabIndex={0} src={InfoYellow} alt="info" className="w-4 cursor-pointer" />
-													<div
-														tabIndex={0}
-														className="dropdown-content transform translate-y-[-25%] md:translate-y-[2%] translate-x-[-47%] sm:translate-x-[-10%] md:translate-x-[-10%] lg:translate-x-[-70%]  bg-secondary border-4 p-4 w-screen max-w-[340px] sm:max-w-[580px] z-[100000]"
-													>
-														<div className="space-y-2 text-start">
-															<h4>Pick up by self</h4>
-															<p>Dear Buyer,</p>
-															<p>
-																Please note that seller’s information is ONLY revealed and released to you upon the
-																receipt of your payment
-															</p>
-															<p>
-																Thorough inspection of the item is to be done by YOU onsite of item’s pick up, after
-																which you would CONFIRM satisfactory state or not of item.
-															</p>
-															<p>
-																Self-pick up is to be done and closed within 24hrs. It is in your best interest to
-																either confirm satfisfactory state of item or not within 24hrs, as after 24hrs, Fund
-																for item shall be released to seller and that transaction CLOSED!
-															</p>
-														</div>
-													</div>
-												</div>
-											</label>
-										</div>
-									</form>
-
-									<button
-										onClick={() => handleScrollTo(termsRef)}
-										type="button"
-										className="mt-2 font-medium text-black underline"
-									>
-										T & C’s apply, please read!
-									</button>
-
-									<div className="mb-2 space-y-3">
-										<Link
-											to={
-												formData.delivery_option === 'delivery'
-													? Approutes.checkout.useDelivery(grabber_id, ad_id)
-													: Approutes.checkout.usePickup(grabber_id, ad_id)
-											}
-										>
-											<Button
-												disabled={formData.delivery_option === '' ? true : false}
-												type="button"
-												variant={'primary'}
-												size={'full'}
-												className={'flex items-center justify-center gap-4 rounded-3xl mt-4'}
-											>
-												Place Order
-											</Button>
-										</Link>
-										<Modal
-											modalHeader={true}
-											children={<ReportAd ad_id={ad?.id} />}
-											headerText={'Feedback / Abuse'}
-											className={`w-full px-2 py-3 my-2 text-lg tracking-tighter rounded-3xl text-white bg-slate-600 hover:bg-slate-500 line-clamp-1 ${
-												!isLogin && 'cursor-not-allowed'
-											}`}
-											disabled={!isLogin || ad?.active === '0' || user?.id === ad?.owner}
-											type="button"
-											buttonChild={
-												<>
-													<span className="flex items-center gap-2 justify-center">
-														Feedback <BiSolidMessageRoundedDetail className="my-auto" />
-													</span>
-												</>
-											}
-										/>
-									</div>
+							<div className="flex flex-col gap-0 items-start text-sm font-light">
+								<div className="flex items-center gap-2">
+									<Members className="w-6" />
+									<span>Member since: {format(parseISO(ad.joined_on), 'd MMM. yyyy')}</span>
 								</div>
+								<div className="flex items-center gap-2">
+									<Seller className="w-6" />
+									<span>{ad?.firstname + ' ' + ad?.lastname}</span>
+								</div>
+								<div className="flex items-center gap-2">
+									<Location2 className="w-6" />
+									<span>{ad?.location}</span>
+								</div>
+								<div className="flex items-center gap-2">
+									<AmountSold className="w-6" />
+									<span>{ad?.items_sold}</span>
+								</div>
+							</div>
 
-								{/* terms and condition modal */}
-								<ModalUi isOpen={isOpen} setIsOpen={setIsOpen} headerText="Terms of Service">
-									<TermsAndCondition termsRef={termsRef} setIsOpen={setIsOpen} isOpen={isOpen} />
-								</ModalUi>
+							<div className="mb-2 space-y-3">
+								<Link to={Approutes.checkout.usePickup(grabber_id, ad_id)}>
+									<Button
+										type="button"
+										variant={'primary'}
+										size={'full'}
+										className={'flex items-center justify-center gap-4 rounded-3xl mt-4'}
+									>
+										Place Order
+									</Button>
+								</Link>
+								<Modal
+									modalHeader={true}
+									children={<ReportAd ad_id={ad?.id} />}
+									headerText={'Feedback / Abuse'}
+									className={`w-full px-2 py-3 my-2 text-lg tracking-tighter rounded-3xl text-white bg-slate-600 hover:bg-slate-500 line-clamp-1 ${
+										!isLogin && 'cursor-not-allowed'
+									}`}
+									disabled={!isLogin || ad?.active === '0' || user?.id === ad?.owner}
+									type="button"
+									buttonChild={
+										<>
+											<span className="flex items-center gap-2 justify-center">
+												Feedback <BiSolidMessageRoundedDetail className="my-auto" />
+											</span>
+										</>
+									}
+								/>
 							</div>
 						</div>
 
@@ -273,25 +198,3 @@ const Action = ({ isGeneral, ad }) => {
 };
 
 export default Action;
-
-{
-	/* // <aside
-	// 	className={
-	// 		isGeneral
-	// 			? 'w-full    border-2 border-gray-400 p-2 lg:p-4 flex flex-col justify-between'
-	// 			: 'w-full  h-full  border-2 border-gray-400 px-2 py-4 lg:p-4 flex flex-col justify-between'
-	// 	}
-	// >
-	
-	// </aside> */
-}
-// quote form data schema
-// {
-// 	buyer_address: 'Lekki';
-// 	buyer_name: 'Mr Ayo';
-// 	buyer_phone: '+2349039085228';
-// 	delivery_type: 'normal';
-// 	note: "Here's a note";
-// 	seller_address: '13 Ayanlaja Street';
-// 	state: '22';
-// }
