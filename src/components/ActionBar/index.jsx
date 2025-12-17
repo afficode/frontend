@@ -4,27 +4,33 @@ import { privateAxios } from '../../utils';
 import { useNotify } from '../../hooks';
 import { useQueryClient } from 'react-query';
 import { useState } from 'react';
+import useAuth from '../../context/UserContext';
 
 const ActionBar = (ad) => {
+	const { user } = useAuth();
 	const notify = useNotify();
 	const navigate = useNavigate();
 
 	const queryClient = useQueryClient();
 
 	const [isDeleting, setIsDeleting] = useState(false);
-
 	const handleDelete = (id) => {
 		setIsDeleting(true);
 
 		privateAxios
-			.delete(`/ads/${id}`)
+			.delete(`/ads/${id}`, {
+				data: {
+					applyPolicy: 'close',
+					owner: user.id,
+				}
+			})
 			.then(async (res) => {
 				setIsDeleting(false);
 				queryClient.invalidateQueries({ queryKey: ['getUserAds'] });
 				notify(res?.data.message, 'success');
 				navigate(Approutes.dashboard.initial);
 			})
-			.catch((error) => {});
+			.catch((error) => { });
 
 		setIsDeleting(false);
 	};
@@ -34,19 +40,19 @@ const ActionBar = (ad) => {
 			<div className="flex items-center justify-between px-2 sm:px-6 py-2 bg-primary text-white">
 				<div className="flex items-center gap-1">
 					<p className="font-light text-sm">Views:</p>
-					<b>{ad?.ad.views}</b>
+					<b>{ad?.ad.views || 0}</b>
 				</div>
 				<div className="flex items-center gap-1">
 					<p className="font-light text-sm">Clicks:</p>
-					<b>250</b>
+					<b>{ad?.ad.chats || 0}</b>
 				</div>
 				<div className="flex items-center gap-1">
 					<p className="font-light text-sm">Phone Views:</p>
-					<b>25</b>
+					<b>{ad?.ad.views || 0}</b>
 				</div>
 				<div className="flex items-center gap-1">
 					<p className="font-light text-sm">Chats:</p>
-					<b>50</b>
+					<b>{ad?.ad.chats || 0}</b>
 				</div>
 			</div>
 

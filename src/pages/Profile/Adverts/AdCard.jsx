@@ -4,10 +4,12 @@ import { Button } from '../../../ui';
 import { toMoney } from '../../../utils';
 import { useNotify, useUpdateAd } from '../../../hooks';
 import { useQueryClient } from 'react-query';
+import useAuth from '../../../context/UserContext';
 
-const AdCard = ({ title, images, active, price, subscribe, views, adId, chats, available }) => {
+const AdCard = ({ title, images, active, price, subscribe, views, adId, chats, available, feature }) => {
 	const navigate = useNavigate();
 	const notify = useNotify();
+	const { user } = useAuth();
 	const { mutate } = useUpdateAd(adId);
 	const queryClient = useQueryClient();
 
@@ -18,6 +20,11 @@ const AdCard = ({ title, images, active, price, subscribe, views, adId, chats, a
 	const closeAdvert = () => {
 		const formData = new FormData();
 		formData.append('active', '2');
+		formData.append('available', available || 1);
+		if (feature === '3') {
+			formData.append('applyPolicy', 'close');
+			formData.append('owner', user.id);
+		}
 		mutate(formData, {
 			onSuccess: (data) => {
 				notify('Advert closed successfully', 'success');
@@ -61,11 +68,11 @@ const AdCard = ({ title, images, active, price, subscribe, views, adId, chats, a
 						</div>
 					)}
 
-                    {active === '1' && available == '0' && (
-                        <div className="absolute top-4 right-4 text-white font-semibold bg-primary py-1 px-2 rounded-xl text-center border-4 border-white max-sm:text-sm">
-                            In Review
-                        </div>
-                    )}
+					{active === '1' && available == '0' && (
+						<div className="absolute top-4 right-4 text-white font-semibold bg-primary py-1 px-2 rounded-xl text-center border-4 border-white max-sm:text-sm">
+							In Review
+						</div>
+					)}
 				</div>
 
 				{/* details  */}
