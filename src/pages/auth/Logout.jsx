@@ -11,13 +11,11 @@ import useMessageContext from '../../context/MessageContext';
 import { useQueryClient } from 'react-query';
 
 const Logout = () => {
-	const notify = useNotify();
 	const { logout } = useAuth();
 	const navigate = useNavigate();
 	const { disconnect_socket } = useMessageContext();
 	const queryClient = useQueryClient();
 
-	const MESSAGE = 'Backend Logout finished and tokens destroyed';
 	useEffect(() => {
 		const logoutBackend = async () => {
 			try {
@@ -34,10 +32,7 @@ const Logout = () => {
 						},
 					}
 				);
-				notify(MESSAGE, 'success');
-			} catch (error) {
-				notify(MESSAGE, 'success');
-			}
+			} catch (error) {}
 			logout();
 			disconnect_socket();
 			queryClient.clear();
