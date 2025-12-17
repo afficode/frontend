@@ -54,7 +54,14 @@ const Action = ({ isGeneral, ad }) => {
 								</div>
 								<div className="flex items-center gap-2">
 									<Seller className="w-6" />
-									<span>{ad?.firstname + ' ' + ad?.lastname}</span>
+									<span>
+										{ad?.firstname + ' ' + ad?.lastname}{' '}
+										{ad?.verified === '1' ? (
+											<span className="py-1 bg-green-500 text-white rounded-md px-2">Verified</span>
+										) : (
+											<span className="py-1 bg-red-500 text-white rounded-md px-2">Unverified</span>
+										)}
+									</span>
 								</div>
 								<div className="flex items-center gap-2">
 									<Location2 className="w-6" />
