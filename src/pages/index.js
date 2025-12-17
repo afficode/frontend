@@ -6,7 +6,6 @@ export { default as AboutUs } from './AboutUs';
 export { default as BoonfuMedia } from './BoonfuMedia';
 export { default as Checkout } from './Checkout';
 export { default as ClosePickup } from './Checkout/PickUp/ClosePickup';
-export { default as Delivery } from './Checkout/Delivery';
 export { default as Pickup } from './Checkout/PickUp';
 export { default as ContactUs } from './ContactUs';
 export { default as Deposit } from './Account/Deposit';
