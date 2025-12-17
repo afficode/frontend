@@ -94,12 +94,13 @@ const PerformanceCharts = ({ adsData }) => {
 
 	const notify = useNotify();
 
-	const handleDelete = (id) => {
+	const handleDelete = (id, ad) => {
 		privateAxios
 			.delete(`/ads/${id}`, {
 				data: {
 					applyPolicy: 'close',
 					owner: user.id,
+					created_at: ad.created_at,
 				}
 			})
 			.then(async (res) => {
@@ -157,7 +158,7 @@ const PerformanceCharts = ({ adsData }) => {
 												</span>{' '}
 												|
 												<span className="text-red-600 ">
-													<FaTrash className="cursor-pointer" onClick={() => handleDelete(ad?.id)} />
+													<FaTrash className="cursor-pointer" onClick={() => handleDelete(ad?.id, ad)} />
 												</span>
 											</td>
 										</tr>

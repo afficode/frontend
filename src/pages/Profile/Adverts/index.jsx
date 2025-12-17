@@ -21,8 +21,8 @@ const Adverts = () => {
 					<div
 						onClick={() => setFilteredAd('all')}
 						className={`${filteredAd === 'all'
-								? 'bg-primary text-white lg:py-2 lg:px-6 py-1 px-4'
-								: 'lg:py-2 lg:px-6 py-1 px-4'
+							? 'bg-primary text-white lg:py-2 lg:px-6 py-1 px-4'
+							: 'lg:py-2 lg:px-6 py-1 px-4'
 							} cursor-pointer max-sm:text-sm`}
 					>
 						All <span>[{ads?.total_ads}]</span>
@@ -30,8 +30,8 @@ const Adverts = () => {
 					<div
 						onClick={() => setFilteredAd('active')}
 						className={`${filteredAd === 'active'
-								? 'bg-primary text-white lg:py-2 lg:px-6 py-1 px-4'
-								: 'text-green-500 lg:py-2 lg:px-6 py-1 px-4'
+							? 'bg-primary text-white lg:py-2 lg:px-6 py-1 px-4'
+							: 'text-green-500 lg:py-2 lg:px-6 py-1 px-4'
 							} cursor-pointer max-sm:text-sm`}
 					>
 						Active <span>[{ads?.active_ads.length || 0}]</span>
@@ -39,8 +39,8 @@ const Adverts = () => {
 					<div
 						onClick={() => setFilteredAd('in_review')}
 						className={`${filteredAd === 'in_review'
-								? 'bg-primary text-white lg:py-2 lg:px-6 py-1 px-4'
-								: 'text-primary lg:py-2 lg:px-6 py-1 px-4'
+							? 'bg-primary text-white lg:py-2 lg:px-6 py-1 px-4'
+							: 'text-primary lg:py-2 lg:px-6 py-1 px-4'
 							} cursor-pointer max-sm:text-sm`}
 					>
 						In Review <span>[{ads?.processing_ads.length || 0}]</span>
@@ -48,8 +48,8 @@ const Adverts = () => {
 					<div
 						onClick={() => setFilteredAd('blocked')}
 						className={`${filteredAd === 'blocked'
-								? 'bg-primary text-white lg:py-2 lg:px-6 py-1 px-4'
-								: 'text-[#D60949] lg:py-2 lg:px-6 py-1 px-4'
+							? 'bg-primary text-white lg:py-2 lg:px-6 py-1 px-4'
+							: 'text-[#D60949] lg:py-2 lg:px-6 py-1 px-4'
 							} cursor-pointer max-sm:text-sm`}
 					>
 						Blocked <span>[{ads?.blocked_ads.length || 0}]</span>
@@ -57,8 +57,8 @@ const Adverts = () => {
 					<div
 						onClick={() => setFilteredAd('sold')}
 						className={`${filteredAd === 'sold'
-								? 'bg-primary text-white lg:py-2 lg:px-6 py-1 px-4'
-								: 'text-black/50 lg:py-2 lg:px-6 py-1 px-4'
+							? 'bg-primary text-white lg:py-2 lg:px-6 py-1 px-4'
+							: 'text-black/50 lg:py-2 lg:px-6 py-1 px-4'
 							} cursor-pointer max-sm:text-sm`}
 					>
 						Closed <span>[{ads?.sold_ads.length || 0}]</span>
@@ -94,6 +94,7 @@ const Adverts = () => {
 										paid={ad.paid}
 										available={ad.available}
 										feature={ad.feature}
+										created_at={ad.created_at}
 									/>
 								))
 						) : filteredAd === 'blocked' ? (
@@ -112,6 +113,8 @@ const Adverts = () => {
 										chats={ad.chats}
 										paid={ad.paid}
 										available={ad.available}
+										feature={ad.feature}
+										created_at={ad.created_at}
 									/>
 								))
 						) : filteredAd === 'in_review' ? (
@@ -130,6 +133,8 @@ const Adverts = () => {
 										chats={ad.chats}
 										paid={ad.paid}
 										available={ad.available}
+										feature={ad.feature}
+										created_at={ad.created_at}
 									/>
 								))
 						) : filteredAd === 'sold' ? (
@@ -148,6 +153,8 @@ const Adverts = () => {
 										chats={ad.chats}
 										paid={ad.paid}
 										available={ad.available}
+										feature={ad.feature}
+										created_at={ad.created_at}
 									/>
 								))
 						) : (
@@ -171,6 +178,8 @@ const Adverts = () => {
 										chats={ad.chats}
 										paid={ad.paid}
 										available={ad.available}
+										feature={ad.feature}
+										created_at={ad.created_at}
 									/>
 								))
 						)
