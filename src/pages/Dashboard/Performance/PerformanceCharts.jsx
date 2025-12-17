@@ -8,8 +8,10 @@ import { FaEdit, FaTrash } from 'react-icons/fa';
 import { privateAxios } from '../../../utils';
 import { useNotify } from '../../../hooks';
 import { useQueryClient } from 'react-query';
+import useAuth from '../../../context/UserContext';
 
 const PerformanceCharts = ({ adsData }) => {
+	const { user } = useAuth();
 	const [chartData, setChartData] = useState([
 		{
 			day: 'Mon',
@@ -94,7 +96,12 @@ const PerformanceCharts = ({ adsData }) => {
 
 	const handleDelete = (id) => {
 		privateAxios
-			.delete(`/ads/${id}`)
+			.delete(`/ads/${id}`, {
+				data: {
+					applyPolicy: 'close',
+					owner: user.id,
+				}
+			})
 			.then(async (res) => {
 				queryClient.invalidateQueries({ queryKey: ['getUserAds'] });
 				notify(res?.data.message, 'success');
