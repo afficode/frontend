@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { Inspector } from '../../assets/svgs';
-import { Button, InputGroup } from '../../ui';
+import { Button, InputGroup, DatePickerInput } from '../../ui';
 import { useFormik } from 'formik';
 import { format, parse, parseISO } from 'date-fns';
 import { useNotify, useUpdateSchedule } from '../../hooks';
@@ -8,6 +8,8 @@ import useAuth from '../../context/UserContext';
 import { useQueryClient } from 'react-query';
 import { BiPhoneCall } from 'react-icons/bi';
 import SpinnerSkeleton from '../SpinnersUi';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const InspectorCard = ({ data, ad_id, isLoading }) => {
 	const { mutate, isLoading: submitting } = useUpdateSchedule(data?.schedules?.id);
@@ -73,6 +75,13 @@ const InspectorCard = ({ data, ad_id, isLoading }) => {
 		return false;
 	}, [formik.values.remark]);
 
+	const timeFromDate = formik.values.time.from
+		? parse(formik.values.time.from, 'HH:mm', new Date())
+		: null;
+	const timeToDate = formik.values.time.to
+		? parse(formik.values.time.to, 'HH:mm', new Date())
+		: null;
+
 	const from = parse(formik.values.time.from, 'HH:mm', new Date());
 	const to = parse(formik.values.time.to, 'HH:mm', new Date());
 
@@ -102,15 +111,16 @@ const InspectorCard = ({ data, ad_id, isLoading }) => {
 					return (
 						<div
 							key={booking.id}
-							className={`${booking?.user_id === data?.schedules?.owner ? 'bg-primary/80' : 'bg-secondary'
-								} px-2 pb-4 pt-6  rounded-lg italic sm:mr-6 relative`}
+							className={`${
+								booking?.user_id === data?.schedules?.owner ? 'bg-primary/80' : 'bg-secondary'
+							} px-2 pb-4 pt-6  rounded-lg italic sm:mr-6 relative`}
 						>
 							<div className="absolute top-1 right-1 bg-white rounded-lg px-1  py-[0.15rem] leading-3 text-[10px]">
 								{booking.user_id === user.id
 									? 'You'
 									: booking?.user_id === data?.schedules?.owner
-										? 'Ad owner'
-										: 'Inspector'}
+									? 'Ad owner'
+									: 'Inspector'}
 							</div>
 
 							<div className="flex items-center gap-2">
@@ -136,10 +146,11 @@ const InspectorCard = ({ data, ad_id, isLoading }) => {
 
 							{booking.remark === 'view_contact' && (
 								<a
-									href={`tel:${user?.id === data?.schedules?.owner
-										? data?.schedules?.phone_details?.buyer_phone
-										: data?.schedules?.phone_details?.owner_phone
-										}`}
+									href={`tel:${
+										user?.id === data?.schedules?.owner
+											? data?.schedules?.phone_details?.buyer_phone
+											: data?.schedules?.phone_details?.owner_phone
+									}`}
 									className="text-white text-sm hover:underline flex items-center gap-1"
 								>
 									<BiPhoneCall />
@@ -156,8 +167,8 @@ const InspectorCard = ({ data, ad_id, isLoading }) => {
 							<div className="flex items-center gap-2">
 								<p>
 									{latestBooking?.remark === 'reschedule' &&
-										booking?.remark === 'reschedule' &&
-										latestBooking?.id === booking?.id
+									booking?.remark === 'reschedule' &&
+									latestBooking?.id === booking?.id
 										? 'New'
 										: null}{' '}
 									Date:
@@ -168,15 +179,17 @@ const InspectorCard = ({ data, ad_id, isLoading }) => {
 							<div className="flex items-center gap-2">
 								<p>
 									{latestBooking?.remark === 'reschedule' &&
-										booking?.remark === 'reschedule' &&
-										latestBooking?.id === booking?.id
+									booking?.remark === 'reschedule' &&
+									latestBooking?.id === booking?.id
 										? 'New'
 										: null}{' '}
 									Time:
 								</p>
 								<p className="lowercase">
 									{booking?.time?.from && format(parse(booking.time.from, 'HH:mm', new Date()), 'h:mma')}
-									{booking?.time?.to && <>to{' '} {format(parse(booking.time.to, 'HH:mm', new Date()), 'h:mma')}</>}
+									{booking?.time?.to && (
+										<>to {format(parse(booking.time.to, 'HH:mm', new Date()), 'h:mma')}</>
+									)}
 								</p>
 							</div>
 						</div>
@@ -220,25 +233,60 @@ const InspectorCard = ({ data, ad_id, isLoading }) => {
 								className={'customSelectInput'}
 							/>
 							<div className="flex gap-6 ">
-								<InputGroup
-									name={'time.from'}
-									type={'time'}
-									label={'From'}
-									value={formik.values.time.from}
-									onChange={formik.handleChange}
-									onBlur={formik.handleBlur}
-									className={'customSelectInput'}
-								/>
-								<InputGroup
-									name={'time.to'}
-									type={'time'}
-									label={'To'}
-									// moreInfo={'Choose a time range you would be available'}
-									value={formik.values.time.to}
-									onChange={formik.handleChange}
-									onBlur={formik.handleBlur}
-									className={'customSelectInput'}
-								/>
+								<div className="my-2">
+									<label className="input-group-label" htmlFor="time.from">
+										From
+									</label>
+									<DatePicker
+										selected={timeFromDate}
+										onChange={(date) => {
+											if (!date) {
+												formik.setFieldValue('time.from', '');
+												return;
+											}
+											formik.setFieldValue('time.from', format(date, 'HH:mm'));
+										}}
+										showTimeSelect
+										showTimeSelectOnly
+										timeIntervals={1}
+										timeCaption="Time"
+										dateFormat="h:mm aa"
+										placeholderText="Select time"
+										customInput={
+											<DatePickerInput
+												name="time.from"
+												value={formik.values.time.from ? format(from, 'h:mm a') : undefined}
+											/>
+										}
+									/>
+								</div>
+								<div className="my-2">
+									<label className="input-group-label" htmlFor="time.to">
+										To
+									</label>
+									<DatePicker
+										selected={timeToDate}
+										onChange={(date) => {
+											if (!date) {
+												formik.setFieldValue('time.to', '');
+												return;
+											}
+											formik.setFieldValue('time.to', format(date, 'HH:mm'));
+										}}
+										showTimeSelect
+										showTimeSelectOnly
+										timeIntervals={1}
+										timeCaption="Time"
+										dateFormat="h:mm aa"
+										placeholderText="Select time"
+										customInput={
+											<DatePickerInput
+												name="time.to"
+												value={formik.values.time.to ? format(from, 'h:mm a') : undefined}
+											/>
+										}
+									/>
+								</div>
 							</div>
 
 							{formik.values.time.from && formik.values.time.to ? (
@@ -251,22 +299,15 @@ const InspectorCard = ({ data, ad_id, isLoading }) => {
 						</>
 					)}
 
-					{/* {latestBooking?.user_id === user?.id ? (
-						<Button
-							onClick={() => {
-								notify("You can't send another response, patiently wait for a reply", 'error');
-							}}
-							variant={'primary'}
-							type="button"
-							className={'rounded-lg mt-4'}
-						>
-							Send
-						</Button>
-					) : ( */}
-					<Button variant={'primary'} type="submit" loading={submitting} className={'rounded-lg mt-4'}>
+					<Button
+						variant={'primary'}
+						type="submit"
+						disabled={submitting || !formik.dirty}
+						loading={submitting}
+						className={'rounded-lg mt-4'}
+					>
 						Send
 					</Button>
-					{/* )} */}
 				</form>
 			</div>
 		</div>
