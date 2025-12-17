@@ -42,7 +42,7 @@ const RefundForm = ({ escrowDetails, escrowReason, otherEscrowReason }) => {
 		if (data?.reason === 'others') {
 			formData.append('other_reason', other_reason);
 		}
-		if (data?.escrow_reason === 'other') {
+		if (data?.escrow_reason === 'others') {
 			formData.append('other_escrow_reason', other_escrow_reason);
 		}
 
@@ -143,7 +143,7 @@ const RefundForm = ({ escrowDetails, escrowReason, otherEscrowReason }) => {
 							onBlur={formik.handleBlur}
 						/>
 
-						{formik.values.reason === 'other' && (
+						{formik.values.reason === 'others' && (
 							<InputGroup
 								type="text"
 								name="other_reason"

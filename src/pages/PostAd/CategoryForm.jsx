@@ -3966,6 +3966,11 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 	const onSubmit = async (values, { setSubmitting, resetForm }) => {
 		setSubmitting(true);
 
+		if (values.feature === '3' && address === '') {
+			notify('Please provide the address for item pickup.', 'error');
+			return;
+		}
+
 		// Function to convert string values in an object to lowercase
 		const convertObjectValuesToLowerCase = (obj) => {
 			const newObj = {};

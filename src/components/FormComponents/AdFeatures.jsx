@@ -200,7 +200,8 @@ const AdFeatures = (props) => {
 																						</li>
 																					</span>
 																					<p className="ml-10">
-																						If you choose to withdraw your advert, 5% of your deposit will be charged as
+																						If you choose to cancel or close your advert, this can ONLY be done in the
+																						first week of posting the advert, 5% of your deposit will be charged as
 																						administrative fee, and the balance will be made available as “withdrawable”
 																					</p>
 																				</div>
