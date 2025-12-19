@@ -23,7 +23,7 @@ const ActionBar = (ad) => {
 					applyPolicy: 'close',
 					owner: user.id,
 					created_at: ad?.ad.created_at,
-				}
+				},
 			})
 			.then(async (res) => {
 				setIsDeleting(false);
@@ -31,7 +31,7 @@ const ActionBar = (ad) => {
 				notify(res?.data.message, 'success');
 				navigate(Approutes.dashboard.initial);
 			})
-			.catch((error) => { });
+			.catch((error) => {});
 
 		setIsDeleting(false);
 	};
