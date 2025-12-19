@@ -20,51 +20,46 @@ const Adverts = () => {
 				<div className="flex flex-wrap items-center justify-between">
 					<div
 						onClick={() => setFilteredAd('all')}
-						className={`${
-							filteredAd === 'all'
-								? 'bg-primary text-white lg:py-2 lg:px-6 py-1 px-4'
-								: 'lg:py-2 lg:px-6 py-1 px-4'
-						} cursor-pointer max-sm:text-sm`}
+						className={`${filteredAd === 'all'
+							? 'bg-primary text-white lg:py-2 lg:px-6 py-1 px-4'
+							: 'lg:py-2 lg:px-6 py-1 px-4'
+							} cursor-pointer max-sm:text-sm`}
 					>
 						All <span>[{ads?.total_ads}]</span>
 					</div>
 					<div
 						onClick={() => setFilteredAd('active')}
-						className={`${
-							filteredAd === 'active'
-								? 'bg-primary text-white lg:py-2 lg:px-6 py-1 px-4'
-								: 'text-green-500 lg:py-2 lg:px-6 py-1 px-4'
-						} cursor-pointer max-sm:text-sm`}
+						className={`${filteredAd === 'active'
+							? 'bg-primary text-white lg:py-2 lg:px-6 py-1 px-4'
+							: 'text-green-500 lg:py-2 lg:px-6 py-1 px-4'
+							} cursor-pointer max-sm:text-sm`}
 					>
 						Active <span>[{ads?.active_ads.length || 0}]</span>
 					</div>
-                    <div
-                        onClick={() => setFilteredAd('in_review')}
-                        className={`${
-                            filteredAd === 'in_review'
-                                ? 'bg-primary text-white lg:py-2 lg:px-6 py-1 px-4'
-                                : 'text-primary lg:py-2 lg:px-6 py-1 px-4'
-                        } cursor-pointer max-sm:text-sm`}
-                    >
-                        In Review <span>[{ads?.processing_ads.length || 0}]</span>
-                    </div>
+					<div
+						onClick={() => setFilteredAd('in_review')}
+						className={`${filteredAd === 'in_review'
+							? 'bg-primary text-white lg:py-2 lg:px-6 py-1 px-4'
+							: 'text-primary lg:py-2 lg:px-6 py-1 px-4'
+							} cursor-pointer max-sm:text-sm`}
+					>
+						In Review <span>[{ads?.processing_ads.length || 0}]</span>
+					</div>
 					<div
 						onClick={() => setFilteredAd('blocked')}
-						className={`${
-							filteredAd === 'blocked'
-								? 'bg-primary text-white lg:py-2 lg:px-6 py-1 px-4'
-								: 'text-[#D60949] lg:py-2 lg:px-6 py-1 px-4'
-						} cursor-pointer max-sm:text-sm`}
+						className={`${filteredAd === 'blocked'
+							? 'bg-primary text-white lg:py-2 lg:px-6 py-1 px-4'
+							: 'text-[#D60949] lg:py-2 lg:px-6 py-1 px-4'
+							} cursor-pointer max-sm:text-sm`}
 					>
 						Blocked <span>[{ads?.blocked_ads.length || 0}]</span>
 					</div>
 					<div
 						onClick={() => setFilteredAd('sold')}
-						className={`${
-							filteredAd === 'sold'
-								? 'bg-primary text-white lg:py-2 lg:px-6 py-1 px-4'
-								: 'text-black/50 lg:py-2 lg:px-6 py-1 px-4'
-						} cursor-pointer max-sm:text-sm`}
+						className={`${filteredAd === 'sold'
+							? 'bg-primary text-white lg:py-2 lg:px-6 py-1 px-4'
+							: 'text-black/50 lg:py-2 lg:px-6 py-1 px-4'
+							} cursor-pointer max-sm:text-sm`}
 					>
 						Closed <span>[{ads?.sold_ads.length || 0}]</span>
 					</div>
@@ -84,22 +79,24 @@ const Adverts = () => {
 					{ads && ads.total_ads > 0 ? (
 						filteredAd === 'active' ? (
 							adsData
-                                .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
-                                .map((ad) => (
-								<AdCard
-									key={ad.id}
-									title={ad.title}
-									images={ad.images}
-									active={ad.active}
-									price={ad.price}
-									views={ad.views}
-									subscribe={ad.subscribe}
-									adId={ad.id}
-									chats={ad.chats}
-									paid={ad.paid}
-									available={ad.available}
-								/>
-							))
+								.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+								.map((ad) => (
+									<AdCard
+										key={ad.id}
+										title={ad.title}
+										images={ad.images}
+										active={ad.active}
+										price={ad.price}
+										views={ad.views}
+										subscribe={ad.subscribe}
+										adId={ad.id}
+										chats={ad.chats}
+										paid={ad.paid}
+										available={ad.available}
+										feature={ad.feature}
+										created_at={ad.created_at}
+									/>
+								))
 						) : filteredAd === 'blocked' ? (
 							ads.blocked_ads
 								.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
@@ -116,27 +113,31 @@ const Adverts = () => {
 										chats={ad.chats}
 										paid={ad.paid}
 										available={ad.available}
+										feature={ad.feature}
+										created_at={ad.created_at}
 									/>
 								))
-						) :  filteredAd === 'in_review' ? (
-                            ads.processing_ads
-                                .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
-                                .map((ad) => (
-                                    <AdCard
-                                        key={ad.id}
-                                        title={ad.title}
-                                        images={ad.images}
-                                        active={ad.active}
-                                        price={ad.price}
-                                        views={ad.views}
-                                        subscribe={ad.subscribe}
-                                        adId={ad.id}
-                                        chats={ad.chats}
-                                        paid={ad.paid}
-                                        available={ad.available}
-                                    />
-                                ))
-                        ) : filteredAd === 'sold' ? (
+						) : filteredAd === 'in_review' ? (
+							ads.processing_ads
+								.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+								.map((ad) => (
+									<AdCard
+										key={ad.id}
+										title={ad.title}
+										images={ad.images}
+										active={ad.active}
+										price={ad.price}
+										views={ad.views}
+										subscribe={ad.subscribe}
+										adId={ad.id}
+										chats={ad.chats}
+										paid={ad.paid}
+										available={ad.available}
+										feature={ad.feature}
+										created_at={ad.created_at}
+									/>
+								))
+						) : filteredAd === 'sold' ? (
 							ads.sold_ads
 								.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
 								.map((ad) => (
@@ -152,6 +153,8 @@ const Adverts = () => {
 										chats={ad.chats}
 										paid={ad.paid}
 										available={ad.available}
+										feature={ad.feature}
+										created_at={ad.created_at}
 									/>
 								))
 						) : (
@@ -175,6 +178,8 @@ const Adverts = () => {
 										chats={ad.chats}
 										paid={ad.paid}
 										available={ad.available}
+										feature={ad.feature}
+										created_at={ad.created_at}
 									/>
 								))
 						)

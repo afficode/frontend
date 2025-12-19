@@ -53,7 +53,6 @@ import {
 	AdDetail,
 	TransactionActivity,
 	GrabPaymentSuccess,
-	Delivery,
 	Pickup,
 	SafetyGuides,
 	ClosePickup,
@@ -169,8 +168,8 @@ function App() {
 
 						<Route path={Approutes.grab.grabProduct(':ad_id')} element={<GrabbedProduct />} />
 						<Route path={Approutes.checkout.checkout} element={<Checkout />} />
-						<Route path={Approutes.checkout.delivery} element={<Delivery />} />
 						<Route path={Approutes.checkout.pickup} element={<Pickup />} />
+						<Route path={Approutes.checkout.pickup2} element={<Pickup />} />
 						<Route path={Approutes.checkout.closePickup} element={<ClosePickup />} />
 						<Route path={Approutes.grab.inspectionLog} element={<InspectionLog />} />
 						<Route path={Approutes.welcome} element={<Welcome />} />
@@ -211,6 +210,9 @@ function App() {
 				autoClose={3500}
 				newestOnTop={true}
 				closeButton={false}
+				closeOnClick={true}
+				draggable
+				pauseOnHover
 				position="top-center"
 				hideProgressBar={true}
 			/>

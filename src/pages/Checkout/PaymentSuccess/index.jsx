@@ -2,26 +2,24 @@ import { ArrowRightBlack, RedirectIcon, SuccessTick } from '../../../assets/svgs
 import { PaymentSuccessful } from '../../../assets/images';
 import { Approutes } from '../../../constants';
 import { Link, useSearchParams } from 'react-router-dom';
+import { format } from 'date-fns';
+import { ScrollToTop } from '../../../utils';
 
 const PaymentSuccess = () => {
 	const [searchParams] = useSearchParams();
 	const transactionId = searchParams.get('transaction_id');
 	const adTitle = searchParams.get('ad_title');
-	const date = searchParams.get('date');
-	const typeOfTansaction = searchParams.get('type_of_transaction');
-	const deliveryType = searchParams.get('delivery_type');
+	const date = new Date(Date.now());
 	const grabberId = searchParams.get('grabber_id');
 
 	return (
 		<div className="max-w-[720px] py-6 px-4 flex flex-col gap-8 m-auto ">
 			<div className="flex flex-col items-center gap-4">
-				<img src={PaymentSuccessful} className="w-[180px]" alt="Payment successful" />
+				<img src={PaymentSuccessful} className="w-[120px]" alt="Payment successful" />
 				<div className="space-y-2 text-center">
 					<h3>Payment Successful</h3>
 					<p>
-						Successfully paid:
-						{/* {ad?.data?.price} */}
-						{adTitle && adTitle}
+						Successfully paid: <b className="capitalize">{adTitle && adTitle}</b>
 					</p>
 				</div>
 			</div>
@@ -36,24 +34,22 @@ const PaymentSuccess = () => {
 						</tr>
 						<tr>
 							<td>Item paid for</td>
-							{/* <td>{ad?.data?.title}</td> */}
+							<td className="capitalize">{adTitle && adTitle}</td>
 						</tr>
 						<tr>
 							<td>Date</td>
-							<td>{date && date}</td>
+							<td>{date && format(date, 'MMM dd, yyyy')}</td>
 						</tr>
 						<tr>
 							<td>Type of transaction</td>
-							<td>{typeOfTansaction && typeOfTansaction}</td>
+							<td>Boonfu Wallet</td>
 						</tr>
-						<tr>
-							<td>Delivery type</td>
-							<td>{deliveryType && deliveryType}</td>
-						</tr>
-						<tr>
-							<td>Grabber ID</td>
-							<td>{grabberId && grabberId}</td>
-						</tr>
+						{grabberId && (
+							<tr>
+								<td>Grabber ID</td>
+								<td>{grabberId}</td>
+							</tr>
+						)}
 						<tr>
 							<td>Status</td>
 							<td>
@@ -69,13 +65,6 @@ const PaymentSuccess = () => {
 
 			<div className="space-y-6">
 				<div className="flex items-center justify-between border-b border-black/50">
-					<button className="flex items-center gap-2">
-						<img src={RedirectIcon} className="w-4" alt="rethinking?" />
-						Change delivery type
-					</button>
-					<img src={ArrowRightBlack} className="w-2" alt="Arrow right" />
-				</div>
-				<div className="flex items-center justify-between border-b border-black/50">
 					<Link to={Approutes.profile.transactions}>
 						<button className="flex items-center gap-2 text-primary">
 							<img src={RedirectIcon} className="w-4" alt="rethinking?" />
@@ -85,6 +74,8 @@ const PaymentSuccess = () => {
 					<img src={ArrowRightBlack} className="w-2" alt="Arrow right" />
 				</div>
 			</div>
+
+			<ScrollToTop />
 		</div>
 	);
 };

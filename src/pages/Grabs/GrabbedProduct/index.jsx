@@ -22,13 +22,18 @@ const GrabbedProduct = () => {
 	const { user } = useAuth();
 
 	const { data: result, isLoading } = fetchProduct(ad_id);
+
+	const category = result?.data?.category;
+
+	const shouldFetch = !!user && !!category && !inspectableCategories.includes(category);
+
 	const {
 		data: checkOrder,
 		isError,
 		error,
 		isLoading: checking,
 	} = useCheckOrder(ad_id, {
-		enabled: !!user,
+		enabled: shouldFetch,
 	});
 
 	if (isLoading || checking)

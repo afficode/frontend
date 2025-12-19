@@ -2,9 +2,10 @@ import { useEffect, useRef, useState } from 'react';
 import { CloseIcon, Location, ThankYou } from '../../../../assets/svgs';
 import { Button, InputGroup, Modal } from '../../../../ui';
 import { useParams } from 'react-router-dom';
-import { useGetEscrowDetails, useNotify, useRequestOtp, useVerifyOtp } from '../../../../hooks';
+import { useEscrowRelease, useGetEscrowDetails, useNotify, useRequestOtp } from '../../../../hooks';
 import { SpinnerSkeleton } from '../../../../components';
 import RefundForm from '../../RefundForm';
+import { ScrollToTop } from '../../../../utils';
 
 const ClosePickup = () => {
 	const { escrow_id } = useParams();
@@ -20,12 +21,7 @@ const ClosePickup = () => {
 		other_escrow_reason: '',
 	});
 
-	const {
-		data: escrowDetails,
-		isLoading: escrowLoading,
-		isError: escrowError,
-		error: escrowErrorData,
-	} = useGetEscrowDetails(escrow_id);
+	const { data: escrowDetails, isLoading: escrowLoading } = useGetEscrowDetails(escrow_id);
 
 	useEffect(() => {
 		if (timer === 0) {
@@ -82,11 +78,9 @@ const ClosePickup = () => {
 		});
 	};
 
-	// Handle single key press/change
 	const handleOtpChange = (e, index) => {
 		const value = e.target.value;
 
-		// Allow only alphanumeric single character
 		if (!/^[0-9a-zA-Z]{0,1}$/.test(value)) return;
 
 		const newCode = [...code];
@@ -98,14 +92,12 @@ const ClosePickup = () => {
 		}
 	};
 
-	// Handle key up to detect backspace and focus previous
 	const handleKeyUp = (e, index) => {
 		if (e.key === 'Backspace' && !code[index] && inputsRef.current[index - 1]) {
 			inputsRef.current[index - 1].focus();
 		}
 	};
 
-	// Handle paste
 	const handlePaste = (e) => {
 		e.preventDefault();
 		const pasteData = (e.clipboardData || window.clipboardData).getData('text');
@@ -128,7 +120,7 @@ const ClosePickup = () => {
 		}
 	};
 
-	const { mutate: verifyOtp, isLoading: isVerifying } = useVerifyOtp();
+	const { mutate: escrowRelease, isLoading: isReleasing } = useEscrowRelease();
 
 	const handleOtpSubmit = (e) => {
 		e.preventDefault();
@@ -138,9 +130,12 @@ const ClosePickup = () => {
 		const data = {
 			otp: joined,
 			service: 'self_pickup',
+			escrow_id: escrow_id,
+			user_id: escrowDetails?.escrow?.buyer_id,
+			ad_id: escrowDetails?.escrow?.ad_id,
 		};
 
-		verifyOtp(data, {
+		escrowRelease(data, {
 			onSuccess: (data) => {
 				notify(data?.message, 'success');
 				setStage(3);
@@ -178,7 +173,8 @@ const ClosePickup = () => {
 							<h6 className="font-semibold text-base">{escrowDetails?.escrow.ad_owner_name}.</h6>
 							<div className="flex items-center gap-1">
 								<img src={Location} alt="map" className="w-4 h-4" />
-								{escrowDetails?.escrow.pickup_address}, {escrowDetails?.escrow.pickup_state}.
+								{escrowDetails?.escrow.pickup_address && `${escrowDetails?.escrow.pickup_address},`}{' '}
+								{escrowDetails?.escrow.pickup_state}.
 							</div>
 							<p>{escrowDetails?.escrow.pickup_mobile}</p>
 						</div>
@@ -233,8 +229,8 @@ const ClosePickup = () => {
 							<div className="flex flex-col gap-2">
 								<Button
 									type="submit"
-									loading={isVerifying}
-									disabled={isVerifying}
+									loading={isReleasing}
+									disabled={isReleasing}
 									className={'bg-[#047F73] py-[.65rem] px-[2.8rem] text-white'}
 								>
 									Finish to pick-up
@@ -286,72 +282,58 @@ const ClosePickup = () => {
 							<img src={CloseIcon} alt="close" className="w-6" />
 						</button>
 						<div className="p-2 bg-gray-200 text-start">
-							<p>Please select atleast one of the following reason(s) for the cancellation request.</p>
+							<p>Please select at least one of the following reason(s) for the cancellation request.</p>
 						</div>
 						<form onSubmit={handleCancelOrder} className="">
-							<div className="flex flex-col gap-2">
+							<div className="flex flex-col gap-4">
 								<label className="flex flex-row justify-between items-center text-start">
-									<span>Item is completely different from what I saw online</span>
+									<span>
+										Item is completely different from what I saw online <br />
+										Wants a replacement
+									</span>
 									<input
 										type="radio"
 										name="escrow_reason"
-										value="item_different"
-										checked={formData.escrow_reason === 'item_different'}
+										value="incorrect_item_replacement"
+										checked={formData.escrow_reason === 'incorrect_item_replacement'}
+										onChange={(e) => setFormData({ ...formData, escrow_reason: e.target.value })}
+									/>
+								</label>
+								<label className="flex flex-row justify-between items-center text-start">
+									<span>
+										Item is completely different from what I saw online <br />
+										Don't want a replacement
+									</span>
+									<input
+										type="radio"
+										name="escrow_reason"
+										value="incorrect_item_no_replacement"
+										checked={formData.escrow_reason === 'incorrect_item_no_replacement'}
 										onChange={(e) => setFormData({ ...formData, escrow_reason: e.target.value })}
 									/>
 								</label>
 
 								<label className="flex flex-row justify-between items-center">
-									<span>I changed my mind</span>
+									<span className="text-start">
+										Damaged or Defective Product <br /> Don't want a replacement
+									</span>
 									<input
 										type="radio"
 										name="escrow_reason"
-										value="changed_mind"
-										checked={formData.escrow_reason === 'changed_mind'}
+										value="damaged_no_replacement"
+										checked={formData.escrow_reason === 'damaged_no_replacement'}
 										onChange={(e) => setFormData({ ...formData, escrow_reason: e.target.value })}
 									/>
 								</label>
-
 								<label className="flex flex-row justify-between items-center">
-									<span>Damaged or Defective Product</span>
+									<span className="text-start">
+										Damaged or Defective Product <br /> Want a replacement
+									</span>
 									<input
 										type="radio"
 										name="escrow_reason"
-										value="damaged"
-										checked={formData.escrow_reason === 'damaged'}
-										onChange={(e) => setFormData({ ...formData, escrow_reason: e.target.value })}
-									/>
-								</label>
-
-								<label className="flex flex-row justify-between items-center">
-									<span>Decided for alternative item</span>
-									<input
-										type="radio"
-										name="escrow_reason"
-										value="alternative_decision"
-										checked={formData.escrow_reason === 'alternative_decision'}
-										onChange={(e) => setFormData({ ...formData, escrow_reason: e.target.value })}
-									/>
-								</label>
-
-								<label className="flex flex-row justify-between items-center">
-									<span>Seller asked to cancel</span>
-									<input
-										type="radio"
-										name="escrow_reason"
-										value="seller_requested"
-										checked={formData.escrow_reason === 'seller_requested'}
-										onChange={(e) => setFormData({ ...formData, escrow_reason: e.target.value })}
-									/>
-								</label>
-
-								<label className="flex flex-row justify-between items-center">
-									<span>Seller’s attitude puts me off</span>
-									<input
-										type="radio"
-										name="escrow_reason"
-										value="seller_attitude"
-										checked={formData.escrow_reason === 'seller_attitude'}
+										value="damaged_replacement"
+										checked={formData.escrow_reason === 'damaged_replacement'}
 										onChange={(e) => setFormData({ ...formData, escrow_reason: e.target.value })}
 									/>
 								</label>
@@ -361,14 +343,14 @@ const ClosePickup = () => {
 									<input
 										type="radio"
 										name="escrow_reason"
-										value="other"
-										checked={formData.escrow_reason === 'other'}
+										value="others"
+										checked={formData.escrow_reason === 'others'}
 										onChange={(e) => setFormData({ ...formData, escrow_reason: e.target.value })}
 									/>
 								</label>
 							</div>
 
-							{formData.escrow_reason === 'other' && (
+							{formData.escrow_reason === 'others' && (
 								<InputGroup
 									type="text"
 									name="other_escrow_reason"
@@ -444,6 +426,8 @@ const ClosePickup = () => {
 					</Modal>
 				</>
 			)}
+
+			<ScrollToTop />
 		</div>
 	);
 };

@@ -46,7 +46,6 @@ const Login = ({ id }) => {
 				// the login from the useAuth tied to a context hook, will update localStorage and set user to Login
 				login(submit);
 				updateToken(submit?.coin);
-				notify('Welcome to Boonfu, This is HELPFUL', 'success');
 				navigate(getRedirectLink() || Approutes.home, {
 					replace: true,
 				});
@@ -105,9 +104,10 @@ const Login = ({ id }) => {
 										<FlowbiteButton
 											type="submit"
 											aria-disabled="true"
-											className={` text-white text-normal lg:text-lg border-0 bg-primary btn-md lg:btn-lg hover:bg-primary/80 ${!formik.isValid || !formik.dirty ? 'cursor-not-allowed' : 'cursor-pointer'
-												}`}
-											disabled={!formik.isValid || !formik.dirty ? 'disabled' : ''}
+											className={` text-white text-normal lg:text-lg border-0 bg-primary btn-md lg:btn-lg hover:bg-primary/80 ${
+												!formik.isValid || !formik.dirty ? 'cursor-not-allowed' : 'cursor-pointer'
+											}`}
+											disabled={!formik.isValid || formik.isSubmitting}
 										>
 											{formik.isSubmitting ? (
 												<>

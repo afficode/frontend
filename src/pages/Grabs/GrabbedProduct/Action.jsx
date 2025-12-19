@@ -74,102 +74,50 @@ const Action = ({ isGeneral, ad }) => {
 							<div>
 								<p className="font-semibold">Select delivery option:</p>
 
-								<form className="mt-1">
-									{/* {category.startsWith(54) ? null : (
+								<div className="mt-1">
+									<form>
 										<div className="flex items-center space-x-4">
 											<input
 												type="radio"
-												name={'delivery'}
-												id={'delivery'}
-												value={'delivery'}
-												checked={formData.delivery_option === 'delivery'}
+												name={'pickup'}
+												id={'pickup'}
+												value={'pickup'}
+												checked={formData.delivery_option === 'pickup'}
 												onChange={(e) => {
 													setFormData({ ...formData, delivery_option: e.target.value });
 												}}
 												className={``}
-												disabled
 											/>
-											<label htmlFor={'delivery'} className="flex items-center gap-2">
-												Boonfu Delivery
+											<label htmlFor={'pickup'} className="flex items-center gap-2">
+												Pick up by self{' '}
 												<div className="dropdown dropdown-hover">
-													<img tabIndex={0} src={InfoYellow} alt="/" className="w-4 cursor-pointer" />
+													<img tabIndex={0} src={InfoYellow} alt="info" className="w-4 cursor-pointer" />
 													<div
 														tabIndex={0}
-														className="dropdown-content transform translate-y-[-25%] md:translate-y-[2%] translate-x-[-54%] md:translate-x-[-80%] lg:translate-x-[-70%]  bg-secondary border-4 p-4 w-screen max-w-[340px] sm:max-w-[580px] z-[100000]"
+														className="dropdown-content transform translate-y-[-25%] md:translate-y-[2%] translate-x-[-47%] sm:translate-x-[-10%] md:translate-x-[-10%] lg:translate-x-[-70%]  bg-secondary border-4 p-4 w-screen max-w-[340px] sm:max-w-[580px] z-[100000]"
 													>
 														<div className="space-y-2 text-start">
-															<h4>
-																Boonfu Delivery. <span className="text-sm ">(coming soon)</span>
-															</h4>
+															<h4>Pick up by self</h4>
+															<p>Dear Buyer,</p>
 															<p>
-																Delivery with boonfu is handled by our third-party logistic company. Delivery of a
-																particular product/item is done in the state where it is sold. NO inter-state
-																delivery is available, for now.
+																Please note that seller’s information is ONLY revealed and released to you upon the
+																receipt of your payment
 															</p>
 															<p>
-																To get a quote for cost of delivery,{' '}
-																<button className="underline text-primary">click quote form</button> fill and you
-																get your quote in minutes.
-															</p>
-															<p>Delivery fee is paid alongside cost of item or product being purchased.</p>
-															<p>
-																Return of Item or Product that DOES NOT meet expectation with strong proof is
-																covered by the seller.
+																Thorough inspection of the item is to be done by YOU onsite of item’s pick up, after
+																which you would CONFIRM satisfactory state or not of item.
 															</p>
 															<p>
-																If you change your mind after payment and shipment is initiated, you would pay
-																administrative charge of one thousand five hundred naira (₦1,500) and get the refund
-																of your balance.
+																Self-pick up is to be done and closed within 24hrs. It is in your best interest to
+																either confirm satfisfactory state of item or not within 24hrs, as after 24hrs, Fund
+																for item shall be released to seller and that transaction CLOSED!
 															</p>
 														</div>
 													</div>
 												</div>
-												<span className="text-xs text-gray-500">(coming soon)</span>
 											</label>
 										</div>
-									)} */}
-
-									<div className="flex items-center space-x-4">
-										<input
-											type="radio"
-											name={'pickup'}
-											id={'pickup'}
-											value={'pickup'}
-											checked={formData.delivery_option === 'pickup'}
-											onChange={(e) => {
-												setFormData({ ...formData, delivery_option: e.target.value });
-											}}
-											className={``}
-										/>
-										<label htmlFor={'pickup'} className="flex items-center gap-2">
-											Pick up by self{' '}
-											<div className="dropdown dropdown-hover">
-												<img tabIndex={0} src={InfoYellow} alt="/" className="w-4 cursor-pointer" />
-												<div
-													tabIndex={0}
-													className="dropdown-content transform translate-y-[-25%] md:translate-y-[2%] translate-x-[-47%] sm:translate-x-[-30%] md:translate-x-[-90%] lg:translate-x-[-70%]  bg-secondary border-4 p-4 w-screen max-w-[340px] sm:max-w-[580px] z-[100000]"
-												>
-													<div className="space-y-2 text-start">
-														<h4>Pick up by self</h4>
-														<p>Dear Buyer,</p>
-														<p>
-															Please note that seller’s information is ONLY revealed and released to you upon the
-															reciept of your payment
-														</p>
-														<p>
-															Thorough inspection of the item is to be done by YOU onsite of item’s pick up, after
-															which you would CONFIRM satisfactory state or not of item.
-														</p>
-														<p>
-															Self-pick up is to be done and closed within 24hrs. It is in your best interest to
-															either confirm satfisfactory state of item or not within 24hrs, as after 24hrs, Fund
-															for item shall be released to seller and that transaction CLOSED!
-														</p>
-													</div>
-												</div>
-											</div>
-										</label>
-									</div>
+									</form>
 
 									<button
 										onClick={() => handleScrollTo(termsRef)}
@@ -197,15 +145,6 @@ const Action = ({ isGeneral, ad }) => {
 												Place Order
 											</Button>
 										</Link>
-										{/* <Button
-											type="button"
-											onClick={() => setInquiryModal(true)}
-											variant={'primary'}
-											size={'full'}
-											className={'flex items-center justify-center gap-4 rounded-3xl mt-4 z-[-1]'}
-										>
-											Inquire about Item
-										</Button> */}
 										<Modal
 											modalHeader={true}
 											children={<ReportAd ad_id={ad?.id} />}
@@ -224,21 +163,12 @@ const Action = ({ isGeneral, ad }) => {
 											}
 										/>
 									</div>
-								</form>
+								</div>
 
 								{/* terms and condition modal */}
 								<ModalUi isOpen={isOpen} setIsOpen={setIsOpen} headerText="Terms of Service">
 									<TermsAndCondition termsRef={termsRef} setIsOpen={setIsOpen} isOpen={isOpen} />
 								</ModalUi>
-
-								{/* <ModalUi
-									isOpen={inquiryModal}
-									setIsOpen={setInquiryModal}
-									modalHeader={false}
-									className={' max-w-fit p-0 '}
-								>
-									<InquiryChat ad={ad} />
-								</ModalUi> */}
 							</div>
 						</div>
 
@@ -271,10 +201,10 @@ const Action = ({ isGeneral, ad }) => {
 							>
 								Seller’s contact
 								<div className="dropdown dropdown-hover">
-									<img tabIndex={0} src={Info} alt="/" className="w-4" />
+									<img tabIndex={0} src={Info} alt="info" className="w-4" />
 									<div
 										tabIndex={0}
-										className="dropdown-content transform translate-y-[10%] translate-x-[-80%]  bg-secondary border-4 p-4 w-screen max-w-[320px] sm:max-w-[480px]"
+										className="dropdown-content transform translate-y-[-25%] md:translate-y-[2%] translate-x-[-70%]  sm:translate-x-[-40%] lg:translate-x-[-70%]  bg-secondary border-4 p-4 w-screen max-w-[320px] sm:max-w-[400px] z-[100000]"
 									>
 										<div className="space-y-2 text-start">
 											<h4>Seller’s Contact Reveal.</h4>

@@ -8,20 +8,6 @@ export const useEscrow = () => {
 	return useMutation(['escrow-pay'], pay);
 };
 
-export const useQuotedPay = (id) => {
-	const pay = (data) =>
-		privateAxios.post(`${backendLink}order/pay/${id}`, data).then((res) => res?.data);
-
-	return useMutation(['quoted-pay'], pay);
-};
-
-export const useSendOrder = () => {
-	const sendOrder = (data) =>
-		privateAxios.post(`${backendLink}order`, data).then((res) => res?.data);
-
-	return useMutation(['send-order'], sendOrder);
-};
-
 export const useGetOrders = () => {
 	const fetchOrders = () => privateAxios.get(`${backendLink}order`).then((res) => res?.data);
 
@@ -72,11 +58,11 @@ export const useRequestOtp = () => {
 	return useMutation(['request-otp'], request);
 };
 
-export const useVerifyOtp = () => {
-	const verify = (data) =>
-		privateAxios.post(`${backendLink}otp/validate`, data).then((res) => res?.data);
+export const useEscrowRelease = () => {
+	const release = (data) =>
+		privateAxios.post(`${backendLink}escrow/release`, data).then((res) => res?.data);
 
-	return useMutation(['verify-otp'], verify);
+	return useMutation(['escrow-release'], release);
 };
 
 export const useRefund = (id) => {

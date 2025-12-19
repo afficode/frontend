@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Approutes } from '../../../constants';
 import { fetchProduct } from '../../../hooks';
 import Breadcrumb from '../../../components/Breadcrumb';
@@ -20,7 +20,7 @@ import ContactAdmin from './ContactAdmin';
 import { Alert } from 'flowbite-react';
 import SaveProduct from '../Default/SaveProduct';
 import { getSaves } from '../../../hooks/useSaves';
-import { NegotiableIcon } from '../../../ui';
+import { Button, NegotiableIcon } from '../../../ui';
 import { useNotify } from '../../../hooks';
 import { ActionBar, GrabUpdateTable } from '../../../components';
 
@@ -31,8 +31,9 @@ const index = () => {
 	const [revealEmail, setRevealEmail] = useState(false);
 	const { isLogin, user } = useAuth();
 	const { data: result, isLoading } = fetchProduct(id);
-	const { data, isLoading: saveLoading } = getSaves();
+	const { _, isLoading: saveLoading } = getSaves();
 	const notify = useNotify();
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		if (result?.data) {
@@ -43,6 +44,12 @@ const index = () => {
 			]);
 		}
 	}, [isLoading, saveLoading]);
+
+	useEffect(() => {
+		if (result?.data?.available === 0 && user?.id !== result?.data?.user_id) {
+			window.location.replace(Approutes.product.initial);
+		}
+	}, [isLoading, result]);
 
 	return isLoading ? (
 		<ViewProduct />
@@ -119,10 +126,10 @@ const index = () => {
 						{/* ad title  */}
 						<div className="flex items-center justify-between w-full my-2 font-bold uppercase text-md md:text-2xl xl:text-3xl">
 							<span className="">{result.data?.title}</span>
-							<span className=" flex items-center gap-2 lg:gap-8 my-auto mr-4 lg:mr-0">
+							<span className=" flex items-center gap-2 lg:gap-8 my-auto ">
 								<NegotiableIcon negotiable={result.data?.negotiable} />
 
-								{((isLogin && parseInt(result.data?.owner) !== parseInt(user?.id)) || !isLogin) && (
+								{isLogin && result?.data?.owner !== user?.id && (
 									<>
 										<SaveProduct ads_id={id} />
 									</>
@@ -211,7 +218,7 @@ const index = () => {
 							<span className=" flex items-center gap-2 lg:gap-8 my-auto mr-4 lg:mr-0">
 								<NegotiableIcon negotiable={result?.data?.negotiable} />
 
-								{((isLogin && parseInt(result?.data?.owner) !== parseInt(user?.id)) || !isLogin) && (
+								{isLogin && result?.data?.owner !== user?.id && (
 									<>
 										<SaveProduct ads_id={id} />
 									</>
@@ -288,16 +295,15 @@ const index = () => {
 							<p className="w-full">Contact {result?.data?.firstname} </p>
 							{result?.data?.contact_type.includes('phone') && (
 								<div className="flex items-center justify-between">
-									<p className="my-2 text-lg  ">
+									<p className="my-2 text-lg  text-start">
 										<span className=" font-bold">
 											{revealNumber ? result?.data?.number : `${result?.data?.number.substring(0, 3)}XXXXXXXX`}
 										</span>
 									</p>
 
 									<button
-										className={`font-bold  text-black bg-white rounded-none btn btn-sm hover:bg-primary hover:text-white hover:border-0 hover:rounded-sm ${
-											!isLogin && 'bg-gray-100 cursor-not-allowed'
-										}`}
+										className={`font-bold  text-black bg-white rounded-none btn btn-sm hover:bg-primary hover:text-white hover:border-0 hover:rounded-sm ${!isLogin && 'bg-gray-100 cursor-not-allowed'
+											}`}
 										onClick={() => {
 											if (isLogin && result?.data?.contact_type.includes('phone')) {
 												setRevealNumber(!revealNumber);
@@ -321,9 +327,8 @@ const index = () => {
 							{result?.data?.contact_type.includes('email') && (
 								<div className="flex items-center justify-between w-full">
 									<p
-										className={`my-2 w-full overflow-x-scroll ${
-											revealEmail ? 'tooltip tooltip-primary' : ''
-										}`}
+										className={`my-2 w-full overflow-x-scroll  text-start ${revealEmail ? 'tooltip tooltip-primary' : ''
+											}`}
 										data-tip={revealEmail ? result?.data?.email : ''}
 									>
 										<span className="pr-1 text-lg font-bold">
@@ -334,9 +339,8 @@ const index = () => {
 									</p>
 
 									<button
-										className={`font-bold text-black bg-white rounded-none btn btn-sm hover:bg-primary hover:text-white hover:border-0 hover:rounded-sm ${
-											!isLogin && 'bg-gray-100 cursor-not-allowed'
-										} `}
+										className={`font-bold text-black bg-white rounded-none btn btn-sm hover:bg-primary hover:text-white hover:border-0 hover:rounded-sm ${!isLogin && 'bg-gray-100 cursor-not-allowed'
+											} `}
 										onClick={() => {
 											isLogin && result?.data?.contact_type.includes('email')
 												? setRevealEmail(!revealEmail)
