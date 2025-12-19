@@ -11,7 +11,11 @@ const RequireAuth = () => {
 			{isLogin ? (
 				<Outlet />
 			) : (
-				<Navigate to={Approutes.auth.initial} state={{ from: location }} replace />
+				<Navigate
+					to={`${Approutes.auth.initial}?next=${location.pathname}`}
+					state={{ from: location.pathname }}
+					replace
+				/>
 			)}
 		</>
 	);

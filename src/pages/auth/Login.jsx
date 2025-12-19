@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { Formik, Form } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import Input from '../../components/FormComponents/Input';
@@ -12,7 +12,6 @@ import { Approutes } from '../../constants';
 import { Button as FlowbiteButton } from 'flowbite-react';
 import useAuth from '../../context/UserContext';
 import { SpinnerSkeleton, Spinner } from '../../components';
-import { getRedirectLink } from '../../utils';
 import { useNotify } from '../../hooks';
 import useTokenContext from '../../context/TokenContext';
 
@@ -21,6 +20,8 @@ const Login = ({ id }) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const navigate = useNavigate();
 	const { updateToken } = useTokenContext();
+	const location = useLocation();
+	const [searchParams] = useSearchParams();
 
 	const initialValues = {
 		email: '',
@@ -46,7 +47,7 @@ const Login = ({ id }) => {
 				// the login from the useAuth tied to a context hook, will update localStorage and set user to Login
 				login(submit);
 				updateToken(submit?.coin);
-				navigate(getRedirectLink() || Approutes.home, {
+				navigate(location.state?.from || searchParams.get('next') || Approutes.home, {
 					replace: true,
 				});
 				// return window.location.reload();
