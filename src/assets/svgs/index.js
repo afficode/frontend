@@ -1,6 +1,7 @@
 /// <reference types="vite-plugin-svgr/client" />
 
 export { default as Advertise } from './advertise.svg';
+export { default as AmountSold } from './AmountSold.svg?react';
 export { default as Apple } from './appleLogo.svg';
 export { default as ArrowRight } from './arrowRight.svg';
 export { default as ArrowRightBlue } from './arrowRightBlue.svg';
@@ -48,7 +49,9 @@ export { default as Instagram } from './instagram.svg';
 export { default as SingleArrowRight } from './singleArrowRight.svg';
 export { default as Tiktok } from './tiktok.svg';
 export { default as Location } from './location.svg';
+export { default as Location2 } from './Location2.svg?react';
 export { default as LoginLock } from './loginLock.svg';
+export { default as Members } from './Members.svg?react';
 export { default as New } from './new.svg';
 export { default as Naira } from './naira.svg';
 export { default as Naira2 } from './Naira2.svg?react';
@@ -63,6 +66,7 @@ export { default as RedirectIcon } from './redirectIcon.svg';
 export { default as SuccessTick } from './successTick.svg';
 export { default as Safely } from './Safely.svg';
 export { default as Securely } from './Securely.svg';
+export { default as Seller } from './Seller.svg?react';
 export { default as Share } from './share.svg';
 export { default as Twitter } from './twitter.svg';
 export { default as UnderConstruction } from './underConstruction.svg';
