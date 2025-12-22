@@ -9,6 +9,9 @@ import { BsCashCoin } from 'react-icons/bs';
 import ShowSellerContact from '../../Checkout/PickUp/ShowSellerContact';
 import NavigatePayment from './NavigatePayment';
 
+import { PiUserListFill } from "react-icons/pi";
+import { MdManageHistory } from "react-icons/md";
+import { ImCheckboxChecked } from "react-icons/im";
 const TransactionActivity = () => {
 	const [pickupEscrowModal, setPickupEscrowModal] = useState(false);
 	const [pickupEscrowOrderId, setPickupEscrowOrderId] = useState(null);
@@ -44,38 +47,43 @@ const TransactionActivity = () => {
 					<h5 className="text-lg font-semibold text-center">Activities</h5>
 					<div className="overflow-x-auto w-full">
 						{allOrders?.sortedOrders?.length > 0 ? (
-							<table className="min-w-max w-full ">
+							<table className="min-w-max w-full table-auto">
 								<thead className="bg-primary text-white w-full">
-									<tr className="p-2 w-full">
-										<th className="">
-											<span className="flex p-1 gap-1 items-center">
+									<tr className="p-2 w-full ">
+										<th className="border-2 border-white">
+											<span className="flex p-2 gap-1 items-center justify-center">
+												<MdManageHistory className='text-xl' />
+											</span>
+										</th>
+										<th className="border-2 border-white">
+											<span className="flex p-2 gap-1 items-center">
 												<IoCalendarSharp />
 												Date
 											</span>
 										</th>
-										<th className=" ">
-											<span className="flex p-1 gap-1 items-center">
+										<th className="border-2 border-white ">
+											<span className="flex gap-1 items-center">
 												<IoReorderFourSharp />
 												Order(s){' '}
 											</span>
 										</th>
-										<th className=" ">
-											<span className="flex p-1 gap-1 items-center px-2">
+										{/* <th className="border-2 border-white ">
+											<span className="flex gap-1 items-center px-2">
 												<TbTruckDelivery /> Delivery type{' '}
 											</span>
-										</th>
-										<th className=" ">
-											<span className="flex p-1 gap-1 items-center justify-center">
+										</th> */}
+										<th className="border-2 border-white ">
+											<span className="flex gap-1 items-center justify-center">
 												<TbStatusChange /> Status{' '}
 											</span>
 										</th>
-										<th className=" ">
-											<span className="flex p-1 gap-1 items-center justify-center">
+										<th className="border-2 border-white">
+											<span className="flex gap-1 items-center justify-center">
 												<BsCashCoin /> Payment Status{' '}
 											</span>
 										</th>
-										<th className=" ">
-											<span className="flex p-1 gap-1 items-center justify-center">
+										<th className="border-2 border-white">
+											<span className="flex gap-1 items-center justify-center">
 												<TbStatusChange /> Delivery Status{' '}
 											</span>
 										</th>
@@ -99,63 +107,60 @@ const TransactionActivity = () => {
 													handleEscrowSelfPickUp(order.id);
 												}
 											}}
-											className={`hover:bg-gray-100 ${
-												order.escrow_type === 'self_pickup' &&
+											className={`hover:bg-gray-100 ${order.escrow_type === 'self_pickup' &&
 												order.stage === 'init' &&
 												order?.delivery_status.toLowerCase() === 'in discussion'
-													? 'cursor-pointer'
-													: 'cursor-not-allowed'
-											}`}
+												? 'cursor-pointer'
+												: 'cursor-not-allowed'
+												}`}
 										>
-											<td>{format(parseISO(order?.created_at), 'd MMMM ')}</td>
-											<td className="capitalize">{order?.title}</td>
-											<td>
+											<td className="border-2 border-white bg-gray-50 flex items-center justify-center">
+												{order?.has_pending_refund === 1 ? <span className="loading loading-spinner text-warning"></span> : order.escrow_type === 'self_pickup' &&
+													order.stage === 'init' &&
+													order?.delivery_status.toLowerCase() === 'in discussion'
+													? <PiUserListFill className='text-primary text-xl' />
+													: <ImCheckboxChecked className='text-success text-xl' />}
+											</td>
+											<td className='border-2 border-white'>{format(parseISO(order?.created_at), 'd MMMM ')}</td>
+											<td className="capitalize border-2 border-white">{order?.title}</td>
+											{/* <td className="border-2 border-white">
 												{order?.escrow_type
 													.split('_')
 													.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
 													.join(' ')}
-											</td>
-											<td className="w-max text-center">
-												<span
-													className={`capitalize badge badge-lg  ${
-														order?.stage === 'init'
-															? 'badge-primary'
-															: order?.stage === 'release'
-															? 'badge-success'
-															: order?.stage === 'refund'
-															? 'badge-secondary'
-															: 'badge-success'
-													}`}
-												>
+											</td> */}
+											<td className={`w-max  border-2 border-white text-center capitalize rounded-none  ${order?.stage === 'init'
+												? 'badge-primary'
+												: order?.stage === 'release'
+													? 'badge-success'
+													: order?.stage === 'refund'
+														? 'badge-secondary'
+														: 'badge-success'
+												}`}>
+												<span>
 													{order.escrow_type === 'self_pickup' && order.paid === 1
-														? (order?.stage === 'init' ? 'Paid' : order?.stage) ?? 'escrow_service'
+														? (order?.stage === 'init' ? 'Paid' : order?.stage === 'refund' ? 'Refunded' : order?.stage === 'release' ? 'Credited Buyer' : order?.stage) ?? 'escrow_service'
 														: `${order?.stage}` ?? 'escrow_service'}
 												</span>
 											</td>
-											<td className="w-max text-center">
+											<td className={`w-max text-center border-2 border-white capitalize ${order?.has_pending_refund === 1 ? 'badge-error' : order?.escrow_type === 'self_pickup' && order?.status === 'success' ? 'badge-success' : 'badge-warning'}`}>
 												{order?.escrow_type === 'self_pickup' && (
 													<>
-														{order?.escrow_type === 'self_pickup' && order?.status === 'success' ? (
-															<span className={`capitalize badge badge-lg badge-success`}>success</span>
+
+														{order?.has_pending_refund === 1 ? (
+															<span>Refund Processing</span>
+														) : order?.escrow_type === 'self_pickup' && order?.status === 'success' ? (
+															<span>success</span>
 														) : (
-															<span className={`capitalize badge badge-lg badge-warning`}>pending</span>
+															<span>pending</span>
 														)}
 													</>
 												)}
 											</td>
-											<td className="w-max  text-center">
-												{order?.delivery_status ? (
-													<span className={`capitalize badge badge-lg badge-success`}>
+											<td className={`w-max  text-center border-2 border-white ${order?.delivery_status.toLowerCase() === 'in discussion' ? 'badge-primary' : order?.delivery_status.toLowerCase() === 'done' ? 'badge-success' : ''}`}>
+												{order?.delivery_status && (
+													<span>
 														{order?.delivery_status}
-													</span>
-												) : (
-													<span className={`capitalize badge badge-lg badge-error`}>
-														{order?.delivery_status !== null
-															? order?.delivery_status
-																	.split('_')
-																	.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-																	.join(' ')
-															: 'Waiting Pickup'}
 													</span>
 												)}
 											</td>
@@ -195,6 +200,7 @@ const TransactionActivity = () => {
 							pickup_mobile={escrowDetails?.escrow.pickup_mobile}
 							ad_owner_name={escrowDetails?.escrow.ad_owner_name}
 							escrow_id={escrowDetails?.escrow.id}
+							has_pending_refund={escrowDetails?.escrow.has_pending_refund || 0}
 						/>
 					)}
 				</Modal>

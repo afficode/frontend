@@ -81,10 +81,6 @@ const GrabbedProduct = () => {
 	}
 
 	if (checkOrder?.status === 200) {
-		if (checkOrder?.data?.type === 'boonfu_delivery') {
-			location.replace(`${Approutes.checkout.useDelivery(grabber_id, ad_id)}`);
-		}
-
 		if (checkOrder?.data?.type === 'self_pickup') {
 			location.replace(`${Approutes.checkout.usePickup(grabber_id, ad_id)}`);
 		}

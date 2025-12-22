@@ -42,7 +42,7 @@ const ClosePickup = () => {
 	const completePickup = () => {
 		const data = {
 			id: escrow_id,
-			service: 'self_pickup',
+			service: 'escrow',
 			type: 'request',
 		};
 
@@ -62,7 +62,7 @@ const ClosePickup = () => {
 	const resendOtp = () => {
 		const data = {
 			id: escrow_id,
-			service: 'self_pickup',
+			service: 'escrow',
 			type: 'resend',
 		};
 
@@ -129,7 +129,7 @@ const ClosePickup = () => {
 
 		const data = {
 			otp: joined,
-			service: 'self_pickup',
+			service: 'escrow',
 			escrow_id: escrow_id,
 			user_id: escrowDetails?.escrow?.buyer_id,
 			ad_id: escrowDetails?.escrow?.ad_id,
