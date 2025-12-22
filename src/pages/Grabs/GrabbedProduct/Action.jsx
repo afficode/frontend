@@ -69,7 +69,7 @@ const Action = ({ isGeneral, ad }) => {
 								</div>
 								<div className="flex items-center gap-2">
 									<AmountSold className="w-6" />
-									<span>{ad?.items_sold}</span>
+									<span>{ad?.items_sold || 0} Items sold</span>
 								</div>
 							</div>
 
@@ -88,9 +88,8 @@ const Action = ({ isGeneral, ad }) => {
 									modalHeader={true}
 									children={<ReportAd ad_id={ad?.id} />}
 									headerText={'Feedback / Abuse'}
-									className={`w-full px-2 py-3 my-2 text-lg tracking-tighter rounded-3xl text-white bg-slate-600 hover:bg-slate-500 line-clamp-1 ${
-										!isLogin && 'cursor-not-allowed'
-									}`}
+									className={`w-full px-2 py-3 my-2 text-lg tracking-tighter rounded-3xl text-white bg-slate-600 hover:bg-slate-500 line-clamp-1 ${!isLogin && 'cursor-not-allowed'
+										}`}
 									disabled={!isLogin || ad?.active === '0' || user?.id === ad?.owner}
 									type="button"
 									buttonChild={
