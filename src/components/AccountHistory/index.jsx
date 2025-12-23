@@ -10,14 +10,14 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { useEffect, useState } from 'react';
 import LoadingScreen from './LoadingScreen';
 
-const AccountHistory = ({ className, setIsOpen, isOpen }) => {
+const AccountHistory = () => {
 	const [searchParams, setSearchParams] = useSearchParams();
 
 	const [dateRange, setDateRange] = useState([null, null]);
 	const [from, to] = dateRange;
 
 	const transactionType = searchParams.get('type') || 'all';
-	const status = searchParams.get('status') || 'all';
+	const status = searchParams.get('status');
 	const fromDate = searchParams.get('from');
 	const toDate = searchParams.get('to');
 	const page = searchParams.get('p') || 1;
@@ -64,7 +64,7 @@ const AccountHistory = ({ className, setIsOpen, isOpen }) => {
 		to: fromDate || undefined,
 		page_size: 5,
 		page: page,
-		status: status === 'all' ? '' : status,
+		status: status,
 	};
 
 	const { data, isLoading } = useTransactions(params);
@@ -101,7 +101,7 @@ const AccountHistory = ({ className, setIsOpen, isOpen }) => {
 	}, [hash]);
 
 	return (
-		<div tabIndex={0} className={`${className} `}>
+		<div tabIndex={0}>
 			<div className="flex max-sm:flex-col items-center justify-between gap-4 px-4 py-2 mx-1 text-white items-centre bg-primary rounded-t-xl">
 				<p className="max-sm:text-center">Become a Grabber and start earning, Today.</p>
 				<Button
@@ -117,7 +117,6 @@ const AccountHistory = ({ className, setIsOpen, isOpen }) => {
 				id="account-history"
 				className="flex items-center justify-center max-sm:px-1 first-letter relative"
 			>
-				<BiArrowBack className="absolute left-2 cursor-pointer" onClick={() => setIsOpen(!isOpen)} />
 				<h4 className="py-4 items-center ">Account History</h4>
 			</div>
 
@@ -129,7 +128,7 @@ const AccountHistory = ({ className, setIsOpen, isOpen }) => {
 							className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm  capitalize text-white"
 						>
 							{transactionType === 'all' ? 'All Transaction' : transactionType}{' '}
-							<img src={ArrowDownWhite} className="w-2 sm:w-3" alt="/" />
+							<img src={ArrowDownWhite} className="w-2 sm:w-3" alt="arrow down" />
 						</button>
 						<ul
 							tabIndex={0}
@@ -160,8 +159,8 @@ const AccountHistory = ({ className, setIsOpen, isOpen }) => {
 							tabIndex={0}
 							className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm capitalize text-white"
 						>
-							{status === 'all' ? 'All Status' : status}{' '}
-							<img src={ArrowDownWhite} className="w-2 sm:w-3" alt="/" />
+							{status === null ? 'All Status' : status}{' '}
+							<img src={ArrowDownWhite} className="w-2 sm:w-3" alt="arrow down" />
 						</button>
 						<ul
 							tabIndex={0}
@@ -197,7 +196,7 @@ const AccountHistory = ({ className, setIsOpen, isOpen }) => {
 					<div className="dropdown dropdown-left">
 						<button className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm text-white">
 							{from && to ? `${params.to} - ${params.from}` : 'All Date'}{' '}
-							<img src={ArrowDownWhite} className="w-2 sm:w-3" alt="/" />
+							<img src={ArrowDownWhite} className="w-2 sm:w-3" alt="arrow down" />
 						</button>
 
 						<div className="dropdown-content ">
@@ -220,18 +219,13 @@ const AccountHistory = ({ className, setIsOpen, isOpen }) => {
 					<div className="space-y-8">
 						{Object.entries(groupedTransactions).map(([monthYear, transactions]) => (
 							<div className="space-y-2" key={monthYear}>
-								<h6 className="py-2 text-center border-b border-b/5">{monthYear}</h6>
+								<h6 className="py-2 text-center border-b border-b/5 text-xs">{monthYear}</h6>
 
 								{transactions.map((transaction) => (
 									<Pallet
 										key={transaction.id}
-										title={
-											transaction.channel === 'bank' || transaction.channel === 'card'
-												? 'Deposit'
-												: transaction.type === 'coin_purchase'
-												? transaction.type
-												: 'Withdrawal'
-										}
+										title={transaction.type}
+										channel={transaction.channel}
 										amount={transaction.amount}
 										status={transaction.status}
 										referenceId={transaction.reference_id}
@@ -240,14 +234,6 @@ const AccountHistory = ({ className, setIsOpen, isOpen }) => {
 								))}
 							</div>
 						))}
-						{/* <Pallet title={'Withdrawn'} />
-					<Pallet title={'Deposited'} /> */}
-						{/* <div className="space-y-2">
-					<h6 className="py-2 text-center border-b border-b/5">Apr, 2024</h6>
-					<Pallet title={'Grab Commission'} />
-					<Pallet title={'Withdrawn'} />
-					<Pallet title={'Token Purchase'} />
-				</div> */}
 					</div>
 				)}
 				<div className="flex items-center justify-center mt-6">
@@ -259,7 +245,7 @@ const AccountHistory = ({ className, setIsOpen, isOpen }) => {
 						>
 							«
 						</button>
-						<div className="px-4 text-primary text-lg font-bold flex items-center justify-center">
+						<div className="px-4 text-primary text-sm font-bold flex items-center justify-center">
 							Page {data?.page} of {data?.total_page}
 						</div>
 						<button
@@ -278,12 +264,16 @@ const AccountHistory = ({ className, setIsOpen, isOpen }) => {
 
 export default AccountHistory;
 
-const Pallet = ({ title, amount, referenceId, date, status }) => {
+const Pallet = ({ title, channel, amount, referenceId, date, status }) => {
 	return (
 		<div className="px-4 pb-4 space-y-2 border-b border-b/5">
 			<div className="flex items-center justify-between">
-				<h4 className="max-sm:hidden capitalize">{title.split('_').join(' ')}</h4>
-				<h5 className="sm:hidden font-bold capitalize">{title}</h5>
+				<h6 className=" font-semibold capitalize">
+					{title.split('_').join(' ')}{' '}
+					<span className="text-xs font-medium bg-gray-400 px-2 rounded-md text-white py-1">
+						{channel}
+					</span>
+				</h6>
 
 				<p>Amount</p>
 			</div>
@@ -291,18 +281,12 @@ const Pallet = ({ title, amount, referenceId, date, status }) => {
 			<div className="flex items-end justify-between">
 				<div className="flex flex-col ">
 					<p className="text-black/50 truncate max-w-[10rem] md:max-w-[15rem]">{referenceId}</p>
-					<p>{format(new Date(date), 'EEEE d, MMMM yyyy')}</p>
+					<p className="max-sm:text-xs">{format(new Date(date), 'EEEE d, MMMM yyyy')}</p>
 				</div>
 
 				<span
-					className={`px-3 py-1 sm:px-4 sm:py-2 max-sm:text-sm text-white whitespace-nowrap ${
-						status === 'completed' || status === 'success'
-							? 'bg-green-600'
-							: status === 'failed'
-							? 'bg-red-600'
-							: status === 'pending'
-							? 'bg-blue-600'
-							: 'bg-yellow-600'
+					className={`px-2 py-1 text-sm text-white whitespace-nowrap ${
+						title === 'deposit' ? 'bg-green-600' : title === 'withdrawal' ? 'bg-red-600' : 'bg-red-600'
 					}`}
 				>
 					₦{toMoney(amount)}

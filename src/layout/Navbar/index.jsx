@@ -25,7 +25,6 @@ import { toSelectOptions } from '../../utils';
 import { NotificationBell } from '../../assets/svgs';
 import VerifyPhoneNumber from '../../pages/Dashboard/Profile/VerifyPhoneNumber';
 import { useNotifications } from '../../context/Notification';
-// import { AccountHistory } from '../../components';
 
 const Navbar = () => {
 	const [nav, setNav] = useState(false);
@@ -193,8 +192,14 @@ const Navbar = () => {
 											className="flex flex-col justify-center items-center p-2 bg-white rounded-full relative"
 											title="My Notifications"
 										>
-											<img src={NotificationBell} alt="my notification" className={`w-6 h-6 ${unreadNotification > 0 ? 'animate-bounce' : ''}`} />
-											<span className="absolute top-[-7px] rounded-full px-1 bg-secondary/90 right-0 font-semibold text-sm text-black">{unreadNotification}</span>
+											<img
+												src={NotificationBell}
+												alt="my notification"
+												className={`w-6 h-6 ${unreadNotification > 0 ? 'animate-bounce' : ''}`}
+											/>
+											<span className="absolute top-[-7px] rounded-full px-1 bg-secondary/90 right-0 font-semibold text-sm text-black">
+												{unreadNotification}
+											</span>
 										</div>
 									</Link>
 									<div className="dropdown">
@@ -209,12 +214,6 @@ const Navbar = () => {
 										<WalletDropdown />
 									</div>
 								</>
-
-								// 	{/* <AccountHistory
-								// 		tabIndex={0}
-								// 		className={`dropdown-content transform -translate-x-2/3 h-fit min-w-[300px]  z-[10] py-1 rounded-xl bg-white shadow-md overflow-y-auto`}
-								// 	/>
-								// </div> */}
 							)}
 							<Link to={Approutes.profile.saved}>
 								<div
