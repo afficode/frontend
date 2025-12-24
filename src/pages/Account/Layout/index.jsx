@@ -10,7 +10,7 @@ const AccountLayout = () => {
 	const { data } = useAccountBalance();
 
 	return (
-		<div className="min-h-screen p-8">
+		<div className="min-h-screen py-8 px-4 md:px-8">
 			<h2>My Account</h2>
 			<h6 className="font-light">
 				Balance: <b className="font-bold">₦ {toMoney(data?.account?.balance)}</b>

@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { CloseIcon, Location, ThankYou } from '../../../../assets/svgs';
 import { Button, InputGroup, Modal } from '../../../../ui';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useEscrowRelease, useGetEscrowDetails, useNotify, useRequestOtp } from '../../../../hooks';
 import { SpinnerSkeleton } from '../../../../components';
 import RefundForm from '../../RefundForm';
 import { ScrollToTop } from '../../../../utils';
+import { Approutes } from '../../../../constants';
 
 const ClosePickup = () => {
 	const { escrow_id } = useParams();
@@ -21,6 +22,7 @@ const ClosePickup = () => {
 		other_escrow_reason: '',
 	});
 
+	const navigate = useNavigate();
 	const { data: escrowDetails, isLoading: escrowLoading } = useGetEscrowDetails(escrow_id);
 
 	useEffect(() => {
@@ -255,7 +257,12 @@ const ClosePickup = () => {
 			{stage === 3 && (
 				<div className="px-4">
 					<div className="border border-black p-6 w-max mx-auto  space-y-4 max-w-full sm:max-w-[450px] text-center relative">
-						<button className="absolute top-2 right-2">
+						<button
+							className="absolute top-2 right-2"
+							onClick={() => {
+								navigate(Approutes.profile.transactions);
+							}}
+						>
 							<img src={CloseIcon} alt="close" className="w-6" />
 						</button>
 						<div className="flex items-center justify-center ">
@@ -385,7 +392,7 @@ const ClosePickup = () => {
 
 							<div>
 								<p>
-									We sincerely apologise that you had to cancel your order. This would be critically looked
+									We sincerely apologize that you had to cancel your order. This would be critically looked
 									into. IF resolution is a refund, It should hit your account within three (3) working days.
 								</p>
 

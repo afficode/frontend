@@ -1,46 +1,34 @@
-import { RedCar, Spa } from '../../../assets/images';
-import NotificationContainer from './NotificationContainer';
+import { useNotifications } from '../../../context/Notification';
+import NotificationCard from './NotificationCard';
 
 const Notifications = () => {
+	const { notifications } = useNotifications();
+
+	if (notifications.length === 0) {
+		return (
+			<div className="flex flex-col items-center justify-center h-[60vh]">
+				<div className="text-center">
+					<h2 className="text-xl font-bold mb-2 text-primary">You are all caught up!</h2>
+					<p className="text-gray-500">You have no notifications at the moment.</p>
+				</div>
+			</div>
+		);
+	}
+
 	return (
 		<div className="max-w-[1024px] mx-auto px-2 sm:px-4 my-10">
-			<div className="flex flex-col gap-1">
-				<NotificationContainer
-					image={RedCar}
-					message={'Lawal Creg liked your post!'}
-					date={'Yesterday '}
-					time={'5:50pm'}
-					name={'Lawal'}
-				/>
-				<NotificationContainer
-					image={Spa}
-					message={'Dayo Az liked your post!'}
-					date={'Today '}
-					time={'5:00am'}
-					name={'Dayo'}
-					type={'inspection'}
-				/>
-				<NotificationContainer
-					image={RedCar}
-					message={'Gt Doe liked your post!'}
-					date={'Yesterday '}
-					time={'10:50pm'}
-					name={'Gt'}
-				/>
-				<NotificationContainer
-					image={RedCar}
-					message={'Steph Emma liked your post!'}
-					date={'2 days ago '}
-					time={'7:30pm'}
-					name={'Steph'}
-				/>
-				<NotificationContainer
-					image={RedCar}
-					message={'Ade Olu liked your post!'}
-					date={'5 days ago '}
-					time={'3:00pm'}
-					name={'Ade'}
-				/>
+			<div className="flex flex-col">
+				{notifications.map((item) => (
+					<NotificationCard
+						key={item.notification_id}
+						feature={item.feature}
+						body={item.body}
+						time={item.created_at}
+						id={item.notification_id}
+						isRead={item.is_read}
+						adId={item.metadata?.ad_id}
+					/>
+				))}
 			</div>
 		</div>
 	);

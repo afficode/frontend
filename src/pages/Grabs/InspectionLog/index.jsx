@@ -5,6 +5,7 @@ import { Modal } from '../../../ui';
 import { InspectorCard, SpinnerSkeleton } from '../../../components';
 import { useGetSchedule, useGetSchedules } from '../../../hooks';
 import useAuth from '../../../context/UserContext';
+import { ScrollToTop } from '../../../utils';
 
 const InspectionLog = () => {
 	const [scheduleId, setScheduleId] = useState(null);
@@ -65,6 +66,8 @@ const InspectionLog = () => {
 			>
 				<InspectorCard data={schedule} isLoading={scheduleLoading} />
 			</Modal>
+
+			<ScrollToTop />
 		</section>
 	);
 };

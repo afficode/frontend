@@ -49,7 +49,7 @@ const WalletDropdown = () => {
 					<Button
 						variant={'plain'}
 						className={
-							'border border-1 !shadow-sm text-black rounded-xl  font-semibold max-sm:text-sm whitespace-nowrap max-sm:px-1'
+							'border border-1 !shadow-sm text-black rounded-xl  font-semibold max-sm:text-sm whitespace-nowrap max-sm:px-2 max-sm:py-2'
 						}
 						size={'full'}
 						onClick={() => navigate(Approutes.account.withdraw)}
@@ -59,7 +59,7 @@ const WalletDropdown = () => {
 					<Button
 						variant={'primary'}
 						className={
-							'rounded-xl !shadow-sm  text-white font-semibold max-sm:text-sm whitespace-nowrap max-sm:px-1'
+							'rounded-xl !shadow-sm  text-white font-semibold max-sm:text-sm whitespace-nowrap max-sm:px-2 max-sm:py-2'
 						}
 						size={'full'}
 						onClick={() => navigate(Approutes.account.deposit)}
@@ -102,7 +102,7 @@ const WalletDropdown = () => {
 			<div className="px-6 sm:px-8 pt-2 lg:pb-4 mb-4 flex flex-col gap-4">
 				<h4>Quick Actions</h4>
 
-				<div className="flex items-center justify-between">
+				<div className="flex items-center justify-between flex-wrap gap-2">
 					<button
 						className="flex items-center gap-1  text-sm"
 						onClick={() => navigate(Approutes.account.initial)}
