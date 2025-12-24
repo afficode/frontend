@@ -58,7 +58,7 @@ const AccountHistory = () => {
 	}
 
 	const params = {
-		db_option: db_option.length > 0 ? db_option : [],
+		db_options: db_option.length > 0 ? db_option : [],
 		from: toDate || undefined,
 		to: fromDate || undefined,
 		page_size: 5,
@@ -134,7 +134,7 @@ const AccountHistory = () => {
 							className="dropdown-content menu z-[10] p-4 shadow bg-white rounded-box w-[10rem] space-y-2"
 						>
 							<li
-								onClick={() => updateParams('type', 'deposits')}
+								onClick={() => updateParams('type', 'deposit')}
 								className="cursor-pointer font-medium hover:text-primary"
 							>
 								Deposit
