@@ -182,7 +182,7 @@ const index = () => {
 				</main>
 			</section>
 
-			{result?.data.feature === '3' ? <GrabUpdateTable ad={result?.data} /> : null}
+			<GrabUpdateTable ad={result?.data} />
 			<section className="flex flex-col p-2 my-2 bg-gray-200 xl:p-6 xl:my-4">
 				<div className="flex flex-col items-start justify-start w-full gap-2 tracking-tighter lg:tracking-normal line-clamp-1">
 					<h2 className="text-xl xl:2xl">Description</h2>
@@ -302,8 +302,9 @@ const index = () => {
 									</p>
 
 									<button
-										className={`font-bold  text-black bg-white rounded-none btn btn-sm hover:bg-primary hover:text-white hover:border-0 hover:rounded-sm ${!isLogin && 'bg-gray-100 cursor-not-allowed'
-											}`}
+										className={`font-bold  text-black bg-white rounded-none btn btn-sm hover:bg-primary hover:text-white hover:border-0 hover:rounded-sm ${
+											!isLogin && 'bg-gray-100 cursor-not-allowed'
+										}`}
 										onClick={() => {
 											if (isLogin && result?.data?.contact_type.includes('phone')) {
 												setRevealNumber(!revealNumber);
@@ -327,8 +328,9 @@ const index = () => {
 							{result?.data?.contact_type.includes('email') && (
 								<div className="flex items-center justify-between w-full">
 									<p
-										className={`my-2 w-full overflow-x-scroll  text-start ${revealEmail ? 'tooltip tooltip-primary' : ''
-											}`}
+										className={`my-2 w-full overflow-x-scroll  text-start ${
+											revealEmail ? 'tooltip tooltip-primary' : ''
+										}`}
 										data-tip={revealEmail ? result?.data?.email : ''}
 									>
 										<span className="pr-1 text-lg font-bold">
@@ -339,8 +341,9 @@ const index = () => {
 									</p>
 
 									<button
-										className={`font-bold text-black bg-white rounded-none btn btn-sm hover:bg-primary hover:text-white hover:border-0 hover:rounded-sm ${!isLogin && 'bg-gray-100 cursor-not-allowed'
-											} `}
+										className={`font-bold text-black bg-white rounded-none btn btn-sm hover:bg-primary hover:text-white hover:border-0 hover:rounded-sm ${
+											!isLogin && 'bg-gray-100 cursor-not-allowed'
+										} `}
 										onClick={() => {
 											isLogin && result?.data?.contact_type.includes('email')
 												? setRevealEmail(!revealEmail)
