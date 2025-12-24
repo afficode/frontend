@@ -1,5 +1,4 @@
 import { IoMdTime } from 'react-icons/io';
-import { AiFillCloseSquare } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
 import { Approutes } from '../../../constants';
@@ -15,15 +14,13 @@ const NotificationCard = ({ feature, body, time, id, adId, isRead }) => {
 			onClick={() => {
 				markAsRead(id);
 				navigate(
-					feature === 'inspection_log'
+					feature.includes('inspection_log')
 						? Approutes.grab.inspectionLog
-						: feature === 'escrow_refund'
+						: feature.includes('escrow')
 						? Approutes.profile.transactions
-						: feature === 'escrow_refund_resolved'
-						? Approutes.profile.transactions
-						: feature === 'ads'
+						: feature.includes('ads')
 						? Approutes.product.initial + '/' + adId
-						: feature === 'message'
+						: feature.includes('message')
 						? Approutes.profile.messages
 						: null
 				);
@@ -36,23 +33,19 @@ const NotificationCard = ({ feature, body, time, id, adId, isRead }) => {
 			<div className="flex flex-col gap-2 justify-between flex-1">
 				<div className="flex items-center max-[420px]:items-stretch max-[420px]:flex-col-reverse justify-between gap-4 max-[420px]:gap-2">
 					<span
-						className={`px-2 py-1 ${
-							feature === 'escrow_refund'
-								? 'bg-orange-500'
-								: feature === 'inspection_log'
+						className={`px-2 py-1 capitalize ${
+							feature.includes('escrow_refund_resolved')
+								? 'bg-green-500'
+								: feature.includes('inspection_log')
 								? 'bg-purple-500'
+								: feature.includes('message')
+								? 'bg-blue-500'
+								: feature.includes('escrow_refund')
+								? 'bg-orange-500'
 								: 'bg-green-500'
 						} text-white w-fit text-xs rounded-md`}
 					>
-						{feature === 'escrow_refund'
-							? 'Escrow Refund'
-							: feature === 'escrow_refund_resolved'
-							? 'Escrow Refund Resolved'
-							: feature === 'ads'
-							? 'Ad Notification'
-							: feature === 'inspection_log'
-							? 'Inspection'
-							: 'General Notification'}
+						{feature.split('_').join(' ')}
 					</span>
 
 					<div className="sm:hidden max-[420px]:justify-end flex items-center justify-start gap-1 text-xs text-gray-400">
@@ -61,12 +54,8 @@ const NotificationCard = ({ feature, body, time, id, adId, isRead }) => {
 				</div>
 
 				<div>
-					{/* <h6 className="text-sm font-bold text-gray-600">New message: Heyy sup</h6> */}
-
 					<p className="text-sm ellipsis-text w-full text-gray-500">{body}</p>
 				</div>
-
-				{/* <h5 className="font-semibold text-sm text-secondary">Allen Ugo</h5> */}
 			</div>
 
 			<div className="max-sm:hidden flex items-center justify-start gap-1 text-xs text-gray-400">

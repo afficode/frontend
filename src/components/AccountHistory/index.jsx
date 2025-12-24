@@ -1,4 +1,3 @@
-import { BiArrowBack } from 'react-icons/bi';
 import { ArrowDownWhite } from '../../assets/svgs';
 import { Button } from '../../ui';
 import { useTransactions } from '../../hooks';
@@ -227,7 +226,6 @@ const AccountHistory = () => {
 										title={transaction.type}
 										channel={transaction.channel}
 										amount={transaction.amount}
-										status={transaction.status}
 										referenceId={transaction.reference_id}
 										date={transaction.created_at}
 									/>
@@ -264,14 +262,14 @@ const AccountHistory = () => {
 
 export default AccountHistory;
 
-const Pallet = ({ title, channel, amount, referenceId, date, status }) => {
+const Pallet = ({ title, channel, amount, referenceId, date }) => {
 	return (
 		<div className="px-4 pb-4 space-y-2 border-b border-b/5">
 			<div className="flex items-center justify-between">
 				<h6 className=" font-semibold capitalize">
 					{title.split('_').join(' ')}{' '}
 					<span className="text-xs font-medium bg-gray-400 px-2 rounded-md text-white py-1">
-						{channel}
+						{channel.split('_').join(' ')}
 					</span>
 				</h6>
 
@@ -280,7 +278,9 @@ const Pallet = ({ title, channel, amount, referenceId, date, status }) => {
 
 			<div className="flex items-end justify-between">
 				<div className="flex flex-col ">
-					<p className="text-black/50 truncate max-w-[10rem] md:max-w-[15rem]">{referenceId}</p>
+					<p className="text-black/50 truncate max-w-[10rem] md:max-w-[15rem]">
+						{referenceId === 'null' ? '' : referenceId}
+					</p>
 					<p className="max-sm:text-xs">{format(new Date(date), 'EEEE d, MMMM yyyy')}</p>
 				</div>
 
