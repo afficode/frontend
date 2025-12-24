@@ -45,7 +45,7 @@ const ActionBar = (ad) => {
 				</div>
 				<div className="flex items-center gap-1">
 					<p className="font-light text-sm">Chats:</p>
-					<b>{ad?.ad.chats || 0}</b>
+					<b>{ad?.ad.ad_summary?.chats || 0}</b>
 				</div>
 				{ad?.ad.feature === '3' && (
 					<div className="flex items-center gap-1">

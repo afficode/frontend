@@ -42,7 +42,7 @@ const GrabUpdateTable = ({ ad }) => {
 		formData.append('price', fromMoney(amount));
 
 		mutate(formData, {
-			onSuccess: (data) => {
+			onSuccess: () => {
 				notify(`${ad.title} price updated successfully`, 'success');
 				queryClient.invalidateQueries({ queryKey: ['fetch-product', ad.id] });
 			},
@@ -81,7 +81,7 @@ const GrabUpdateTable = ({ ad }) => {
 												<td>{offer.date}</td>
 												<td>{offer.location}</td>
 												<td>{offer.name}</td>
-												<td className="font-bold">{toMoney(offer.amount)}</td>
+												<td className="font-bold">{offer.amount}</td>
 											</tr>
 										))}
 									</tbody>

@@ -30,7 +30,7 @@ const index = () => {
 	const [revealNumber, setRevealNumber] = useState(false);
 	const [revealEmail, setRevealEmail] = useState(false);
 	const { isLogin, user } = useAuth();
-	const { data: result, isLoading } = fetchProduct(id);
+	const { data: result, isLoading } = fetchProduct(id, isLogin);
 	const { _, isLoading: saveLoading } = getSaves();
 	const notify = useNotify();
 	const navigate = useNavigate();
