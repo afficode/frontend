@@ -113,7 +113,7 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
 	};
 
 	return (
-		<div className={`} ${ad?.feature === '3' && 'md:mt-[6rem]'}     mt-4 h-full`}>
+		<div className={`${ad?.feature === '3' && 'md:mt-[6rem]'}     mt-4 h-full`}>
 			<Formik
 				initialValues={{
 					message:

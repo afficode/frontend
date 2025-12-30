@@ -44,17 +44,15 @@ const ActionBar = (ad) => {
 					<b>{ad?.ad.views || 0}</b>
 				</div>
 				<div className="flex items-center gap-1">
-					<p className="font-light text-sm">Clicks:</p>
-					<b>{ad?.ad.chats || 0}</b>
-				</div>
-				<div className="flex items-center gap-1">
-					<p className="font-light text-sm">Phone Views:</p>
-					<b>{ad?.ad.views || 0}</b>
-				</div>
-				<div className="flex items-center gap-1">
 					<p className="font-light text-sm">Chats:</p>
-					<b>{ad?.ad.chats || 0}</b>
+					<b>{ad?.ad.ad_summary?.chats || 0}</b>
 				</div>
+				{ad?.ad.feature === '3' && (
+					<div className="flex items-center gap-1">
+						<p className="font-light text-sm">Number of Grabs:</p>
+						<b>{ad?.ad.ad_summary?.number_of_grabs || 0}</b>
+					</div>
+				)}
 			</div>
 
 			<div className="flex justify-between items-center border px-2 sm:px-6 py-2">
