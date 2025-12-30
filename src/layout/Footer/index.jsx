@@ -129,7 +129,7 @@ const Footer = () => {
 
 					{/* copyright */}
 					<p className="text-center md:text-start">
-						&copy; Copyright 2025{' '}
+						&copy; Copyright {new Date().getFullYear() + ' '}
 						<b>
 							<Link to={'/'}>Boonfu.com</Link>
 						</b>
