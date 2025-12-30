@@ -16,7 +16,6 @@ import { GoBookmark } from 'react-icons/go';
 import { IoMdClose } from 'react-icons/io';
 import { VscGitPullRequestGoToChanges, VscMenu } from 'react-icons/vsc';
 import { CgProfile } from 'react-icons/cg';
-import { BsShop } from 'react-icons/bs';
 import { MdMiscellaneousServices } from 'react-icons/md';
 import { FaCarSide, FaBuilding, FaRegHandshake } from 'react-icons/fa';
 import { useDebouncedCallback } from 'use-debounce';
@@ -329,11 +328,6 @@ const Navbar = () => {
 														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Messages</li>
 													</div>
 												</NavLink>
-												<NavLink to={'#'}>
-													<div className="flex items-center hover:underline opacity-50">
-														<li className="text-lg max-sm:text-base -12 whitespace-nowrap   ">My Shop</li>
-													</div>
-												</NavLink>
 												<NavLink to={Approutes.grab.initial}>
 													<div className="flex items-center hover:underline">
 														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Grab</li>
@@ -347,16 +341,6 @@ const Navbar = () => {
 												<NavLink to={Approutes.profile.notifications}>
 													<div className="flex items-center hover:underline">
 														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Notifications</li>
-													</div>
-												</NavLink>
-												<NavLink to={'#'}>
-													<div className="flex items-center hover:underline opacity-50">
-														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Manage my Ads</li>
-													</div>
-												</NavLink>
-												<NavLink to={'#'}>
-													<div className="flex items-center hover:underline opacity-50">
-														<li className="text-lg max-sm:text-base -12 whitespace-nowrap ">Manage my shop</li>
 													</div>
 												</NavLink>
 												<NavLink to={Approutes.profile.saved}>
@@ -445,12 +429,6 @@ const Navbar = () => {
 														<SlArrowRight size={20} className="ml-auto text-black " />
 													</div>
 												</NavLink>
-												<NavLink to={'#'}>
-													<div className="flex items-center hover:underline opacity-50">
-														<li className="text-base whitespace-nowrap ">My Shop</li>
-														<SlArrowRight size={20} className="ml-auto text-black " />
-													</div>
-												</NavLink>
 												<NavLink to={Approutes.grab.initial}>
 													<div className="flex items-center hover:underline">
 														<li className="text-base whitespace-nowrap ">Grab</li>
@@ -466,18 +444,6 @@ const Navbar = () => {
 												<NavLink to={Approutes.profile.notifications}>
 													<div className="flex items-center hover:underline">
 														<li className="text-base whitespace-nowrap ">Notifications</li>
-														<SlArrowRight size={20} className="ml-auto text-black " />
-													</div>
-												</NavLink>
-												<NavLink to={'#'}>
-													<div className="flex items-center hover:underline opacity-50">
-														<li className="text-base whitespace-nowrap ">Manage my Ads</li>
-														<SlArrowRight size={20} className="ml-auto text-black " />
-													</div>
-												</NavLink>
-												<NavLink to={'#'}>
-													<div className="flex items-center hover:underline opacity-50">
-														<li className="text-base whitespace-nowrap ">Manage my shop</li>
 														<SlArrowRight size={20} className="ml-auto text-black " />
 													</div>
 												</NavLink>

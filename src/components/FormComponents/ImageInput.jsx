@@ -6,6 +6,7 @@ import { useNotify } from '../../hooks';
 import { useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
+import { AD_IMAGE_COUNT, AD_IMAGE_SIZE } from '../../constants';
 
 const ImageInput = (props) => {
 	const { label, name, required, edit = false, images, ...rest } = props;
@@ -69,7 +70,7 @@ const ImageInput = (props) => {
 													setIsLoading(false);
 													return;
 												}
-												if (file.size > 5 * 1024 * 1024) {
+												if (file.size > AD_IMAGE_SIZE) {
 													notify('Image is too big!.', 'error');
 													setIsLoading(false);
 													return;
@@ -88,8 +89,8 @@ const ImageInput = (props) => {
 												}
 											});
 
-											if (newImgFiles.length > 10) {
-												notify('You can only upload up to 10 images.', 'error');
+											if (newImgFiles.length > AD_IMAGE_COUNT) {
+												notify(`You can only upload up to ${AD_IMAGE_COUNT} images.`, 'error');
 												setIsLoading(false);
 												return;
 											}
