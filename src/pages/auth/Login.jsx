@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { Formik, Form } from 'formik';
 import { useNavigate } from 'react-router-dom';
@@ -6,8 +6,6 @@ import Input from '../../components/FormComponents/Input';
 import * as Yup from 'yup';
 import { MdLogin } from 'react-icons/md';
 import { LoginHook } from '../../hooks/AuthHook';
-import { Apple, Facebook, Google } from '../../assets/svgs';
-import { Button } from '../../ui';
 import { Approutes } from '../../constants';
 import { Button as FlowbiteButton } from 'flowbite-react';
 import useAuth from '../../context/UserContext';
@@ -128,27 +126,6 @@ const Login = ({ id }) => {
 						<div className="w-full my-2 font-bold text-center lg:my-8 hover:underline text-primary text-base lg:text-lg">
 							<Link to={Approutes.forgotPassword}>Forgot your Password?</Link>
 						</div>
-					</div>
-
-					<div className="w-[80%] mx-auto my-4 lg:my-8 p-[0.1rem] bg-black"></div>
-
-					<div className="w-[85%] mx-auto my-4">
-						<p className="w-full text-center text-md lg:text-2xl">Or Connect with:</p>
-
-						<Button className="mt-6 w-full px-4 py-[.7rem] text-white bg-[#0F8EEF] flex items-center hover:brightness-90">
-							<img src={Facebook} alt="apple logo" className="mr-auto" />{' '}
-							<span className="w-full font-semibold text-center">Continue with Facebook</span>
-						</Button>
-
-						<Button className="mt-6 w-full px-4 py-[.7rem] text-white bg-black flex items-center hover:brightness-90">
-							<img src={Apple} alt="apple logo" className="mr-auto" />{' '}
-							<span className="w-full font-semibold text-center">Continue with Apple</span>
-						</Button>
-
-						<Button className="mt-6 w-full px-4 py-[.7rem] border border-black text-black bg-white flex items-center hover:brightness-90">
-							<img src={Google} alt="apple logo" className="mr-auto" />{' '}
-							<span className="w-full font-semibold text-center">Continue with Google</span>
-						</Button>
 					</div>
 				</>
 			)}

@@ -94,17 +94,12 @@ const Register = ({ id }) => {
 						</h1>
 						<ul className="px-4 lg:p-[1.56rem] list-disc ml-2">
 							<li className="text-black text-[0.8rem] lg:text-[1.2rem] font-sans pb-2">
-								Own an online shop(s) for your businesses
-							</li>
-							<li className="text-black text-[0.8rem] lg:text-[1.2rem] font-sans pb-2">
 								Post and manage your ads
 							</li>
 							<li className="text-black text-[0.8rem] lg:text-[1.2rem] font-sans pb-2">
 								Become a Grabber and Earn commissions on sales
 							</li>
-							<li className="text-black text-[0.8rem] lg:text-[1.2rem] font-sans pb-2">
-								Have your customized shop link{' '}
-							</li>
+
 							<li className="text-black text-[0.8rem] lg:text-[1.2rem] font-sans pb-2">
 								Never Miss a deal or offer
 							</li>
