@@ -164,6 +164,7 @@ const AdCard = ({
 								variant={'plain'}
 								size={'small'}
 								className={'text-primary rounded-lg shadow-none hover:shadow-md'}
+								disabled={active === '2'}
 								onClick={(e) => {
 									e.stopPropagation();
 									e.preventDefault();
@@ -191,6 +192,7 @@ const AdCard = ({
 								variant={'secondary'}
 								size={'small'}
 								className={' rounded-lg '}
+								disabled={active === '2'}
 								onClick={(e) => {
 									e.stopPropagation();
 									e.preventDefault();
