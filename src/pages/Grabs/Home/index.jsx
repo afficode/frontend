@@ -104,26 +104,28 @@ const GrabberHome = () => {
 						className="ml-auto text-white transition-all hover:underline"
 					>
 						<button className="flex items-center gap-2 ">
-							<span>Load Grabable Products</span>
-							<img src={ArrowRight} className="w-4" alt="/" />
+							<span>See Grabbed Products</span>
+							<img src={ArrowRight} className="w-4" alt="arrow" />
 						</button>
 					</Link>
 
 					<div className="flex flex-wrap items-center justify-between gap-6">
+						{isLoading && <h4 className="text-white">Loading grabbed ads...</h4>}
+
 						{result?.grabs?.map((ad) => (
 							<div key={ad.ads_id} className="relative flex mx-auto flex-col w-[250px] bg-white">
 								<button>
-									<img src={GrabSave} alt="/" className="absolute w-8 top-2 left-2" />
+									<img src={GrabSave} alt="save" className="absolute w-8 top-2 left-2" />
 								</button>
 								<button onClick={() => handleUnGrab(ad)}>
-									<img src={GrabIcon} alt="/" className="absolute w-8 top-2 right-2" />
+									<img src={GrabIcon} alt="grab" className="absolute w-8 top-2 right-2" />
 								</button>
 								<img
 									src={ad?.images[0]?.path ? ad?.images[0]?.path : noimage}
 									alt={ad?.images[0]?.filename ? ad?.images[0]?.filename : 'no image'}
 									className="w-full h-[200px] "
 								/>
-								<h6 className="px-2 font-semibold text-left">{ad?.title}</h6>
+								<h6 className="px-2 font-semibold text-left capitalize">{ad?.title}</h6>
 								<Link to={Approutes.grab.product(ad.ads_id)} className={'mt-8 mb-2 mx-auto'}>
 									<Button variant={'primary'} size={'small'} className={' w-fit '}>
 										Click for info
