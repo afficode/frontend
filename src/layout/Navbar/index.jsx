@@ -196,9 +196,11 @@ const Navbar = () => {
 												alt="my notification"
 												className={`w-6 h-6 ${unreadNotification > 0 ? 'animate-bounce' : ''}`}
 											/>
-											<span className="absolute top-[-7px] rounded-full px-1 bg-secondary/90 right-0 font-semibold text-sm text-black">
-												{unreadNotification}
-											</span>
+											{unreadNotification > 0 && (
+												<span className="absolute top-[-7px] rounded-full px-1 bg-secondary/90 right-0 font-semibold text-sm text-black">
+													{unreadNotification}
+												</span>
+											)}
 										</div>
 									</Link>
 									<div className="dropdown">
