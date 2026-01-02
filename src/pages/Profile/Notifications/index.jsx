@@ -27,6 +27,7 @@ const Notifications = () => {
 						id={item.notification_id}
 						isRead={item.is_read}
 						adId={item.metadata?.ad_id}
+						metadata={item?.metadata}
 					/>
 				))}
 			</div>
