@@ -13,6 +13,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 const InspectorCard = ({ data, ad_id, isLoading }) => {
 	const { mutate, isLoading: submitting } = useUpdateSchedule(data?.schedules?.id);
+	console.log(data);
 
 	const latest = data?.schedules?.bookings.length - 1;
 	const latestBooking = data?.schedules?.bookings[latest];
@@ -111,16 +112,15 @@ const InspectorCard = ({ data, ad_id, isLoading }) => {
 					return (
 						<div
 							key={booking.id}
-							className={`${
-								booking?.user_id === data?.schedules?.owner ? 'bg-primary/80' : 'bg-secondary'
-							} px-2 pb-4 pt-6  rounded-lg italic sm:mr-6 relative`}
+							className={`${booking?.user_id === data?.schedules?.owner ? 'bg-primary/80' : 'bg-secondary'
+								} px-2 pb-4 pt-6  rounded-lg italic sm:mr-6 relative`}
 						>
 							<div className="absolute top-1 right-1 bg-white rounded-lg px-1  py-[0.15rem] leading-3 text-[10px]">
 								{booking.user_id === user.id
 									? 'You'
-									: booking?.user_id === data?.schedules?.owner
-									? 'Ad owner'
-									: 'Inspector'}
+									: booking?.user_id === data?.schedules?.owner && booking?.remark !== 'view_contact'
+										? 'Ad owner'
+										: <span className='-mx-2 bg-white px-2 py-[6px] rounded-bl-lg font-semibold'>Boonfu</span>}
 							</div>
 
 							<div className="flex items-center gap-2">
@@ -134,8 +134,18 @@ const InspectorCard = ({ data, ad_id, isLoading }) => {
 									<p>Withdrawn from the site.</p>
 								) : booking?.remark === 'not_available' ? (
 									<p>Item no longer available.</p>
-								) : booking?.remark === 'view_contact' ? (
+								) : booking?.remark === 'view_contact' && !data.schedules?.grabber_details ? (
 									<p>You can view the contact now.</p>
+								) : booking?.remark === 'view_contact' && data.schedules?.grabber_details ? (
+									<div className='space-y-4'>
+										<p>Thank you for booking an inspection for the {data?.schedules?.ad_details.title.toUpperCase()} on Boonfu.com.</p>
+
+										<p>Our Partner &#40;{data.schedules.grabber_details.name}&#41; who introduced this listing to you shall be in touch with you shortly to coordinate the time and specific location for the inspection.</p>
+
+										<p>Should you have any questions in the meantime, feel free to reply to this message.</p>
+
+										<p>Best regards, The Boonfu Team</p>
+									</div>
 								) : booking?.remark === 'ok' && data?.schedules?.owner === user?.id ? (
 									<>
 										<p>Inspector:</p>
@@ -144,172 +154,173 @@ const InspectorCard = ({ data, ad_id, isLoading }) => {
 								) : null}
 							</div>
 
-							{booking.remark === 'view_contact' && (
-								<a
-									href={`tel:${
-										user?.id === data?.schedules?.owner
-											? data?.schedules?.phone_details?.buyer_phone
-											: data?.schedules?.phone_details?.owner_phone
+							{(booking.remark === 'view_contact' && !data.schedules?.grabber_details) && <a
+								href={`tel:${user?.id === data?.schedules?.owner
+									? data?.schedules?.phone_details?.buyer_phone
+									: data?.schedules?.phone_details?.owner_phone
 									}`}
-									className="text-white text-sm hover:underline flex items-center gap-1"
-								>
-									<BiPhoneCall />
-									{user?.id === data?.schedules?.owner
-										? data?.schedules?.phone_details?.buyer_phone
-										: data?.schedules?.phone_details?.owner_phone}
-								</a>
-							)}
+								className="text-white text-sm hover:underline flex items-center gap-1"
+							>
+								<BiPhoneCall />
+								{user?.id === data?.schedules?.owner
+									? data?.schedules?.phone_details?.buyer_phone
+									: data?.schedules?.phone_details?.owner_phone}
+							</a>}
 
-							<div className="flex items-center gap-2">
-								<p>For:</p>
-								<p className="capitalize">{data?.schedules?.ad_details.title}</p>
-							</div>
-							<div className="flex items-center gap-2">
-								<p>
-									{latestBooking?.remark === 'reschedule' &&
-									booking?.remark === 'reschedule' &&
-									latestBooking?.id === booking?.id
-										? 'New'
-										: null}{' '}
-									Date:
-								</p>
+							{(booking?.remark !== 'view_contact' || (booking?.remark === 'view_contact' && !data?.schedules?.grabber_details)) && <>
+								<div className="flex items-center gap-2">
+									<p>For:</p>
+									<p className="capitalize">{data?.schedules?.ad_details.title}</p>
+								</div>
+								<div className="flex items-center gap-2">
+									<p>
+										{latestBooking?.remark === 'reschedule' &&
+											booking?.remark === 'reschedule' &&
+											latestBooking?.id === booking?.id
+											? 'New'
+											: null}{' '}
+										Date:
+									</p>
 
-								<p> {booking?.date && format(parseISO(booking?.date), 'EEEE d, MMMM yyyy')}</p>
-							</div>
-							<div className="flex items-center gap-2">
-								<p>
-									{latestBooking?.remark === 'reschedule' &&
-									booking?.remark === 'reschedule' &&
-									latestBooking?.id === booking?.id
-										? 'New'
-										: null}{' '}
-									Time:
-								</p>
-								<p className="lowercase">
-									{booking?.time?.from && format(parse(booking.time.from, 'HH:mm', new Date()), 'h:mma')}
-									{booking?.time?.to && (
-										<>to {format(parse(booking.time.to, 'HH:mm', new Date()), 'h:mma')}</>
-									)}
-								</p>
-							</div>
+									<p> {booking?.date && format(parseISO(booking?.date), 'EEEE d, MMMM yyyy')}</p>
+								</div>
+								<div className="flex items-center gap-2">
+									<p>
+										{latestBooking?.remark === 'reschedule' &&
+											booking?.remark === 'reschedule' &&
+											latestBooking?.id === booking?.id
+											? 'New'
+											: null}{' '}
+										Time:
+									</p>
+									<p className="lowercase">
+										{booking?.time?.from && format(parse(booking.time.from, 'HH:mm', new Date()), 'h:mma')}
+										{booking?.time?.to && (
+											<>to {format(parse(booking.time.to, 'HH:mm', new Date()), 'h:mma')}</>
+										)}
+									</p>
+								</div></>}
+
+
 						</div>
 					);
 				})}
 			</div>
-
-			<div className=" border-t border-black/40 py-4 mt-4">
-				{user?.id === data?.schedules?.owner ? (
-					<h5 className="capitalize font-semibold">
-						{data?.schedules?.ad_details.title} <span className="lowercase">reply</span>:
-					</h5>
-				) : (
-					<h5 className="font-semibold">Inspector's reply:</h5>
-				)}
-
-				<form onSubmit={formik.handleSubmit}>
-					<InputGroup
-						name={'remark'}
-						type={'select'}
-						label={'Select a response'}
-						moreInfo={'Select a response'}
-						value={formik.values.remark}
-						onChange={formik.handleChange}
-						onBlur={formik.handleBlur}
-						optionLists={
-							user?.id === data?.schedules?.owner ? sellerResponseOptions : buyerResponseOptions
-						}
-						className={'customSelectInput'}
-					/>
-					{showDateInput && (
-						<>
-							<InputGroup
-								name={'date'}
-								type={'date'}
-								label={'Reschedule Date'}
-								value={formik.values.date}
-								onChange={formik.handleChange}
-								moreInfo={'Select a date and the time range you will be available '}
-								onBlur={formik.handleBlur}
-								className={'customSelectInput'}
-							/>
-							<div className="flex gap-6 ">
-								<div className="my-2">
-									<label className="input-group-label" htmlFor="time.from">
-										From
-									</label>
-									<DatePicker
-										selected={timeFromDate}
-										onChange={(date) => {
-											if (!date) {
-												formik.setFieldValue('time.from', '');
-												return;
-											}
-											formik.setFieldValue('time.from', format(date, 'HH:mm'));
-										}}
-										showTimeSelect
-										showTimeSelectOnly
-										timeIntervals={1}
-										timeCaption="Time"
-										dateFormat="h:mm aa"
-										placeholderText="Select time"
-										customInput={
-											<DatePickerInput
-												name="time.from"
-												value={formik.values.time.from ? format(from, 'h:mm a') : undefined}
-											/>
-										}
-									/>
-								</div>
-								<div className="my-2">
-									<label className="input-group-label" htmlFor="time.to">
-										To
-									</label>
-									<DatePicker
-										selected={timeToDate}
-										onChange={(date) => {
-											if (!date) {
-												formik.setFieldValue('time.to', '');
-												return;
-											}
-											formik.setFieldValue('time.to', format(date, 'HH:mm'));
-										}}
-										showTimeSelect
-										showTimeSelectOnly
-										timeIntervals={1}
-										timeCaption="Time"
-										dateFormat="h:mm aa"
-										placeholderText="Select time"
-										customInput={
-											<DatePickerInput
-												name="time.to"
-												value={formik.values.time.to ? format(from, 'h:mm a') : undefined}
-											/>
-										}
-									/>
-								</div>
-							</div>
-
-							{formik.values.time.from && formik.values.time.to ? (
-								<div>
-									<p>
-										Selected time range: <b>{format(from, 'h:mm a')}</b> - <b>{format(to, 'h:mm a')}</b>
-									</p>
-								</div>
-							) : null}
-						</>
+			{!data?.schedules?.confirmed &&
+				<div className=" border-t border-black/40 py-4 mt-4">
+					{user?.id === data?.schedules?.owner ? (
+						<h5 className="capitalize font-semibold">
+							{data?.schedules?.ad_details.title} <span className="lowercase">reply</span>:
+						</h5>
+					) : (
+						<h5 className="font-semibold">Inspector's reply:</h5>
 					)}
 
-					<Button
-						variant={'primary'}
-						type="submit"
-						disabled={submitting || !formik.dirty}
-						loading={submitting}
-						className={'rounded-lg mt-4'}
-					>
-						Send
-					</Button>
-				</form>
-			</div>
+					<form onSubmit={formik.handleSubmit}>
+						<InputGroup
+							name={'remark'}
+							type={'select'}
+							label={'Select a response'}
+							moreInfo={'Select a response'}
+							value={formik.values.remark}
+							onChange={formik.handleChange}
+							onBlur={formik.handleBlur}
+							optionLists={
+								user?.id === data?.schedules?.owner ? sellerResponseOptions : buyerResponseOptions
+							}
+							className={'customSelectInput'}
+						/>
+						{showDateInput && (
+							<>
+								<InputGroup
+									name={'date'}
+									type={'date'}
+									label={'Reschedule Date'}
+									value={formik.values.date}
+									onChange={formik.handleChange}
+									moreInfo={'Select a date and the time range you will be available '}
+									onBlur={formik.handleBlur}
+									className={'customSelectInput'}
+								/>
+								<div className="flex gap-6 ">
+									<div className="my-2">
+										<label className="input-group-label" htmlFor="time.from">
+											From
+										</label>
+										<DatePicker
+											selected={timeFromDate}
+											onChange={(date) => {
+												if (!date) {
+													formik.setFieldValue('time.from', '');
+													return;
+												}
+												formik.setFieldValue('time.from', format(date, 'HH:mm'));
+											}}
+											showTimeSelect
+											showTimeSelectOnly
+											timeIntervals={1}
+											timeCaption="Time"
+											dateFormat="h:mm aa"
+											placeholderText="Select time"
+											customInput={
+												<DatePickerInput
+													name="time.from"
+													value={formik.values.time.from ? format(from, 'h:mm a') : undefined}
+												/>
+											}
+										/>
+									</div>
+									<div className="my-2">
+										<label className="input-group-label" htmlFor="time.to">
+											To
+										</label>
+										<DatePicker
+											selected={timeToDate}
+											onChange={(date) => {
+												if (!date) {
+													formik.setFieldValue('time.to', '');
+													return;
+												}
+												formik.setFieldValue('time.to', format(date, 'HH:mm'));
+											}}
+											showTimeSelect
+											showTimeSelectOnly
+											timeIntervals={1}
+											timeCaption="Time"
+											dateFormat="h:mm aa"
+											placeholderText="Select time"
+											customInput={
+												<DatePickerInput
+													name="time.to"
+													value={formik.values.time.to ? format(from, 'h:mm a') : undefined}
+												/>
+											}
+										/>
+									</div>
+								</div>
+
+								{formik.values.time.from && formik.values.time.to ? (
+									<div>
+										<p>
+											Selected time range: <b>{format(from, 'h:mm a')}</b> - <b>{format(to, 'h:mm a')}</b>
+										</p>
+									</div>
+								) : null}
+							</>
+						)}
+
+						<Button
+							variant={'primary'}
+							type="submit"
+							disabled={submitting || !formik.dirty}
+							loading={submitting}
+							className={'rounded-lg mt-4'}
+						>
+							Send
+						</Button>
+					</form>
+				</div>
+			}
 		</div>
 	);
 };
