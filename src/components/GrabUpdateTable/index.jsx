@@ -12,7 +12,6 @@ const GrabUpdateTable = ({ ad }) => {
 
 	const handleMoneyChange = (event) => {
 		const inputValue = event.target.value;
-		const inputName = event.target.name || name;
 
 		let raw = String(inputValue).replace(/[^0-9.]/g, '');
 
@@ -60,7 +59,7 @@ const GrabUpdateTable = ({ ad }) => {
 		ad?.negotiable === 1 && (
 			<section className="my-8 space-y-4">
 				<div className="w-full border border-black  ">
-					{ad.ad_summary?.offers ? (
+					{ad.ad_summary?.offers.length > 0 ? (
 						<>
 							<div className=" overflow-x-auto">
 								<table className="w-full table table-fixed">
