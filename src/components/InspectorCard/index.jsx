@@ -13,7 +13,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 const InspectorCard = ({ data, ad_id, isLoading }) => {
 	const { mutate, isLoading: submitting } = useUpdateSchedule(data?.schedules?.id);
-	console.log(data);
 
 	const latest = data?.schedules?.bookings.length - 1;
 	const latestBooking = data?.schedules?.bookings[latest];
