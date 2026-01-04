@@ -5,7 +5,7 @@ import { Approutes } from '../../../constants';
 import { useNotifications } from '../../../context/Notification';
 import useAuth from '../../../context/UserContext';
 
-const NotificationCard = ({ feature, body, time, id, adId, adOwner, isRead }) => {
+const NotificationCard = ({ feature, body, time, id, adId, isRead, metadata, user_id }) => {
 	const navigate = useNavigate();
 	const { markAsRead } = useNotifications();
 	const { user } = useAuth();
@@ -16,9 +16,9 @@ const NotificationCard = ({ feature, body, time, id, adId, adOwner, isRead }) =>
 			onClick={() => {
 				markAsRead(id);
 				navigate(
-					feature.includes('inspection_log') && user.id === adOwner
-						? `${Approutes.product.initial}/${adId}`
-						: feature.includes('inspection_log') && user.id !== adOwner
+					feature.includes('inspection_log') && metadata && metadata?.ad_owner === user.id
+						? Approutes.product.initial + '/' + adId
+						: feature.includes('inspection_log')
 						? Approutes.grab.inspectionLog
 						: feature.includes('escrow')
 						? Approutes.profile.transactions

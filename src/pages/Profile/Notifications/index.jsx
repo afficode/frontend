@@ -27,7 +27,7 @@ const Notifications = () => {
 						id={item.notification_id}
 						isRead={item.is_read}
 						adId={item.metadata?.ad_id}
-						adOwner={item.metadata?.ad_owner}
+						metadata={item?.metadata}
 					/>
 				))}
 			</div>
@@ -36,39 +36,3 @@ const Notifications = () => {
 };
 
 export default Notifications;
-
-// image, message, date, time, name
-
-// notification data format from backend
-/*
-	[
-		{
-			name: '',
-			image: '',
-			message: '',
-			date: '',
-			time: '',
-		},
-		{
-			name: '',
-			image: '',
-			message: '',
-			date: '',
-			time: '',
-		},
-		{
-			name: '',
-			image: '',
-			message: '',
-			date: '',
-			time: '',
-		},
-		{
-			name: '',
-			image: '',
-			message: '',
-			date: '',
-			time: '',
-		},
-	]
-*/
