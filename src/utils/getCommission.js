@@ -10,11 +10,8 @@ const getCommission = (price, subCat) => {
 
 	const rate = isInspectable ? 0.01 : 0.1;
 
-	let boonfuCommission = price * rate;
-	let grabberCommission = boonfuCommission / 2;
-
-	boonfuCommission = Math.round(boonfuCommission);
-	grabberCommission = Math.round(grabberCommission);
+	const boonfuCommission = Math.round(price * rate);
+	const grabberCommission = Math.round(boonfuCommission * 0.9);
 
 	return { boonfuCommission, grabberCommission };
 };

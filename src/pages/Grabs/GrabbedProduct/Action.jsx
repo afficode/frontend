@@ -88,8 +88,9 @@ const Action = ({ isGeneral, ad }) => {
 									modalHeader={true}
 									children={<ReportAd ad_id={ad?.id} />}
 									headerText={'Feedback / Abuse'}
-									className={`w-full px-2 py-3 my-2 text-lg tracking-tighter rounded-3xl text-white bg-slate-600 hover:bg-slate-500 line-clamp-1 ${!isLogin && 'cursor-not-allowed'
-										}`}
+									className={`w-full px-2 py-3 my-2 text-lg tracking-tighter rounded-3xl text-white bg-slate-600 hover:bg-slate-500 line-clamp-1 ${
+										!isLogin && 'cursor-not-allowed'
+									}`}
 									disabled={!isLogin || ad?.active === '0' || user?.id === ad?.owner}
 									type="button"
 									buttonChild={
@@ -182,7 +183,11 @@ const Action = ({ isGeneral, ad }) => {
 									headerSize={'small'}
 									className={'bg-secondary max-w-[600px]'}
 								>
-									<InspectionSchedule setInspectionModalOpen={setInspectionModalOpen} ad={ad} />
+									<InspectionSchedule
+										setInspectionModalOpen={setInspectionModalOpen}
+										ad={ad}
+										grabbersId={grabber_id}
+									/>
 								</ModalUi>
 							)}
 						</div>

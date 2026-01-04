@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-const InspectionSchedule = ({ setInspectionModalOpen, ad }) => {
+const InspectionSchedule = ({ setInspectionModalOpen, ad, grabbersId }) => {
 	const { user } = useAuth();
 
 	const navigate = useNavigate();
@@ -24,6 +24,7 @@ const InspectionSchedule = ({ setInspectionModalOpen, ad }) => {
 			ad_id: ad?.id,
 			category: ad?.category,
 			remark: 'ok',
+			grabber_id: grabbersId,
 		};
 
 		if (!user.isLogin) {

@@ -3,10 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
 import { Approutes } from '../../../constants';
 import { useNotifications } from '../../../context/Notification';
+import useAuth from '../../../context/UserContext';
 
-const NotificationCard = ({ feature, body, time, id, adId, isRead }) => {
+const NotificationCard = ({ feature, body, time, id, adId, adOwner, isRead }) => {
 	const navigate = useNavigate();
 	const { markAsRead } = useNotifications();
+	const { user } = useAuth();
 
 	return (
 		<div
@@ -14,7 +16,9 @@ const NotificationCard = ({ feature, body, time, id, adId, isRead }) => {
 			onClick={() => {
 				markAsRead(id);
 				navigate(
-					feature.includes('inspection_log')
+					feature.includes('inspection_log') && user.id === adOwner
+						? `${Approutes.product.initial}/${adId}`
+						: feature.includes('inspection_log') && user.id !== adOwner
 						? Approutes.grab.inspectionLog
 						: feature.includes('escrow')
 						? Approutes.profile.transactions
