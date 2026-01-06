@@ -60,11 +60,9 @@ const Register = ({ id }) => {
 		setTimeout(async () => {
 			const submit = await RegistrationHook(values, setSubmitting, 'register');
 			if (submit?.success) {
-				// notifySuc();
 				notify(submit.message, 'success');
 				return navigate('/', { replace: true });
 			} else {
-				// notifyErr(submit.message);
 				notify(submit.message, 'error');
 			}
 			setIsLoading(false);
@@ -111,7 +109,7 @@ const Register = ({ id }) => {
 					<div className="my-8 w-[90%] mx-auto">
 						<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
 							{(formik) => (
-								<Form>
+								<Form autoComplete="off">
 									<div className="form-control">
 										<Input
 											className={inputClass}
@@ -153,6 +151,20 @@ const Register = ({ id }) => {
 										/>
 									</div>
 									<div className="form-control">
+										<select
+											name="location"
+											id={`${id}-register-location`}
+											className={`${inputClass}`}
+											{...formik.getFieldProps('location')}
+										>
+											{statesOptions.map((state, index) => (
+												<option key={state.value} value={state.value}>
+													{state.key}
+												</option>
+											))}
+										</select>
+									</div>
+									<div className="form-control">
 										<Input
 											className={inputClass}
 											type="password"
@@ -172,32 +184,8 @@ const Register = ({ id }) => {
 											{...formik.getFieldProps('confirmPassword')}
 										/>
 									</div>
-									<div className="form-control">
-										<select
-											name="location"
-											id={`${id}-register-location`}
-											className={`${inputClass}`}
-											{...formik.getFieldProps('location')}
-										>
-											{statesOptions.map((state, index) => (
-												<option key={state.value} value={state.value}>
-													{state.key}
-												</option>
-											))}
-										</select>
-									</div>
-									<div className=" form-control">
-										{/* <Button
-                  type="submit"
-                  size={"xl"}
-                  className="bg-primary border-0"
-                  disabled={formik.isValid || !formik.dirty}
-                >
-                  <span className="flex text-xl">
-                    Register &emsp; <MdAppRegistration className="my-auto" />
-                  </span>
-                </Button> */}
 
+									<div className=" form-control">
 										<Button
 											type="submit"
 											tabIndex="-1"
