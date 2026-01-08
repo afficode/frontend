@@ -174,12 +174,6 @@ const GrabProduct = () => {
 
 					<aside className="w-full h-max min-h-[350px]  xl:w-[45%] border-2 border-gray-400 p-2 lg:p-4 flex flex-col justify-between">
 						<div className="">
-							<h6 className="w-full text-base font-bold text-center ">
-								Product ID: {formatAdId(result.data?.id)}
-							</h6>
-
-							<hr className="h-px my-2 border-black/40 border-1" />
-
 							<div className="w-full tracking-tighter">
 								<div className="flex justify-between">
 									<p className="p-lg">Category </p>
@@ -188,10 +182,10 @@ const GrabProduct = () => {
 									</p>
 								</div>
 							</div>
+							<hr className="h-px my-2 border-black/40 border-1" />
 						</div>
 
 						<div>
-							<hr className="h-px my-2 border-black/40 border-1" />
 							<div className="mb-6">
 								<p className="p-lg">Grab Link</p>
 
