@@ -4,15 +4,41 @@ A scalable frontend built with React 18 and JavaScript.
 
 ---
 
-To get started, run
+## 🛠 Tech Stack
 
-### `npm install`
+**Core:** React 18, JavaScript, Vite
+**State Management:** Context API, React Query
+**Styling:** TailwindCSS, Flowbite, DaisyUI
+**Forms:** Formik + Yup
+**CI/CD:** Coolify
 
-To install packages being used, then
+## 🚀 Getting Started
 
-### `npm run dev`
+Follow these steps to set up your local development environment.
 
-To start the server
+### Prerequisites
+
+- Node.js (v18 or higher)
+
+### Installation
+
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/afficode/frontend.git
+   cd frontend
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server**
+   ```bash
+   npm run dev
+   ```
 
 ## Folder structure
 
@@ -103,7 +129,7 @@ Branch naming convention
 - Installing unused packages
 - Not declaring universal constants that could change in a single file (constants folder)
 
-# CI / CD
+## CI / CD
 
 To have access to our CI/CD server, contact admin to give register your email.
 This gives you access to check deployment, check deployment error.
