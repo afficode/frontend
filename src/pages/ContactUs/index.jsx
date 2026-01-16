@@ -9,9 +9,8 @@ import secureLocalStorage from 'react-secure-storage';
 // icons
 import { BiEnvelope } from 'react-icons/bi';
 import { SlLocationPin } from 'react-icons/sl';
-import { FiPhone } from 'react-icons/fi';
-import { MdOutlineSupportAgent } from 'react-icons/md';
-import { BOONFU_MAIL } from '../../constants';
+import { FaWhatsapp } from 'react-icons/fa';
+import { BOONFU_ADDRESS, BOONFU_MAIL, BOONFU_PHONE } from '../../constants';
 
 const ContactUs = () => {
 	const [loading, setLoading] = useState(false);
@@ -93,12 +92,12 @@ const ContactUs = () => {
 					<div>
 						<Link to="https://wa.me/+2348136155728" rel="noopener noreferrer" target="_blank">
 							<span className="inline-block p-3 text-white transition-all rounded-full bg-primary hover:scale-105">
-								<MdOutlineSupportAgent size={20} />
+								<FaWhatsapp size={20} />
 							</span>
 						</Link>
 						<h6 className="mt-4 font-medium text-black ">Live chat</h6>
 						<p className="mt-2 text-gray-500 dark:text-gray-400">Our friendly team is here to help.</p>
-						<Link to="https://wa.me/+2348136155728" rel="noopener noreferrer" target="_blank">
+						<Link to={`https://wa.me/${BOONFU_PHONE}`} rel="noopener noreferrer" target="_blank">
 							<span className="mt-2 text-sm hover:underline text-primary">Start new chat</span>
 						</Link>
 					</div>
@@ -111,11 +110,11 @@ const ContactUs = () => {
 						<h6 className="mt-4 font-medium text-black ">Office</h6>
 						<p className="mt-2 text-gray-500 dark:text-gray-400">Come say hello at our office HQ.</p>
 
-						<span className="mt-2 text-sm text-primary">100 Smith Street Collingwood VIC 3066 AU</span>
+						<span className="mt-2 text-sm text-primary">{BOONFU_ADDRESS}</span>
 					</div>
 
 					<div>
-						<Link to={'tel:+2348136155728'}>
+						{/* <Link to={'tel:+2348136155728'}>
 							<span className="inline-block p-3 text-white transition-all rounded-full bg-primary hover:scale-105">
 								<FiPhone size={20} />
 							</span>
@@ -125,8 +124,8 @@ const ContactUs = () => {
 						<p className="mt-2 text-gray-500 dark:text-gray-400">Mon-Fri from 8am to 5pm.</p>
 
 						<Link to={'tel:+2348136155728'}>
-							<span className="mt-2 text-sm hover:underline text-primary">+234 8136155728</span>
-						</Link>
+							<span className="mt-2 text-sm hover:underline text-primary">{BOONFU_PHONE}</span>
+						</Link> */}
 					</div>
 				</div>
 

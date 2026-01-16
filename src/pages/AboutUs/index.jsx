@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Advertise, JoinUs } from '../../assets/svgs';
 import { ScrollToTop } from '../../utils';
 import { useLocation } from 'react-router-dom';
+import { BOONFU_ADDRESS, BOONFU_LEGAL_MAIL, BOONFU_MAIL, frontendLink } from '../../constants';
 
 const AboutUs = () => {
 	const { hash } = useLocation();
@@ -20,37 +21,106 @@ const AboutUs = () => {
 			<div className="pt-1">
 				<div className=" py-12 px-4 sm:px-[4rem] m-2 rounded-md about">
 					<h1 className="text-center text-white uppercase">About Us</h1>
+
+					<h6 className="text-center text-white text-semibold mt-4">
+						Boonfu Limited – Empowering Digital Commerce Through Community and Choice
+					</h6>
 				</div>
 			</div>
 
 			{/* our story */}
 			<div id="about-us" className={`${sectionStyles} scroll-mt-[92px] flex flex-col gap-4`}>
-				<h3 className="text-primary">About Boonfu</h3>
+				<h4 className="text-primary">Overview</h4>
 
 				<p>
-					Welcome to Boonfu.com, your premier online marketplace in Nigeria, Africa, where convenience
-					meets quality. At Boonfu.com, we are more than just a platform; we are a community-driven
-					marketplace committed to empowering people (Grabbers), local businesses and connecting buyers
-					with a diverse range of products and services. Founded with the vision of revolutionizing the
-					online marketplace landscape in Nigeria, Boonfu.com is dedicated to providing a seamless
-					shopping experience tailored to the unique needs and preferences of our customers. Whether
-					you're searching for cars & vehicles, fashion-forward apparel, artisanal crafts, cutting-edge
-					electronics, or essential everyday items, Boonfu.com offers a comprehensive selection to cater
-					to every lifestyle. What sets us apart is our unwavering commitment to fostering economic
-					growth and sustainability within our local communities. By enlisting all that is to be sold,
-					showcased and traded among the people of Nigeria and talented artisans there are, we not only
-					promote indigenous craftsmanship but also contribute to the socio-economic development of our
-					nation.
+					Boonfu Limited (operating via boonfu.com and associated domains such as boonfu.site) is a
+					Nigerian-registered digital marketplace platform headquartered at Plot 1B, Opeyemi Rotimi
+					Famakinwa Close, Ajomale Zone, Opic, Lagos State (RC Number: 7379214). We operate as a
+					Customer-to-Customer (C2C) online marketplace with integrated affiliate-driven urgency sales
+					capabilities, uniquely designed to accelerate transactions while creating earning opportunities
+					for digital marketers.
 				</p>
 
+				<h4 className="text-primary">Our Mission </h4>
+
 				<p>
-					Our platform is designed with user convenience in mind, featuring intuitive navigation, secure
-					payment options, and responsive customer support to ensure a hassle-free enlisting of items &
-					products and shopping experience from start to finish. Whether you're browsing from the comfort
-					of your home or on the go, Boonfu.com is your one-stop destination for all your day-to-day
-					essentials and shopping needs. Join us in our mission to redefine online marketplace in
-					Nigeria. Experience the convenience, diversity, and authenticity that Boonfu.com has to offer,
-					and become a part of our growing community today.
+					To drive a next-generation digital commerce ecosystem that is adaptable, intuitive, and powered
+					by user choice—where sellers achieve faster, safer sales, buyers discover trusted listings, and
+					digital marketers (“Grabbers”) monetize their networks ethically and transparently.
+				</p>
+
+				<h4 className="text-primary">Our Vision </h4>
+
+				<p>
+					To become Nigeria’s most trusted peer-to-peer trading and micro-entrepreneurship platform by
+					blending marketplace efficiency with decentralized affiliate marketing to fostering financial
+					inclusion, digital literacy, and community-driven commerce.
+				</p>
+
+				<h4 className="text-primary">Core Solutions & Services</h4>
+
+				<p>
+					At the heart of Boonfu is a simple yet powerful vision: to transform how Nigerians buy, sell,
+					and earn in the digital economy. We’ve built more than just a marketplace—we’ve engineered a
+					dynamic ecosystem where urgency meets opportunity. Whether you're a seller needing to move an
+					item quickly, a buyer seeking trusted deals, or a digital marketer (Grabber) looking to
+					monetize your network, Boonfu provides the tools, security, and incentive structure to make
+					every interaction fast, fair, and financially rewarding—all within a platform designed for
+					Nigeria’s unique digital commerce landscape. <br /> <br /> Our core solution and services
+					include:
+					<br />
+					<br />
+					<ol className={orderedListStyles}>
+						<li>
+							<b>C2C Marketplace Platform:</b> Boonfu enables private individuals and small businesses to
+							list, discover, and transact in a wide range of goods including electronics, fashion, home
+							appliances, vehicles, real estate etc. through a secure, user-friendly interface.
+						</li>
+						<li>
+							<b>The Grab Feature – Our Urgency Engine:</b> The Grab Feature is Boonfu’s proprietary
+							affiliate-powered sales accelerator, designed for sellers who need to sell quickly and
+							Grabbers who want to earn real income from their networks.
+						</li>
+						<li>
+							<b>Escrow Payment Protection:</b> To mitigate fraud and build trust, Boonfu acts as a neutral
+							intermediary for Grab-enabled transactions:
+							<ul className="list-disc list-inside">
+								<li>Buyers pay into a secure platform-held account.</li>
+								<li>
+									Funds are released to the seller only after buyer confirmation of receipt or expiry of the
+									inspection window.
+								</li>
+								<li>
+									This service is provided at no additional cost to users who opt for the Grab Feature.
+								</li>
+							</ul>
+						</li>
+						<li>
+							<b>Digital Earning Pathways for Grabbers:</b> Independent marketers can register as Grabbers
+							to:
+							<ul className="list-disc list-inside">
+								<li>Browse “grabbable” listings with visible commission rates.</li>
+								<li>Earn 60% of the locked commission (for other categories) upon successful sale.</li>
+								<li>Earn 80% of the locked commission (for vehicles & properties) upon successful sale.</li>
+								<li>Receive automated payouts to their Boonfu Wallet, withdrawable to bank accounts.</li>
+								<li>Access optional training and performance analytics to optimize their outreach.</li>
+							</ul>
+						</li>
+
+						<li>
+							<b>Promotional Services:</b> Beyond organic reach, sellers may purchase featured placements,
+							homepage banners, or social media spotlights to amplify visibility—subject to separate
+							promotional terms.
+						</li>
+					</ol>
+				</p>
+
+				<h4 className="text-primary">Community Commitment</h4>
+
+				<p>
+					We foster a safe, inclusive, and accountable trading environment. Prohibited items (e.g.,
+					weapons, counterfeit goods, illegal substances) are strictly barred. Users violating platform
+					rules face warnings, ad removal, or account suspension.
 				</p>
 			</div>
 
@@ -59,119 +129,234 @@ const AboutUs = () => {
 			>
 				<div className="flex items-center gap-8 p-6 bg-gray-300 shadow-xl">
 					<img src={Advertise} className="w-[6rem]" alt="/" />
-					<h3>Advertise With Us</h3>
+					<h4>Advertise With Us</h4>
 				</div>
 				<div className="flex items-center gap-8 p-6 bg-gray-300 shadow-xl">
 					<img src={JoinUs} className="w-[6rem]" alt="/" />
-					<h3>Join Us</h3>
+					<h4>Join Us</h4>
 				</div>
 			</div>
 
 			{/* our vision and mission */}
 			<div id="advertise" className={`${sectionStyles} scroll-mt-[92px] flex flex-col gap-4`}>
-				<h3 className="text-primary">How Advertise with us works!</h3>
+				<h4 className="text-primary">How Advertise with us works!</h4>
 				<p>
-					Explore how Boonfu.com Marketplace can help you achieve your advertising objectives and connect
-					with a highly receptive audience. Jump on the “Post an Ad” and begin your journey toward
-					enhanced brand visibility, quick sales and right engagement.
-				</p>
-
-				<p>
-					Boonfu.com is a trusted platform dedicated to exploring the latest trends in fashion, vehicles
-					and other products enlisted by entrepreneurs. With a commitment to continuously improve this
-					site for the betterment of members and fostering community engagement, we empower our audience
-					to stay informed and inspired in an ever-evolving digital landscape
+					Boonfu is a Customer-to-Customer (C2C) digital marketplace that connects Sellers, Buyers, and
+					independent marketers called Grabbers. Whether you want to sell quickly, earn commissions, or
+					buy securely, here’s how the platform works:
 				</p>
 
 				<ol className="list-decimal list-inside">
-					<h6 className="my-4 font-bold">Why Choose Boonfu.com Marketplace?</h6>
 					<li>
-						<b>Targeted Audience</b>: Engage with a niche audience deeply interested in the product .
-						enlisted, through unmatched algorithm this platform has been designed to.
+						<b>Creating an Account</b>
+						<ul className="list-disc list-inside pl-4">
+							<p>For Everyone (Sellers, Buyers & Grabbers):</p>
+							<li>
+								Visit{' '}
+								<a href={frontendLink} className="text-secondary">
+									{frontendLink}
+								</a>
+							</li>
+							<li>
+								Click “Sign Up” and provide:
+								<ul className="list-disc list-inside pl-6">
+									<li>First Name</li>
+									<li>Last Name</li>
+									<li>A valid email address,</li>
+									<li>A Nigerian phone number.</li>
+									<li>Set a secured password</li>
+									<li>Set Location</li>
+									<li>And create your account</li>
+								</ul>
+							</li>
+							<li>Go to the email account you provided to verify your email </li>
+							<li>
+								Navigate back to{' '}
+								<a href={frontendLink} className="text-secondary">
+									{frontendLink}
+								</a>{' '}
+								and Log-in{' '}
+							</li>
+							<li>Your account is now ready! No fees to register.</li>
+						</ul>
 					</li>
 					<li>
-						<b>Effective Reach</b>: Amplify your brand's visibility and products/items among influencers
-						and early adopters who actively seek genuine services and products.
+						<b>Funding Your Wallet (Deposit)</b>
+						<p>Required only for Sellers using the Grab Feature or Grabbers receiving commissions.</p>
+						<ul className="list-disc list-inside pl-4">
+							<li>Log in and go to your Boonfu Wallet (found in your dashboard).</li>
+							<li>Click “Fund Wallet” and choose a payment method (bank transfer, card, etc.).</li>
+							<li>Enter the amount and complete the transaction.</li>
+							<li>Funds appear instantly in your Available Balance.</li>
+							<li>For Grab listings, funds will be locked automatically when you activate the feature.</li>
+						</ul>
+					</li>
+
+					<li>
+						<b>Listing a Product (For Sellers)</b>
+						<p>Post any item—electronics, fashion, vehicles, property, and more:</p>
+						<ul className="list-disc list-inside pl-4">
+							<li>Click “Post Advert” on your dashboard.</li>
+							<li>
+								Fill in the listing details:
+								<ul className="list-disc list-inside pl-6">
+									<li>Item title, description, category,</li>
+									<li>Clear photos,</li>
+									<li>Price and location.</li>
+								</ul>
+							</li>
+							<li>
+								Choose listing type:
+								<ul className="list-disc list-inside pl-6">
+									<li>Basic Listing: Free </li>
+									<li>
+										Grab Feature: Paid urgency option (requires wallet deposit—see Enabling Grab Feature)
+									</li>
+								</ul>
+							</li>
+							<li>Review and publish your listing.</li>
+						</ul>
 					</li>
 					<li>
-						<b>Flexible Options</b>: Choose from a range of advertising solutions tailored to meet your
-						specific marketing goals and budget.
+						<b>Enabling the Grab Feature (Urgent Sale)</b>
+						<p>Sell faster with Boonfu’s affiliate-powered urgency engine:</p>
+						<ul className="list-disc list-inside pl-4">
+							<li>During listing, toggle “Enable Grab Feature”.</li>
+							<li>
+								Fund your wallet with the required deposit:
+								<ul className="list-disc list-inside pl-6">
+									<li>10% of item price for general items (e.g., ₦10,000 for a ₦100,000 phone),</li>
+									<li>1% of item price for vehicles & properties (e.g., ₦100,000 for a ₦10,000,000 car).</li>
+								</ul>
+							</li>
+							<li>Once funded, your listing goes live with “Grab” status.</li>
+							<li>
+								Real-time alerts are sent to all active Grabbers, who can now share/promote your
+								listings/item.
+							</li>
+							<li>Your deposit is locked for 1 month.</li>
+							<li>All Grab transactions are protected by Boonfu Escrow (zero cost).</li>
+						</ul>
+						<p className="pl-4 mt-2 font-semibold">If the Item Sells via a Grabber:</p>
+						<ul className="list-disc list-inside pl-4">
+							<li>The buyer pays through Boonfu’s mandatory, zero-cost Escrow system.</li>
+							<li>
+								Upon payment confirmation and buyer pickup (within 24 hours), the entire locked deposit is
+								converted into commission.
+							</li>
+							<li>60% is automatically credited to the Grabber’s Wallet.</li>
+							<li>40% is retained by Boonfu as platform service fee.</li>
+							<li>
+								Seller receives the full item price (minus any bank charges), with no additional cost.
+							</li>
+						</ul>
+						<p className="pl-4 mt-2 font-semibold">If the Item Does NOT Sell Within 1 Month:</p>
+						<ul className="list-disc list-inside pl-4">
+							<li>The seller receives a “Take Action” notification before downgrade.</li>
+							<li>
+								Options include:
+								<ul className="list-disc list-inside pl-6">
+									<li>
+										Downgrade to Basic Listing: Advert remains live for another month at no extra cost (90% of
+										deposit refunded).
+									</li>
+									<li>
+										Reduce Price by ≥10%: Qualifies for a new 1-month Grab promotion (new deposit required
+										based on revised price).
+									</li>
+								</ul>
+							</li>
+							<li>
+								If no action is taken, the listing is downgraded automatically. 10% administrative fee is
+								deducted from the locked deposit; 90% is unlocked for your withdrawal.
+							</li>
+						</ul>
+						<p className="pl-4 mt-2 font-semibold">Cancellation (Vehicles/Properties Only):</p>
+						<ul className="list-disc list-inside pl-4">
+							<li>Sellers may cancel within 7 days of posting.</li>
+							<li>5% admin fee applies; 95% is released as withdrawable balance.</li>
+						</ul>
 					</li>
 					<li>
-						<b>Authentic Engagement</b>: Benefit from genuine interactions and <b>feedback</b> from our .
-						engaged community, ensuring your message resonates effectively.
+						<b>Becoming a Grabber (Affiliate Marketer)</b>
+						<p>Earn commissions by promoting listings:</p>
+						<ul className="list-disc list-inside pl-4">
+							<li>Register and log in (same as Seller/Buyer).</li>
+							<li>
+								Provide you social media handle(s) (The channels where you intent to promote the listings)
+							</li>
+							<li>Go to the “Grabber Dashboard” (or browse live “Grab” listings).</li>
+							<li>No application needed—all users can become Grabbers instantly.</li>
+							<li>Start browsing new “grabbable” items with visible commission rates.</li>
+						</ul>
 					</li>
 					<li>
-						<b>Grab Feature</b>: Use the Grab feature to reach even audiences beyond Boonfu website,m
-						guaranteeing almost instantaneous closing transactions.
+						<b>Promoting a Product (as a Grabbers)</b>
+						<p>Share. Earn. Repeat.</p>
+						<ul className="list-disc list-inside pl-4">
+							<li>Find a listing you want to promote.</li>
+							<li>Click “Grab” → a unique affiliate link is generated.</li>
+							<li>Share this link on WhatsApp, Instagram, Facebook, blogs, or email.</li>
+							<li>
+								When a buyer clicks your link and completes payment via Escrow, you earn:
+								<ul className="list-disc list-inside pl-6">
+									<li>60% of the Seller’s locked deposit (e.g., ₦6,000 from a ₦10,000 deposit).</li>
+									<li>
+										Commissions are only paid after Escrow completion (buyer confirms pickup or 24-hour window
+										expires).
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<b>Escrow Service (Secure Payment Protection)</b>
+						<p>Mandatory for all Grab-enabled transactions:</p>
+						<ul className="list-disc list-inside pl-4">
+							<li>Buyer pays → funds are held in Boonfu’s secure Escrow account (not sent to Seller).</li>
+							<li>Seller’s contact details are revealed only after payment confirmation.</li>
+							<li>Buyer must pick up the item within 24 hours and confirm receipt.</li>
+							<li>
+								After confirmation (or 24-hour expiry):
+								<ul className="list-disc list-inside pl-6">
+									<li>Funds are released to the Seller,</li>
+									<li>60% of the commission is credited to the Grabber’s Wallet.</li>
+								</ul>
+							</li>
+						</ul>
+						<p className="pl-4 mt-2 font-semibold">If buyer fails to pick up within 24 hours:</p>
+						<ul className="list-disc list-inside pl-4">
+							<li>Transaction is cancelled,</li>
+							<li>Item is relisted,</li>
+							<li>Buyer gets a refund minus ₦1,000 admin fee.</li>
+						</ul>
+						<p className="pl-4 mt-2 italic font-semibold">
+							Note: Escrow is only available for Grab listings. Standard listings are direct peer-to-peer
+							deals with no payment protection.
+						</p>
+					</li>
+					<li>
+						<b>Withdrawing Funds</b>
+						<p>For Sellers (unsold Grab listings) & Grabbers (earned commissions):</p>
+						<ul className="list-disc list-inside pl-4">
+							<li>Go to your Boonfu Wallet.</li>
+							<li>
+								Ensure the balance is “Withdrawable” (i.e., not locked in an active listing). Grab listings
+								must be closed or expired before withdrawal.
+							</li>
+							<li>Click “Withdraw”, enter your bank details, and submit.</li>
+							<li>Funds are processed and sent to your account within 24–48 hours.</li>
+						</ul>
+						<p className="pl-4 mt-2 italic font-semibold">
+							Note: You cannot withdraw funds locked for an active Grab listing.
+						</p>
 					</li>
 				</ol>
-
-				<p>
-					Boonfu is your one-stop leading marketplace where buying, selling and also making money takes
-					place. We offering a curated selection of products and services that are most sought-after with
-					reasonable prices. With a focus on genuine product and quality, handsomely rewarded commission
-					on Grab-sales too, we provide a platform where consumers and brands converge to discover and
-					explore the latest items there are on the market, this also boast of a stress-free,
-					grab-and-post for commission system for all, to make good commissions on sales of products when
-					re-shared for marketing purposes
-				</p>
 			</div>
-
-			{/* our platform */}
-			{/* <div className={`${sectionStyles} flex flex-col gap-8`}>
-				<h3 className="text-center text-primary">Our Platform</h3>
-
-				<div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 ">
-					<div className="px-8 py-8 border-r border-black/30">
-						<span className="block text-4xl font-semibold text-primary">9.2m</span>
-						<p>Lorem ipsum dolor sit amet.</p>
-					</div>
-					<div className="px-8 py-8 max-md:border-r max-md:border-black/30 lg:border-r lg:border-black/30">
-						<span className="block text-4xl font-semibold text-primary">9.2m</span>
-						<p>Lorem ipsum dolor sit amet.</p>
-					</div>
-					<div className="px-8 py-8 border-r border-black/30">
-						<span className="block text-4xl font-semibold text-primary">9.2m</span>
-						<p>Lorem ipsum dolor sit amet.</p>
-					</div>
-					<div className="px-8 py-8 max-md:border-r max-md:border-black/30">
-						<span className="block text-4xl font-semibold text-primary">9.2m</span>
-						<p>Lorem ipsum dolor sit amet.</p>
-					</div>
-					<div className="px-8 py-8 border-r border-black/30">
-						<span className="block text-4xl font-semibold text-primary">9.2m</span>
-						<p>Lorem ipsum dolor sit amet.</p>
-					</div>
-					<div className="px-8 py-8 max-md:border-r max-md:border-black/30 lg:border-r lg:border-black/30">
-						<span className="block text-4xl font-semibold text-primary">9.2m</span>
-						<p>Lorem ipsum dolor sit amet.</p>
-					</div>
-					<div className="px-8 py-8 border-r border-black/30">
-						<span className="block text-4xl font-semibold text-primary">9.2m</span>
-						<p>Lorem ipsum dolor sit amet.</p>
-					</div>
-					<div className="px-8 py-8 max-md:border-r max-md:border-black/30">
-						<span className="block text-4xl font-semibold text-primary">9.2m</span>
-						<p>Lorem ipsum dolor sit amet.</p>
-					</div>
-				</div>
-
-				<div className="text-center ">
-					<p className="font-thin">
-						Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil, perspiciatis! Sapiente
-						dolorem libero dicta sint ut fugit odio vero quod.
-					</p>
-
-					<Button variant="subtle" size="small" className="my-4 font-semibold rounded-3xl">
-						Advertise with us
-					</Button>
-				</div>
-			</div> */}
 
 			{/* why choose us */}
 			<div id="jobs" className={`${sectionStyles} scroll-mt-[92px] flex flex-col gap-4`}>
-				<h3 className="text-primary">Join us / Jobs</h3>
+				<h4 className="text-primary">Join us / Jobs</h4>
 				<h6 className="font-bold ">Find Your Next Tech Career </h6>
 				<p>
 					Are you searching for exciting job opportunities in the tech industry? Boonfu Marketplace
@@ -241,6 +426,152 @@ const AboutUs = () => {
 				</p>
 			</div>
 
+			<div
+				id="candidate-privacy-policy"
+				className={`${sectionStyles} scroll-mt-[92px] flex flex-col gap-4`}
+			>
+				<h4 className="text-primary">Candidate Privacy Policy</h4>
+
+				<p>
+					Boonfu Ltd is committed to safeguarding the personal information of all job applicants. We take
+					your privacy seriously and ensure that all data is handled in accordance with applicable data
+					protection regulations. <br /> This Candidate Privacy Policy explains how we collect, use, and
+					protect your personal data throughout the recruitment process.
+				</p>
+
+				<h6 className="mt-4 font-bold ">Data Controller</h6>
+				<p>
+					{' '}
+					Boonfu Limited, a company registered in Nigeria, is the data controller responsible for your
+					personal information.
+				</p>
+
+				<h6 className="mt-4 font-bold ">Collection and Use of Personal Data</h6>
+				<p>
+					Personal data refers to any information that can identify you directly or indirectly. During
+					the recruitment process, we may collect and process the following:
+				</p>
+
+				<ul className="list-disc list-inside">
+					<h6 className="my-4 font-bold">Benefits of Using Boonfu Marketplace</h6>
+
+					<li>Full name</li>
+					<li>Location</li>
+					<li>Phone number</li>
+					<li>Email address</li>
+					<li>Curriculum Vitae (CV)</li>
+					<li>Work history and prior experience</li>
+					<li>Educational background</li>
+				</ul>
+
+				<p>We may also collect information on how you learned about the job opportunity.</p>
+
+				<h6 className="mt-4 font-bold">Purpose of Processing</h6>
+				<p>Your personal data is processed strictly for recruitment-related purposes, including:</p>
+
+				<ul className="list-disc list-inside">
+					<li>Assessing your suitability for the position you applied for</li>
+					<li>Communicating with you regarding your application</li>
+					<li>Managing and documenting the recruitment process</li>
+					<li>
+						With your consent, your data may also be retained for consideration for future job openings
+						within Boonfu or its affiliates. This allows us to contact you if a suitable position becomes
+						available, even if we are unable to offer you a role at present.
+					</li>
+				</ul>
+
+				<h6 className="mt-4 font-bold">Your Rights</h6>
+				<p>You have the following rights regarding your personal data:</p>
+
+				<ul className="list-disc list-inside">
+					<li>The right to request access to your personal data</li>
+					<li>The right to request correction or rectification</li>
+					<li>The right to request deletion of your data</li>
+					<li>The right to object to the processing of your data</li>
+					<li>The right to request data portability</li>
+				</ul>
+
+				<p>
+					To exercise any of these rights, please contact us at{' '}
+					<a className="text-secondary" href={`mailto:${BOONFU_MAIL}`}>
+						{BOONFU_MAIL}
+					</a>
+				</p>
+
+				<h6 className="mt-4 font-bold">Contact</h6>
+				<ul className="list-disc list-inside">
+					<li>
+						Legal:{' '}
+						<a className="text-secondary" href={`mailto:${BOONFU_LEGAL_MAIL}`}>
+							{BOONFU_LEGAL_MAIL}
+						</a>
+					</li>
+					<li>
+						Support:{' '}
+						<a className="text-secondary" href={`mailto:${BOONFU_MAIL}`}>
+							{BOONFU_MAIL}
+						</a>
+					</li>
+					<li>Registered Office: {BOONFU_ADDRESS}</li>
+				</ul>
+
+				<h6 className="mt-4 font-bold">Changes to This Policy</h6>
+				<p>
+					Boonfu Ltd reserves the right to update or modify this Privacy Policy as necessary. Any changes
+					will be posted on this page.
+				</p>
+			</div>
+
+			<div className={`${sectionStyles}  flex flex-col gap-4`}>
+				<h4 className="text-primary">Legal & Operational Compliance </h4>
+
+				<p>Boonfu is committed to full compliance with Nigerian regulatory frameworks, including:</p>
+				<ul className="list-disc list-inside">
+					<li>
+						The Nigeria <b>Data Protection Act (NDPA) 2023</b>, implementing robust data governance, user
+						consent mechanisms, and breach notification protocols.
+					</li>
+					<li>
+						<b>The Federal Competition and Consumer Protection Act (FCCPA)</b>, ensuring fair advertising,
+						transparent pricing, and consumer redress.
+					</li>
+					<li>
+						<b>Central Bank of Nigeria (CBN)</b> guidelines on payment intermediation and escrow
+						operations.
+					</li>
+				</ul>
+
+				<p>
+					All platform activities are governed by clear, accessible policies—continuously reviewed for
+					legal alignment and user protection.
+				</p>
+
+				<h4 className="text-primary">Contact Us</h4>
+
+				<p>For inquiries, support, or partnership opportunities:</p>
+
+				<ul className="list-disc list-inside">
+					<li>
+						<b>Customer Support:</b>{' '}
+						<a className="text-secondary" href={`mailto:${BOONFU_MAIL}`}>
+							{BOONFU_MAIL}
+						</a>
+					</li>
+					<li>
+						<b>Legal & Compliance:</b>{' '}
+						<a className="text-secondary" href={`mailto:${BOONFU_LEGAL_MAIL}`}>
+							{BOONFU_LEGAL_MAIL}
+						</a>
+					</li>
+					<li>
+						Registered Address: Plot 1B, Opeyemi Rotimi Famakinwa Close, Ajomale Zone, Opic, Lagos State,
+						Nigeria.
+					</li>
+				</ul>
+
+				<p>Boonfu — Where Selling Meets Speed, and Sharing Meets Earnings</p>
+			</div>
+
 			<ScrollToTop />
 		</section>
 	);
@@ -249,3 +580,4 @@ const AboutUs = () => {
 export default AboutUs;
 
 const sectionStyles = 'px-[4rem] py-8 max-sm:px-4';
+const orderedListStyles = 'text-base leading-relaxed dark:text-gray-400 list-decimal pl-6';

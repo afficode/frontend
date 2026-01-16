@@ -30,6 +30,8 @@ export const Approutes = {
 	},
 	aboutUs: '/about-us',
 	privacyPolicy: '/privacy-policy',
+	grabSystem: '/grab-system',
+	cookiePolicy: '/cookie-policy',
 	checkout: {
 		checkout: '/checkout/:grabber_id/:ad_id',
 		useCheckout: (grabber_id, ad_id) => `/checkout/${grabber_id}/${ad_id}`,
