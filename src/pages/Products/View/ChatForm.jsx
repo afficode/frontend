@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Field, Form, Formik } from 'formik';
 import Input from '../../../components/FormComponents/Input.jsx';
-import Button from '../../../ui/Button/index.jsx';
+import { Button, Modal as ModalUi } from '../../../ui';
 import { privateAxios } from '../../../utils/axios.js';
 import useAuth from '../../../context/UserContext.jsx';
 import useGrabContext from '../../../context/GrabContext.jsx';
@@ -21,6 +21,7 @@ import { ArrowDown, Cancel, Naira } from '../../../assets/svgs/index.js';
 import { InputGroup } from '../../../ui/index.js';
 import { inspectableCategories } from '../../../constants/Category.js';
 import { toMoney } from '../../../utils';
+import { TermsAndCondition } from '../../../components/index.js';
 
 const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
 	const navigate = useNavigate();
@@ -110,6 +111,23 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
 	const handleOfferSubmit = () => {
 		const content = `I'm willing to pay: ₦${toMoney(offer)}`;
 		chatCreation(content, true);
+	};
+
+	const ref = useRef(null);
+
+	//to scroll into terms and condition document
+	const [isOpen, setIsOpen] = useState(false);
+	const termsRef = useRef(null);
+
+	const handleScrollTo = (ref) => {
+		if (!isOpen) {
+			setIsOpen(true);
+			setTimeout(() => {
+				ref.current.scrollIntoView({ behavior: 'smooth' });
+			}, 1000); // Add a delay to ensure the component is rendered before scrolling
+		} else {
+			ref.current.scrollIntoView({ behavior: 'smooth' });
+		}
 	};
 
 	return (
@@ -255,12 +273,35 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
 										!isLogin && 'bg-gray-100 cursor-not-allowed'
 									} ${chatId !== null && 'bg-gray-300 cursor-not-allowed'}`}
 								/>
-
-								<p className="w-full my-2 text-center ">
-									Your contact details will be included in your reply. BOONFU reserves the right to monitor
-									conversations sent through our servers to protect you from fraud,spam or suspicious
-									behavior.
-								</p>
+								<div className="space-y-1 w-full my-2 text-center ">
+									<h5 className="text-base font-semibold">Product Page Disclaimer</h5>
+									<p className="text-center !text-xs">
+										Boonfu is a C2C marketplace—we do not sell, inspect, or guarantee any listed item. All
+										listings are posted by private individuals.
+										<ul className="!text-xs">
+											<li className="!text-xs">
+												● For GRAB listings: Payment is protected by Boonfu Escrow (funds held until you confirm
+												pickup). Inspect before confirming—sales are final after confirmation.
+											</li>
+											<li className="!text-xs">
+												● For NON-GRAB listings: No Escrow protection—transactions are direct between you and
+												the seller. Boonfu offers no support or refunds for these deals.
+											</li>
+										</ul>{' '}
+										<br />
+										Use Grab for secure, urgent sales. All transactions are at your own risk.{' '}
+										<button
+											type="button"
+											onClick={() => {
+												handleScrollTo(termsRef);
+											}}
+											className="text-secondary"
+										>
+											[View More]
+										</button>{' '}
+										to read the full Disclaimer in our Terms and Conditions.
+									</p>
+								</div>
 
 								{chatId ? (
 									<Link to={Approutes.profile.messages}>
@@ -392,6 +433,10 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
 					</>
 				}
 			/>
+
+			<ModalUi isOpen={isOpen} setIsOpen={setIsOpen} headerText="Terms of Service">
+				<TermsAndCondition termsRef={termsRef} setIsOpen={setIsOpen} isOpen={isOpen} />
+			</ModalUi>
 		</div>
 	);
 };

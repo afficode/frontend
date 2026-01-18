@@ -57,6 +57,8 @@ import {
 	SafetyGuides,
 	ClosePickup,
 	PrivacyPolicy,
+	CookiePolicy,
+	GrabSystem,
 } from './pages';
 import { AppLayout, DashboardLayout } from './layout';
 import { Approutes } from './constants';
@@ -82,7 +84,9 @@ function App() {
 				<Route element={<AppLayout />}>
 					<Route path={Approutes.home} element={isLogin ? <Welcome /> : <Home />} />
 					<Route path={Approutes.aboutUs} element={<AboutUs />} />
+					<Route path={Approutes.cookiePolicy} element={<CookiePolicy />} />
 					<Route path={Approutes.privacyPolicy} element={<PrivacyPolicy />} />
+					<Route path={Approutes.grabSystem} element={<GrabSystem />} />
 					<Route path={Approutes.media} element={<BoonfuMedia />} />
 					<Route path={Approutes.safety} element={<SafetyGuides />} />
 					<Route path={Approutes.contactUs} element={<ContactUs />} />

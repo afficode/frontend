@@ -15,6 +15,9 @@ const Footer = () => {
 	const termsRef = useRef(null);
 	const rulesRef = useRef(null);
 	const privacyRef = useRef(null);
+	const customerRef = useRef(null);
+	const returnRef = useRef(null);
+	const promotionRef = useRef(null);
 
 	const handleScrollTo = (ref) => {
 		if (!isOpen) {
@@ -42,6 +45,29 @@ const Footer = () => {
 								<br />
 								#SecureTransactions #EarnWithBoonfu
 							</p>
+							<div className="space-y-1">
+								<h4 className="text-start">Product Page Disclaimer</h4>
+								<p className="text-justify p-lg">
+									Boonfu is a C2C marketplace—we do not sell, inspect, or guarantee any listed item. All
+									listings are posted by private individuals.
+									<ul>
+										<li>
+											● For GRAB listings: Payment is protected by Boonfu Escrow (funds held until you confirm
+											pickup). Inspect before confirming—sales are final after confirmation.
+										</li>
+										<li>
+											● For NON-GRAB listings: No Escrow protection—transactions are direct between you and the
+											seller. Boonfu offers no support or refunds for these deals.
+										</li>
+									</ul>{' '}
+									<br />
+									Use Grab for secure, urgent sales. All transactions are at your own risk.{' '}
+									<button onClick={() => handleScrollTo(termsRef)} className="text-secondary">
+										[View More]
+									</button>{' '}
+									to read the full Disclaimer in our Terms and Conditions.
+								</p>
+							</div>
 						</div>
 					</div>
 
@@ -49,49 +75,67 @@ const Footer = () => {
 					<div className="grid max-[450px]:grid-cols-1 grid-cols-2 lg:grid-cols-4 gap-6 justify-between">
 						<ul className="flex flex-col ">
 							<h6 className="px-2 md:px-8 text-2xl opacity-[.7] font-normal whitespace-nowrap mb-3">
-								About US
+								Company
 							</h6>
-							<Link to={`${Approutes.aboutUs}#about-us`}>
-								<li className={listStyles}>About Boonfu</li>
+							<Link to={`${Approutes.aboutUs}`}>
+								<li className={listStyles}>About Us</li>
 							</Link>
-							<Link to={`${Approutes.aboutUs}#advertise`}>
-								<li className={listStyles}>Advertise With Us</li>
+							<Link to={Approutes.contactUs}>
+								<li className={listStyles}>Contact Us</li>
 							</Link>
 							<Link to={`${Approutes.aboutUs}#jobs`}>
-								<li className={listStyles}>Jobs</li>
+								<li className={listStyles}>Careers</li>
 							</Link>
+						</ul>
 
-							<Link to={Approutes.media}>
-								<li className={listStyles}>Media</li>
+						<ul className="flex flex-col ">
+							<h6 className="px-2 md:px-8 text-2xl opacity-[.7] font-normal whitespace-nowrap mb-3">
+								Platform
+							</h6>
+
+							<Link to={`${Approutes.aboutUs}#advertise`}>
+								<li className={listStyles}>How it works</li>
 							</Link>
 							<Link to={Approutes.privacyPolicy}>
 								<li className={listStyles}>Privacy Policy</li>
 							</Link>
 							<li onClick={() => handleScrollTo(termsRef)} className={listStyles}>
-								Terms & Conditions
+								Terms of Use
 							</li>
+							<Link to={Approutes.cookiePolicy}>
+								<li className={listStyles}>Cookie Policy</li>
+							</Link>
+							<li onClick={() => handleScrollTo(customerRef)} className={listStyles}>
+								Customer Service Agreement
+							</li>
+							<Link to={Approutes.grabSystem}>
+								<li className={listStyles}>Grabber Service Agreement</li>
+							</Link>
+							<li onClick={() => handleScrollTo(promotionRef)} className={listStyles}>
+								Promotional Service Agreement
+							</li>
+							<li onClick={() => handleScrollTo(returnRef)} className={listStyles}>
+								Return Policy
+							</li>
+							<Link to={`${Approutes.aboutUs}#candidate-privacy-policy`}>
+								<li className={listStyles}>Candidate Privacy Policy</li>
+							</Link>
 						</ul>
-
 						<ul className="flex flex-col ">
 							<h6 className="px-2 md:px-8 text-2xl opacity-[.7] font-normal whitespace-nowrap mb-3">
-								Help & Support
+								Resources
 							</h6>
-							<Link to={Approutes.contactUs}>
-								<li className={listStyles}>Contact Us</li>
-							</Link>
 							<Link to={Approutes.underConstruction}>
 								<li className={listStyles}>FAQs</li>
 							</Link>
 							<Link to={Approutes.safety}>
 								<li className={listStyles}>Safety Guides</li>
 							</Link>
-						</ul>
-						<ul className="flex flex-col ">
-							<h6 className="px-2 md:px-8 text-2xl opacity-[.7] font-normal whitespace-nowrap mb-3">
-								Boonfu Extra
-							</h6>
-							<Link to={Approutes.grab.home}>
-								<li className={listStyles}>Grab System</li>
+							<Link to={Approutes.media}>
+								<li className={listStyles}>Media</li>
+							</Link>
+							<Link to={`${Approutes.aboutUs}#advertise`}>
+								<li className={listStyles}>Advertise With Us</li>
 							</Link>
 						</ul>
 						<ul className="flex flex-col ">
@@ -142,6 +186,9 @@ const Footer = () => {
 						rulesRef={rulesRef}
 						termsRef={termsRef}
 						privacyRef={privacyRef}
+						returnRef={returnRef}
+						customerRef={customerRef}
+						promotionRef={promotionRef}
 						setIsOpen={setIsOpen}
 						isOpen={isOpen}
 					/>

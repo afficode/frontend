@@ -295,7 +295,7 @@ const index = () => {
 							<p className="w-full">Contact {result?.data?.firstname} </p>
 							{result?.data?.contact_type.includes('phone') && (
 								<div className="flex items-center justify-between">
-									<p className="my-2 text-lg  text-start">
+									<p className="my-2 text-sm  text-start">
 										<span className=" font-bold">
 											{revealNumber ? result?.data?.number : `${result?.data?.number.substring(0, 3)}XXXXXXXX`}
 										</span>
@@ -333,7 +333,7 @@ const index = () => {
 										}`}
 										data-tip={revealEmail ? result?.data?.email : ''}
 									>
-										<span className="pr-1 text-lg font-bold">
+										<span className="pr-1 text-sm font-bold">
 											{revealEmail && result?.data?.email !== null
 												? result?.data?.email
 												: `${result?.data?.email.substring(0, 3)}XXXXXXXX`}
