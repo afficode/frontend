@@ -12,10 +12,6 @@ const TermsAndCondition = ({
 }) => {
 	return (
 		<div ref={termsRef} className="space-y-4 text-justify">
-			<div className="flex flex-col items-center justify-center ">
-				<p className="text-primary">[Effective Date: 22 December 2025]</p>
-				<p className="text-primary">[Last Updated: 22 December 2025]</p>
-			</div>
 			<h4>1. INTRODUCTION</h4>
 			<p className={textStyles}>
 				1.1 Before registering or using the Boonfu website, you are required to carefully read,
