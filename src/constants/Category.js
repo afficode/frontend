@@ -12,8 +12,6 @@ import tradesman from '../assets/images/categories/tradesman.jpg';
 import vehicles from '../assets/images/categories/vehicles.jpg';
 import sports from '../assets/images/categories/sports.jpg';
 import motorbike from '../assets/images/categories/motorbike.jpg';
-import requests from '../assets/images/categories/requests.jpg';
-import deals from '../assets/images/categories/deals.jpg';
 
 export const categoryData = [
 	{

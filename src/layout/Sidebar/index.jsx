@@ -1,7 +1,6 @@
 import { Link, NavLink } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { ManSmiling } from '../../assets/images';
 import { CameraSmall } from '../../assets/svgs';
 import { Approutes } from '../../constants';
 import { Button, InputGroup } from '../../ui';
@@ -92,7 +91,7 @@ const Sidebar = () => {
 									? URL.createObjectURL(formik.values.profile_image)
 									: user?.profile_image?.path
 							}
-							alt="/"
+							alt={user?.firstname + ' ' + user?.lastname}
 							className="w-full h-full mx-auto rounded-full object-fit "
 						/>
 					) : (
