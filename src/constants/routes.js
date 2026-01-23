@@ -83,11 +83,30 @@ export const Approutes = {
 	refundForm: '/refund-form',
 };
 
-//export const backendLink = process.env.NODE_ENV !== "sam" ? 'http://109.237.25.252:4000/' : 'http://localhost:4000/';
-export const backendLink =
-	import.meta.env.VITE_CHECK_ENV === 'sam_dev'
-		? 'http://localhost:4000/'
-		: 'https://api.boonfu.site/';
+const getBackendLink = () => {
+	if (import.meta.env.VITE_CHECK_ENV === 'sam_dev') {
+		return 'http://localhost:4000/';
+	}
 
-export const frontendLink = 'https://boonfu.site/';
-// export const frontendLink = 'http://localhost:5173/';
+	if (
+		window.location.hostname.includes('boonfu.site') ||
+		window.location.hostname.includes('localhost')
+	) {
+		return 'https://api.boonfu.site/';
+	}
+
+	return 'https://api.boonfu.com/';
+};
+
+const getFrontendLink = () => {
+	if (window.location.hostname.includes('localhost')) {
+		return 'http://localhost:5173/';
+	}
+	if (window.location.hostname.includes('boonfu.site')) {
+		return 'https://boonfu.site/';
+	}
+	return 'https://boonfu.com/';
+};
+
+export const backendLink = getBackendLink();
+export const frontendLink = getFrontendLink();
