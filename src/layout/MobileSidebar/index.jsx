@@ -1,10 +1,11 @@
 import { Link, NavLink } from 'react-router-dom';
 import { CameraSmall } from '../../assets/svgs';
 import { Approutes } from '../../constants';
-import { Button } from '../../ui';
+import { Button, InputGroup } from '../../ui';
 import { useRef, useState } from 'react';
 import { useEffect } from 'react';
 import useAuth from '../../context/UserContext';
+import * as Yup from 'yup';
 import { useNotify, userUpdate } from '../../hooks';
 import { useFormik } from 'formik';
 
@@ -195,10 +196,9 @@ const navList = [
 		name: 'Security & Login',
 		link: Approutes.dashboard.security,
 	},
-
 	{
 		name: 'Privacy/Policy',
-		link: Approutes.dashboard.privacyPolicy,
+		link: Approutes.dashboard.dashboardPrivacyPolicy,
 	},
 	{
 		name: 'Help',

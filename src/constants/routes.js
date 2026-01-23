@@ -85,7 +85,7 @@ export const Approutes = {
 
 const getBackendLink = () => {
 	if (import.meta.env.VITE_ENV === 'local') {
-		return 'http://localhost:4000/';
+		return 'https://api.boonfu.site/';
 	}
 	return import.meta.env.VITE_BACKEND_URL || 'https://api.boonfu.com/';
 };
