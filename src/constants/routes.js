@@ -84,28 +84,14 @@ export const Approutes = {
 };
 
 const getBackendLink = () => {
-	if (import.meta.env.VITE_CHECK_ENV === 'sam_dev') {
+	if (import.meta.env.VITE_ENV === 'local') {
 		return 'http://localhost:4000/';
 	}
-
-	if (
-		window.location.hostname.includes('boonfu.site') ||
-		window.location.hostname.includes('localhost')
-	) {
-		return 'https://api.boonfu.site/';
-	}
-
-	return 'https://api.boonfu.com/';
+	return import.meta.env.VITE_BACKEND_URL || 'https://api.boonfu.com/';
 };
 
 const getFrontendLink = () => {
-	if (window.location.hostname.includes('localhost')) {
-		return 'http://localhost:5173/';
-	}
-	if (window.location.hostname.includes('boonfu.site')) {
-		return 'https://boonfu.site/';
-	}
-	return 'https://boonfu.com/';
+	return import.meta.env.VITE_FRONTEND_URL || 'https://boonfu.com/';
 };
 
 export const backendLink = getBackendLink();
