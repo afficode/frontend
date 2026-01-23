@@ -65,8 +65,6 @@ import {
 	Approutes,
 } from '../../constants';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Coin } from '../../assets/images';
-import { inspectableCategories } from '../../constants/Category';
 import { useQueryClient } from 'react-query';
 
 const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
@@ -129,17 +127,17 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 	const carModelOptions = toSelectOptions(
 		carModels(formValues.make),
 		'carModel',
-		'Select your car model'
+		'Select your car model',
 	);
 	const vehicleAccessoriesTypeOptions = toSelectOptions(
 		vehicleAccessoriesType,
 		'accessoriesType',
-		'Select type here'
+		'Select type here',
 	);
 	const otherVehicleTypeOptions = toSelectOptions(
 		otherVehicleType,
 		'otherVehicle',
-		'Select type here'
+		'Select type here',
 	);
 
 	// properties category
@@ -147,20 +145,20 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 		propertyType[selectedPropertyCategory] === undefined
 			? propertyType['default']
 			: propertyType[selectedPropertyCategory],
-		'propertyType'
+		'propertyType',
 	);
 	const propertyFacilityOptions = toOptions(
 		propertyFacilities[selectedPropertyCategory] === undefined
 			? propertyFacilities['default']
 			: propertyFacilities[selectedPropertyCategory],
-		'propertyFacility'
+		'propertyFacility',
 	);
 
 	//services category
 	const servicesTypeOptions = toSelectOptions(
 		servicesType[selectedServicesCategory],
 		'serviceType',
-		'Select type here'
+		'Select type here',
 	);
 	const servicesExpertiseOptions = toSelectOptions(tutorialTopics, 'topic', 'Select expertise here');
 
@@ -168,7 +166,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 	const motorbikeMakeOptions = toSelectOptions(
 		motorbikeMake[selectedMotorbikeCategory],
 		'motorbikeMake',
-		'Select make here'
+		'Select make here',
 	);
 	const motorbikeTypeOptions = toSelectOptions(motorbikeType, 'motorbikeType', 'Select type here');
 
@@ -176,13 +174,13 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 	const tradesmanTypeOptions = toSelectOptions(
 		tradesmanType[selectedTradesmanCategory],
 		'type',
-		'Select type here'
+		'Select type here',
 	);
 	const tradesmanAreaOptions = toOptions(
 		tradesmanArea[selectedTradesmanCategory] === undefined
 			? tradesmanArea['default']
 			: tradesmanArea[selectedTradesmanCategory],
-		'area'
+		'area',
 	);
 	const tradesmanFormOptions = toOptions(tradesmanForms[selectedTradesmanCategory], 'form');
 
@@ -192,28 +190,28 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			? fashionTypes['default']
 			: fashionTypes[selectedFashionCategory],
 		'fashionType',
-		'Select type here'
+		'Select type here',
 	);
 	const fashionBrandOptions = toSelectOptions(
 		fashionBrands[selectedFashionCategory] === undefined
 			? fashionBrands['default']
 			: fashionBrands[selectedFashionCategory],
 		'fashionBrand',
-		'Select brand here'
+		'Select brand here',
 	);
 	const fashionMaterialsOptions = toSelectOptions(
 		fashionMaterials[selectedFashionCategory] === undefined
 			? fashionMaterials['default']
 			: fashionMaterials[selectedFashionCategory],
 		'fashionMaterials',
-		'Select material here'
+		'Select material here',
 	);
 	const fashionSizeOptions = toSelectOptions(
 		fashionSizes[selectedFashionCategory] === undefined
 			? fashionSizes['default']
 			: fashionSizes[selectedFashionCategory],
 		'fashionSize',
-		'Select size here'
+		'Select size here',
 	);
 
 	// home category
@@ -222,19 +220,19 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			? homeBrands['default']
 			: homeBrands[selectedHomeCategory],
 		'homeBrand',
-		'Select brand here'
+		'Select brand here',
 	);
 	const homeTypesOptions = toSelectOptions(
 		homeTypes[selectedHomeCategory] === undefined
 			? homeTypes['default']
 			: homeTypes[selectedHomeCategory],
 		'homeType',
-		'Select type here'
+		'Select type here',
 	);
 	const homeMaterialsOptions = toSelectOptions(
 		homeMaterials,
 		'homeMaterial',
-		'Select material type here'
+		'Select material type here',
 	);
 	const furnitureForOptions = toSelectOptions(furnitureFor, 'furnitureFor', 'Select furniture for');
 	const homeFormOptions = toSelectOptions(homeChemicals, 'homeForm', 'Select form here');
@@ -245,12 +243,12 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			? softwarePlatforms['default']
 			: softwarePlatforms[selectedSoftwareCategory],
 		'softwarePlatform',
-		'Select platform here'
+		'Select platform here',
 	);
 	const softwareTypeOptions = toSelectOptions(
 		softwareTypes,
 		'softwareTypes',
-		'Select software type here'
+		'Select software type here',
 	);
 	const gameGenreOptions = toSelectOptions(gameGenre, 'gameGenre', 'Select game genre here');
 
@@ -260,14 +258,14 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			? babiesBrands['default']
 			: babiesBrands[selectedBabiesCategory],
 		'babiesBrands',
-		'Select brand here'
+		'Select brand here',
 	);
 	const babiesTypeOptions = toSelectOptions(
 		babiesTypes[selectedBabiesCategory] === undefined
 			? babiesTypes['default']
 			: babiesTypes[selectedBabiesCategory],
 		'babiesType',
-		'Select type here'
+		'Select type here',
 	);
 	const babiesSizeOptions = toSelectOptions(babiesSizes, 'babiesSize', 'Select size here');
 
@@ -281,7 +279,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 	const operatingSysOptions = toSelectOptions(
 		operatingSystems,
 		'OS',
-		'Select operating system here'
+		'Select operating system here',
 	);
 	const resolutionOptions = toSelectOptions(resolution, 'resolution', 'Select resolution here');
 	const simTypeOptions = toSelectOptions(simType, 'simType', 'Select sim type here');
@@ -290,60 +288,60 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 			? electronicsBrands['default']
 			: electronicsBrands[selectedElectronicsCategory],
 		'electronicsBrand',
-		'Select brand here'
+		'Select brand here',
 	);
 	const electronicsTypeOptions = toSelectOptions(
 		electronicsType[selectedElectronicsCategory],
 		'electronicsType',
-		'Select type here'
+		'Select type here',
 	);
 
 	// sports category
 	const sportBrandOptions = toSelectOptions(
 		sportBrands[selectedSportsCategory],
 		'sportBrand',
-		'Select brand here'
+		'Select brand here',
 	);
 	const sportTypeOptions = toSelectOptions(
 		sportTypes[selectedSportsCategory],
 		'sportType',
-		'Select type here'
+		'Select type here',
 	);
 
 	// agriculture category
 	const agricultureTypeOptions = toSelectOptions(
 		agricultureTypes[selectedAgricultureCategory],
 		'agricultureTypes',
-		'Select type here'
+		'Select type here',
 	);
 
 	// pet category
 	const petBreedsOptions = toSelectOptions(
 		petBreeds[selectedPetCategory],
 		'petBreed',
-		'Select a breed'
+		'Select a breed',
 	);
 	const petTypeOptions = toSelectOptions(
 		petTypes[selectedPetCategory] === undefined ? petTypes['default'] : petTypes[selectedPetCategory],
 		'petType',
-		'Select a breed type'
+		'Select a breed type',
 	);
 
 	//health category
 	const healthBrandOptions = toSelectOptions(
 		healthBrands[selectedHealthCategory],
 		'healthBrand',
-		'Select brand here'
+		'Select brand here',
 	);
 	const healthTypesOptions = toSelectOptions(
 		healthTypes[selectedHealthCategory],
 		'healthType',
-		'Select type here'
+		'Select type here',
 	);
 	const healthFormulationOptions = toSelectOptions(
 		healthProductFormulation[selectedHealthCategory],
 		'healthFormulation',
-		'Select formulation here'
+		'Select formulation here',
 	);
 
 	const categoryFields = {
@@ -4005,7 +4003,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 
 		if (values.images && values.images.length > 0) {
 			const watermarkedImages = await Promise.all(
-				values.images.map((file) => addWatermarkToImage(file))
+				values.images.map((file) => addWatermarkToImage(file)),
 			);
 
 			watermarkedImages.forEach((file) => {
