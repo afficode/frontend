@@ -1,14 +1,80 @@
 import { Link, NavLink } from 'react-router-dom';
-import { ManSmiling } from '../../assets/images';
 import { CameraSmall } from '../../assets/svgs';
 import { Approutes } from '../../constants';
-import { Button } from '../../ui';
-import { useRef } from 'react';
+import { Button, InputGroup } from '../../ui';
+import { useRef, useState } from 'react';
 import { useEffect } from 'react';
 import useAuth from '../../context/UserContext';
+import * as Yup from 'yup';
+import { useNotify, userUpdate } from '../../hooks';
+import { useFormik } from 'formik';
 
 const MobileSidebar = ({ sidebar, setSidebar }) => {
 	const sidebarRef = useRef();
+	const { mutate, isLoading } = userUpdate('dashboard/update_user');
+	const [uploadingImage, setUploadingImage] = useState(false);
+	const notify = useNotify();
+	const { user, updateUserInfo } = useAuth();
+
+	const initialValues = {
+		profile_image: null,
+	};
+
+	const validationSchema = Yup.object({
+		profile_image: Yup.mixed()
+			.test('fileType', 'Only image files are allowed', (value) => {
+				if (!value) return true; // Allow empty files (no validation)
+				return (
+					value && value.type.startsWith('image/') // Check if the file is an image
+				);
+			})
+			.test('fileSize', 'File size must be less than 1MB', (value) => {
+				if (!value) return true; // Allow empty files (no validation)
+				return value && value.size <= 1024 * 1024; // Check if the file size is <= 1MB
+			}),
+		// .required('Image file is required'),
+	});
+
+	const formik = useFormik({
+		initialValues,
+		validationSchema,
+	});
+
+	const handleFileChange = async (event) => {
+		const file = event.currentTarget.files[0];
+
+		try {
+			const formData = new FormData();
+			setUploadingImage(true);
+
+			if (file && file.type.startsWith('image/')) {
+				if (file.size <= 1024 * 1024) {
+					setUploadingImage(false);
+
+					formik.setFieldValue('profile_image', file);
+					formData.append('profile_image', file);
+					mutate(formData, {
+						onSuccess: async (data) => {
+							updateUserInfo(data?.user);
+							notify(data?.message, 'success');
+						},
+						onError: (error) => {
+							notify(error?.message, 'error');
+						},
+					});
+				} else {
+					notify('File size must be less than 1MB', 'error');
+					setUploadingImage(false);
+				}
+			} else {
+				notify('Please upload an image file', 'error');
+				setUploadingImage(false);
+			}
+		} catch (e) {
+			notify('Something went wrong...', 'error');
+			setUploadingImage(false);
+		}
+	};
 
 	useEffect(() => {
 		const handleClickOutside = (e) => {
@@ -24,8 +90,6 @@ const MobileSidebar = ({ sidebar, setSidebar }) => {
 		};
 	}, [setSidebar]);
 
-	const { user } = useAuth();
-
 	return (
 		<div className={sidebar ? showStyles : closeStyles}>
 			<aside
@@ -34,8 +98,47 @@ const MobileSidebar = ({ sidebar, setSidebar }) => {
 			>
 				<div className="w-full pb-2 mt-2 space-y-4 border-b border-black/30 ">
 					<div className="relative w-[9rem] h-[9rem] mx-auto">
-						<img src={ManSmiling} alt="" className="w-full h-full mx-auto rounded-full object-fit " />
-						<img src={CameraSmall} alt="" className="absolute bottom-0 right-0 cursor-pointer" />
+						{isLoading || uploadingImage ? (
+							<div className="w-full h-full m-auto flex items-center justify-center rounded-full bg-slate-400 text-white text-xs ">
+								{' '}
+								Loading...
+							</div>
+						) : formik?.values.profile_image || user?.profile_image ? (
+							<img
+								src={
+									formik?.values.profile_image
+										? URL.createObjectURL(formik.values.profile_image)
+										: user?.profile_image?.path
+								}
+								alt={user?.firstname + ' ' + user?.lastname}
+								className="w-full h-full mx-auto rounded-full object-fit "
+							/>
+						) : (
+							<div className="w-full">
+								<div className="avatar avatar-placeholder">
+									<div className="bg-gray-400 text-black w-40 rounded-full">
+										<div className="md:text-6xl sm:text-4xl flex items-center justify-center h-full">
+											{getInitials(user?.firstname + ' ' + user?.lastname)}
+										</div>
+									</div>
+								</div>
+							</div>
+						)}
+
+						<form encType="multipart/form-data">
+							<InputGroup
+								type="file"
+								name="profile_image"
+								onChange={handleFileChange}
+								errorMsg={
+									formik.touched.profile_image && formik.errors.profile_image
+										? formik.errors.profile_image
+										: null
+								}
+							>
+								<img src={CameraSmall} alt="" className="absolute bottom-0 right-0 cursor-pointer" />
+							</InputGroup>
+						</form>
 					</div>
 
 					<div>
@@ -93,10 +196,9 @@ const navList = [
 		name: 'Security & Login',
 		link: Approutes.dashboard.security,
 	},
-
 	{
 		name: 'Privacy/Policy',
-		link: Approutes.dashboard.privacyPolicy,
+		link: Approutes.dashboard.dashboardPrivacyPolicy,
 	},
 	{
 		name: 'Help',

@@ -1,4 +1,3 @@
-import { Coin } from '../../assets/images';
 import { InfoYellow, Naira } from '../../assets/svgs';
 import { Field } from 'formik';
 import { Button, InputGroup, Modal } from '../../ui';
@@ -39,8 +38,8 @@ const AdFeatures = (props) => {
 				showGrab && !showCalc
 					? 'mb-32 transition-all'
 					: showGrab && showCalc
-					? 'mb-48 transition-all'
-					: ''
+						? 'mb-48 transition-all'
+						: ''
 			}`}
 		>
 			{/* other posting package */}
@@ -74,10 +73,7 @@ const AdFeatures = (props) => {
 													</td>
 													<td className="flex-1">{option.info}</td>
 													<td className="flex justify-end items-end">
-														<div className="flex items-center ">
-															<img src={Coin} alt="/" className="w-[1.8rem] mx-2" />
-															<b className="w-8">{option.coin}</b>
-														</div>
+														<div className="flex items-center "></div>
 													</td>
 												</tr>
 											);
@@ -122,11 +118,11 @@ const AdFeatures = (props) => {
 																		? () => {
 																				setGrabModal(true);
 																				setShowCalc(true);
-																		  }
+																			}
 																		: () => {
 																				setGrabModal(false);
 																				setShowCalc(false);
-																		  }
+																			}
 																}
 															/>
 															<label htmlFor={option.value}>{option.key}</label>
@@ -359,21 +355,18 @@ const featureList = [
 	{
 		key: 'Basic',
 		value: '0',
-		coin: '3.5',
 		color: 'bg-secondary text-black',
 		info: 'Basic posting package.',
 	},
 	{
 		key: 'Feature Ad',
 		value: '1',
-		coin: '5',
 		color: 'bg-primary text-white',
 		info: 'Each category listing features yours on TOP.',
 	},
 	{
 		key: 'Spotlight',
 		value: '2',
-		coin: '7',
 		color: 'bg-green-600 text-white',
 		info: ' Your AD is  placed on Boonfu homepage + Priority given.',
 	},

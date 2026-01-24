@@ -101,13 +101,13 @@ const PerformanceCharts = ({ adsData }) => {
 					applyPolicy: 'close',
 					owner: user.id,
 					created_at: ad.created_at,
-				}
+				},
 			})
 			.then(async (res) => {
 				queryClient.invalidateQueries({ queryKey: ['getUserAds'] });
 				notify(res?.data.message, 'success');
 			})
-			.catch((error) => { });
+			.catch((error) => {});
 	};
 
 	return (
@@ -204,33 +204,6 @@ const PerformanceCharts = ({ adsData }) => {
 
 export default PerformanceCharts;
 
-const tableData = [
-	{
-		product: 'Toyota Corolla ‘07',
-		views: '1023',
-		chats: '20',
-		grabs: '18',
-	},
-	{
-		product: 'Toyota Corolla ‘07',
-		views: '1023',
-		chats: '20',
-		grabs: '18',
-	},
-	{
-		product: 'Toyota Corolla ‘07',
-		views: '1023',
-		chats: '20',
-		grabs: '18',
-	},
-	{
-		product: 'Toyota Corolla ‘07',
-		views: '1023',
-		chats: '20',
-		grabs: '18',
-	},
-];
-
 const monthlyPerformanceData = [
 	{
 		color: '#2686CE',
@@ -258,62 +231,3 @@ const monthlyPerformanceData = [
 		stat: '12%',
 	},
 ];
-
-/* 
-	monthly performance data = [
-		{
-			date: "Jan 2023",
-			account_interaction: "30%",
-		},
-		{
-			date: "May 2023",
-			account_interaction: "25%",
-		},
-		{
-			date: "Feb 2023",
-			account_interaction: "18%",
-		},
-		{
-			date: "Aug 2023",
-			account_interaction: "15%",
-		},
-		{
-			date: "Jan 2023",
-			account_interaction: "12%",
-		},
-	]
-*/
-
-/*
-barchart data = [
-		{
-			day: 'Mon',
-			account_interaction: 120,
-		},
-		{
-			day: 'Tue',
-			account_interaction: 200,
-		},
-		{
-			day: 'Wed',
-			account_interaction: 150,
-		},
-		{
-			day: 'Thu',
-			account_interaction: 80,
-		},
-		{
-			day: 'Fri',
-			account_interaction: 70,
-		},
-		{
-			day: 'Sat',
-			account_interaction: 120,
-		},
-
-		{
-			day: 'Sun',
-			account_interaction: 170,
-		},
-	],
-*/

@@ -5,10 +5,8 @@ import { Button, InputGroup } from '../../../ui';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import LoadingScreen from './LoadingScreen';
-
 import useAuth from '../../../context/UserContext.jsx';
 import { useStates } from '../../../hooks/index.js';
-
 import { userUpdate } from '../../../hooks/index.js';
 import { useNotify } from '../../../hooks/index.js';
 import VerifyPhoneNumber from './VerifyPhoneNumber.jsx';
@@ -26,7 +24,7 @@ const Profile = () => {
 				value: state?.state_id,
 				key: state?.name,
 			})),
-		[data]
+		[data],
 	);
 	const [isLoading, setIsLoading] = useState(true);
 	const { user, updateUserInfo } = useAuth();
@@ -125,11 +123,6 @@ const Profile = () => {
 			notify('Only image files are allowed', 'error');
 		}
 	};
-	//
-	// const handleRemoveFile = () => {
-	// 	formik.setFieldValue('cover_image', null);
-	// 	setToggleEdit((prev) => ({ ...prev, cover_image: false }));
-	// };
 
 	useEffect(() => {
 		setTimeout(() => {
@@ -152,8 +145,9 @@ const Profile = () => {
 
 			{/* banner */}
 			<div
-				className={`${!formik?.values.cover_image && 'border rounded-xl flex items-center justify-center'
-					} w-full h-[20rem] my-4 relative`}
+				className={`${
+					!formik?.values.cover_image && 'border rounded-xl flex items-center justify-center'
+				} w-full h-[20rem] my-4 relative`}
 			>
 				{formik?.values.cover_image || user?.cover_image ? (
 					<div className="w-full h-full relative group">
@@ -166,19 +160,8 @@ const Profile = () => {
 							alt="/"
 							className="w-full h-full mx-auto object-fit rounded-xl"
 						/>
-						{/*{ formik?.values.cover_image &&*/}
-						{/*	<div className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-100 absolute right-2 top-2 cursor-pointer opacity-0 group-hover:opacity-100 transition-all">*/}
-						{/*		<MdClose size={15} onClick={handleRemoveFile} />*/}
-						{/*	</div>*/}
-						{/*}*/}
 					</div>
 				) : (
-					// <img
-					// 	src={user?.cover_image?.path || ProfileBanner}
-					// 	alt="/"
-					// 	className="w-full h-full mx-auto object-fit rounded-xl"
-					// />
-
 					<h4 className="text-primary">No cover image</h4>
 				)}
 				<form encType="multipart/form-data">
@@ -216,7 +199,8 @@ const Profile = () => {
 					</div>
 					<div className="flex max-md:flex-col md:items-center md:justify-between  border-b border-black/10">
 						<label className="max-md:text-sm max-md:mt-2 inline-flex" htmlFor="phone">
-							<span className="my-auto mr-4">Contact Number</span> <VerifyPhoneNumber phoneDetails={phoneDetails} />
+							<span className="my-auto mr-4">Contact Number</span>{' '}
+							<VerifyPhoneNumber phoneDetails={phoneDetails} />
 						</label>
 						{toggleEdit?.about ? (
 							<InputGroup

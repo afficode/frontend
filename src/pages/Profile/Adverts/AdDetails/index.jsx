@@ -2,7 +2,7 @@ import { TbCurrencyNaira } from 'react-icons/tb';
 import OverviewPills from '../../../Products/View/OverviewPills';
 import { FaCamera } from 'react-icons/fa6';
 import { ScrollToTop } from '../../../../utils';
-import { CarBlack } from '../../../../assets/images';
+import { noimage } from '../../../../assets/images';
 import { Carousel } from 'flowbite-react';
 import { ActionBar, GrabUpdateTable } from '../../../../components';
 
@@ -31,20 +31,10 @@ const AdDetails = () => {
 					</div>{' '}
 					<div className="p-6 border">
 						<div className="relative rounded-none w-full xl:h-[550px]  mt-1">
-							{/* {result.data?.images.length > 0 ? ( */}
 							<Carousel className="  rounded-none">
-								{/* {result.data?.images.map((img, index) => (
-                                <img
-                                    src={img.path}
-                                    alt={img.filename}
-                                    key={index * 3}
-                                    className="rounded-t-sm rounded-b-none "
-                                />
-                            ))} */}
-								<img src={CarBlack} alt="no image" className="object-cover w-full h-full " />
-								<img src={CarBlack} alt="no image" className="object-cover w-full h-full " />
+								<img src={noimage} alt="no image" className="object-cover w-full h-full " />
+								<img src={noimage} alt="no image" className="object-cover w-full h-full " />
 							</Carousel>
-							{/* ) : ( */}
 
 							<div className="absolute bottom-0 flex w-full h-10 py-2 pl-6 text-white rounded-none bg-black/50">
 								<span className="flex px-2 my-auto border-2 border-white">
@@ -77,10 +67,6 @@ const AdDetails = () => {
 					<h2 className="text-xl tracking-tighter lg:tracking-normal">Overview</h2>
 
 					<div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-						{/* {convertKeyToName(result?.data).map((val, index) => ( */}
-						{/* overview={val} ad={result?.data} key={index} */}
-
-						{/* ))} */}
 						{overview.map((val, index) => (
 							<OverviewPills overview={val} key={index} />
 						))}

@@ -104,71 +104,9 @@ const InspectionCard = ({ image, location, condition, title, onClick }) => {
 								</span>
 							)}
 						</div>
-
-						{/* <div className="flex gap-4 items-center max-md:my-2 ">
-							<p className="flex items-center gap-2 ">
-								<img src={GrabIcon} alt="grabbers" className="w-5" /> 21-times
-							</p>
-							<p className="flex items-center gap-2 ">
-								<img src={InspectionCalender} alt="calender" className="w-5" /> 4
-							</p>
-						</div> */}
 					</div>
-					{/* <div className="md:ml-auto flex flex-col gap-2">
-						<Button variant={'primary'} size={'large'} className={'rounded-2xl font-semibold'}>
-							Active
-						</Button>
-						<Button variant={'grey'} size={'large'} className={'rounded-2xl font-semibold'}>
-							Close
-						</Button>
-					</div> */}
 				</div>
 			</div>
 		</div>
 	);
 };
-
-{
-	/* <Modal
-				isOpen={inspectionModal}
-				setIsOpen={setInspectionModal}
-				headerSize={'small'}
-				className={'max-w-[700px]'}
-			>
-				<div className="space-y-6">
-					<div className="flex flex-col items-center gap-4">
-						<div className="sm:h-[300px]">
-							<img src={InspectionImage} alt="/" className="rounded-xl w-full h-full object-cover" />
-						</div>
-						<h4>BLUE, TOYOTA COROLLA 2020</h4>
-					</div>
-
-					<div className="space-y-4 pb-6 border-b border-black/30">
-						<p className="flex gap-1 sm:gap-3">
-							Inspection date : <b>22.09.2024</b>
-						</p>
-						<p className="flex gap-1 sm:gap-3">
-							Inspector’s name : <b>LAWAL, QUDUS</b>
-						</p>
-						<p className="flex gap-1 sm:gap-3">
-							Contact : <b>22.09.2024</b>
-						</p>
-						<p className="flex gap-1 sm:gap-3">
-							Location : <b>Agege Pencinema</b>
-						</p>
-					</div>
-
-					<div>
-						<p className="flex gap-1 sm:gap-3 ">
-							Grabber : <b>Sholistic0012</b>
-						</p>
-
-						<div className="mt-16 flex items-center justify-center">
-							<Button variant={'primary'} className={'rounded-3xl mx-auto'}>
-								Active
-							</Button>
-						</div>
-					</div>
-				</div>
-			</Modal> */
-}

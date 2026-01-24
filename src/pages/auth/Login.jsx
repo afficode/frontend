@@ -11,13 +11,11 @@ import { Button as FlowbiteButton } from 'flowbite-react';
 import useAuth from '../../context/UserContext';
 import { SpinnerSkeleton, Spinner } from '../../components';
 import { useNotify } from '../../hooks';
-import useTokenContext from '../../context/TokenContext';
 
 const Login = ({ id }) => {
 	const { login } = useAuth();
 	const [isLoading, setIsLoading] = useState(false);
 	const navigate = useNavigate();
-	const { updateToken } = useTokenContext();
 	const location = useLocation();
 	const [searchParams] = useSearchParams();
 
@@ -44,7 +42,6 @@ const Login = ({ id }) => {
 			if (submit?.success) {
 				// the login from the useAuth tied to a context hook, will update localStorage and set user to Login
 				login(submit);
-				updateToken(submit?.coin);
 				navigate(location.state?.from || searchParams.get('next') || Approutes.home, {
 					replace: true,
 				});
