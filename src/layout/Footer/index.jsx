@@ -47,7 +47,7 @@ const Footer = () => {
 							</p>
 							<div className="space-y-1">
 								<h4 className="text-start">Product Page Disclaimer</h4>
-								<p className="text-justify p-lg">
+								<div className="text-justify p-lg">
 									Boonfu is a C2C marketplace—we do not sell, inspect, or guarantee any listed item. All
 									listings are posted by private individuals.
 									<ul>
@@ -66,7 +66,7 @@ const Footer = () => {
 										[View More]
 									</button>{' '}
 									to read the full Disclaimer in our Terms and Conditions.
-								</p>
+								</div>
 							</div>
 						</div>
 					</div>
