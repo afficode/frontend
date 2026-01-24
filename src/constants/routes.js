@@ -83,8 +83,10 @@ export const Approutes = {
 	refundForm: '/refund-form',
 };
 
+const prodOptions = ['production', 'prod'];
+
 const getBackendLink = () => {
-	if (import.meta.env.VITE_ENV === 'production') {
+	if (prodOptions.includes(import.meta.env.VITE_ENV)) {
 		return import.meta.env.VITE_BACKEND_URL || 'https://api.boonfu.com/';
 	}
 
@@ -92,7 +94,7 @@ const getBackendLink = () => {
 };
 
 const getFrontendLink = () => {
-	if (import.meta.env.VITE_ENV === 'production') {
+	if (prodOptions.includes(import.meta.env.VITE_ENV)) {
 		return import.meta.env.VITE_FRONTEND_URL || 'https://boonfu.com/';
 	}
 
