@@ -244,7 +244,7 @@ const Navbar = () => {
 									tabIndex={0}
 									className={`dropdown-content transform -translate-x-2/3 min-h-fit w-fit  z-[10] px-4 py-6 bg-white shadow-md rounded-md `}
 								>
-									{!user?.phone[0]?.isVerified ? (
+									{isLogin && !user?.phone[0]?.isVerified ? (
 										<div className="flex flex-col gap-4 justify-center items-center">
 											<p className="w-[18rem] text-justify">
 												Please verify your phone number before you can post an AD.
