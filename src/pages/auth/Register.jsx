@@ -202,8 +202,9 @@ const Register = ({ id }) => {
 													<Spinner color={'secondary'} /> Submitting Data{' '}
 												</>
 											) : (
-												<span className=" w-full flex text-base lg:text-lg">
-													Register &nbsp; <MdAppRegistration className="text-lg my-auto lg:text-2xl" />
+												<span className=" w-full flex text-base lg:text-lg text-white">
+													Register &nbsp;{' '}
+													<MdAppRegistration className="text-lg my-auto lg:text-2xl text-white" />
 												</span>
 											)}
 										</Button>

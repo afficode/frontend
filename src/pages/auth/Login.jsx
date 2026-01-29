@@ -111,8 +111,8 @@ const Login = ({ id }) => {
 													<span className="my-auto text-xl">Submitting Data...</span>{' '}
 												</>
 											) : (
-												<span className="flex w-full text-base lg:text-lg">
-													Login &nbsp; <MdLogin className="my-auto text-lg lg:text-2xl" />
+												<span className="flex w-full text-base lg:text-lg text-white">
+													Login &nbsp; <MdLogin className="my-auto text-lg text-white lg:text-2xl" />
 												</span>
 											)}
 										</FlowbiteButton>
