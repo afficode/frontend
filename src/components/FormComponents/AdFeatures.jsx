@@ -166,7 +166,7 @@ const AdFeatures = (props) => {
 																							If the Item Doesn’t Sell
 																						</li>
 																					</span>
-																					<p className="ml-10">
+																					<div className="ml-10">
 																						If:
 																						<ul className="ml-6">
 																							<li className="list-disc"> Our Grabbers don’t sell your item, or </li>
@@ -174,7 +174,7 @@ const AdFeatures = (props) => {
 																						</ul>
 																						you’ll get 90% of your deposit back, while 10% is charged as administrative
 																						fee.
-																					</p>
+																					</div>
 																				</div>
 																				<div>
 																					<span className="flex items-center gap-1">

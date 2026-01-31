@@ -47,6 +47,7 @@ const PostAd = () => {
 			fuel_type: ad?.fuel_type,
 			engine_size: ad?.engine_size,
 			negotiable: ad?.negotiable,
+			address: ad?.address,
 			feature: ad?.feature,
 		},
 		51: {
@@ -71,6 +72,7 @@ const PostAd = () => {
 			negotiable: ad?.negotiable,
 			contact_type:
 				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
+			address: ad?.address,
 			feature: ad?.feature,
 		},
 		52: {
@@ -95,6 +97,7 @@ const PostAd = () => {
 			negotiable: ad?.negotiable,
 			contact_type:
 				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
+			address: ad?.address,
 			feature: ad?.feature,
 		},
 		53: {
@@ -114,6 +117,7 @@ const PostAd = () => {
 			negotiable: ad?.negotiable,
 			contact_type:
 				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
+			address: ad?.address,
 			feature: ad?.feature,
 		},
 		54: {
@@ -149,6 +153,7 @@ const PostAd = () => {
 			negotiable: ad?.negotiable,
 			contact_type:
 				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
+			address: ad?.address,
 			feature: ad?.feature,
 		},
 		55: {
@@ -174,6 +179,7 @@ const PostAd = () => {
 			negotiable: ad?.negotiable,
 			contact_type:
 				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
+			address: ad?.address,
 			feature: ad?.feature,
 		},
 		56: {
@@ -198,6 +204,7 @@ const PostAd = () => {
 			negotiable: ad?.negotiable,
 			contact_type:
 				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
+			address: ad?.address,
 			feature: ad?.feature,
 		},
 		57: {
@@ -223,6 +230,7 @@ const PostAd = () => {
 			negotiable: ad?.negotiable,
 			contact_type:
 				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
+			address: ad?.address,
 			feature: ad?.feature,
 		},
 		58: {
@@ -250,6 +258,7 @@ const PostAd = () => {
 			negotiable: ad?.negotiable,
 			contact_type:
 				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
+			address: ad?.address,
 			feature: ad?.feature,
 		},
 		59: {
@@ -272,6 +281,7 @@ const PostAd = () => {
 			negotiable: ad?.negotiable,
 			contact_type:
 				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
+			address: ad?.address,
 			feature: ad?.feature,
 		},
 		60: {
@@ -293,6 +303,7 @@ const PostAd = () => {
 			negotiable: ad?.negotiable,
 			contact_type:
 				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
+			address: ad?.address,
 			feature: ad?.feature,
 		},
 		61: {
@@ -316,6 +327,7 @@ const PostAd = () => {
 			bulk_price: toMoney(ad?.bulk_price, false),
 			contact_type:
 				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
+			address: ad?.address,
 			feature: ad?.feature,
 		},
 		62: {
@@ -337,6 +349,7 @@ const PostAd = () => {
 			negotiable: ad?.negotiable,
 			contact_type:
 				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
+			address: ad?.address,
 			feature: ad?.feature,
 		},
 		63: {
@@ -363,6 +376,7 @@ const PostAd = () => {
 			negotiable: ad?.negotiable,
 			contact_type:
 				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
+			address: ad?.address,
 			feature: ad?.feature,
 		},
 		64: {
@@ -380,6 +394,7 @@ const PostAd = () => {
 			negotiable: ad?.negotiable,
 			contact_type:
 				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
+			address: ad?.address,
 			feature: ad?.feature,
 		},
 		65: {
@@ -398,6 +413,7 @@ const PostAd = () => {
 			negotiable: ad?.negotiable,
 			contact_type:
 				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
+			address: ad?.address,
 			feature: ad?.feature,
 		},
 	};
