@@ -66,6 +66,7 @@ import {
 } from '../../constants';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useQueryClient } from 'react-query';
+import { inspectableCategories } from '../../constants/Category';
 
 const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 	const [selectedHealthCategory, setSelectedHealthCategory] = useState(null);
@@ -3964,7 +3965,11 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 	const onSubmit = async (values, { setSubmitting, resetForm }) => {
 		setSubmitting(true);
 
-		if (values.feature === '3' && address === '') {
+		if (
+			values.feature === '3' &&
+			!inspectableCategories.includes(parseInt(values.category)) &&
+			address === ''
+		) {
 			notify('Please provide the address for item pickup.', 'error');
 			return;
 		}

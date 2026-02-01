@@ -78,7 +78,7 @@ const ImageInput = (props) => {
 
 												// Check if the file is already in the array based on the entire file object
 												const isFileAlreadyAdded = newImgFiles.some(
-													(existingFile) => existingFile.name === file.name && existingFile.size === file.size
+													(existingFile) => existingFile.name === file.name && existingFile.size === file.size,
 												);
 
 												if (isFileAlreadyAdded) {
@@ -125,8 +125,8 @@ const ImageInput = (props) => {
 
 							{editMode === false && isLoading === false && field.value?.length === 0 && (
 								<div className="max-sm:w-44 max-md:w-60 max-lg:w-80">
-									<h4 className="max-md:text-base">You can add up to 10 images</h4>
-									<p>Upload 10 maximum clear images to get your ad more views and replies.</p>
+									<h4 className="max-md:text-base">You can add up to {AD_IMAGE_COUNT} images</h4>
+									<p>Upload {AD_IMAGE_COUNT} maximum clear images to get your ad more views and replies.</p>
 								</div>
 							)}
 
