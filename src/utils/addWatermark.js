@@ -30,7 +30,7 @@ const addWatermarkToImage = (file, watermarkText = '©boonfu.com') => {
                 canvas.toBlob(
                     (blob) => {
                         if (blob) {
-                            const newFileName = file.name.replace(/\.[^/.]+$/, "") + ".webp";
+                            const newFileName = file.name.replace(/\.[^/.]+$/, '') + '.webp';
 
                             const watermarkedFile = new File([blob], newFileName, {
                                 type: 'image/webp', 

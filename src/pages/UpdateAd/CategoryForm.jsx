@@ -4,13 +4,13 @@ import { Form, Formik } from 'formik';
 import { FormControl } from '../../components';
 import { Button } from '../../ui';
 import {
-	useSubCategories,
-	useStates,
-	useLga,
-	useNotify,
-	useUpdateAd,
-	useCategories,
-	useImageCompressor,
+    useSubCategories,
+    useStates,
+    useLga,
+    useNotify,
+    useUpdateAd,
+    useCategories,
+    useImageCompressor,
 } from '../../hooks';
 import { addWatermarkToImage, fromMoney, toOptions, toSelectOptions } from '../../utils';
 import {
@@ -3953,12 +3953,12 @@ const CategoryForm = ({
             />
         ));
 
-	const { user } = useAuth();
-	const navigate = useNavigate();
-	const notify = useNotify();
-	const { mutate } = useUpdateAd(adId);
-	const queryClient = useQueryClient();
-	const {compressImages} = useImageCompressor()
+    const { user } = useAuth();
+    const navigate = useNavigate();
+    const notify = useNotify();
+    const { mutate } = useUpdateAd(adId);
+    const queryClient = useQueryClient();
+    const {compressImages} = useImageCompressor();
 
     const onSubmit = async (values, { setSubmitting }) => {
         setSubmitting(true);
@@ -4010,25 +4010,25 @@ const CategoryForm = ({
             formData.append(key, value);
         });
 
-		if (values.images && values.images.length > 0) {
-			try{
-				const compressedImages = await compressImages(values.images);
+        if (values.images && values.images.length > 0) {
+            try{
+                const compressedImages = await compressImages(values.images);
 
-				const finalImages = await Promise.all(
-					compressedImages.map((file) => addWatermarkToImage(file))
-				);
+                const finalImages = await Promise.all(
+                    compressedImages.map((file) => addWatermarkToImage(file))
+                );
 
-				finalImages.forEach((file) => {
-					formData.append('images', file);
-				});
-			}catch{
-				notify('Error preparing images.', 'error');
-				setSubmitting(false);
-				return;
-			}
-		}
-		formData.append('owner', user.id);
-		formData.delete('images');
+                finalImages.forEach((file) => {
+                    formData.append('images', file);
+                });
+            }catch{
+                notify('Error preparing images.', 'error');
+                setSubmitting(false);
+                return;
+            }
+        }
+        formData.append('owner', user.id);
+        formData.delete('images');
 
         mutate(formData, {
             onSuccess: (data) => {
