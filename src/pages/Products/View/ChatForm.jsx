@@ -30,14 +30,16 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
     const { isLogin, user } = useAuth();
     const { grabs, unGrabAd, grabAd: socketGrabAd } = useGrabContext();
 
-    const [blocked, _] = useState(active === '0');
+    const [blocked] = useState(active === '0');
     const [chatId, setChatId] = useState(null);
 
     const verifyChat = async () =>
         await privateAxios
             .post('chat/verifyChat', { ad_id, owner })
             .then((res) => {
-                res?.data?.chat.length > 0 && setChatId(res?.data?.chat[0].chat_id);
+                if(res?.data?.chat.length > 0){
+                    setChatId(res?.data?.chat[0].chat_id);
+                }
             })
             .catch((error) => {
                 notify(error?.response?.data?.message, 'error');
@@ -113,7 +115,7 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
         chatCreation(content, true);
     };
 
-    const ref = useRef(null);
+
 
     //to scroll into terms and condition document
     const [isOpen, setIsOpen] = useState(false);
@@ -135,9 +137,9 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
             <Formik
                 initialValues={{
                     message:
-						chatId !== null
-						    ? 'Disabled... Please continue chat in the message section'
-						    : 'Hi There, I am interested in this car, is it still available?',
+                        chatId !== null
+                            ? 'Disabled... Please continue chat in the message section'
+                            : 'Hi There, I am interested in this car, is it still available?',
                     phone: chatId !== null ? 'Disabled... Please continue chat in the message section' : '',
                 }}
                 onSubmit={(values) => {
@@ -148,7 +150,7 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
             >
                 {({ isSubmitting }) => (
                     <Form>
-                        {inspectableCategories.includes(ad?.category) && feature == '3' ? (
+                        {inspectableCategories.includes(ad?.category) && feature === '3' ? (
                             <>
                                 <Link to={Approutes.grab.grabProduct(ad_id)}>
                                     <Button
@@ -195,7 +197,7 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
                                     </Button>
                                 )}
                             </>
-                        ) : !inspectableCategories.includes(ad?.category) && feature == '3' ? (
+                        ) : !inspectableCategories.includes(ad?.category) && feature === '3' ? (
                             <>
                                 <Link to={Approutes.grab.grabProduct(ad_id)}>
                                     <Button
@@ -442,26 +444,3 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
 };
 
 export default ChatForm;
-
-{
-    /* <Button
-			size={"full"}
-			className="w-full p-2 my-2 text-lg tracking-tighter text-white bg-slate-600 hover:bg-slate-500 line-clamp-1"
-			disabled={!isLogin || blocked || user?.id === owner}
-			type="button"
-			onClick={() => setIsOpen(!isOpen)}
-		  >
-			<span className="flex items-center gap-2 justify-center">
-			  Feedback <BiSolidMessageRoundedDetail className="my-auto" />
-			</span>
-		  </Button> */
-}
-{
-    /* <Modal
-			isOpen={isOpen}
-			setIsOpen={setIsOpen}
-			modalHeader={true}
-			children={<ReportAd />}
-			headerText={"Feedback / Abuse"}
-		  /> */
-}

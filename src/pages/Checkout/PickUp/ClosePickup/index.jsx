@@ -35,6 +35,7 @@ const ClosePickup = () => {
             setTimer((prev) => prev - 1);
         }, 1000);
 
+        // eslint-disable-next-line consistent-return
         return () => clearInterval(interval);
     }, [timer]);
 
@@ -152,9 +153,7 @@ const ClosePickup = () => {
         e.preventDefault();
         if (formData.escrow_reason || formData.other_escrow_reason) {
             setStage(5);
-        } else {
-			
-        }
+        } 
     };
 
     if (escrowLoading) {

@@ -1,10 +1,9 @@
-import React from 'react';
+
 
 const Spinners = ({
     spinnerType = 'spinner',
     size = 'md',
     color = 'black',
-    otherClasses = '',
 }) => {
     /**
    * - spinnerType: spinner, dots, ring, ball, bars, infinity

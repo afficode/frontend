@@ -14,7 +14,7 @@ const FilterForm = ({ categoryId }) => {
 
     const initialValues = useMemo(() => {
         const params = getSearchParamsObject(searchParams);
-        const { [queryStrings.page]: page, [queryStrings.subCategory]: sub, ...filterParams } = params;
+        const { ...filterParams } = params;
         return filterParams;
     }, [searchParams, categoryId]);
 

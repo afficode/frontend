@@ -31,7 +31,7 @@ const Products = () => {
 
     const [product, setProduct] = useState({ ads: [] });
     const [featured, setFeatured] = useState([]);
-    const { isLoading, error, data } = useProduct({
+    const { isLoading, data } = useProduct({
         page: searchParams.get('page'),
         q: searchParams.get('q') || null,
         state_id: searchParams.get('state_id') || null,
@@ -42,12 +42,12 @@ const Products = () => {
     useEffect(() => {
         // when product change, we update the featured product immediately
         if (data) {
-            setProduct((prev) => ({ ...data }));
+            setProduct(() => ({ ...data }));
             if (data.ads.length > 0) {
                 // TODO: Revisit this after discussing with Mr Lawal the criteria for the Featured.
-                setFeatured((prev) => [...data?.ads?.slice(0, 8)]);
+                setFeatured(() => [...data?.ads?.slice(0, 8)]);
             } else {
-                setFeatured((prev) => []);
+                setFeatured(() => []);
             }
         }
 
@@ -60,7 +60,7 @@ const Products = () => {
 
     useEffect(() => {
         if (result.data) {
-            setCategories((prev) => manipulateCategory([...result.data]));
+            setCategories(() => manipulateCategory([...result.data]));
         }
     }, [result.isLoading]);
 
@@ -127,38 +127,38 @@ const Products = () => {
 
                     {/* <div className="join mx-auto mt-4 bg-primary text-white"> */}
                     {isLoading ||
-						(product && product?.ads.length > 0 && (
-						    <div className="join mx-auto mt-4 bg-primary text-white">
-						        <button
-						            onClick={() => {
-						                setSearchParams({
-						                    page: product?.prev,
-						                    q: searchParams.get('q') === null ? '' : searchParams.get('q'),
-						                });
-						                window.location.reload();
-						            }}
-						            // to={`${Approutes.product.initial}?page=${product?.prev}`}
-						            className="join-item btn bg-primary text-white border-gray-300 hover:bg-secondary hover:text-black hover:border-gray-300"
-						            disabled={product?.prev === null}
-						        >
-									Prev
-						        </button>
-						        <button
-						            // to={`${Approutes.product.initial}?page=${product?.next}`}
-						            onClick={() => {
-						                setSearchParams({
-						                    page: product?.next,
-						                    q: searchParams.get('q') === null ? '' : searchParams.get('q'),
-						                });
-						                window.location.reload();
-						            }}
-						            className="join-item btn bg-primary text-white border-gray-300 hover:bg-secondary hover:text-black hover:border-gray-300"
-						            disabled={product?.next === null}
-						        >
-									Next
-						        </button>
-						    </div>
-						))}
+                        (product && product?.ads.length > 0 && (
+                            <div className="join mx-auto mt-4 bg-primary text-white">
+                                <button
+                                    onClick={() => {
+                                        setSearchParams({
+                                            page: product?.prev,
+                                            q: searchParams.get('q') === null ? '' : searchParams.get('q'),
+                                        });
+                                        window.location.reload();
+                                    }}
+                                    // to={`${Approutes.product.initial}?page=${product?.prev}`}
+                                    className="join-item btn bg-primary text-white border-gray-300 hover:bg-secondary hover:text-black hover:border-gray-300"
+                                    disabled={product?.prev === null}
+                                >
+                                    Prev
+                                </button>
+                                <button
+                                    // to={`${Approutes.product.initial}?page=${product?.next}`}
+                                    onClick={() => {
+                                        setSearchParams({
+                                            page: product?.next,
+                                            q: searchParams.get('q') === null ? '' : searchParams.get('q'),
+                                        });
+                                        window.location.reload();
+                                    }}
+                                    className="join-item btn bg-primary text-white border-gray-300 hover:bg-secondary hover:text-black hover:border-gray-300"
+                                    disabled={product?.next === null}
+                                >
+                                    Next
+                                </button>
+                            </div>
+                        ))}
                     {/* </div> */}
                 </main>
             </section>

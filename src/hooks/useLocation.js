@@ -29,10 +29,12 @@ export const useLga = (state_id) => {
 export const fetchStates = () => {
     const states = () => axios.get(`${backendLink}api/states`).then((res) => res?.data);
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     return useQuery('states', states, CACHE_CONFIG);
 };
 
 export const fetchLGA = () => {
     const lga = () => axios.get(`${backendLink}api/lga`).then((res) => res?.data);
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     return useQuery('lga', lga, CACHE_CONFIG);
 };

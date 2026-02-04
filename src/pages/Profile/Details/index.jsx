@@ -24,7 +24,7 @@ const Details = () => {
         email_address: Yup.string().required('Required').email('Invalid email address'),
     });
 
-    const handleSave = (values) => {
+    const handleSave = () => {
         setToggleEdit(() => ({
             contact: true,
             business: true,
@@ -171,5 +171,3 @@ const Details = () => {
 };
 
 export default Details;
-
-const inputStyle = 'border-transparent font-medium ';

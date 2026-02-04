@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { BiSolidBookmarkAltPlus, BiSolidBookmarkAltMinus } from 'react-icons/bi';
 import { getSaves, saveAd, unSaveAd } from '../../../hooks/useSaves';
 import useAuth from '../../../context/UserContext';
@@ -15,7 +15,7 @@ const SaveProduct = ({ ads_id, className }) => {
     const { mutate } = saveAd();
     const [unSave, setUnSave] = useState(false);
     const { data, refetch, isLoading } = getSaves();
-    const { isLogin, user } = useAuth();
+    const { isLogin } = useAuth();
     const navigate = useNavigate();
     const queryClient = useQueryClient();
     const notify = useNotify();

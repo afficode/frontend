@@ -1,6 +1,4 @@
 import { formatDistance } from 'date-fns';
-import React from 'react';
-
 import useAuth from '../../../context/UserContext';
 
 import FeedbackForm from './FeedbackForm';
@@ -14,7 +12,7 @@ import { useEffect, useState } from 'react';
 const Feedback = ({ ad_id }) => {
     const [enable, setEnable] = useState(false);
     const { isLogin } = useAuth();
-    const { data: response, isLoading, isError, error } = fetchFeedbacks(ad_id, enable);
+    const { data: response, isError, error } = fetchFeedbacks(ad_id, enable);
     if (isError) {
         // redirect the user to login page
         if (isLogin && error?.response?.status === 401) {
@@ -57,7 +55,7 @@ const Feedback = ({ ad_id }) => {
 
 export default Feedback;
 
-const Feedbacks = ({ name, user_id, feedback_on, positive, text }) => {
+const Feedbacks = ({ name, feedback_on, positive, text }) => {
     return (
         <div className="flex flex-col w-full items-center justify-start bg-slate-50 p-2 lg:p-4 shadow-xl border border-b-primary border-b-4">
             <div className="w-full text-slate-600 text-xs text-right my-4">
@@ -102,7 +100,7 @@ const Feedbacks = ({ name, user_id, feedback_on, positive, text }) => {
                     <span className="font-bold my-auto">{name}</span>
                 </div>
                 <p className="">
-                    {positive == 'true' ? (
+                    {positive === 'true' ? (
                         <span className="text-green-500">
                             <BsFillEmojiSmileFill className="text-2xl" />
                         </span>
@@ -116,38 +114,3 @@ const Feedbacks = ({ name, user_id, feedback_on, positive, text }) => {
         </div>
     );
 };
-
-const feedbacks = [
-    {
-        name: 'Lukman Danfodio',
-        user_id: 23,
-        feedback_on: '2024-01-31 10:34:59',
-        positive: 'false',
-        text:
-			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque impedit nesciunt enim itaque autem ipsam quasi. Modi deserunt ipsa impedit provident cumque id quisquam aperiam necessitatibus earum quo, possimus aliquid!',
-    },
-    {
-        name: 'Effiong Uduaki',
-        user_id: 23,
-        feedback_on: '2023-12-11 10:34:59',
-        positive: 'true',
-        text:
-			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque impedit nesciunt enim itaque autem ipsam quasi. Modi deserunt ipsa impedit provident cumque id quisquam aperiam necessitatibus earum quo, possimus aliquid!',
-    },
-    {
-        name: 'Musa Eke',
-        user_id: 23,
-        feedback_on: '2024-01-15 10:34:59',
-        positive: 'false',
-        text:
-			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque impedit nesciunt enim itaque autem ipsam quasi. Modi deserunt ipsa impedit provident cumque id quisquam aperiam necessitatibus earum quo, possimus aliquid!',
-    },
-    {
-        name: 'Gbenga Ifeanyi',
-        user_id: 23,
-        feedback_on: '2024-02-10 10:34:59',
-        positive: 'true',
-        text:
-			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque impedit nesciunt enim itaque autem ipsam quasi. Modi deserunt ipsa impedit provident cumque id quisquam aperiam necessitatibus earum quo, possimus aliquid!',
-    },
-];

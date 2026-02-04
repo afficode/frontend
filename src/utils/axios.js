@@ -43,7 +43,7 @@ privateAxios.interceptors.response.use(
                     },
                 });
 
-                if (!response?.data) return;
+                if (!response?.data) {return;}
                 const { token, user } = response?.data;
                 setUpUser(user, initialState);
                 setToken(token);

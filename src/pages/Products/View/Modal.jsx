@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Modal = ({ modalHeader, children, headerText, buttonChild, className, ...rest }) => {
     return (
         <div>

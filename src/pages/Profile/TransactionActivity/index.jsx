@@ -4,7 +4,7 @@ import { Modal } from '../../../ui';
 import { format, parseISO } from 'date-fns';
 import { SpinnerSkeleton } from '../../../components';
 import { IoCalendarSharp, IoReorderFourSharp } from 'react-icons/io5';
-import { TbTruckDelivery, TbStatusChange } from 'react-icons/tb';
+import {  TbStatusChange } from 'react-icons/tb';
 import { BsCashCoin } from 'react-icons/bs';
 import ShowSellerContact from '../../Checkout/PickUp/ShowSellerContact';
 import NavigatePayment from './NavigatePayment';

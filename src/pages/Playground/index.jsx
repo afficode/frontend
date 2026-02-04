@@ -1,31 +1,24 @@
 import { useState } from 'react';
 import { Button, Notification } from '../../ui';
 import { FormControl, GrabUpdateTable } from '../../components';
-import { Form, Formik, useFormik } from 'formik';
+import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { ToggleSwitch } from 'flowbite-react';
-import { useCreateAd, useNotify } from '../../hooks';
+import { useNotify } from '../../hooks';
 import InquiryChat from '../Grabs/GrabbedProduct/Modals/InquiryChat';
 
 const Playground = () => {
     const [loading, setLoading] = useState(false);
     const [checked, setChecked] = useState(false);
 
-    const [formData, setFormData] = useState({
-        response: '',
-        reschedule_date: '',
-    });
+
 
     // const notify = useNotify();
-    const { mutate } = useCreateAd();
+    // const { mutate } = useCreateAd();
 
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-    };
+
+
 
     const notifyToast = useNotify();
 
@@ -73,36 +66,7 @@ const Playground = () => {
 
     //input group
 
-    const initialFormValues = {
-        name: '',
-        description: '',
-        bio: '',
-        age: '',
-    };
 
-    const formik = useFormik({
-        initialValues: initialFormValues,
-        onSubmit: (values) => {},
-        validate: (values) => {
-            const errors = {};
-
-            if (!values.name) {
-                errors.name = 'Required';
-            }
-
-            if (!values.description) {
-                errors.description = 'Required';
-            }
-            if (!values.bio) {
-                errors.bio = 'Required';
-            }
-
-            if (!values.age) {
-                errors.age = 'Required';
-            }
-            return errors;
-        },
-    });
 
     return (
         <div className="w-full max-w-5xl mx-auto">

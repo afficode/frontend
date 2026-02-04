@@ -25,7 +25,7 @@ const GrabRegister = () => {
                 const res = await privateAxios.get('/grab/account_exist');
                 setCheckGrabber(res.data.message === 'Account Exist' ? res.data : null);
             } catch (error) {
-                console.error(error);
+                // console.error(error);
             }
         };
 
@@ -37,7 +37,7 @@ const GrabRegister = () => {
             const response = await privateAxios.get(`/grab/verify_display_name/${displayName}`);
             return response.data.success;
         } catch (error) {
-            console.error('Error checking display name', error);
+            // console.error('Error checking display name', error);
             return false;
         }
     };
@@ -81,9 +81,10 @@ const GrabRegister = () => {
                 setSubmitting(true);
                 let formValues;
 
-                checkGrabber === null
-                    ? (formValues = values)
-                    : (formValues = {
+                if(checkGrabber === null){
+                    formValues = values;
+                }else{
+                    formValues = {
                         ...values,
                         display_name: checkGrabber?.user?.display_name,
                         current_location: checkGrabber?.user?.current_location,
@@ -94,15 +95,16 @@ const GrabRegister = () => {
                         whatsapp: checkGrabber?.user?.whatsapp ?? '',
                         instagram: checkGrabber?.user?.instagram ?? '',
                         tiktok: checkGrabber?.user?.tiktok ?? '',
-					  });
+                    };
+                }
 
                 const filteredFormValues = Object.fromEntries(
                     Object.entries(formValues).filter(
-                        ([key, value]) => value !== null && value !== undefined && value !== ''
+                        ([_, value]) => value !== null && value !== undefined && value !== ''
                     )
                 );
                 // Submit the form data to the backend endpoint
-                const response = await privateAxios.post('/grab/become_grabber', filteredFormValues);
+                await privateAxios.post('/grab/become_grabber', filteredFormValues);
                 notify('You are now a grabber!', 'success');
                 resetForm();
 

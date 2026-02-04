@@ -30,8 +30,7 @@ const ActionBar = (ad) => {
                 queryClient.invalidateQueries({ queryKey: ['getUserAds'] });
                 notify(res?.data.message, 'success');
                 navigate(Approutes.dashboard.initial);
-            })
-            .catch((error) => {});
+            });
 
         setIsDeleting(false);
     };

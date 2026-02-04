@@ -35,7 +35,7 @@ const NewAccount = () => {
         }),
         onSubmit: (values) => {
             mutate(values, {
-                onSuccess: (data) => {
+                onSuccess: (_data) => {
                     notify('Account added successfully', 'success');
                 },
                 onError: (error) => {
@@ -163,18 +163,3 @@ const NewAccount = () => {
 };
 
 export default NewAccount;
-
-const savedBankAccountList = [
-    {
-        id: 1,
-        name: 'Zenith Bank',
-        expiry: '20/29',
-        number: '**** **** **** 0112',
-    },
-    {
-        id: 2,
-        name: 'EcoBank',
-        expiry: '20/29',
-        number: '**** **** **** 2211',
-    },
-];

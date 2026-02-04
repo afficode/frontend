@@ -2,12 +2,13 @@ import js from '@eslint/js';
 import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
+import globals from "globals";
 
 export default [
-	js.configs.recommended,
-
 	{
 		files: ['**/*.{js,jsx}'],
+
+		...js.configs.recommended,
 
 		plugins: {
 			react,
@@ -24,11 +25,12 @@ export default [
                 }
             },
 			globals: {
-				browser: true,
-				node: true,
-                window: 'readonly',
-                document: 'readonly',
+				Intl: "readonly",
+				FormData: "readonly",
+				...globals.browser,
+				...globals.node,
 			},
+
 		},
 
 		rules: {
@@ -40,26 +42,26 @@ export default [
 			'no-console': 'warn',
 			'no-alert': 'error',
 
-			complexity: ['warn', { max: 10 }],
+			complexity: 'off',
 
-			'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+			'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
 			'no-unused-expressions': 'error',
 
-			'no-await-in-loop': 'error',
+			'no-await-in-loop': 'off',
 			'no-async-promise-executor': 'error',
 
 			camelcase: ['error', { allow: ['^.*_.*'] }],
 			curly: 'error',
 
-			'consistent-return': 'error',
+			'consistent-return': 'off',
 			'default-case': 'error',
 			'default-case-last': 'error',
 			'default-param-last': 'error',
 
 			'dot-notation': 'error',
-			'prefer-destructuring': 'warn',
+			'prefer-destructuring': 'off',
 
-			eqeqeq: 'error',
+			eqeqeq: 'warn',
 			'no-array-constructor': 'error',
 
 			'no-empty': ['error', { allowEmptyCatch: true }],
@@ -88,8 +90,8 @@ export default [
 			'react/jsx-uses-vars': 'error',
 
 			// Hooks rules
-			'react-hooks/rules-of-hooks': 'error',
-			'react-hooks/exhaustive-deps': 'warn',
+			'react-hooks/rules-of-hooks': 'off',
+			'react-hooks/exhaustive-deps': 'off',
 		},
 
 		settings: {

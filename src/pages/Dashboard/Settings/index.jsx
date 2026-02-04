@@ -36,9 +36,7 @@ const Settings = () => {
     });
 
     // submit function
-    const handleSave = (values) => {
-        const formData = { ...values, username: `Boonfu.com/${values.username}` };
-
+    const handleSave = () => {
         setToggleEdit(() => ({
             profile: true,
             account: true,

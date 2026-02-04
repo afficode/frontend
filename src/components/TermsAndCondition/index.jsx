@@ -1008,4 +1008,3 @@ export default TermsAndCondition;
 
 const textStyles = 'text-base leading-relaxed text-gray-500 dark:text-gray-400';
 const listStyles = 'text-base leading-relaxed text-gray-500 dark:text-gray-400 list-disc pl-6';
-const orderedListStyles = 'text-base leading-relaxed text-gray-500 dark:text-gray-400 list-decimal pl-6';

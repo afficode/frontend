@@ -1,4 +1,3 @@
-import React from 'react';
 import { FacebookBlue, Instagram, Linkdin, Twitter } from '../../assets/svgs';
 import { Button } from '../../ui';
 import { ScrollToTop } from '../../utils';

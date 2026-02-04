@@ -1,23 +1,23 @@
 import { useEffect, useState } from 'react';
-import { EditPencil, LoginLock, Password } from '../../../assets/svgs';
+import { EditPencil, Password } from '../../../assets/svgs';
 import { DashboardHeader } from '../../../components';
-import { Button, Modal } from '../../../ui';
+import { Modal } from '../../../ui';
 import UpdatePassword from './UpdatePassword';
-import { ToggleSwitch } from 'flowbite-react';
-import { useFormik } from 'formik';
+// import { ToggleSwitch } from 'flowbite-react';
+// import { useFormik } from 'formik';
 import LoadingScreen from './LoadingScreen';
-import { AiFillNotification } from 'react-icons/ai';
+// import { AiFillNotification } from 'react-icons/ai';
 
 const Security = () => {
     const [isOpen, setIsOpen] = useState(false);
 
-    const formik = useFormik({
-        initialValues: {
-            remember_password: false,
-            login_failure_alert: false,
-        },
-        onSubmit: (values) => { },
-    });
+    // const formik = useFormik({
+    //     initialValues: {
+    //         remember_password: false,
+    //         login_failure_alert: false,
+    //     },
+    //     onSubmit: (values) => { },
+    // });
 
     // loading screen timeout
     const [isLoading, setIsLoading] = useState(true);

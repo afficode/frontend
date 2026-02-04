@@ -22,17 +22,17 @@ const SideBar = ({ displayCategories, currentCategoryId }) => {
                 </header>
                 <div className="flex flex-col border-2 border-gray-300 p-2 text-sm sm:text-base border-t-0 gap-y-1">
                     {displayCategories !== null &&
-						displayCategories?.map((cat, index) => (
-						    <span
-						        key={index}
-						        className={`hover:text-primary hover:underline hover:font-bold ease-in cursor-pointer tracking-tighter line-clamp-1 ${
-						            cat.category === currentCategoryId ? 'text-primary font-semibold' : ''
-						        }`}
-						        onClick={() => handleCategoryChange(cat.category)}
-						    >
-						        {cat.name} ({cat.amount})
-						    </span>
-						))}
+                        displayCategories?.map((cat, index) => (
+                            <span
+                                key={index}
+                                className={`hover:text-primary hover:underline hover:font-bold ease-in cursor-pointer tracking-tighter line-clamp-1 ${
+                                    cat.category === currentCategoryId ? 'text-primary font-semibold' : ''
+                                }`}
+                                onClick={() => handleCategoryChange(cat.category)}
+                            >
+                                {cat.name} ({cat.amount})
+                            </span>
+                        ))}
                 </div>
             </div>
 

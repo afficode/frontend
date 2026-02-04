@@ -1,15 +1,7 @@
-import React from 'react';
 import {
-    Commitment,
-    FacebookBlue,
-    Instagram,
-    Linkdin,
     Safely,
     Securely,
-    Twitter,
-    Warning,
 } from '../../assets/svgs';
-import { Button } from '../../ui';
 import { ScrollToTop } from '../../utils';
 
 const SafetyGuides = () => {
@@ -146,11 +138,11 @@ const SafetyGuides = () => {
                 </h3>
 
                 <ul className=" list-inside font-normal pl-6">
-                    <li>🚩 Buyers/Sellers Asking for Off-Platform Payments</li>
+                    <li>🚩 Buyers/Sellers Asking for Off-Platform Payments</li>
                     <li>🚩 Poor or No Reviews on New Accounts</li>
-                    <li>🚩 Vague Product Descriptions or Stock Images</li>
-                    <li>🚩 Pressure to Close DealsQuickly</li>
-                    <li>🚩 Unverified Grabbers Promising Unrealistic Sales</li>
+                    <li>🚩 Vague Product Descriptions or Stock Images</li>
+                    <li>🚩 Pressure to Close DealsQuickly</li>
+                    <li>🚩 Unverified Grabbers Promising Unrealistic Sales</li>
                 </ul>
             </div>
 
@@ -158,9 +150,9 @@ const SafetyGuides = () => {
                 <h3 className="flex items-center gap-2 text-black"> 🛠️ What to Do If Something Goes Wrong</h3>
 
                 <ul className=" list-inside font-normal pl-6">
-                    <li>✅ Open a Dispute – Boonfu’s support team will mediate.</li>
-                    <li>✅ Report Suspicious Users – Help keep the community safe.</li>
-                    <li>✅ Contact Support – Reach out for urgent issues.</li>
+                    <li>✅ Open a Dispute – Boonfu’s support team will mediate.</li>
+                    <li>✅ Report Suspicious Users – Help keep the community safe.</li>
+                    <li>✅ Contact Support – Reach out for urgent issues.</li>
                 </ul>
             </div>
 
@@ -171,10 +163,10 @@ const SafetyGuides = () => {
                 </h3>
 
                 <ul className=" list-inside font-normal pl-6">
-                    <li>✔ Escrow Protection – Funds secured until delivery confirmation.</li>
-                    <li>✔ Verified Users – Reduced risk of scams.</li>
-                    <li>✔ 24/7 Fraud Monitoring – Proactive detection of suspicious activity.</li>
-                    <li>✔ Dedicated Support – Fast resolution for disputes.</li>
+                    <li>✔ Escrow Protection – Funds secured until delivery confirmation.</li>
+                    <li>✔ Verified Users – Reduced risk of scams.</li>
+                    <li>✔ 24/7 Fraud Monitoring – Proactive detection of suspicious activity.</li>
+                    <li>✔ Dedicated Support – Fast resolution for disputes.</li>
                 </ul>
             </div>
 

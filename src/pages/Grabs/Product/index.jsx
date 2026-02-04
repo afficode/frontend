@@ -7,7 +7,6 @@ import { FaCamera } from 'react-icons/fa';
 import OverviewPills from '../../Products/View/OverviewPills';
 import {
     convertKeyToName,
-    formatAdId,
     getCommission,
     numberWithCommas,
     ScrollToTop,
@@ -57,7 +56,7 @@ const GrabProduct = () => {
                 notify('Link copied to clipboard', 'success');
                 setCopied(true);
             })
-            .catch((err) => {
+            .catch(() => {
                 notify('Failed to copy link', 'error');
             });
     };

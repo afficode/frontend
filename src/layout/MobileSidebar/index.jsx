@@ -8,6 +8,7 @@ import useAuth from '../../context/UserContext';
 import * as Yup from 'yup';
 import { useNotify, userUpdate } from '../../hooks';
 import { useFormik } from 'formik';
+import { getInitials } from '../../utils';
 
 const MobileSidebar = ({ sidebar, setSidebar }) => {
     const sidebarRef = useRef();

@@ -1,10 +1,7 @@
 import { BoonfuLogo } from '../../assets/images';
-import { useNavigate } from 'react-router-dom';
 import ReverifyEmail from './ReverifyEmail';
 
 const ForgotPassword = () => {
-    const navigate = useNavigate();
-
     return (
         <div className="bg-white">
             <div className="flex items-center flex-col md:w-[80%] w-[95%] mx-auto py-[60px] bg-white">

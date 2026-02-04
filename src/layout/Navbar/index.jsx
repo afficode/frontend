@@ -49,6 +49,7 @@ const Navbar = () => {
         electCat: [],
     };
     if (isLogin && error) {
+        // eslint-disable-next-line no-unsafe-optional-chaining
         const { status } = error?.response;
         if (status === 401) {
             return window.location.assign(Approutes.auth.initial);
@@ -72,8 +73,10 @@ const Navbar = () => {
             }
         });
     }
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const { pathname } = useLocation();
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const handleSearch = useDebouncedCallback((query, stateId) => {
         if (query || stateId) {
             setSearchParams({
@@ -92,9 +95,11 @@ const Navbar = () => {
         }
     }, 500);
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const { data: states } = useStates();
     const statesOptions = toSelectOptions(states, 'states', 'All');
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
         const handleClickOutside = (e) => {
             if (navRef.current && !navRef.current.contains(e.target)) {

@@ -14,7 +14,9 @@ const PrivacyPolicy = () => {
         contact_access: Yup.string().required('Required'),
     });
 
-    const onSubmit = (values) => {};
+    const onSubmit = () => {
+        // console.log('formik', formik);
+    };
 
     return (
         <div>
@@ -27,7 +29,7 @@ const PrivacyPolicy = () => {
                 </div>
 
                 <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
-                    {(formik) => {
+                    {() => {
                         return (
                             <Form className=" ">
                                 <div className="max-md:mt-6 flex max-md:flex-col md:items-center md:gap-8  border-b border-black/10">

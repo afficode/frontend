@@ -1,4 +1,3 @@
-import React from 'react';
 import GrabSidebar from '../GrabSidebar';
 import { Outlet } from 'react-router-dom';
 

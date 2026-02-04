@@ -1,21 +1,19 @@
 import { useState } from 'react';
 
 import { useQueryClient } from 'react-query';
-import { ErrorMessage, Field, Form, Formik, useFormik } from 'formik';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import TextArea from '../../../components/FormComponents/TextArea';
 import { Button } from '../../../ui';
-import useAuth from '../../../context/UserContext';
-import { useFeedback } from '../../../hooks';
+import { useFeedback, useNotify } from '../../../hooks';
 import { BsFillEmojiSmileFill } from 'react-icons/bs';
 import { FaSadTear } from 'react-icons/fa';
-import { useNotify } from '../../../hooks';
 
 const FeedbackForm = ({ ad_id, buttonText, url, feedback }) => {
     const queryClient = useQueryClient();
     const notify = useNotify();
     const [feedbackType, setFeedbackType] = useState(null);
-    const { mutate, isLoading, isSuccess } = useFeedback(`${url}`);
+    const { mutate } = useFeedback(`${url}`);
     const initialValue = {
         text: '',
         positive: '',
@@ -35,7 +33,9 @@ const FeedbackForm = ({ ad_id, buttonText, url, feedback }) => {
                 notify(data?.message, 'success');
                 queryClient.invalidateQueries('feedback');
             },
-            onError: (err) => {},
+            onError: (err) => {
+                notify(err?.message, 'error');
+            },
         });
 
         // setTimeout(() => {

@@ -34,6 +34,7 @@ export const LoginHook = async (values, setSubmitting) => {
 };
 
 export const TokenHook = async (values, endpoint, token, setSubmitting) => {
+    // eslint-disable-next-line no-unused-expressions
     setSubmitting !== undefined && setSubmitting(true);
     let returnData;
     await axios
@@ -58,7 +59,6 @@ export const TokenHook = async (values, endpoint, token, setSubmitting) => {
 };
 
 export const updateUserInfo = async () => {
-    let returnedData;
 
     axios.post();
 };
@@ -67,5 +67,6 @@ export const updateUserPassword = () => {
     const userPassword = (values) =>
         privateAxios.post(`${backendLink}auth/change_password`, values).then((res) => res?.data);
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     return useMutation(['updateUserPassword'], userPassword);
 };

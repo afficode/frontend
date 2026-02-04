@@ -24,7 +24,9 @@ const Messages = () => {
         }
     };
 
-    useEffect(() => {}, [onlineUsers]);
+    useEffect(() => {
+        // console.log(onlineUsers);
+    }, [onlineUsers]);
 
     const [chatsUi, setChatsUi] = useState(false);
 
@@ -71,11 +73,11 @@ const Messages = () => {
                                         <div className="w-[calc(100%-5rem)] py-2">
                                             <div className="flex items-center justify-between w-full">
                                                 <h6 className="text-sm  truncate">
-                                                    {ad.user_a != user.id ? ad.user_a_name : ad.user_b_name}{' '}
+                                                    {ad.user_a !== user.id ? ad.user_a_name : ad.user_b_name}{' '}
                                                 </h6>
 
                                                 {onlineUsers?.includes(
-                                                    ad.user_a != user.id ? ad.user_a.toString() : ad.user_b.toString(),
+                                                    ad.user_a !== user.id ? ad.user_a.toString() : ad.user_b.toString(),
                                                 ) ? (
                                                         <div className="p-1 text-[0.65rem] text-green-800 bg-green-200 rounded-full animate-bounce">
 														Online
@@ -150,11 +152,11 @@ const Messages = () => {
                                     <div className="w-[calc(100%-5rem)] py-2">
                                         <div className="flex items-center justify-between w-full">
                                             <h6 className="text-sm  truncate">
-                                                {ad.user_a != user.id ? ad.user_a_name : ad.user_b_name}{' '}
+                                                {ad.user_a !== user.id ? ad.user_a_name : ad.user_b_name}{' '}
                                             </h6>
 
                                             {onlineUsers?.includes(
-                                                ad.user_a != user.id ? ad.user_a.toString() : ad.user_b.toString(),
+                                                ad.user_a !== user.id ? ad.user_a.toString() : ad.user_b.toString(),
                                             ) ? (
                                                     <div className="p-1 text-[0.65rem] text-green-800 bg-green-200 rounded-full animate-bounce">
 													Online

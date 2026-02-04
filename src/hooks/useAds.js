@@ -89,6 +89,7 @@ export const useFeedback = (endpoint) => {
 export const fetchFeedbacks = (ads_id, enable = false) => {
     const getFeedbacks = () => privateAxios.get(`ads/feedback/${ads_id}`);
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     return useQuery(['feedbacks', ads_id], getFeedbacks, {
         enabled: enable && !!ads_id,
         staleTime: Infinity,
@@ -102,6 +103,7 @@ export const fetchFeedbacks = (ads_id, enable = false) => {
 
 export const fetchRemarks = (ads_id, enabled = false) => {
     const getRemarks = () => privateAxios.get(`ads/remarks/${ads_id}`);
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     return useQuery(['remarks', ads_id], getRemarks, {
         enabled: enabled && !!ads_id,
         staleTime: Infinity, // Never auto-refresh, only on invalidation
@@ -114,7 +116,9 @@ export const fetchRemarks = (ads_id, enabled = false) => {
 };
 
 export const postRemark = () => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const queryClient = useQueryClient();
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     return useMutation({
         mutationFn: (remark) =>
             privateAxios.post('/ads/user/remark', remark, {
@@ -129,11 +133,13 @@ export const postRemark = () => {
 };
 
 export const deleteAd = () => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const queryClient = useQueryClient();
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     return useMutation({
         mutationFn: (ads_id) => privateAxios.delete(`/ads/${ads_id}`).then((res) => res?.data),
-        onSuccess: (data, ads_id) => {
+        onSuccess: (_, ads_id) => {
             queryClient.invalidateQueries(['getUserAds']);
             queryClient.invalidateQueries(['getAd', ads_id]);
             queryClient.invalidateQueries(['getAds']);

@@ -1,12 +1,10 @@
 import { useContext, useState } from 'react';
 
-import useAuth from './UserContext';
 import { createContext } from 'react';
 
 const SaveContext = createContext(null);
 
 export const SaveProvider = ({ children }) => {
-    const { isLogin } = useAuth();
 
     const [saves, setSaves] = useState({});
     const [savesId, setSavesId] = useState([]);

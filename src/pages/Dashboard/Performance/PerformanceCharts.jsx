@@ -12,7 +12,7 @@ import useAuth from '../../../context/UserContext';
 
 const PerformanceCharts = ({ adsData }) => {
     const { user } = useAuth();
-    const [chartData, setChartData] = useState([
+    const [chartData, ] = useState([
         {
             day: 'Mon',
             account_interaction: 120,
@@ -107,7 +107,7 @@ const PerformanceCharts = ({ adsData }) => {
                 queryClient.invalidateQueries({ queryKey: ['getUserAds'] });
                 notify(res?.data.message, 'success');
             })
-            .catch((error) => {});
+            .catch(() => { /* empty */ });
     };
 
     return (
@@ -130,39 +130,39 @@ const PerformanceCharts = ({ adsData }) => {
                         </thead>
                         <tbody>
                             {adsData?.ads_summary &&
-								adsData?.ads_summary
-								    .sort((a, b) => {
-								        if (a.id < b.id) {return 1;}
-								        if (a.id > b.id) {return -1;}
-								        return 0;
-								    })
-								    .map((ad) => (
-								        <tr key={ad.id} className="font-medium whitespace-nowrap hover:bg-gray-200">
-								            <td className="capitalize hover:underline hover:underline-offset-4">
-								                <Link
-								                    to={`${Approutes.product.initial}/${ad.id}`}
-								                    target="_blank"
-								                    rel="noopener noreferrer"
-								                >
-								                    {ad.name}
-								                </Link>
-								            </td>
-								            <td className="text-center text-primary">[ {ad.views} ]</td>
-								            <td className="text-center text-primary">[ {ad.chats} ]</td>
-								            <td className="text-center text-primary">[ 0 ]</td>
-								            <td className="flex justify-center text-center text-gray-600 gap-x-2">
-								                <span className="hover:text-primary ">
-								                    <Link to={`${Approutes.updateAd}/${ad.id}`} target="_blank" rel="noopener noreferrer">
-								                        <FaEdit />
-								                    </Link>
-								                </span>{' '}
-												|
-								                <span className="text-red-600 ">
-								                    <FaTrash className="cursor-pointer" onClick={() => handleDelete(ad?.id, ad)} />
-								                </span>
-								            </td>
-								        </tr>
-								    ))}
+                                adsData?.ads_summary
+                                    .sort((a, b) => {
+                                        if (a.id < b.id) { return 1; }
+                                        if (a.id > b.id) { return -1; }
+                                        return 0;
+                                    })
+                                    .map((ad) => (
+                                        <tr key={ad.id} className="font-medium whitespace-nowrap hover:bg-gray-200">
+                                            <td className="capitalize hover:underline hover:underline-offset-4">
+                                                <Link
+                                                    to={`${Approutes.product.initial}/${ad.id}`}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                >
+                                                    {ad.name}
+                                                </Link>
+                                            </td>
+                                            <td className="text-center text-primary">[ {ad.views} ]</td>
+                                            <td className="text-center text-primary">[ {ad.chats} ]</td>
+                                            <td className="text-center text-primary">[ 0 ]</td>
+                                            <td className="flex justify-center text-center text-gray-600 gap-x-2">
+                                                <span className="hover:text-primary ">
+                                                    <Link to={`${Approutes.updateAd}/${ad.id}`} target="_blank" rel="noopener noreferrer">
+                                                        <FaEdit />
+                                                    </Link>
+                                                </span>{' '}
+                                                |
+                                                <span className="text-red-600 ">
+                                                    <FaTrash className="cursor-pointer" onClick={() => handleDelete(ad?.id, ad)} />
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    ))}
                         </tbody>
                     </table>
                 </div>

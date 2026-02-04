@@ -67,7 +67,7 @@ const GrabbedProduct = () => {
                             <ul>
                                 <li>✅ Browse similar available items</li>
                                 <li>✅ Check back in 24-48 hours if the deal falls through</li>
-                                <li>✅ Contact support@boonfu.com for urgent inquiries</li>
+                                <li>✅ Contact support@boonfu.com for urgent inquiries</li>
                             </ul>
 
                             <p>Thank you for understanding our secure transaction process!</p>

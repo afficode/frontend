@@ -3,7 +3,7 @@ import TextError from './TextError';
 import { ToggleSwitch } from 'flowbite-react';
 
 const UrgentField = (props) => {
-    const { label, name, required, type, className, ...rest } = props;
+    const { label, name, required } = props;
 
     return (
         <div className={'my-2'}>

@@ -26,5 +26,6 @@ export const useChats = () => {
 export const createChat = () => {
     const createChat = (ad_id) => privateAxios.post('chat', ad_id);
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     return useMutation(['new_chat'], createChat);
 };

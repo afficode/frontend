@@ -6,6 +6,7 @@ import { Button, InputGroup, Modal } from '../../../ui';
 import PaymentOption from '../PaymentOption';
 import { SpinnerSkeleton } from '../../../components';
 import ShowSellerContact from './ShowSellerContact';
+import { Approutes } from '../../../constants';
 
 const PickUp = () => {
     const { grabber_id, ad_id } = useParams();
@@ -51,7 +52,7 @@ const PickUp = () => {
                             <ul>
                                 <li>✅ Browse similar available items</li>
                                 <li>✅ Check back in 24-48 hours if the deal falls through</li>
-                                <li>✅ Contact support@boonfu.com for urgent inquiries</li>
+                                <li>✅ Contact support@boonfu.com for urgent inquiries</li>
                             </ul>
 
                             <p>Thank you for understanding our secure transaction process!</p>

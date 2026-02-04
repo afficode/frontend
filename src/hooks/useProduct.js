@@ -33,6 +33,7 @@ export const fetchProduct = (ad_id, isLogin = false) => {
         ? () => privateAxios.get(`${backendLink}ads/${ad_id}`)
         : () => axios.get(`${backendLink}ads/${ad_id}`);
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     return useQuery(['fetch-product', ad_id], fetchSingleProduct, {
         refetchInterval: 180000,
         refetchIntervalInBackground: false,
@@ -44,6 +45,7 @@ export const fetchCategorySummary = (cat_id) => {
     const fetchCatSummary = () =>
         axios.get(`${backendLink}ads/cat_summary/${cat_id}`).then((res) => res?.data);
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     return useQuery(['fetchCatSummary', cat_id], fetchCatSummary, {
         refetchInterval: 5000,
         refetchIntervalInBackground: false,

@@ -5,7 +5,7 @@ import { Approutes } from '../../../constants';
 import { useNotifications } from '../../../context/Notification';
 import useAuth from '../../../context/UserContext';
 
-const NotificationCard = ({ feature, body, time, id, adId, isRead, metadata, user_id }) => {
+const NotificationCard = ({ feature, body, time, id, adId, isRead, metadata }) => {
     const navigate = useNavigate();
     const { markAsRead } = useNotifications();
     const { user } = useAuth();

@@ -102,7 +102,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
     const [otherColor, setOtherColor] = useState(false);
     const [otherExpertise, setOtherExpertise] = useState(false);
     const [otherRoom, setOtherRoom] = useState(false);
-    const [otherUse, setOtherUse] = useState(false);
+    const [, setOtherUse] = useState(false);
     const [otherCondition, setOtherCondition] = useState(false);
     const [otherProcessor, setOtherProcessor] = useState(false);
     const [otherScent, setOtherScent] = useState(false);
@@ -3423,7 +3423,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
             {
                 control: 'toggle',
                 label: 'Negotiable?',
-                name: 'negotiable	',
+                name: 'negotiable',
             },
             {
                 control: 'feature',
@@ -3931,31 +3931,31 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
 
     //rendering form fields based on category
     const renderFields =
-		fields &&
-		fields?.map((field, index) => (
-		    <FormControl
-		        key={index}
-		        categoryId={categoryId}
-		        control={field.control}
-		        name={field.name}
-		        type={field.type}
-		        maxLength={field.maxLength}
-		        placeholder={field.placeholder}
-		        label={field.label}
-		        options={field.options}
-		        required={field.required}
-		        price={fromMoney(priceValue)}
-		        address={address}
-		        setAddress={setAddress}
-		        subCat={
-		            selectedVehicleCategory ||
-					selectedPropertyCategory ||
-					selectedAgricultureCategory ||
-					selectedMotorbikeCategory ||
-					selectedElectronicsCategory
-		        }
-		    />
-		));
+        fields &&
+        fields?.map((field, index) => (
+            <FormControl
+                key={index}
+                categoryId={categoryId}
+                control={field.control}
+                name={field.name}
+                type={field.type}
+                maxLength={field.maxLength}
+                placeholder={field.placeholder}
+                label={field.label}
+                options={field.options}
+                required={field.required}
+                price={fromMoney(priceValue)}
+                address={address}
+                setAddress={setAddress}
+                subCat={
+                    selectedVehicleCategory ||
+                    selectedPropertyCategory ||
+                    selectedAgricultureCategory ||
+                    selectedMotorbikeCategory ||
+                    selectedElectronicsCategory
+                }
+            />
+        ));
 
     const notify = useNotify();
     const { mutate, isPending } = useCreateAd();

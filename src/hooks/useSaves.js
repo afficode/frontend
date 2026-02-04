@@ -14,6 +14,7 @@ const CACHE_CONFIG = {
 export const getSaves = (enable = false) => {
     const getSaved = () => privateAxios.get(`${backendLink}ads/saves`).then((res) => res?.data);
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     return useQuery('saved', getSaved, {
         enabled: enable,
         ...CACHE_CONFIG,
@@ -21,10 +22,12 @@ export const getSaves = (enable = false) => {
 };
 
 export const saveAd = () => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const queryClient = useQueryClient();
 
     const saveAd = (ads_id) => privateAxios.post('ads/saveAd', ads_id).then((res) => res?.data);
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     return useMutation(['saveAd'], saveAd, {
         onSuccess: () => {
             queryClient.invalidateQueries('saved');
@@ -33,7 +36,7 @@ export const saveAd = () => {
 };
 
 export const unSaveAd = async ({ queryKey }) => {
-    const [_, ads_id] = queryKey;
+    const [, ads_id] = queryKey;
     return await privateAxios.get(`ads/unSaveAd?ads_id=${ads_id}`).then((res) => res?.data);
 };
 

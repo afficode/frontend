@@ -30,9 +30,9 @@ const PostAd = () => {
             description: ad?.description,
             vehicle_id: ad?.vehicle_id,
             vehicle_features:
-				typeof ad?.vehicle_features === 'string'
-				    ? ad?.vehicle_features.split(',')
-				    : ad?.vehicle_features,
+                typeof ad?.vehicle_features === 'string'
+                    ? ad?.vehicle_features.split(',')
+                    : ad?.vehicle_features,
             ad_condition: ad?.ad_condition,
             vehicle_body: ad?.vehicle_body,
             contact_type:
@@ -245,9 +245,9 @@ const PostAd = () => {
             type_other: ad?.type_other,
             service_area: ad?.service_area,
             service_features:
-				typeof ad?.service_features === 'string'
-				    ? ad?.service_features?.split(',')
-				    : ad?.service_features,
+                typeof ad?.service_features === 'string'
+                    ? ad?.service_features?.split(',')
+                    : ad?.service_features,
             payment_terms: ad?.payment_terms,
             mode_of_transport: ad?.mode_of_transport,
             form: typeof ad?.form === 'string' ? ad?.form?.split(',') : ad?.form,

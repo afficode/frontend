@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import ReactLoading from 'react-loading';
 
 /**
@@ -15,9 +14,7 @@ import ReactLoading from 'react-loading';
  * spinningBubbles
  * spokes
  */
-const SpinnerSkeleton = ({ heading = '', body = '', type, color = '#2686CE', height, width }) => {
-    const [loading, setLoading] = useState(true);
-
+const SpinnerSkeleton = ({ heading = '', body = '', type, color = '#2686CE', height }) => {
     return (
         <div className="w-full">
             <div className="w-[90%] mx-auto md:w-[80%] lg:w-[65%] flex flex-col items-center justify-center">

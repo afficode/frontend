@@ -55,6 +55,7 @@ export const MessageProvider = ({ children }) => {
             return b.read_status > a.read_status;
         });
         sorted?.forEach((chat) => {
+            // eslint-disable-next-line no-unused-expressions
             chat.read_status === 1 && setUnread(parseInt(unread) + 1);
         });
         setChats([...sorted]);
@@ -69,7 +70,7 @@ export const MessageProvider = ({ children }) => {
         //   return b.read_status >= a.read_status;
         // });
         chats?.forEach((chat) => {
-            if (chat.read_status == 0 && chat.sender !== user.id) {
+            if (chat.read_status === 0 && chat.sender !== user.id) {
                 ++unreadMessages;
             }
         });
@@ -117,15 +118,17 @@ export const MessageProvider = ({ children }) => {
         socket.on('receive_message', handleReceiveMessage);
         socket.on('connect_error', handleConnectError);
 
+        // eslint-disable-next-line consistent-return
         return () => {
             socket.off('receive_message', handleReceiveMessage);
             socket.off('connect_error', handleConnectError);
         };
-    }, [isLogin]);
+    }, [isLogin, notify, socket, user?.id]);
 
     useEffect(() => {
+        // eslint-disable-next-line no-unused-expressions
         isLogin ? fetchChats() : [];
-    }, []);
+    }, [isLogin]);
 
     return (
         <MessageContext.Provider

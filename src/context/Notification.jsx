@@ -56,10 +56,11 @@ export const NotificationProvider = ({ children }) => {
         socket.on('notifications', handleNotifications);
         socket.on('connect_error', handleConnectError);
 
+        // eslint-disable-next-line consistent-return
         return () => {
             socket.disconnect();
         };
-    }, [isLogin]);
+    }, [isLogin, notify, socket]);
 
     const markAsRead = (notificationId) => {
         socket.emit('read_notification', notificationId, (res) => {

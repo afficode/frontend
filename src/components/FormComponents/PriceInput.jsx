@@ -2,7 +2,7 @@ import { Field, ErrorMessage, useField, useFormikContext } from 'formik';
 import TextError from './TextError';
 
 const PriceInput = (props) => {
-    const { label, name, required, type, className, ...rest } = props;
+    const { label, name, required, className, ...rest } = props;
     const [field] = useField(name);
     const formik = useFormikContext();
 

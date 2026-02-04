@@ -91,21 +91,21 @@ const ChatWindow = ({ chat_id, chat_data, title }) => {
             {/* chat window */}
             <div className="mt-auto flex flex-col py-3 pr-3 overflow-x-hidden overflow-y-auto scrollbar-thin scrollbar-track-white scrollbar-thumb-rounded-md scrollbar-thumb-secondary scrollbar-track-rounded-md ">
                 {groupedMessages &&
-					Object.entries(groupedMessages)?.map(([date, messages]) => (
-					    <div key={date} className="py-2 w-full flex flex-col gap-2">
-					        <span className="w-full text-center text-xs text-white ">{date}</span>
+                    Object.entries(groupedMessages)?.map(([date, messages]) => (
+                        <div key={date} className="py-2 w-full flex flex-col gap-2">
+                            <span className="w-full text-center text-xs text-white ">{date}</span>
 
-					        {messages?.map((message, i) => (
-					            <div
-					                key={i}
-					                className={`w-fit max-w-[80%] py-2 ${message.sender === user.id ? 'ml-auto' : ''}`}
-					                ref={i === messages.length - 1 ? latestMessageRef : null}
-					            >
-					                <Message key={i} message={message} time={message.message_updated_on} />
-					            </div>
-					        ))}
-					    </div>
-					))}
+                            {messages?.map((message, i) => (
+                                <div
+                                    key={i}
+                                    className={`w-fit max-w-[80%] py-2 ${message.sender === user.id ? 'ml-auto' : ''}`}
+                                    ref={i === messages.length - 1 ? latestMessageRef : null}
+                                >
+                                    <Message key={i} message={message} time={message.message_updated_on} />
+                                </div>
+                            ))}
+                        </div>
+                    ))}
             </div>
 
             {/* chat input */}

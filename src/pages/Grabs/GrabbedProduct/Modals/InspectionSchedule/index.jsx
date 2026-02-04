@@ -35,7 +35,7 @@ const InspectionSchedule = ({ setInspectionModalOpen, ad, grabbersId }) => {
             }, 2000);
         } else {
             mutate(formData, {
-                onSuccess: (data) => {
+                onSuccess: (_data) => {
                     notify('Inspection Booked successfully', 'success');
                     resetForm();
                     setTimeout(() => {

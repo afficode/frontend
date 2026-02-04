@@ -8,7 +8,6 @@ import { Modal } from '../../ui';
 import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
 
 const Footer = () => {
-    const ref = useRef(null);
 
     //to scroll into terms and condition document
     const [isOpen, setIsOpen] = useState(false);

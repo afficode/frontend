@@ -107,7 +107,7 @@ const AdCard = ({
                             </span>
                         ) : (
                             <>
-                                {active === '1' && available == '1' && (
+                                {active === '1' && available === '1' && (
                                     <span className=" text-white font-semibold bg-[#047F73] py-1 px-2 rounded-xl text-center border-4 border-white max-sm:text-sm">
 										Active
                                     </span>
@@ -118,13 +118,13 @@ const AdCard = ({
                                     </span>
                                 )}
 
-                                {active === '0' && available == '1' && (
+                                {active === '0' && available === '1' && (
                                     <div className=" text-white font-semibold bg-red-500 py-1 px-2 rounded-xl text-center border-4 border-white max-sm:text-sm">
 										Blocked
                                     </div>
                                 )}
 
-                                {active === '1' && available == '0' && (
+                                {active === '1' && available === '0' && (
                                     <div className=" text-white font-semibold bg-primary py-1 px-2 rounded-xl text-center border-4 border-white max-sm:text-sm">
 										In Review
                                     </div>

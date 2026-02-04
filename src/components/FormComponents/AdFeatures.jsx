@@ -7,7 +7,7 @@ import { inspectableCategories } from '../../constants/Category';
 import { getCommission, toMoney } from '../../utils';
 
 const AdFeatures = (props) => {
-    const { name, price, subCat, address, setAddress, categoryId, feature, ...rest } = props;
+    const { name, price, subCat, address, setAddress, ...rest } = props;
 
     const { hash, pathname } = useLocation();
     const [showGrab, setShowGrab] = useState(pathname.startsWith('/update-ad') ?? false);

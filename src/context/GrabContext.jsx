@@ -19,7 +19,7 @@ export const GrabProvider = ({ children }) => {
         },
     });
 
-    socket.on('connect', () => { });
+    socket.on('connect', () => { /* empty */ });
     socket.on('grabs', (grabs) => {
         setGrabs(() => [...grabs]);
     });
@@ -35,6 +35,7 @@ export const GrabProvider = ({ children }) => {
             }
             if (response.success) {
                 notify(response.message, 'success');
+                // eslint-disable-next-line no-unsafe-optional-chaining
                 setGrabs(() => [...response?.grabs]);
             }
         });
@@ -62,10 +63,11 @@ export const GrabProvider = ({ children }) => {
         socket.on('error', handleConnectError);
         socket.on('connect_error', handleConnectError);
 
+        // eslint-disable-next-line consistent-return
         return () => {
             socket.disconnect();
         };
-    }, [isLogin]);
+    }, [isLogin, notify, socket]);
 
     return (
         <GrabContext.Provider

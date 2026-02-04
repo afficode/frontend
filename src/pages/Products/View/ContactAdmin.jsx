@@ -9,7 +9,7 @@ import { ContactAdminForm } from './ContactAdminForm';
 import { fetchRemarks, useNotify } from '../../../hooks';
 import useAuth from '../../../context/UserContext';
 
-export default function ContactAdmin({ ads_id, images }) {
+export default function ContactAdmin({ ads_id }) {
     const { isLogin } = useAuth();
     const [remark, setRemark] = useState();
     const [isOpen, setIsOpen] = useState(false);
@@ -35,14 +35,14 @@ export default function ContactAdmin({ ads_id, images }) {
         }
         const remarks = async function () {
             const timelineData =
-				data?.data?.remark?.length > 0
-				    ? data?.data?.remark?.map((el) => ({
-				        date: el?.date,
-				        title: el?.name,
-				        body: el?.text,
-				        user: el?.user_id,
-				    }))
-				    : [];
+                data?.data?.remark?.length > 0
+                    ? data?.data?.remark?.map((el) => ({
+                        date: el?.date,
+                        title: el?.name,
+                        body: el?.text,
+                        user: el?.user_id,
+                    }))
+                    : [];
             setRemark(() => timelineData);
         };
 

@@ -10,7 +10,7 @@ const GrabSidebar = () => {
 
     const handleDeactivateGrabber = async () => {
         try {
-            const response = await privateAxios.delete('/grab/remove_grabber_account');
+            await privateAxios.delete('/grab/remove_grabber_account');
             notify('Your grabber account has been deactivated.', 'success');
 
             // Redirect to the home page or any other page
@@ -18,7 +18,7 @@ const GrabSidebar = () => {
                 navigate(Approutes.logout);
             }, 2000);
         } catch (error) {
-            console.error('Account deactivation error:', error);
+            // console.error('Account deactivation error:', error);
             notify('There was an error deactivating your account. Please try again.', 'error');
         }
     };

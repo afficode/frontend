@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { categoryData } from '../../constants/Category';
 import CategoryCard from './CategoryCard';
 const index = () => {

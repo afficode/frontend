@@ -84,7 +84,7 @@ const FeaturedProducts = ({ product }) => {
                             </span>
                             <span className="flex justify-around gap-2 my-auto text-xl font-bold">
                                 <NegotiableIcon negotiable={ad?.negotiable} />
-                                {ad?.feature == '3' && isLogin && <GrabIcon className="text-secondary" />}
+                                {ad?.feature === '3' && isLogin && <GrabIcon className="text-secondary" />}
                             </span>{' '}
 							&nbsp;
                             <span className="tracking-tighter">

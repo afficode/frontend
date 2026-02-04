@@ -41,7 +41,7 @@ const Category = () => {
             let name = '';
 
             categories?.summary.forEach((cat) => {
-                if (cat.category == currentCategoryId) {
+                if (cat.category === currentCategoryId) {
                     name = cat.name;
                 }
             });
@@ -97,46 +97,46 @@ const Category = () => {
 
                 <div className="flex items-center justify-center">
                     {isLoading ||
-						(data && data?.ads.length > 0 && (
-						    <div className="join mx-auto mt-4 bg-primary text-white">
-						        <button
-						            onClick={() => {
-						                let previousParams = getPreviousSearchParams(searchParams);
+                        (data && data?.ads.length > 0 && (
+                            <div className="join mx-auto mt-4 bg-primary text-white">
+                                <button
+                                    onClick={() => {
+                                        let previousParams = getPreviousSearchParams(searchParams);
 
-						                previousParams = {
-						                    ...previousParams,
-						                    [queryStrings.page]: data?.prev,
-						                };
+                                        previousParams = {
+                                            ...previousParams,
+                                            [queryStrings.page]: data?.prev,
+                                        };
 
-						                setSearchParams(previousParams, { replace: true });
-						            }}
-						            className={`${
-						                data?.prev === null ? 'hidden' : ''
-						            } join-item btn bg-primary text-white border-gray-300 hover:bg-secondary hover:text-black hover:border-gray-300`}
-						            disabled={data?.prev === null}
-						        >
-									Prev
-						        </button>
-						        <button
-						            onClick={() => {
-						                let previousParams = getPreviousSearchParams(searchParams);
+                                        setSearchParams(previousParams, { replace: true });
+                                    }}
+                                    className={`${
+                                        data?.prev === null ? 'hidden' : ''
+                                    } join-item btn bg-primary text-white border-gray-300 hover:bg-secondary hover:text-black hover:border-gray-300`}
+                                    disabled={data?.prev === null}
+                                >
+                                    Prev
+                                </button>
+                                <button
+                                    onClick={() => {
+                                        let previousParams = getPreviousSearchParams(searchParams);
 
-						                previousParams = {
-						                    ...previousParams,
-						                    [queryStrings.page]: data?.next,
-						                };
+                                        previousParams = {
+                                            ...previousParams,
+                                            [queryStrings.page]: data?.next,
+                                        };
 
-						                setSearchParams(previousParams, { replace: true });
-						            }}
-						            className={`${
-						                data?.next === null ? 'hidden' : ''
-						            } join-item btn bg-primary text-white border-gray-300 hover:bg-secondary hover:text-black hover:border-gray-300`}
-						            disabled={data?.next === null}
-						        >
-									Next
-						        </button>
-						    </div>
-						))}
+                                        setSearchParams(previousParams, { replace: true });
+                                    }}
+                                    className={`${
+                                        data?.next === null ? 'hidden' : ''
+                                    } join-item btn bg-primary text-white border-gray-300 hover:bg-secondary hover:text-black hover:border-gray-300`}
+                                    disabled={data?.next === null}
+                                >
+                                    Next
+                                </button>
+                            </div>
+                        ))}
                 </div>
             </main>
             <ScrollToTop />

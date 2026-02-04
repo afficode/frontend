@@ -11,7 +11,7 @@ import {
     useUpdateAd,
     useCategories,
 } from '../../hooks';
-import { fromMoney, toOptions, toSelectOptions } from '../../utils';
+import { addWatermarkToImage, fromMoney, toOptions, toSelectOptions } from '../../utils';
 import {
     Approutes,
     agricultureTypes,
@@ -110,7 +110,7 @@ const CategoryForm = ({
     const [otherColor, setOtherColor] = useState(false);
     const [otherExpertise, setOtherExpertise] = useState(false);
     const [otherRoom, setOtherRoom] = useState(false);
-    const [otherUse, setOtherUse] = useState(false);
+    const [, setOtherUse] = useState(false);
     const [otherCondition, setOtherCondition] = useState(false);
     const [otherProcessor, setOtherProcessor] = useState(false);
     const [otherScent, setOtherScent] = useState(false);
@@ -3431,7 +3431,7 @@ const CategoryForm = ({
             {
                 control: 'toggle',
                 label: 'Negotiable?',
-                name: 'negotiable	',
+                name: 'negotiable',
             },
             {
                 control: 'feature',
@@ -3923,34 +3923,34 @@ const CategoryForm = ({
     const [address, setAddress] = useState('');
 
     const renderFields =
-		fields &&
-		fields?.map((field, index) => (
-		    <FormControl
-		        categoryId={categoryId}
-		        key={index}
-		        control={field.control}
-		        name={field.name}
-		        type={field.type}
-		        maxLength={field.maxLength}
-		        placeholder={field.placeholder}
-		        label={field.label}
-		        options={field.options}
-		        required={field.required}
-		        price={fromMoney(priceValue)}
-		        address={address}
-		        images={field.images}
-		        feature={initialValues.feature}
-		        edit={field.edit}
-		        setAddress={setAddress}
-		        subCat={
-		            selectedVehicleCategory ||
-					selectedPropertyCategory ||
-					selectedAgricultureCategory ||
-					selectedMotorbikeCategory ||
-					selectedElectronicsCategory
-		        }
-		    />
-		));
+        fields &&
+        fields?.map((field, index) => (
+            <FormControl
+                categoryId={categoryId}
+                key={index}
+                control={field.control}
+                name={field.name}
+                type={field.type}
+                maxLength={field.maxLength}
+                placeholder={field.placeholder}
+                label={field.label}
+                options={field.options}
+                required={field.required}
+                price={fromMoney(priceValue)}
+                address={address}
+                images={field.images}
+                feature={initialValues.feature}
+                edit={field.edit}
+                setAddress={setAddress}
+                subCat={
+                    selectedVehicleCategory ||
+                    selectedPropertyCategory ||
+                    selectedAgricultureCategory ||
+                    selectedMotorbikeCategory ||
+                    selectedElectronicsCategory
+                }
+            />
+        ));
 
     const { user } = useAuth();
     const navigate = useNavigate();

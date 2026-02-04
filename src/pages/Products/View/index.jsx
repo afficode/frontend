@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Approutes } from '../../../constants';
 import { fetchProduct } from '../../../hooks';
 import Breadcrumb from '../../../components/Breadcrumb';
@@ -20,7 +20,7 @@ import ContactAdmin from './ContactAdmin';
 import { Alert } from 'flowbite-react';
 import SaveProduct from '../Default/SaveProduct';
 import { getSaves } from '../../../hooks/useSaves';
-import { Button, NegotiableIcon } from '../../../ui';
+import {  NegotiableIcon } from '../../../ui';
 import { useNotify } from '../../../hooks';
 import { ActionBar, GrabUpdateTable } from '../../../components';
 
@@ -31,9 +31,8 @@ const index = () => {
     const [revealEmail, setRevealEmail] = useState(false);
     const { isLogin, user } = useAuth();
     const { data: result, isLoading } = fetchProduct(id, isLogin);
-    const { _, isLoading: saveLoading } = getSaves();
+    const {  isLoading: saveLoading } = getSaves();
     const notify = useNotify();
-    const navigate = useNavigate();
 
     useEffect(() => {
         if (result?.data) {
@@ -64,13 +63,13 @@ const index = () => {
                         <h5 className="font-medium text-red-600">This Ad is marked as closed: </h5>{' '}
                         <div className="">
                             {' '}
-							This Ad is marked as closed and is not displayed for customers to see.
+                            This Ad is marked as closed and is not displayed for customers to see.
                             <ul className="list-disc list-inside font-bold my-4">
                                 <li className="text-sm">
-									You can choose to delete this Ad or it will be VACUMMED during our daily cleanup.
+                                    You can choose to delete this Ad or it will be VACUMMED during our daily cleanup.
                                 </li>
                                 <li className="text-sm">
-									Closed Ad are deleted after 48 hours of closure from our policy.
+                                    Closed Ad are deleted after 48 hours of closure from our policy.
                                 </li>
                             </ul>
                             <span className="font-bold mt-4 bg-white text-green-500 p-2">Thanks for using Boonfu!</span>
@@ -86,16 +85,16 @@ const index = () => {
                         <h5 className="font-medium text-red-600">Ad Post successfully: </h5>{' '}
                         <div className="">
                             {' '}
-							This Ad is been processed ATM. Processing time is less than 24 hours. If this takes more than
-							24 hours please reach out to Admin with the contact form with the below details.
+                            This Ad is been processed ATM. Processing time is less than 24 hours. If this takes more than
+                            24 hours please reach out to Admin with the contact form with the below details.
                             <ul className="list-disc list-inside font-bold ">
                                 <li className="text-sm">Ad Title</li>
                                 <li className="text-sm">Your email address</li>
                                 <li className="text-sm">Date Posted</li>
                             </ul>
                             <div className="w-full font-bold my-2 bg-secondary text-white p-2">
-								Please ensure the Ad title matches exactly what you have in your Ad. This will facilitate
-								the response to your request.
+                                Please ensure the Ad title matches exactly what you have in your Ad. This will facilitate
+                                the response to your request.
                             </div>
                         </div>
                     </Alert>
@@ -111,7 +110,7 @@ const index = () => {
                         >
                             <div>
                                 <span className="font-medium text-red-600">
-									Ad Blocked:{' '}
+                                    Ad Blocked:{' '}
                                     <span className="underline"> Change a few things up and try submitting again.</span>
                                 </span>{' '}
                             </div>
@@ -173,7 +172,7 @@ const index = () => {
                             <div className="absolute bottom-0 flex w-full h-10 py-2 pl-6 text-white rounded-none bg-black/50">
                                 <span className="flex px-2 my-auto border-2 border-white">
                                     <FaCamera className="mt-1 text-sm" />
-									&nbsp; &nbsp; <span className="my-auto text-sm"> {result.data?.images.length}</span>
+                                    &nbsp; &nbsp; <span className="my-auto text-sm"> {result.data?.images.length}</span>
                                 </span>
                             </div>
                         </div>
@@ -272,7 +271,7 @@ const index = () => {
                         <div className="absolute bottom-0 flex w-full h-10 my-0 py-2 pl-6 text-white rounded-none bg-black/50">
                             <span className="flex px-2 my-auto border-2 border-white">
                                 <FaCamera className="mt-1 text-sm" />
-								&nbsp; &nbsp; <span className="my-auto text-sm"> {result?.data?.images.length}</span>
+                                &nbsp; &nbsp; <span className="my-auto text-sm"> {result?.data?.images.length}</span>
                             </span>
                         </div>
                     </div>
@@ -345,9 +344,11 @@ const index = () => {
                                             !isLogin && 'bg-gray-100 cursor-not-allowed'
                                         } `}
                                         onClick={() => {
-                                            isLogin && result?.data?.contact_type.includes('email')
-                                                ? setRevealEmail(!revealEmail)
-                                                : notify('Please login to reveal Ads owner email');
+                                            if(isLogin && result?.data?.contact_type.includes('email')){
+                                                setRevealEmail(!revealEmail);
+                                            }else{
+                                                notify('Please login to reveal Ads owner email');
+                                            }
                                         }}
                                     >
                                         {!revealEmail ? (
