@@ -1,5 +1,5 @@
 // NotificationContext.js
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import useAuth from './UserContext';
 import { getRefreshToken } from '../utils';
 import { manager } from '../utils/socket';
@@ -13,7 +13,7 @@ export const NotificationProvider = ({ children }) => {
     const notify = useNotify();
     const unread = useMemo(() => notifications.filter((notification) => !notification.is_read).length, [notifications]);
 
-    const socket = manager.socket("/notification", {
+    const socket = manager.socket('/notification', {
         auth: (cb) => {
             cb({
                 token: getRefreshToken(),
@@ -48,23 +48,24 @@ export const NotificationProvider = ({ children }) => {
         };
 
         const handleConnectError = (error) => {
-            if (error?.message === "Unauthorized!") {
-                notify("Please login again to continue", "error");
+            if (error?.message === 'Unauthorized!') {
+                notify('Please login again to continue', 'error');
             }
         };
 
-        socket.on("notifications", handleNotifications);
-        socket.on("connect_error", handleConnectError);
+        socket.on('notifications', handleNotifications);
+        socket.on('connect_error', handleConnectError);
 
+        // eslint-disable-next-line consistent-return
         return () => {
             socket.disconnect();
         };
-    }, [isLogin]);
+    }, [isLogin, notify, socket]);
 
     const markAsRead = (notificationId) => {
-        socket.emit("read_notification", notificationId, (res) => {
+        socket.emit('read_notification', notificationId, (res) => {
             if (!res?.success) {
-                notify(res?.message || "Something went wrong.", "error");
+                notify(res?.message || 'Something went wrong.', 'error');
             }
         });
     };
@@ -74,6 +75,6 @@ export const NotificationProvider = ({ children }) => {
             {children}
         </NotificationContext.Provider>
     );
-}
+};
 
 export const useNotifications = () => useContext(NotificationContext);

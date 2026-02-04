@@ -5,53 +5,53 @@ import { toMoney } from '../../../utils';
 import { useAccountBalance } from '../../../hooks';
 
 const AccountLayout = () => {
-	const location = useLocation();
+    const location = useLocation();
 
-	const { data } = useAccountBalance();
+    const { data } = useAccountBalance();
 
-	return (
-		<div className="min-h-screen py-8 px-4 md:px-8">
-			<h2>My Account</h2>
-			<h6 className="font-light">
+    return (
+        <div className="min-h-screen py-8 px-4 md:px-8">
+            <h2>My Account</h2>
+            <h6 className="font-light">
 				Balance: <b className="font-bold">₦ {toMoney(data?.account?.balance)}</b>
-			</h6>
-			<div className="flex max-md:justify-between sm:gap-6 items-center max-w-sm my-6">
-				<Link to={Approutes.account.initial}>
-					<Button
-						type="button"
-						variant={location.pathname === '/my-account/' ? 'primary' : 'grey'}
-						size={'small'}
-						className={'w-full whitespace-nowrap max-md:!px-2 max-md:text-sm'}
-					>
+            </h6>
+            <div className="flex max-md:justify-between sm:gap-6 items-center max-w-sm my-6">
+                <Link to={Approutes.account.initial}>
+                    <Button
+                        type="button"
+                        variant={location.pathname === '/my-account/' ? 'primary' : 'grey'}
+                        size={'small'}
+                        className={'w-full whitespace-nowrap max-md:!px-2 max-md:text-sm'}
+                    >
 						Transaction History
-					</Button>
-				</Link>
-				<Link to={Approutes.account.deposit}>
-					<Button
-						type="button"
-						variant={location.pathname === '/my-account/deposit' ? 'primary' : 'grey'}
-						size={'small'}
-						className={'w-full max-md:!px-2 max-md:text-sm'}
-					>
+                    </Button>
+                </Link>
+                <Link to={Approutes.account.deposit}>
+                    <Button
+                        type="button"
+                        variant={location.pathname === '/my-account/deposit' ? 'primary' : 'grey'}
+                        size={'small'}
+                        className={'w-full max-md:!px-2 max-md:text-sm'}
+                    >
 						Deposit
-					</Button>
-				</Link>
-				<Link to={Approutes.account.withdraw}>
-					<Button
-						type="button"
-						variant={location.pathname === '/my-account/withdraw' ? 'primary' : 'grey'}
-						size={'small'}
-						className={'w-full max-md:!px-2 max-md:text-sm'}
-					>
+                    </Button>
+                </Link>
+                <Link to={Approutes.account.withdraw}>
+                    <Button
+                        type="button"
+                        variant={location.pathname === '/my-account/withdraw' ? 'primary' : 'grey'}
+                        size={'small'}
+                        className={'w-full max-md:!px-2 max-md:text-sm'}
+                    >
 						Withdraw
-					</Button>
-				</Link>
-			</div>
-			<hr className="my-8" />
+                    </Button>
+                </Link>
+            </div>
+            <hr className="my-8" />
 
-			<Outlet />
-		</div>
-	);
+            <Outlet />
+        </div>
+    );
 };
 
 export default AccountLayout;
