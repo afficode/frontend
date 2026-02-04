@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState } from "react";
-import { TbPhoneCheck } from "react-icons/tb";
-import { useNotify, useVerifyPhoneNumber } from "../../../hooks";
-import { Button, Modal } from "flowbite-react";
-import { BsAlarmFill } from "react-icons/bs";
-import { updateUserPhoneVerified } from "../../../utils";
+import { useEffect, useRef, useState } from 'react';
+import { TbPhoneCheck } from 'react-icons/tb';
+import { useNotify, useVerifyPhoneNumber } from '../../../hooks';
+import { Button, Modal } from 'flowbite-react';
+import { BsAlarmFill } from 'react-icons/bs';
+import { updateUserPhoneVerified } from '../../../utils';
 
 // call back end api and verify otp is sent then activate modal
 const VerifyPhoneNumber = ({ phoneDetails }) => {
@@ -21,7 +21,7 @@ const VerifyPhoneNumber = ({ phoneDetails }) => {
                 notify(error?.response.data.message, 'error');
             },
         });
-    }
+    };
 
     return (
         <div>
@@ -45,8 +45,8 @@ const VerifyPhoneNumber = ({ phoneDetails }) => {
                     </Modal>
                 </>}
         </div >
-    )
-}
+    );
+};
 
 export default VerifyPhoneNumber;
 
@@ -75,10 +75,10 @@ const ConfirmPhoneNumber = ({ phoneDetails, sendOtp, setOpenModal }) => {
 
     // Handle single key press/change
     const handleOtpChange = (e, index) => {
-        const value = e.target.value;
+        const {value} = e.target;
 
         // Allow only alphanumeric single character
-        if (!/^[0-9a-zA-Z]{0,1}$/.test(value)) return;
+        if (!/^[0-9a-zA-Z]{0,1}$/.test(value)) {return;}
 
         const newCode = [...code];
         newCode[index] = value;
@@ -200,5 +200,5 @@ const ConfirmPhoneNumber = ({ phoneDetails, sendOtp, setOpenModal }) => {
                 </div>
             </form>
         </div>
-    )
-}
+    );
+};

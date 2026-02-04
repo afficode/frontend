@@ -9,64 +9,64 @@ import LoadingScreen from './LoadingScreen';
 import { AiFillNotification } from 'react-icons/ai';
 
 const Security = () => {
-	const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
 
-	const formik = useFormik({
-		initialValues: {
-			remember_password: false,
-			login_failure_alert: false,
-		},
-		onSubmit: (values) => { },
-	});
+    const formik = useFormik({
+        initialValues: {
+            remember_password: false,
+            login_failure_alert: false,
+        },
+        onSubmit: (values) => { },
+    });
 
-	// loading screen timeout
-	const [isLoading, setIsLoading] = useState(true);
-	useEffect(() => {
-		setTimeout(() => {
-			setIsLoading(false);
-		}, 1000);
-	}, []);
+    // loading screen timeout
+    const [isLoading, setIsLoading] = useState(true);
+    useEffect(() => {
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 1000);
+    }, []);
 
-	if (isLoading) {
-		return (
-			<>
-				<DashboardHeader />
-				<LoadingScreen />;
-			</>
-		);
-	}
+    if (isLoading) {
+        return (
+            <>
+                <DashboardHeader />
+                <LoadingScreen />;
+            </>
+        );
+    }
 
-	return (
-		<div>
-			<DashboardHeader />
+    return (
+        <div>
+            <DashboardHeader />
 
-			{/* Security and login container */}
-			<div className="flex flex-col my-8 md:px-2 lg:px-4">
-				<div className="flex justify-between border-b border-black/30">
-					<h4>Security and Login</h4>
-				</div>
+            {/* Security and login container */}
+            <div className="flex flex-col my-8 md:px-2 lg:px-4">
+                <div className="flex justify-between border-b border-black/30">
+                    <h4>Security and Login</h4>
+                </div>
 
-				<div className="border-b border-black/30">
-					<div className="w-full px-4 py-2 my-4 bg-gray-200">
-						<h5 className="font-semibold">Login</h5>
-					</div>
+                <div className="border-b border-black/30">
+                    <div className="w-full px-4 py-2 my-4 bg-gray-200">
+                        <h5 className="font-semibold">Login</h5>
+                    </div>
 
-					<div className="flex items-center w-full gap-2 mt-2 sm:gap-8">
-						<img src={Password} alt="/" className="w-6 sm:w-[2.5rem]" />
-						<div>
-							<h6 className="font-medium">Update Password</h6>
-							<p>Use a strong password that is not repeated on other account</p>
-						</div>
-						<div
-							className="flex items-center gap-1 ml-auto text-lg font-medium cursor-pointer text-primary"
-							onClick={() => setIsOpen(true)}
-						>
-							<img src={EditPencil} alt="/" className="w-4" />
-							<span>Edit</span>
-						</div>
-					</div>
+                    <div className="flex items-center w-full gap-2 mt-2 sm:gap-8">
+                        <img src={Password} alt="/" className="w-6 sm:w-[2.5rem]" />
+                        <div>
+                            <h6 className="font-medium">Update Password</h6>
+                            <p>Use a strong password that is not repeated on other account</p>
+                        </div>
+                        <div
+                            className="flex items-center gap-1 ml-auto text-lg font-medium cursor-pointer text-primary"
+                            onClick={() => setIsOpen(true)}
+                        >
+                            <img src={EditPencil} alt="/" className="w-4" />
+                            <span>Edit</span>
+                        </div>
+                    </div>
 
-					{/* <div className="flex items-center w-full gap-2 my-4 sm:gap-8">
+                    {/* <div className="flex items-center w-full gap-2 my-4 sm:gap-8">
 						<img src={LoginLock} alt="/" className="w-6 sm:w-[2.5rem]" />
 						<div>
 							<h6 className="font-medium">Save your login info</h6>
@@ -83,9 +83,9 @@ const Security = () => {
 							/>
 						</div>
 					</div> */}
-				</div>
+                </div>
 
-				{/* <div className="pb-4 my-4 border-b border-black/30">
+                {/* <div className="pb-4 my-4 border-b border-black/30">
 					<div className="w-full px-4 py-2 my-4 bg-gray-200">
 						<h5 className="font-semibold">Setting Up Extra Security</h5>
 					</div>
@@ -109,7 +109,7 @@ const Security = () => {
 					</div>
 				</div> */}
 
-				{/* <div className="sm:w-[200px] px-4 mt-8">
+                {/* <div className="sm:w-[200px] px-4 mt-8">
 					<Button
 						variant="primary"
 						size={'full'}
@@ -120,18 +120,18 @@ const Security = () => {
 						Save
 					</Button>
 				</div> */}
-			</div>
+            </div>
 
-			<Modal
-				isOpen={isOpen}
-				setIsOpen={setIsOpen}
-				headerText="UPDATE PASSWORD"
-				className={'max-w-[500px]'}
-			>
-				<UpdatePassword setIsOpen={setIsOpen} />
-			</Modal>
-		</div>
-	);
+            <Modal
+                isOpen={isOpen}
+                setIsOpen={setIsOpen}
+                headerText="UPDATE PASSWORD"
+                className={'max-w-[500px]'}
+            >
+                <UpdatePassword setIsOpen={setIsOpen} />
+            </Modal>
+        </div>
+    );
 };
 
 export default Security;

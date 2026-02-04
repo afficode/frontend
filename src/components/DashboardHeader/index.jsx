@@ -10,42 +10,42 @@ import useAuth from '../../context/UserContext';
 import { useNotifications } from '../../context/Notification';
 
 const DashboardHeader = () => {
-	const [showSidebar, setShowSidebar] = useState(false);
-	const { unread } = useMessageContext();
-	const { unread: unreadNotification } = useNotifications();
-	const { isLogin } = useAuth();
+    const [showSidebar, setShowSidebar] = useState(false);
+    const { unread } = useMessageContext();
+    const { unread: unreadNotification } = useNotifications();
+    const { isLogin } = useAuth();
 
-	return (
-		<div className="flex justify-between py-2 border-b border-black/30">
-			<h3>Dashboard</h3>
+    return (
+        <div className="flex justify-between py-2 border-b border-black/30">
+            <h3>Dashboard</h3>
 
-			<div className="flex items-center gap-2 sm:gap-4">
-				<Link to={Approutes.profile.messages}>
-					<div className="relative">
-						<BiEnvelope size={28} />
-						{isLogin && unread > 0 && (
-							<span className="py-[.5] px-1 bg-primary text-white text-center text-xs font-medium rounded-full absolute right-[-10%] top-0">
-								{unread}
-							</span>
-						)}
-					</div>
-				</Link>
+            <div className="flex items-center gap-2 sm:gap-4">
+                <Link to={Approutes.profile.messages}>
+                    <div className="relative">
+                        <BiEnvelope size={28} />
+                        {isLogin && unread > 0 && (
+                            <span className="py-[.5] px-1 bg-primary text-white text-center text-xs font-medium rounded-full absolute right-[-10%] top-0">
+                                {unread}
+                            </span>
+                        )}
+                    </div>
+                </Link>
 
-				<Link to={Approutes.profile.notifications}>
-					<div className="relative">
-						<AiOutlineBell size={28} />
-						<span className="py-[.5] px-1 bg-[#D60949] text-white text-center text-xs font-medium rounded-full absolute right-[-10%] top-0">
-							{unreadNotification}
-						</span>
-					</div>
-				</Link>
-				<button onClick={() => setShowSidebar(!showSidebar)}>
-					<IoIosMenu size={28} className="cursor-pointer lg:hidden" />
-				</button>
-			</div>
-			<MobileSidebar sidebar={showSidebar} setSidebar={setShowSidebar} />
-		</div>
-	);
+                <Link to={Approutes.profile.notifications}>
+                    <div className="relative">
+                        <AiOutlineBell size={28} />
+                        <span className="py-[.5] px-1 bg-[#D60949] text-white text-center text-xs font-medium rounded-full absolute right-[-10%] top-0">
+                            {unreadNotification}
+                        </span>
+                    </div>
+                </Link>
+                <button onClick={() => setShowSidebar(!showSidebar)}>
+                    <IoIosMenu size={28} className="cursor-pointer lg:hidden" />
+                </button>
+            </div>
+            <MobileSidebar sidebar={showSidebar} setSidebar={setShowSidebar} />
+        </div>
+    );
 };
 
 export default DashboardHeader;
