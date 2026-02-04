@@ -4,12 +4,13 @@ import * as Yup from 'yup';
 import { FormControl, TermsAndCondition } from '../../components';
 import { Button, Modal } from '../../ui';
 import {
-    useSubCategories,
-    useStates,
-    useLga,
-    useCreateAd,
-    useNotify,
-    useCategories,
+	useSubCategories,
+	useStates,
+	useLga,
+	useCreateAd,
+	useNotify,
+	useCategories,
+	useImageCompressor,
 } from '../../hooks';
 import { addWatermarkToImage, fromMoney, toOptions, toSelectOptions } from '../../utils';
 import {
@@ -3957,10 +3958,11 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
             />
         ));
 
-    const notify = useNotify();
-    const { mutate, isPending } = useCreateAd();
-    const navigate = useNavigate();
-    const queryClient = useQueryClient();
+	const notify = useNotify();
+	const { mutate, isPending } = useCreateAd();
+	const navigate = useNavigate();
+	const queryClient = useQueryClient();
+	const {compressImages} = useImageCompressor()
 
     const onSubmit = async (values, { setSubmitting, resetForm }) => {
         setSubmitting(true);
@@ -4006,15 +4008,23 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
             }
         });
 
-        if (values.images && values.images.length > 0) {
-            const watermarkedImages = await Promise.all(
-                values.images.map((file) => addWatermarkToImage(file)),
-            );
+		if (values.images && values.images.length > 0) {
+			try{
+				const compressedImages = await compressImages(values.images);
 
-            watermarkedImages.forEach((file) => {
-                formData.append('images', file);
-            });
-        }
+				const finalImages = await Promise.all(
+					compressedImages.map((file) => addWatermarkToImage(file))
+				);
+
+				finalImages.forEach((file) => {
+					formData.append('images', file);
+				});
+			}catch{
+				notify('Error preparing images.', 'error');
+        		setSubmitting(false);
+      		 	return;
+			}
+		}
 
         mutate(formData, {
             onSuccess: (data) => {

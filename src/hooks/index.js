@@ -14,4 +14,5 @@ export * from './useProduct';
 export * from './useSchedule';
 export * from './useEscrow';
 export { default as useNotify } from './useNotify';
+export { default as useImageCompressor } from './useImageCompressor';
 // export { default as useAccountBalance } from './useAccountBalance';

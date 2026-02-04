@@ -4,12 +4,13 @@ import { Form, Formik } from 'formik';
 import { FormControl } from '../../components';
 import { Button } from '../../ui';
 import {
-    useSubCategories,
-    useStates,
-    useLga,
-    useNotify,
-    useUpdateAd,
-    useCategories,
+	useSubCategories,
+	useStates,
+	useLga,
+	useNotify,
+	useUpdateAd,
+	useCategories,
+	useImageCompressor,
 } from '../../hooks';
 import { addWatermarkToImage, fromMoney, toOptions, toSelectOptions } from '../../utils';
 import {
@@ -3952,11 +3953,12 @@ const CategoryForm = ({
             />
         ));
 
-    const { user } = useAuth();
-    const navigate = useNavigate();
-    const notify = useNotify();
-    const { mutate } = useUpdateAd(adId);
-    const queryClient = useQueryClient();
+	const { user } = useAuth();
+	const navigate = useNavigate();
+	const notify = useNotify();
+	const { mutate } = useUpdateAd(adId);
+	const queryClient = useQueryClient();
+	const {compressImages} = useImageCompressor()
 
     const onSubmit = async (values, { setSubmitting }) => {
         setSubmitting(true);
@@ -4008,17 +4010,25 @@ const CategoryForm = ({
             formData.append(key, value);
         });
 
-        if (values.images && values.images.length > 0) {
-            const watermarkedImages = await Promise.all(
-                values.images.map((file) => addWatermarkToImage(file)),
-            );
+		if (values.images && values.images.length > 0) {
+			try{
+				const compressedImages = await compressImages(values.images);
 
-            watermarkedImages.forEach((file) => {
-                formData.append('new_images', file);
-            });
-        }
-        formData.append('owner', user.id);
-        formData.delete('images');
+				const finalImages = await Promise.all(
+					compressedImages.map((file) => addWatermarkToImage(file))
+				);
+
+				finalImages.forEach((file) => {
+					formData.append('images', file);
+				});
+			}catch{
+				notify('Error preparing images.', 'error');
+				setSubmitting(false);
+				return;
+			}
+		}
+		formData.append('owner', user.id);
+		formData.delete('images');
 
         mutate(formData, {
             onSuccess: (data) => {
