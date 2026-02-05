@@ -22,7 +22,6 @@ const addWatermarkToImage = (file, watermarkText = '©boonfu.com') => {
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
 
-                // Add watermark in center
                 const x = canvas.width / 2;
                 const y = canvas.height / 2;
                 ctx.strokeText(watermarkText, x, y);
@@ -31,25 +30,27 @@ const addWatermarkToImage = (file, watermarkText = '©boonfu.com') => {
                 canvas.toBlob(
                     (blob) => {
                         if (blob) {
-                            const watermarkedFile = new File([blob], file.name, {
-                                type: 'image/png',
+                            const newFileName = file.name.replace(/\.[^/.]+$/, '') + '.webp';
+
+                            const watermarkedFile = new File([blob], newFileName, {
+                                type: 'image/webp', 
                                 lastModified: Date.now(),
                             });
                             resolve(watermarkedFile);
                         } else {
-                            reject(new Error('Failed to create blob'));
+                            reject(new Error(`System could not process ${file.name}`));
                         }
                     },
-                    'image/png',
-                    0.95
-                ); // 0.95 quality for PNG
+                    'image/webp', 
+                    0.9           
+                ); 
             };
 
-            img.onerror = () => reject(new Error('Failed to load image'));
+            img.onerror = () => reject(new Error(`The file "${file.name}" appears to be corrupted or not a valid image.`));
             img.src = e.target.result;
         };
 
-        reader.onerror = () => reject(new Error('Failed to read file'));
+        reader.onerror = () => reject(new Error(`Could not read permissions for "${file.name}".`));
         reader.readAsDataURL(file);
     });
 };

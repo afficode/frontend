@@ -13,7 +13,7 @@ const FeedbackForm = ({ ad_id, buttonText, url, feedback }) => {
     const queryClient = useQueryClient();
     const notify = useNotify();
     const [feedbackType, setFeedbackType] = useState(null);
-    const { mutate } = useFeedback(`${url}`);
+    const { mutate, isLoading } = useFeedback(`${url}`);
     const initialValue = {
         text: '',
         positive: '',

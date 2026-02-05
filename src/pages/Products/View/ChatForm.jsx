@@ -115,8 +115,6 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
         chatCreation(content, true);
     };
 
-
-
     //to scroll into terms and condition document
     const [isOpen, setIsOpen] = useState(false);
     const termsRef = useRef(null);
@@ -276,8 +274,8 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
                                     } ${chatId !== null && 'bg-gray-300 cursor-not-allowed'}`}
                                 />
                                 <div className="space-y-1 w-full my-2 text-center ">
-                                    <h5 className="text-base font-semibold">Product Page Disclaimer</h5>
-                                    <p className="text-center !text-xs">
+                                    <h5 className="text-base font-semibold">Disclaimer</h5>
+                                    <div className="text-center !text-xs">
 										Boonfu is a C2C marketplace—we do not sell, inspect, or guarantee any listed item. All
 										listings are posted by private individuals.
                                         <ul className="!text-xs">
@@ -302,7 +300,7 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
 											[View More]
                                         </button>{' '}
 										to read the full Disclaimer in our Terms and Conditions.
-                                    </p>
+                                    </div>
                                 </div>
 
                                 {chatId ? (
