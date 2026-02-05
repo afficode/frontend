@@ -38,19 +38,19 @@ const addWatermarkToImage = (file, watermarkText = '©boonfu.com') => {
                             });
                             resolve(watermarkedFile);
                         } else {
-                            reject(new Error('Failed to create blob'));
+                            reject(new Error(`System could not process ${file.name}`));
                         }
                     },
                     'image/webp', 
-                    0.8           
+                    0.9           
                 ); 
             };
 
-            img.onerror = () => reject(new Error('Failed to load image'));
+            img.onerror = () => reject(new Error(`The file "${file.name}" appears to be corrupted or not a valid image.`));
             img.src = e.target.result;
         };
 
-        reader.onerror = () => reject(new Error('Failed to read file'));
+        reader.onerror = () => reject(new Error(`Could not read permissions for "${file.name}".`));
         reader.readAsDataURL(file);
     });
 };

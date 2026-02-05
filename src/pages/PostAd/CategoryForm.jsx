@@ -628,7 +628,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
                 control: 'price',
                 label: 'Price',
                 name: 'price',
-                type: 'number',
+                type: 'text',
                 placeholder: '₦0.00',
                 required: true,
             },
@@ -828,7 +828,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
                 control: 'price',
                 label: 'Price',
                 name: 'price',
-                type: 'number',
+                type: 'text',
                 placeholder: '₦0.00',
                 required: true,
             },
@@ -1047,7 +1047,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
                 control: 'price',
                 label: 'Price',
                 name: 'price',
-                type: 'number',
+                type: 'text',
                 placeholder: '₦0.00',
                 required: true,
             },
@@ -1190,7 +1190,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
                 control: 'price',
                 label: 'Price',
                 name: 'price',
-                type: 'number',
+                type: 'text',
                 placeholder: '₦0.00',
                 required: true,
             },
@@ -1479,7 +1479,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
                 control: 'price',
                 label: 'Price',
                 name: 'price',
-                type: 'number',
+                type: 'text',
                 placeholder: '₦0.00',
                 required: true,
             },
@@ -1684,7 +1684,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
                 control: 'price',
                 label: 'Price',
                 name: 'price',
-                type: 'number',
+                type: 'text',
                 placeholder: '₦0.00',
                 required: true,
             },
@@ -1889,7 +1889,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
                 control: 'price',
                 label: 'Price',
                 name: 'price',
-                type: 'number',
+                type: 'text',
                 placeholder: '₦0.00',
                 required: true,
             },
@@ -2069,7 +2069,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
                 control: 'price',
                 label: 'Price',
                 name: 'price',
-                type: 'number',
+                type: 'text',
                 placeholder: '₦0.00',
                 required: true,
             },
@@ -2258,7 +2258,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
                 control: 'price',
                 label: 'Price',
                 name: 'price',
-                type: 'number',
+                type: 'text',
                 placeholder: '₦0.00',
                 required: true,
             },
@@ -2436,7 +2436,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
                 control: 'price',
                 label: 'Price',
                 name: 'price',
-                type: 'number',
+                type: 'text',
                 placeholder: '₦0.00',
                 required: true,
             },
@@ -2599,7 +2599,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
                 control: 'price',
                 label: 'Price',
                 name: 'price',
-                type: 'number',
+                type: 'text',
                 placeholder: '₦0.00',
                 required: true,
             },
@@ -2785,7 +2785,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
                 control: 'price',
                 label: 'Price',
                 name: 'price',
-                type: 'number',
+                type: 'text',
                 placeholder: '₦0.00',
                 required: true,
             },
@@ -2956,7 +2956,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
                 control: 'price',
                 label: 'Price',
                 name: 'price',
-                type: 'number',
+                type: 'text',
                 placeholder: '₦0.00',
                 required: true,
             },
@@ -3160,7 +3160,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
                 control: 'price',
                 label: 'Price',
                 name: 'price',
-                type: 'number',
+                type: 'text',
                 placeholder: '₦0.00',
                 required: true,
             },
@@ -3416,7 +3416,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
                 control: 'price',
                 label: 'Price',
                 name: 'price',
-                type: 'number',
+                type: 'text',
                 placeholder: '₦0.00',
                 required: true,
             },
@@ -4019,10 +4019,12 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
                 finalImages.forEach((file) => {
                     formData.append('images', file);
                 });
-            }catch{
-                notify('Error preparing images.', 'error');
+            }catch(error){
+                const message = error instanceof Error ? error.message : 'File is corrupt or format is unsupported.';
+
+                notify(message, 'error');
         		setSubmitting(false);
-      		 	return;
+      		 	return; 
             }
         }
 

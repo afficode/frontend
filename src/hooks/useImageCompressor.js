@@ -9,10 +9,10 @@ const useImageCompressor = () => {
 
                 const options = {
                     maxSizeMB: 1,
-                    maxWidthOrHeight: 1200,
+                    maxWidthOrHeight: 1920,
                     useWebWorker: true,
                     fileType: 'image/webp',
-                    initialQuality: 0.8,
+                    initialQuality: 1,
                 };
 
                 try {
@@ -21,7 +21,7 @@ const useImageCompressor = () => {
                     const newFileName = file.name.replace(/\.[^/.]+$/, '') + '.webp';
                     return new File([compressedBlob], newFileName, { type: 'image/webp', lastModified: Date.now() });
                 } catch {
-                    return file; 
+                    throw new Error(`Could not compress "${file.name}". The file might be corrupt.`);
                 }
             })
         );
