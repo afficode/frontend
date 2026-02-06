@@ -10,27 +10,30 @@ import { MessageProvider } from './context/MessageContext.jsx';
 import { GrabProvider } from './context/GrabContext.jsx';
 import { TokenProvider } from './context/TokenContext.jsx';
 import { NotificationProvider } from './context/Notification.jsx';
+import { HelmetProvider } from 'react-helmet-async';
 
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-    <React.StrictMode>
-        <QueryClientProvider client={queryClient}>
-            <UserProvider>
-                <NotificationProvider>
-                    <TokenProvider>
-                        <MessageProvider>
-                            <GrabProvider>
-                                <SaveProvider>
-                                    <App />
-                                </SaveProvider>
-                            </GrabProvider>
-                        </MessageProvider>
-                    </TokenProvider>
-                </NotificationProvider>
-            </UserProvider>
+	<React.StrictMode>
+		<HelmetProvider>
+			<QueryClientProvider client={queryClient}>
+				<UserProvider>
+					<NotificationProvider>
+						<TokenProvider>
+							<MessageProvider>
+								<GrabProvider>
+									<SaveProvider>
+										<App />
+									</SaveProvider>
+								</GrabProvider>
+							</MessageProvider>
+						</TokenProvider>
+					</NotificationProvider>
+				</UserProvider>
 
-            <ReactQueryDevtools initialIsOpen={false} />
-        </QueryClientProvider>
-    </React.StrictMode>
+				<ReactQueryDevtools initialIsOpen={false} />
+			</QueryClientProvider>
+		</HelmetProvider>
+	</React.StrictMode>,
 );

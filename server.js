@@ -6,6 +6,7 @@ import prerender from 'prerender-node';
 import { fileURLToPath } from 'url';
 import rateLimit from 'express-rate-limit';
 import helmet from 'helmet';
+import cors from 'cors';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -13,6 +14,8 @@ const __dirname = path.dirname(__filename);
 const app = express();
 
 app.disable('x-powered-by');
+
+const PORT = parseInt(process.env.PORT || '3000');
 
 app.use(
 	helmet({
@@ -33,8 +36,8 @@ app.use(
 );
 
 const limiter = rateLimit({
-	windowMs: process.env.RATE_LIMIT_WINDOW_MS || 15 * 60 * 1000,
-	max: process.env.RATE_LIMIT_MAX_REQUESTS || 300,
+	windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MIN || '15') * 60 * 1000,
+	max: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS || '300'),
 	standardHeaders: true,
 	legacyHeaders: false,
 	message: 'Too many requests, please try again later.',
@@ -52,6 +55,6 @@ app.get('*', (req, res) => {
 	res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
-app.listen(3000, () => {
-	console.log('Server is running on http://localhost:3000');
+app.listen(PORT, () => {
+	console.log(`Server is running on http://localhost:${PORT}`);
 });
