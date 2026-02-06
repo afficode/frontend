@@ -10,6 +10,7 @@ import {
     useCreateAd,
     useNotify,
     useCategories,
+    useImageCompressor,
 } from '../../hooks';
 import { addWatermarkToImage, fromMoney, toOptions, toSelectOptions } from '../../utils';
 import {
@@ -627,7 +628,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
                 control: 'price',
                 label: 'Price',
                 name: 'price',
-                type: 'number',
+                type: 'text',
                 placeholder: '₦0.00',
                 required: true,
             },
@@ -827,7 +828,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
                 control: 'price',
                 label: 'Price',
                 name: 'price',
-                type: 'number',
+                type: 'text',
                 placeholder: '₦0.00',
                 required: true,
             },
@@ -1046,7 +1047,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
                 control: 'price',
                 label: 'Price',
                 name: 'price',
-                type: 'number',
+                type: 'text',
                 placeholder: '₦0.00',
                 required: true,
             },
@@ -1189,7 +1190,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
                 control: 'price',
                 label: 'Price',
                 name: 'price',
-                type: 'number',
+                type: 'text',
                 placeholder: '₦0.00',
                 required: true,
             },
@@ -1478,7 +1479,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
                 control: 'price',
                 label: 'Price',
                 name: 'price',
-                type: 'number',
+                type: 'text',
                 placeholder: '₦0.00',
                 required: true,
             },
@@ -1683,7 +1684,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
                 control: 'price',
                 label: 'Price',
                 name: 'price',
-                type: 'number',
+                type: 'text',
                 placeholder: '₦0.00',
                 required: true,
             },
@@ -1888,7 +1889,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
                 control: 'price',
                 label: 'Price',
                 name: 'price',
-                type: 'number',
+                type: 'text',
                 placeholder: '₦0.00',
                 required: true,
             },
@@ -2068,7 +2069,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
                 control: 'price',
                 label: 'Price',
                 name: 'price',
-                type: 'number',
+                type: 'text',
                 placeholder: '₦0.00',
                 required: true,
             },
@@ -2257,7 +2258,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
                 control: 'price',
                 label: 'Price',
                 name: 'price',
-                type: 'number',
+                type: 'text',
                 placeholder: '₦0.00',
                 required: true,
             },
@@ -2435,7 +2436,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
                 control: 'price',
                 label: 'Price',
                 name: 'price',
-                type: 'number',
+                type: 'text',
                 placeholder: '₦0.00',
                 required: true,
             },
@@ -2598,7 +2599,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
                 control: 'price',
                 label: 'Price',
                 name: 'price',
-                type: 'number',
+                type: 'text',
                 placeholder: '₦0.00',
                 required: true,
             },
@@ -2784,7 +2785,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
                 control: 'price',
                 label: 'Price',
                 name: 'price',
-                type: 'number',
+                type: 'text',
                 placeholder: '₦0.00',
                 required: true,
             },
@@ -2955,7 +2956,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
                 control: 'price',
                 label: 'Price',
                 name: 'price',
-                type: 'number',
+                type: 'text',
                 placeholder: '₦0.00',
                 required: true,
             },
@@ -3159,7 +3160,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
                 control: 'price',
                 label: 'Price',
                 name: 'price',
-                type: 'number',
+                type: 'text',
                 placeholder: '₦0.00',
                 required: true,
             },
@@ -3415,7 +3416,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
                 control: 'price',
                 label: 'Price',
                 name: 'price',
-                type: 'number',
+                type: 'text',
                 placeholder: '₦0.00',
                 required: true,
             },
@@ -3961,6 +3962,7 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
     const { mutate, isPending } = useCreateAd();
     const navigate = useNavigate();
     const queryClient = useQueryClient();
+    const {compressImages} = useImageCompressor();
 
     const onSubmit = async (values, { setSubmitting, resetForm }) => {
         setSubmitting(true);
@@ -4007,13 +4009,23 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
         });
 
         if (values.images && values.images.length > 0) {
-            const watermarkedImages = await Promise.all(
-                values.images.map((file) => addWatermarkToImage(file)),
-            );
+            try{
+                const compressedImages = await compressImages(values.images);
 
-            watermarkedImages.forEach((file) => {
-                formData.append('images', file);
-            });
+                const finalImages = await Promise.all(
+                    compressedImages.map((file) => addWatermarkToImage(file))
+                );
+
+                finalImages.forEach((file) => {
+                    formData.append('images', file);
+                });
+            }catch(error){
+                const message = error instanceof Error ? error.message : 'File is corrupt or format is unsupported.';
+
+                notify(message, 'error');
+        		setSubmitting(false);
+      		 	return; 
+            }
         }
 
         mutate(formData, {
