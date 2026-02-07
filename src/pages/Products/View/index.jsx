@@ -176,6 +176,13 @@ const index = () => {
 				</div>
 			</section>
 			<ScrollToTop />
+			<SEO
+				title={result?.data?.title}
+				description={result?.data?.description}
+				url={`https://boonfu.com${Approutes.product.view.replace(':id', slugGeneratorForAdIdWithName(result?.data?.title, result?.data?.id))}`}
+				keywords={[result?.data?.title, ...categoryData.map((category) => result?.data?.category.toString().startsWith(category.id.toString()))]}
+				image={result?.data?.images[0]?.path}
+			/>
 		</section>
 	) : (
 		<section className='w-full p-2 lg:p-4'>
