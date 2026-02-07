@@ -11,7 +11,7 @@ export const GRAB_AD_EXPIRY_DAYS = 31;
 
 export const COMPANY_NAME = 'Boonfu';
 
-export const WELCOME_BOONFU_IMAGE = 'https://storage.boonfu.site/ads/YouHaveMadeItToBoonfu.png';
+export const WELCOME_BOONFU_IMAGE = 'https://boonfu.com/og-image.png';
 
 export const GRABBERS_FLYER = 'https://storage.boonfu.site/ads/GrabberService.png';
 
