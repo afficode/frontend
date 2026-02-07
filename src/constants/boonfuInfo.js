@@ -11,11 +11,11 @@ export const GRAB_AD_EXPIRY_DAYS = 31;
 
 export const COMPANY_NAME = 'Boonfu';
 
-export const WELCOME_BOONFU_IMAGE = 'https://storage-console.boonfu.site/api/v1/buckets/ads/objects/download?preview=true&prefix=YouHaveMadeItToBoonfu.png';
+export const WELCOME_BOONFU_IMAGE = 'https://storage.boonfu.site/ads/YouHaveMadeItToBoonfu.png';
 
-export const GRABBERS_FLYER = 'https://storage-console.boonfu.site/api/v1/buckets/ads/objects/download?preview=true&prefix=GrabberService.png';
+export const GRABBERS_FLYER = 'https://storage.boonfu.site/ads/GrabberService.png';
 
-export const ESCROW_SERVICE_FLYER = 'https://storage-console.boonfu.site/api/v1/buckets/ads/objects/download?preview=true&prefix=EscrowService.png';
+export const ESCROW_SERVICE_FLYER = 'https://storage.boonfu.site/ads/EscrowService.png';
 
 export const SEO_PAGES = [
 	Approutes.auth.initial,
