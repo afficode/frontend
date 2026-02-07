@@ -13,7 +13,7 @@ const SEO = ({ title, description, image, url, type = 'website', keywords = [] }
 	const completeKeywords = Array.isArray(keywords) ? keywords.concat(defaultKeywords).join(', ') : keywords.split(',').concat(defaultKeywords).join(', ');
 
 	useEffect(() => {
-		if (SEO_PAGES.includes(location.pathname)) {
+		if (!SEO_PAGES.includes(location.pathname)) {
 			title = "Boonfu | Nigeria's Premier Marketplace to Buy, Sell & Earn";
 			description = "Join Boonfu, Nigeria's fastest-growing C2C marketplace. Use our unique Grab feature to accelerate sales, shop securely with escrow, or earn commissions as a digital marketer.";
 			image = WELCOME_BOONFU_IMAGE;

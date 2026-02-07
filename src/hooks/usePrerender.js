@@ -6,7 +6,7 @@ export const usePrerender = (isReady = true) => {
 		if (isReady) {
 			const timer = setTimeout(() => {
 				window.prerenderReady = true;
-			}, 100);
+			}, 1000);
 			return () => clearTimeout(timer);
 		} else {
 			window.prerenderReady = false;
