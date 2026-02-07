@@ -14,6 +14,7 @@ const __dirname = path.dirname(__filename);
 const app = express();
 
 app.disable('x-powered-by');
+app.set('trust proxy', 1);
 
 const PORT = parseInt(process.env.PORT || '3000');
 
