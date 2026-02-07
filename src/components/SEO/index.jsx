@@ -1,11 +1,12 @@
 import { Helmet } from 'react-helmet-async';
 import { COMPANY_NAME, SEO_PAGES, WELCOME_BOONFU_IMAGE } from '../../constants';
 import { usePrerender } from '../../hooks/usePrerender';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 const SEO = ({ title, description, image, url, type = 'website', keywords = [] }) => {
 	const location = useLocation();
+	const [isDefault, setIsDefault] = useState(false);
 
 	const siteName = COMPANY_NAME;
 	const fullTitle = title ? `${title} | ${siteName}` : siteName;
@@ -33,7 +34,17 @@ const SEO = ({ title, description, image, url, type = 'website', keywords = [] }
 			<meta property='og:type' content={type} />
 			<meta property='og:title' content={fullTitle} />
 			<meta property='og:description' content={description} />
-			{image && <meta property='og:image' content={image} />}
+			{image && (
+				<>
+					<meta property='og:image' content={image} />
+					{isDefault && (
+						<>
+							<meta property='og:image:width' content='1200' />
+							<meta property='og:image:height' content='630' />
+						</>
+					)}
+				</>
+			)}
 			{url && <meta property='og:url' content={url} />}
 
 			<meta name='twitter:card' content='summary_large_image' />
