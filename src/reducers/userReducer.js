@@ -95,10 +95,10 @@ const userReducer = (state, action) => {
     case userReducerOptions.LOGIN_USER: {
         const userStatus = setUpUser(payload, state);
         setUser(userStatus);
-        if(payload?.token){
+        if (payload?.token) {
             setToken(payload?.token);
         }
-        if(payload?.refreshToken){
+        if (payload?.refreshToken) {
             setRefreshToken(payload?.refreshToken);
         }
         setReducerInitialState({ ...userStatus });
@@ -110,10 +110,10 @@ const userReducer = (state, action) => {
     case userReducerOptions.UPDATE_USER_INFO: {
         const updatedUserStatus = setUpUser(payload, state);
         setUser(updatedUserStatus);
-        if(payload?.token){
+        if (payload?.token) {
             setToken(payload?.token);
         }
-        if(payload?.refreshToken){
+        if (payload?.refreshToken) {
             setRefreshToken(payload?.refreshToken);
         }
         setReducerInitialState({ ...updatedUserStatus });

@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
-import { Approutes } from '../../constants';
+import { Approutes, BOONFU_FACEBOOK, BOONFU_INSTAGRAM } from '../../constants';
 import { useRef, useState } from 'react';
 import { TermsAndCondition } from '../../components';
 import { Modal } from '../../ui';
 
 // icons
-import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
+import { FaFacebook, FaInstagram } from 'react-icons/fa';
 
 const Footer = () => {
 
@@ -36,19 +36,10 @@ const Footer = () => {
                         <div className="col-span-2  space-y-2">
                             <h3 className="text-start">Transact with peace of mind on Boonfu</h3>
                             <p className="text-justify p-lg">
-								Shop and sell securely with Boonfu's escrow protection (Grab) - your funds are safe until
-								delivery is confirmed. Our verified marketplace ensures trustworthy transactions, while
-								real-time tracking keeps you in control. Sellers can boost sales through our Grab Feature,
-								where independent marketers promote your products for commission-on-sale. Enjoy instant
-								dispute resolution and worry-free commerce. At Boonfu, security and growth go hand-in-hand!{' '}
-                                <br />
-								#SecureTransactions #EarnWithBoonfu
+								Boonfu is a C2C marketplace—we do not sell, inspect, or guarantee any listed item. All
+								listings are posted by private individuals.
                             </p>
-                            <div className="space-y-1">
-                                <h4 className="text-start">Product Page Disclaimer</h4>
                                 <div className="text-justify p-lg">
-									Boonfu is a C2C marketplace—we do not sell, inspect, or guarantee any listed item. All
-									listings are posted by private individuals.
                                     <ul>
                                         <li>
 											● For GRAB listings: Payment is protected by Boonfu Escrow (funds held until you confirm
@@ -66,7 +57,6 @@ const Footer = () => {
                                     </button>{' '}
 									to read the full Disclaimer in our Terms and Conditions.
                                 </div>
-                            </div>
                         </div>
                     </div>
 
@@ -143,7 +133,7 @@ const Footer = () => {
                             </h6>
                             <div className="flex gap-4 px-2 md:px-8">
                                 <Link
-                                    to={'https://web.facebook.com/profile.php?id=61550635179141'}
+                                    to={BOONFU_FACEBOOK}
                                     rel="noopener noreferrer"
                                     target="_blank"
                                     className="hover:text-secondary"
@@ -151,15 +141,7 @@ const Footer = () => {
                                     <FaFacebook size={28} />
                                 </Link>
                                 <Link
-                                    to={'https://twitter.com/affi_ng88124'}
-                                    rel="noopener noreferrer"
-                                    target="_blank"
-                                    className="hover:text-secondary"
-                                >
-                                    <FaTwitter size={28} />
-                                </Link>
-                                <Link
-                                    to={'https://www.instagram.com/contactaffi/'}
+                                    to={BOONFU_INSTAGRAM}
                                     rel="noopener noreferrer"
                                     target="_blank"
                                     className="hover:text-secondary"

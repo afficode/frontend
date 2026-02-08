@@ -1,8 +1,8 @@
-import {format} from 'date-fns';
-import {getUserFromLocalStorage, setUser} from './localstorage';
+import { format } from 'date-fns';
+import { getUserFromLocalStorage, setUser } from './localstorage';
 
 export const manipulateCategory = (category) => {
-    return Object.groupBy(category, ({category_id}) => category_id);
+    return Object.groupBy(category, ({ category_id }) => category_id);
 };
 
 export const numberWithCommas = (x) => {
@@ -10,13 +10,17 @@ export const numberWithCommas = (x) => {
 };
 
 export const formatCurrency = (x) => {
-    if (!x) {return '';}
+    if (!x) {
+        return '';
+    }
 
     // Convert the value to a number first
     const numericValue = parseFloat(x);
 
     // If the conversion fails, return the original value
-    if (isNaN(numericValue)) {return x;}
+    if (isNaN(numericValue)) {
+        return x;
+    }
     const parts = numericValue.toFixed(2).split('.');
     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     return parts.join('.');
@@ -100,12 +104,16 @@ export const convertKeyToName = (ad) => {
         'capacity',
     ];
 
-    if (!ad) {return [];}
+    if (!ad) {
+        return [];
+    }
 
     const overviews = [];
 
     keys.forEach((key) => {
-        if (!(key in ad)) {return;}
+        if (!(key in ad)) {
+            return;
+        }
 
         const displayName = key
             .split('_')
@@ -120,13 +128,17 @@ export const convertKeyToName = (ad) => {
             const otherValue = ad[otherKey];
 
             // Skip if no corresponding *_other field or it's empty
-            if (!otherValue) {return;}
+            if (!otherValue) {
+                return;
+            }
 
             value = otherValue;
         }
 
         // Skip if value is null, undefined, or empty string
-        if (value === null || value === '') {return;}
+        if (value === null || value === '') {
+            return;
+        }
 
         // Format date
         if (key === 'date_available') {
@@ -139,7 +151,8 @@ export const convertKeyToName = (ad) => {
     return overviews;
 };
 
-export const arrayRange = (start, stop, step) => Array.from({ length: (stop - start) / step + 1 }, (value, index) => start + index * step);
+export const arrayRange = (start, stop, step) =>
+    Array.from({ length: (stop - start) / step + 1 }, (value, index) => start + index * step);
 
 export const getStateLGA = (lga, state_id) => {
     const state_lga = lga.filter((val) => val.state_id === state_id);
@@ -202,19 +215,28 @@ export const manipulateFilterForm = (values, category_id) => {
     if (filteredValue.min_price !== undefined) {
         const raw = filteredValue.min_price?.toString().replace(/[^0-9]/g, '');
         filteredValue.min_price = raw ? raw : '';
-        if (filteredValue.min_price === '') {delete filteredValue.min_price;}
+        if (filteredValue.min_price === '') {
+            delete filteredValue.min_price;
+        }
     }
     if (filteredValue.max_price !== undefined) {
         const raw = filteredValue.max_price?.toString().replace(/[^0-9]/g, '');
         filteredValue.max_price = raw ? raw : '';
-        if (filteredValue.max_price === '') {delete filteredValue.max_price;}
+        if (filteredValue.max_price === '') {
+            delete filteredValue.max_price;
+        }
     }
 
     if (filteredValue.min_price || filteredValue.max_price) {
-        if ('price' in filteredValue) {delete filteredValue.price;}
+        if ('price' in filteredValue) {
+            delete filteredValue.price;
+        }
     } else if ('price' in filteredValue) {
         const priceValue = filteredValue.price;
-        const isEmptyPrice = priceValue === '' || priceValue === null || (Array.isArray(priceValue) && priceValue.length === 0);
+        const isEmptyPrice =
+            priceValue === '' ||
+            priceValue === null ||
+            (Array.isArray(priceValue) && priceValue.length === 0);
 
         if (isEmptyPrice) {
             delete filteredValue.price;
@@ -223,8 +245,12 @@ export const manipulateFilterForm = (values, category_id) => {
                 ...filteredValue,
                 price: manipulatePrice(filteredValue.price, category_id),
             };
-            if ('min_price' in filteredValue) {delete filteredValue.min_price;}
-            if ('max_price' in filteredValue) {delete filteredValue.max_price;}
+            if ('min_price' in filteredValue) {
+                delete filteredValue.min_price;
+            }
+            if ('max_price' in filteredValue) {
+                delete filteredValue.max_price;
+            }
         }
     }
 

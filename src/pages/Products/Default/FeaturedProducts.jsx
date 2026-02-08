@@ -46,13 +46,13 @@ const FeaturedProducts = ({ product }) => {
                                         src={img.path}
                                         alt={img.filename}
                                         key={index * 3}
-                                        className="w-full h-full  rounded-b-none "
+                                        className="w-full h-full object-cover rounded-b-none "
                                     />
                                 ))}
                             </Carousel>
                         ) : (
-                            <div className="h-[120px] md:h-[230px] rounded-none">
-                                <img src={noimage} alt="no image" className="w-full h-full mx-auto rounded-none" />
+                            <div className="h-[120px] md:h-[230px] rounded-none  ">
+                                <img src={noimage} alt="no image" className="w-full h-full object-cover  mx-auto rounded-none" />
                             </div>
                         )}
 

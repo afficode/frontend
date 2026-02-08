@@ -92,7 +92,7 @@ const AdCard = ({
             <div className="bg-gray-200 w-[18rem] sm:w-[20rem]">
                 {/* image  */}
                 <div className="w-full h-[13rem]  sm:h-[15rem] relative border border-gray-300">
-                    <img src={images[0]?.path} alt={images[0]?.filename} className="w-full h-full object-fit" />
+                    <img src={images[0]?.path} alt={images[0]?.filename} className="w-full h-full object-cover" />
                     <div className="absolute bottom-0 flex items-center w-full gap-2 p-2 bg-black/60">
                         <img src={CameraWhite} alt="images" className="w-4" />
                         <span className="text-white">{images.length}</span>

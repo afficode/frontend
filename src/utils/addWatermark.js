@@ -33,7 +33,7 @@ const addWatermarkToImage = (file, watermarkText = '©boonfu.com') => {
                             const newFileName = file.name.replace(/\.[^/.]+$/, '') + '.webp';
 
                             const watermarkedFile = new File([blob], newFileName, {
-                                type: 'image/webp', 
+                                type: 'image/webp',
                                 lastModified: Date.now(),
                             });
                             resolve(watermarkedFile);
@@ -41,12 +41,17 @@ const addWatermarkToImage = (file, watermarkText = '©boonfu.com') => {
                             reject(new Error(`System could not process ${file.name}`));
                         }
                     },
-                    'image/webp', 
-                    0.9           
-                ); 
+                    'image/webp',
+                    0.9
+                );
             };
 
-            img.onerror = () => reject(new Error(`The file "${file.name}" appears to be corrupted or not a valid image.`));
+            img.onerror = () =>
+                reject(
+                    new Error(
+                        `The file "${file.name}" appears to be corrupted or not a valid image.`
+                    )
+                );
             img.src = e.target.result;
         };
 

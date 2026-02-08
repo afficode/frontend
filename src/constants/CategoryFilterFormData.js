@@ -15286,11 +15286,13 @@ const sport = [
         title: 'Condition',
         type: 'checkbox',
         content_checkbox: false,
-        content: condition_refub.filter((cond) => cond.values !== 'refurbished').map((ad_condition) => ({
-            name: 'ad_condition',
-            value: ad_condition.value,
-            label: ad_condition.label,
-        })),
+        content: condition_refub
+            .filter((cond) => cond.values !== 'refurbished')
+            .map((ad_condition) => ({
+                name: 'ad_condition',
+                value: ad_condition.value,
+                label: ad_condition.label,
+            })),
     },
 ];
 const sport01 = [
@@ -15368,11 +15370,13 @@ const sport01 = [
         title: 'Condition',
         type: 'checkbox',
         content_checkbox: false,
-        content: condition_refub.filter((cond) => cond.values !== 'refurbished').map((ad_condition) => ({
-            name: 'ad_condition',
-            value: ad_condition.value,
-            label: ad_condition.label,
-        })),
+        content: condition_refub
+            .filter((cond) => cond.values !== 'refurbished')
+            .map((ad_condition) => ({
+                name: 'ad_condition',
+                value: ad_condition.value,
+                label: ad_condition.label,
+            })),
     },
 ];
 const sport04 = [
@@ -15521,11 +15525,13 @@ const sport02 = [
         title: 'Condition',
         type: 'checkbox',
         content_checkbox: false,
-        content: condition_refub.filter((cond) => cond.values !== 'refurbished').map((ad_condition) => ({
-            name: 'ad_condition',
-            value: ad_condition.value,
-            label: ad_condition.label,
-        })),
+        content: condition_refub
+            .filter((cond) => cond.values !== 'refurbished')
+            .map((ad_condition) => ({
+                name: 'ad_condition',
+                value: ad_condition.value,
+                label: ad_condition.label,
+            })),
     },
     {
         id: 'brand',
@@ -15614,11 +15620,13 @@ const sport03 = [
         title: 'Condition',
         type: 'checkbox',
         content_checkbox: false,
-        content: condition_refub.filter((cond) => cond.values !== 'refurbished').map((ad_condition) => ({
-            name: 'ad_condition',
-            value: ad_condition.value,
-            label: ad_condition.label,
-        })),
+        content: condition_refub
+            .filter((cond) => cond.values !== 'refurbished')
+            .map((ad_condition) => ({
+                name: 'ad_condition',
+                value: ad_condition.value,
+                label: ad_condition.label,
+            })),
     },
     {
         id: 'brand',
@@ -15707,11 +15715,13 @@ const sport06 = [
         title: 'Condition',
         type: 'checkbox',
         content_checkbox: false,
-        content: condition_refub.filter((cond) => cond.values !== 'refurbished').map((ad_condition) => ({
-            name: 'ad_condition',
-            value: ad_condition.value,
-            label: ad_condition.label,
-        })),
+        content: condition_refub
+            .filter((cond) => cond.values !== 'refurbished')
+            .map((ad_condition) => ({
+                name: 'ad_condition',
+                value: ad_condition.value,
+                label: ad_condition.label,
+            })),
     },
     {
         id: 'brand',

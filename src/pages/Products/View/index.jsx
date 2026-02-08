@@ -156,13 +156,13 @@ const index = () => {
                     <div className="w-full mx-auto mt-1">
                         <div className="relative rounded-none w-full  h-full ">
                             {result.data?.images.length > 0 ? (
-                                <Carousel className="h-full max-lg:h-[300px] md:h-[470px] rounded-none">
+                                <Carousel className="h-full max-lg:h-[300px] md:h-[470px] rounded-none bg-black/50">
                                     {result.data?.images.map((img, index) => (
                                         <img
                                             src={img.path}
                                             alt={img.filename}
                                             key={index * 3}
-                                            className="rounded-t-sm rounded-b-none "
+                                            className="rounded-t-sm rounded-b-none w-full h-full object-contain "
                                         />
                                     ))}
                                 </Carousel>
@@ -251,13 +251,13 @@ const index = () => {
                     {/* ad images */}
                     <div className="relative w-full h-full mx-auto mt-1  rounded-none ">
                         {result?.data?.images.length > 0 ? (
-                            <Carousel className="h-full max-lg:h-[300px] md:h-[470px] rounded-none">
+                            <Carousel className="h-full max-lg:h-[300px] md:h-[470px] rounded-none bg-black/50">
                                 {result?.data?.images.map((img, index) => (
                                     <img
                                         src={img.path}
                                         alt={img.filename}
                                         key={index * 3}
-                                        className="rounded-t-sm rounded-b-none"
+                                        className="rounded-t-sm rounded-b-none w-full h-full object-contain"
                                     />
                                 ))}
                             </Carousel>

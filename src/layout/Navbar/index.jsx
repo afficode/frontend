@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation, useSearchParams, useNavigate } from 'react-router-dom';
 import { Approutes } from '../../constants/routes';
 import { CategoryDropdown, WalletDropdown } from '../../ui';
-import { BoonfuLogo } from '../../assets/images';
+import {  BoonfuWhite } from '../../assets/images';
 import { useCategories, useStates } from '../../hooks';
 import useAuth from '../../context/UserContext';
 import useMessageContext from '../../context/MessageContext';
@@ -126,11 +126,9 @@ const Navbar = () => {
                     {/* top nav  */}
                     <div className="max-w-[1380px] mx-auto px-2 flex items-center justify-between ">
                         {/* logo */}
-                        <div className="flex items-center bg-white rounded-full p-[2px]">
                             <NavLink to={'/'}>
-                                <img src={BoonfuLogo} className="w-[2.9rem]" alt="Boonfu.com" />
+                                <img src={BoonfuWhite} className="w-[6.5rem]" alt="Boonfu.com" />
                             </NavLink>
-                        </div>
 
                         {/* <!-- Search input on desktop screen --> */}
                         <div className="items-center justify-between hidden lg:flex">

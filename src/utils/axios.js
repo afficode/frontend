@@ -43,7 +43,10 @@ privateAxios.interceptors.response.use(
                     },
                 });
 
-                if (!response?.data) {return;}
+                if (!response?.data) {
+                    return;
+                }
+                // eslint-disable-next-line no-unsafe-optional-chaining
                 const { token, user } = response?.data;
                 setUpUser(user, initialState);
                 setToken(token);

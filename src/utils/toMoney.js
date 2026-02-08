@@ -1,5 +1,7 @@
 export const toMoney = (value, fixed) => {
-    if (!value) {value = 0;}
+    if (!value) {
+        value = 0;
+    }
 
     if (typeof value !== 'string') {
         value = String(value);
@@ -27,13 +29,19 @@ export const toMoney = (value, fixed) => {
 };
 
 export const fromMoney = (value) => {
-    if (value === null || value === undefined) {return 0;}
+    if (value === null || value === undefined) {
+        return 0;
+    }
 
-    if (typeof value === 'number') {return value;}
+    if (typeof value === 'number') {
+        return value;
+    }
 
     if (typeof value === 'string') {
         const cleaned = value.trim().replace(/,/g, '');
-        if (cleaned === '') {return 0;}
+        if (cleaned === '') {
+            return 0;
+        }
         const parsed = Number(cleaned);
         return isNaN(parsed) ? 0 : parsed;
     }

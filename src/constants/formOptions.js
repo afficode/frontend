@@ -725,7 +725,18 @@ const allMake = [
     },
     {
         make: 'Jaguar',
-        models: ['E-PACE', 'I-PACE', 'F-PACE', 'F-TYPE', 'XE', 'XF', 'XJ', 'XK', 'S-Type', 'X-Type'],
+        models: [
+            'E-PACE',
+            'I-PACE',
+            'F-PACE',
+            'F-TYPE',
+            'XE',
+            'XF',
+            'XJ',
+            'XK',
+            'S-Type',
+            'X-Type',
+        ],
         categories: ['SUV', 'Convertible', 'Sedan', 'Wagon', 'Coupe'],
     },
     {
@@ -1262,7 +1273,16 @@ const allMake = [
             '240',
             '740',
         ],
-        categories: ['SUV', 'SUV1992', 'Sedan', 'Wagon', 'SUV2020', 'Hatchback', 'Convertible', 'Coupe'],
+        categories: [
+            'SUV',
+            'SUV1992',
+            'Sedan',
+            'Wagon',
+            'SUV2020',
+            'Hatchback',
+            'Convertible',
+            'Coupe',
+        ],
     },
     {
         make: 'Alfa Romeo',
@@ -1371,7 +1391,12 @@ const allMake = [
     },
     {
         make: 'smart',
-        models: ['fortwo electric drive', 'fortwo electric drive cabrio', 'fortwo cabrio', 'fortwo'],
+        models: [
+            'fortwo electric drive',
+            'fortwo electric drive cabrio',
+            'fortwo cabrio',
+            'fortwo',
+        ],
         categories: ['Hatchback', 'Convertible'],
     },
     {

@@ -59,7 +59,6 @@ export const TokenHook = async (values, endpoint, token, setSubmitting) => {
 };
 
 export const updateUserInfo = async () => {
-
     axios.post();
 };
 
