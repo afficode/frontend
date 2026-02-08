@@ -58,16 +58,18 @@ export default function ContactAdmin({ ads_id }) {
                 </p>
                 <ul className="list-disc ml-4">
                     <li>
-						Before you click on contact Admin, it will be Good to edit this Ad and make the necessary
-						changes complained by Admin as the reason why this Ad was blocked.
+                        Before you click on contact Admin, it will be Good to edit this Ad and make
+                        the necessary changes complained by Admin as the reason why this Ad was
+                        blocked.
                     </li>
                     <li>
                         {' '}
-						If you think this Ads was blocked unjustly, click on the Contact Admin button to queue this
-						Ads for review.
+                        If you think this Ads was blocked unjustly, click on the Contact Admin
+                        button to queue this Ads for review.
                     </li>
                     <li>
-						Ensure the Ad is in good state before clicking Contact Admin to queue the Ad for review.{' '}
+                        Ensure the Ad is in good state before clicking Contact Admin to queue the Ad
+                        for review.{' '}
                     </li>
                 </ul>
             </div>
@@ -78,19 +80,20 @@ export default function ContactAdmin({ ads_id }) {
                     onClick={() => setIsOpen(true)}
                 >
                     <HiEye className="-ml-0.5 mr-2 h-4 w-4" />
-					Contact Admin
+                    Contact Admin
                 </button>
                 <button
                     type="button"
                     className="rounded-lg border border-red-700 bg-transparent px-3 py-1.5 text-center text-xs font-medium text-red-700 hover:bg-red-800 hover:text-white focus:ring-4 focus:ring-red-300 dark:border-red-800 dark:text-red-800 dark:hover:text-white"
                     onClick={() => handleDelete(ads_id)}
                 >
-					Delete Ad
+                    Delete Ad
                 </button>
                 <Modal
                     isOpen={isOpen}
                     setIsOpen={setIsOpen}
                     headerText={'Ad Review Form'}
+                    // eslint-disable-next-line react/no-children-prop
                     children={<ContactAdminForm setIsOpen={setIsOpen} ads_id={ads_id} />}
                 />
             </div>

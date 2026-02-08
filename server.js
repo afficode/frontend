@@ -19,43 +19,49 @@ app.set('trust proxy', 1);
 const PORT = parseInt(process.env.PORT || '3000');
 
 app.use(
-	helmet({
-		contentSecurityPolicy: process.env.CONTENT_SECURITY_POLICY === 'false' ? false : true,
-	}),
+    helmet({
+        contentSecurityPolicy: process.env.CONTENT_SECURITY_POLICY === 'false' ? false : true,
+    })
 );
-const allowedOrigins = process.env.COS_WHITELIST ? process.env.COS_WHITELIST.split(',').map((origin) => origin.trim()) : [];
+const allowedOrigins = process.env.COS_WHITELIST
+    ? process.env.COS_WHITELIST.split(',').map((origin) => origin.trim())
+    : [];
 app.use(
-	cors({
-		origin: (origin, callback) => {
-			if (!origin || allowedOrigins.includes(origin)) {
-				callback(null, true);
-			} else {
-				callback(new Error('Not allowed by CORS'));
-			}
-		},
-	}),
+    cors({
+        origin: (origin, callback) => {
+            if (!origin || allowedOrigins.includes(origin)) {
+                callback(null, true);
+            } else {
+                callback(new Error('Not allowed by CORS'));
+            }
+        },
+    })
 );
 
 const limiter = rateLimit({
-	windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MIN || '15') * 60 * 1000,
-	max: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS || '300'),
-	standardHeaders: true,
-	legacyHeaders: false,
-	message: 'Too many requests, please try again later.',
+    windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MIN || '15') * 60 * 1000,
+    max: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS || '300'),
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: 'Too many requests, please try again later.',
 });
 
 // Apply to all routes
 app.use(limiter);
-prerender.set('prerenderToken', process.env.PRERENDER_TOKEN).set('protocol', 'https').set('blacklisted', ['^/api', '\\.js', '\\.css', '\\.png', '\\.jpg', '\\.static']);
+prerender
+    .set('prerenderToken', process.env.PRERENDER_TOKEN)
+    .set('protocol', 'https')
+    .set('blacklisted', ['^/api', '\\.js', '\\.css', '\\.png', '\\.jpg', '\\.static']);
 
 app.use(express.static(path.join(__dirname, 'dist')));
 
 app.use(prerender);
 
 app.get('*', (req, res) => {
-	res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
 app.listen(PORT, () => {
-	console.log(`Server is running on http://localhost:${PORT}`);
+    // eslint-disable-next-line no-console
+    console.log(`Server is running on http://localhost:${PORT}`);
 });

@@ -37,7 +37,7 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
         await privateAxios
             .post('chat/verifyChat', { ad_id, owner })
             .then((res) => {
-                if(res?.data?.chat.length > 0){
+                if (res?.data?.chat.length > 0) {
                     setChatId(res?.data?.chat[0].chat_id);
                 }
             })
@@ -62,7 +62,10 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
             onSuccess: ({ data }) => {
                 if (data.success) {
                     setChatId(message.chat_id);
-                    notify('Message sent successfully, The ad owner will be in touch with you soon.', 'success');
+                    notify(
+                        'Message sent successfully, The ad owner will be in touch with you soon.',
+                        'success'
+                    );
                 }
             },
         });
@@ -73,11 +76,14 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
             { ad_id },
             {
                 onError: () => {
-                    notify('Error creating chat. If the error persist, please contact Admin.', 'error');
+                    notify(
+                        'Error creating chat. If the error persist, please contact Admin.',
+                        'error'
+                    );
                 },
                 onSuccess: ({ data }) => {
                     if (data?.chat_id) {
-                        const {chat_id} = data;
+                        const { chat_id } = data;
                         sendMessage({ chat_id, content, offer });
                     }
                 },
@@ -91,7 +97,11 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
                 { ads_id: ad_id },
                 {
                     onSuccess: () => {
-                        notify('Item Grabbed, View on Grab Page', 'success', Approutes.grab.product(ad?.id));
+                        notify(
+                            'Item Grabbed, View on Grab Page',
+                            'success',
+                            Approutes.grab.product(ad?.id)
+                        );
                         socketGrabAd(ad_id);
                     },
                     onError: (error) => {
@@ -119,17 +129,6 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
     const [isOpen, setIsOpen] = useState(false);
     const termsRef = useRef(null);
 
-    const handleScrollTo = (ref) => {
-        if (!isOpen) {
-            setIsOpen(true);
-            setTimeout(() => {
-                ref.current.scrollIntoView({ behavior: 'smooth' });
-            }, 1000); // Add a delay to ensure the component is rendered before scrolling
-        } else {
-            ref.current.scrollIntoView({ behavior: 'smooth' });
-        }
-    };
-
     return (
         <div className={`${ad?.feature === '3' && 'md:mt-[6rem]'}     mt-4 h-full`}>
             <Formik
@@ -138,11 +137,15 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
                         chatId !== null
                             ? 'Disabled... Please continue chat in the message section'
                             : 'Hi There, I am interested in this car, is it still available?',
-                    phone: chatId !== null ? 'Disabled... Please continue chat in the message section' : '',
+                    phone:
+                        chatId !== null
+                            ? 'Disabled... Please continue chat in the message section'
+                            : '',
                 }}
                 onSubmit={(values) => {
                     let content = values.message;
-                    content += values.phone !== '' ? ` This is my phone number: ${values.phone}` : '';
+                    content +=
+                        values.phone !== '' ? ` This is my phone number: ${values.phone}` : '';
                     chatCreation(content);
                 }}
             >
@@ -157,7 +160,7 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
                                         type="button"
                                         className="my-2  text-lg tracking-tighter line-clamp-1 "
                                     >
-										Interested
+                                        Interested
                                     </Button>
                                 </Link>
 
@@ -171,7 +174,7 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
                                         type="button"
                                     >
                                         <span className="flex items-center gap-2 justify-center">
-											Ungrab Item
+                                            Ungrab Item
                                             <FcCancel className="my-auto" />
                                         </span>{' '}
                                     </Button>
@@ -181,14 +184,16 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
                                         variant="secondary"
                                         size={'full'}
                                         className={`my-2  text-lg tracking-tighter line-clamp-1 ${isLoading ? 'opacity-40' : ''}`}
-                                        disabled={!isLogin || blocked || user?.id === owner || isLoading}
+                                        disabled={
+                                            !isLogin || blocked || user?.id === owner || isLoading
+                                        }
                                         type="button"
                                     >
                                         {isLoading ? (
                                             <span className="loading loading-spinner loading-md"></span>
                                         ) : (
                                             <span className="flex items-center gap-2 justify-center">
-												Grab Item
+                                                Grab Item
                                                 <FaMicrochip className="my-auto" />
                                             </span>
                                         )}{' '}
@@ -204,7 +209,7 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
                                         type="button"
                                         className="my-2  text-lg tracking-tighter line-clamp-1 "
                                     >
-										Place order
+                                        Place order
                                     </Button>
                                 </Link>
 
@@ -218,7 +223,7 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
                                         type="button"
                                     >
                                         <span className="flex items-center gap-2 justify-center">
-											Ungrab Item
+                                            Ungrab Item
                                             <FcCancel className="my-auto" />
                                         </span>{' '}
                                     </Button>
@@ -228,14 +233,16 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
                                         variant="secondary"
                                         size={'full'}
                                         className={`my-2  text-lg tracking-tighter line-clamp-1 ${isLoading ? 'opacity-40' : ''}`}
-                                        disabled={!isLogin || blocked || user?.id === owner || isLoading}
+                                        disabled={
+                                            !isLogin || blocked || user?.id === owner || isLoading
+                                        }
                                         type="button"
                                     >
                                         {isLoading ? (
                                             <span className="loading loading-spinner loading-md"></span>
                                         ) : (
                                             <span className="flex items-center gap-2 justify-center">
-												Grab Item
+                                                Grab Item
                                                 <FaMicrochip className="my-auto" />
                                             </span>
                                         )}{' '}
@@ -245,7 +252,9 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
                         ) : (
                             <>
                                 <Field
-                                    disabled={!isLogin || chatId !== null || blocked || user?.id === owner}
+                                    disabled={
+                                        !isLogin || chatId !== null || blocked || user?.id === owner
+                                    }
                                     as="textarea"
                                     name="message"
                                     id="message"
@@ -273,34 +282,29 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
                                         !isLogin && 'bg-gray-100 cursor-not-allowed'
                                     } ${chatId !== null && 'bg-gray-300 cursor-not-allowed'}`}
                                 />
-                                <div className="space-y-1 w-full my-2 text-center ">
-                                    <h5 className="text-base font-semibold">Disclaimer</h5>
-                                    <div className="text-center !text-xs">
-										Boonfu is a C2C marketplace—we do not sell, inspect, or guarantee any listed item. All
-										listings are posted by private individuals.
-                                        <ul className="!text-xs">
-                                            <li className="!text-xs">
-												● For GRAB listings: Payment is protected by Boonfu Escrow (funds held until you confirm
-												pickup). Inspect before confirming—sales are final after confirmation.
-                                            </li>
-                                            <li className="!text-xs">
-												● For NON-GRAB listings: No Escrow protection—transactions are direct between you and
-												the seller. Boonfu offers no support or refunds for these deals.
-                                            </li>
-                                        </ul>{' '}
-                                        <br />
-										Use Grab for secure, urgent sales. All transactions are at your own risk.{' '}
-                                        <button
-                                            type="button"
-                                            onClick={() => {
-                                                handleScrollTo(termsRef);
-                                            }}
-                                            className="text-secondary"
-                                        >
-											[View More]
-                                        </button>{' '}
-										to read the full Disclaimer in our Terms and Conditions.
-                                    </div>
+                                <div className="space-y-1 w-full my-2 text-start ">
+                                    <h5 className="text-base font-semibold">The Boonfu Standard</h5>
+                                    <ul className="!text-xs">
+                                        <li className="!text-xs">
+                                            -Use &quot;Grab&quot; for Escrow; never pay sellers
+                                            directly.
+                                        </li>
+                                        <li className="!text-xs">
+                                            -Inspect items thoroughly before confirming to release
+                                            funds.
+                                        </li>
+                                        <li className="!text-xs">
+                                            -Keep all chats and payments within the Boonfu platform.
+                                        </li>
+                                        <li className="!text-xs">
+                                            -Meet in busy, public locations for physical
+                                            inspections.
+                                        </li>
+                                        <li className="!text-xs">
+                                            -If a deal looks too good to be true, proceed with
+                                            caution.
+                                        </li>
+                                    </ul>
                                 </div>
 
                                 {chatId ? (
@@ -309,11 +313,11 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
                                             disabled={!isLogin || blocked || user?.id === owner}
                                             variant="secondary"
                                             size={'full'}
-                                            className="my-2 text-lg font-bold tracking-tighter line-clamp-1"
+                                            className="my-2 text-base font-bold tracking-tighter line-clamp-1"
                                         >
                                             <span className="flex gap-2 lg:gap-4 items-center justify-center">
                                                 {' '}
-												Go to Message <FaEnvelope className="my-auto" />
+                                                Go to Message <FaEnvelope className="my-auto" />
                                             </span>
                                         </Button>
                                     </Link>
@@ -328,9 +332,9 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
                                             type="submit"
                                             variant="primary"
                                             size={'full'}
-                                            className="my-2 text-lg font-bold tracking-tighter line-clamp-1"
+                                            className="my-2 text-base font-bold tracking-tighter line-clamp-1"
                                         >
-											Submit
+                                            Submit
                                         </Button>
                                     </div>
                                 )}
@@ -340,13 +344,13 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
                                             variant={'secondary'}
                                             size={'full'}
                                             type="button"
-                                            className=" text-lg  tracking-tighter line-clamp-1 group focus:bg-white focus:border-black"
+                                            className=" text-base  tracking-tighter line-clamp-1 group focus:bg-white focus:border-black"
                                         >
                                             <span className="flex items-center gap-4 justify-center font-semibold">
-												Make offer{' '}
+                                                Make offer{' '}
                                                 <img
                                                     src={ArrowDown}
-                                                    alt="/"
+                                                    alt="arrow down"
                                                     className="w-4 group-focus:transform group-focus:rotate-180 transition-all"
                                                 />
                                             </span>
@@ -361,7 +365,12 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
                                                         <p>Price:</p>
                                                         <h6 className="font-bold flex items-center gap-2">
                                                             {' '}
-                                                            <img src={Naira} alt="naira" className="w-4" /> {toMoney(ad?.price)}
+                                                            <img
+                                                                src={Naira}
+                                                                alt="naira"
+                                                                className="w-4"
+                                                            />{' '}
+                                                            {toMoney(ad?.price)}
                                                         </h6>
                                                     </div>
                                                     <div className="flex items-center justify-between gap-6">
@@ -374,7 +383,9 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
                                                             autoComplete="off"
                                                             className={' customAmountInput '}
                                                             value={offer}
-                                                            onChange={(e) => setOffer(e.target.value)}
+                                                            onChange={(e) =>
+                                                                setOffer(e.target.value)
+                                                            }
                                                             // onBlur={formikWithdraw.handleBlur}
                                                             // errorMsg={
                                                             // 	formikWithdraw.touched.amount && formikWithdraw.errors.amount
@@ -389,7 +400,11 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
                                                                     type="button"
                                                                     className="absolute right-2 inset-y-0 my-auto h-fit "
                                                                 >
-                                                                    <img src={Cancel} alt="/" className="w-4" />
+                                                                    <img
+                                                                        src={Cancel}
+                                                                        alt="cancel"
+                                                                        className="w-4"
+                                                                    />
                                                                 </button>
                                                             }
                                                         />
@@ -399,13 +414,18 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
                                                 <Button
                                                     variant={'secondary'}
                                                     size={'full'}
-                                                    className={'py-2 font-semibold'}
+                                                    className={'py-2 text-base font-semibold'}
                                                     type="button"
                                                     onClick={handleOfferSubmit}
-                                                    disabled={!isLogin || blocked || offer === '' || sendingChat}
+                                                    disabled={
+                                                        !isLogin ||
+                                                        blocked ||
+                                                        offer === '' ||
+                                                        sendingChat
+                                                    }
                                                     loading={sendingChat}
                                                 >
-													Send this offer
+                                                    Send this offer
                                                 </Button>
                                             </form>
                                         </div>
@@ -418,17 +438,18 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
             </Formik>
             <Modal
                 modalHeader={true}
+                // eslint-disable-next-line react/no-children-prop
                 children={<ReportAd ad_id={ad_id} />}
                 headerText={'Feedback / Abuse'}
-                className={`w-full px-2 py-3 my-2 text-lg tracking-tighter text-white bg-slate-600 hover:bg-slate-500 line-clamp-1 ${
+                className={`w-full px-2 py-3 my-2 text-base tracking-tighter text-white bg-slate-600 hover:bg-slate-500 line-clamp-1 ${
                     !isLogin && 'cursor-not-allowed'
                 }`}
                 disabled={!isLogin || blocked || user?.id === owner}
                 type="button"
                 buttonChild={
                     <>
-                        <span className="flex items-center gap-2 justify-center">
-							Feedback <BiSolidMessageRoundedDetail className="my-auto" />
+                        <span className="flex items-center gap-2  justify-center">
+                            Feedback <BiSolidMessageRoundedDetail className="my-auto" />
                         </span>
                     </>
                 }

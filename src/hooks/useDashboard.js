@@ -12,7 +12,8 @@ export const useUserAds = (params) => {
 };
 
 export const useVerifyPhoneNumber = (method) => {
-    const sendPhoneNumberCode = (data) => privateAxios[method]('auth/verify_phone', data).then((res) => res?.data);
+    const sendPhoneNumberCode = (data) =>
+        privateAxios[method]('auth/verify_phone', data).then((res) => res?.data);
 
     return useMutation(['verify-phone-number'], sendPhoneNumberCode);
 };
