@@ -9,10 +9,6 @@
         "mytheme",
         "occured"
     ],
-
-    "DockerRun.DisableDockerrc": true,
-    "postman.settings.dotenv-detection-notification-visibility": false,
-
     "editor.defaultFormatter": "dbaeumer.vscode-eslint",
 
     "editor.formatOnSave": true,
