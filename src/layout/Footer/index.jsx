@@ -1,9 +1,5 @@
-import { Link } from 'react-router-dom';
-import { Approutes, BOONFU_FACEBOOK, BOONFU_INSTAGRAM } from '../../constants';
-import { useRef, useState } from 'react';
-import { TermsAndCondition } from '../../components';
+import { Approutes, BOONFU_FACEBOOK, BOONFU_INSTAGRAM, SEO_PAGES } from '../../constants';
 import { Link, useLocation } from 'react-router-dom';
-import { Approutes } from '../../constants';
 import { useEffect, useRef, useState } from 'react';
 import { SEO, TermsAndCondition } from '../../components';
 import { Modal } from '../../ui';
@@ -12,110 +8,120 @@ import { Modal } from '../../ui';
 import { FaFacebook, FaInstagram } from 'react-icons/fa';
 
 const Footer = () => {
-	const location = useLocation();
-	//to scroll into terms and condition document
-	const [isOpen, setIsOpen] = useState(false);
-	const termsRef = useRef(null);
-	const rulesRef = useRef(null);
-	const privacyRef = useRef(null);
-	const customerRef = useRef(null);
-	const returnRef = useRef(null);
-	const promotionRef = useRef(null);
-	const [isSEOPage, setIsSEOPage] = useState(false);
+    const location = useLocation();
+    //to scroll into terms and condition document
+    const [isOpen, setIsOpen] = useState(false);
+    const termsRef = useRef(null);
+    const rulesRef = useRef(null);
+    const privacyRef = useRef(null);
+    const customerRef = useRef(null);
+    const returnRef = useRef(null);
+    const promotionRef = useRef(null);
+    const [isSEOPage, setIsSEOPage] = useState(false);
 
-	const handleScrollTo = (ref) => {
-		if (!isOpen) {
-			setIsOpen(true);
-			setTimeout(() => {
-				ref.current.scrollIntoView({ behavior: 'smooth' });
-			}, 1000); // Add a delay to ensure the component is rendered before scrolling
-		} else {
-			ref.current.scrollIntoView({ behavior: 'smooth' });
-		}
-	};
+    const handleScrollTo = (ref) => {
+        if (!isOpen) {
+            setIsOpen(true);
+            setTimeout(() => {
+                ref.current.scrollIntoView({ behavior: 'smooth' });
+            }, 1000); // Add a delay to ensure the component is rendered before scrolling
+        } else {
+            ref.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
 
-	useEffect(() => {
-		if (SEO_PAGES.includes(location.pathname)) {
-			setIsSEOPage(true);
-		} else {
-			setIsSEOPage(false);
-		}
-	}, [location.pathname]);
+    useEffect(() => {
+        if (SEO_PAGES.includes(location.pathname)) {
+            setIsSEOPage(true);
+        } else {
+            setIsSEOPage(false);
+        }
+    }, [location.pathname]);
 
     return (
         <footer className="bg-primary mt-16">
-			{!isSEOPage && <SEO />}
+            {!isSEOPage && <SEO />}
             <section className=" w-full px-[1.5rem] lg:px-[4rem] max-w-[1380px] mx-auto">
                 <div className=" text-white flex flex-col gap-[1.5rem] md:gap-[3rem] py-8">
                     <div className="grid grid-cols-1 items-center">
                         <div className="col-span-2  space-y-2">
                             <h3 className="text-start">Transact with peace of mind on Boonfu</h3>
                             <p className="text-justify p-lg">
-								Boonfu is a C2C marketplace—we do not sell, inspect, or guarantee any listed item. All
-								listings are posted by private individuals.
+                                Boonfu is a C2C marketplace—we do not sell, inspect, or guarantee
+                                any listed item. All listings are posted by private individuals.
                             </p>
-                                <div className="text-justify p-lg">
-                                    <ul>
-                                        <li>
-											● For GRAB listings: Payment is protected by Boonfu Escrow (funds held until you confirm
-											pickup). Inspect before confirming—sales are final after confirmation.
-                                        </li>
-                                        <li>
-											● For NON-GRAB listings: No Escrow protection—transactions are direct between you and the
-											seller. Boonfu offers no support or refunds for these deals.
-                                        </li>
-                                    </ul>{' '}
-                                    <br />
-									Use Grab for secure, urgent sales. All transactions are at your own risk.{' '}
-									<button onClick={() => handleScrollTo(termsRef)} className='text-secondary'>
-										[View More]
-									</button>{' '}
-									to read the full Disclaimer in our Terms and Conditions.
-                                </div>
+                            <div className="text-justify p-lg">
+                                <ul>
+                                    <li>
+                                        ● For GRAB listings: Payment is protected by Boonfu Escrow
+                                        (funds held until you confirm pickup). Inspect before
+                                        confirming—sales are final after confirmation.
+                                    </li>
+                                    <li>
+                                        ● For NON-GRAB listings: No Escrow protection—transactions
+                                        are direct between you and the seller. Boonfu offers no
+                                        support or refunds for these deals.
+                                    </li>
+                                </ul>{' '}
+                                <br />
+                                Use Grab for secure, urgent sales. All transactions are at your own
+                                risk.{' '}
+                                <button
+                                    onClick={() => handleScrollTo(termsRef)}
+                                    className="text-secondary"
+                                >
+                                    [View More]
+                                </button>{' '}
+                                to read the full Disclaimer in our Terms and Conditions.
+                            </div>
                         </div>
                     </div>
 
-					{/* footer lists  */}
-					<div className='grid max-[450px]:grid-cols-1 grid-cols-2 lg:grid-cols-4 gap-6 justify-between'>
-						<ul className='flex flex-col '>
-							<h6 className='px-2 md:px-8 text-2xl opacity-[.7] font-normal whitespace-nowrap mb-3'>Company</h6>
-							<Link to={`${Approutes.aboutUs}`}>
-								<li className={listStyles}>About Us</li>
-							</Link>
-							<Link to={Approutes.contactUs}>
-								<li className={listStyles}>Contact Us</li>
-							</Link>
-							<Link to={`${Approutes.aboutUs}#jobs`}>
-								<li className={listStyles}>Careers</li>
-							</Link>
-						</ul>
+                    {/* footer lists  */}
+                    <div className="grid max-[450px]:grid-cols-1 grid-cols-2 lg:grid-cols-4 gap-6 justify-between">
+                        <ul className="flex flex-col ">
+                            <h6 className="px-2 md:px-8 text-2xl opacity-[.7] font-normal whitespace-nowrap mb-3">
+                                Company
+                            </h6>
+                            <Link to={`${Approutes.aboutUs}`}>
+                                <li className={listStyles}>About Us</li>
+                            </Link>
+                            <Link to={Approutes.contactUs}>
+                                <li className={listStyles}>Contact Us</li>
+                            </Link>
+                            <Link to={`${Approutes.aboutUs}#jobs`}>
+                                <li className={listStyles}>Careers</li>
+                            </Link>
+                        </ul>
 
-						<ul className='flex flex-col '>
-							<h6 className='px-2 md:px-8 text-2xl opacity-[.7] font-normal whitespace-nowrap mb-3'>Platform</h6>
+                        <ul className="flex flex-col ">
+                            <h6 className="px-2 md:px-8 text-2xl opacity-[.7] font-normal whitespace-nowrap mb-3">
+                                Platform
+                            </h6>
 
-							<Link to={`${Approutes.aboutUs}#advertise`}>
-								<li className={listStyles}>How it works</li>
-							</Link>
-							<Link to={Approutes.privacyPolicy}>
-								<li className={listStyles}>Privacy Policy</li>
-							</Link>
-							<li onClick={() => handleScrollTo(termsRef)} className={listStyles}>
-								Terms of Use
-							</li>
-							<Link to={Approutes.cookiePolicy}>
-								<li className={listStyles}>Cookie Policy</li>
-							</Link>
-							<li onClick={() => handleScrollTo(customerRef)} className={listStyles}>
-								Customer Service Agreement
-							</li>
-							<Link to={Approutes.grabSystem}>
-								<li className={listStyles}>Grabber Service Agreement</li>
-							</Link>
-							<li onClick={() => handleScrollTo(promotionRef)} className={listStyles}>
-								Promotional Service Agreement
-							</li>
-							<li onClick={() => handleScrollTo(returnRef)} className={listStyles}>
-								Return Policy
+                            <Link to={`${Approutes.aboutUs}#advertise`}>
+                                <li className={listStyles}>How it works</li>
+                            </Link>
+                            <Link to={Approutes.privacyPolicy}>
+                                <li className={listStyles}>Privacy Policy</li>
+                            </Link>
+                            <li onClick={() => handleScrollTo(termsRef)} className={listStyles}>
+                                Terms of Use
+                            </li>
+                            <Link to={Approutes.cookiePolicy}>
+                                <li className={listStyles}>Cookie Policy</li>
+                            </Link>
+                            <li onClick={() => handleScrollTo(customerRef)} className={listStyles}>
+                                Customer Service Agreement
+                            </li>
+                            <Link to={Approutes.grabSystem}>
+                                <li className={listStyles}>Grabber Service Agreement</li>
+                            </Link>
+                            <li onClick={() => handleScrollTo(promotionRef)} className={listStyles}>
+                                Promotional Service Agreement
+                            </li>
+                            <li onClick={() => handleScrollTo(returnRef)} className={listStyles}>
+                                Return Policy
                             </li>
                             <Link to={`${Approutes.aboutUs}#candidate-privacy-policy`}>
                                 <li className={listStyles}>Candidate Privacy Policy</li>
@@ -123,7 +129,7 @@ const Footer = () => {
                         </ul>
                         <ul className="flex flex-col ">
                             <h6 className="px-2 md:px-8 text-2xl opacity-[.7] font-normal whitespace-nowrap mb-3">
-								Resources
+                                Resources
                             </h6>
                             <Link to={Approutes.underConstruction}>
                                 <li className={listStyles}>FAQs</li>
@@ -140,7 +146,7 @@ const Footer = () => {
                         </ul>
                         <ul className="flex flex-col ">
                             <h6 className="px-2 md:px-8 text-2xl opacity-[.7] font-normal whitespace-nowrap mb-3">
-								Social
+                                Social
                             </h6>
                             <div className="flex gap-4 px-2 md:px-8">
                                 <Link
@@ -163,24 +169,34 @@ const Footer = () => {
                         </ul>
                     </div>
 
-					{/* copyright */}
-					<p className='text-center md:text-start'>
-						&copy; Copyright {new Date().getFullYear() + ' '}
-						<b>
-							<Link to={'/'}>Boonfu.com</Link>
-						</b>
-						. All rights reserved.
-					</p>
-				</div>
-				{/* terms and condition modal */}
-				<Modal isOpen={isOpen} setIsOpen={setIsOpen} headerText='Terms of Service'>
-					<TermsAndCondition rulesRef={rulesRef} termsRef={termsRef} privacyRef={privacyRef} returnRef={returnRef} customerRef={customerRef} promotionRef={promotionRef} setIsOpen={setIsOpen} isOpen={isOpen} />
-				</Modal>
-			</section>
-		</footer>
-	);
+                    {/* copyright */}
+                    <p className="text-center md:text-start">
+                        &copy; Copyright {new Date().getFullYear() + ' '}
+                        <b>
+                            <Link to={'/'}>Boonfu.com</Link>
+                        </b>
+                        . All rights reserved.
+                    </p>
+                </div>
+                {/* terms and condition modal */}
+                <Modal isOpen={isOpen} setIsOpen={setIsOpen} headerText="Terms of Service">
+                    <TermsAndCondition
+                        rulesRef={rulesRef}
+                        termsRef={termsRef}
+                        privacyRef={privacyRef}
+                        returnRef={returnRef}
+                        customerRef={customerRef}
+                        promotionRef={promotionRef}
+                        setIsOpen={setIsOpen}
+                        isOpen={isOpen}
+                    />
+                </Modal>
+            </section>
+        </footer>
+    );
 };
 
 export default Footer;
 
-const listStyles = 'capitalize cursor-pointer text-white text-sm md:text-base font-medium py-[.3rem] px-2 md:px-8 hover:text-secondary transition-colors whitespace-nowrap';
+const listStyles =
+    'capitalize cursor-pointer text-white text-sm md:text-base font-medium py-[.3rem] px-2 md:px-8 hover:text-secondary transition-colors whitespace-nowrap';
