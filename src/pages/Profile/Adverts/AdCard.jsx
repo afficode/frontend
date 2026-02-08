@@ -83,7 +83,8 @@ const AdCard = ({
     const diffInMs = Date.now() - createdAt;
     const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
 
-    const isExpired = feature === '3' && diffInDays > GRAB_AD_EXPIRY_DAYS;
+    const isExpired =
+        feature === '3' && diffInDays > GRAB_AD_EXPIRY_DAYS && active != '2' && available != '0';
 
     const expiryDate = addDays(new Date(createdAt), GRAB_AD_EXPIRY_DAYS);
 
