@@ -1,8 +1,11 @@
 export { default as Avatar } from './Avatar.png';
-export { default as Boonfu1 } from './Boonfu1.png';
-export { default as Boonfu2 } from './Boonfu2.png';
-export { default as Boonfu3 } from './Boonfu3.png';
+export { default as Boonfu1 } from './Boonfu1.webp';
+export { default as Boonfu2 } from './Boonfu2.webp';
+export { default as Boonfu3 } from './Boonfu3.webp';
 export { default as BoonfuLogo } from './boonfuLogo.png';
+export { default as BoonfuLogo1 } from './BoonfuLogo1.png';
+export { default as BoonfuLogoWhiteBg } from './BoonfuLogoWhiteBg.png';
+export { default as BoonfuWhite } from './BoonfuWhite.webp';
 export { default as Four } from './four.png';
 export { default as Furniture } from './furniture.png';
 export { default as House } from './house.png';

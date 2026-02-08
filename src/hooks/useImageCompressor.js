@@ -1,11 +1,12 @@
 import imageCompression from 'browser-image-compression';
 
 const useImageCompressor = () => {
-
     const compressImages = async (files) => {
         const compressedFiles = await Promise.all(
             files.map(async (file) => {
-                if (!(file instanceof File)) {return file;}
+                if (!(file instanceof File)) {
+                    return file;
+                }
 
                 const options = {
                     maxSizeMB: 1,
@@ -16,12 +17,17 @@ const useImageCompressor = () => {
                 };
 
                 try {
-                    const compressedBlob = await imageCompression(file, options);        
+                    const compressedBlob = await imageCompression(file, options);
 
                     const newFileName = file.name.replace(/\.[^/.]+$/, '') + '.webp';
-                    return new File([compressedBlob], newFileName, { type: 'image/webp', lastModified: Date.now() });
+                    return new File([compressedBlob], newFileName, {
+                        type: 'image/webp',
+                        lastModified: Date.now(),
+                    });
                 } catch {
-                    throw new Error(`Could not compress "${file.name}". The file might be corrupt.`);
+                    throw new Error(
+                        `Could not compress "${file.name}". The file might be corrupt.`
+                    );
                 }
             })
         );

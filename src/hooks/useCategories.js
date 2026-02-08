@@ -29,7 +29,8 @@ export const useSubCategories = (category_id) => {
 };
 
 export const useCategory = (id) => {
-    const fetchCategory = () => axios.get(`${backendLink}categories/${id}`).then((res) => res?.data);
+    const fetchCategory = () =>
+        axios.get(`${backendLink}categories/${id}`).then((res) => res?.data);
 
     return useQuery(['category', id], fetchCategory, {
         ...CACHE_CONFIG,

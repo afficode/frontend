@@ -1,5 +1,7 @@
 const getPreviousSearchParams = (searchParams) => {
-    if (!searchParams) {return {};}
+    if (!searchParams) {
+        return {};
+    }
 
     const previousParams = {};
 

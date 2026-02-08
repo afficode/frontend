@@ -37,10 +37,18 @@ export const toSelectOptions = (
         // Sort the array alphabetically based on the 'key' property but move 'other' to the bottom
         if (name !== 'year') {
             computedOptions.sort((a, b) => {
-                if (a.key.toLowerCase() === placeholderText.toLowerCase()) {return -1;}
-                if (b.key.toLowerCase() === placeholderText.toLowerCase()) {return 1;}
-                if (a.key.toLowerCase() === 'other') {return 1;}
-                if (b.key.toLowerCase() === 'other') {return -1;}
+                if (a.key.toLowerCase() === placeholderText.toLowerCase()) {
+                    return -1;
+                }
+                if (b.key.toLowerCase() === placeholderText.toLowerCase()) {
+                    return 1;
+                }
+                if (a.key.toLowerCase() === 'other') {
+                    return 1;
+                }
+                if (b.key.toLowerCase() === 'other') {
+                    return -1;
+                }
 
                 // Use ternary operator to sort in ascending or descending order
                 return descending
@@ -78,8 +86,12 @@ export const toOptions = (sourceData, name, descending = false) => {
 
         // Sort the array alphabetically based on the 'key' property but move 'other' to the bottom
         computedOptions.sort((a, b) => {
-            if (a.key.toLowerCase() === 'other') {return 1;}
-            if (b.key.toLowerCase() === 'other') {return -1;}
+            if (a.key.toLowerCase() === 'other') {
+                return 1;
+            }
+            if (b.key.toLowerCase() === 'other') {
+                return -1;
+            }
 
             // Use ternary operator to sort in ascending or descending order
             return descending
