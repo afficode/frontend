@@ -12,3 +12,5 @@ export { default as SpinnerSkeleton } from './SpinnersUi';
 export { default as Spinner } from './Spinners';
 export { default as TermsAndCondition } from './TermsAndCondition';
 export { default as Timeline } from './TimelineComponent';
+
+export { default as SEO } from './SEO';
