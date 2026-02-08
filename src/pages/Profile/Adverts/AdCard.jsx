@@ -69,7 +69,6 @@ const AdCard = ({ title, images, active, price, views, adId, chats, available, f
 	const isExpired = feature === '3' && diffInDays > GRAB_AD_EXPIRY_DAYS && active != '2' && available != '0';
 
 	const expiryDate = addDays(new Date(createdAt), GRAB_AD_EXPIRY_DAYS);
-	console.log(title, active, grab_activity);
 	return (
 		<Link to={`/product/${slugGeneratorForAdIdWithName(title, adId)}`} className={isExpired ? 'pointer-events-none relative' : 'relative'}>
 			<div className='bg-gray-200 w-[18rem] sm:w-[20rem]'>
