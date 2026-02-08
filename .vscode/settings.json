@@ -1,0 +1,27 @@
+{
+    "cSpell.words": [
+        "Approutes",
+        "Boonfu",
+        "daisyui",
+        "firstname",
+        "flowbite",
+        "Formik",
+        "mytheme",
+        "occured"
+    ],
+
+    "DockerRun.DisableDockerrc": true,
+    "postman.settings.dotenv-detection-notification-visibility": false,
+
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+
+    "editor.formatOnSave": true,
+
+    "eslint.validate": ["javascript", "javascriptreact"],
+
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit"
+    },
+    "prettier.enable": false,
+    "files.eol": "\n"
+}
