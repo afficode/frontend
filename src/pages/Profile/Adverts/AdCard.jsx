@@ -66,10 +66,10 @@ const AdCard = ({ title, images, active, price, views, adId, chats, available, f
 	const diffInMs = Date.now() - createdAt;
 	const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
 
-	const isExpired = feature === '3' && diffInDays > GRAB_AD_EXPIRY_DAYS;
+	const isExpired = feature === '3' && diffInDays > GRAB_AD_EXPIRY_DAYS && active != '2' && available != '0';
 
 	const expiryDate = addDays(new Date(createdAt), GRAB_AD_EXPIRY_DAYS);
-
+	console.log(title, active, grab_activity);
 	return (
 		<Link to={`/product/${slugGeneratorForAdIdWithName(title, adId)}`} className={isExpired ? 'pointer-events-none relative' : 'relative'}>
 			<div className='bg-gray-200 w-[18rem] sm:w-[20rem]'>
@@ -88,12 +88,13 @@ const AdCard = ({ title, images, active, price, views, adId, chats, available, f
 							<span className=' text-white font-semibold bg-[#00000080] py-2 px-3 rounded-xl text-center max-sm:text-sm'>Expired</span>
 						) : (
 							<>
-								{active === '1' && available === '1' && <span className=' text-white font-semibold bg-[#047F73] py-1 px-2 rounded-xl text-center border-4 border-white max-sm:text-sm'>Active</span>}
+								{/* In this code. Please note we are using the loose equality for the 'available' field. This is because it comes from DB and sometime is comes as string or integer. This will prevent having PR's all the time sql changes their orientation.  */}
+								{active === '1' && available == '1' && <span className=' text-white font-semibold bg-[#047F73] py-1 px-2 rounded-xl text-center border-4 border-white max-sm:text-sm'>Active</span>}
 								{active === '2' && <span className=' text-white font-semibold bg-primary py-1 px-2 rounded-xl text-center border-4 border-white max-sm:text-sm'>Closed</span>}
 
-								{active === '0' && available === '1' && <div className=' text-white font-semibold bg-red-500 py-1 px-2 rounded-xl text-center border-4 border-white max-sm:text-sm'>Blocked</div>}
+								{active === '0' && available == '1' && <div className=' text-white font-semibold bg-red-500 py-1 px-2 rounded-xl text-center border-4 border-white max-sm:text-sm'>Blocked</div>}
 
-								{active === '1' && available === '0' && <div className=' text-white font-semibold bg-primary py-1 px-2 rounded-xl text-center border-4 border-white max-sm:text-sm'>In Review</div>}
+								{active === '1' && available == '0' && <div className=' text-white font-semibold bg-primary py-1 px-2 rounded-xl text-center border-4 border-white max-sm:text-sm'>In Review</div>}
 							</>
 						)}
 					</div>
