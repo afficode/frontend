@@ -4,6 +4,8 @@ import { useCategory } from '../../hooks';
 import { PropertyHeader } from '../../assets/images';
 import LoadingScreen from './LoadingScreen';
 import { ScrollToTop } from '../../utils';
+import { Approutes } from '../../constants';
+import { SEO } from '../../components';
 // import PostPreview from './PostPreview';
 
 const PostAd = () => {
@@ -225,27 +227,16 @@ const PostAd = () => {
 	};
 
 	return (
-		<div className="px-4 my-12 sm:px-8 md:px-12">
-			{categoryId === '51' ? (
-				<img
-					src={PropertyHeader}
-					alt="property banner"
-					className="w-full lg:h-[20rem] mx-auto object-fit rounded-xl my-8"
-				/>
-			) : (
-				<h1 className="pt-6 text-center">Post an Ad</h1>
-			)}
+		<div className='px-4 my-12 sm:px-8 md:px-12'>
+			{categoryId === '51' ? <img src={PropertyHeader} alt='property banner' className='w-full lg:h-[20rem] mx-auto object-fit rounded-xl my-8' /> : <h1 className='pt-6 text-center'>Post an Ad</h1>}
 
 			{isLoading ? (
 				<LoadingScreen />
 			) : (
-				<div className="max-w-[1024px] mx-auto">
-					<CategoryForm
-						categoryId={categoryId}
-						categoryName={categoryName}
-						initialValues={initialValues[categoryId]}
-					/>
+				<div className='max-w-[1024px] mx-auto'>
+					<CategoryForm categoryId={categoryId} categoryName={categoryName} initialValues={initialValues[categoryId]} />
 					{/* <PostPreview /> */}
+					<SEO title='Post an Ad' description='Post a new ad on Boonfu' url={`https://boonfu.com${Approutes.postAd}`} keywords={['post ad', 'advertisement', 'sell', 'marketing', 'C2C', 'Car', 'real estate']} />
 				</div>
 			)}
 

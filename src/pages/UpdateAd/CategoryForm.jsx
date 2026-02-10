@@ -3,15 +3,8 @@ import { useEffect, useMemo, useState } from 'react';
 import { Form, Formik } from 'formik';
 import { FormControl } from '../../components';
 import { Button } from '../../ui';
-import {
-	useSubCategories,
-	useStates,
-	useLga,
-	useNotify,
-	useUpdateAd,
-	useCategories,
-} from '../../hooks';
-import { fromMoney, toOptions, toSelectOptions } from '../../utils';
+import { useSubCategories, useStates, useLga, useNotify, useUpdateAd, useCategories, useImageCompressor } from '../../hooks';
+import { addWatermarkToImage, fromMoney, toOptions, toSelectOptions } from '../../utils';
 import {
 	Approutes,
 	agricultureTypes,
@@ -69,14 +62,7 @@ import { useQueryClient } from 'react-query';
 import useAuth from '../../context/UserContext';
 import { inspectableCategories } from '../../constants/Category';
 
-const CategoryForm = ({
-	categoryId,
-	subCategoryId,
-	categoryName,
-	initialValues,
-	adImages,
-	adId,
-}) => {
+const CategoryForm = ({ categoryId, subCategoryId, categoryName, initialValues, adImages, adId }) => {
 	const [selectedHealthCategory, setSelectedHealthCategory] = useState(subCategoryId);
 	const [selectedFashionCategory, setSelectedFashionCategory] = useState(subCategoryId);
 	const [selectedSoftwareCategory, setSelectedSoftwareCategory] = useState(subCategoryId);
@@ -110,7 +96,7 @@ const CategoryForm = ({
 	const [otherColor, setOtherColor] = useState(false);
 	const [otherExpertise, setOtherExpertise] = useState(false);
 	const [otherRoom, setOtherRoom] = useState(false);
-	const [otherUse, setOtherUse] = useState(false);
+	const [, setOtherUse] = useState(false);
 	const [otherCondition, setOtherCondition] = useState(false);
 	const [otherProcessor, setOtherProcessor] = useState(false);
 	const [otherScent, setOtherScent] = useState(false);
@@ -133,149 +119,48 @@ const CategoryForm = ({
 
 	// vehicle category
 	const carMakeOptions = toSelectOptions(carMake, 'carMake', 'Select your car make');
-	const carModelOptions = toSelectOptions(
-		carModels(formValues.make),
-		'carModel',
-		'Select your car model',
-	);
-	const vehicleAccessoriesTypeOptions = toSelectOptions(
-		vehicleAccessoriesType,
-		'accessoriesType',
-		'Select type here',
-	);
-	const otherVehicleTypeOptions = toSelectOptions(
-		otherVehicleType,
-		'otherVehicle',
-		'Select type here',
-	);
+	const carModelOptions = toSelectOptions(carModels(formValues.make), 'carModel', 'Select your car model');
+	const vehicleAccessoriesTypeOptions = toSelectOptions(vehicleAccessoriesType, 'accessoriesType', 'Select type here');
+	const otherVehicleTypeOptions = toSelectOptions(otherVehicleType, 'otherVehicle', 'Select type here');
 
 	// properties category
-	const propertyTypeOptions = toOptions(
-		propertyType[selectedPropertyCategory] === undefined
-			? propertyType['default']
-			: propertyType[selectedPropertyCategory],
-		'propertyType',
-	);
-	const propertyFacilityOptions = toOptions(
-		propertyFacilities[selectedPropertyCategory] === undefined
-			? propertyFacilities['default']
-			: propertyFacilities[selectedPropertyCategory],
-		'propertyFacility',
-	);
+	const propertyTypeOptions = toOptions(propertyType[selectedPropertyCategory] === undefined ? propertyType.default : propertyType[selectedPropertyCategory], 'propertyType');
+	const propertyFacilityOptions = toOptions(propertyFacilities[selectedPropertyCategory] === undefined ? propertyFacilities.default : propertyFacilities[selectedPropertyCategory], 'propertyFacility');
 
 	//services category
-	const servicesTypeOptions = toSelectOptions(
-		servicesType[selectedServicesCategory],
-		'serviceType',
-		'Select type here',
-	);
+	const servicesTypeOptions = toSelectOptions(servicesType[selectedServicesCategory], 'serviceType', 'Select type here');
 	const servicesExpertiseOptions = toSelectOptions(tutorialTopics, 'topic', 'Select expertise here');
 
 	//motorbike category
-	const motorbikeMakeOptions = toSelectOptions(
-		motorbikeMake[selectedMotorbikeCategory],
-		'motorbikeMake',
-		'Select make here',
-	);
+	const motorbikeMakeOptions = toSelectOptions(motorbikeMake[selectedMotorbikeCategory], 'motorbikeMake', 'Select make here');
 	const motorbikeTypeOptions = toSelectOptions(motorbikeType, 'motorbikeType', 'Select type here');
 
 	// tradesman category
-	const tradesmanTypeOptions = toSelectOptions(
-		tradesmanType[selectedTradesmanCategory],
-		'type',
-		'Select type here',
-	);
-	const tradesmanAreaOptions = toOptions(
-		tradesmanArea[selectedTradesmanCategory] === undefined
-			? tradesmanArea['default']
-			: tradesmanArea[selectedTradesmanCategory],
-		'area',
-	);
+	const tradesmanTypeOptions = toSelectOptions(tradesmanType[selectedTradesmanCategory], 'type', 'Select type here');
+	const tradesmanAreaOptions = toOptions(tradesmanArea[selectedTradesmanCategory] === undefined ? tradesmanArea.default : tradesmanArea[selectedTradesmanCategory], 'area');
 	const tradesmanFormOptions = toOptions(tradesmanForms[selectedTradesmanCategory], 'form');
 
 	// fashion category
-	const fashionTypesOptions = toSelectOptions(
-		fashionTypes[selectedFashionCategory] === undefined
-			? fashionTypes['default']
-			: fashionTypes[selectedFashionCategory],
-		'fashionType',
-		'Select type here',
-	);
-	const fashionBrandOptions = toSelectOptions(
-		fashionBrands[selectedFashionCategory] === undefined
-			? fashionBrands['default']
-			: fashionBrands[selectedFashionCategory],
-		'fashionBrand',
-		'Select brand here',
-	);
-	const fashionMaterialsOptions = toSelectOptions(
-		fashionMaterials[selectedFashionCategory] === undefined
-			? fashionMaterials['default']
-			: fashionMaterials[selectedFashionCategory],
-		'fashionMaterials',
-		'Select material here',
-	);
-	const fashionSizeOptions = toSelectOptions(
-		fashionSizes[selectedFashionCategory] === undefined
-			? fashionSizes['default']
-			: fashionSizes[selectedFashionCategory],
-		'fashionSize',
-		'Select size here',
-	);
+	const fashionTypesOptions = toSelectOptions(fashionTypes[selectedFashionCategory] === undefined ? fashionTypes.default : fashionTypes[selectedFashionCategory], 'fashionType', 'Select type here');
+	const fashionBrandOptions = toSelectOptions(fashionBrands[selectedFashionCategory] === undefined ? fashionBrands.default : fashionBrands[selectedFashionCategory], 'fashionBrand', 'Select brand here');
+	const fashionMaterialsOptions = toSelectOptions(fashionMaterials[selectedFashionCategory] === undefined ? fashionMaterials.default : fashionMaterials[selectedFashionCategory], 'fashionMaterials', 'Select material here');
+	const fashionSizeOptions = toSelectOptions(fashionSizes[selectedFashionCategory] === undefined ? fashionSizes.default : fashionSizes[selectedFashionCategory], 'fashionSize', 'Select size here');
 
 	// home category
-	const homeBrandsOptions = toSelectOptions(
-		homeBrands[selectedHomeCategory] === undefined
-			? homeBrands['default']
-			: homeBrands[selectedHomeCategory],
-		'homeBrand',
-		'Select brand here',
-	);
-	const homeTypesOptions = toSelectOptions(
-		homeTypes[selectedHomeCategory] === undefined
-			? homeTypes['default']
-			: homeTypes[selectedHomeCategory],
-		'homeType',
-		'Select type here',
-	);
-	const homeMaterialsOptions = toSelectOptions(
-		homeMaterials,
-		'homeMaterial',
-		'Select material type here',
-	);
+	const homeBrandsOptions = toSelectOptions(homeBrands[selectedHomeCategory] === undefined ? homeBrands.default : homeBrands[selectedHomeCategory], 'homeBrand', 'Select brand here');
+	const homeTypesOptions = toSelectOptions(homeTypes[selectedHomeCategory] === undefined ? homeTypes.default : homeTypes[selectedHomeCategory], 'homeType', 'Select type here');
+	const homeMaterialsOptions = toSelectOptions(homeMaterials, 'homeMaterial', 'Select material type here');
 	const furnitureForOptions = toSelectOptions(furnitureFor, 'furnitureFor', 'Select furniture for');
 	const homeFormOptions = toSelectOptions(homeChemicals, 'homeForm', 'Select form here');
 
 	//software category
-	const softwarePlatformOptions = toSelectOptions(
-		softwarePlatforms[selectedSoftwareCategory] === undefined
-			? softwarePlatforms['default']
-			: softwarePlatforms[selectedSoftwareCategory],
-		'softwarePlatform',
-		'Select platform here',
-	);
-	const softwareTypeOptions = toSelectOptions(
-		softwareTypes,
-		'softwareTypes',
-		'Select software type here',
-	);
+	const softwarePlatformOptions = toSelectOptions(softwarePlatforms[selectedSoftwareCategory] === undefined ? softwarePlatforms.default : softwarePlatforms[selectedSoftwareCategory], 'softwarePlatform', 'Select platform here');
+	const softwareTypeOptions = toSelectOptions(softwareTypes, 'softwareTypes', 'Select software type here');
 	const gameGenreOptions = toSelectOptions(gameGenre, 'gameGenre', 'Select game genre here');
 
 	//babies category
-	const babiesBrandOptions = toSelectOptions(
-		babiesBrands[selectedBabiesCategory] === undefined
-			? babiesBrands['default']
-			: babiesBrands[selectedBabiesCategory],
-		'babiesBrands',
-		'Select brand here',
-	);
-	const babiesTypeOptions = toSelectOptions(
-		babiesTypes[selectedBabiesCategory] === undefined
-			? babiesTypes['default']
-			: babiesTypes[selectedBabiesCategory],
-		'babiesType',
-		'Select type here',
-	);
+	const babiesBrandOptions = toSelectOptions(babiesBrands[selectedBabiesCategory] === undefined ? babiesBrands.default : babiesBrands[selectedBabiesCategory], 'babiesBrands', 'Select brand here');
+	const babiesTypeOptions = toSelectOptions(babiesTypes[selectedBabiesCategory] === undefined ? babiesTypes.default : babiesTypes[selectedBabiesCategory], 'babiesType', 'Select type here');
 	const babiesSizeOptions = toSelectOptions(babiesSizes, 'babiesSize', 'Select size here');
 
 	// electronics category
@@ -285,72 +170,30 @@ const CategoryForm = ({
 	const storageSizeOptions = toSelectOptions(storageSize, 'storageSize', 'Select storage size here');
 	const storageTypeOptions = toSelectOptions(storageType, 'storageType', 'Select storage type here');
 	const processorsOptions = toSelectOptions(processors, 'processor', 'Select processor here');
-	const operatingSysOptions = toSelectOptions(
-		operatingSystems,
-		'OS',
-		'Select operating system here',
-	);
+	const operatingSysOptions = toSelectOptions(operatingSystems, 'OS', 'Select operating system here');
 	const resolutionOptions = toSelectOptions(resolution, 'resolution', 'Select resolution here');
 	const simTypeOptions = toSelectOptions(simType, 'simType', 'Select sim type here');
-	const electronicsBrandsOptions = toSelectOptions(
-		electronicsBrands[selectedElectronicsCategory] === undefined
-			? electronicsBrands['default']
-			: electronicsBrands[selectedElectronicsCategory],
-		'electronicsBrand',
-		'Select brand here',
-	);
-	const electronicsTypeOptions = toSelectOptions(
-		electronicsType[selectedElectronicsCategory],
-		'electronicsType',
-		'Select type here',
-	);
+	const electronicsBrandsOptions = toSelectOptions(electronicsBrands[selectedElectronicsCategory] === undefined ? electronicsBrands.default : electronicsBrands[selectedElectronicsCategory], 'electronicsBrand', 'Select brand here');
+	const electronicsTypeOptions = toSelectOptions(electronicsType[selectedElectronicsCategory], 'electronicsType', 'Select type here');
 
 	// sports category
-	const sportBrandOptions = toSelectOptions(
-		sportBrands[selectedSportsCategory],
-		'sportBrand',
-		'Select brand here',
-	);
-	const sportTypeOptions = toSelectOptions(
-		sportTypes[selectedSportsCategory],
-		'sportType',
-		'Select type here',
-	);
+	const sportBrandOptions = toSelectOptions(sportBrands[selectedSportsCategory], 'sportBrand', 'Select brand here');
+	const sportTypeOptions = toSelectOptions(sportTypes[selectedSportsCategory], 'sportType', 'Select type here');
 
 	// agriculture category
-	const agricultureTypeOptions = toSelectOptions(
-		agricultureTypes[selectedAgricultureCategory],
-		'agricultureTypes',
-		'Select type here',
-	);
+	const agricultureTypeOptions = toSelectOptions(agricultureTypes[selectedAgricultureCategory], 'agricultureTypes', 'Select type here');
 
 	// pet category
-	const petBreedsOptions = toSelectOptions(
-		petBreeds[selectedPetCategory],
-		'petBreed',
-		'Select a breed',
-	);
-	const petTypeOptions = toSelectOptions(
-		petTypes[selectedPetCategory] === undefined ? petTypes['default'] : petTypes[selectedPetCategory],
-		'petType',
-		'Select a breed type',
-	);
+	const petBreedsOptions = toSelectOptions(petBreeds[selectedPetCategory], 'petBreed', 'Select a breed');
+	const petTypeOptions = toSelectOptions(petTypes[selectedPetCategory] === undefined ? petTypes.default : petTypes[selectedPetCategory], 'petType', 'Select a breed type');
 
 	//health category
 	const healthBrandOptions = useMemo(() => {
 		return toSelectOptions(healthBrands[selectedHealthCategory], 'healthBrand', 'Select brand here');
 	}, [selectedHealthCategory]);
-	const healthTypesOptions = toSelectOptions(
-		healthTypes[selectedHealthCategory],
-		'healthType',
-		'Select type here',
-	);
+	const healthTypesOptions = toSelectOptions(healthTypes[selectedHealthCategory], 'healthType', 'Select type here');
 	const healthFormulationOptions = useMemo(() => {
-		return toSelectOptions(
-			healthProductFormulation[selectedHealthCategory],
-			'healthFormulation',
-			'Select formulation here',
-		);
+		return toSelectOptions(healthProductFormulation[selectedHealthCategory], 'healthFormulation', 'Select formulation here');
 	}, [selectedHealthCategory]);
 
 	const categoryFields = {
@@ -446,8 +289,7 @@ const CategoryForm = ({
 				name: 'type',
 				type: 'text',
 				placeholder: 'Enter type here',
-				options:
-					selectedVehicleCategory === '5007' ? otherVehicleTypeOptions : vehicleAccessoriesTypeOptions,
+				options: selectedVehicleCategory === '5007' ? otherVehicleTypeOptions : vehicleAccessoriesTypeOptions,
 			},
 			['5005', '5007'].includes(selectedVehicleCategory) &&
 				otherType && {
@@ -486,8 +328,7 @@ const CategoryForm = ({
 				name: 'description',
 				type: 'textarea',
 				maxLength: 500,
-				placeholder:
-					'Enter as much information as possible. Please state IF any defects. You could include reason for  selling, number of previous owners, if there had been colour changes or defects.',
+				placeholder: 'Enter as much information as possible. Please state IF any defects. You could include reason for  selling, number of previous owners, if there had been colour changes or defects.',
 				required: true,
 			},
 			{
@@ -635,7 +476,7 @@ const CategoryForm = ({
 				control: 'price',
 				label: 'Price',
 				name: 'price',
-				type: 'number',
+				type: 'text',
 				placeholder: '₦0.00',
 				required: true,
 			},
@@ -835,7 +676,7 @@ const CategoryForm = ({
 				control: 'price',
 				label: 'Price',
 				name: 'price',
-				type: 'number',
+				type: 'text',
 				placeholder: '₦0.00',
 				required: true,
 			},
@@ -893,22 +734,7 @@ const CategoryForm = ({
 				required: true,
 			},
 			{
-				control: [
-					'5201',
-					'5202',
-					'5203',
-					'5204',
-					'5205',
-					'5206',
-					'5207',
-					'5209',
-					'5210',
-					'5211',
-					'5212',
-					'5213',
-				].includes(selectedServicesCategory)
-					? 'select'
-					: 'input',
+				control: ['5201', '5202', '5203', '5204', '5205', '5206', '5207', '5209', '5210', '5211', '5212', '5213'].includes(selectedServicesCategory) ? 'select' : 'input',
 				label: 'Type',
 				name: 'type',
 				type: 'text',
@@ -1054,7 +880,7 @@ const CategoryForm = ({
 				control: 'price',
 				label: 'Price',
 				name: 'price',
-				type: 'number',
+				type: 'text',
 				placeholder: '₦0.00',
 				required: true,
 			},
@@ -1197,7 +1023,7 @@ const CategoryForm = ({
 				control: 'price',
 				label: 'Price',
 				name: 'price',
-				type: 'number',
+				type: 'text',
 				placeholder: '₦0.00',
 				required: true,
 			},
@@ -1486,7 +1312,7 @@ const CategoryForm = ({
 				control: 'price',
 				label: 'Price',
 				name: 'price',
-				type: 'number',
+				type: 'text',
 				placeholder: '₦0.00',
 				required: true,
 			},
@@ -1691,7 +1517,7 @@ const CategoryForm = ({
 				control: 'price',
 				label: 'Price',
 				name: 'price',
-				type: 'number',
+				type: 'text',
 				placeholder: '₦0.00',
 				required: true,
 			},
@@ -1896,7 +1722,7 @@ const CategoryForm = ({
 				control: 'price',
 				label: 'Price',
 				name: 'price',
-				type: 'number',
+				type: 'text',
 				placeholder: '₦0.00',
 				required: true,
 			},
@@ -2076,7 +1902,7 @@ const CategoryForm = ({
 				control: 'price',
 				label: 'Price',
 				name: 'price',
-				type: 'number',
+				type: 'text',
 				placeholder: '₦0.00',
 				required: true,
 			},
@@ -2265,7 +2091,7 @@ const CategoryForm = ({
 				control: 'price',
 				label: 'Price',
 				name: 'price',
-				type: 'number',
+				type: 'text',
 				placeholder: '₦0.00',
 				required: true,
 			},
@@ -2443,7 +2269,7 @@ const CategoryForm = ({
 				control: 'price',
 				label: 'Price',
 				name: 'price',
-				type: 'number',
+				type: 'text',
 				placeholder: '₦0.00',
 				required: true,
 			},
@@ -2606,7 +2432,7 @@ const CategoryForm = ({
 				control: 'price',
 				label: 'Price',
 				name: 'price',
-				type: 'number',
+				type: 'text',
 				placeholder: '₦0.00',
 				required: true,
 			},
@@ -2792,7 +2618,7 @@ const CategoryForm = ({
 				control: 'price',
 				label: 'Price',
 				name: 'price',
-				type: 'number',
+				type: 'text',
 				placeholder: '₦0.00',
 				required: true,
 			},
@@ -2963,7 +2789,7 @@ const CategoryForm = ({
 				control: 'price',
 				label: 'Price',
 				name: 'price',
-				type: 'number',
+				type: 'text',
 				placeholder: '₦0.00',
 				required: true,
 			},
@@ -3076,8 +2902,7 @@ const CategoryForm = ({
 				name: 'description',
 				type: 'textarea',
 				maxLength: 500,
-				placeholder:
-					'Enter as much information as possible. Please state IF any defects. You could include reason for  selling, number of previous owners, if there had been colour changes or defects.',
+				placeholder: 'Enter as much information as possible. Please state IF any defects. You could include reason for  selling, number of previous owners, if there had been colour changes or defects.',
 				required: true,
 			},
 			{
@@ -3167,7 +2992,7 @@ const CategoryForm = ({
 				control: 'price',
 				label: 'Price',
 				name: 'price',
-				type: 'number',
+				type: 'text',
 				placeholder: '₦0.00',
 				required: true,
 			},
@@ -3365,8 +3190,7 @@ const CategoryForm = ({
 				label: 'Reason for this deal?',
 				name: 'reason_for_deal',
 				type: 'text',
-				placeholder:
-					'Please state reason for this deal example;  declutter,  I am relocating and won’t be needing this abroad.',
+				placeholder: 'Please state reason for this deal example;  declutter,  I am relocating and won’t be needing this abroad.',
 			},
 			{
 				control: 'radio',
@@ -3423,7 +3247,7 @@ const CategoryForm = ({
 				control: 'price',
 				label: 'Price',
 				name: 'price',
-				type: 'number',
+				type: 'text',
 				placeholder: '₦0.00',
 				required: true,
 			},
@@ -3431,7 +3255,7 @@ const CategoryForm = ({
 			{
 				control: 'toggle',
 				label: 'Negotiable?',
-				name: 'negotiable	',
+				name: 'negotiable',
 			},
 			{
 				control: 'feature',
@@ -3471,7 +3295,9 @@ const CategoryForm = ({
 			price: Yup.string()
 				.required('Required')
 				.test('is-valid-money', 'Please enter a valid price', (value) => {
-					if (!value) return false;
+					if (!value) {
+						return false;
+					}
 					const numericValue = fromMoney(value);
 					return numericValue > 0 && !isNaN(numericValue);
 				}),
@@ -3507,7 +3333,9 @@ const CategoryForm = ({
 			price: Yup.string()
 				.required('Required')
 				.test('is-valid-money', 'Please enter a valid price', (value) => {
-					if (!value) return false;
+					if (!value) {
+						return false;
+					}
 					const numericValue = fromMoney(value);
 					return numericValue > 0 && !isNaN(numericValue);
 				}),
@@ -3537,7 +3365,9 @@ const CategoryForm = ({
 			price: Yup.string()
 				.required('Required')
 				.test('is-valid-money', 'Please enter a valid price', (value) => {
-					if (!value) return false;
+					if (!value) {
+						return false;
+					}
 					const numericValue = fromMoney(value);
 					return numericValue > 0 && !isNaN(numericValue);
 				}),
@@ -3560,7 +3390,9 @@ const CategoryForm = ({
 			price: Yup.string()
 				.required('Required')
 				.test('is-valid-money', 'Please enter a valid price', (value) => {
-					if (!value) return false;
+					if (!value) {
+						return false;
+					}
 					const numericValue = fromMoney(value);
 					return numericValue > 0 && !isNaN(numericValue);
 				}),
@@ -3578,7 +3410,9 @@ const CategoryForm = ({
 			price: Yup.string()
 				.required('Required')
 				.test('is-valid-money', 'Please enter a valid price', (value) => {
-					if (!value) return false;
+					if (!value) {
+						return false;
+					}
 					const numericValue = fromMoney(value);
 					return numericValue > 0 && !isNaN(numericValue);
 				}),
@@ -3644,7 +3478,9 @@ const CategoryForm = ({
 			price: Yup.string()
 				.required('Required')
 				.test('is-valid-money', 'Please enter a valid price', (value) => {
-					if (!value) return false;
+					if (!value) {
+						return false;
+					}
 					const numericValue = fromMoney(value);
 					return numericValue > 0 && !isNaN(numericValue);
 				}),
@@ -3669,7 +3505,9 @@ const CategoryForm = ({
 			price: Yup.string()
 				.required('Required')
 				.test('is-valid-money', 'Please enter a valid price', (value) => {
-					if (!value) return false;
+					if (!value) {
+						return false;
+					}
 					const numericValue = fromMoney(value);
 					return numericValue > 0 && !isNaN(numericValue);
 				}),
@@ -3687,7 +3525,9 @@ const CategoryForm = ({
 			price: Yup.string()
 				.required('Required')
 				.test('is-valid-money', 'Please enter a valid price', (value) => {
-					if (!value) return false;
+					if (!value) {
+						return false;
+					}
 					const numericValue = fromMoney(value);
 					return numericValue > 0 && !isNaN(numericValue);
 				}),
@@ -3726,7 +3566,9 @@ const CategoryForm = ({
 			price: Yup.string()
 				.required('Required')
 				.test('is-valid-money', 'Please enter a valid price', (value) => {
-					if (!value) return false;
+					if (!value) {
+						return false;
+					}
 					const numericValue = fromMoney(value);
 					return numericValue > 0 && !isNaN(numericValue);
 				}),
@@ -3751,7 +3593,9 @@ const CategoryForm = ({
 			price: Yup.string()
 				.required('Required')
 				.test('is-valid-money', 'Please enter a valid price', (value) => {
-					if (!value) return false;
+					if (!value) {
+						return false;
+					}
 					const numericValue = fromMoney(value);
 					return numericValue > 0 && !isNaN(numericValue);
 				}),
@@ -3771,7 +3615,9 @@ const CategoryForm = ({
 			price: Yup.string()
 				.required('Required')
 				.test('is-valid-money', 'Please enter a valid price', (value) => {
-					if (!value) return false;
+					if (!value) {
+						return false;
+					}
 					const numericValue = fromMoney(value);
 					return numericValue > 0 && !isNaN(numericValue);
 				}),
@@ -3793,12 +3639,16 @@ const CategoryForm = ({
 			price: Yup.string()
 				.required('Required')
 				.test('is-valid-money', 'Please enter a valid price', (value) => {
-					if (!value) return false;
+					if (!value) {
+						return false;
+					}
 					const numericValue = fromMoney(value);
 					return numericValue > 0 && !isNaN(numericValue);
 				}),
 			bulk_price: Yup.string().test('is-valid-money', 'Please enter a valid price', (value) => {
-				if (!value) return true; // Optional field
+				if (!value) {
+					return true;
+				} // Optional field
 				const numericValue = fromMoney(value);
 				return numericValue > 0 && !isNaN(numericValue);
 			}),
@@ -3823,7 +3673,9 @@ const CategoryForm = ({
 			price: Yup.string()
 				.required('Required')
 				.test('is-valid-money', 'Please enter a valid price', (value) => {
-					if (!value) return false;
+					if (!value) {
+						return false;
+					}
 					const numericValue = fromMoney(value);
 					return numericValue > 0 && !isNaN(numericValue);
 				}),
@@ -3858,7 +3710,9 @@ const CategoryForm = ({
 			price: Yup.string()
 				.required('Required')
 				.test('is-valid-money', 'Please enter a valid price', (value) => {
-					if (!value) return false;
+					if (!value) {
+						return false;
+					}
 					const numericValue = fromMoney(value);
 					return numericValue > 0 && !isNaN(numericValue);
 				}),
@@ -3879,14 +3733,18 @@ const CategoryForm = ({
 			min_price: Yup.string()
 				.required('Required')
 				.test('is-valid-money', 'Please enter a valid price', (value) => {
-					if (!value) return false;
+					if (!value) {
+						return false;
+					}
 					const numericValue = fromMoney(value);
 					return numericValue > 0 && !isNaN(numericValue);
 				}),
 			max_price: Yup.string()
 				.required('Required')
 				.test('is-valid-money', 'Please enter a valid price', (value) => {
-					if (!value) return false;
+					if (!value) {
+						return false;
+					}
 					const numericValue = fromMoney(value);
 					return numericValue > 0 && !isNaN(numericValue);
 				}),
@@ -3908,7 +3766,9 @@ const CategoryForm = ({
 			price: Yup.string()
 				.required('Required')
 				.test('is-valid-money', 'Please enter a valid price', (value) => {
-					if (!value) return false;
+					if (!value) {
+						return false;
+					}
 					const numericValue = fromMoney(value);
 					return numericValue > 0 && !isNaN(numericValue);
 				}),
@@ -3942,13 +3802,7 @@ const CategoryForm = ({
 				feature={initialValues.feature}
 				edit={field.edit}
 				setAddress={setAddress}
-				subCat={
-					selectedVehicleCategory ||
-					selectedPropertyCategory ||
-					selectedAgricultureCategory ||
-					selectedMotorbikeCategory ||
-					selectedElectronicsCategory
-				}
+				subCat={selectedVehicleCategory || selectedPropertyCategory || selectedAgricultureCategory || selectedMotorbikeCategory || selectedElectronicsCategory}
 			/>
 		));
 
@@ -3957,15 +3811,12 @@ const CategoryForm = ({
 	const notify = useNotify();
 	const { mutate } = useUpdateAd(adId);
 	const queryClient = useQueryClient();
+	const { compressImages } = useImageCompressor();
 
 	const onSubmit = async (values, { setSubmitting }) => {
 		setSubmitting(true);
 
-		if (
-			values.feature === '3' &&
-			!inspectableCategories.includes(parseInt(values.category)) &&
-			address === ''
-		) {
+		if (values.feature === '3' && !inspectableCategories.includes(parseInt(values.category)) && address === '') {
 			notify('Please provide the address for item pickup.', 'error');
 			return;
 		}
@@ -3986,7 +3837,7 @@ const CategoryForm = ({
 			category: parseInt(values.category),
 			state_id: parseInt(values.state_id),
 			lga_id: parseInt(values.lga_id),
-			address: address,
+			address,
 			negotiable: values.negotiable === true ? 1 : 0,
 			price: fromMoney(values.price),
 			...(values.bulk_price && { bulk_price: fromMoney(values.bulk_price) }),
@@ -4009,13 +3860,21 @@ const CategoryForm = ({
 		});
 
 		if (values.images && values.images.length > 0) {
-			const watermarkedImages = await Promise.all(
-				values.images.map((file) => addWatermarkToImage(file)),
-			);
+			try {
+				const compressedImages = await compressImages(values.images);
 
-			watermarkedImages.forEach((file) => {
-				formData.append('new_images', file);
-			});
+				const finalImages = await Promise.all(compressedImages.map((file) => addWatermarkToImage(file)));
+
+				finalImages.forEach((file) => {
+					formData.append('images', file);
+				});
+			} catch (error) {
+				const message = error instanceof Error ? error.message : 'File is corrupt or format is unsupported.';
+
+				notify(message, 'error');
+				setSubmitting(false);
+				return;
+			}
 		}
 		formData.append('owner', user.id);
 		formData.delete('images');
@@ -4037,11 +3896,7 @@ const CategoryForm = ({
 	};
 
 	return (
-		<Formik
-			initialValues={initialValues}
-			onSubmit={onSubmit}
-			validationSchema={validationSchema[categoryName]}
-		>
+		<Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema[categoryName]}>
 			{(formik) => {
 				useEffect(() => {
 					setFormValues({
@@ -4144,15 +3999,15 @@ const CategoryForm = ({
 				}, [formik.values.price]);
 
 				return (
-					<Form encType="multipart/form-data">
-						{renderFields ? renderFields : <div className="text-center">No fields to display</div>}
+					<Form encType='multipart/form-data'>
+						{renderFields ? renderFields : <div className='text-center'>No fields to display</div>}
 
 						<Button
-							type="submit"
+							type='submit'
 							onClick={formik.handleSubmit}
 							loading={formik.isSubmitting}
-							variant="primary"
-							size="full"
+							variant='primary'
+							size='full'
 							disabled={!(formik.isValid && formik.dirty)}
 							className={'mt-10 text-lg font-bold rounded-md'}
 						>

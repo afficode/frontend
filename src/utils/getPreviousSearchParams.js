@@ -1,13 +1,15 @@
 const getPreviousSearchParams = (searchParams) => {
-	if (!searchParams) return {};
+    if (!searchParams) {
+        return {};
+    }
 
-	const previousParams = {};
+    const previousParams = {};
 
-	for (const entry of searchParams.entries()) {
-		previousParams[entry[0]] = entry[1];
-	}
+    for (const entry of searchParams.entries()) {
+        previousParams[entry[0]] = entry[1];
+    }
 
-	return previousParams;
+    return previousParams;
 };
 
 export default getPreviousSearchParams;

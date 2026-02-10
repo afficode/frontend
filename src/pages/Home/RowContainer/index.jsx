@@ -8,6 +8,7 @@ import { Button } from '../../../ui';
 // icons
 import { BsFastForwardFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
+import { slugGeneratorForAdIdWithName } from '../../../utils';
 
 const RowContainer = ({ title, link, data }) => {
 	return (
@@ -53,7 +54,7 @@ export default RowContainer;
 
 const FeaturedProductsCard = ({ product }) => {
 	return (
-		<Link to={`${Approutes.product.initial}/${product?.id}`} className='max-w-[11rem] max-h-[14rem]  sm:w-[13rem] sm:h-[16rem] flex flex-col items-center justify-center rounded-lg bg-white '>
+		<Link to={`${Approutes.product.initial}/${slugGeneratorForAdIdWithName(product?.title, product?.id)}`} className='max-w-[11rem] max-h-[14rem]  sm:w-[13rem] sm:h-[16rem] flex flex-col items-center justify-center rounded-lg bg-white '>
 			<img className='object-cover min-w-full h-[8rem] rounded-t-lg' src={product?.images[0]?.path || noimage} alt={product?.title} />
 
 			<div className=' flex flex-col  justify-between py-2 w-[11rem] my-auto tooltip tooltip-secondary' data-tip={product?.title.toUpperCase()}>

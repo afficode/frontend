@@ -6,78 +6,78 @@ import { format } from 'date-fns';
 import { ScrollToTop } from '../../../utils';
 
 const PaymentSuccess = () => {
-	const [searchParams] = useSearchParams();
-	const transactionId = searchParams.get('transaction_id');
-	const adTitle = searchParams.get('ad_title');
-	const date = new Date(Date.now());
-	const grabberId = searchParams.get('grabber_id');
+    const [searchParams] = useSearchParams();
+    const transactionId = searchParams.get('transaction_id');
+    const adTitle = searchParams.get('ad_title');
+    const date = new Date(Date.now());
+    const grabberId = searchParams.get('grabber_id');
 
-	return (
-		<div className="max-w-[720px] py-6 px-4 flex flex-col gap-8 m-auto ">
-			<div className="flex flex-col items-center gap-4">
-				<img src={PaymentSuccessful} className="w-[120px]" alt="Payment successful" />
-				<div className="space-y-2 text-center">
-					<h3>Payment Successful</h3>
-					<p>
+    return (
+        <div className="max-w-[720px] py-6 px-4 flex flex-col gap-8 m-auto ">
+            <div className="flex flex-col items-center gap-4">
+                <img src={PaymentSuccessful} className="w-[120px]" alt="Payment successful" />
+                <div className="space-y-2 text-center">
+                    <h3>Payment Successful</h3>
+                    <p>
 						Successfully paid: <b className="capitalize">{adTitle && adTitle}</b>
-					</p>
-				</div>
-			</div>
+                    </p>
+                </div>
+            </div>
 
-			<div className="space-y-2">
-				<h4>Transaction info</h4>
-				<table className="w-full border border-black/50 ">
-					<tbody>
-						<tr>
-							<td>Transaction ID</td>
-							<td>{transactionId && transactionId}</td>
-						</tr>
-						<tr>
-							<td>Item paid for</td>
-							<td className="capitalize">{adTitle && adTitle}</td>
-						</tr>
-						<tr>
-							<td>Date</td>
-							<td>{date && format(date, 'MMM dd, yyyy')}</td>
-						</tr>
-						<tr>
-							<td>Type of transaction</td>
-							<td>Boonfu Wallet</td>
-						</tr>
-						{grabberId && (
-							<tr>
-								<td>Grabber ID</td>
-								<td>{grabberId}</td>
-							</tr>
-						)}
-						<tr>
-							<td>Status</td>
-							<td>
-								<div className="flex items-center gap-1 bg-[#047F7370] py-1 px-2 font-medium rounded-xl w-fit">
-									<img src={SuccessTick} className="w-4" alt="successful" />
-									<span>Success</span>
-								</div>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
+            <div className="space-y-2">
+                <h4>Transaction info</h4>
+                <table className="w-full border border-black/50 ">
+                    <tbody>
+                        <tr>
+                            <td>Transaction ID</td>
+                            <td>{transactionId && transactionId}</td>
+                        </tr>
+                        <tr>
+                            <td>Item paid for</td>
+                            <td className="capitalize">{adTitle && adTitle}</td>
+                        </tr>
+                        <tr>
+                            <td>Date</td>
+                            <td>{date && format(date, 'MMM dd, yyyy')}</td>
+                        </tr>
+                        <tr>
+                            <td>Type of transaction</td>
+                            <td>Boonfu Wallet</td>
+                        </tr>
+                        {grabberId && (
+                            <tr>
+                                <td>Grabber ID</td>
+                                <td>{grabberId}</td>
+                            </tr>
+                        )}
+                        <tr>
+                            <td>Status</td>
+                            <td>
+                                <div className="flex items-center gap-1 bg-[#047F7370] py-1 px-2 font-medium rounded-xl w-fit">
+                                    <img src={SuccessTick} className="w-4" alt="successful" />
+                                    <span>Success</span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-			<div className="space-y-6">
-				<div className="flex items-center justify-between border-b border-black/50">
-					<Link to={Approutes.profile.transactions}>
-						<button className="flex items-center gap-2 text-primary">
-							<img src={RedirectIcon} className="w-4" alt="rethinking?" />
+            <div className="space-y-6">
+                <div className="flex items-center justify-between border-b border-black/50">
+                    <Link to={Approutes.profile.transactions}>
+                        <button className="flex items-center gap-2 text-primary">
+                            <img src={RedirectIcon} className="w-4" alt="rethinking?" />
 							View your order(s)
-						</button>
-					</Link>
-					<img src={ArrowRightBlack} className="w-2" alt="Arrow right" />
-				</div>
-			</div>
+                        </button>
+                    </Link>
+                    <img src={ArrowRightBlack} className="w-2" alt="Arrow right" />
+                </div>
+            </div>
 
-			<ScrollToTop />
-		</div>
-	);
+            <ScrollToTop />
+        </div>
+    );
 };
 
 export default PaymentSuccess;

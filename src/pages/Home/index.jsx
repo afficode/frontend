@@ -1,4 +1,4 @@
-import { Banner } from '../../components';
+import { Banner, SEO } from '../../components';
 import { Approutes } from '../../constants';
 // import { Button } from '../../ui';
 import Hero from './Hero';
@@ -11,11 +11,8 @@ const Home = () => {
 		<>
 			<Banner />
 			<Hero />
-			<RowContainer
-				title={'Featured Ads'}
-				link={Approutes.product.initial}
-				data={data?.ads?.slice(0, 12)}
-			/>
+			<RowContainer title={'Featured Ads'} link={Approutes.product.initial} data={data?.ads?.slice(0, 12)} />
+			<SEO />
 		</>
 	);
 };

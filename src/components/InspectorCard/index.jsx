@@ -12,357 +12,357 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 const InspectorCard = ({ data, ad_id, isLoading }) => {
-	const { mutate, isLoading: submitting } = useUpdateSchedule(data?.schedules?.id);
+    const { mutate, isLoading: submitting } = useUpdateSchedule(data?.schedules?.id);
 
-	const latest = data?.schedules?.bookings.length - 1;
-	const latestBooking = data?.schedules?.bookings[latest];
+    const latest = data?.schedules?.bookings.length - 1;
+    const latestBooking = data?.schedules?.bookings[latest];
 
-	const { user } = useAuth();
-	const notify = useNotify();
-	const queryClient = useQueryClient();
+    const { user } = useAuth();
+    const notify = useNotify();
+    const queryClient = useQueryClient();
 
-	const initialValues = {
-		owner: data?.schedules?.owner,
-		ad_id: data?.schedules?.ad_id,
-		remark: '',
-		date: '',
-		time: {
-			from: '',
-			to: '',
-		},
-	};
+    const initialValues = {
+        owner: data?.schedules?.owner,
+        ad_id: data?.schedules?.ad_id,
+        remark: '',
+        date: '',
+        time: {
+            from: '',
+            to: '',
+        },
+    };
 
-	const handleSubmit = (values, { resetForm }) => {
-		let formData;
-		if (values.remark === 'reschedule') {
-			formData = {
-				...values,
-			};
-		} else {
-			formData = {
-				...values,
-				date: latestBooking?.date,
-				time: {
-					from: latestBooking?.time?.from,
-					to: latestBooking?.time?.to,
-				},
-			};
-		}
+    const handleSubmit = (values, { resetForm }) => {
+        let formData;
+        if (values.remark === 'reschedule') {
+            formData = {
+                ...values,
+            };
+        } else {
+            formData = {
+                ...values,
+                date: latestBooking?.date,
+                time: {
+                    from: latestBooking?.time?.from,
+                    to: latestBooking?.time?.to,
+                },
+            };
+        }
 
-		mutate(formData, {
-			onSuccess: (data) => {
-				notify(data?.message, 'success');
-				queryClient.invalidateQueries('get-schedule');
-				queryClient.invalidateQueries(['get-ads-schedule', { ad_id: ad_id }]);
-				resetForm();
-			},
-			onError: (error) => {
-				notify(error?.response.data.message, 'error');
-			},
-		});
-	};
+        mutate(formData, {
+            onSuccess: (data) => {
+                notify(data?.message, 'success');
+                queryClient.invalidateQueries('get-schedule');
+                queryClient.invalidateQueries(['get-ads-schedule', { ad_id }]);
+                resetForm();
+            },
+            onError: (error) => {
+                notify(error?.response.data.message, 'error');
+            },
+        });
+    };
 
-	const formik = useFormik({
-		initialValues,
-		onSubmit: handleSubmit,
-		enableReinitialize: true,
-	});
+    const formik = useFormik({
+        initialValues,
+        onSubmit: handleSubmit,
+        enableReinitialize: true,
+    });
 
-	const showDateInput = useMemo(() => {
-		if (formik.values.remark === 'reschedule') {
-			return true;
-		}
-		return false;
-	}, [formik.values.remark]);
+    const showDateInput = useMemo(() => {
+        if (formik.values.remark === 'reschedule') {
+            return true;
+        }
+        return false;
+    }, [formik.values.remark]);
 
-	const timeFromDate = formik.values.time.from
-		? parse(formik.values.time.from, 'HH:mm', new Date())
-		: null;
-	const timeToDate = formik.values.time.to
-		? parse(formik.values.time.to, 'HH:mm', new Date())
-		: null;
+    const timeFromDate = formik.values.time.from
+        ? parse(formik.values.time.from, 'HH:mm', new Date())
+        : null;
+    const timeToDate = formik.values.time.to
+        ? parse(formik.values.time.to, 'HH:mm', new Date())
+        : null;
 
-	const from = parse(formik.values.time.from, 'HH:mm', new Date());
-	const to = parse(formik.values.time.to, 'HH:mm', new Date());
+    const from = parse(formik.values.time.from, 'HH:mm', new Date());
+    const to = parse(formik.values.time.to, 'HH:mm', new Date());
 
-	if (isLoading) {
-		return (
-			<div className="h-48 w-[300px]">
-				<SpinnerSkeleton />
-			</div>
-		);
-	}
+    if (isLoading) {
+        return (
+            <div className="h-48 w-[300px]">
+                <SpinnerSkeleton />
+            </div>
+        );
+    }
 
-	return (
-		<div className="max-w-[400px] border  p-4">
-			<div className="flex items-center justify-between">
-				{user?.id === data?.schedules?.owner ? (
-					<h5 className="font-semibold">Inspector’s schedule :</h5>
-				) : (
-					<h5 className="capitalize font-semibold">
+    return (
+        <div className="max-w-[400px] border  p-4">
+            <div className="flex items-center justify-between">
+                {user?.id === data?.schedules?.owner ? (
+                    <h5 className="font-semibold">Inspector’s schedule :</h5>
+                ) : (
+                    <h5 className="capitalize font-semibold">
 						Response from: {data?.schedules?.ad_details.title}
-					</h5>
-				)}
-				<img src={Inspector} alt="inspector" className="w-12" />
-			</div>
+                    </h5>
+                )}
+                <img src={Inspector} alt="inspector" className="w-12" />
+            </div>
 
-			<div className="space-y-2">
-				{data?.schedules?.bookings.map((booking) => {
-					return (
-						<div
-							key={booking.id}
-							className={`${
-								booking?.user_id === data?.schedules?.owner ? 'bg-primary/80' : 'bg-secondary'
-							} px-2 pb-4 pt-6  rounded-lg italic sm:mr-6 relative`}
-						>
-							<div className="absolute top-1 right-1 bg-white rounded-lg px-1  py-[0.15rem] leading-3 text-[10px]">
-								{booking.user_id === user.id ? (
-									'You'
-								) : booking?.user_id === data?.schedules?.owner && booking?.remark !== 'view_contact' ? (
-									'Ad owner'
-								) : booking?.remark === 'view_contact' && data.schedules?.grabber_details ? (
-									<span className="-mx-2 bg-white px-2 py-[6px] rounded-bl-lg font-semibold">Boonfu</span>
-								) : (
-									'Inspector'
-								)}
-							</div>
+            <div className="space-y-2">
+                {data?.schedules?.bookings.map((booking) => {
+                    return (
+                        <div
+                            key={booking.id}
+                            className={`${
+                                booking?.user_id === data?.schedules?.owner ? 'bg-primary/80' : 'bg-secondary'
+                            } px-2 pb-4 pt-6  rounded-lg italic sm:mr-6 relative`}
+                        >
+                            <div className="absolute top-1 right-1 bg-white rounded-lg px-1  py-[0.15rem] leading-3 text-[10px]">
+                                {booking.user_id === user.id ? (
+                                    'You'
+                                ) : booking?.user_id === data?.schedules?.owner && booking?.remark !== 'view_contact' ? (
+                                    'Ad owner'
+                                ) : booking?.remark === 'view_contact' && data.schedules?.grabber_details ? (
+                                    <span className="-mx-2 bg-white px-2 py-[6px] rounded-bl-lg font-semibold">Boonfu</span>
+                                ) : (
+                                    'Inspector'
+                                )}
+                            </div>
 
-							<div className="flex items-center gap-2">
-								{booking?.remark === 'reschedule' ? (
-									<p>Rescheduled Date & Time.</p>
-								) : booking?.remark === 'confirmed' ? (
-									<p>Confirmed Date & Time.</p>
-								) : booking?.remark === 'not_interested' ? (
-									<p>Not interested in the inspection.</p>
-								) : booking?.remark === 'withdrawn' ? (
-									<p>Withdrawn from the site.</p>
-								) : booking?.remark === 'not_available' ? (
-									<p>Item no longer available.</p>
-								) : booking?.remark === 'view_contact' && !data.schedules?.grabber_details ? (
-									<p>You can view the contact now.</p>
-								) : booking?.remark === 'view_contact' && data.schedules?.grabber_details ? (
-									<div className="space-y-4">
-										<p>
+                            <div className="flex items-center gap-2">
+                                {booking?.remark === 'reschedule' ? (
+                                    <p>Rescheduled Date & Time.</p>
+                                ) : booking?.remark === 'confirmed' ? (
+                                    <p>Confirmed Date & Time.</p>
+                                ) : booking?.remark === 'not_interested' ? (
+                                    <p>Not interested in the inspection.</p>
+                                ) : booking?.remark === 'withdrawn' ? (
+                                    <p>Withdrawn from the site.</p>
+                                ) : booking?.remark === 'not_available' ? (
+                                    <p>Item no longer available.</p>
+                                ) : booking?.remark === 'view_contact' && !data.schedules?.grabber_details ? (
+                                    <p>You can view the contact now.</p>
+                                ) : booking?.remark === 'view_contact' && data.schedules?.grabber_details ? (
+                                    <div className="space-y-4">
+                                        <p>
 											Thank you for booking an inspection for the{' '}
-											{data?.schedules?.ad_details.title.toUpperCase()} on Boonfu.com.
-										</p>
+                                            {data?.schedules?.ad_details.title.toUpperCase()} on Boonfu.com.
+                                        </p>
 
-										<p>
+                                        <p>
 											Our Partner &#40;{data.schedules.grabber_details.name}&#41; who introduced this listing
 											to you shall be in touch with you shortly to coordinate the time and specific location
 											for the inspection.
-										</p>
+                                        </p>
 
-										<p>Should you have any questions in the meantime, feel free to reply to this message.</p>
+                                        <p>Should you have any questions in the meantime, feel free to reply to this message.</p>
 
-										<p>Best regards, The Boonfu Team</p>
-									</div>
-								) : booking?.remark === 'ok' && data?.schedules?.owner === user?.id ? (
-									<>
-										<p>Inspector:</p>
-										<p>{data?.schedules?.buyer_name}</p>
-									</>
-								) : null}
-							</div>
+                                        <p>Best regards, The Boonfu Team</p>
+                                    </div>
+                                ) : booking?.remark === 'ok' && data?.schedules?.owner === user?.id ? (
+                                    <>
+                                        <p>Inspector:</p>
+                                        <p>{data?.schedules?.buyer_name}</p>
+                                    </>
+                                ) : null}
+                            </div>
 
-							{booking.remark === 'view_contact' && !data.schedules?.grabber_details && (
-								<a
-									href={`tel:${
-										user?.id === data?.schedules?.owner
-											? data?.schedules?.phone_details?.buyer_phone
-											: data?.schedules?.phone_details?.owner_phone
-									}`}
-									className="text-white text-sm hover:underline flex items-center gap-1"
-								>
-									<BiPhoneCall />
-									{user?.id === data?.schedules?.owner
-										? data?.schedules?.phone_details?.buyer_phone
-										: data?.schedules?.phone_details?.owner_phone}
-								</a>
-							)}
+                            {booking.remark === 'view_contact' && !data.schedules?.grabber_details && (
+                                <a
+                                    href={`tel:${
+                                        user?.id === data?.schedules?.owner
+                                            ? data?.schedules?.phone_details?.buyer_phone
+                                            : data?.schedules?.phone_details?.owner_phone
+                                    }`}
+                                    className="text-white text-sm hover:underline flex items-center gap-1"
+                                >
+                                    <BiPhoneCall />
+                                    {user?.id === data?.schedules?.owner
+                                        ? data?.schedules?.phone_details?.buyer_phone
+                                        : data?.schedules?.phone_details?.owner_phone}
+                                </a>
+                            )}
 
-							{(booking?.remark !== 'view_contact' ||
+                            {(booking?.remark !== 'view_contact' ||
 								(booking?.remark === 'view_contact' && !data?.schedules?.grabber_details)) && (
-								<>
-									<div className="flex items-center gap-2">
-										<p>For:</p>
-										<p className="capitalize">{data?.schedules?.ad_details.title}</p>
-									</div>
-									<div className="flex items-center gap-2">
-										<p>
-											{latestBooking?.remark === 'reschedule' &&
+                                <>
+                                    <div className="flex items-center gap-2">
+                                        <p>For:</p>
+                                        <p className="capitalize">{data?.schedules?.ad_details.title}</p>
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                        <p>
+                                            {latestBooking?.remark === 'reschedule' &&
 											booking?.remark === 'reschedule' &&
 											latestBooking?.id === booking?.id
-												? 'New'
-												: null}{' '}
+                                                ? 'New'
+                                                : null}{' '}
 											Date:
-										</p>
+                                        </p>
 
-										<p> {booking?.date && format(parseISO(booking?.date), 'EEEE d, MMMM yyyy')}</p>
-									</div>
-									<div className="flex items-center gap-2">
-										<p>
-											{latestBooking?.remark === 'reschedule' &&
+                                        <p> {booking?.date && format(parseISO(booking?.date), 'EEEE d, MMMM yyyy')}</p>
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                        <p>
+                                            {latestBooking?.remark === 'reschedule' &&
 											booking?.remark === 'reschedule' &&
 											latestBooking?.id === booking?.id
-												? 'New'
-												: null}{' '}
+                                                ? 'New'
+                                                : null}{' '}
 											Time:
-										</p>
-										<p className="lowercase">
-											{booking?.time?.from && format(parse(booking.time.from, 'HH:mm', new Date()), 'h:mma')}
-											{booking?.time?.to && (
-												<> to {format(parse(booking.time.to, 'HH:mm', new Date()), 'h:mma')}</>
-											)}
-										</p>
-									</div>
-								</>
-							)}
-						</div>
-					);
-				})}
-			</div>
-			{!data?.schedules?.confirmed && (
-				<div className=" border-t border-black/40 py-4 mt-4">
-					{user?.id === data?.schedules?.owner ? (
-						<h5 className="capitalize font-semibold">
-							{data?.schedules?.ad_details.title} <span className="lowercase">reply</span>:
-						</h5>
-					) : (
-						<h5 className="font-semibold">Inspector's reply:</h5>
-					)}
+                                        </p>
+                                        <p className="lowercase">
+                                            {booking?.time?.from && format(parse(booking.time.from, 'HH:mm', new Date()), 'h:mma')}
+                                            {booking?.time?.to && (
+                                                <> to {format(parse(booking.time.to, 'HH:mm', new Date()), 'h:mma')}</>
+                                            )}
+                                        </p>
+                                    </div>
+                                </>
+                            )}
+                        </div>
+                    );
+                })}
+            </div>
+            {!data?.schedules?.confirmed && (
+                <div className=" border-t border-black/40 py-4 mt-4">
+                    {user?.id === data?.schedules?.owner ? (
+                        <h5 className="capitalize font-semibold">
+                            {data?.schedules?.ad_details.title} <span className="lowercase">reply</span>:
+                        </h5>
+                    ) : (
+                        <h5 className="font-semibold">Inspector's reply:</h5>
+                    )}
 
-					<form onSubmit={formik.handleSubmit}>
-						<InputGroup
-							name={'remark'}
-							type={'select'}
-							label={'Select a response'}
-							moreInfo={'Select a response'}
-							value={formik.values.remark}
-							onChange={formik.handleChange}
-							onBlur={formik.handleBlur}
-							optionLists={
-								user?.id === data?.schedules?.owner ? sellerResponseOptions : buyerResponseOptions
-							}
-							className={'customSelectInput'}
-						/>
-						{showDateInput && (
-							<>
-								<InputGroup
-									name={'date'}
-									type={'date'}
-									label={'Reschedule Date'}
-									value={formik.values.date}
-									onChange={formik.handleChange}
-									moreInfo={'Select a date and the time range you will be available '}
-									onBlur={formik.handleBlur}
-									className={'customSelectInput'}
-								/>
-								<div className="flex gap-6 ">
-									<div className="my-2">
-										<label className="input-group-label" htmlFor="time.from">
+                    <form onSubmit={formik.handleSubmit}>
+                        <InputGroup
+                            name={'remark'}
+                            type={'select'}
+                            label={'Select a response'}
+                            moreInfo={'Select a response'}
+                            value={formik.values.remark}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            optionLists={
+                                user?.id === data?.schedules?.owner ? sellerResponseOptions : buyerResponseOptions
+                            }
+                            className={'customSelectInput'}
+                        />
+                        {showDateInput && (
+                            <>
+                                <InputGroup
+                                    name={'date'}
+                                    type={'date'}
+                                    label={'Reschedule Date'}
+                                    value={formik.values.date}
+                                    onChange={formik.handleChange}
+                                    moreInfo={'Select a date and the time range you will be available '}
+                                    onBlur={formik.handleBlur}
+                                    className={'customSelectInput'}
+                                />
+                                <div className="flex gap-6 ">
+                                    <div className="my-2">
+                                        <label className="input-group-label" htmlFor="time.from">
 											From
-										</label>
-										<DatePicker
-											selected={timeFromDate}
-											onChange={(date) => {
-												if (!date) {
-													formik.setFieldValue('time.from', '');
-													return;
-												}
-												formik.setFieldValue('time.from', format(date, 'HH:mm'));
-											}}
-											showTimeSelect
-											showTimeSelectOnly
-											timeIntervals={1}
-											timeCaption="Time"
-											dateFormat="h:mm aa"
-											placeholderText="Select time"
-											customInput={
-												<DatePickerInput
-													name="time.from"
-													value={formik.values.time.from ? format(from, 'h:mm a') : undefined}
-												/>
-											}
-										/>
-									</div>
-									<div className="my-2">
-										<label className="input-group-label" htmlFor="time.to">
+                                        </label>
+                                        <DatePicker
+                                            selected={timeFromDate}
+                                            onChange={(date) => {
+                                                if (!date) {
+                                                    formik.setFieldValue('time.from', '');
+                                                    return;
+                                                }
+                                                formik.setFieldValue('time.from', format(date, 'HH:mm'));
+                                            }}
+                                            showTimeSelect
+                                            showTimeSelectOnly
+                                            timeIntervals={1}
+                                            timeCaption="Time"
+                                            dateFormat="h:mm aa"
+                                            placeholderText="Select time"
+                                            customInput={
+                                                <DatePickerInput
+                                                    name="time.from"
+                                                    value={formik.values.time.from ? format(from, 'h:mm a') : undefined}
+                                                />
+                                            }
+                                        />
+                                    </div>
+                                    <div className="my-2">
+                                        <label className="input-group-label" htmlFor="time.to">
 											To
-										</label>
-										<DatePicker
-											selected={timeToDate}
-											onChange={(date) => {
-												if (!date) {
-													formik.setFieldValue('time.to', '');
-													return;
-												}
-												formik.setFieldValue('time.to', format(date, 'HH:mm'));
-											}}
-											showTimeSelect
-											showTimeSelectOnly
-											timeIntervals={1}
-											timeCaption="Time"
-											dateFormat="h:mm aa"
-											placeholderText="Select time"
-											customInput={
-												<DatePickerInput
-													name="time.to"
-													value={formik.values.time.to ? format(from, 'h:mm a') : undefined}
-												/>
-											}
-										/>
-									</div>
-								</div>
+                                        </label>
+                                        <DatePicker
+                                            selected={timeToDate}
+                                            onChange={(date) => {
+                                                if (!date) {
+                                                    formik.setFieldValue('time.to', '');
+                                                    return;
+                                                }
+                                                formik.setFieldValue('time.to', format(date, 'HH:mm'));
+                                            }}
+                                            showTimeSelect
+                                            showTimeSelectOnly
+                                            timeIntervals={1}
+                                            timeCaption="Time"
+                                            dateFormat="h:mm aa"
+                                            placeholderText="Select time"
+                                            customInput={
+                                                <DatePickerInput
+                                                    name="time.to"
+                                                    value={formik.values.time.to ? format(from, 'h:mm a') : undefined}
+                                                />
+                                            }
+                                        />
+                                    </div>
+                                </div>
 
-								{formik.values.time.from && formik.values.time.to ? (
-									<div>
-										<p>
+                                {formik.values.time.from && formik.values.time.to ? (
+                                    <div>
+                                        <p>
 											Selected time range: <b>{format(from, 'h:mm a')}</b> - <b>{format(to, 'h:mm a')}</b>
-										</p>
-									</div>
-								) : null}
-							</>
-						)}
+                                        </p>
+                                    </div>
+                                ) : null}
+                            </>
+                        )}
 
-						<Button
-							variant={'primary'}
-							type="submit"
-							disabled={submitting || !formik.dirty}
-							loading={submitting}
-							className={'rounded-lg mt-4'}
-						>
+                        <Button
+                            variant={'primary'}
+                            type="submit"
+                            disabled={submitting || !formik.dirty}
+                            loading={submitting}
+                            className={'rounded-lg mt-4'}
+                        >
 							Send
-						</Button>
-					</form>
-				</div>
-			)}
-		</div>
-	);
+                        </Button>
+                    </form>
+                </div>
+            )}
+        </div>
+    );
 };
 
 export default InspectorCard;
 
 const sellerResponseOptions = [
-	{ value: '', key: 'Select a response' },
-	{
-		key: 'I can do this time and date.',
-		value: 'reschedule',
-	},
-	{
-		key: 'Confirmed',
-		value: 'confirmed',
-	},
-	{ value: 'withdrawn', key: 'Withdrawn from site' },
-	{ value: 'not_available', key: 'Item no longer available' },
-	{ value: 'view_contact', key: 'You can View my contact now.' },
+    { value: '', key: 'Select a response' },
+    {
+        key: 'I can do this time and date.',
+        value: 'reschedule',
+    },
+    {
+        key: 'Confirmed',
+        value: 'confirmed',
+    },
+    { value: 'withdrawn', key: 'Withdrawn from site' },
+    { value: 'not_available', key: 'Item no longer available' },
+    { value: 'view_contact', key: 'You can View my contact now.' },
 ];
 const buyerResponseOptions = [
-	{ value: '', key: 'Select a response' },
-	{
-		key: 'Ok, that’s fine by me, please confirm.',
-		value: 'ok',
-	},
-	{ value: 'not_interested', key: 'I am no longer interested.' },
-	{ value: 'reschedule', key: 'I have to reschedule' },
+    { value: '', key: 'Select a response' },
+    {
+        key: 'Ok, that’s fine by me, please confirm.',
+        value: 'ok',
+    },
+    { value: 'not_interested', key: 'I am no longer interested.' },
+    { value: 'reschedule', key: 'I have to reschedule' },
 ];

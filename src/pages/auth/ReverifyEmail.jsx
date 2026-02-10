@@ -9,59 +9,59 @@ import { Spinner } from '../../components';
 import { useNotify } from '../../hooks';
 
 const ReverifyEmail = ({ endpoint }) => {
-	const navigate = useNavigate();
-	const initialValues = { email: '' };
-	const validationSchema = Yup.object({
-		email: Yup.string().required('Email is required').email('Invalid email address'),
-	});
+    const navigate = useNavigate();
+    const initialValues = { email: '' };
+    const validationSchema = Yup.object({
+        email: Yup.string().required('Email is required').email('Invalid email address'),
+    });
 
-	const notify = useNotify();
-	const onSubmit = async (values, { setSubmitting }) => {
-		const backendEndpoint = endpoint !== undefined ? endpoint : 'resend_verification';
-		const submit = await RegistrationHook(values, setSubmitting, backendEndpoint);
-		if (submit?.success) {
-			notify(submit.message, 'success');
-			return navigate('/', { replace: true });
-		} else {
-			if (submit?.status === 401) {
-				notify('Email not found', 'error');
-			} else {
-				notify(submit.message, 'success');
-			}
-		}
-	};
+    const notify = useNotify();
+    const onSubmit = async (values, { setSubmitting }) => {
+        const backendEndpoint = endpoint !== undefined ? endpoint : 'resend_verification';
+        const submit = await RegistrationHook(values, setSubmitting, backendEndpoint);
+        if (submit?.success) {
+            notify(submit.message, 'success');
+            return navigate('/', { replace: true });
+        } 
+        if (submit?.status === 401) {
+            notify('Email not found', 'error');
+        } else {
+            notify(submit.message, 'success');
+        }
+		
+    };
 
-	return (
-		<div className='w-full'>
-			<div className='p-2 lg:p-4'>
-				<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-					{(formik) => (
-						<Form>
-							<Input
-								type='email'
-								name='email'
-								placeholder='email@email.com'
-								className='input input-bordered border-black w-full bg-gray-100 text-black text-lg lg:text-xl rounded-none my-2 input-md'
-								{...formik.getFieldProps('email')}
-							/>
-							<Button size='lg' type='submit' className='text-black bg-primary w-[60%] mx-auto text-md lg:text-2xl my-2' disabled={!formik.isValid || !formik.dirty ? 'disabled' : ''}>
-								{!formik.isSubmitting ? (
-									<>
-										<span className='text-lg'>Verify</span> &emsp; <FaEnvelope className='my-auto' />
-									</>
-								) : (
-									<>
-										<Spinner color='white' /> &emsp;
-										<span className='pl-3 text-white'>Sending Email... </span>
-									</>
-								)}
-							</Button>
-						</Form>
-					)}
-				</Formik>
-			</div>
-		</div>
-	);
+    return (
+        <div className='w-full'>
+            <div className='p-2 lg:p-4'>
+                <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+                    {(formik) => (
+                        <Form>
+                            <Input
+                                type='email'
+                                name='email'
+                                placeholder='email@email.com'
+                                className='input input-bordered border-black w-full bg-gray-100 text-black text-lg lg:text-xl rounded-none my-2 input-md'
+                                {...formik.getFieldProps('email')}
+                            />
+                            <Button size='lg' type='submit' className='text-black bg-primary w-[60%] mx-auto text-md lg:text-2xl my-2' disabled={!formik.isValid || !formik.dirty ? 'disabled' : ''}>
+                                {!formik.isSubmitting ? (
+                                    <>
+                                        <span className='text-lg'>Verify</span> &emsp; <FaEnvelope className='my-auto' />
+                                    </>
+                                ) : (
+                                    <>
+                                        <Spinner color='white' /> &emsp;
+                                        <span className='pl-3 text-white'>Sending Email... </span>
+                                    </>
+                                )}
+                            </Button>
+                        </Form>
+                    )}
+                </Formik>
+            </div>
+        </div>
+    );
 };
 
 export default ReverifyEmail;

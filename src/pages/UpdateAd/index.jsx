@@ -29,14 +29,10 @@ const PostAd = () => {
 			type_other: ad?.type_other,
 			description: ad?.description,
 			vehicle_id: ad?.vehicle_id,
-			vehicle_features:
-				typeof ad?.vehicle_features === 'string'
-					? ad?.vehicle_features.split(',')
-					: ad?.vehicle_features,
+			vehicle_features: typeof ad?.vehicle_features === 'string' ? ad?.vehicle_features.split(',') : ad?.vehicle_features,
 			ad_condition: ad?.ad_condition,
 			vehicle_body: ad?.vehicle_body,
-			contact_type:
-				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
+			contact_type: typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
 			price: toMoney(ad?.price, false),
 			year: ad?.year,
 			millage: ad?.millage,
@@ -56,8 +52,7 @@ const PostAd = () => {
 			lga_id: ad?.lga_id,
 			marketed_by: ad?.marketed_by,
 			title: ad?.title,
-			property_type:
-				typeof ad?.property_type === 'string' ? ad?.property_type?.split(',') : ad?.property_type,
+			property_type: typeof ad?.property_type === 'string' ? ad?.property_type?.split(',') : ad?.property_type,
 			ad_condition: ad?.ad_condition,
 			furnished: ad?.furnished,
 			time_period: ad?.time_period,
@@ -70,8 +65,7 @@ const PostAd = () => {
 			description: ad?.description,
 			price: toMoney(ad?.price, false),
 			negotiable: ad?.negotiable,
-			contact_type:
-				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
+			contact_type: typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
 			address: ad?.address,
 			feature: ad?.feature,
 		},
@@ -95,8 +89,7 @@ const PostAd = () => {
 			description: ad?.description,
 			price: toMoney(ad?.price, false),
 			negotiable: ad?.negotiable,
-			contact_type:
-				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
+			contact_type: typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
 			address: ad?.address,
 			feature: ad?.feature,
 		},
@@ -115,8 +108,7 @@ const PostAd = () => {
 			color: ad?.color,
 			price: toMoney(ad?.price, false),
 			negotiable: ad?.negotiable,
-			contact_type:
-				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
+			contact_type: typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
 			address: ad?.address,
 			feature: ad?.feature,
 		},
@@ -151,8 +143,7 @@ const PostAd = () => {
 			color: ad?.color,
 			price: toMoney(ad?.price, false),
 			negotiable: ad?.negotiable,
-			contact_type:
-				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
+			contact_type: typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
 			address: ad?.address,
 			feature: ad?.feature,
 		},
@@ -177,8 +168,7 @@ const PostAd = () => {
 			display: ad?.display,
 			price: toMoney(ad?.price, false),
 			negotiable: ad?.negotiable,
-			contact_type:
-				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
+			contact_type: typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
 			address: ad?.address,
 			feature: ad?.feature,
 		},
@@ -202,8 +192,7 @@ const PostAd = () => {
 			price: toMoney(ad?.price, false),
 			scent_type_other: ad?.scent_type_other,
 			negotiable: ad?.negotiable,
-			contact_type:
-				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
+			contact_type: typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
 			address: ad?.address,
 			feature: ad?.feature,
 		},
@@ -228,8 +217,7 @@ const PostAd = () => {
 			price: toMoney(ad?.price, false),
 			color_other: ad?.color_other,
 			negotiable: ad?.negotiable,
-			contact_type:
-				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
+			contact_type: typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
 			address: ad?.address,
 			feature: ad?.feature,
 		},
@@ -244,10 +232,7 @@ const PostAd = () => {
 			type: ad?.type,
 			type_other: ad?.type_other,
 			service_area: ad?.service_area,
-			service_features:
-				typeof ad?.service_features === 'string'
-					? ad?.service_features?.split(',')
-					: ad?.service_features,
+			service_features: typeof ad?.service_features === 'string' ? ad?.service_features?.split(',') : ad?.service_features,
 			payment_terms: ad?.payment_terms,
 			mode_of_transport: ad?.mode_of_transport,
 			form: typeof ad?.form === 'string' ? ad?.form?.split(',') : ad?.form,
@@ -256,8 +241,7 @@ const PostAd = () => {
 			available_to_travel: ad?.available_to_travel,
 			price: toMoney(ad?.price, false),
 			negotiable: ad?.negotiable,
-			contact_type:
-				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
+			contact_type: typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
 			address: ad?.address,
 			feature: ad?.feature,
 		},
@@ -279,8 +263,7 @@ const PostAd = () => {
 			rating: ad?.rating,
 			price: toMoney(ad?.price, false),
 			negotiable: ad?.negotiable,
-			contact_type:
-				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
+			contact_type: typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
 			address: ad?.address,
 			feature: ad?.feature,
 		},
@@ -301,8 +284,7 @@ const PostAd = () => {
 			age: ad?.age,
 			price: toMoney(ad?.price, false),
 			negotiable: ad?.negotiable,
-			contact_type:
-				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
+			contact_type: typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
 			address: ad?.address,
 			feature: ad?.feature,
 		},
@@ -325,8 +307,7 @@ const PostAd = () => {
 			size: ad?.size,
 			price: toMoney(ad?.price, false),
 			bulk_price: toMoney(ad?.bulk_price, false),
-			contact_type:
-				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
+			contact_type: typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
 			address: ad?.address,
 			feature: ad?.feature,
 		},
@@ -347,8 +328,7 @@ const PostAd = () => {
 			age: ad?.age,
 			price: toMoney(ad?.price, false),
 			negotiable: ad?.negotiable,
-			contact_type:
-				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
+			contact_type: typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
 			address: ad?.address,
 			feature: ad?.feature,
 		},
@@ -364,8 +344,7 @@ const PostAd = () => {
 			type: ad?.type,
 			type_other: ad?.type_other,
 			description: ad?.description,
-			ad_condition:
-				typeof ad?.ad_condition === 'string' ? ad?.ad_condition?.split(',') : ad?.ad_condition,
+			ad_condition: typeof ad?.ad_condition === 'string' ? ad?.ad_condition?.split(',') : ad?.ad_condition,
 			year: ad?.year,
 			mileage: ad?.mileage,
 			transmission: ad?.transmission,
@@ -374,8 +353,7 @@ const PostAd = () => {
 			// engine_size: ad?.engine_size,
 			price: toMoney(ad?.price, false),
 			negotiable: ad?.negotiable,
-			contact_type:
-				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
+			contact_type: typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
 			address: ad?.address,
 			feature: ad?.feature,
 		},
@@ -392,8 +370,7 @@ const PostAd = () => {
 			min_price: toMoney(ad?.min_price, false),
 			max_price: toMoney(ad?.max_price, false),
 			negotiable: ad?.negotiable,
-			contact_type:
-				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
+			contact_type: typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
 			address: ad?.address,
 			feature: ad?.feature,
 		},
@@ -411,37 +388,21 @@ const PostAd = () => {
 			defects_detail: ad?.defects_detail,
 			price: toMoney(ad?.price, false),
 			negotiable: ad?.negotiable,
-			contact_type:
-				typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
+			contact_type: typeof ad?.contact_type === 'string' ? ad?.contact_type?.split(',') : ad?.contact_type,
 			address: ad?.address,
 			feature: ad?.feature,
 		},
 	};
 
 	return (
-		<div className="px-4 my-12 sm:px-8 md:px-12">
-			{categoryId === '51' ? (
-				<img
-					src={PropertyHeader}
-					alt="property banner"
-					className="w-full lg:h-[20rem] mx-auto object-fit rounded-xl my-8"
-				/>
-			) : (
-				<h1 className="pt-6 text-center">Update Ad</h1>
-			)}
+		<div className='px-4 my-12 sm:px-8 md:px-12'>
+			{categoryId === '51' ? <img src={PropertyHeader} alt='property banner' className='w-full lg:h-[20rem] mx-auto object-fit rounded-xl my-8' /> : <h1 className='pt-6 text-center'>Update Ad</h1>}
 
 			{isLoading ? (
 				<LoadingScreen />
 			) : (
-				<div className="max-w-[1024px] mx-auto">
-					<CategoryForm
-						adId={adId}
-						adImages={ad?.images}
-						categoryId={categoryId}
-						subCategoryId={ad.category}
-						categoryName={categoryName}
-						initialValues={initialValues[categoryId]}
-					/>
+				<div className='max-w-[1024px] mx-auto'>
+					<CategoryForm adId={adId} adImages={ad?.images} categoryId={categoryId} subCategoryId={ad.category} categoryName={categoryName} initialValues={initialValues[categoryId]} />
 				</div>
 			)}
 

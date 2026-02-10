@@ -20,25 +20,21 @@ const ImageInput = (props) => {
 		setEditMode(false);
 	};
 	return (
-		<div className="my-4 space-y-2 ">
+		<div className='my-4 space-y-2 '>
 			{label && (
 				<div>
-					<div className="flex justify-between ">
-						<label className="formLabel" htmlFor={name}>
+					<div className='flex justify-between '>
+						<label className='formLabel' htmlFor={name}>
 							{label} {required && <span>*</span>}
 						</label>
 						{editMode && (
-							<button onClick={handleEdit} type="button" className="font-semibold text-primary">
+							<button onClick={handleEdit} type='button' className='font-semibold text-primary'>
 								Edit
 							</button>
 						)}
 					</div>
 
-					{editMode && (
-						<div className="text-sm text-secondary">
-							Clicking on edit means you have to reselect your desired images
-						</div>
-					)}
+					{editMode && <div className='text-sm text-secondary'>Clicking on edit means you have to reselect your desired images</div>}
 				</div>
 			)}
 			<Field name={name}>
@@ -49,14 +45,14 @@ const ImageInput = (props) => {
 					};
 
 					return (
-						<div className="flex flex-wrap items-center gap-4">
+						<div className='flex flex-wrap items-center gap-4'>
 							{editMode === false ? (
-								<div className="relative rounded-md w-36 h-28 sm:w-44 sm:h-32 ">
+								<div className='relative rounded-md w-36 h-28 sm:w-44 sm:h-32 '>
 									<input
 										{...rest}
-										className="sr-only "
-										type="file"
-										id="fileInput"
+										className='sr-only '
+										type='file'
+										id='fileInput'
 										multiple
 										onChange={(e) => {
 											setIsLoading(true);
@@ -77,9 +73,7 @@ const ImageInput = (props) => {
 												}
 
 												// Check if the file is already in the array based on the entire file object
-												const isFileAlreadyAdded = newImgFiles.some(
-													(existingFile) => existingFile.name === file.name && existingFile.size === file.size,
-												);
+												const isFileAlreadyAdded = newImgFiles.some((existingFile) => existingFile.name === file.name && existingFile.size === file.size);
 
 												if (isFileAlreadyAdded) {
 													// alert('File already added!!');
@@ -100,51 +94,37 @@ const ImageInput = (props) => {
 										}}
 									/>
 
-									<label htmlFor="fileInput" className={`cursor-pointer transition-all duration-300`}>
-										<div className="flex items-center justify-center w-full h-full bg-gray-200 border rounded-md border-primary text-primary">
-											<img src={Camera} alt="camera" className="max-sm:w-8" /> <h5 className="">Add image</h5>
+									<label htmlFor='fileInput' className={'cursor-pointer transition-all duration-300'}>
+										<div className='flex items-center justify-center w-full h-full bg-gray-200 border rounded-md border-primary text-primary'>
+											<img src={Camera} alt='camera' className='max-sm:w-8' /> <h5 className=''>Add image</h5>
 										</div>
 									</label>
 								</div>
 							) : (
 								images?.map((img, index) => {
 									return (
-										<div
-											key={index}
-											className="border rounded-md group w-36 h-28 sm:w-44 sm:h-32 border-primary"
-										>
-											<img
-												src={img.path}
-												className="max-w-full max-h-full mx-auto my-auto object-fit"
-												alt={img.filename}
-											/>
+										<div key={index} className='border rounded-md group w-36 h-28 sm:w-44 sm:h-32 border-primary'>
+											<img src={img.path} className='max-w-full max-h-full mx-auto my-auto object-fit' alt={img.filename} />
 										</div>
 									);
 								})
 							)}
 
 							{editMode === false && isLoading === false && field.value?.length === 0 && (
-								<div className="max-sm:w-44 max-md:w-60 max-lg:w-80">
-									<h4 className="max-md:text-base">You can add up to {AD_IMAGE_COUNT} images</h4>
+								<div className='max-sm:w-44 max-md:w-60 max-lg:w-80'>
+									<h4 className='max-md:text-base'>You can add up to {AD_IMAGE_COUNT} images</h4>
 									<p>Upload {AD_IMAGE_COUNT} maximum clear images to get your ad more views and replies.</p>
 								</div>
 							)}
 
 							{field?.value.map((imgFile, index) => {
 								return (
-									<div
-										key={index}
-										className="relative border rounded-md group w-36 h-28 sm:w-44 sm:h-32 border-primary"
-									>
-										<img
-											src={URL.createObjectURL(imgFile)}
-											className="max-w-full max-h-full mx-auto my-auto object-fit"
-											alt={imgFile?.name}
-										/>
+									<div key={index} className='relative border rounded-md group w-36 h-28 sm:w-44 sm:h-32 border-primary'>
+										<img src={URL.createObjectURL(imgFile)} className='max-w-full max-h-full mx-auto my-auto object-fit' alt={imgFile?.name} />
 										<button
-											type="button"
+											type='button'
 											onClick={() => handleRemoveImage(index)}
-											className="absolute flex items-center justify-center w-6 h-6 transition-all bg-gray-100 rounded-full opacity-0 cursor-pointer right-1 top-1 group-hover:opacity-100"
+											className='absolute flex items-center justify-center w-6 h-6 transition-all bg-gray-100 rounded-full opacity-0 cursor-pointer right-1 top-1 group-hover:opacity-100'
 										>
 											<MdClose size={15} />
 										</button>
@@ -153,8 +133,8 @@ const ImageInput = (props) => {
 							})}
 
 							{isLoading && (
-								<div className="w-36 h-28 sm:w-44 sm:h-32 border-primary">
-									<Skeleton height="100%" width="100%" />
+								<div className='w-36 h-28 sm:w-44 sm:h-32 border-primary'>
+									<Skeleton height='100%' width='100%' />
 								</div>
 							)}
 						</div>

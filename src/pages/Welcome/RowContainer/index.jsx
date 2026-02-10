@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { useProduct } from '../../../hooks';
 import { Approutes } from '../../../constants';
 import { TbCurrencyNaira } from 'react-icons/tb';
-import { numberWithCommas } from '../../../utils/index.js';
+import { getCategoryName, numberWithCommas, slugGeneratorForAdIdWithName } from '../../../utils/index.js';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import { formatDistance } from 'date-fns';
 import Feature from '../../Products/Default/Feature';
@@ -49,7 +49,10 @@ export default RowContainer;
 const CardDetails = ({ id, title, location, images, created_at, price, feature }) => {
 	const img = images[0]?.path || noimage;
 	return (
-		<Link to={`${Approutes.product.initial}/${id}`} className=' w-[18rem] sm:max-w-[25rem] h-[22rem] border border-black/25 shadow-sm cursor-pointer hover:shadow-lg transition-all  ease-in-out overflow-hidden'>
+		<Link
+			to={`${Approutes.product.initial}/${slugGeneratorForAdIdWithName(title, id)}`}
+			className=' w-[18rem] sm:max-w-[25rem] h-[22rem] border border-black/25 shadow-sm cursor-pointer hover:shadow-lg transition-all  ease-in-out overflow-hidden'
+		>
 			<div className='relative ml-0.5'>{feature !== '0' && feature !== '3' && <Feature feature={feature} />}</div>
 			<img className=' min-w-full h-[70%] object-cover' src={img} alt={title && title} />
 
@@ -81,21 +84,21 @@ const categoriesData = [
 	{
 		img: SportCar,
 		title: 'Cars & Automobiles',
-		link: `${Approutes.product.category}/${btoa(50)}`,
+		link: `${Approutes.product.category}/${getCategoryName(50)}`,
 	},
 	{
 		img: House,
 		title: 'Properties',
-		link: `${Approutes.product.category}/${btoa(51)}`,
+		link: `${Approutes.product.category}/${getCategoryName(51)}`,
 	},
 	{
 		img: Furniture,
 		title: 'Home and Accessories',
-		link: `${Approutes.product.category}/${btoa(57)}`,
+		link: `${Approutes.product.category}/${getCategoryName(57)}`,
 	},
 	{
 		img: Tailor,
 		title: 'Fashion',
-		link: `${Approutes.product.category}/${btoa(55)}`,
+		link: `${Approutes.product.category}/${getCategoryName(55)}`,
 	},
 ];

@@ -11,53 +11,53 @@ import PriceInput from './PriceInput';
 import AdFeatures from './AdFeatures';
 
 const FormControl = (props) => {
-	const { control, price, subCat, address, setAddress, categoryId, feature, ...rest } = props;
+    const { control, price, subCat, address, setAddress, categoryId, feature, ...rest } = props;
 
-	switch (control) {
-		case 'input':
-			return <Input {...rest} />;
-		case 'price':
-			return <PriceInput {...rest} />;
+    switch (control) {
+    case 'input':
+        return <Input {...rest} />;
+    case 'price':
+        return <PriceInput {...rest} />;
 
-		case 'textarea':
-			return <TextArea {...rest} />;
+    case 'textarea':
+        return <TextArea {...rest} />;
 
-		case 'select':
-			return <Select {...rest} />;
+    case 'select':
+        return <Select {...rest} />;
 
-		case 'radio':
-			return <RadioButtons {...rest} />;
+    case 'radio':
+        return <RadioButtons {...rest} />;
 
-		case 'checkbox':
-			return <CheckboxGroup {...rest} />;
+    case 'checkbox':
+        return <CheckboxGroup {...rest} />;
 
-		case 'datepicker':
-			return <DatePicker {...rest} />;
+    case 'datepicker':
+        return <DatePicker {...rest} />;
 
-		case 'imageinput':
-			return <ImageInput {...rest} />;
+    case 'imageinput':
+        return <ImageInput {...rest} />;
 
-		case 'toggle':
-			return <Toggle {...rest} />;
+    case 'toggle':
+        return <Toggle {...rest} />;
 
-		case 'urgent':
-			return <UrgentField {...rest} />;
-		case 'feature':
-			return (
-				<AdFeatures
-					price={price}
-					subCat={subCat}
-					address={address}
-					setAddress={setAddress}
-					categoryId={categoryId}
-					feature={feature}
-					{...rest}
-				/>
-			);
+    case 'urgent':
+        return <UrgentField {...rest} />;
+    case 'feature':
+        return (
+            <AdFeatures
+                price={price}
+                subCat={subCat}
+                address={address}
+                setAddress={setAddress}
+                categoryId={categoryId}
+                feature={feature}
+                {...rest}
+            />
+        );
 
-		default:
-			return null;
-	}
+    default:
+        return null;
+    }
 };
 
 export default FormControl;

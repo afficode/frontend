@@ -2,13 +2,11 @@ import { Sidebar } from 'flowbite-react';
 import { HiOutlineMinusSm, HiOutlinePlusSm } from 'react-icons/hi';
 import { twMerge } from 'tailwind-merge';
 import { Approutes } from '../../constants';
+import { getCategoryName } from '../../utils';
 
 const SidebarUI = ({ items }) => {
 	return (
-		<Sidebar
-			aria-label="Sidebar for categories"
-			className="min-h-[96vh] h-full md:min-h-[1000px]  w-full tracking-tighter line-clamp-1"
-		>
+		<Sidebar aria-label='Sidebar for categories' className='min-h-[96vh] h-full md:min-h-[1000px]  w-full tracking-tighter line-clamp-1'>
 			<Sidebar.Items>
 				<Sidebar.ItemGroup>
 					{items?.null.map(({ id, name }, index) => (
@@ -23,20 +21,16 @@ const SidebarUI = ({ items }) => {
 
 										return (
 											<div>
-												<IconComponent
-													key={index}
-													aria-hidden
-													className={twMerge(theme.label.icon.open[open ? 'on' : 'off'])}
-												/>
+												<IconComponent key={index} aria-hidden className={twMerge(theme.label.icon.open[open ? 'on' : 'off'])} />
 											</div>
 										);
 									}}
 								>
-									<Sidebar.Item href={`${Approutes.product.category}/${btoa(id)}`} key={index}>
+									<Sidebar.Item href={`${Approutes.product.category}/${getCategoryName(id)}`} key={index}>
 										{name}
 									</Sidebar.Item>
 									{items[`${id}`].map(({ id, name }, index) => (
-										<Sidebar.Item href={`${Approutes.product.category}/${btoa(id)}`} key={index}>
+										<Sidebar.Item href={`${Approutes.product.category}/${getCategoryName(id)}`} key={index}>
 											{name}
 										</Sidebar.Item>
 									))}

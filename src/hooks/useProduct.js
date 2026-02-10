@@ -8,7 +8,7 @@ export const useProduct = (params) => {
 		axios
 			.get(
 				`${backendLink}ads`,
-				{ params }
+				{ params },
 				// {
 				// 	headers: {
 				// 		...headers,
@@ -29,10 +29,9 @@ export const useProduct = (params) => {
 };
 
 export const fetchProduct = (ad_id, isLogin = false) => {
-	const fetchSingleProduct = isLogin
-		? () => privateAxios.get(`${backendLink}ads/${ad_id}`)
-		: () => axios.get(`${backendLink}ads/${ad_id}`);
+	const fetchSingleProduct = isLogin ? () => privateAxios.get(`${backendLink}ads/${ad_id}`) : () => axios.get(`${backendLink}ads/${ad_id}`);
 
+	// eslint-disable-next-line react-hooks/rules-of-hooks
 	return useQuery(['fetch-product', ad_id], fetchSingleProduct, {
 		refetchInterval: 180000,
 		refetchIntervalInBackground: false,
@@ -41,12 +40,14 @@ export const fetchProduct = (ad_id, isLogin = false) => {
 };
 
 export const fetchCategorySummary = (cat_id) => {
-	const fetchCatSummary = () =>
-		axios.get(`${backendLink}ads/cat_summary/${cat_id}`).then((res) => res?.data);
+	const fetchCatSummary = () => axios.get(`${backendLink}ads/cat_summary/${cat_id}`).then((res) => res?.data);
 
+	// eslint-disable-next-line react-hooks/rules-of-hooks
 	return useQuery(['fetchCatSummary', cat_id], fetchCatSummary, {
-		refetchInterval: 5000,
+		refetchInterval: 180000,
 		refetchIntervalInBackground: false,
 		refetchOnWindowFocus: false,
+		cacheTime: Infinity,
+		staleTime: Infinity,
 	});
 };

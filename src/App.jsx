@@ -101,61 +101,31 @@ function App() {
 					<Route path={Approutes.product.category} element={<Categories />} />
 					<Route path={Approutes.product.viewCategoryId} element={<Category />} />
 					<Route path={Approutes.underConstruction} element={<UnderConstruction />} />
-					<Route
-						path={Approutes.grab.grabbedProduct(':grabber_id', ':ad_id')}
-						element={<GrabbedProduct />}
-					/>
+					<Route path={Approutes.grab.grabbedProduct(':grabber_id', ':ad_id')} element={<GrabbedProduct />} />
 				</Route>
 				{/* Protected page routes */}
 				<Route element={<RequireAuth />}>
 					{/* Use NavBar and Footer layout  */}
 					<Route element={<AppLayout />}>
 						<Route element={<DashboardLayout />}>
-							<Route
-								path={Approutes.dashboard.initial}
-								element={<Navigate to={Approutes.dashboard.performance} />}
-							/>
+							<Route path={Approutes.dashboard.initial} element={<Navigate to={Approutes.dashboard.performance} />} />
 							<Route path={Approutes.dashboard.performance} element={<Performance />} />
 							<Route path={Approutes.dashboard.profile} element={<Profile />} />
 							<Route path={Approutes.dashboard.settings} element={<Settings />} />
 							<Route path={Approutes.dashboard.security} element={<Security />} />
-							<Route
-								path={Approutes.dashboard.dashboardPrivacyPolicy}
-								element={<DashboardPrivacyPolicy />}
-							/>
+							<Route path={Approutes.dashboard.dashboardPrivacyPolicy} element={<DashboardPrivacyPolicy />} />
 							<Route path={Approutes.dashboard.help} element={<Help />} />
 						</Route>
 						<Route element={<GrabLayout />}>
-							<Route
-								path={Approutes.grab.profile}
-								element={user?.grabberActive ? <GrabProfile /> : <Navigate to={Approutes.grab.initial} />}
-							/>
+							<Route path={Approutes.grab.profile} element={user?.grabberActive ? <GrabProfile /> : <Navigate to={Approutes.grab.initial} />} />
 							<Route path={Approutes.grab.dashboard} element={<GrabDashboard />} />
-							<Route
-								path={Approutes.grab.products}
-								element={user?.grabberActive ? <GrabProducts /> : <Navigate to={Approutes.grab.initial} />}
-							/>
-							<Route
-								path={Approutes.grab.product(':ad_id')}
-								element={user?.grabberActive ? <GrabProduct /> : <Navigate to={Approutes.grab.initial} />}
-							/>
-							<Route
-								path={Approutes.grab.settings}
-								element={user?.grabberActive ? <GrabSettings /> : <Navigate to={Approutes.grab.initial} />}
-							/>
+							<Route path={Approutes.grab.products} element={user?.grabberActive ? <GrabProducts /> : <Navigate to={Approutes.grab.initial} />} />
+							<Route path={Approutes.grab.product(':ad_id')} element={user?.grabberActive ? <GrabProduct /> : <Navigate to={Approutes.grab.initial} />} />
+							<Route path={Approutes.grab.settings} element={user?.grabberActive ? <GrabSettings /> : <Navigate to={Approutes.grab.initial} />} />
 						</Route>
-						<Route
-							path={Approutes.grab.initial}
-							element={user?.grabberActive ? <Navigate to={Approutes.grab.home} /> : <Grabs />}
-						/>
-						<Route
-							path={Approutes.grab.register}
-							element={user?.grabberActive ? <Navigate to={Approutes.grab.home} /> : <GrabRegister />}
-						/>
-						<Route
-							path={Approutes.grab.home}
-							element={user?.grabberActive ? <GrabHome /> : <Navigate to={Approutes.grab.initial} />}
-						/>
+						<Route path={Approutes.grab.initial} element={user?.grabberActive ? <Navigate to={Approutes.grab.home} /> : <Grabs />} />
+						<Route path={Approutes.grab.register} element={user?.grabberActive ? <Navigate to={Approutes.grab.home} /> : <GrabRegister />} />
+						<Route path={Approutes.grab.home} element={user?.grabberActive ? <GrabHome /> : <Navigate to={Approutes.grab.initial} />} />
 
 						<Route path={Approutes.grab.register} element={<GrabRegister />} />
 
@@ -188,14 +158,11 @@ function App() {
 							<Route path={Approutes.account.deposit} element={<Deposit />} />
 							<Route path={Approutes.account.withdraw} element={<Withdraw />} />
 						</Route>
-						<Route path="/my-advert" element={<AdDetail />} />
+						<Route path='/my-advert' element={<AdDetail />} />
 
 						{/* profile layout  */}
 						<Route element={<ProfileLayout />}>
-							<Route
-								path={Approutes.profile.initial}
-								element={<Navigate to={Approutes.profile.adverts} />}
-							/>
+							<Route path={Approutes.profile.initial} element={<Navigate to={Approutes.profile.adverts} />} />
 							{/* <Route path={Approutes.profile.details} element={<Details />} /> */}
 							<Route path={Approutes.profile.adverts} element={<Adverts />} />
 							<Route path={Approutes.profile.messages} element={<Messages />} />
@@ -206,20 +173,10 @@ function App() {
 					</Route>
 				</Route>
 
-				<Route path="*" element={<PageNotFound />} />
+				<Route path='*' element={<PageNotFound />} />
 			</Routes>
 
-			<ToastContainer
-				limit={1}
-				autoClose={3500}
-				newestOnTop={true}
-				closeButton={false}
-				closeOnClick={true}
-				draggable
-				pauseOnHover
-				position="top-center"
-				hideProgressBar={true}
-			/>
+			<ToastContainer limit={1} autoClose={3500} newestOnTop={true} closeButton={false} closeOnClick={true} draggable pauseOnHover position='top-center' hideProgressBar={true} />
 		</BrowserRouter>
 	);
 }

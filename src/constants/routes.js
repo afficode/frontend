@@ -39,8 +39,7 @@ export const Approutes = {
 		useDelivery: (grabber_id, ad_id) => `/checkout/delivery/${grabber_id}/${ad_id}`,
 		pickup: '/checkout/pickup/:grabber_id/:ad_id',
 		pickup2: '/checkout/pickup/:ad_id',
-		usePickup: (grabber_id, ad_id) =>
-			`/checkout/pickup${grabber_id !== undefined ? `/${grabber_id}` : ''}/${ad_id}`,
+		usePickup: (grabber_id, ad_id) => `/checkout/pickup${grabber_id !== undefined ? `/${grabber_id}` : ''}/${ad_id}`,
 		paymentSuccess: '/checkout/payment-success',
 		closePickup: '/checkout/close-pickup/:escrow_id',
 		useClosePickup: (escrow_id) => `/checkout/close-pickup/${escrow_id}`,
