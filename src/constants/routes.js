@@ -82,22 +82,22 @@ export const Approutes = {
 	refundForm: '/refund-form',
 };
 
-const prodOptions = ['production', 'prod'];
+const devOptions = ['development', 'dev'];
 
 const getBackendLink = () => {
-	if (prodOptions.includes(import.meta.env.VITE_ENV)) {
-		return import.meta.env.VITE_BACKEND_URL || 'https://api.boonfu.com/';
+	if (devOptions.includes(import.meta.env.VITE_ENV)) {
+		return import.meta.env.VITE_BACKEND_URL || 'https://api.boonfu.site/';
 	}
 
-	return import.meta.env.VITE_BACKEND_URL || 'https://api.boonfu.site/';
+	return import.meta.env.VITE_BACKEND_URL || 'https://api.boonfu.com/';
 };
 
 const getFrontendLink = () => {
-	if (prodOptions.includes(import.meta.env.VITE_ENV)) {
-		return import.meta.env.VITE_FRONTEND_URL || 'https://boonfu.com/';
+	if (devOptions.includes(import.meta.env.VITE_ENV)) {
+		return import.meta.env.VITE_FRONTEND_URL || 'https://boonfu.site/';
 	}
 
-	return import.meta.env.VITE_FRONTEND_URL || 'https://boonfu.site/';
+	return import.meta.env.VITE_FRONTEND_URL || 'https://boonfu.com/';
 };
 
 export const backendLink = getBackendLink();
