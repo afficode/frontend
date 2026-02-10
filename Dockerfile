@@ -1,15 +1,15 @@
 FROM node:20.20-alpine3.23 AS build-stage
 
 
-ARG VITE_ENV
+ARG NODE_ENV
 ARG VITE_FRONTEND_URL
 ARG VITE_BACKEND_URL
-ENV VITE_ENV $VITE_ENV
+ENV NODE_ENV $NODE_ENV
 ENV VITE_FRONTEND_URL $VITE_FRONTEND_URL
 ENV VITE_BACKEND_URL $VITE_BACKEND_URL
 
 WORKDIR /app
-RUN echo "VITE_ENV=$VITE_ENV" > /app/.env
+RUN echo "NODE_ENV=$NODE_ENV" > /app/.env
 RUN echo "VITE_FRONTEND_URL=$VITE_FRONTEND_URL" >> /app/.env
 RUN echo "VITE_BACKEND_URL=$VITE_BACKEND_URL" >> /app/.env
 
@@ -17,7 +17,7 @@ COPY package*.json ./
 RUN npm install
 COPY . .
 
-RUN npm run build
+RUN NODE_ENV=production npx vite build --mode production
 
 
 FROM node:20-alpine
