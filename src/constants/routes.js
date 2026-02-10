@@ -85,6 +85,10 @@ export const Approutes = {
 const devOptions = ['development', 'dev'];
 
 const getBackendLink = () => {
+	if (import.meta.env.PROD) {
+		return import.meta.env.VITE_BACKEND_URL || 'https://api.boonfu.com/';
+	}
+
 	if (devOptions.includes(import.meta.env.VITE_ENV)) {
 		return import.meta.env.VITE_BACKEND_URL || 'https://api.boonfu.site/';
 	}
@@ -93,6 +97,10 @@ const getBackendLink = () => {
 };
 
 const getFrontendLink = () => {
+	if (import.meta.env.PROD) {
+		return import.meta.env.VITE_FRONTEND_URL || 'https://boonfu.com/';
+	}
+
 	if (devOptions.includes(import.meta.env.VITE_ENV)) {
 		return import.meta.env.VITE_FRONTEND_URL || 'https://boonfu.site/';
 	}
