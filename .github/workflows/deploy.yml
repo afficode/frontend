@@ -75,4 +75,4 @@ jobs:
             - name: Trigger Coolify (Dev)
               if: github.ref == 'refs/heads/dev'
               run: |
-                  curl --request GET '${{ secrets.COOLIFY_TEST_WEBHOOK }}' --header 'Authorization: Bearer ${{ secrets.COOLIFY_DEV_TOKEN }}'
+                  curl --request GET '${{ secrets.COOLIFY_DEV_WEBHOOK }}' --header 'Authorization: Bearer ${{ secrets.COOLIFY_DEV_TOKEN }}'
