@@ -62,6 +62,7 @@ jobs:
                   labels: ${{ steps.meta.outputs.labels }}
                   build-args: |
                       VITE_ENV=prod
+                      VITE_NODE_ENV=prod
                       VITE_FRONTEND_URL=https://boonfu.com/
                       VITE_BACKEND_URL=https://api.boonfu.com/
 
