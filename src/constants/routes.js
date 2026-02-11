@@ -86,19 +86,27 @@ export const Approutes = {
 const devOptions = ['development', 'dev'];
 
 const getBackendLink = () => {
-    if (devOptions.includes(import.meta.env.VITE_ENV)) {
+    if (import.meta.env.PROD) {
         return import.meta.env.VITE_BACKEND_URL || 'https://api.boonfu.com/';
     }
 
-    return import.meta.env.VITE_BACKEND_URL || 'https://api.boonfu.site/';
+    if (devOptions.includes(import.meta.env.VITE_ENV)) {
+        return import.meta.env.VITE_BACKEND_URL || 'https://api.boonfu.site/';
+    }
+
+    return import.meta.env.VITE_BACKEND_URL || 'https://api.boonfu.com/';
 };
 
 const getFrontendLink = () => {
-    if (devOptions.includes(import.meta.env.VITE_ENV)) {
+    if (import.meta.env.PROD) {
         return import.meta.env.VITE_FRONTEND_URL || 'https://boonfu.com/';
     }
 
-    return import.meta.env.VITE_FRONTEND_URL || 'https://boonfu.site/';
+    if (devOptions.includes(import.meta.env.VITE_ENV)) {
+        return import.meta.env.VITE_FRONTEND_URL || 'https://boonfu.site/';
+    }
+
+    return import.meta.env.VITE_FRONTEND_URL || 'https://boonfu.com/';
 };
 
 export const backendLink = getBackendLink();
