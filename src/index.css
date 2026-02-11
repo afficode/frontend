@@ -378,3 +378,17 @@ td {
 img {
 	@apply !text-xs;
 }
+
+/* 1. Force the slide area to have a fixed height */
+.image-gallery-slide .image-gallery-image {
+    height: 490px; 
+    width: 100%;
+    object-fit: contain; 
+    background-color: #f3f4f6; 
+}
+
+
+.fullscreen .image-gallery-slide .image-gallery-image {
+    height: 100vh; 
+    max-height: 100vh;
+}
