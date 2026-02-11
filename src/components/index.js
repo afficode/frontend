@@ -2,6 +2,7 @@ export { default as AccountHistory } from './AccountHistory';
 export { default as ActionBar } from './ActionBar';
 export { default as Banner } from './Banner';
 export { default as Card } from './Card';
+export { default as Carousel } from './Carousel';
 export { default as DashboardHeader } from './DashboardHeader';
 export { default as FormControl } from './FormComponents/FormControl';
 export { default as GrabUpdateTable } from './GrabUpdateTable';

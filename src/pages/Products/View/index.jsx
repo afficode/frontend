@@ -5,8 +5,6 @@ import { fetchProduct } from '../../../hooks';
 import Breadcrumb from '../../../components/Breadcrumb';
 import { TbCurrencyNaira } from 'react-icons/tb';
 import { IoEye, IoEyeOff } from 'react-icons/io5';
-import { noimage } from '../../../assets/images';
-import { Carousel } from 'flowbite-react';
 import { FaCamera } from 'react-icons/fa';
 import useAuth from '../../../context/UserContext';
 import ChatForm from './ChatForm';
@@ -27,7 +25,7 @@ import SaveProduct from '../Default/SaveProduct';
 import { getSaves } from '../../../hooks/useSaves';
 import { NegotiableIcon } from '../../../ui';
 import { useNotify } from '../../../hooks';
-import { ActionBar, GrabUpdateTable, SEO } from '../../../components';
+import { ActionBar, Carousel, GrabUpdateTable, SEO } from '../../../components';
 import { categoryData } from '../../../constants/Category.js';
 
 const index = () => {
@@ -174,28 +172,18 @@ const index = () => {
                         </div>
                     </div>{' '}
                     <div className="w-full mx-auto mt-1">
-                        <div className="relative rounded-none w-full  h-full ">
-                            {result.data?.images.length > 0 ? (
-                                <Carousel className="h-full max-lg:h-[300px] md:h-[470px] rounded-none bg-black/50">
-                                    {result.data?.images.map((img, index) => (
-                                        <img
-                                            src={img.path}
-                                            alt={img.filename}
-                                            key={index * 3}
-                                            className="rounded-t-sm rounded-b-none w-full h-full object-contain "
-                                        />
-                                    ))}
-                                </Carousel>
-                            ) : (
-                                <img src={noimage} alt="no image" className="rounded-sm " />
-                            )}
-                            <div className="absolute bottom-0 flex w-full h-10 py-2 pl-6 text-white rounded-none bg-black/50">
-                                <span className="flex px-2 my-auto border-2 border-white">
+                        <div className="relative w-full h-[600px] mx-auto mt-1  rounded-none ">
+                            <Carousel
+                                className="w-full h-full mx-auto"
+                                items={result?.data?.images}
+                            />
+                            <div className="absolute top-[440px] flex w-full h-10 my-0 py-2 pl-6 text-white  rounded-none">
+                                <span className="flex px-2 my-auto border-2 border-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
                                     <FaCamera className="mt-1 text-sm" />
                                     &nbsp; &nbsp;{' '}
                                     <span className="my-auto text-sm">
                                         {' '}
-                                        {result.data?.images.length}
+                                        {result?.data?.images.length}
                                     </span>
                                 </span>
                             </div>
@@ -285,27 +273,10 @@ const index = () => {
                         </div>
                     </div>{' '}
                     {/* ad images */}
-                    <div className="relative w-full h-full mx-auto mt-1  rounded-none ">
-                        {result?.data?.images.length > 0 ? (
-                            <Carousel className="h-full max-lg:h-[300px] md:h-[470px] rounded-none bg-black/50">
-                                {result?.data?.images.map((img, index) => (
-                                    <img
-                                        src={img.path}
-                                        alt={img.filename}
-                                        key={index * 3}
-                                        className="rounded-t-sm rounded-b-none w-full h-full object-contain"
-                                    />
-                                ))}
-                            </Carousel>
-                        ) : (
-                            <img
-                                src={noimage}
-                                alt="no image"
-                                className="rounded-sm  h-[250px] md:min-h-[650px] w-full object-cover"
-                            />
-                        )}
-                        <div className="absolute bottom-0 flex w-full h-10 my-0 py-2 pl-6 text-white rounded-none bg-black/50">
-                            <span className="flex px-2 my-auto border-2 border-white">
+                    <div className="relative w-full h-[600px] mx-auto mt-1  rounded-none ">
+                        <Carousel className="w-full h-full mx-auto" items={result?.data?.images} />
+                        <div className="absolute top-[440px] flex w-full h-10 my-0 py-2 pl-6 text-white  rounded-none">
+                            <span className="flex px-2 my-auto border-2 border-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
                                 <FaCamera className="mt-1 text-sm" />
                                 &nbsp; &nbsp;{' '}
                                 <span className="my-auto text-sm">
