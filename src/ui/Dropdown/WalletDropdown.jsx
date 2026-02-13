@@ -17,7 +17,9 @@ const WalletDropdown = () => {
     return (
         <div
             tabIndex={0}
-            className={'dropdown-content w-[350px] sm:w-[600px] lg:w-[960px] right-[-120px] sm:right-[-180px] md:right-[-240px]  z-10 py-2 sm:py-4 lg:py-6   bg-white shadow-md rounded-md'}
+            className={
+                'dropdown-content w-[350px] sm:w-[600px] lg:w-[960px] right-[-120px] sm:right-[-180px] md:right-[-240px]  z-10 py-2 sm:py-4 lg:py-6   bg-white shadow-md rounded-md'
+            }
         >
             <div className="px-6 sm:px-8 pt-2 lg:pb-4 mb-4 text-black">
                 <div className="flex items-center justify-between mt-2">
@@ -54,7 +56,7 @@ const WalletDropdown = () => {
                         size={'full'}
                         onClick={() => navigate(Approutes.account.withdraw)}
                     >
-						Withdraw
+                        Withdraw
                     </Button>
                     <Button
                         variant={'primary'}
@@ -64,7 +66,7 @@ const WalletDropdown = () => {
                         size={'full'}
                         onClick={() => navigate(Approutes.account.deposit)}
                     >
-						Fund Wallet
+                        Fund Wallet
                     </Button>
                 </div>
             </div>
@@ -86,9 +88,13 @@ const WalletDropdown = () => {
                             <tbody className="text-center">
                                 {data?.account?.grabbers_commissions?.map((commission) => (
                                     <tr key={commission?.reference_id}>
-                                        <td>{format(new Date(commission?.date), 'MMM dd, yyyy')}</td>
+                                        <td>
+                                            {format(new Date(commission?.date), 'MMM dd, yyyy')}
+                                        </td>
                                         <td>{commission?.ad_title}</td>
-                                        <td className="font-bold">{toMoney(commission?.amount, false)}</td>
+                                        <td className="font-bold">
+                                            {toMoney(commission?.amount, false)}
+                                        </td>
                                     </tr>
                                 ))}
                             </tbody>
@@ -108,12 +114,12 @@ const WalletDropdown = () => {
                         onClick={() => navigate(Approutes.account.initial)}
                     >
                         <ViewTransaction className="w-4 h-4" />
-						View Transaction History
+                        View Transaction History
                     </button>
 
                     <button className="flex items-center gap-1  text-sm">
                         <WalletIcon className="w-4 h-4" />
-						Manage Payment Methods
+                        Manage Payment Methods
                     </button>
                 </div>
             </div>
