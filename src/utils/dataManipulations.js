@@ -303,7 +303,7 @@ export const updateUserPhoneVerified = (value) => {
 
 export const slugGeneratorForAdIdWithName = (name, adId) => {
     const slug = name
-        .toLowerCase()
+        ?.toLowerCase()
         .replace(/[^a-z0-9]+/g, '-')
         .replace(/^-|-$/g, '');
 
@@ -345,3 +345,8 @@ export const capitalizeWords = (string) =>
         .split(' ')
         .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
         .join(' ');
+
+export const joinObjectArrayAndSortByCreatedAt = (array) =>
+    array
+        .filter((item) => item.created_at)
+        .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));

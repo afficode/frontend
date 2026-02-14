@@ -132,7 +132,7 @@ const GrabProduct = () => {
                                     >
                                         {result.data?.location.split(',')[0]}
                                     </Link>{' '}
-									|{' '}
+                                    |{' '}
                                     <Link
                                         to={`/products/search?state_id=${result.data?.state_id}`}
                                         className="text-primary hover:underline"
@@ -159,13 +159,21 @@ const GrabProduct = () => {
                                     ))}
                                 </Carousel>
                             ) : (
-                                <img src={noimage} alt="no image" className="object-cover w-full h-full " />
+                                <img
+                                    src={noimage}
+                                    alt="no image"
+                                    className="object-cover w-full h-full "
+                                />
                             )}
 
                             <div className="absolute bottom-0 flex w-full h-10 py-2 pl-6 text-white rounded-none bg-black/50">
                                 <span className="flex px-2 my-auto border-2 border-white">
                                     <FaCamera className="mt-1 text-sm" />
-									&nbsp; &nbsp; <span className="my-auto text-sm"> {result?.data.images.length}</span>
+                                    &nbsp; &nbsp;{' '}
+                                    <span className="my-auto text-sm">
+                                        {' '}
+                                        {result?.data.images.length}
+                                    </span>
                                 </span>
                             </div>
                         </div>
@@ -189,7 +197,9 @@ const GrabProduct = () => {
                                 <p className="p-lg">Grab Link</p>
 
                                 <div className="flex items-center justify-between">
-                                    <p className="text-primary w-[16rem] break-words">{grabLink ? grabLink : null}</p>
+                                    <p className="text-primary w-[16rem] break-words">
+                                        {grabLink ? grabLink : null}
+                                    </p>
                                     <div>
                                         {copied ? (
                                             <button title="Link copied to your clipboard">
@@ -197,7 +207,10 @@ const GrabProduct = () => {
                                             </button>
                                         ) : (
                                             <button title="Copy link!" onClick={handleCopy}>
-                                                <IoCopyOutline className="cursor-pointer" size={20} />
+                                                <IoCopyOutline
+                                                    className="cursor-pointer"
+                                                    size={20}
+                                                />
                                             </button>
                                         )}
                                     </div>
@@ -211,15 +224,19 @@ const GrabProduct = () => {
                                     className={'flex items-center justify-center gap-4 rounded-xl'}
                                 >
                                     <img src={GrabIcon} alt="/" className=" w-8 " />
-									Remove Item
+                                    Remove Item
                                 </Button>
-                                <Link to={Approutes.grab.useFlyer(ad_id)} target="_blank" className="flex-1">
+                                <Link
+                                    to={Approutes.grab.useFlyer(ad_id)}
+                                    target="_blank"
+                                    className="flex-1"
+                                >
                                     <Button
                                         variant={'primary'}
                                         size={'full'}
                                         className={'!bg-[#047F73] text-white rounded-xl'}
                                     >
-										Generate Post Now
+                                        Generate Post Now
                                     </Button>
                                 </Link>
                             </div>
@@ -264,7 +281,7 @@ const GrabProduct = () => {
 
                     <Link to={Approutes.grab.products} className="flex-1">
                         <Button variant={'grey'} className={' w-full h-full font-semibold text-xl'}>
-							Close
+                            Close
                         </Button>
                     </Link>
                 </div>

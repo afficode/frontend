@@ -3,8 +3,9 @@ import { Button, InputGroup } from '../../../../ui';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Cancel } from '../../../../assets/svgs';
+import { useQueryClient } from 'react-query';
 
-const NewAccount = () => {
+const NewAccount = ({ closeModal }) => {
     const { data } = useBanks();
 
     const { mutate } = useAddBankAccount();
@@ -16,6 +17,8 @@ const NewAccount = () => {
             ? allBanks.map((a) => ({ value: a.code, key: a.name }))
             : []), // Map only if allBanks is an array
     ];
+
+    const queryClient = useQueryClient();
 
     const notify = useNotify();
 
@@ -33,13 +36,18 @@ const NewAccount = () => {
             account_number: Yup.string().required('Account number is required'),
             bank_code: Yup.string().required('Bank is required'),
         }),
-        onSubmit: (values) => {
+        onSubmit: (values, { setSubmitting, resetForm }) => {
             mutate(values, {
                 onSuccess: (_data) => {
                     notify('Account added successfully', 'success');
+                    queryClient.invalidateQueries('payouts');
+                    resetForm();
+                    setSubmitting(false);
+                    closeModal();
                 },
                 onError: (error) => {
                     notify(error?.response?.data.message, 'error');
+                    setSubmitting(false);
                 },
             });
         },
@@ -51,7 +59,7 @@ const NewAccount = () => {
             <form onSubmit={formikNewAccount.handleSubmit} className="space-y-3 max-w-[24rem]">
                 <div className="flex flex-col">
                     <label htmlFor="bank_code" className="mb-[-7px] font-bold">
-						Select Bank
+                        Select Bank
                     </label>
 
                     <div className="relative max-w-sm">
@@ -67,7 +75,8 @@ const NewAccount = () => {
                             onChange={formikNewAccount.handleChange}
                             onBlur={formikNewAccount.handleBlur}
                             errorMsg={
-                                formikNewAccount.touched.bank_code && formikNewAccount.errors.bank_code
+                                formikNewAccount.touched.bank_code &&
+                                formikNewAccount.errors.bank_code
                                     ? formikNewAccount.errors.bank_code
                                     : null
                             }
@@ -77,7 +86,7 @@ const NewAccount = () => {
 
                 <div className="flex flex-col">
                     <label htmlFor="account_number" className="mb-[-7px] font-bold">
-						Account
+                        Account
                     </label>
                     <div className="relative max-w-sm">
                         <InputGroup
@@ -92,7 +101,8 @@ const NewAccount = () => {
                             onChange={formikNewAccount.handleChange}
                             onBlur={formikNewAccount.handleBlur}
                             errorMsg={
-                                formikNewAccount.touched.account_number && formikNewAccount.errors.account_number
+                                formikNewAccount.touched.account_number &&
+                                formikNewAccount.errors.account_number
                                     ? formikNewAccount.errors.account_number
                                     : null
                             }
@@ -112,7 +122,7 @@ const NewAccount = () => {
                 </div>
                 <div className="flex flex-col">
                     <label htmlFor="name" className="mb-[-7px] font-bold">
-						Account Name
+                        Account Name
                     </label>
                     <div className="relative max-w-sm">
                         <InputGroup
@@ -151,11 +161,13 @@ const NewAccount = () => {
                     size={'full'}
                     className={'max-w-sm font-bold rounded-xl'}
                     disabled={
-                        !formikNewAccount.isValid || formikNewAccount.dirty === false || formikNewAccount.isSubmitting
+                        !formikNewAccount.isValid ||
+                        formikNewAccount.dirty === false ||
+                        formikNewAccount.isSubmitting
                     }
                     loading={formikNewAccount.isSubmitting}
                 >
-					Add Account
+                    Add Account
                 </Button>
             </form>
         </div>
