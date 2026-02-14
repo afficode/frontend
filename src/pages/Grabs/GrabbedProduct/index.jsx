@@ -36,12 +36,13 @@ const GrabbedProduct = () => {
         enabled: shouldFetch,
     });
 
-    if (isLoading || checking)
-    {return (
-        <div className="h-screen">
-            <SpinnerSkeleton />
-        </div>
-    );}
+    if (isLoading || checking) {
+        return (
+            <div className="h-screen">
+                <SpinnerSkeleton />
+            </div>
+        );
+    }
 
     if (user?.id === result?.data?.user_id) {
         location.replace(`${Approutes.product.initial}/${ad_id}`);
@@ -56,8 +57,9 @@ const GrabbedProduct = () => {
                             <h3>🔒 Restricted Access Notice</h3>
 
                             <p>
-								This ad is currently locked due to an active transaction. To protect both buyers and
-								sellers, listings become temporarily unavailable once a purchase is in progress.
+                                This ad is currently locked due to an active transaction. To protect
+                                both buyers and sellers, listings become temporarily unavailable
+                                once a purchase is in progress.
                             </p>
                         </div>
 
@@ -91,12 +93,12 @@ const GrabbedProduct = () => {
             <section className="w-full p-4 lg:p-8">
                 <div className="flex flex-col gap-4 p-4 mb-6 rounded-xl bg-primary">
                     <h4 className="text-white">
-						Welcome to: <span className="capitalize">{result?.data.title}</span>,{' '}
+                        Welcome to: <span className="capitalize">{result?.data.title}</span>,{' '}
                         {result.data?.location.split(',')[1]} - Page
                     </h4>
                     {grabber_id && (
                         <h5 className="flex justify-center max-sm:flex-col max-sm:items-center p-2 bg-white">
-							You were directed here by:
+                            You were directed here by:
                             <span className="px-2 text-primary"> {`BF${grabberId}`}</span>{' '}
                         </h5>
                     )}
@@ -118,7 +120,7 @@ const GrabbedProduct = () => {
                                     >
                                         {result.data?.location.split(',')[0]}
                                     </Link>{' '}
-									|{' '}
+                                    |{' '}
                                     <Link
                                         to={`/products/search?state_id=${result.data?.state_id}`}
                                         className="text-primary hover:underline"
@@ -145,13 +147,21 @@ const GrabbedProduct = () => {
                                     ))}
                                 </Carousel>
                             ) : (
-                                <img src={noimage} alt="no image" className="object-cover w-full h-full md:h-[470px] " />
+                                <img
+                                    src={noimage}
+                                    alt="no image"
+                                    className="object-cover w-full h-full md:h-[470px] "
+                                />
                             )}
 
                             <div className="absolute bottom-0 flex w-full h-10 py-2 pl-6 text-white rounded-none bg-black/50">
                                 <span className="flex px-2 my-auto border-2 border-white">
                                     <FaCamera className="mt-1 text-sm" />
-									&nbsp; &nbsp; <span className="my-auto text-sm"> {result?.data.images.length}</span>
+                                    &nbsp; &nbsp;{' '}
+                                    <span className="my-auto text-sm">
+                                        {' '}
+                                        {result?.data.images.length}
+                                    </span>
                                 </span>
                             </div>
                         </div>
@@ -159,7 +169,9 @@ const GrabbedProduct = () => {
 
                     <div className="xl:w-[40%] lg:self-end h-full ">
                         <Action
-                            isGeneral={inspectableCategories.includes(result?.data.category) ? false : true}
+                            isGeneral={
+                                inspectableCategories.includes(result?.data.category) ? false : true
+                            }
                             ad={result?.data}
                         />
                     </div>

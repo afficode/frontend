@@ -20,15 +20,16 @@ const GrabProducts = () => {
         queryClient.invalidateQueries({ queryKey: ['get-grabs'] });
     };
 
-    if (isLoading)
-    {return (
-        <section>
-            <GrabHeader text="Grabber’s Products Page" />
-            <div className="flex items-center justify-center p-16">
-                <SpinnerSkeleton />
-            </div>
-        </section>
-    );}
+    if (isLoading) {
+        return (
+            <section>
+                <GrabHeader text="Grabber’s Products Page" />
+                <div className="flex items-center justify-center p-16">
+                    <SpinnerSkeleton />
+                </div>
+            </section>
+        );
+    }
 
     return (
         <section>
@@ -37,7 +38,10 @@ const GrabProducts = () => {
             <div className="flex flex-wrap items-center justify-between gap-6 mt-8 mb-12 ">
                 {result?.grabs?.map((ad) => (
                     // <Link key={ad.ads_id} to={Approutes.grab.product(ad.ads_id)}>
-                    <div className="relative flex mx-auto flex-col w-[250px] bg-white border ">
+                    <div
+                        className="relative flex mx-auto flex-col w-[250px] bg-white border "
+                        key={ad.ads_id}
+                    >
                         <button>
                             <img src={GrabSave} alt="save" className="absolute w-8 top-2 left-2" />
                         </button>
@@ -50,9 +54,12 @@ const GrabProducts = () => {
                             className="w-full h-[200px] "
                         />
                         <h6 className="px-2 font-semibold text-left capitalize">{ad.title}</h6>
-                        <Link to={Approutes.grab.product(ad.ads_id)} className={'mt-8 mb-2 mx-auto'}>
+                        <Link
+                            to={Approutes.grab.product(ad.ads_id)}
+                            className={'mt-8 mb-2 mx-auto'}
+                        >
                             <Button variant={'primary'} size={'small'} className={'w-fit'}>
-								Click for info
+                                Click for info
                             </Button>
                         </Link>
                     </div>

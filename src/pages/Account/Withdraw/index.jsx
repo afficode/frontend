@@ -1,18 +1,34 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Button, InputGroup, Modal } from '../../../ui';
 import { ArrowRightBlack, Cancel } from '../../../assets/svgs';
-import { FaCcVisa } from 'react-icons/fa';
+import { RiVisaFill } from 'react-icons/ri';
+import { BsBank2 } from 'react-icons/bs';
+import { CiCreditCard2 } from 'react-icons/ci';
 import NewAccount from './NewAccount';
-import { useNotify, useWithdraw } from '../../../hooks';
+import { useFetchPayouts, useNotify, useWithdraw } from '../../../hooks';
 import { useQueryClient } from 'react-query';
+import { joinObjectArrayAndSortByCreatedAt } from '../../../utils';
+import { FaCcMastercard } from 'react-icons/fa6';
 
 const Withdraw = () => {
     const [newBankAccount, setNewBankAccount] = useState(false);
 
     const [selectedBank, setSelectedBank] = useState('');
     const queryClient = useQueryClient();
+
+    const { data: payouts } = useFetchPayouts();
+
+    const selectedBankIconSize = 20;
+    const selectedBankSpanClass = 'text-black w-full flex items-center justify-start';
+
+    const savedBankAccountList = useMemo(() => {
+        return joinObjectArrayAndSortByCreatedAt([
+            ...(payouts?.payouts?.bank_details || []),
+            ...(payouts?.payouts?.card_details || []),
+        ]);
+    }, [payouts]);
 
     const { mutate } = useWithdraw();
 
@@ -31,6 +47,7 @@ const Withdraw = () => {
             mutate(values, {
                 onSuccess: (data) => {
                     notify(data.message, 'success');
+                    setSelectedBank('');
                     queryClient.invalidateQueries('account-balance');
                     queryClient.invalidateQueries('all-transactions');
                     resetForm();
@@ -53,7 +70,7 @@ const Withdraw = () => {
             <form onSubmit={formikWithdraw.handleSubmit} className="space-y-3 max-w-[24rem]">
                 <div className="flex flex-col">
                     <label htmlFor="bank" className="mb-[-7px] font-bold">
-						Withdraw to:
+                        Withdraw to:
                     </label>
 
                     <div className="dropdown dropdown-bottom dropdown-center ">
@@ -62,7 +79,31 @@ const Withdraw = () => {
                             tabIndex={0}
                             className="customSelectInput p-2 mt-2 text-left flex justify-between items-center text-black/50 "
                         >
-                            <span>{selectedBank ? selectedBank?.name : 'Select Account'}</span>{' '}
+                            {selectedBank ? (
+                                selectedBank?.type === 'bank' ? (
+                                    <span className={selectedBankSpanClass}>
+                                        <BsBank2 size={selectedBankIconSize} /> &emsp;
+                                        {`${selectedBank?.bank_name} - ${selectedBank?.account_number
+                                            .toString()
+                                            .slice(-3)
+                                            .padStart(7, '*')}`}
+                                    </span>
+                                ) : (
+                                    <span className={selectedBankSpanClass}>
+                                        {selectedBank?.card_type.trim() === 'visa' ? (
+                                            <RiVisaFill size={selectedBankIconSize} />
+                                        ) : selectedBank?.card_type.trim() === 'mastercard' ? (
+                                            <FaCcMastercard size={selectedBankIconSize} />
+                                        ) : (
+                                            <CiCreditCard2 size={selectedBankIconSize} />
+                                        )}
+                                        &emsp;{selectedBank?.bank} -{' '}
+                                        {selectedBank?.last4.toString().slice(-4).padStart(7, '*')}
+                                    </span>
+                                )
+                            ) : (
+                                <span className="pl-2 text-gray-400">Select Account</span>
+                            )}
                             <img src={ArrowRightBlack} className="w-4 h-4" alt="/" />
                         </button>
                         <ul
@@ -70,19 +111,61 @@ const Withdraw = () => {
                             className="dropdown-content  z-[1] menu  shadow bg-white   w-96 flex flex-col justify-between"
                         >
                             <div>
-                                <div className="bg-secondary text-center p-2">Bank Cards/Accounts</div>
-                                {savedBankAccountList.map((bank) => (
-                                    <li
-                                        onClick={() => handleWithdrawChange(bank)}
-                                        key={bank?.id}
-                                        tabIndex={0}
-                                        className="cursor-pointer font-medium border-b border-b-transparent pb-0 hover:border-black/30  whitespace-nowrap flex flex-row items-center justify-between"
-                                    >
-                                        <div>
-                                            <FaCcVisa size={25} /> {bank?.name}
-                                        </div>{' '}
-                                        <div>({bank?.number.toString().slice(-4)})</div>
-                                    </li>
+                                <div className="bg-secondary text-center p-2">
+                                    Bank Cards/Accounts
+                                </div>
+                                {savedBankAccountList.map((payout) => (
+                                    <>
+                                        {payout.type === 'bank' && (
+                                            <li
+                                                onClick={() => handleWithdrawChange(payout)}
+                                                key={payout?.id.slice(4)}
+                                                tabIndex={0}
+                                                className="cursor-pointer font-medium border-b border-b-transparent pb-0 hover:border-black/30  whitespace-nowrap flex flex-row items-center justify-between w-full"
+                                            >
+                                                <span>
+                                                    <BsBank2 size={25} /> {payout?.bank_name}
+                                                </span>{' '}
+                                                <span>
+                                                    (
+                                                    {payout?.account_number
+                                                        .toString()
+                                                        .slice(-3)
+                                                        .padStart(10, '*')}
+                                                    )
+                                                </span>
+                                            </li>
+                                        )}
+
+                                        {payout.type === 'card' && (
+                                            <li
+                                                onClick={() => handleWithdrawChange(payout)}
+                                                key={payout?.id?.slice(4)}
+                                                tabIndex={0}
+                                                className="cursor-pointer font-medium border-b border-b-transparent pb-0 hover:border-black/30  whitespace-nowrap flex flex-row items-center justify-between w-full"
+                                            >
+                                                <span>
+                                                    {payout?.card_type.trim() === 'visa' ? (
+                                                        <RiVisaFill size={25} />
+                                                    ) : payout?.card_type.trim() ===
+                                                      'mastercard' ? (
+                                                        <FaCcMastercard size={25} />
+                                                    ) : (
+                                                        <CiCreditCard2 size={25} />
+                                                    )}{' '}
+                                                    {payout?.bank}
+                                                </span>{' '}
+                                                <span>
+                                                    (
+                                                    {payout?.last4
+                                                        .toString()
+                                                        .slice(-4)
+                                                        .padStart(12, '*')}
+                                                    )
+                                                </span>
+                                            </li>
+                                        )}
+                                    </>
                                 ))}
                             </div>
 
@@ -90,7 +173,7 @@ const Withdraw = () => {
                                 className="border border-secondary rounded-lg mt-8 p-2"
                                 onClick={() => setNewBankAccount(true)}
                             >
-								Withdraw to a new bank account
+                                Withdraw to a new bank account
                             </button>
                         </ul>
                     </div>
@@ -98,7 +181,7 @@ const Withdraw = () => {
 
                 <div className="flex flex-col">
                     <label htmlFor="amount" className="mb-[-7px] font-bold">
-						Amount
+                        Amount
                     </label>
                     <div className="relative max-w-sm">
                         <InputGroup
@@ -137,34 +220,21 @@ const Withdraw = () => {
                     size={'full'}
                     className={'max-w-sm font-bold rounded-xl'}
                     disabled={
-                        !formikWithdraw.isValid || formikWithdraw.dirty === false || formikWithdraw.isSubmitting
+                        !formikWithdraw.isValid ||
+                        formikWithdraw.dirty === false ||
+                        formikWithdraw.isSubmitting
                     }
                     loading={formikWithdraw.isSubmitting}
                 >
-					Withdraw
+                    Withdraw
                 </Button>
             </form>
 
             <Modal isOpen={newBankAccount} setIsOpen={setNewBankAccount}>
-                <NewAccount />
+                <NewAccount closeModal={() => setNewBankAccount(false)} />
             </Modal>
         </div>
     );
 };
 
 export default Withdraw;
-
-const savedBankAccountList = [
-    {
-        id: 1,
-        name: 'Zenith Bank',
-        expiry: '20/29',
-        number: '**** **** **** 0112',
-    },
-    {
-        id: 2,
-        name: 'EcoBank',
-        expiry: '20/29',
-        number: '**** **** **** 2211',
-    },
-];

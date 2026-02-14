@@ -62,3 +62,16 @@ export const useAccountBalance = () => {
         refetchInterval: false,
     });
 };
+
+export const useFetchPayouts = () => {
+    const fetchPayouts = () => privateAxios.get('payment/payouts').then((res) => res?.data);
+
+    return useQuery(['payouts'], fetchPayouts, {
+        staleTime: Infinity,
+        cacheTime: 30 * 60 * 1000,
+        refetchOnWindowFocus: false,
+        refetchOnMount: false,
+        refetchOnReconnect: false,
+        refetchInterval: false,
+    });
+};
