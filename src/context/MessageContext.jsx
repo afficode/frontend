@@ -25,14 +25,21 @@ export const MessageProvider = ({ children }) => {
         socket.disconnect();
     };
     const sendMessage = (messageData) => {
-        socket.emit('send_message', { ...messageData }, (response) => {
-            if (!response.success) {
-                notify(response.message, 'info');
-            }
-            if (response.success) {
-                notify(response.message, 'success');
-            }
-        });
+        if (!socket.active) {
+            socket.connect();
+        }
+        if (socket.connected) {
+            socket.emit('send_message', { ...messageData }, (response) => {
+                if (!response.success) {
+                    notify(response.message, 'info');
+                }
+                if (response.success) {
+                    notify(response.message, 'success');
+                }
+            });
+        } else {
+            notify('Please reload the browser and try again', 'error');
+        }
     };
 
     const readMessage = (chat_id, receiver) => {
@@ -85,10 +92,13 @@ export const MessageProvider = ({ children }) => {
     };
     useEffect(() => {
         if (!isLogin) {
+            if (socket.active) {
+                socket.disconnect();
+            }
             return;
         }
 
-        if (!socket.active) {
+        if (!socket.connected) {
             socket.connect();
         }
 
@@ -122,8 +132,11 @@ export const MessageProvider = ({ children }) => {
         return () => {
             socket.off('receive_message', handleReceiveMessage);
             socket.off('connect_error', handleConnectError);
+            if (!isLogin) {
+                socket.disconnect();
+            }
         };
-    }, [isLogin, notify, socket, user?.id]);
+    }, [isLogin, socket, user?.id]);
 
     useEffect(() => {
         // eslint-disable-next-line no-unused-expressions

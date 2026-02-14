@@ -11,7 +11,10 @@ export const NotificationProvider = ({ children }) => {
     const { isLogin } = useAuth();
     const [notifications, setNotifications] = useState([]);
     const notify = useNotify();
-    const unread = useMemo(() => notifications.filter((notification) => !notification.is_read).length, [notifications]);
+    const unread = useMemo(
+        () => notifications.filter((notification) => !notification.is_read).length,
+        [notifications]
+    );
 
     const socket = manager.socket('/notification', {
         auth: (cb) => {
@@ -22,7 +25,10 @@ export const NotificationProvider = ({ children }) => {
     });
 
     socket.on('notifications', (data) => {
-        const newNotifications = data.filter((notification) => !notifications.some((n) => n.notification_id === notification.notification_id));
+        const newNotifications = data.filter(
+            (notification) =>
+                !notifications.some((n) => n.notification_id === notification.notification_id)
+        );
         if (newNotifications.length === 0) {
             return;
         }
@@ -39,7 +45,7 @@ export const NotificationProvider = ({ children }) => {
             return;
         }
 
-        if (!socket.active) {
+        if (!socket.connected) {
             socket.connect();
         }
 
@@ -58,16 +64,25 @@ export const NotificationProvider = ({ children }) => {
 
         // eslint-disable-next-line consistent-return
         return () => {
-            socket.disconnect();
+            if (!isLogin) {
+                socket.disconnect();
+            }
         };
     }, [isLogin, notify, socket]);
 
     const markAsRead = (notificationId) => {
-        socket.emit('read_notification', notificationId, (res) => {
-            if (!res?.success) {
-                notify(res?.message || 'Something went wrong.', 'error');
-            }
-        });
+        if (!socket.connected) {
+            socket.connect();
+        }
+        if (socket.connected) {
+            socket.emit('read_notification', notificationId, (res) => {
+                if (!res?.success) {
+                    notify(res?.message || 'Something went wrong.', 'error');
+                }
+            });
+        } else {
+            notify('Please reload the browser and try again', 'error');
+        }
     };
 
     return (

@@ -48,7 +48,9 @@ const Messages = () => {
                             <div
                                 key={i}
                                 className={`px-4 py-2 transition-all border-t-2 border-gray-200 cursor-pointer h-5rem hover:bg-primary/30 ${
-                                    ad.chat_id === searchParams.get(queryStrings.chat) ? 'bg-primary/30' : ''
+                                    ad.chat_id === searchParams.get(queryStrings.chat)
+                                        ? 'bg-primary/30'
+                                        : ''
                                 }`}
                                 onClick={() => {
                                     setSearchParams({ [queryStrings.chat]: ad.chat_id });
@@ -73,27 +75,40 @@ const Messages = () => {
                                         <div className="w-[calc(100%-5rem)] py-2">
                                             <div className="flex items-center justify-between w-full">
                                                 <h6 className="text-sm  truncate">
-                                                    {ad.user_a !== user.id ? ad.user_a_name : ad.user_b_name}{' '}
+                                                    {ad.user_a !== user.id
+                                                        ? ad.user_a_name
+                                                        : ad.user_b_name}{' '}
                                                 </h6>
 
                                                 {onlineUsers?.includes(
-                                                    ad.user_a !== user.id ? ad.user_a.toString() : ad.user_b.toString(),
+                                                    ad.user_a !== user.id
+                                                        ? ad.user_a.toString()
+                                                        : ad.user_b.toString()
                                                 ) ? (
                                                         <div className="p-1 text-[0.65rem] text-green-800 bg-green-200 rounded-full animate-bounce">
-														Online
+                                                        Online
                                                         </div>
                                                     ) : (
-                                                        <div className="p-1 text-[0.65rem] text-red-800 bg-red-200 rounded-full">Offline</div>
+                                                        <div className="p-1 text-[0.65rem] text-red-800 bg-red-200 rounded-full">
+                                                        Offline
+                                                        </div>
                                                     )}
                                             </div>
 
-                                            <h6 className="font-medium capitalize truncate">{ad.title}</h6>
+                                            <h6 className="font-medium capitalize truncate">
+                                                {ad.title}
+                                            </h6>
                                             <div className="flex items-center gap-1">
                                                 {ad.read_status === 0 && ad.sender !== user.id && (
                                                     <span className="p-1 rounded-full bg-primary" />
                                                 )}
-                                                <p className={`text-xs truncate ${ad.read_status !== 1 ? 'text-gray-500' : ''}`}>
-                                                    <span className="italic">{user.id === ad.sender ? 'You:' : ''}</span> {ad.last_message}
+                                                <p
+                                                    className={`text-xs truncate ${ad.read_status !== 1 ? 'text-gray-500' : ''}`}
+                                                >
+                                                    <span className="italic">
+                                                        {user.id === ad.sender ? 'You:' : ''}
+                                                    </span>{' '}
+                                                    {ad.last_message}
                                                 </p>
                                             </div>
                                         </div>
@@ -110,7 +125,7 @@ const Messages = () => {
                                     <IoIosChatboxes className="my-4 text-[10rem] text-white" />
                                 </span>
                                 <h1 className="text-lg lg:text-xl 2xl:text-2xl text-white text-center">
-									Please select a chat to start conversation
+                                    Please select a chat to start conversation
                                 </h1>
                             </div>
                         ) : (
@@ -130,7 +145,9 @@ const Messages = () => {
                         <div
                             key={i}
                             className={`px-4 py-2 transition-all border-t-2 border-gray-200 cursor-pointer h-5rem hover:bg-primary/30 ${
-                                ad.chat_id === searchParams.get(queryStrings.chat) ? 'bg-primary/30' : ''
+                                ad.chat_id === searchParams.get(queryStrings.chat)
+                                    ? 'bg-primary/30'
+                                    : ''
                             }`}
                             onClick={() => {
                                 chat_viewed(ad.chat_id);
@@ -142,7 +159,9 @@ const Messages = () => {
                                     <div className="w-[5rem] h-[5rem] !p-2 rounded-full bg-white flex items-center justify-center overflow-x-hidden">
                                         <img
                                             src={
-                                                ad?.image[0]?.filename?.startsWith('vehicles') ? noimage : ad?.image[0]?.path || noimage
+                                                ad?.image[0]?.filename?.startsWith('vehicles')
+                                                    ? noimage
+                                                    : ad?.image[0]?.path || noimage
                                             }
                                             alt={ad?.image[0]?.filename}
                                             className=" w-full h-full max-w-[4rem] max-h-[4rem] object-contain "
@@ -152,27 +171,40 @@ const Messages = () => {
                                     <div className="w-[calc(100%-5rem)] py-2">
                                         <div className="flex items-center justify-between w-full">
                                             <h6 className="text-sm  truncate">
-                                                {ad.user_a !== user.id ? ad.user_a_name : ad.user_b_name}{' '}
+                                                {ad.user_a !== user.id
+                                                    ? ad.user_a_name
+                                                    : ad.user_b_name}{' '}
                                             </h6>
 
                                             {onlineUsers?.includes(
-                                                ad.user_a !== user.id ? ad.user_a.toString() : ad.user_b.toString(),
+                                                ad.user_a !== user.id
+                                                    ? ad.user_a.toString()
+                                                    : ad.user_b.toString()
                                             ) ? (
                                                     <div className="p-1 text-[0.65rem] text-green-800 bg-green-200 rounded-full animate-bounce">
-													Online
+                                                    Online
                                                     </div>
                                                 ) : (
-                                                    <div className="p-1 text-[0.65rem] text-red-800 bg-red-200 rounded-full">Offline</div>
+                                                    <div className="p-1 text-[0.65rem] text-red-800 bg-red-200 rounded-full">
+                                                    Offline
+                                                    </div>
                                                 )}
                                         </div>
 
-                                        <h6 className="font-medium capitalize truncate text-base">{ad.title}</h6>
+                                        <h6 className="font-medium capitalize truncate text-base">
+                                            {ad.title}
+                                        </h6>
                                         <div className="flex items-center gap-1 ">
                                             {ad.read_status === 0 && ad.sender !== user.id && (
                                                 <span className="p-1 rounded-full bg-primary" />
                                             )}
-                                            <p className={`text-xs truncate ${ad.read_status !== 1 ? 'text-gray-500' : ''}`}>
-                                                <span className="italic">{user.id === ad.sender ? 'You:' : ''}</span> {ad.last_message}
+                                            <p
+                                                className={`text-xs truncate ${ad.read_status !== 1 ? 'text-gray-500' : ''}`}
+                                            >
+                                                <span className="italic">
+                                                    {user.id === ad.sender ? 'You:' : ''}
+                                                </span>{' '}
+                                                {ad.last_message}
                                             </p>
                                         </div>
                                     </div>
@@ -189,7 +221,7 @@ const Messages = () => {
                                 <IoIosChatboxes className="my-4 text-[10rem] text-white" />
                             </span>
                             <h1 className="text-lg lg:text-xl 2xl:text-2xl text-white text-center">
-								Please select a chat to start conversation
+                                Please select a chat to start conversation
                             </h1>
                         </div>
                     ) : (

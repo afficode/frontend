@@ -303,7 +303,7 @@ export const updateUserPhoneVerified = (value) => {
 
 export const slugGeneratorForAdIdWithName = (name, adId) => {
     const slug = name
-        .toLowerCase()
+        ?.toLowerCase()
         .replace(/[^a-z0-9]+/g, '-')
         .replace(/^-|-$/g, '');
 
