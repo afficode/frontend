@@ -19,26 +19,42 @@ export const GrabProvider = ({ children }) => {
         },
     });
 
-    socket.on('connect', () => { /* empty */ });
+    socket.on('connect', () => {
+        /* empty */
+    });
     socket.on('grabs', (grabs) => {
         setGrabs(() => [...grabs]);
     });
 
     const grabAd = (adId) => {
-        socket.emit('grab_ad', adId);
+        if (!socket.connected) {
+            socket.connect();
+        }
+        if (socket.connected) {
+            socket.emit('grab_ad', adId);
+        } else {
+            notify('Please reload the browser and try again', 'error');
+        }
     };
 
     const unGrabAd = async (adId) => {
-        socket.emit('ungrab_ad', adId, (response) => {
-            if (!response.success) {
-                notify(response.message, 'info');
-            }
-            if (response.success) {
-                notify(response.message, 'success');
-                // eslint-disable-next-line no-unsafe-optional-chaining
-                setGrabs(() => [...response?.grabs]);
-            }
-        });
+        if (!socket.connected) {
+            socket.connect();
+        }
+        if (socket.connected) {
+            socket.emit('ungrab_ad', adId, (response) => {
+                if (!response.success) {
+                    notify(response.message, 'info');
+                }
+                if (response.success) {
+                    notify(response.message, 'success');
+                    // eslint-disable-next-line no-unsafe-optional-chaining
+                    setGrabs(() => [...response?.grabs]);
+                }
+            });
+        } else {
+            notify('Please reload the browser and try again', 'error');
+        }
     };
 
     const disconnect_socket = () => {
@@ -47,10 +63,13 @@ export const GrabProvider = ({ children }) => {
 
     useEffect(() => {
         if (!isLogin) {
+            if (socket.active) {
+                socket.disconnect();
+            }
             return;
         }
 
-        if (!socket.active) {
+        if (!socket.connected) {
             socket.connect();
         }
 
@@ -65,7 +84,12 @@ export const GrabProvider = ({ children }) => {
 
         // eslint-disable-next-line consistent-return
         return () => {
-            socket.disconnect();
+            socket.off('error', handleConnectError);
+            socket.off('connect_error', handleConnectError);
+
+            if (!isLogin) {
+                socket.disconnect();
+            }
         };
     }, [isLogin, notify, socket]);
 
