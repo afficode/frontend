@@ -283,7 +283,9 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
                                     } ${chatId !== null && 'bg-gray-300 cursor-not-allowed'}`}
                                 />
                                 <div className="space-y-1 w-full my-2 text-start ">
-                                    <h5 className="text-base font-semibold">The Boonfu Standard</h5>
+                                    <h5 className="text-base font-semibold">
+                                        The Boonfu Safety Standard
+                                    </h5>
                                     <ul className="!text-xs">
                                         <li className="!text-xs">
                                             -Use &quot;Grab&quot; for Escrow; never pay sellers
@@ -386,12 +388,6 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
                                                             onChange={(e) =>
                                                                 setOffer(e.target.value)
                                                             }
-                                                            // onBlur={formikWithdraw.handleBlur}
-                                                            // errorMsg={
-                                                            // 	formikWithdraw.touched.amount && formikWithdraw.errors.amount
-                                                            // 		? formikWithdraw.errors.amount
-                                                            // 		: null
-                                                            // }
                                                             cancelButton={
                                                                 <button
                                                                     onClick={() => {

@@ -68,7 +68,7 @@ export const NotificationProvider = ({ children }) => {
                 socket.disconnect();
             }
         };
-    }, [isLogin, notify, socket]);
+    }, [isLogin, socket]);
 
     const markAsRead = (notificationId) => {
         if (!socket.connected) {
