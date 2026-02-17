@@ -9,7 +9,7 @@ import { CiCreditCard2 } from 'react-icons/ci';
 import NewAccount from './NewAccount';
 import { useFetchPayouts, useNotify, useWithdraw } from '../../../hooks';
 import { useQueryClient } from 'react-query';
-import { joinObjectArrayAndSortByCreatedAt } from '../../../utils';
+import { fromMoney, joinObjectArrayAndSortByCreatedAt } from '../../../utils';
 import { FaCcMastercard } from 'react-icons/fa6';
 
 const Withdraw = () => {
@@ -41,10 +41,23 @@ const Withdraw = () => {
             amount: '',
         },
         validationSchema: Yup.object({
-            amount: Yup.number().required('Amount is required').min(500, 'Minimum amount is 500'),
+            amount: Yup.number()
+                .transform((value, originalValue) => {
+                    if (typeof originalValue === 'string') {
+                        return fromMoney(originalValue);
+                    }
+                    return value;
+                })
+                .required('Amount is required')
+                .min(500, 'Minimum amount is 500'),
         }),
         onSubmit: (values, { setSubmitting, resetForm }) => {
-            mutate(values, {
+            const formData = {
+                ...values,
+                amount: fromMoney(values.amount),
+            };
+
+            mutate(formData, {
                 onSuccess: (data) => {
                     notify(data.message, 'success');
                     setSelectedBank('');
@@ -63,6 +76,26 @@ const Withdraw = () => {
     const handleWithdrawChange = (bank) => {
         setSelectedBank(bank);
         formikWithdraw.setFieldValue('preferred_payout', bank);
+    };
+
+    const handleMoneyChange = (event) => {
+        const inputValue = event.target.value;
+
+        const raw = String(inputValue).replace(/[^0-9.]/g, '');
+
+        if (!raw) {
+            formikWithdraw.setFieldValue('amount', '');
+            return;
+        }
+
+        const [intPart, decimalPart] = raw.split('.');
+        let formatted = new Intl.NumberFormat('en-US').format(Number(intPart || '0'));
+
+        if (decimalPart !== undefined) {
+            formatted += '.' + decimalPart;
+        }
+
+        formikWithdraw.setFieldValue('amount', formatted);
     };
 
     return (
@@ -114,8 +147,8 @@ const Withdraw = () => {
                                 <div className="bg-secondary text-center p-2">
                                     Bank Cards/Accounts
                                 </div>
-                                {savedBankAccountList.map((payout) => (
-                                    <>
+                                {savedBankAccountList.map((payout, i) => (
+                                    <div key={i}>
                                         {payout.type === 'bank' && (
                                             <li
                                                 onClick={() => handleWithdrawChange(payout)}
@@ -149,10 +182,10 @@ const Withdraw = () => {
                                                         <RiVisaFill size={25} />
                                                     ) : payout?.card_type.trim() ===
                                                       'mastercard' ? (
-                                                        <FaCcMastercard size={25} />
-                                                    ) : (
-                                                        <CiCreditCard2 size={25} />
-                                                    )}{' '}
+                                                            <FaCcMastercard size={25} />
+                                                        ) : (
+                                                            <CiCreditCard2 size={25} />
+                                                        )}{' '}
                                                     {payout?.bank}
                                                 </span>{' '}
                                                 <span>
@@ -165,7 +198,7 @@ const Withdraw = () => {
                                                 </span>
                                             </li>
                                         )}
-                                    </>
+                                    </div>
                                 ))}
                             </div>
 
@@ -187,12 +220,12 @@ const Withdraw = () => {
                         <InputGroup
                             name="amount"
                             id="amount"
-                            type="number"
+                            type="text"
                             amount="NGN"
                             autoComplete="off"
                             className={'customAmountInput '}
                             value={formikWithdraw.values.amount}
-                            onChange={formikWithdraw.handleChange}
+                            onChange={handleMoneyChange}
                             onBlur={formikWithdraw.handleBlur}
                             errorMsg={
                                 formikWithdraw.touched.amount && formikWithdraw.errors.amount
@@ -222,7 +255,8 @@ const Withdraw = () => {
                     disabled={
                         !formikWithdraw.isValid ||
                         formikWithdraw.dirty === false ||
-                        formikWithdraw.isSubmitting
+                        formikWithdraw.isSubmitting ||
+                        selectedBank === ''
                     }
                     loading={formikWithdraw.isSubmitting}
                 >

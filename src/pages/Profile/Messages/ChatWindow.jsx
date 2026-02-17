@@ -3,7 +3,7 @@ import { noimage } from '../../../assets/images';
 import Message from './Message';
 import MessageInput from './MessageInput';
 import useAuth from '../../../context/UserContext';
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useMessages } from '../../../hooks';
 import { Button } from '../../../ui';
 import { BiPhoneCall } from 'react-icons/bi';
@@ -32,15 +32,27 @@ const ChatWindow = ({ chat_id, chat_data, title }) => {
         }
     }, [messageData]);
 
-    const groupedMessages = messageData?.messages?.reduce((acc, message) => {
-        const dateKey = new Date(message.message_updated_on).toDateString();
-
-        if (!acc[dateKey]) {
-            acc[dateKey] = [];
+    const sortedChatHistory = useMemo(() => {
+        if (!messageData?.messages) {
+            return [];
         }
-        acc[dateKey].push(message);
-        return acc;
-    }, {});
+
+        const sortedMessages = [...messageData.messages].sort(
+            (a, b) => new Date(a.message_updated_on) - new Date(b.message_updated_on)
+        );
+
+        const groups = sortedMessages.reduce((acc, message) => {
+            const dateKey = new Date(message.message_updated_on).toDateString();
+
+            if (!acc[dateKey]) {
+                acc[dateKey] = [];
+            }
+            acc[dateKey].push(message);
+            return acc;
+        }, {});
+
+        return Object.entries(groups).sort(([dateA], [dateB]) => new Date(dateA) - new Date(dateB));
+    }, [messageData]);
 
     return (
         <>
@@ -101,30 +113,27 @@ const ChatWindow = ({ chat_id, chat_data, title }) => {
 
                     {/* chat window */}
                     <div className="mt-auto flex flex-col py-3 pr-3 overflow-x-hidden overflow-y-auto scrollbar-thin scrollbar-track-white scrollbar-thumb-rounded-md scrollbar-thumb-secondary scrollbar-track-rounded-md ">
-                        {groupedMessages &&
-                            Object.entries(groupedMessages)?.map(([date, messages]) => (
-                                <div key={date} className="py-2 w-full flex flex-col gap-2">
-                                    <span className="w-full text-center text-xs text-white ">
-                                        {date}
-                                    </span>
+                        {sortedChatHistory?.map(([date, messages]) => (
+                            <div key={date} className="py-2 w-full flex flex-col gap-2">
+                                <span className="w-full text-center text-xs text-white ">
+                                    {date}
+                                </span>
 
-                                    {messages?.map((message, i) => (
-                                        <div
+                                {messages?.map((message, i) => (
+                                    <div
+                                        key={i}
+                                        className={`w-fit max-w-[80%] py-2 ${message.sender === user.id ? 'ml-auto' : ''}`}
+                                        ref={i === messages.length - 1 ? latestMessageRef : null}
+                                    >
+                                        <Message
                                             key={i}
-                                            className={`w-fit max-w-[80%] py-2 ${message.sender === user.id ? 'ml-auto' : ''}`}
-                                            ref={
-                                                i === messages.length - 1 ? latestMessageRef : null
-                                            }
-                                        >
-                                            <Message
-                                                key={i}
-                                                message={message}
-                                                time={message.message_updated_on}
-                                            />
-                                        </div>
-                                    ))}
-                                </div>
-                            ))}
+                                            message={message}
+                                            time={message.message_updated_on}
+                                        />
+                                    </div>
+                                ))}
+                            </div>
+                        ))}
                     </div>
 
                     {/* chat input */}

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Button, Notification } from '../../ui';
-import { FormControl, GrabUpdateTable } from '../../components';
+import { FormControl } from '../../components';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { ToggleSwitch } from 'flowbite-react';
@@ -11,14 +11,8 @@ const Playground = () => {
     const [loading, setLoading] = useState(false);
     const [checked, setChecked] = useState(false);
 
-
-
     // const notify = useNotify();
     // const { mutate } = useCreateAd();
-
-
-
-
 
     const notifyToast = useNotify();
 
@@ -66,8 +60,6 @@ const Playground = () => {
 
     //input group
 
-
-
     return (
         <div className="w-full max-w-5xl mx-auto">
             <div className="w-full text-black ">
@@ -78,7 +70,7 @@ const Playground = () => {
                 <div className="p-6 space-y-12">
                     <div className="text-center py-6">
                         <h3 className="py-2">Notifications</h3>
-                        <div className="flex justify-between gap-6">
+                        <div className="flex justify-between gap-6 flex-wrap">
                             <Notification message={'Successful!'} status={'success'} />
                             <Notification message={'Error!'} status={'error'} />
                             <Notification message={'Info!'} status={'info'} />
@@ -90,9 +82,10 @@ const Playground = () => {
 
                         <div className="w-[50rem]">
                             <p className="truncate">
-								Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo excepturi mollitia tenetur
-								maiores dolorem ipsa veritatis animi? Tempore modi voluptatum iure beatae sequi, quasi quos
-								doloribus excepturi quis dolores adipisci.
+                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo
+                                excepturi mollitia tenetur maiores dolorem ipsa veritatis animi?
+                                Tempore modi voluptatum iure beatae sequi, quasi quos doloribus
+                                excepturi quis dolores adipisci.
                             </p>
                         </div>
 
@@ -100,27 +93,42 @@ const Playground = () => {
                         <div className="flex flex-wrap justify-center gap-12 my-3">
                             <div className="text-center ">
                                 <p>variant - primary</p>
-                                <Button onClick={notify} variant="primary" className="my-4 text-lg font-bold rounded-full">
-									+ Follow
+                                <Button
+                                    onClick={notify}
+                                    variant="primary"
+                                    className="my-4 text-lg font-bold rounded-full"
+                                >
+                                    + Follow
                                 </Button>
                             </div>
                             <div className="text-center ">
                                 <p>variant - secondary, size - small</p>
-                                <Button variant="secondary" size={'small'} className="my-4 text-lg font-bold rounded-full">
-									+ Follow
+                                <Button
+                                    variant="secondary"
+                                    size={'small'}
+                                    className="my-4 text-lg font-bold rounded-full"
+                                >
+                                    + Follow
                                 </Button>
                             </div>
 
                             <div className="text-center ">
                                 <p>variant - subtle</p>
-                                <Button variant="subtle" size={'full'} className="my-4 text-lg font-bold rounded-full">
-									+ Follow
+                                <Button
+                                    variant="subtle"
+                                    size={'full'}
+                                    className="my-4 text-lg font-bold rounded-full"
+                                >
+                                    + Follow
                                 </Button>
                             </div>
                             <div className="text-center ">
                                 <p>variant - outline</p>
-                                <Button variant="outline" className="my-4 text-lg font-bold rounded-full">
-									Other Shops
+                                <Button
+                                    variant="outline"
+                                    className="my-4 text-lg font-bold rounded-full"
+                                >
+                                    Other Shops
                                 </Button>
                             </div>
                             <div className="text-center ">
@@ -131,16 +139,12 @@ const Playground = () => {
                                     size={'full'}
                                     className="my-4 text-lg font-bold rounded-full"
                                 >
-									Submit
+                                    Submit
                                 </Button>
                             </div>
                         </div>
                     </div>
 
-                    <div>
-                        <h5 className="text-center">Grab update table</h5>
-                        <GrabUpdateTable />
-                    </div>
                     <div>
                         <h5 className="text-center">Inquiry Chat</h5>
                         <InquiryChat />
@@ -180,7 +184,9 @@ const Playground = () => {
                                 {(formik) => {
                                     return (
                                         <Form>
-                                            <p className="py-0 my-0">control - input, type - text, required - true</p>
+                                            <p className="py-0 my-0">
+                                                control - input, type - text, required - true
+                                            </p>
                                             <FormControl
                                                 control="input"
                                                 name="name"
@@ -189,9 +195,19 @@ const Playground = () => {
                                                 placeholder="Enter your name"
                                                 required={true}
                                             />
-                                            <FormControl control="imageinput" name="images" type="file" label="Enter your images" />
+                                            <FormControl
+                                                control="imageinput"
+                                                name="images"
+                                                type="file"
+                                                label="Enter your images"
+                                            />
 
-                                            <FormControl control="textarea" name="description" type="text" label="Description" />
+                                            <FormControl
+                                                control="textarea"
+                                                name="description"
+                                                type="text"
+                                                label="Description"
+                                            />
 
                                             <FormControl
                                                 control="select"
@@ -213,13 +229,21 @@ const Playground = () => {
                                                 name="checkboxOption"
                                                 label="Checkbox topic"
                                             />
-                                            <FormControl control="datepicker" name="birthDate" label="Pick a date" />
+                                            <FormControl
+                                                control="datepicker"
+                                                name="birthDate"
+                                                label="Pick a date"
+                                            />
 
                                             <ToggleSwitch
                                                 checked={formik.values.isVisible}
                                                 name="isVisible"
-                                                onChange={(e) => formik.setFieldValue('isVisible', e)}
-                                                className={formik.values.isVisible ? 'custom-toggle' : ''}
+                                                onChange={(e) =>
+                                                    formik.setFieldValue('isVisible', e)
+                                                }
+                                                className={
+                                                    formik.values.isVisible ? 'custom-toggle' : ''
+                                                }
                                             />
 
                                             <Button
@@ -229,7 +253,7 @@ const Playground = () => {
                                                 size="full"
                                                 className="my-4 text-lg font-bold rounded-sm"
                                             >
-												Submit
+                                                Submit
                                             </Button>
                                         </Form>
                                     );

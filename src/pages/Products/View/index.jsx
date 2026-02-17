@@ -4,7 +4,7 @@ import { Approutes } from '../../../constants';
 import { fetchProduct } from '../../../hooks';
 import Breadcrumb from '../../../components/Breadcrumb';
 import { TbCurrencyNaira } from 'react-icons/tb';
-import { IoEye, IoEyeOff } from 'react-icons/io5';
+import { IoEye } from 'react-icons/io5';
 import { FaCamera } from 'react-icons/fa';
 import useAuth from '../../../context/UserContext';
 import ChatForm from './ChatForm';
@@ -311,79 +311,77 @@ const index = () => {
                             <p className="w-full">Contact {result?.data?.firstname} </p>
                             {result?.data?.contact_type.includes('phone') && (
                                 <div className="flex items-center justify-between">
-                                    <p className="my-2 text-sm  text-start">
-                                        <span className=" font-bold">
+                                    <p className="my-2 text-sm  text-start w-max">
+                                        <span>
                                             {revealNumber
                                                 ? result?.data?.number
                                                 : `${result?.data?.number.substring(0, 3)}XXXXXXXX`}
                                         </span>
                                     </p>
-
-                                    <button
-                                        className={`font-bold  text-black bg-white rounded-none btn btn-sm hover:bg-primary hover:text-white hover:border-0 hover:rounded-sm ${
-                                            !isLogin && 'bg-gray-100 cursor-not-allowed'
-                                        }`}
-                                        onClick={() => {
-                                            if (
-                                                isLogin &&
-                                                result?.data?.contact_type.includes('phone')
-                                            ) {
-                                                setRevealNumber(!revealNumber);
-                                            } else {
-                                                notify('Please login to reveal phone number');
-                                            }
-                                        }}
-                                    >
-                                        {!revealNumber ? (
+                                    {!revealNumber ? (
+                                        <button
+                                            className={`font-bold  text-black bg-white rounded-none btn btn-sm hover:bg-primary hover:text-white hover:border-0 hover:rounded-sm ${
+                                                !isLogin && 'bg-gray-100 cursor-not-allowed'
+                                            }`}
+                                            onClick={() => {
+                                                if (
+                                                    isLogin &&
+                                                    result?.data?.contact_type.includes('phone')
+                                                ) {
+                                                    setRevealNumber(!revealNumber);
+                                                } else {
+                                                    notify('Please login to reveal phone number');
+                                                }
+                                            }}
+                                        >
                                             <span className="flex items-center justify-center text-sm">
                                                 <IoEye /> &nbsp; Reveal{' '}
                                             </span>
-                                        ) : (
-                                            <span className="flex items-center justify-center text-sm">
-                                                <IoEyeOff /> &nbsp; Hide
-                                            </span>
-                                        )}
-                                    </button>
+                                        </button>
+                                    ) : (
+                                        <></>
+                                    )}
                                 </div>
                             )}
+
                             {result?.data?.contact_type.includes('email') && (
                                 <div className="flex items-center justify-between w-full">
                                     <p
-                                        className={`my-2 w-full overflow-x-scroll  text-start ${revealEmail ? 'tooltip tooltip-primary' : ''}`}
+                                        className={`my-2 w-max  text-start ${revealEmail ? 'tooltip tooltip-primary' : ''}`}
                                         data-tip={revealEmail ? result?.data?.email : ''}
                                     >
-                                        <span className="pr-1 text-sm font-bold">
+                                        <span className="pr-1 text-sm ">
                                             {revealEmail && result?.data?.email !== null
                                                 ? result?.data?.email
                                                 : `${result?.data?.email.substring(0, 3)}XXXXXXXX`}
                                         </span>
                                     </p>
 
-                                    <button
-                                        className={`font-bold text-black bg-white rounded-none btn btn-sm hover:bg-primary hover:text-white hover:border-0 hover:rounded-sm ${
-                                            !isLogin && 'bg-gray-100 cursor-not-allowed'
-                                        } `}
-                                        onClick={() => {
-                                            if (
-                                                isLogin &&
-                                                result?.data?.contact_type.includes('email')
-                                            ) {
-                                                setRevealEmail(!revealEmail);
-                                            } else {
-                                                notify('Please login to reveal Ads owner email');
-                                            }
-                                        }}
-                                    >
-                                        {!revealEmail ? (
+                                    {!revealEmail ? (
+                                        <button
+                                            className={`font-bold text-black bg-white rounded-none btn btn-sm hover:bg-primary hover:text-white hover:border-0 hover:rounded-sm ${
+                                                !isLogin && 'bg-gray-100 cursor-not-allowed'
+                                            } `}
+                                            onClick={() => {
+                                                if (
+                                                    isLogin &&
+                                                    result?.data?.contact_type.includes('email')
+                                                ) {
+                                                    setRevealEmail(!revealEmail);
+                                                } else {
+                                                    notify(
+                                                        'Please login to reveal Ads owner email'
+                                                    );
+                                                }
+                                            }}
+                                        >
                                             <span className="flex items-center justify-center text-sm">
                                                 <IoEye /> &nbsp; Reveal{' '}
                                             </span>
-                                        ) : (
-                                            <span className="flex items-center justify-center text-sm">
-                                                <IoEyeOff /> &nbsp; Hide
-                                            </span>
-                                        )}
-                                    </button>
+                                        </button>
+                                    ) : (
+                                        <></>
+                                    )}
                                 </div>
                             )}
                         </div>
