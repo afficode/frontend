@@ -29,15 +29,22 @@ const GrabSidebar = () => {
                 <ul className="flex flex-col gap-1 sidebar-list">
                     {navList.map((navItem) => (
                         <NavLink key={navItem.name} to={navItem.link}>
-                            <li className="w-full py-1 transition rounded-md p-lg hover:bg-white">{navItem.name}</li>
+                            <li className="w-full py-1 transition rounded-md p-lg hover:bg-white">
+                                {navItem.name}
+                            </li>
                         </NavLink>
                     ))}
                 </ul>
 
                 <ul className="mb-2 space-y-4">
                     <Link to={Approutes.logout}>
-                        <Button variant="plain" size="small" className="font-medium" title="Log out">
-							Log Out
+                        <Button
+                            variant="plain"
+                            size="small"
+                            className="font-medium"
+                            title="Log out"
+                        >
+                            Log Out
                         </Button>
                     </Link>
                     <Button
@@ -47,7 +54,7 @@ const GrabSidebar = () => {
                         className="font-medium"
                         title="Deactivate your account"
                     >
-						Deactivate Account{' '}
+                        Deactivate Account{' '}
                     </Button>
                 </ul>
             </nav>

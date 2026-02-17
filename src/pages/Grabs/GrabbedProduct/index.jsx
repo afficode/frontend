@@ -1,13 +1,11 @@
 import { Link, useParams } from 'react-router-dom';
 import { TbCurrencyNaira } from 'react-icons/tb';
-import { noimage } from '../../../assets/images';
-import { Carousel } from 'flowbite-react';
 import { FaCamera } from 'react-icons/fa';
 import OverviewPills from '../../Products/View/OverviewPills';
 import { convertKeyToName, numberWithCommas, ScrollToTop } from '../../../utils';
 import Action from './Action';
 import { fetchProduct, useCheckOrder } from '../../../hooks';
-import { SpinnerSkeleton } from '../../../components';
+import { Carousel, SpinnerSkeleton } from '../../../components';
 import { inspectableCategories } from '../../../constants/Category';
 import useAuth from '../../../context/UserContext';
 import { Approutes } from '../../../constants';
@@ -106,7 +104,7 @@ const GrabbedProduct = () => {
                 <div className="flex flex-col w-full h-full gap-2  lg:flex-row md:gap-8 line-clamp-1">
                     {/* product display */}
 
-                    <div className="w-full  flex flex-col justify-between">
+                    <div className="w-full xl:w-[70%] flex flex-col justify-between">
                         <div className="w-full mb-2">
                             <div className="flex items-center justify-between w-full  font-bold uppercase ">
                                 <h3 className="capitalize">{result?.data.title} </h3>
@@ -134,40 +132,25 @@ const GrabbedProduct = () => {
                                 </p>
                             </div>
                         </div>{' '}
-                        <div className="relative rounded-none w-full h-full mt-1">
-                            {result.data?.images.length > 0 ? (
-                                <Carousel className="h-full max-lg:h-[300px] md:min-h-[470px]    rounded-none">
-                                    {result.data?.images?.map((img, index) => (
-                                        <img
-                                            src={img.path}
-                                            alt={img.filename}
-                                            key={index * 3}
-                                            className="rounded-t-sm rounded-b-none object-cover"
-                                        />
-                                    ))}
-                                </Carousel>
-                            ) : (
-                                <img
-                                    src={noimage}
-                                    alt="no image"
-                                    className="object-cover w-full h-full md:h-[470px] "
-                                />
-                            )}
-
-                            <div className="absolute bottom-0 flex w-full h-10 py-2 pl-6 text-white rounded-none bg-black/50">
-                                <span className="flex px-2 my-auto border-2 border-white">
+                        <div className="relative w-full h-[600px] mx-auto mt-1  rounded-none ">
+                            <Carousel
+                                className="w-full h-full mx-auto"
+                                items={result?.data?.images}
+                            />
+                            <div className="absolute top-[440px] flex w-full h-10 my-0 py-2 pl-6 text-white  rounded-none">
+                                <span className="flex px-2 my-auto border-2 border-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
                                     <FaCamera className="mt-1 text-sm" />
                                     &nbsp; &nbsp;{' '}
                                     <span className="my-auto text-sm">
                                         {' '}
-                                        {result?.data.images.length}
+                                        {result?.data?.images.length}
                                     </span>
                                 </span>
                             </div>
                         </div>
                     </div>
 
-                    <div className="xl:w-[40%] lg:self-end h-full ">
+                    <div className="xl:w-[30%] lg:self-end h-full ">
                         <Action
                             isGeneral={
                                 inspectableCategories.includes(result?.data.category) ? false : true
