@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { noimage } from '../../../assets/images';
 import Message from './Message';
 import MessageInput from './MessageInput';
