@@ -16,7 +16,6 @@ import { Approutes, frontendLink } from '../../../constants';
 import { Button } from '../../../ui';
 import { Download, GrabIcon } from '../../../assets/svgs';
 import { fetchProduct, useNotify } from '../../../hooks';
-// import { Carousel } from 'flowbite-react';
 import { Carousel, SpinnerSkeleton } from '../../../components';
 import useAuth from '../../../context/UserContext';
 import useGrabContext from '../../../context/GrabContext';
