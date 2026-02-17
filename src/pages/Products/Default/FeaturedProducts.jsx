@@ -23,7 +23,7 @@ const FeaturedProducts = ({ product }) => {
                         navigate(`/product/${slugGeneratorForAdIdWithName(ad.title, ad.id)}`)
                     }
                     key={index}
-                    className="overflow-hidden min-w-[18rem] md:w-[18rem] sm:w-full min-h-[12rem] md:h-[22rem] bg-white hover:bg-gray-200 border border-gray-200 rounded-lg shadow-sm cursor-pointer hover:shadow-lg transition-all  ease-in-out"
+                    className="overflow-hidden w-[18rem]  min-h-[12rem] md:h-[22rem] bg-white hover:bg-gray-200 border border-gray-200 rounded-lg shadow-sm cursor-pointer hover:shadow-lg transition-all  ease-in-out"
                 >
                     <div
                         onClick={(e) => {
@@ -78,12 +78,12 @@ const FeaturedProducts = ({ product }) => {
                     </div>
 
                     <div className="w-full p-2 tracking-tighter tooltip tooltip-secondary line-clamp-1 ">
-                        <p className="flex items-start justify-start h-6 overflow-hidden text-xl font-semibold uppercase lg:h-8 ">
-                            {ad.title.toString().trimEnd().trim()}{' '}
+                        <p className="truncate text-start text-xl font-semibold uppercase  ">
+                            {ad.title}
                         </p>
-                        <div className="flex items-center justify-start w-full mt-1 text-start text-ellipsis flex-nowrap line-clamp-1">
+                        <div className="flex items-center justify-start  mt-1 text-start  flex-nowrap line-clamp-1">
                             <FaMapMarkerAlt className="inline-block mr-1" />
-                            <p className="text-xs tracking-tighter md:text-md lg:text-lg line-clamp-1">
+                            <p className="text-xs tracking-tighter md:text-md lg:text-lg line-clamp-1 truncate">
                                 {ad.location}
                             </p>
                         </div>

@@ -292,6 +292,11 @@ select:disabled {
 		left: 50%;
 		transform: translateX(-50%);
 	}
+
+	.Toastify__toast {
+		max-width: 90vw;
+		width: max-content;
+	}
 }
 
 /* under construction page  */

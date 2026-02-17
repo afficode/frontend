@@ -22,6 +22,7 @@ import { InputGroup } from '../../../ui/index.js';
 import { inspectableCategories } from '../../../constants/Category.js';
 import { toMoney } from '../../../utils';
 import { TermsAndCondition } from '../../../components/index.js';
+import { useQueryClient } from 'react-query';
 
 const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
     const navigate = useNavigate();
@@ -32,6 +33,8 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
 
     const [blocked] = useState(active === '0');
     const [chatId, setChatId] = useState(null);
+
+    const queryClient = useQueryClient();
 
     const verifyChat = async () =>
         await privateAxios
@@ -66,6 +69,8 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
                         'Message sent successfully, The ad owner will be in touch with you soon.',
                         'success'
                     );
+
+                    queryClient.invalidateQueries(['chats']);
                 }
             },
         });
@@ -118,11 +123,31 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
         }
     };
 
-    const [offer, setOffer] = useState();
+    const [offer, setOffer] = useState('');
 
     const handleOfferSubmit = () => {
-        const content = `I'm willing to pay: ₦${toMoney(offer)}`;
+        const content = `I'm willing to pay: ₦${offer}`;
         chatCreation(content, true);
+    };
+
+    const handleMoneyChange = (event) => {
+        const inputValue = event.target.value;
+
+        const raw = String(inputValue).replace(/[^0-9.]/g, '');
+
+        if (!raw) {
+            setOffer('');
+            return;
+        }
+
+        const [intPart, decimalPart] = raw.split('.');
+        let formatted = new Intl.NumberFormat('en-US').format(Number(intPart || '0'));
+
+        if (decimalPart !== undefined) {
+            formatted += '.' + decimalPart;
+        }
+
+        setOffer(formatted);
     };
 
     //to scroll into terms and condition document
@@ -283,7 +308,9 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
                                     } ${chatId !== null && 'bg-gray-300 cursor-not-allowed'}`}
                                 />
                                 <div className="space-y-1 w-full my-2 text-start ">
-                                    <h5 className="text-base font-semibold">The Boonfu Standard</h5>
+                                    <h5 className="text-base font-semibold">
+                                        The Boonfu Safety Standard
+                                    </h5>
                                     <ul className="!text-xs">
                                         <li className="!text-xs">
                                             -Use &quot;Grab&quot; for Escrow; never pay sellers
@@ -378,20 +405,12 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
                                                         <InputGroup
                                                             name="offer"
                                                             id="offer"
-                                                            type="number"
+                                                            type="text"
                                                             amount={'naira'}
                                                             autoComplete="off"
                                                             className={' customAmountInput '}
                                                             value={offer}
-                                                            onChange={(e) =>
-                                                                setOffer(e.target.value)
-                                                            }
-                                                            // onBlur={formikWithdraw.handleBlur}
-                                                            // errorMsg={
-                                                            // 	formikWithdraw.touched.amount && formikWithdraw.errors.amount
-                                                            // 		? formikWithdraw.errors.amount
-                                                            // 		: null
-                                                            // }
+                                                            onChange={handleMoneyChange}
                                                             cancelButton={
                                                                 <button
                                                                     onClick={() => {

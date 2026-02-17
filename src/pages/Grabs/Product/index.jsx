@@ -2,7 +2,6 @@ import { useMemo, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { TbCurrencyNaira } from 'react-icons/tb';
 import { IoCopy, IoCopyOutline } from 'react-icons/io5';
-import { noimage } from '../../../assets/images';
 import { FaCamera } from 'react-icons/fa';
 import OverviewPills from '../../Products/View/OverviewPills';
 import {
@@ -17,8 +16,7 @@ import { Approutes, frontendLink } from '../../../constants';
 import { Button } from '../../../ui';
 import { Download, GrabIcon } from '../../../assets/svgs';
 import { fetchProduct, useNotify } from '../../../hooks';
-import { Carousel } from 'flowbite-react';
-import { SpinnerSkeleton } from '../../../components';
+import { Carousel, SpinnerSkeleton } from '../../../components';
 import useAuth from '../../../context/UserContext';
 import useGrabContext from '../../../context/GrabContext';
 import { useQueryClient } from 'react-query';
@@ -95,6 +93,7 @@ const GrabProduct = () => {
             toastId: 'downloading',
         });
 
+        // eslint-disable-next-line no-unsafe-optional-chaining
         for (const img of result?.data?.images) {
             await downloadImage(img);
         }
@@ -112,13 +111,14 @@ const GrabProduct = () => {
 
     if (result) {
         return (
-            <section>
+            <section className="w-full">
                 <GrabHeader text="Grabbed Item preview" />
                 <div className="w-full p-2 my-4 text-center text-white bg-red-500 whitespace-nowrap">
                     {grabberCommission && <h4>Commission : ₦ {toMoney(grabberCommission)}</h4>}
                 </div>
-                <div className="flex flex-col w-full h-full gap-2 xl:flex-row xl:gap-4 line-clamp-1">
-                    <div className="w-full  flex flex-col justify-between">
+
+                <div className="flex flex-col w-full h-full gap-2 xl:flex-row xl:gap-4 ">
+                    <div className="w-full xl:w-[65%]  flex flex-col justify-between">
                         <div className="w-full mb-2">
                             <div className="flex items-center justify-between w-full  font-bold uppercase ">
                                 <h3 className="capitalize">{result?.data.title} </h3>
@@ -146,48 +146,31 @@ const GrabProduct = () => {
                                 </p>
                             </div>
                         </div>{' '}
-                        <div className="relative rounded-none w-full  h-full mt-1">
-                            {result?.data?.images.length > 0 ? (
-                                <Carousel className="h-full max-lg:h-[300px] md:h-[470px]  rounded-none">
-                                    {result.data?.images.map((img, index) => (
-                                        <img
-                                            src={img.path}
-                                            alt={img.filename}
-                                            key={index * 3}
-                                            className="rounded-t-sm rounded-b-none object-cover w-full h-full"
-                                        />
-                                    ))}
-                                </Carousel>
-                            ) : (
-                                <img
-                                    src={noimage}
-                                    alt="no image"
-                                    className="object-cover w-full h-full "
-                                />
-                            )}
-
-                            <div className="absolute bottom-0 flex w-full h-10 py-2 pl-6 text-white rounded-none bg-black/50">
-                                <span className="flex px-2 my-auto border-2 border-white">
+                        <div className="relative w-full h-[600px] mx-auto mt-1  rounded-none ">
+                            <Carousel
+                                className="w-full h-full mx-auto"
+                                items={result?.data?.images}
+                            />
+                            <div className="absolute top-[440px] flex w-full h-10 my-0 py-2 pl-6 text-white  rounded-none">
+                                <span className="flex px-2 my-auto border-2 border-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
                                     <FaCamera className="mt-1 text-sm" />
                                     &nbsp; &nbsp;{' '}
                                     <span className="my-auto text-sm">
                                         {' '}
-                                        {result?.data.images.length}
+                                        {result?.data?.images.length}
                                     </span>
                                 </span>
                             </div>
                         </div>
                     </div>
 
-                    <aside className="w-full h-max min-h-[350px]  xl:w-[45%] border-2 border-gray-400 p-2 lg:p-4 flex flex-col justify-between">
-                        <div className="">
-                            <div className="w-full tracking-tighter">
-                                <div className="flex justify-between">
-                                    <p className="p-lg">Category </p>
-                                    <p className="font-semibold p-lg text-primary text-right">
-                                        {result?.data.parent_category}
-                                    </p>
-                                </div>
+                    <aside className="flex flex-col justify-between w-full xl:w-[35%] h-max min-h-[350px]   border-2 border-gray-400 p-2 lg:p-4 ">
+                        <div className="w-full flex flex-col">
+                            <div className="flex items-center flex-wrap justify-between">
+                                <p className="p-lg">Category </p>
+                                <p className="font-semibold p-lg text-primary text-right">
+                                    {result?.data.parent_category}
+                                </p>
                             </div>
                             <hr className="h-px my-2 border-black/40 border-1" />
                         </div>
@@ -197,7 +180,7 @@ const GrabProduct = () => {
                                 <p className="p-lg">Grab Link</p>
 
                                 <div className="flex items-center justify-between">
-                                    <p className="text-primary w-[16rem] break-words">
+                                    <p className="text-primary text-wrap break-words w-[16rem]">
                                         {grabLink ? grabLink : null}
                                     </p>
                                     <div>
