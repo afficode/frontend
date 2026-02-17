@@ -3780,7 +3780,7 @@ const CategoryForm = ({ categoryId, subCategoryId, categoryName, initialValues, 
 
 	const fields = categoryFields[categoryName] || [];
 	const [priceValue, setPriceValue] = useState(null);
-	const [address, setAddress] = useState('');
+	const [address, setAddress] = useState(initialValues.address);
 
 	const renderFields =
 		fields &&
