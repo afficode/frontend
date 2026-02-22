@@ -15,8 +15,10 @@ const OverviewPills = ({ overview, ad }) => {
                 ) : isNaN(overview?.value) ? (
                     <>
                         {overview?.value
-                            .split(' ')
-                            .map((val) => val[0].toUpperCase() + val.substring(1))
+                          ?.trim()
+                            ?.split(' ')
+                            ?.filter(Boolean) 
+                            ?.map((val) => val[0]?.toUpperCase() + val.substring(1))
                             .join(' ')}
                     </>
                 ) : (

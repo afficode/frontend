@@ -2,17 +2,18 @@ import { Link, useParams } from 'react-router-dom';
 import { TbCurrencyNaira } from 'react-icons/tb';
 import { FaCamera } from 'react-icons/fa';
 import OverviewPills from '../../Products/View/OverviewPills';
-import { convertKeyToName, numberWithCommas, ScrollToTop } from '../../../utils';
+import { convertKeyToName, extractAdIdFromSlug, numberWithCommas, ScrollToTop, slugGeneratorForAdIdWithName } from '../../../utils';
 import Action from './Action';
 import { fetchProduct, useCheckOrder } from '../../../hooks';
-import { Carousel, SpinnerSkeleton } from '../../../components';
-import { inspectableCategories } from '../../../constants/Category';
+import { Carousel, SEO, SpinnerSkeleton } from '../../../components';
+import { categoryData, inspectableCategories } from '../../../constants/Category';
 import useAuth from '../../../context/UserContext';
 import { Approutes } from '../../../constants';
 
 const GrabbedProduct = () => {
-    const { grabber_id, ad_id } = useParams();
+    let { grabber_id, ad_id } = useParams();
     let grabberId;
+    ad_id = extractAdIdFromSlug(ad_id);
 
     if (grabber_id) {
         grabberId = grabber_id.slice(2);
@@ -150,7 +151,7 @@ const GrabbedProduct = () => {
                         </div>
                     </div>
 
-                    <div className='xl:w-[30%] lg:self-end h-full '>
+                    <div className="xl:w-[30%]  h-full ">
                         <Action
                             isGeneral={
                                 inspectableCategories.includes(result?.data.category) ? false : true
@@ -180,6 +181,19 @@ const GrabbedProduct = () => {
                         </div>
                     </div>
                 </div>
+
+                   <SEO
+                        title={result?.data?.title}
+                        description={result?.data?.description}
+                        url={`https://boonfu.com${Approutes.grab.grabbedProduct(grabber_id, slugGeneratorForAdIdWithName(result?.data?.title, result?.data?.id))}`}
+                        keywords={[
+                            result?.data?.title,
+                            ...categoryData.map((category) =>
+                                result?.data?.category.toString().startsWith(category.id.toString())
+                            ),
+                        ]}
+                        image={result?.data?.images[0]?.path}
+                    />
                 <ScrollToTop />
             </section>
         );

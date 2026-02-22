@@ -9,6 +9,7 @@ import {
     getCommission,
     numberWithCommas,
     ScrollToTop,
+    slugGeneratorForAdIdWithName,
     toMoney,
 } from '../../../utils';
 import GrabHeader from '../GrabHeader';
@@ -20,6 +21,7 @@ import { Carousel, SpinnerSkeleton } from '../../../components';
 import useAuth from '../../../context/UserContext';
 import useGrabContext from '../../../context/GrabContext';
 import { useQueryClient } from 'react-query';
+import InspectionUpdate from './InspectionUpdate';
 
 const GrabProduct = () => {
     const notify = useNotify();
@@ -27,15 +29,17 @@ const GrabProduct = () => {
 
     const { ad_id } = useParams();
 
+    const [inspectionModal, setInspectionModal] = useState(false);
     const { user } = useAuth();
+    const { data: result, isLoading, isError } = fetchProduct(ad_id);
+
+    // console.log(result)
 
     const grabLink = useMemo(
         () =>
-            `${frontendLink.slice(0, -1)}${Approutes.grab.grabbedProduct(`bf${user.grabber.id}`, ad_id)}`,
-        [ad_id, user.grabber.id]
+            `${frontendLink.slice(0, -1)}${Approutes.grab.grabbedProduct(`bf${user.grabber.id}`, slugGeneratorForAdIdWithName(result?.data?.title, ad_id))}`,
+        [ad_id, user.grabber.id, result]
     );
-
-    const { data: result, isLoading, isError } = fetchProduct(ad_id);
 
     const { unGrabAd } = useGrabContext();
     const queryClient = useQueryClient();
@@ -222,6 +226,14 @@ const GrabProduct = () => {
                                         Generate Post Now
                                     </Button>
                                 </Link>
+                                {/* <Button
+                                    onClick={() => setInspectionModal(true)}
+                                    variant={'primary'}
+                                    size={'full'}
+                                    className={' rounded-xl'}
+                                >
+                                    Inspection log
+                                </Button> */}
                             </div>
                         </div>
                     </aside>
@@ -259,7 +271,7 @@ const GrabProduct = () => {
                             'flex  flex-1 items-center justify-center gap-4 px-8 py-[.75rem] w-full  font-semibold text-xl '
                         }
                     >
-                        <img src={Download} alt='/' className='w-8' /> Download images
+                        <img src={Download} alt="download icon" className="w-8" /> Download images
                     </Button>
 
                     <Link to={Approutes.grab.products} className='flex-1'>
@@ -269,6 +281,10 @@ const GrabProduct = () => {
                     </Link>
                 </div>
 
+                <InspectionUpdate
+                    inspectionModal={inspectionModal}
+                    setInspectionModal={setInspectionModal}
+                />
                 <ScrollToTop />
             </section>
         );
