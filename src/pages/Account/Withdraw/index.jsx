@@ -182,10 +182,10 @@ const Withdraw = () => {
                                                         <RiVisaFill size={25} />
                                                     ) : payout?.card_type.trim() ===
                                                       'mastercard' ? (
-                                                        <FaCcMastercard size={25} />
-                                                    ) : (
-                                                        <CiCreditCard2 size={25} />
-                                                    )}{' '}
+                                                            <FaCcMastercard size={25} />
+                                                        ) : (
+                                                            <CiCreditCard2 size={25} />
+                                                        )}{' '}
                                                     {payout?.bank}
                                                 </span>{' '}
                                                 <span>
