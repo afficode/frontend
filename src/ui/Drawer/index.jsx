@@ -1,26 +1,26 @@
 const Drawer = ({ items, icon }) => {
     return (
-        <div className="drawer">
-            <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content ">
+        <div className='drawer'>
+            <input id='my-drawer' type='checkbox' className='drawer-toggle' />
+            <div className='drawer-content '>
                 {/* Page content here */}
                 {icon ? (
-                    <label htmlFor="my-drawer" className="text-primary drawer-button">
+                    <label htmlFor='my-drawer' className='text-primary drawer-button'>
                         {icon}
                     </label>
                 ) : (
-                    <label htmlFor="my-drawer" className="btn btn-primary drawer-button">
-						Open drawer
+                    <label htmlFor='my-drawer' className='btn btn-primary drawer-button'>
+                        Open drawer
                     </label>
                 )}
             </div>
-            <div className="drawer-side z-[2000] min-h-screen">
+            <div className='drawer-side z-[2000] min-h-screen'>
                 <label
-                    htmlFor="my-drawer"
-                    aria-label="close sidebar"
-                    className="drawer-overlay min-h-full"
+                    htmlFor='my-drawer'
+                    aria-label='close sidebar'
+                    className='drawer-overlay min-h-full'
                 ></label>
-                <ul className="menu p-4 w-80 min-h-full bg-white ">
+                <ul className='menu p-4 w-80 min-h-full bg-white '>
                     {/* Sidebar content here */}
                     {items}
                 </ul>

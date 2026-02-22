@@ -55,21 +55,21 @@ const NewAccount = ({ closeModal }) => {
 
     return (
         <div>
-            <h3 className="mb-8">Withdraw to a New Account </h3>
-            <form onSubmit={formikNewAccount.handleSubmit} className="space-y-3 max-w-[24rem]">
-                <div className="flex flex-col">
-                    <label htmlFor="bank_code" className="mb-[-7px] font-bold">
+            <h3 className='mb-8'>Withdraw to a New Account </h3>
+            <form onSubmit={formikNewAccount.handleSubmit} className='space-y-3 max-w-[24rem]'>
+                <div className='flex flex-col'>
+                    <label htmlFor='bank_code' className='mb-[-7px] font-bold'>
                         Select Bank
                     </label>
 
-                    <div className="relative max-w-sm">
+                    <div className='relative max-w-sm'>
                         <InputGroup
-                            name="bank_code"
-                            id="bank_code"
-                            type="select"
+                            name='bank_code'
+                            id='bank_code'
+                            type='select'
                             optionLists={bankOptions}
                             placeholder={'Enter account number'}
-                            autoComplete="off"
+                            autoComplete='off'
                             className={'customSelectInput'}
                             value={formikNewAccount.values.bank_code}
                             onChange={formikNewAccount.handleChange}
@@ -84,18 +84,18 @@ const NewAccount = ({ closeModal }) => {
                     </div>
                 </div>
 
-                <div className="flex flex-col">
-                    <label htmlFor="account_number" className="mb-[-7px] font-bold">
+                <div className='flex flex-col'>
+                    <label htmlFor='account_number' className='mb-[-7px] font-bold'>
                         Account
                     </label>
-                    <div className="relative max-w-sm">
+                    <div className='relative max-w-sm'>
                         <InputGroup
-                            name="account_number"
-                            id="account_number"
-                            type="text"
+                            name='account_number'
+                            id='account_number'
+                            type='text'
                             // amount
                             placeholder={'Enter account number'}
-                            autoComplete="off"
+                            autoComplete='off'
                             className={'customAmountInput !text-left !pl-3'}
                             value={formikNewAccount.values.account_number}
                             onChange={formikNewAccount.handleChange}
@@ -111,26 +111,26 @@ const NewAccount = ({ closeModal }) => {
                                     onClick={() => {
                                         formikNewAccount.setFieldValue('account_number', '');
                                     }}
-                                    type="button"
-                                    className="absolute right-2 inset-y-0 my-auto h-fit "
+                                    type='button'
+                                    className='absolute right-2 inset-y-0 my-auto h-fit '
                                 >
-                                    <img src={Cancel} alt="/" className="w-4" />
+                                    <img src={Cancel} alt='/' className='w-4' />
                                 </button>
                             }
                         />
                     </div>
                 </div>
-                <div className="flex flex-col">
-                    <label htmlFor="name" className="mb-[-7px] font-bold">
+                <div className='flex flex-col'>
+                    <label htmlFor='name' className='mb-[-7px] font-bold'>
                         Account Name
                     </label>
-                    <div className="relative max-w-sm">
+                    <div className='relative max-w-sm'>
                         <InputGroup
-                            name="name"
-                            id="name"
-                            type="text"
+                            name='name'
+                            id='name'
+                            type='text'
                             placeholder={'Enter account name'}
-                            autoComplete="off"
+                            autoComplete='off'
                             className={'customAmountInput !text-left !pl-3'}
                             value={formikNewAccount.values.name}
                             onChange={formikNewAccount.handleChange}
@@ -145,10 +145,10 @@ const NewAccount = ({ closeModal }) => {
                                     onClick={() => {
                                         formikNewAccount.setFieldValue('name', '');
                                     }}
-                                    type="button"
-                                    className="absolute right-2 inset-y-0 my-auto h-fit "
+                                    type='button'
+                                    className='absolute right-2 inset-y-0 my-auto h-fit '
                                 >
-                                    <img src={Cancel} alt="/" className="w-4" />
+                                    <img src={Cancel} alt='/' className='w-4' />
                                 </button>
                             }
                         />
@@ -156,7 +156,7 @@ const NewAccount = ({ closeModal }) => {
                 </div>
 
                 <Button
-                    type="submit"
+                    type='submit'
                     variant={'secondary'}
                     size={'full'}
                     className={'max-w-sm font-bold rounded-xl'}

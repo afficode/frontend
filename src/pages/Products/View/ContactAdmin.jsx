@@ -37,11 +37,11 @@ export default function ContactAdmin({ ads_id }) {
             const timelineData =
                 data?.data?.remark?.length > 0
                     ? data?.data?.remark?.map((el) => ({
-                        date: el?.date,
-                        title: el?.name,
-                        body: el?.text,
-                        user: el?.user_id,
-                    }))
+                          date: el?.date,
+                          title: el?.name,
+                          body: el?.text,
+                          user: el?.user_id,
+                      }))
                     : [];
             setRemark(() => timelineData);
         };
@@ -52,11 +52,11 @@ export default function ContactAdmin({ ads_id }) {
     }, [data]);
     return (
         <>
-            <div className="mb-4 mt-2 text-red-700 dark:text-red-800">
-                <p className="w-full p-2 pt-4">
+            <div className='mb-4 mt-2 text-red-700 dark:text-red-800'>
+                <p className='w-full p-2 pt-4'>
                     <Timeline data={remark} />
                 </p>
-                <ul className="list-disc ml-4">
+                <ul className='list-disc ml-4'>
                     <li>
                         Before you click on contact Admin, it will be Good to edit this Ad and make
                         the necessary changes complained by Admin as the reason why this Ad was
@@ -73,18 +73,18 @@ export default function ContactAdmin({ ads_id }) {
                     </li>
                 </ul>
             </div>
-            <div className="flex">
+            <div className='flex'>
                 <button
-                    type="button"
-                    className="mr-2 inline-flex items-center rounded-lg bg-primary px-3 py-1.5 text-center text-xs font-medium text-white hover:bg-primary/80 focus:ring-4 focus:ring-primary/90 dark:bg-primary dark:hover:bg-primary/70"
+                    type='button'
+                    className='mr-2 inline-flex items-center rounded-lg bg-primary px-3 py-1.5 text-center text-xs font-medium text-white hover:bg-primary/80 focus:ring-4 focus:ring-primary/90 dark:bg-primary dark:hover:bg-primary/70'
                     onClick={() => setIsOpen(true)}
                 >
-                    <HiEye className="-ml-0.5 mr-2 h-4 w-4" />
+                    <HiEye className='-ml-0.5 mr-2 h-4 w-4' />
                     Contact Admin
                 </button>
                 <button
-                    type="button"
-                    className="rounded-lg border border-red-700 bg-transparent px-3 py-1.5 text-center text-xs font-medium text-red-700 hover:bg-red-800 hover:text-white focus:ring-4 focus:ring-red-300 dark:border-red-800 dark:text-red-800 dark:hover:text-white"
+                    type='button'
+                    className='rounded-lg border border-red-700 bg-transparent px-3 py-1.5 text-center text-xs font-medium text-red-700 hover:bg-red-800 hover:text-white focus:ring-4 focus:ring-red-300 dark:border-red-800 dark:text-red-800 dark:hover:text-white'
                     onClick={() => handleDelete(ads_id)}
                 >
                     Delete Ad

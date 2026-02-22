@@ -136,7 +136,7 @@ const sportBrands = {
         'Crescent',
         'CTS',
         'Custom',
-        'D\'Addario',
+        "D'Addario",
         'DBZ',
         'Dean Guitars',
         'Diezel',
@@ -338,7 +338,7 @@ const sportBrands = {
         'Giant',
         'Gng Fitness',
         'Gofit',
-        'Gold\'s Gym',
+        "Gold's Gym",
         'Gramax',
         'Gripmaster',
         'Gym Master',
@@ -716,7 +716,7 @@ const sportTypes = {
         'Jump Boxes',
         'Kettlebell',
         'Kickboards',
-        'Kids\' Vehicle',
+        "Kids' Vehicle",
         'Leg Machines',
         'Medicine Balls & Slam Balls',
         'Multi-Station Gym',
@@ -1807,7 +1807,7 @@ const electronicsBrands = {
         'Evisu',
         'Fil',
         'Fineblue',
-        'Fresh \'n Rebel',
+        "Fresh 'n Rebel",
         'Gabba Goods',
         'Generic',
         'Genius',
@@ -3313,7 +3313,7 @@ const fashionBrands = {
         'Ever-Pretty',
         'Aidan Maddox',
         'Amazon Essentials',
-        'David\'s Bridal',
+        "David's Bridal",
         'Adrianna Papell',
         'Amsale',
         'Atelier Emelia',
@@ -3617,7 +3617,7 @@ const healthBrands = {
         'Armani',
         'Hawaiian Silky',
         'Just For Men',
-        'L\'Oreal',
+        "L'Oreal",
         'Mac',
         'Mielle',
         'DC Shoes',
@@ -3672,7 +3672,7 @@ const healthBrands = {
         'Kosdaq',
         'Kumiko',
         'Kyolic',
-        'L\'Il Critters',
+        "L'Il Critters",
         'Ladies Shine',
         'Lamosa',
         'Lennox',
@@ -3714,7 +3714,7 @@ const healthBrands = {
         'Nature Cure',
         'Nature Leaf',
         'Nature Made',
-        'Nature\'s Answer',
+        "Nature's Answer",
         'Schiff',
         'Scitec Nutrition',
         'Secret',
@@ -3818,9 +3818,9 @@ const healthBrands = {
         'Daynee',
         'Detoxi Slim',
         'Deva',
-        'Doctor\'s Best',
+        "Doctor's Best",
         'Double Wood',
-        'Dr. Ohhira\'s',
+        "Dr. Ohhira's",
         'Dxn',
         'Dymatize',
         'Dymatize Nutrition',
@@ -3830,7 +3830,7 @@ const healthBrands = {
         'Dynewell',
         'Dynwell',
         'Earth Creation',
-        'Earth\'S Creation',
+        "Earth'S Creation",
         'Edible Herbs',
         'Edmark',
         'Edmark International',
@@ -3859,7 +3859,7 @@ const healthBrands = {
         'Pure Encapsulations',
         'Pure Protein',
         'Purely Inspired',
-        'Puritan\'s Pride',
+        "Puritan's Pride",
         'Rain',
         'Rain International',
         'Redcon1',
@@ -3870,14 +3870,14 @@ const healthBrands = {
         'Rule 1',
         'Sambucol',
         'Satin Skinz',
-        'Nature\'s Blend',
-        'Nature\'s Bounty',
-        'Nature\'S Field',
-        'Nature\'s Life',
-        'Nature\'s Plus',
-        'Nature\'S Renaissance',
-        'Nature\'s Sunshine',
-        'Nature\'s Way',
+        "Nature's Blend",
+        "Nature's Bounty",
+        "Nature'S Field",
+        "Nature's Life",
+        "Nature's Plus",
+        "Nature'S Renaissance",
+        "Nature's Sunshine",
+        "Nature's Way",
         'Naturefield',
         'Natures Aid',
         'Natures Cure',
@@ -4163,7 +4163,7 @@ const healthBrands = {
         'Paris Corner',
         'Paris Hilton',
         'Pendora Scents',
-        'Penhaligon\'s',
+        "Penhaligon's",
         'Perry Ellis',
         'Philz',
         'Porsche Design',
@@ -4204,7 +4204,7 @@ const healthBrands = {
         'Vera Wang',
         'Versace',
         'Vertigo',
-        'Victoria\'s Secret',
+        "Victoria's Secret",
         'Viktor & Rolf',
         'Ville',
         'Vince Camuto',
@@ -4360,9 +4360,9 @@ const healthBrands = {
         'Karite',
         'Kylie',
         'Just For Men',
-        'L\'Oreal',
+        "L'Oreal",
         'Mac',
-        'L\'Oreal Paris',
+        "L'Oreal Paris",
         'Laura Mercier',
         'Lush',
         'MAC',
@@ -4419,7 +4419,7 @@ const healthBrands = {
         'Virgo',
         'Village Naturals',
         'Viktor & Rolf',
-        'Victoria\'s Secret',
+        "Victoria's Secret",
         'Vespa',
         'Versace',
         'Veetgold',
@@ -4427,10 +4427,10 @@ const healthBrands = {
         'Vaseline',
         'United Colors of Benetton',
         'Ultra',
-        'Two\'s Company',
+        "Two's Company",
         'Tura',
         'Trussardi',
-        'Trader Joe\'s',
+        "Trader Joe's",
         'Tosowoong',
         'Top Gel',
         'Tommy Hilfiger',
@@ -4484,7 +4484,7 @@ const healthBrands = {
         'Papaya',
         'Pamper Glow',
         'Palmolive',
-        'Palmer\'s',
+        "Palmer's",
         'Paco Rabanne',
         'own',
         'ORIGINAL SOURCE',
@@ -4495,7 +4495,7 @@ const healthBrands = {
         'Only Natural',
         'Old Spice',
         'Olay',
-        'O\'Carly',
+        "O'Carly",
         'O HUI',
         'Now',
         'NOVA',
@@ -4505,7 +4505,7 @@ const healthBrands = {
         'No-Name',
         'NIVEA',
         'Neutrogena',
-        'Nature\'s Blend',
+        "Nature's Blend",
         'Nature Secrete',
         'MYSORE SANDAL SOAP',
         'Multistream',
@@ -4530,7 +4530,7 @@ const healthBrands = {
         'Lasting Impressions',
         'Lanbena',
         'La Roche-Posay',
-        'L\'Oreal',
+        "L'Oreal",
         'Kojiesan',
         'Kojic',
         'Kirkland Signature',
@@ -4538,7 +4538,7 @@ const healthBrands = {
         'Kimberly-Clark',
         'Kedi',
         'K Brothers',
-        'JOHNSON\'S',
+        "JOHNSON'S",
         'Johnson & Johnson',
         'Jimpo Ori',
         'Jergens',
@@ -4664,7 +4664,7 @@ const healthBrands = {
         'Christian Breton',
         'Cien',
         'Clarins',
-        'Clark\'s Botanicals',
+        "Clark's Botanicals",
         'Clean',
         'Clean & Clear',
         'Clear Essence',
@@ -4705,7 +4705,7 @@ const healthBrands = {
         'Dr. Brandt',
         'Dr. Hauschka',
         'Dr. Jart+',
-        'Dr. Teal\'s',
+        "Dr. Teal's",
         'E-System',
         'EduPad',
         'eMachines',
@@ -4728,8 +4728,8 @@ const healthBrands = {
         'Itel',
         'Just For Men',
         'Kylie',
-        'L\'Oreal',
-        'L\'Oreal Paris',
+        "L'Oreal",
+        "L'Oreal Paris",
         'Laura Mercier',
         'Linx',
         'Lush',
@@ -4833,7 +4833,7 @@ const healthBrands = {
         'Dr Rasheal',
         'Dr Teal',
         'Dr Teals',
-        'Dr. Miracle\'s',
+        "Dr. Miracle's",
         'Dr. Rashel',
         'Dynamic Health',
         'E45',
@@ -4902,7 +4902,7 @@ const healthBrands = {
         'Instant White',
         'Isntree',
         'It Works',
-        'It\'s Skin',
+        "It's Skin",
         'Jamberry',
         'Jergens',
         'Jimpo Ori',
@@ -4911,14 +4911,14 @@ const healthBrands = {
         'Jovees',
         'Julie Diamond',
         'Jumiso',
-        'Pond\'s',
+        "Pond's",
         'Pretty Cowry',
         'Pure Body Naturals',
         'Pure Carrot',
         'Pure Egyptian',
         'Purederm',
         'Pureglow',
-        'Puritan\'s Pride',
+        "Puritan's Pride",
         'Qei+',
         'Queen Helene',
         'Radha Beauty',
@@ -4951,7 +4951,7 @@ const healthBrands = {
         'Kose',
         'Kuu',
         'Kuu Spa',
-        'L\'Oreal',
+        "L'Oreal",
         'La Roche-Posay',
         'Lacura',
         'Lanbena',
@@ -4999,9 +4999,9 @@ const healthBrands = {
         'Natural Factors',
         'Nature Made',
         'Nature Well',
-        'Nature\'s Cure',
-        'Nature\'s Life',
-        'Nature\'s Way',
+        "Nature's Cure",
+        "Nature's Life",
+        "Nature's Way",
         'Naturium',
         'Neo G',
         'NeoCell',
@@ -5017,7 +5017,7 @@ const healthBrands = {
         'Now',
         'Nuskin',
         'NutriBiotic',
-        'O\'Carly',
+        "O'Carly",
         'Oilatum',
         'Olay',
         'Old Spice',
@@ -5028,12 +5028,12 @@ const healthBrands = {
         'Origins',
         'Osmotics',
         'OXY',
-        'Palmer\'s',
+        "Palmer's",
         'Pamper Glow',
         'PanOxyl',
         'Paris Hilton',
         'Parley Goldie',
-        'Paula\'s Choice',
+        "Paula's Choice",
         'Peau De Lune',
         'Pei Mei',
         'Perlay Goldie',
@@ -5081,7 +5081,7 @@ const healthTypes = {
         'Blood Supplements',
         'Bone, Joint & Cartilage Supplements',
         'Brain & Cognitive Supplements',
-        'Children\'s Health Supplements',
+        "Children's Health Supplements",
         'Cholesterol Support Supplements',
         'Circulatory System Supplements',
         'Collagen Supplements',
@@ -5108,7 +5108,7 @@ const healthTypes = {
         'Hyaluronic Acid Nutritional Supplements',
         'Lipid Nutritional Supplements',
         'MCT Oil Nutritional Supplements',
-        'Men\'s Health Supplements',
+        "Men's Health Supplements",
         'Menstrual & PMS Support Supplements',
         'Minerals Supplements',
         'Mood & Emotional Support Supplements',
@@ -5125,7 +5125,7 @@ const healthTypes = {
         'Sports Supplements',
         'Thyroid Support Supplements',
         'Urinary Tract Health Supplements',
-        'Women\'s Health Supplements',
+        "Women's Health Supplements",
         'Other',
     ],
     5603: [
@@ -5331,7 +5331,7 @@ const homeBrands = {
         'Nest',
         'Napoleon',
         'Mouka',
-        'Member\'s Mark',
+        "Member's Mark",
         'MasterCraft',
         'Master',
         'Mainstays',
@@ -5348,7 +5348,7 @@ const homeBrands = {
         'Leisure',
         'Legacy',
         'LDR',
-        'Lands\' End',
+        "Lands' End",
         'Kitchen Craft',
         'Kingston Brass',
         'King',
@@ -5681,14 +5681,14 @@ const homeBrands = {
         'Charcoal Companion',
         'Charles Viancin',
         'Chef Craft',
-        'Chef\'sChoice',
+        "Chef'sChoice",
         'Circulon',
         'Clover',
         'Cole & Mason',
         'Coleman',
         'Container Store',
-        'Cook\'s',
-        'Cook\'s Essentials',
+        "Cook's",
+        "Cook's Essentials",
         'Cooking Concepts',
         'Cooper',
         'Corona',
@@ -5720,7 +5720,7 @@ const homeBrands = {
         'EKCO',
         'Element',
         'Ello',
-        'Emeril\'s',
+        "Emeril's",
         'Essential Home',
         'Euro Cuisine',
         'Euro-Pro',
@@ -5740,7 +5740,7 @@ const homeBrands = {
         'Gorham',
         'Gotham Steel',
         'Gourmet Settings',
-        'Grace\'s Teaware',
+        "Grace's Teaware",
         'GreenPan',
         'Haier',
         'Hamilton Beach',
@@ -5788,7 +5788,7 @@ const homeBrands = {
         'Lansky',
         'Laurie Gates',
         'Le Creuset',
-        'Leed\'s',
+        "Leed's",
         'LEM',
         'LG',
         'Libbey',
@@ -5803,7 +5803,7 @@ const homeBrands = {
         'Maxim',
         'Melannco',
         'Melitta',
-        'Member\'s Mark',
+        "Member's Mark",
         'Midea',
         'Miele',
         'Mighty Mug',
@@ -6031,7 +6031,7 @@ const homeBrands = {
         'Charcoal Companion',
         'Cheerpower',
         'Chef Craft',
-        'Chef\'sChoice',
+        "Chef'sChoice",
         'Chemex',
         'Chicago Metallic',
         'Chigo',
@@ -6043,9 +6043,9 @@ const homeBrands = {
         'Cobra',
         'Comark',
         'Container Store',
-        'Cook\'s',
-        'Cook\'s Companion',
-        'Cook\'s Essentials',
+        "Cook's",
+        "Cook's Companion",
+        "Cook's Essentials",
         'Cooking Concepts',
         'Cookwork',
         'Cooper',
@@ -6055,7 +6055,7 @@ const homeBrands = {
         'Cway',
         'Daewoo',
         'Daichi',
-        'De\'Longhi',
+        "De'Longhi",
         'Deco',
         'Delta',
         'Deluxe',
@@ -6237,7 +6237,7 @@ const homeBrands = {
         'Happycall',
         'Harri',
         'Havells',
-        'Heinrich\'S',
+        "Heinrich'S",
         'Henkel',
         'Hicel',
         'Hitachi',
@@ -6753,7 +6753,7 @@ const homeBrands = {
         'Master',
         'Matt & Rose',
         'Maxim',
-        'Member\'s Mark',
+        "Member's Mark",
         'Mercer',
         'Mercury',
         'Merit Linens',
@@ -8293,7 +8293,7 @@ const babiesBrands = {
         'Candies',
         'Canvas',
         'Carter',
-        'Carter\'s',
+        "Carter's",
         'Cat & Jack',
         'Charlie',
         'China',
@@ -8367,7 +8367,7 @@ const babiesBrands = {
         'On',
         'Original',
         'Oscar',
-        'OshKosh B\'gosh',
+        "OshKosh B'gosh",
         'Outdoor',
         'Papillio',
         'Paul Frank',
@@ -8393,11 +8393,11 @@ const babiesBrands = {
         'Starbury',
         'Steve Madden',
         'Summer',
-        'The Children\'s Place',
+        "The Children's Place",
         'Theme',
         'Timberland',
         'Tingley',
-        'Tom\'s',
+        "Tom's",
         'Tommy Hilfiger',
         'TOP MODA',
         'TU',
@@ -8479,7 +8479,7 @@ const babiesBrands = {
         'iPlay, iLearn',
         'Jeep',
         'Judelink',
-        'K\'s Kids',
+        "K's Kids",
         'Kidrobot',
         'Kids II',
         'Kids Preferred',
@@ -8677,8 +8677,8 @@ const babiesBrands = {
         '3M',
         'adidas',
         'Angel',
-        'Carter\'s',
-        'The Children\'s Place',
+        "Carter's",
+        "The Children's Place",
         '2B Real',
         '2XU',
         '3pommes',
@@ -8717,7 +8717,7 @@ const babiesBrands = {
         'Alviero Martini',
         'Amazon',
         'American Princess',
-        'Amy\'s Closet',
+        "Amy's Closet",
         'Anavini',
         'AND1',
         'Anderson',
@@ -8885,7 +8885,7 @@ const babiesBrands = {
         'Kids Headquarters',
         'KIKO MILANO',
         'Lacoste',
-        'Lands\' End',
+        "Lands' End",
         'Laura Ashley',
         'Lauren',
         'Lee',
@@ -8900,7 +8900,7 @@ const babiesBrands = {
         'Luvable Friends',
         'Lux',
         'Lv',
-        'M&M\'s',
+        "M&M's",
         'Mango',
         'Mario',
         'Marks and Spencer',
@@ -8976,7 +8976,7 @@ const babiesBrands = {
         'Unknown Factory',
         'US Polo Assn.',
         'Versace',
-        'Victoria\'s Secret',
+        "Victoria's Secret",
         'Vintage Red',
         'VIP',
         'Waves',
@@ -8994,13 +8994,13 @@ const babiesBrands = {
     6111: [
         'Gerber',
         'Beech-Nut',
-        'Ella\'s Kitchen',
+        "Ella's Kitchen",
         'Plum Organics',
         'Happy Family Organics',
         'Homemade Baby',
         'Sprout Organic',
-        'Earth\'s Best Organic',
-        'Parent\'s Choice',
+        "Earth's Best Organic",
+        "Parent's Choice",
         'Little Spoon',
         'Peter Rabbit Organics',
         'Organix (UK Brand)',
@@ -9166,7 +9166,7 @@ const babiesTypes = {
         'RC Models',
         'Robots',
         'Rocking Horses',
-        'Rubik\'s Cube',
+        "Rubik's Cube",
         'Slot Cars',
         'Space Toys',
         'Stuffed Animals & Plush Toys',
@@ -9224,7 +9224,7 @@ const babiesTypes = {
         'Easels',
         'Hooks & Wall Organization',
         'Kids Armoires',
-        'Kids\' Vanities',
+        "Kids' Vanities",
         'Mattresses',
         'Nursery Centers',
         'Nursery Furniture Sets',
@@ -16162,225 +16162,225 @@ const motorbike01 = [
 // FilterForm Controller, To avoid exporting everything to the page, we only return what is needed.
 export const formToDisplay = (categoryId) => {
     switch (categoryId) {
-    case 50:
-    case 5005:
-    case 5007:
-        return filterFields;
-    case 5003:
-    case 5004:
-        return vans;
-    case 5001:
-        return cars;
-    case 5002:
-        return automobile;
-    case 51:
-        return propertyFields;
-    case 5101:
-    case 5102:
-    case 5103:
-    case 5104:
-    case 5106:
-    case 5107:
-    case 5108:
-    case 5109:
-        return propertyHouseApartment;
-    case 5105:
-        return propertyLand;
-    case 52:
-        return serviceDefault;
-    case 5201:
-        return serviceOffice;
-    case 5202:
-        return serviceFood;
-    case 5203:
-        return serviceWeddings;
-    case 5204:
-        return serviceChildCare;
-    case 5205:
-        return serviceMaintenance;
-    case 5206:
-        return serviceTutorial;
-    case 5207:
-        return serviceClothing;
-    case 5208:
-        return serviceAutomotive;
-    case 5209:
-        return serviceEntertainment;
-    case 5210:
-        return serviceTravel;
-    case 5211:
-        return serviceGoods;
-    case 5212:
-        return serviceLegal;
-    case 5213:
-        return serviceTransport;
-    case 53:
-        return agric;
-    case 5301:
-        return agricultureAnimal;
-    case 5302:
-        return agricultureFarm;
-    case 5303:
-        return agricultureEquipment;
-    case 5304:
-    case 5305:
-        return agricultureFeed;
-    case 54:
-    case 5411:
-        return electronic;
-    case 5401:
-        return electronics01;
-    case 5402:
-        return electronics02;
-    case 5403:
-        return electronics03;
-    case 5404:
-        return electronics04;
-    case 5405:
-        return electronics05;
-    case 5406:
-        return electronics06;
-    case 5407:
-        return electronics07;
-    case 5408:
-        return electronics08;
-    case 5409:
-        return electronics09;
-    case 5410:
-        return electronics10;
-    case 55:
-    case 5502:
-    case 5505:
-        return fashion;
-    case 5501:
-        return fashion01;
-    case 5503:
-        return fashion03;
-    case 5504:
-        return fashion04;
-    case 5506:
-        return fashion06;
-    case 5507:
-        return fashion07;
-    case 56:
-        return health;
-    case 5601:
-        return health01;
-    case 5602:
-        return health02;
-    case 5603:
-        return health03;
-    case 5604:
-        return health04;
-    case 5605:
-        return health05;
-    case 5606:
-        return health06;
-    case 5607:
-        return health07;
-    case 5608:
-        return health08;
-    case 57:
-    case 5703:
-        return home;
-    case 5701:
-        return home01;
-    case 5702:
-        return home02;
-    case 5704:
-        return home04;
-    case 5705:
-        return home05;
-    case 5706:
-        return home06;
-    case 5707:
-        return home07;
-    case 58:
-    case 5801:
-        return tradesman;
-    case 5802:
-        return tradesman02;
-    case 5803:
-        return tradesman03;
-    case 5804:
-        return tradesman04;
-    case 5805:
-        return tradesman05;
-    case 5806:
-        return tradesman06;
-    case 5807:
-        return tradesman07;
-    case 5808:
-        return tradesman08;
-    case 5809:
-        return tradesman09;
-    case 5810:
-        return tradesman10;
-    case 5811:
-        return tradesman11;
-    case 5812:
-        return tradesman12;
-    case 5813:
-        return tradesman13;
-    case 59:
-    case 5902:
-    case 5903:
-        return software;
-    case 5901:
-        return software01;
-    case 60:
-    case 6001:
-    case 6006:
-        return pet;
-    case 6002:
-        return pet02;
-    case 6003:
-        return pet03;
-    case 6004:
-        return pet04;
-    case 6005:
-        return pet05;
-    case 61:
-    case 6107:
-    case 6108:
-        return babies;
-    case 6101:
-        return babies01;
-    case 6102:
-        return babies02;
-    case 6103:
-        return babies03;
-    case 6104:
-        return babies04;
-    case 6105:
-        return babies05;
-    case 6106:
-        return babies06;
-    case 6109:
-        return babies09;
-    case 6110:
-        return babies10;
-    case 6111:
-        return babies11;
-    case 62:
-    case 6205:
-        return sport;
-    case 6201:
-        return sport01;
-    case 6202:
-        return sport02;
-    case 6203:
-        return sport03;
-    case 6204:
-        return sport04;
-    case 6206:
-        return sport06;
-    case 63:
-    case 6302:
-        return motorbike;
-    case 6301:
-        return motorbike01;
-    default:
-        return [];
+        case 50:
+        case 5005:
+        case 5007:
+            return filterFields;
+        case 5003:
+        case 5004:
+            return vans;
+        case 5001:
+            return cars;
+        case 5002:
+            return automobile;
+        case 51:
+            return propertyFields;
+        case 5101:
+        case 5102:
+        case 5103:
+        case 5104:
+        case 5106:
+        case 5107:
+        case 5108:
+        case 5109:
+            return propertyHouseApartment;
+        case 5105:
+            return propertyLand;
+        case 52:
+            return serviceDefault;
+        case 5201:
+            return serviceOffice;
+        case 5202:
+            return serviceFood;
+        case 5203:
+            return serviceWeddings;
+        case 5204:
+            return serviceChildCare;
+        case 5205:
+            return serviceMaintenance;
+        case 5206:
+            return serviceTutorial;
+        case 5207:
+            return serviceClothing;
+        case 5208:
+            return serviceAutomotive;
+        case 5209:
+            return serviceEntertainment;
+        case 5210:
+            return serviceTravel;
+        case 5211:
+            return serviceGoods;
+        case 5212:
+            return serviceLegal;
+        case 5213:
+            return serviceTransport;
+        case 53:
+            return agric;
+        case 5301:
+            return agricultureAnimal;
+        case 5302:
+            return agricultureFarm;
+        case 5303:
+            return agricultureEquipment;
+        case 5304:
+        case 5305:
+            return agricultureFeed;
+        case 54:
+        case 5411:
+            return electronic;
+        case 5401:
+            return electronics01;
+        case 5402:
+            return electronics02;
+        case 5403:
+            return electronics03;
+        case 5404:
+            return electronics04;
+        case 5405:
+            return electronics05;
+        case 5406:
+            return electronics06;
+        case 5407:
+            return electronics07;
+        case 5408:
+            return electronics08;
+        case 5409:
+            return electronics09;
+        case 5410:
+            return electronics10;
+        case 55:
+        case 5502:
+        case 5505:
+            return fashion;
+        case 5501:
+            return fashion01;
+        case 5503:
+            return fashion03;
+        case 5504:
+            return fashion04;
+        case 5506:
+            return fashion06;
+        case 5507:
+            return fashion07;
+        case 56:
+            return health;
+        case 5601:
+            return health01;
+        case 5602:
+            return health02;
+        case 5603:
+            return health03;
+        case 5604:
+            return health04;
+        case 5605:
+            return health05;
+        case 5606:
+            return health06;
+        case 5607:
+            return health07;
+        case 5608:
+            return health08;
+        case 57:
+        case 5703:
+            return home;
+        case 5701:
+            return home01;
+        case 5702:
+            return home02;
+        case 5704:
+            return home04;
+        case 5705:
+            return home05;
+        case 5706:
+            return home06;
+        case 5707:
+            return home07;
+        case 58:
+        case 5801:
+            return tradesman;
+        case 5802:
+            return tradesman02;
+        case 5803:
+            return tradesman03;
+        case 5804:
+            return tradesman04;
+        case 5805:
+            return tradesman05;
+        case 5806:
+            return tradesman06;
+        case 5807:
+            return tradesman07;
+        case 5808:
+            return tradesman08;
+        case 5809:
+            return tradesman09;
+        case 5810:
+            return tradesman10;
+        case 5811:
+            return tradesman11;
+        case 5812:
+            return tradesman12;
+        case 5813:
+            return tradesman13;
+        case 59:
+        case 5902:
+        case 5903:
+            return software;
+        case 5901:
+            return software01;
+        case 60:
+        case 6001:
+        case 6006:
+            return pet;
+        case 6002:
+            return pet02;
+        case 6003:
+            return pet03;
+        case 6004:
+            return pet04;
+        case 6005:
+            return pet05;
+        case 61:
+        case 6107:
+        case 6108:
+            return babies;
+        case 6101:
+            return babies01;
+        case 6102:
+            return babies02;
+        case 6103:
+            return babies03;
+        case 6104:
+            return babies04;
+        case 6105:
+            return babies05;
+        case 6106:
+            return babies06;
+        case 6109:
+            return babies09;
+        case 6110:
+            return babies10;
+        case 6111:
+            return babies11;
+        case 62:
+        case 6205:
+            return sport;
+        case 6201:
+            return sport01;
+        case 6202:
+            return sport02;
+        case 6203:
+            return sport03;
+        case 6204:
+            return sport04;
+        case 6206:
+            return sport06;
+        case 63:
+        case 6302:
+            return motorbike;
+        case 6301:
+            return motorbike01;
+        default:
+            return [];
     }
 };

@@ -100,17 +100,17 @@ const Withdraw = () => {
 
     return (
         <div>
-            <form onSubmit={formikWithdraw.handleSubmit} className="space-y-3 max-w-[24rem]">
-                <div className="flex flex-col">
-                    <label htmlFor="bank" className="mb-[-7px] font-bold">
+            <form onSubmit={formikWithdraw.handleSubmit} className='space-y-3 max-w-[24rem]'>
+                <div className='flex flex-col'>
+                    <label htmlFor='bank' className='mb-[-7px] font-bold'>
                         Withdraw to:
                     </label>
 
-                    <div className="dropdown dropdown-bottom dropdown-center ">
+                    <div className='dropdown dropdown-bottom dropdown-center '>
                         <button
-                            type="button"
+                            type='button'
                             tabIndex={0}
-                            className="customSelectInput p-2 mt-2 text-left flex justify-between items-center text-black/50 "
+                            className='customSelectInput p-2 mt-2 text-left flex justify-between items-center text-black/50 '
                         >
                             {selectedBank ? (
                                 selectedBank?.type === 'bank' ? (
@@ -135,16 +135,16 @@ const Withdraw = () => {
                                     </span>
                                 )
                             ) : (
-                                <span className="pl-2 text-gray-400">Select Account</span>
+                                <span className='pl-2 text-gray-400'>Select Account</span>
                             )}
-                            <img src={ArrowRightBlack} className="w-4 h-4" alt="/" />
+                            <img src={ArrowRightBlack} className='w-4 h-4' alt='/' />
                         </button>
                         <ul
                             tabIndex={0}
-                            className="dropdown-content  z-[1] menu  shadow bg-white   w-96 flex flex-col justify-between"
+                            className='dropdown-content  z-[1] menu  shadow bg-white   w-96 flex flex-col justify-between'
                         >
                             <div>
-                                <div className="bg-secondary text-center p-2">
+                                <div className='bg-secondary text-center p-2'>
                                     Bank Cards/Accounts
                                 </div>
                                 {savedBankAccountList.map((payout, i) => (
@@ -154,7 +154,7 @@ const Withdraw = () => {
                                                 onClick={() => handleWithdrawChange(payout)}
                                                 key={payout?.id.slice(4)}
                                                 tabIndex={0}
-                                                className="cursor-pointer font-medium border-b border-b-transparent pb-0 hover:border-black/30  whitespace-nowrap flex flex-row items-center justify-between w-full"
+                                                className='cursor-pointer font-medium border-b border-b-transparent pb-0 hover:border-black/30  whitespace-nowrap flex flex-row items-center justify-between w-full'
                                             >
                                                 <span>
                                                     <BsBank2 size={25} /> {payout?.bank_name}
@@ -175,17 +175,17 @@ const Withdraw = () => {
                                                 onClick={() => handleWithdrawChange(payout)}
                                                 key={payout?.id?.slice(4)}
                                                 tabIndex={0}
-                                                className="cursor-pointer font-medium border-b border-b-transparent pb-0 hover:border-black/30  whitespace-nowrap flex flex-row items-center justify-between w-full"
+                                                className='cursor-pointer font-medium border-b border-b-transparent pb-0 hover:border-black/30  whitespace-nowrap flex flex-row items-center justify-between w-full'
                                             >
                                                 <span>
                                                     {payout?.card_type.trim() === 'visa' ? (
                                                         <RiVisaFill size={25} />
                                                     ) : payout?.card_type.trim() ===
                                                       'mastercard' ? (
-                                                            <FaCcMastercard size={25} />
-                                                        ) : (
-                                                            <CiCreditCard2 size={25} />
-                                                        )}{' '}
+                                                        <FaCcMastercard size={25} />
+                                                    ) : (
+                                                        <CiCreditCard2 size={25} />
+                                                    )}{' '}
                                                     {payout?.bank}
                                                 </span>{' '}
                                                 <span>
@@ -203,7 +203,7 @@ const Withdraw = () => {
                             </div>
 
                             <button
-                                className="border border-secondary rounded-lg mt-8 p-2"
+                                className='border border-secondary rounded-lg mt-8 p-2'
                                 onClick={() => setNewBankAccount(true)}
                             >
                                 Withdraw to a new bank account
@@ -212,17 +212,17 @@ const Withdraw = () => {
                     </div>
                 </div>
 
-                <div className="flex flex-col">
-                    <label htmlFor="amount" className="mb-[-7px] font-bold">
+                <div className='flex flex-col'>
+                    <label htmlFor='amount' className='mb-[-7px] font-bold'>
                         Amount
                     </label>
-                    <div className="relative max-w-sm">
+                    <div className='relative max-w-sm'>
                         <InputGroup
-                            name="amount"
-                            id="amount"
-                            type="text"
-                            amount="NGN"
-                            autoComplete="off"
+                            name='amount'
+                            id='amount'
+                            type='text'
+                            amount='NGN'
+                            autoComplete='off'
                             className={'customAmountInput '}
                             value={formikWithdraw.values.amount}
                             onChange={handleMoneyChange}
@@ -237,10 +237,10 @@ const Withdraw = () => {
                                     onClick={() => {
                                         formikWithdraw.resetForm();
                                     }}
-                                    type="button"
-                                    className="absolute right-2 inset-y-0 my-auto h-fit "
+                                    type='button'
+                                    className='absolute right-2 inset-y-0 my-auto h-fit '
                                 >
-                                    <img src={Cancel} alt="/" className="w-4" />
+                                    <img src={Cancel} alt='/' className='w-4' />
                                 </button>
                             }
                         />
@@ -248,7 +248,7 @@ const Withdraw = () => {
                 </div>
 
                 <Button
-                    type="submit"
+                    type='submit'
                     variant={'secondary'}
                     size={'full'}
                     className={'max-w-sm font-bold rounded-xl'}

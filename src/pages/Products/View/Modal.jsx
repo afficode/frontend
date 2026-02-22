@@ -9,18 +9,18 @@ const Modal = ({ modalHeader, children, headerText, buttonChild, className, ...r
             >
                 {buttonChild}
             </button>
-            <dialog id="feedbackModal" className="modal">
-                <div className="modal-box bg-white  md:min-w-[700px]">
-                    {modalHeader && <h3 className="font-bold text-lg">{headerText}</h3>}
-                    <div className="py-4">{children}</div>
-                    <div className="modal-action">
-                        <form method="dialog">
+            <dialog id='feedbackModal' className='modal'>
+                <div className='modal-box bg-white  md:min-w-[700px]'>
+                    {modalHeader && <h3 className='font-bold text-lg'>{headerText}</h3>}
+                    <div className='py-4'>{children}</div>
+                    <div className='modal-action'>
+                        <form method='dialog'>
                             {/* if there is a button in form, it will close the modal */}
-                            <button className="btn">Close</button>
+                            <button className='btn'>Close</button>
                         </form>
                     </div>
                 </div>
-                <form method="dialog" className="modal-backdrop">
+                <form method='dialog' className='modal-backdrop'>
                     <button>close</button>
                 </form>
             </dialog>

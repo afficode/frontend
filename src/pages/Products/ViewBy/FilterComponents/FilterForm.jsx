@@ -20,7 +20,9 @@ const FilterForm = ({ categoryId }) => {
 
     const filterFieldNames = useMemo(() => {
         const fields = formToDisplay(categoryId);
-        if (!fields) {return [];}
+        if (!fields) {
+            return [];
+        }
         return fields.map((field) => field.name);
     }, [categoryId]);
 
@@ -42,7 +44,7 @@ const FilterForm = ({ categoryId }) => {
     };
 
     return (
-        <div className="my-2">
+        <div className='my-2'>
             <Formik
                 initialValues={initialValues}
                 enableReinitialize={true}
@@ -103,40 +105,40 @@ const FilterForm = ({ categoryId }) => {
 
                     return (
                         <Form>
-                            <div className="flex gap-2">
+                            <div className='flex gap-2'>
                                 <button
-                                    type="submit"
-                                    className="btn btn-square rounded-none text-black !text-sm !sm:text-base px-2 bg-white hover:bg-primary hover:border-0 hover:text-white flex-1 tracking-tighter line-clamp-1"
+                                    type='submit'
+                                    className='btn btn-square rounded-none text-black !text-sm !sm:text-base px-2 bg-white hover:bg-primary hover:border-0 hover:text-white flex-1 tracking-tighter line-clamp-1'
                                 >
-									Apply
+                                    Apply
                                 </button>
                                 <button
-                                    type="button"
+                                    type='button'
                                     onClick={() => handleClearFilters(resetForm)}
-                                    className="btn btn-square rounded-none text-black !text-sm !sm:text-base px-2 bg-white hover:bg-red-500 hover:border-0 hover:text-white flex-1 tracking-tighter line-clamp-1"
+                                    className='btn btn-square rounded-none text-black !text-sm !sm:text-base px-2 bg-white hover:bg-red-500 hover:border-0 hover:text-white flex-1 tracking-tighter line-clamp-1'
                                 >
-									Clear
+                                    Clear
                                 </button>
                             </div>
 
                             {fields?.map((field, index) => (
-                                <div key={index} className="">
+                                <div key={index} className=''>
                                     <FilterCard field={field} setfieldvalue={setFieldValue} />
                                 </div>
                             ))}
-                            <div className="flex gap-2">
+                            <div className='flex gap-2'>
                                 <button
-                                    type="submit"
-                                    className="btn btn-square rounded-none text-black !text-sm !sm:text-base px-2 bg-white hover:bg-primary hover:border-0 hover:text-white flex-1 tracking-tighter line-clamp-1"
+                                    type='submit'
+                                    className='btn btn-square rounded-none text-black !text-sm !sm:text-base px-2 bg-white hover:bg-primary hover:border-0 hover:text-white flex-1 tracking-tighter line-clamp-1'
                                 >
-									Apply
+                                    Apply
                                 </button>
                                 <button
-                                    type="button"
+                                    type='button'
                                     onClick={() => handleClearFilters(resetForm)}
-                                    className="btn btn-square rounded-none text-black !text-sm !sm:text-base px-2 bg-white hover:bg-red-500 hover:border-0 hover:text-white flex-1 tracking-tighter line-clamp-1"
+                                    className='btn btn-square rounded-none text-black !text-sm !sm:text-base px-2 bg-white hover:bg-red-500 hover:border-0 hover:text-white flex-1 tracking-tighter line-clamp-1'
                                 >
-									Clear
+                                    Clear
                                 </button>
                             </div>
                         </Form>

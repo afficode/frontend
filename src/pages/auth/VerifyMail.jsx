@@ -46,13 +46,15 @@ const VerifyMail = () => {
     }, [location.search]);
 
     return (
-        <div className="bg-white w-full  ">
-            <div className="w-full  flex items-center justify-center  ">
-                <div className="md:w-[50%] w-[90%] my-[5rem] ">
-                    <h1 className="text-center text-black text-[1.5rem] font-[500]">Verify your phone number</h1>
-                    <div className="flex flex-col p-4 text-center">
+        <div className='bg-white w-full  '>
+            <div className='w-full  flex items-center justify-center  '>
+                <div className='md:w-[50%] w-[90%] my-[5rem] '>
+                    <h1 className='text-center text-black text-[1.5rem] font-[500]'>
+                        Verify your phone number
+                    </h1>
+                    <div className='flex flex-col p-4 text-center'>
                         <h4>Enter OTP</h4>
-                        <p className="my-2">OTP sent to your registered phone number</p>
+                        <p className='my-2'>OTP sent to your registered phone number</p>
                         <ConfirmPhoneNumber />
                     </div>
                 </div>
@@ -106,10 +108,12 @@ const ConfirmPhoneNumber = () => {
 
     // Handle single key press/change
     const handleOtpChange = (e, index) => {
-        const {value} = e.target;
+        const { value } = e.target;
 
         // Allow only alphanumeric single character
-        if (!/^[0-9a-zA-Z]{0,1}$/.test(value)) {return;}
+        if (!/^[0-9a-zA-Z]{0,1}$/.test(value)) {
+            return;
+        }
 
         const newCode = [...code];
         newCode[index] = value;
@@ -185,7 +189,7 @@ const ConfirmPhoneNumber = () => {
                 if (error?.response?.status === 401) {
                     notify(
                         error?.response.data.message ||
-							'Error verifying your account. The token is either broken or expired. Please try resending a verification email',
+                            'Error verifying your account. The token is either broken or expired. Please try resending a verification email',
                         'error'
                     );
                 } else {
@@ -212,40 +216,45 @@ const ConfirmPhoneNumber = () => {
 
     return (
         <div>
-            <form onSubmit={handleOtpSubmit} className="flex flex-col items-center space-y-4">
-                <div className="flex mb-2 space-x-2 rtl:space-x-reverse">
+            <form onSubmit={handleOtpSubmit} className='flex flex-col items-center space-y-4'>
+                <div className='flex mb-2 space-x-2 rtl:space-x-reverse'>
                     {code.map((value, index) => (
                         <input
                             key={index}
-                            type="text"
-                            maxLength="1"
+                            type='text'
+                            maxLength='1'
                             value={value}
                             onChange={(e) => handleOtpChange(e, index)}
                             onKeyUp={(e) => handleKeyUp(e, index)}
                             onPaste={index === 0 ? handlePaste : undefined}
                             ref={(el) => (inputsRef.current[index] = el)}
-                            className="block w-9 h-9 py-3 text-sm font-extrabold text-center text-gray-900 bg-white border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
+                            className='block w-9 h-9 py-3 text-sm font-extrabold text-center text-gray-900 bg-white border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary'
                             required
                         />
                     ))}
                 </div>
-                <div className="flex flex-col gap-2">
-                    <div className="flex gap-2 items-center justify-between">
-                        <Button type="submit" disabled={isLoading} className={'bg-[#047F73]  text-white p-2'}>
-							Verify OTP
+                <div className='flex flex-col gap-2'>
+                    <div className='flex gap-2 items-center justify-between'>
+                        <Button
+                            type='submit'
+                            disabled={isLoading}
+                            className={'bg-[#047F73]  text-white p-2'}
+                        >
+                            Verify OTP
                         </Button>
                         <Button
-                            type="button"
+                            type='button'
                             onClick={resendOtp}
                             disabled={!isExpired || isLoading}
-                            className="bg-primary p-2"
+                            className='bg-primary p-2'
                         >
-							Resend OTP
+                            Resend OTP
                         </Button>
                     </div>
-                    <p className="text-center text-sm my-4 gap-x-4">
-						OTP expires in: {Math.floor(timer / 60)}:{(timer % 60).toString().padStart(2, '0')}
-                        <span className="ml-4">
+                    <p className='text-center text-sm my-4 gap-x-4'>
+                        OTP expires in: {Math.floor(timer / 60)}:
+                        {(timer % 60).toString().padStart(2, '0')}
+                        <span className='ml-4'>
                             <BsAlarmFill
                                 className={`absolute inline-flex mb-4 text-gray ${
                                     Math.floor(timer / 60) < 1 ? 'animate-ping flex' : 'hidden'
@@ -256,8 +265,8 @@ const ConfirmPhoneNumber = () => {
                                     Math.floor(timer / 60) > 2
                                         ? 'text-green-700'
                                         : Math.floor(timer / 60) > 1
-                                            ? 'text-yellow-500'
-                                            : 'text-red-700'
+                                          ? 'text-yellow-500'
+                                          : 'text-red-700'
                                 }`}
                             />
                         </span>

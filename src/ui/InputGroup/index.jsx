@@ -22,16 +22,16 @@ const InputGroup = ({
     ...rest
 }) => {
     return (
-        <div className="my-2">
+        <div className='my-2'>
             {label ? (
-                <label className="input-group-label" htmlFor={name}>
+                <label className='input-group-label' htmlFor={name}>
                     {label}
                     {moreInfo ? (
-                        <span className="info-con">
-                            <button type="button" className="info" tabIndex={0}>
+                        <span className='info-con'>
+                            <button type='button' className='info' tabIndex={0}>
                                 <img src={InputInfo} />
                             </button>
-                            <span className="outer">
+                            <span className='outer'>
                                 <span>{moreInfo}</span>
                             </span>
                         </span>
@@ -50,10 +50,14 @@ const InputGroup = ({
                         className={`${className ? className : ''}`}
                         value={value}
                         onBlur={(e) => {
-                            if (typeof onChange === 'function') {onBlur(e);}
+                            if (typeof onChange === 'function') {
+                                onBlur(e);
+                            }
                         }}
                         onChange={(e) => {
-                            if (typeof onChange === 'function') {onChange(e);}
+                            if (typeof onChange === 'function') {
+                                onChange(e);
+                            }
                         }}
                         {...rest}
                     />
@@ -62,19 +66,23 @@ const InputGroup = ({
                 </>
             ) : type === 'file' ? (
                 <>
-                    <label htmlFor={name} className="cursor-pointer">
+                    <label htmlFor={name} className='cursor-pointer'>
                         {children}
                         <input
-                            type="file"
+                            type='file'
                             name={name}
                             id={name}
                             className={`hidden ${className ? className : ''}`}
                             value={value}
                             onBlur={(e) => {
-                                if (typeof onChange === 'function') {onBlur(e);}
+                                if (typeof onChange === 'function') {
+                                    onBlur(e);
+                                }
                             }}
                             onChange={(e) => {
-                                if (typeof onChange === 'function') {onChange(e);}
+                                if (typeof onChange === 'function') {
+                                    onChange(e);
+                                }
                             }}
                             {...rest}
                         />
@@ -84,23 +92,31 @@ const InputGroup = ({
             ) : type === 'select' ? (
                 <>
                     <select
-                        type="select"
+                        type='select'
                         name={name}
                         id={name}
                         placeholder={placeholder}
                         className={` ${className ? className : ''}`}
                         value={value}
                         onBlur={(e) => {
-                            if (typeof onChange === 'function') {onBlur(e);}
+                            if (typeof onChange === 'function') {
+                                onBlur(e);
+                            }
                         }}
                         onChange={(e) => {
-                            if (typeof onChange === 'function') {onChange(e);}
+                            if (typeof onChange === 'function') {
+                                onChange(e);
+                            }
                         }}
                         {...rest}
                     >
                         {optionLists?.map((option, i) => {
                             return (
-                                <option key={i} value={option.value} className="whitespace-normal break-all">
+                                <option
+                                    key={i}
+                                    value={option.value}
+                                    className='whitespace-normal break-all'
+                                >
                                     {option.key}
                                 </option>
                             );
@@ -111,20 +127,24 @@ const InputGroup = ({
                 </>
             ) : type === 'date' ? (
                 <>
-                    <label htmlFor={name} className="cursor-pointer">
+                    <label htmlFor={name} className='cursor-pointer'>
                         {children}
                         <input
-                            type="date"
+                            type='date'
                             name={name}
                             id={name}
                             placeholder={placeholder}
                             className={` ${className ? className : ''}`}
                             value={value}
                             onBlur={(e) => {
-                                if (typeof onChange === 'function') {onBlur(e);}
+                                if (typeof onChange === 'function') {
+                                    onBlur(e);
+                                }
                             }}
                             onChange={(e) => {
-                                if (typeof onChange === 'function') {onChange(e);}
+                                if (typeof onChange === 'function') {
+                                    onChange(e);
+                                }
                             }}
                             {...rest}
                         />
@@ -137,19 +157,26 @@ const InputGroup = ({
                         {children}
                         {optionLists.map((option) => {
                             return (
-                                <div key={option.value} className="inline-block items-center pr-8 space-x-2">
+                                <div
+                                    key={option.value}
+                                    className='inline-block items-center pr-8 space-x-2'
+                                >
                                     <input
-                                        type="radio"
+                                        type='radio'
                                         name={option.value}
                                         id={option.value}
                                         value={option.value}
                                         checked={option.value === value}
                                         className={` ${className ? className : ''}`}
                                         onBlur={(e) => {
-                                            if (typeof onChange === 'function') {onBlur(e);}
+                                            if (typeof onChange === 'function') {
+                                                onBlur(e);
+                                            }
                                         }}
                                         onChange={(e) => {
-                                            if (typeof onChange === 'function') {onChange(e);}
+                                            if (typeof onChange === 'function') {
+                                                onChange(e);
+                                            }
                                         }}
                                         {...rest}
                                     />
@@ -171,20 +198,26 @@ const InputGroup = ({
                             className={` ${className ? className : ''}`}
                             value={value}
                             onBlur={(e) => {
-                                if (typeof onChange === 'function') {onBlur(e);}
+                                if (typeof onChange === 'function') {
+                                    onBlur(e);
+                                }
                             }}
                             onChange={(e) => {
-                                if (typeof onChange === 'function') {onChange(e);}
+                                if (typeof onChange === 'function') {
+                                    onChange(e);
+                                }
                             }}
                             readOnly={readOnly}
                             {...rest}
                         />
                         {amount && amount === 'naira' ? (
-                            <span className="absolute left-2 inset-y-0 my-auto h-fit font-bold">
-                                <img src={Naira} alt="naira" className="w-4" />
+                            <span className='absolute left-2 inset-y-0 my-auto h-fit font-bold'>
+                                <img src={Naira} alt='naira' className='w-4' />
                             </span>
                         ) : amount === 'NGN' ? (
-                            <span className="absolute left-2 inset-y-0 my-auto h-fit font-bold">{amount}</span>
+                            <span className='absolute left-2 inset-y-0 my-auto h-fit font-bold'>
+                                {amount}
+                            </span>
                         ) : null}
                         {cancelButton && cancelButton}
                     </div>

@@ -182,8 +182,8 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
                                     <Button
                                         variant={'primary'}
                                         size={'full'}
-                                        type="button"
-                                        className="my-2  text-lg tracking-tighter line-clamp-1 "
+                                        type='button'
+                                        className='my-2  text-lg tracking-tighter line-clamp-1 '
                                     >
                                         Interested
                                     </Button>
@@ -192,34 +192,34 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
                                 {grabs?.includes(ad_id) ? (
                                     <Button
                                         onClick={async () => unGrabAd(ad_id)}
-                                        variant="secondary"
+                                        variant='secondary'
                                         size={'full'}
-                                        className="my-2  text-lg tracking-tighter line-clamp-1 hover:opacity-40"
+                                        className='my-2  text-lg tracking-tighter line-clamp-1 hover:opacity-40'
                                         disabled={isLoading || false}
-                                        type="button"
+                                        type='button'
                                     >
-                                        <span className="flex items-center gap-2 justify-center">
+                                        <span className='flex items-center gap-2 justify-center'>
                                             Ungrab Item
-                                            <FcCancel className="my-auto" />
+                                            <FcCancel className='my-auto' />
                                         </span>{' '}
                                     </Button>
                                 ) : (
                                     <Button
                                         onClick={handleGrab}
-                                        variant="secondary"
+                                        variant='secondary'
                                         size={'full'}
                                         className={`my-2  text-lg tracking-tighter line-clamp-1 ${isLoading ? 'opacity-40' : ''}`}
                                         disabled={
                                             !isLogin || blocked || user?.id === owner || isLoading
                                         }
-                                        type="button"
+                                        type='button'
                                     >
                                         {isLoading ? (
-                                            <span className="loading loading-spinner loading-md"></span>
+                                            <span className='loading loading-spinner loading-md'></span>
                                         ) : (
-                                            <span className="flex items-center gap-2 justify-center">
+                                            <span className='flex items-center gap-2 justify-center'>
                                                 Grab Item
-                                                <FaMicrochip className="my-auto" />
+                                                <FaMicrochip className='my-auto' />
                                             </span>
                                         )}{' '}
                                     </Button>
@@ -231,8 +231,8 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
                                     <Button
                                         variant={'primary'}
                                         size={'full'}
-                                        type="button"
-                                        className="my-2  text-lg tracking-tighter line-clamp-1 "
+                                        type='button'
+                                        className='my-2  text-lg tracking-tighter line-clamp-1 '
                                     >
                                         Place order
                                     </Button>
@@ -241,34 +241,34 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
                                 {grabs?.includes(ad_id, 10) ? (
                                     <Button
                                         onClick={async () => unGrabAd(ad_id)}
-                                        variant="secondary"
+                                        variant='secondary'
                                         size={'full'}
-                                        className="my-2  text-lg tracking-tighter line-clamp-1 hover:opacity-40"
+                                        className='my-2  text-lg tracking-tighter line-clamp-1 hover:opacity-40'
                                         disabled={isLoading || false}
-                                        type="button"
+                                        type='button'
                                     >
-                                        <span className="flex items-center gap-2 justify-center">
+                                        <span className='flex items-center gap-2 justify-center'>
                                             Ungrab Item
-                                            <FcCancel className="my-auto" />
+                                            <FcCancel className='my-auto' />
                                         </span>{' '}
                                     </Button>
                                 ) : (
                                     <Button
                                         onClick={handleGrab}
-                                        variant="secondary"
+                                        variant='secondary'
                                         size={'full'}
                                         className={`my-2  text-lg tracking-tighter line-clamp-1 ${isLoading ? 'opacity-40' : ''}`}
                                         disabled={
                                             !isLogin || blocked || user?.id === owner || isLoading
                                         }
-                                        type="button"
+                                        type='button'
                                     >
                                         {isLoading ? (
-                                            <span className="loading loading-spinner loading-md"></span>
+                                            <span className='loading loading-spinner loading-md'></span>
                                         ) : (
-                                            <span className="flex items-center gap-2 justify-center">
+                                            <span className='flex items-center gap-2 justify-center'>
                                                 Grab Item
-                                                <FaMicrochip className="my-auto" />
+                                                <FaMicrochip className='my-auto' />
                                             </span>
                                         )}{' '}
                                     </Button>
@@ -280,9 +280,9 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
                                     disabled={
                                         !isLogin || chatId !== null || blocked || user?.id === owner
                                     }
-                                    as="textarea"
-                                    name="message"
-                                    id="message"
+                                    as='textarea'
+                                    name='message'
+                                    id='message'
                                     className={`border-2 w-full border-gray-200 p-4 focus:outline-none focus:bg-white focus:border-primary tracking-tighter line-clamp-1 ${
                                         !isLogin && 'bg-gray-100 cursor-not-allowed'
                                     } ${chatId !== null && 'bg-gray-300 cursor-not-allowed'}`}
@@ -296,8 +296,8 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
                                 />
                                 <Input
                                     disabled={chatId !== null || blocked || user?.id === owner}
-                                    name="phone"
-                                    id="phone"
+                                    name='phone'
+                                    id='phone'
                                     placeholder={
                                         chatId !== null
                                             ? 'Disabled... Please continue chat in the message section'
@@ -307,27 +307,27 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
                                         !isLogin && 'bg-gray-100 cursor-not-allowed'
                                     } ${chatId !== null && 'bg-gray-300 cursor-not-allowed'}`}
                                 />
-                                <div className="space-y-1 w-full my-2 text-start ">
-                                    <h5 className="text-base font-semibold">
+                                <div className='space-y-1 w-full my-2 text-start '>
+                                    <h5 className='text-base font-semibold'>
                                         The Boonfu Safety Standard
                                     </h5>
-                                    <ul className="!text-xs">
-                                        <li className="!text-xs">
+                                    <ul className='!text-xs'>
+                                        <li className='!text-xs'>
                                             -Use &quot;Grab&quot; for Escrow; never pay sellers
                                             directly.
                                         </li>
-                                        <li className="!text-xs">
+                                        <li className='!text-xs'>
                                             -Inspect items thoroughly before confirming to release
                                             funds.
                                         </li>
-                                        <li className="!text-xs">
+                                        <li className='!text-xs'>
                                             -Keep all chats and payments within the Boonfu platform.
                                         </li>
-                                        <li className="!text-xs">
+                                        <li className='!text-xs'>
                                             -Meet in busy, public locations for physical
                                             inspections.
                                         </li>
-                                        <li className="!text-xs">
+                                        <li className='!text-xs'>
                                             -If a deal looks too good to be true, proceed with
                                             caution.
                                         </li>
@@ -338,13 +338,13 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
                                     <Link to={Approutes.profile.messages}>
                                         <Button
                                             disabled={!isLogin || blocked || user?.id === owner}
-                                            variant="secondary"
+                                            variant='secondary'
                                             size={'full'}
-                                            className="my-2 text-base font-bold tracking-tighter line-clamp-1"
+                                            className='my-2 text-base font-bold tracking-tighter line-clamp-1'
                                         >
-                                            <span className="flex gap-2 lg:gap-4 items-center justify-center">
+                                            <span className='flex gap-2 lg:gap-4 items-center justify-center'>
                                                 {' '}
-                                                Go to Message <FaEnvelope className="my-auto" />
+                                                Go to Message <FaEnvelope className='my-auto' />
                                             </span>
                                         </Button>
                                     </Link>
@@ -356,58 +356,58 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
                                         <Button
                                             disabled={!isLogin || blocked || user?.id === owner}
                                             loading={isSubmitting}
-                                            type="submit"
-                                            variant="primary"
+                                            type='submit'
+                                            variant='primary'
                                             size={'full'}
-                                            className="my-2 text-base font-bold tracking-tighter line-clamp-1"
+                                            className='my-2 text-base font-bold tracking-tighter line-clamp-1'
                                         >
                                             Submit
                                         </Button>
                                     </div>
                                 )}
                                 {ad?.negotiable === 1 && (
-                                    <div className="dropdown dropdown-top dropdown-center w-full ">
+                                    <div className='dropdown dropdown-top dropdown-center w-full '>
                                         <Button
                                             variant={'secondary'}
                                             size={'full'}
-                                            type="button"
-                                            className=" text-base  tracking-tighter line-clamp-1 group focus:bg-white focus:border-black"
+                                            type='button'
+                                            className=' text-base  tracking-tighter line-clamp-1 group focus:bg-white focus:border-black'
                                         >
-                                            <span className="flex items-center gap-4 justify-center font-semibold">
+                                            <span className='flex items-center gap-4 justify-center font-semibold'>
                                                 Make offer{' '}
                                                 <img
                                                     src={ArrowDown}
-                                                    alt="arrow down"
-                                                    className="w-4 group-focus:transform group-focus:rotate-180 transition-all"
+                                                    alt='arrow down'
+                                                    className='w-4 group-focus:transform group-focus:rotate-180 transition-all'
                                                 />
                                             </span>
                                         </Button>
                                         <div
                                             tabIndex={0}
-                                            className="dropdown-content   z-[10] menu  p-4 bg-white shadow-2xl w-full flex flex-col justify-between"
+                                            className='dropdown-content   z-[10] menu  p-4 bg-white shadow-2xl w-full flex flex-col justify-between'
                                         >
-                                            <form className="space-y-4">
+                                            <form className='space-y-4'>
                                                 <div>
-                                                    <div className="flex items-center justify-between">
+                                                    <div className='flex items-center justify-between'>
                                                         <p>Price:</p>
-                                                        <h6 className="font-bold flex items-center gap-2">
+                                                        <h6 className='font-bold flex items-center gap-2'>
                                                             {' '}
                                                             <img
                                                                 src={Naira}
-                                                                alt="naira"
-                                                                className="w-4"
+                                                                alt='naira'
+                                                                className='w-4'
                                                             />{' '}
                                                             {toMoney(ad?.price)}
                                                         </h6>
                                                     </div>
-                                                    <div className="flex items-center justify-between gap-6">
-                                                        <label htmlFor="offer">Offer:</label>
+                                                    <div className='flex items-center justify-between gap-6'>
+                                                        <label htmlFor='offer'>Offer:</label>
                                                         <InputGroup
-                                                            name="offer"
-                                                            id="offer"
-                                                            type="text"
+                                                            name='offer'
+                                                            id='offer'
+                                                            type='text'
                                                             amount={'naira'}
-                                                            autoComplete="off"
+                                                            autoComplete='off'
                                                             className={' customAmountInput '}
                                                             value={offer}
                                                             onChange={handleMoneyChange}
@@ -416,13 +416,13 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
                                                                     onClick={() => {
                                                                         setOffer('');
                                                                     }}
-                                                                    type="button"
-                                                                    className="absolute right-2 inset-y-0 my-auto h-fit "
+                                                                    type='button'
+                                                                    className='absolute right-2 inset-y-0 my-auto h-fit '
                                                                 >
                                                                     <img
                                                                         src={Cancel}
-                                                                        alt="cancel"
-                                                                        className="w-4"
+                                                                        alt='cancel'
+                                                                        className='w-4'
                                                                     />
                                                                 </button>
                                                             }
@@ -434,7 +434,7 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
                                                     variant={'secondary'}
                                                     size={'full'}
                                                     className={'py-2 text-base font-semibold'}
-                                                    type="button"
+                                                    type='button'
                                                     onClick={handleOfferSubmit}
                                                     disabled={
                                                         !isLogin ||
@@ -464,17 +464,17 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
                     !isLogin && 'cursor-not-allowed'
                 }`}
                 disabled={!isLogin || blocked || user?.id === owner}
-                type="button"
+                type='button'
                 buttonChild={
                     <>
-                        <span className="flex items-center gap-2  justify-center">
-                            Feedback <BiSolidMessageRoundedDetail className="my-auto" />
+                        <span className='flex items-center gap-2  justify-center'>
+                            Feedback <BiSolidMessageRoundedDetail className='my-auto' />
                         </span>
                     </>
                 }
             />
 
-            <ModalUi isOpen={isOpen} setIsOpen={setIsOpen} headerText="Terms of Service">
+            <ModalUi isOpen={isOpen} setIsOpen={setIsOpen} headerText='Terms of Service'>
                 <TermsAndCondition termsRef={termsRef} setIsOpen={setIsOpen} isOpen={isOpen} />
             </ModalUi>
         </div>

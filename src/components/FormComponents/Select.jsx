@@ -4,18 +4,18 @@ import TextError from './TextError';
 const Select = (props) => {
     const { label, name, options, required, ...rest } = props;
     return (
-        <div className="formControlClass">
+        <div className='formControlClass'>
             {label && (
-                <label className="formLabel" htmlFor={name}>
+                <label className='formLabel' htmlFor={name}>
                     {label}{' '}
                     {required ? (
-                        <span className="text-black" title="This field is required">
-							*
+                        <span className='text-black' title='This field is required'>
+                            *
                         </span>
                     ) : null}
                 </label>
             )}
-            <Field as="select" name={name} id={name} {...rest}>
+            <Field as='select' name={name} id={name} {...rest}>
                 {options?.map((option, i) => {
                     return (
                         <option key={i} value={option.value}>

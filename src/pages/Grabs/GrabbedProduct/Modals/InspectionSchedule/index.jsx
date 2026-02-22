@@ -28,7 +28,7 @@ const InspectionSchedule = ({ setInspectionModalOpen, ad, grabbersId }) => {
         };
 
         if (!user.isLogin) {
-            notify('You don\'t have an account with Boonfu, Create one to book inspection', 'error');
+            notify("You don't have an account with Boonfu, Create one to book inspection", 'error');
 
             setTimeout(() => {
                 navigate(Approutes.auth.initial);
@@ -75,35 +75,35 @@ const InspectionSchedule = ({ setInspectionModalOpen, ad, grabbersId }) => {
 
     return (
         <div>
-            <form className="flex flex-col space-y-4" onSubmit={formik.handleSubmit}>
-                <label htmlFor="user_id" className="flex flex-col font-medium">
-					Firstname
+            <form className='flex flex-col space-y-4' onSubmit={formik.handleSubmit}>
+                <label htmlFor='user_id' className='flex flex-col font-medium'>
+                    Firstname
                     <input
-                        type="text"
-                        name="user_id"
-                        id="user_id"
-                        placeholder="crystalgush"
+                        type='text'
+                        name='user_id'
+                        id='user_id'
+                        placeholder='crystalgush'
                         value={user.firstname}
                         disabled
                     />
                 </label>
-                <label htmlFor="date" className="flex flex-col font-medium">
-					Select inspection date
+                <label htmlFor='date' className='flex flex-col font-medium'>
+                    Select inspection date
                     <input
-                        type="date"
-                        name="date"
-                        id="date"
-                        placeholder="29.10.2024"
+                        type='date'
+                        name='date'
+                        id='date'
+                        placeholder='29.10.2024'
                         value={formik.values.date}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                     />
                 </label>
 
-                <div className="flex items-center">
-                    <label htmlFor="start_time" className="flex flex-col font-medium">
-						Time (From - To)
-                        <div className="flex items-center gap-4">
+                <div className='flex items-center'>
+                    <label htmlFor='start_time' className='flex flex-col font-medium'>
+                        Time (From - To)
+                        <div className='flex items-center gap-4'>
                             <DatePicker
                                 selected={timeFromDate}
                                 onChange={(date) => {
@@ -116,14 +116,18 @@ const InspectionSchedule = ({ setInspectionModalOpen, ad, grabbersId }) => {
                                 showTimeSelect
                                 showTimeSelectOnly
                                 timeIntervals={1}
-                                timeCaption="Time"
-                                dateFormat="h:mm aa"
-                                popperPlacement="top"
-                                placeholderText="11:00 AM"
+                                timeCaption='Time'
+                                dateFormat='h:mm aa'
+                                popperPlacement='top'
+                                placeholderText='11:00 AM'
                                 customInput={
                                     <DatePickerInput
-                                        name="time.from"
-                                        value={formik.values.time.from ? format(from, 'h:mm a') : undefined}
+                                        name='time.from'
+                                        value={
+                                            formik.values.time.from
+                                                ? format(from, 'h:mm a')
+                                                : undefined
+                                        }
                                     />
                                 }
                             />
@@ -139,14 +143,18 @@ const InspectionSchedule = ({ setInspectionModalOpen, ad, grabbersId }) => {
                                 showTimeSelect
                                 showTimeSelectOnly
                                 timeIntervals={1}
-                                timeCaption="Time"
-                                dateFormat="h:mm aa"
-                                popperPlacement="top"
-                                placeholderText="1:00 PM"
+                                timeCaption='Time'
+                                dateFormat='h:mm aa'
+                                popperPlacement='top'
+                                placeholderText='1:00 PM'
                                 customInput={
                                     <DatePickerInput
-                                        name="time.to"
-                                        value={formik.values.time.to ? format(from, 'h:mm a') : undefined}
+                                        name='time.to'
+                                        value={
+                                            formik.values.time.to
+                                                ? format(from, 'h:mm a')
+                                                : undefined
+                                        }
                                     />
                                 }
                             />
@@ -157,34 +165,36 @@ const InspectionSchedule = ({ setInspectionModalOpen, ad, grabbersId }) => {
                 {formik.values.time.from && formik.values.time.to ? (
                     <div>
                         <p>
-							Selected time range: <b>{format(from, 'h:mm a')}</b> - <b>{format(to, 'h:mm a')}</b>
+                            Selected time range: <b>{format(from, 'h:mm a')}</b> -{' '}
+                            <b>{format(to, 'h:mm a')}</b>
                         </p>
                     </div>
                 ) : null}
 
-                <div className="space-y-4">
+                <div className='space-y-4'>
                     <p>
-						Please be double sure of the date and inspection time set, as you might not have the
-						opportunity to re-schedule another one for <b className="text-white">free</b>.
+                        Please be double sure of the date and inspection time set, as you might not
+                        have the opportunity to re-schedule another one for{' '}
+                        <b className='text-white'>free</b>.
                     </p>
-                    <div className="flex items-center gap-6">
+                    <div className='flex items-center gap-6'>
                         <Button
-                            type="submit"
+                            type='submit'
                             variant={'primary'}
                             size={'small'}
                             loading={formik.isSubmitting || isLoading}
                             disabled={
                                 !formik.dirty ||
-								formik.isSubmitting ||
-								formik.values.time.from === '' ||
-								formik.values.time.to === '' ||
-								formik.values.date === ''
+                                formik.isSubmitting ||
+                                formik.values.time.from === '' ||
+                                formik.values.time.to === '' ||
+                                formik.values.date === ''
                             }
                         >
-							Submit
+                            Submit
                         </Button>
                         <Button
-                            type="button"
+                            type='button'
                             onClick={() => {
                                 setInspectionModalOpen(false);
                                 formik.resetForm();
@@ -192,7 +202,7 @@ const InspectionSchedule = ({ setInspectionModalOpen, ad, grabbersId }) => {
                             variant={'plain'}
                             size={'small'}
                         >
-							Cancel
+                            Cancel
                         </Button>
                     </div>
                 </div>

@@ -50,33 +50,37 @@ const UpdatePassword = ({ setIsOpen }) => {
 
     return (
         <div>
-            <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
+            <Formik
+                initialValues={initialValues}
+                onSubmit={onSubmit}
+                validationSchema={validationSchema}
+            >
                 {(formik) => {
                     return (
-                        <Form className="px-1 mt-1 space-y-4">
+                        <Form className='px-1 mt-1 space-y-4'>
                             <FormControl
-                                control="input"
-                                type="password"
-                                name="password"
-                                placeholder="New password"
+                                control='input'
+                                type='password'
+                                name='password'
+                                placeholder='New password'
                                 className={'w-full rounded-[.3rem]'}
                             />
                             <FormControl
-                                control="input"
-                                type="password"
-                                name="confirmPassword"
-                                placeholder="Confirm new password"
+                                control='input'
+                                type='password'
+                                name='confirmPassword'
+                                placeholder='Confirm new password'
                                 className={'w-full rounded-[.3rem]'}
                             />
 
                             <Button
-                                type="submit"
-                                variant="primary"
-                                size="full"
+                                type='submit'
+                                variant='primary'
+                                size='full'
                                 className={' rounded-[.3rem]'}
                                 loading={formik.isSubmitting}
                             >
-								Done
+                                Done
                             </Button>
                         </Form>
                     );

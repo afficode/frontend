@@ -41,27 +41,27 @@ const Security = () => {
             <DashboardHeader />
 
             {/* Security and login container */}
-            <div className="flex flex-col my-8 md:px-2 lg:px-4">
-                <div className="flex justify-between border-b border-black/30">
+            <div className='flex flex-col my-8 md:px-2 lg:px-4'>
+                <div className='flex justify-between border-b border-black/30'>
                     <h4>Security and Login</h4>
                 </div>
 
-                <div className="border-b border-black/30">
-                    <div className="w-full px-4 py-2 my-4 bg-gray-200">
-                        <h5 className="font-semibold">Login</h5>
+                <div className='border-b border-black/30'>
+                    <div className='w-full px-4 py-2 my-4 bg-gray-200'>
+                        <h5 className='font-semibold'>Login</h5>
                     </div>
 
-                    <div className="flex items-center w-full gap-2 mt-2 sm:gap-8">
-                        <img src={Password} alt="/" className="w-6 sm:w-[2.5rem]" />
+                    <div className='flex items-center w-full gap-2 mt-2 sm:gap-8'>
+                        <img src={Password} alt='/' className='w-6 sm:w-[2.5rem]' />
                         <div>
-                            <h6 className="font-medium">Update Password</h6>
+                            <h6 className='font-medium'>Update Password</h6>
                             <p>Use a strong password that is not repeated on other account</p>
                         </div>
                         <div
-                            className="flex items-center gap-1 ml-auto text-lg font-medium cursor-pointer text-primary"
+                            className='flex items-center gap-1 ml-auto text-lg font-medium cursor-pointer text-primary'
                             onClick={() => setIsOpen(true)}
                         >
-                            <img src={EditPencil} alt="/" className="w-4" />
+                            <img src={EditPencil} alt='/' className='w-4' />
                             <span>Edit</span>
                         </div>
                     </div>
@@ -125,7 +125,7 @@ const Security = () => {
             <Modal
                 isOpen={isOpen}
                 setIsOpen={setIsOpen}
-                headerText="UPDATE PASSWORD"
+                headerText='UPDATE PASSWORD'
                 className={'max-w-[500px]'}
             >
                 <UpdatePassword setIsOpen={setIsOpen} />
