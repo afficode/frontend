@@ -24,7 +24,7 @@ const InspectionLog = () => {
 
     if (isLoading) {
         return (
-            <div className="h-52 flex items-center justify-center">
+            <div className='h-52 flex items-center justify-center'>
                 <SpinnerSkeleton />
             </div>
         );
@@ -32,11 +32,11 @@ const InspectionLog = () => {
 
     return (
         <section>
-            <div className="space-y-8 p-6 sm:px-16">
-                <h3 className="uppercase">INSPECTION LOG </h3>
+            <div className='space-y-8 p-6 sm:px-16'>
+                <h3 className='uppercase'>INSPECTION LOG </h3>
 
                 {data?.schedules.filter((item) => item.owner !== user.id).length > 0 ? (
-                    <div className="space-y-4">
+                    <div className='space-y-4'>
                         {data?.schedules
                             .filter((item) => item.owner !== user.id)
                             .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
@@ -52,8 +52,8 @@ const InspectionLog = () => {
                             ))}
                     </div>
                 ) : (
-                    <div className="flex items-center justify-center text-primary py-8">
-						You haven't booked an inspection yet
+                    <div className='flex items-center justify-center text-primary py-8'>
+                        You haven't booked an inspection yet
                     </div>
                 )}
             </div>
@@ -78,28 +78,36 @@ const InspectionCard = ({ image, location, condition, title, onClick }) => {
     return (
         <div
             onClick={onClick}
-            className="flex max-sm:flex-col gap-4 p-4 bg-gray-300 max-w-full h-fit md:h-[200px] mx-auto cursor-pointer"
+            className='flex max-sm:flex-col gap-4 p-4 bg-gray-300 max-w-full h-fit md:h-[200px] mx-auto cursor-pointer'
         >
-            <div className=" h-[150px] w-[150px] max-sm:w-full max-sm:h-[200]  md:h-full md:w-[200px]">
+            <div className=' h-[150px] w-[150px] max-sm:w-full max-sm:h-[200]  md:h-full md:w-[200px]'>
                 {image ? (
-                    <img src={image} alt={title} className="object-cover w-full h-full rounded-xl" />
+                    <img
+                        src={image}
+                        alt={title}
+                        className='object-cover w-full h-full rounded-xl'
+                    />
                 ) : (
-                    <img src={noimage} alt={'default'} className="object-cover w-full h-full rounded-xl" />
+                    <img
+                        src={noimage}
+                        alt={'default'}
+                        className='object-cover w-full h-full rounded-xl'
+                    />
                 )}
             </div>
 
-            <div className="md:h-[240px] md:flex-1">
-                <h4 className="uppercase text-start">{title}</h4>
+            <div className='md:h-[240px] md:flex-1'>
+                <h4 className='uppercase text-start'>{title}</h4>
 
-                <div className="flex md:items-center justify-between max-md:flex-col">
-                    <div className="h-full flex flex-col items-start justify-between gap-6  md:gap-28">
-                        <div className="flex flex-col gap-1">
-                            <p className="flex gap-2">
-                                <img src={Location} alt="location" className="w-3" />
+                <div className='flex md:items-center justify-between max-md:flex-col'>
+                    <div className='h-full flex flex-col items-start justify-between gap-6  md:gap-28'>
+                        <div className='flex flex-col gap-1'>
+                            <p className='flex gap-2'>
+                                <img src={Location} alt='location' className='w-3' />
                                 {location}
                             </p>
                             {condition && (
-                                <span className="bg-white p-1 rounded-lg text-sm max-sm:text-xs capitalize w-max">
+                                <span className='bg-white p-1 rounded-lg text-sm max-sm:text-xs capitalize w-max'>
                                     {condition}
                                 </span>
                             )}

@@ -4,13 +4,13 @@ import TextError from './TextError';
 const RadioButtons = (props) => {
     const { label, name, options, required, ...rest } = props;
     return (
-        <div className="my-4 space-y-2">
+        <div className='my-4 space-y-2'>
             {label && (
-                <label className="block formLabel" htmlFor={name}>
+                <label className='block formLabel' htmlFor={name}>
                     {label}{' '}
                     {required ? (
-                        <span className="text-black" title="This field is required">
-							*
+                        <span className='text-black' title='This field is required'>
+                            *
                         </span>
                     ) : null}
                 </label>
@@ -19,9 +19,12 @@ const RadioButtons = (props) => {
                 {({ field }) => {
                     return options.map((option) => {
                         return (
-                            <div className="inline-block items-center pr-8 space-x-2" key={option.key}>
+                            <div
+                                className='inline-block items-center pr-8 space-x-2'
+                                key={option.key}
+                            >
                                 <input
-                                    type="radio"
+                                    type='radio'
                                     id={option.value}
                                     {...field}
                                     {...rest}

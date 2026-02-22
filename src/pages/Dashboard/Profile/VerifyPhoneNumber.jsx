@@ -12,39 +12,59 @@ const VerifyPhoneNumber = ({ phoneDetails }) => {
     const { mutate, isLoading } = useVerifyPhoneNumber('post');
 
     const sendOTP = async () => {
-        mutate({ phone: phoneDetails?.number }, {
-            onSuccess: (data) => {
-                notify(data?.message, 'success');
-                setOpenModal(true);
-            },
-            onError: (error) => {
-                notify(error?.response.data.message, 'error');
-            },
-        });
+        mutate(
+            { phone: phoneDetails?.number },
+            {
+                onSuccess: (data) => {
+                    notify(data?.message, 'success');
+                    setOpenModal(true);
+                },
+                onError: (error) => {
+                    notify(error?.response.data.message, 'error');
+                },
+            }
+        );
     };
 
     return (
         <div>
-            {phoneDetails?.isVerified ? <span className="text-xl"><TbPhoneCheck className="text-green-500" /></span> :
+            {phoneDetails?.isVerified ? (
+                <span className='text-xl'>
+                    <TbPhoneCheck className='text-green-500' />
+                </span>
+            ) : (
                 <>
                     <Button
                         size={'xs'}
                         onClick={sendOTP}
-                        className="bg-primary "
+                        className='bg-primary '
                         disabled={isLoading}
                     >
                         Verify Number
                     </Button>
-                    <Modal show={openModal} size="md" onClose={() => setOpenModal(false)} popup>
-                        <div className="flex flex-col p-4 text-center">
+                    <Modal show={openModal} size='md' onClose={() => setOpenModal(false)} popup>
+                        <div className='flex flex-col p-4 text-center'>
                             <h3>Enter OTP</h3>
-                            <p className="my-2">OTP sent to <span className="font-bold underline underline-offset-4 text-primary "> {phoneDetails?.number}</span></p>
-                            <ConfirmPhoneNumber phoneDetails={phoneDetails} sendOtp={mutate} setOpenModal={setOpenModal} />
-                            <Button onClick={() => setOpenModal(false)} className="bg-primary">Close</Button>
+                            <p className='my-2'>
+                                OTP sent to{' '}
+                                <span className='font-bold underline underline-offset-4 text-primary '>
+                                    {' '}
+                                    {phoneDetails?.number}
+                                </span>
+                            </p>
+                            <ConfirmPhoneNumber
+                                phoneDetails={phoneDetails}
+                                sendOtp={mutate}
+                                setOpenModal={setOpenModal}
+                            />
+                            <Button onClick={() => setOpenModal(false)} className='bg-primary'>
+                                Close
+                            </Button>
                         </div>
                     </Modal>
-                </>}
-        </div >
+                </>
+            )}
+        </div>
     );
 };
 
@@ -61,24 +81,29 @@ const ConfirmPhoneNumber = ({ phoneDetails, sendOtp, setOpenModal }) => {
     const { number } = phoneDetails;
 
     const resendOtp = () => {
-        sendOtp({ phone: number }, {
-            onSuccess: (data) => {
-                notify(data?.message, 'success');
-                setTimer(300);
-                setIsExpired(false);
-            },
-            onError: (error) => {
-                notify(error?.response.data.message, 'error');
-            },
-        });
+        sendOtp(
+            { phone: number },
+            {
+                onSuccess: (data) => {
+                    notify(data?.message, 'success');
+                    setTimer(300);
+                    setIsExpired(false);
+                },
+                onError: (error) => {
+                    notify(error?.response.data.message, 'error');
+                },
+            }
+        );
     };
 
     // Handle single key press/change
     const handleOtpChange = (e, index) => {
-        const {value} = e.target;
+        const { value } = e.target;
 
         // Allow only alphanumeric single character
-        if (!/^[0-9a-zA-Z]{0,1}$/.test(value)) {return;}
+        if (!/^[0-9a-zA-Z]{0,1}$/.test(value)) {
+            return;
+        }
 
         const newCode = [...code];
         newCode[index] = value;
@@ -156,27 +181,27 @@ const ConfirmPhoneNumber = ({ phoneDetails, sendOtp, setOpenModal }) => {
 
     return (
         <div>
-            <form onSubmit={handleOtpSubmit} className="flex flex-col items-center space-y-4">
-                <div className="flex mb-2 space-x-2 rtl:space-x-reverse">
+            <form onSubmit={handleOtpSubmit} className='flex flex-col items-center space-y-4'>
+                <div className='flex mb-2 space-x-2 rtl:space-x-reverse'>
                     {code.map((value, index) => (
                         <input
                             key={index}
-                            type="text"
-                            maxLength="1"
+                            type='text'
+                            maxLength='1'
                             value={value}
                             onChange={(e) => handleOtpChange(e, index)}
                             onKeyUp={(e) => handleKeyUp(e, index)}
                             onPaste={index === 0 ? handlePaste : undefined}
                             ref={(el) => (inputsRef.current[index] = el)}
-                            className="block w-9 h-9 py-3 text-sm font-extrabold text-center text-gray-900 bg-white border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
+                            className='block w-9 h-9 py-3 text-sm font-extrabold text-center text-gray-900 bg-white border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary'
                             required
                         />
                     ))}
                 </div>
-                <div className="flex flex-col gap-2">
-                    <div className="flex gap-2 items-center justify-between">
+                <div className='flex flex-col gap-2'>
+                    <div className='flex gap-2 items-center justify-between'>
                         <Button
-                            type="submit"
+                            type='submit'
                             disabled={isLoading}
                             className={'bg-[#047F73]  text-white'}
                         >
@@ -185,16 +210,21 @@ const ConfirmPhoneNumber = ({ phoneDetails, sendOtp, setOpenModal }) => {
                         <Button
                             onClick={resendOtp}
                             disabled={!isExpired || isLoading}
-                            className="bg-primary"
+                            className='bg-primary'
                         >
                             Resend OTP
                         </Button>
                     </div>
-                    <p className="text-center text-sm my-4 gap-x-4">
-                        OTP expires in: {Math.floor(timer / 60)}:{(timer % 60).toString().padStart(2, '0')}
-                        <span className="ml-4">
-                            <BsAlarmFill className={`absolute inline-flex mb-4 text-gray ${Math.floor(timer / 60) < 1 ? 'animate-ping flex' : 'hidden'}`} />
-                            <BsAlarmFill className={`relative inline-flex text-lg  mb-[6px] ${Math.floor(timer / 60) > 2 ? 'text-green-700' : Math.floor(timer / 60) > 1 ? 'text-yellow-500' : 'text-red-700'}`} />
+                    <p className='text-center text-sm my-4 gap-x-4'>
+                        OTP expires in: {Math.floor(timer / 60)}:
+                        {(timer % 60).toString().padStart(2, '0')}
+                        <span className='ml-4'>
+                            <BsAlarmFill
+                                className={`absolute inline-flex mb-4 text-gray ${Math.floor(timer / 60) < 1 ? 'animate-ping flex' : 'hidden'}`}
+                            />
+                            <BsAlarmFill
+                                className={`relative inline-flex text-lg  mb-[6px] ${Math.floor(timer / 60) > 2 ? 'text-green-700' : Math.floor(timer / 60) > 1 ? 'text-yellow-500' : 'text-red-700'}`}
+                            />
                         </span>
                     </p>
                 </div>

@@ -37,7 +37,7 @@ const PaymentOption = ({ result }) => {
                     if (data?.payment_payload) {
                         navigate(
                             Approutes.checkout.paymentSuccess +
-								`?transaction_id=${data?.payment_payload?.payment_id}&ad_title=${data?.payment_payload?.ad_title}`
+                                `?transaction_id=${data?.payment_payload?.payment_id}&ad_title=${data?.payment_payload?.ad_title}`
                         );
                     }
                 },
@@ -49,18 +49,18 @@ const PaymentOption = ({ result }) => {
     };
 
     return (
-        <section className="border border-black">
-            <h5 className="py-2 px-4 font-bold bg-gray-300">Payment</h5>
+        <section className='border border-black'>
+            <h5 className='py-2 px-4 font-bold bg-gray-300'>Payment</h5>
 
-            <div className="px-4 py-6 bg-white">
-                <p className="text-sm italic mb-4">
-					Note: This payment will be deducted from your Boonfu wallet. Please ensure you have sufficient
-					balance.
+            <div className='px-4 py-6 bg-white'>
+                <p className='text-sm italic mb-4'>
+                    Note: This payment will be deducted from your Boonfu wallet. Please ensure you
+                    have sufficient balance.
                 </p>
 
-                <div className=" mt-6 border-2 border-primary  !px-2 !py-4 h-fit space-y-6 max-w-[400px] mx-auto mb-4">
-                    <table className="w-full ">
-                        <tbody className="border-b border-black/30">
+                <div className=' mt-6 border-2 border-primary  !px-2 !py-4 h-fit space-y-6 max-w-[400px] mx-auto mb-4'>
+                    <table className='w-full '>
+                        <tbody className='border-b border-black/30'>
                             <tr>
                                 <td>Item</td>
                                 <td>{toMoney(result?.data?.price)}</td>
@@ -75,7 +75,7 @@ const PaymentOption = ({ result }) => {
                     </table>
                     <div>
                         <Button
-                            type="button"
+                            type='button'
                             onClick={handlePickupPay}
                             variant={'primary'}
                             size={'full'}
@@ -83,7 +83,7 @@ const PaymentOption = ({ result }) => {
                             loading={isLoading}
                             disabled={isLoading}
                         >
-							Confirm and pay
+                            Confirm and pay
                         </Button>
                     </div>
                 </div>

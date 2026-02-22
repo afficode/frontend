@@ -92,38 +92,38 @@ export const setUpUser = (payload, state) => {
 const userReducer = (state, action) => {
     const { type, payload } = action;
     switch (type) {
-    case userReducerOptions.LOGIN_USER: {
-        const userStatus = setUpUser(payload, state);
-        setUser(userStatus);
-        if (payload?.token) {
-            setToken(payload?.token);
+        case userReducerOptions.LOGIN_USER: {
+            const userStatus = setUpUser(payload, state);
+            setUser(userStatus);
+            if (payload?.token) {
+                setToken(payload?.token);
+            }
+            if (payload?.refreshToken) {
+                setRefreshToken(payload?.refreshToken);
+            }
+            setReducerInitialState({ ...userStatus });
+            return { ...userStatus };
         }
-        if (payload?.refreshToken) {
-            setRefreshToken(payload?.refreshToken);
+        case userReducerOptions.LOGOUT:
+            clearLocalStorage();
+            return initialState;
+        case userReducerOptions.UPDATE_USER_INFO: {
+            const updatedUserStatus = setUpUser(payload, state);
+            setUser(updatedUserStatus);
+            if (payload?.token) {
+                setToken(payload?.token);
+            }
+            if (payload?.refreshToken) {
+                setRefreshToken(payload?.refreshToken);
+            }
+            setReducerInitialState({ ...updatedUserStatus });
+            return { ...updatedUserStatus };
         }
-        setReducerInitialState({ ...userStatus });
-        return { ...userStatus };
-    }
-    case userReducerOptions.LOGOUT:
-        clearLocalStorage();
-        return initialState;
-    case userReducerOptions.UPDATE_USER_INFO: {
-        const updatedUserStatus = setUpUser(payload, state);
-        setUser(updatedUserStatus);
-        if (payload?.token) {
-            setToken(payload?.token);
-        }
-        if (payload?.refreshToken) {
-            setRefreshToken(payload?.refreshToken);
-        }
-        setReducerInitialState({ ...updatedUserStatus });
-        return { ...updatedUserStatus };
-    }
-    case userReducerOptions.GET_USER:
-        return state.user;
+        case userReducerOptions.GET_USER:
+            return state.user;
 
-    default:
-        return state;
+        default:
+            return state;
     }
 };
 

@@ -3,18 +3,18 @@ import 'react-loading-skeleton/dist/skeleton.css';
 
 const LoadingScreen = () => {
     return (
-        <div className="w-full flex flex-col space-y-4">
-            <div className="flex items-center justify-center py-2 border-b border-b/5">
+        <div className='w-full flex flex-col space-y-4'>
+            <div className='flex items-center justify-center py-2 border-b border-b/5'>
                 <Skeleton height={20} width={250} />
             </div>
 
-            <div className="space-y-4 border-b border-b/5 pb-4">
-                <div className="flex justify-between items-center">
+            <div className='space-y-4 border-b border-b/5 pb-4'>
+                <div className='flex justify-between items-center'>
                     <Skeleton height={30} width={200} />
                     <Skeleton height={20} width={80} />
                 </div>
 
-                <div className="flex justify-between items-center">
+                <div className='flex justify-between items-center'>
                     <div>
                         <Skeleton height={15} width={140} />
                         <Skeleton height={15} width={210} />
@@ -25,13 +25,13 @@ const LoadingScreen = () => {
                     </div>
                 </div>
             </div>
-            <div className="space-y-4 border-b border-b/5 pb-4">
-                <div className="flex justify-between items-center">
+            <div className='space-y-4 border-b border-b/5 pb-4'>
+                <div className='flex justify-between items-center'>
                     <Skeleton height={30} width={200} />
                     <Skeleton height={20} width={80} />
                 </div>
 
-                <div className="flex justify-between items-center">
+                <div className='flex justify-between items-center'>
                     <div>
                         <Skeleton height={15} width={140} />
                         <Skeleton height={15} width={210} />

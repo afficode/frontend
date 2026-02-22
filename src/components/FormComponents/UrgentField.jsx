@@ -8,16 +8,16 @@ const UrgentField = (props) => {
     return (
         <div className={'my-2'}>
             {label && (
-                <label className="formLabel" htmlFor={name}>
+                <label className='formLabel' htmlFor={name}>
                     {label}{' '}
                     {required ? (
-                        <span className="text-black" title="This field is required">
-							*
+                        <span className='text-black' title='This field is required'>
+                            *
                         </span>
                     ) : null}
                 </label>
             )}
-            <div className="flex items-center gap-4 my-2 flex-wrap">
+            <div className='flex items-center gap-4 my-2 flex-wrap'>
                 <Field name={name}>
                     {({ field, form }) => {
                         return (
@@ -31,7 +31,7 @@ const UrgentField = (props) => {
                     }}
                 </Field>
 
-                <span className="bg-red-600 px-4 py-1 text-white">URGENT</span>
+                <span className='bg-red-600 px-4 py-1 text-white'>URGENT</span>
                 <p>Let people know you want to sell, urgently!.</p>
             </div>
 

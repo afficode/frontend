@@ -24,21 +24,21 @@ Follow these steps to set up your local development environment.
 
 1. **Clone the repository**
 
-   ```bash
-   git clone https://github.com/afficode/frontend.git
-   cd frontend
-   ```
+    ```bash
+    git clone https://github.com/afficode/frontend.git
+    cd frontend
+    ```
 
 2. **Install dependencies**
 
-   ```bash
-   npm install
-   ```
+    ```bash
+    npm install
+    ```
 
 3. **Start the development server**
-   ```bash
-   npm run dev
-   ```
+    ```bash
+    npm run dev
+    ```
 
 ## Folder structure
 

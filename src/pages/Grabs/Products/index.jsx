@@ -23,8 +23,8 @@ const GrabProducts = () => {
     if (isLoading) {
         return (
             <section>
-                <GrabHeader text="Grabber’s Products Page" />
-                <div className="flex items-center justify-center p-16">
+                <GrabHeader text='Grabber’s Products Page' />
+                <div className='flex items-center justify-center p-16'>
                     <SpinnerSkeleton />
                 </div>
             </section>
@@ -49,27 +49,27 @@ const GrabProducts = () => {
 
     return (
         <section>
-            <GrabHeader text="Grabber’s Products Page" />
+            <GrabHeader text='Grabber’s Products Page' />
 
-            <div className="flex flex-wrap items-center justify-between gap-6 mt-8 mb-12 ">
+            <div className='flex flex-wrap items-center justify-between gap-6 mt-8 mb-12 '>
                 {result?.grabs?.map((ad) => (
                     // <Link key={ad.ads_id} to={Approutes.grab.product(ad.ads_id)}>
                     <div
-                        className="relative flex mx-auto flex-col w-[250px] bg-white border "
+                        className='relative flex mx-auto flex-col w-[250px] bg-white border '
                         key={ad.ads_id}
                     >
                         <button>
-                            <img src={GrabSave} alt="save" className="absolute w-8 top-2 left-2" />
+                            <img src={GrabSave} alt='save' className='absolute w-8 top-2 left-2' />
                         </button>
                         <button onClick={() => handleUnGrab(ad)}>
-                            <img src={GrabIcon} alt="grab" className="absolute w-8 top-2 right-2" />
+                            <img src={GrabIcon} alt='grab' className='absolute w-8 top-2 right-2' />
                         </button>
                         <img
                             src={ad?.images[0]?.path ? ad?.images[0]?.path : noimage}
                             alt={ad?.images[0]?.filename ? ad?.images[0]?.filename : 'no image'}
-                            className="w-full h-[200px] "
+                            className='w-full h-[200px] '
                         />
-                        <h6 className="px-2 font-semibold text-left capitalize">{ad.title}</h6>
+                        <h6 className='px-2 font-semibold text-left capitalize'>{ad.title}</h6>
                         <Link
                             to={Approutes.grab.product(ad.ads_id)}
                             className={'mt-8 mb-2 mx-auto'}

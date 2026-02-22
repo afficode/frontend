@@ -78,7 +78,9 @@ const SaveProduct = ({ ads_id, className }) => {
                                 refetch();
                             },
                             onError: (error) => {
-                                if (error?.response?.status === 401) {setRedirectLink(window.location.pathname);}
+                                if (error?.response?.status === 401) {
+                                    setRedirectLink(window.location.pathname);
+                                }
                                 return window.location.assign(Approutes.auth.initial);
                             },
                         }

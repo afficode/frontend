@@ -31,22 +31,22 @@ const Button = ({ variant, size, loading, disabled, children, className, ...rest
                 variant === 'primary'
                     ? primaryStyles
                     : variant === 'secondary'
-                        ? secondaryStyles
-                        : variant === 'subtle'
-                            ? subtleStyles
-                            : variant === 'plain'
-                                ? plainStyles
-                                : variant === 'grey'
-                                    ? greyStyles
-                                    : variant === 'outline'
-                                        ? 'outline-btn'
-                                        : ''
+                      ? secondaryStyles
+                      : variant === 'subtle'
+                        ? subtleStyles
+                        : variant === 'plain'
+                          ? plainStyles
+                          : variant === 'grey'
+                            ? greyStyles
+                            : variant === 'outline'
+                              ? 'outline-btn'
+                              : ''
             }  normal-case transition-all ease-in-out duration-200 active:scale-[0.975]`}
             {...rest}
         >
             {loading ? (
-                <span className="flex items-center gap-2 justify-center">
-                    <span className="loading loading-spinner" />
+                <span className='flex items-center gap-2 justify-center'>
+                    <span className='loading loading-spinner' />
                     {children}
                 </span>
             ) : (

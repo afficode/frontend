@@ -35,18 +35,18 @@ const Deposit = () => {
 
     return (
         <div>
-            <form onSubmit={formikDeposit.handleSubmit} className="space-y-6 w-full mb-6">
-                <div className="flex flex-col">
-                    <label htmlFor="amount" className="mb-[-7px] font-bold">
-						Amount
+            <form onSubmit={formikDeposit.handleSubmit} className='space-y-6 w-full mb-6'>
+                <div className='flex flex-col'>
+                    <label htmlFor='amount' className='mb-[-7px] font-bold'>
+                        Amount
                     </label>
-                    <div className=" max-w-sm">
+                    <div className=' max-w-sm'>
                         <InputGroup
-                            name="amount"
-                            id="amount"
-                            type="text"
-                            amount="NGN"
-                            autoComplete="off"
+                            name='amount'
+                            id='amount'
+                            type='text'
+                            amount='NGN'
+                            autoComplete='off'
                             className={'customAmountInput relative'}
                             value={formikDeposit.values.amount}
                             onChange={formikDeposit.handleChange}
@@ -61,10 +61,10 @@ const Deposit = () => {
                                     onClick={() => {
                                         formikDeposit.resetForm();
                                     }}
-                                    type="button"
-                                    className="absolute right-2 inset-y-0 my-auto h-fit "
+                                    type='button'
+                                    className='absolute right-2 inset-y-0 my-auto h-fit '
                                 >
-                                    <img src={Cancel} alt="/" className="w-4" />
+                                    <img src={Cancel} alt='/' className='w-4' />
                                 </button>
                             }
                         />
@@ -72,16 +72,18 @@ const Deposit = () => {
                 </div>
 
                 <Button
-                    type="submit"
+                    type='submit'
                     variant={'secondary'}
                     size={'full'}
                     className={'max-w-sm font-bold rounded-xl'}
                     disabled={
-                        !formikDeposit.isValid || formikDeposit.dirty === false || formikDeposit.isSubmitting
+                        !formikDeposit.isValid ||
+                        formikDeposit.dirty === false ||
+                        formikDeposit.isSubmitting
                     }
                     loading={formikDeposit.isSubmitting}
                 >
-					Top Up Now
+                    Top Up Now
                 </Button>
             </form>
 

@@ -10,7 +10,7 @@ const DatePickerInput = forwardRef(({ value, onClick, name, placeholder }, ref) 
             onClick={onClick}
             value={value}
             placeholder={placeholder}
-            className="customSelectInput input"
+            className='customSelectInput input'
         />
     );
 });

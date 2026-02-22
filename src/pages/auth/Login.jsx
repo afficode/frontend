@@ -53,9 +53,9 @@ const Login = ({ id }) => {
         }, 3000);
     };
     return (
-        <div className="w-full ">
+        <div className='w-full '>
             {isLoading ? (
-                <div className="mt-4 lg:mt-20">
+                <div className='mt-4 lg:mt-20'>
                     <SpinnerSkeleton
                         heading={'You’re being logged on.'}
                         body={'...learn more about the Grab system too 😊.'}
@@ -67,9 +67,9 @@ const Login = ({ id }) => {
                 </div>
             ) : (
                 <>
-                    <div className="w-[90%] mx-auto">
+                    <div className='w-[90%] mx-auto'>
                         {' '}
-                        <h2 className="my-4 text-xl lg:text-4xl">Sign In</h2>
+                        <h2 className='my-4 text-xl lg:text-4xl'>Sign In</h2>
                         <Formik
                             initialValues={initialValues}
                             validationSchema={validationSchema}
@@ -77,33 +77,33 @@ const Login = ({ id }) => {
                         >
                             {(formik) => (
                                 <Form>
-                                    <div className="form-control">
+                                    <div className='form-control'>
                                         <Input
                                             className={inputClass}
-                                            type="email"
-                                            name="email"
+                                            type='email'
+                                            name='email'
                                             id={`${id}-login-email`}
-                                            placeholder="email@email.com"
+                                            placeholder='email@email.com'
                                             // autoComplete="off"
                                             {...formik.getFieldProps('email')}
                                         />
                                     </div>
 
-                                    <div className="form-control">
+                                    <div className='form-control'>
                                         <Input
                                             className={inputClass}
-                                            type="password"
-                                            name="password"
+                                            type='password'
+                                            name='password'
                                             id={`${id}-login-password`}
-                                            placeholder="Password"
+                                            placeholder='Password'
                                             {...formik.getFieldProps('password')}
                                         />
                                     </div>
 
-                                    <div className=" form-control">
+                                    <div className=' form-control'>
                                         <FlowbiteButton
-                                            type="submit"
-                                            aria-disabled="true"
+                                            type='submit'
+                                            aria-disabled='true'
                                             className={` text-white text-normal lg:text-lg border-0 bg-primary btn-md lg:btn-lg hover:bg-primary/80 ${
                                                 !formik.isValid || !formik.dirty
                                                     ? 'cursor-not-allowed'
@@ -114,14 +114,14 @@ const Login = ({ id }) => {
                                             {formik.isSubmitting ? (
                                                 <>
                                                     <Spinner color={'secondary'} /> &emsp;{' '}
-                                                    <span className="my-auto text-xl">
+                                                    <span className='my-auto text-xl'>
                                                         Submitting Data...
                                                     </span>{' '}
                                                 </>
                                             ) : (
-                                                <span className="flex w-full text-base lg:text-lg text-white">
+                                                <span className='flex w-full text-base lg:text-lg text-white'>
                                                     Login &nbsp;{' '}
-                                                    <MdLogin className="my-auto text-lg text-white lg:text-2xl" />
+                                                    <MdLogin className='my-auto text-lg text-white lg:text-2xl' />
                                                 </span>
                                             )}
                                         </FlowbiteButton>
@@ -129,7 +129,7 @@ const Login = ({ id }) => {
                                 </Form>
                             )}
                         </Formik>
-                        <div className="w-full my-2 font-bold text-center lg:my-8 hover:underline text-primary text-base lg:text-lg">
+                        <div className='w-full my-2 font-bold text-center lg:my-8 hover:underline text-primary text-base lg:text-lg'>
                             <Link to={Approutes.forgotPassword}>Forgot your Password?</Link>
                         </div>
                     </div>

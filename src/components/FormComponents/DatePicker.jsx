@@ -6,12 +6,12 @@ import TextError from './TextError';
 const DatePicker = (props) => {
     const { label, name, required, placeholder, ...rest } = props;
     return (
-        <div className="my-4 space-y-2">
-            <label className="block formLabel" htmlFor={name}>
+        <div className='my-4 space-y-2'>
+            <label className='block formLabel' htmlFor={name}>
                 {label}
                 {required ? (
-                    <span className="text-black" title="This field is required">
-						*
+                    <span className='text-black' title='This field is required'>
+                        *
                     </span>
                 ) : null}
             </label>

@@ -3,16 +3,16 @@ import TextError from './TextError';
 import { ToggleSwitch } from 'flowbite-react';
 
 const Toggle = (props) => {
-    const { label, name, required} = props;
+    const { label, name, required } = props;
 
     return (
         <div className={'my-2'}>
             {label && (
-                <label className="formLabel" htmlFor={name}>
+                <label className='formLabel' htmlFor={name}>
                     {label}
                     {required ? (
-                        <span className="text-black" title="This field is required">
-							*
+                        <span className='text-black' title='This field is required'>
+                            *
                         </span>
                     ) : null}
                 </label>

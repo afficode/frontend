@@ -12,7 +12,7 @@ import useAuth from '../../../context/UserContext';
 
 const PerformanceCharts = ({ adsData }) => {
     const { user } = useAuth();
-    const [chartData, ] = useState([
+    const [chartData] = useState([
         {
             day: 'Mon',
             account_interaction: 120,
@@ -107,58 +107,78 @@ const PerformanceCharts = ({ adsData }) => {
                 queryClient.invalidateQueries({ queryKey: ['getUserAds'] });
                 notify(res?.data.message, 'success');
             })
-            .catch(() => { /* empty */ });
+            .catch(() => {
+                /* empty */
+            });
     };
 
     return (
-        <div className="flex flex-col gap-6 my-6">
+        <div className='flex flex-col gap-6 my-6'>
             {/* priducts table  */}
             <div>
                 <h4>Products Activities Chart</h4>
                 <p>Monitor this chart regularly to make informed decisions</p>
 
-                <div className="mt-4 overflow-x-auto bg-white border border-black/40 h-96">
-                    <table className="table table-pin-rows ">
-                        <thead className="text-sm font-medium text-white ">
-                            <tr className="bg-primary">
+                <div className='mt-4 overflow-x-auto bg-white border border-black/40 h-96'>
+                    <table className='table table-pin-rows '>
+                        <thead className='text-sm font-medium text-white '>
+                            <tr className='bg-primary'>
                                 <th>Product(s)</th>
-                                <th className="text-center">Impression/ Views</th>
-                                <th className="text-center">Chats</th>
-                                <th className="text-center">Grabs</th>
-                                <th className="text-center">Edit</th>
+                                <th className='text-center'>Impression/ Views</th>
+                                <th className='text-center'>Chats</th>
+                                <th className='text-center'>Grabs</th>
+                                <th className='text-center'>Edit</th>
                             </tr>
                         </thead>
                         <tbody>
                             {adsData?.ads_summary &&
                                 adsData?.ads_summary
                                     .sort((a, b) => {
-                                        if (a.id < b.id) { return 1; }
-                                        if (a.id > b.id) { return -1; }
+                                        if (a.id < b.id) {
+                                            return 1;
+                                        }
+                                        if (a.id > b.id) {
+                                            return -1;
+                                        }
                                         return 0;
                                     })
                                     .map((ad) => (
-                                        <tr key={ad.id} className="font-medium whitespace-nowrap hover:bg-gray-200">
-                                            <td className="capitalize hover:underline hover:underline-offset-4">
+                                        <tr
+                                            key={ad.id}
+                                            className='font-medium whitespace-nowrap hover:bg-gray-200'
+                                        >
+                                            <td className='capitalize hover:underline hover:underline-offset-4'>
                                                 <Link
                                                     to={`${Approutes.product.initial}/${ad.id}`}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
+                                                    target='_blank'
+                                                    rel='noopener noreferrer'
                                                 >
                                                     {ad.name}
                                                 </Link>
                                             </td>
-                                            <td className="text-center text-primary">[ {ad.views} ]</td>
-                                            <td className="text-center text-primary">[ {ad.chats} ]</td>
-                                            <td className="text-center text-primary">[ 0 ]</td>
-                                            <td className="flex justify-center text-center text-gray-600 gap-x-2">
-                                                <span className="hover:text-primary ">
-                                                    <Link to={`${Approutes.updateAd}/${ad.id}`} target="_blank" rel="noopener noreferrer">
+                                            <td className='text-center text-primary'>
+                                                [ {ad.views} ]
+                                            </td>
+                                            <td className='text-center text-primary'>
+                                                [ {ad.chats} ]
+                                            </td>
+                                            <td className='text-center text-primary'>[ 0 ]</td>
+                                            <td className='flex justify-center text-center text-gray-600 gap-x-2'>
+                                                <span className='hover:text-primary '>
+                                                    <Link
+                                                        to={`${Approutes.updateAd}/${ad.id}`}
+                                                        target='_blank'
+                                                        rel='noopener noreferrer'
+                                                    >
                                                         <FaEdit />
                                                     </Link>
                                                 </span>{' '}
                                                 |
-                                                <span className="text-red-600 ">
-                                                    <FaTrash className="cursor-pointer" onClick={() => handleDelete(ad?.id, ad)} />
+                                                <span className='text-red-600 '>
+                                                    <FaTrash
+                                                        className='cursor-pointer'
+                                                        onClick={() => handleDelete(ad?.id, ad)}
+                                                    />
                                                 </span>
                                             </td>
                                         </tr>
@@ -173,16 +193,22 @@ const PerformanceCharts = ({ adsData }) => {
                 <h4>Monthly AD Performance</h4>
                 <p>See hot spots for your products. </p>
 
-                <div className="flex items-center w-full gap-4 mt-4 sm:gap-8 sm:pl-12">
+                <div className='flex items-center w-full gap-4 mt-4 sm:gap-8 sm:pl-12'>
                     <div>
-                        <img src={PerformanceArrowUp} className="h-[15rem] " alt="/" />
+                        <img src={PerformanceArrowUp} className='h-[15rem] ' alt='/' />
                     </div>
-                    <div className="space-y-2 location-table ">
+                    <div className='space-y-2 location-table '>
                         {monthlyPerformanceData.map((item, i) => (
-                            <div key={i} className="flex justify-between px-6 py-3 location-row rounded-2xl">
-                                <div className="flex gap-8">
+                            <div
+                                key={i}
+                                className='flex justify-between px-6 py-3 location-row rounded-2xl'
+                            >
+                                <div className='flex gap-8'>
                                     {' '}
-                                    <span style={{ background: item.color }} className="w-5 h-5 m-auto rounded-full" />{' '}
+                                    <span
+                                        style={{ background: item.color }}
+                                        className='w-5 h-5 m-auto rounded-full'
+                                    />{' '}
                                     <p>{item.state}</p>
                                 </div>
                                 <p>{item.stat}</p>

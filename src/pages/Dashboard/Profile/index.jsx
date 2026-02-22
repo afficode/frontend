@@ -24,7 +24,7 @@ const Profile = () => {
                 value: state?.state_id,
                 key: state?.name,
             })),
-        [data],
+        [data]
     );
     const [isLoading, setIsLoading] = useState(true);
     const { user, updateUserInfo } = useAuth();
@@ -146,132 +146,148 @@ const Profile = () => {
             {/* banner */}
             <div
                 className={`${
-                    !formik?.values.cover_image && 'border rounded-xl flex items-center justify-center'
+                    !formik?.values.cover_image &&
+                    'border rounded-xl flex items-center justify-center'
                 } w-full h-[20rem] my-4 relative`}
             >
                 {formik?.values.cover_image || user?.cover_image ? (
-                    <div className="w-full h-full relative group">
+                    <div className='w-full h-full relative group'>
                         <img
                             src={
                                 formik?.values.cover_image
                                     ? URL.createObjectURL(formik.values.cover_image)
                                     : user?.cover_image?.path
                             }
-                            alt="/"
-                            className="w-full h-full mx-auto object-fit rounded-xl"
+                            alt='/'
+                            className='w-full h-full mx-auto object-fit rounded-xl'
                         />
                     </div>
                 ) : (
-                    <h4 className="text-primary">No cover image</h4>
+                    <h4 className='text-primary'>No cover image</h4>
                 )}
-                <form encType="multipart/form-data">
-                    <InputGroup type="file" name="cover_image" onChange={handleFileChange}>
-                        <img src={CameraBlue} alt="/" className="absolute right-0 bottom-[-20px] w-[3rem]" />
+                <form encType='multipart/form-data'>
+                    <InputGroup type='file' name='cover_image' onChange={handleFileChange}>
+                        <img
+                            src={CameraBlue}
+                            alt='/'
+                            className='absolute right-0 bottom-[-20px] w-[3rem]'
+                        />
                     </InputGroup>
                 </form>
             </div>
 
             {/* aboutme container */}
-            <div className="flex flex-col my-8 md:px-2 lg:px-4">
-                <div className="flex justify-between border-b border-black/30">
+            <div className='flex flex-col my-8 md:px-2 lg:px-4'>
+                <div className='flex justify-between border-b border-black/30'>
                     <h4>About Me</h4>
                     <div
                         onClick={() => setToggleEdit((prev) => ({ ...prev, about: false }))}
-                        className="flex gap-1 items-center text-primary text-lg font-medium cursor-pointer"
+                        className='flex gap-1 items-center text-primary text-lg font-medium cursor-pointer'
                     >
-                        <img src={EditPencil} alt="/" className="w-4" />
+                        <img src={EditPencil} alt='/' className='w-4' />
                         <span>Edit</span>
                     </div>
                 </div>
 
-                <form className="w-full lg:w-[600px]">
-                    <div className="flex max-md:flex-col md:items-center md:justify-between  border-b border-black/10">
-                        <label className="max-md:text-sm max-md:mt-2" htmlFor="name">
-							Name
+                <form className='w-full lg:w-[600px]'>
+                    <div className='flex max-md:flex-col md:items-center md:justify-between  border-b border-black/10'>
+                        <label className='max-md:text-sm max-md:mt-2' htmlFor='name'>
+                            Name
                         </label>
                         <InputGroup
-                            name="name"
-                            type="text"
+                            name='name'
+                            type='text'
                             className={`${toggleEdit.about && inputStyle} `}
                             disabled={true}
                             value={user?.firstname + ' ' + user?.lastname}
                         />
                     </div>
-                    <div className="flex max-md:flex-col md:items-center md:justify-between  border-b border-black/10">
-                        <label className="max-md:text-sm max-md:mt-2 inline-flex" htmlFor="phone">
-                            <span className="my-auto mr-4">Contact Number</span>{' '}
+                    <div className='flex max-md:flex-col md:items-center md:justify-between  border-b border-black/10'>
+                        <label className='max-md:text-sm max-md:mt-2 inline-flex' htmlFor='phone'>
+                            <span className='my-auto mr-4'>Contact Number</span>{' '}
                             <VerifyPhoneNumber phoneDetails={phoneDetails} />
                         </label>
                         {toggleEdit?.about ? (
                             <InputGroup
-                                name="num"
-                                type="text"
+                                name='num'
+                                type='text'
                                 className={`${toggleEdit.about && inputStyle} `}
                                 disabled={true}
                                 value={formik.values.phone}
                             />
                         ) : (
                             <InputGroup
-                                name="phone"
-                                type="number"
+                                name='phone'
+                                type='number'
                                 className={`${toggleEdit.about && inputStyle} `}
                                 disabled={toggleEdit.about}
                                 value={formik.values.phone}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
-                                errorMsg={formik.touched.phone && formik.errors.phone ? formik.errors.phone : null}
+                                errorMsg={
+                                    formik.touched.phone && formik.errors.phone
+                                        ? formik.errors.phone
+                                        : null
+                                }
                             />
                         )}
                     </div>
                     {toggleEdit?.about ? (
-                        <div className="flex max-md:flex-col md:items-center md:justify-between  border-b border-black/10">
-                            <label className="max-md:text-sm max-md:mt-2" htmlFor="user_location">
-								Current Location
+                        <div className='flex max-md:flex-col md:items-center md:justify-between  border-b border-black/10'>
+                            <label className='max-md:text-sm max-md:mt-2' htmlFor='user_location'>
+                                Current Location
                             </label>
                             <InputGroup
-                                name="user_location"
-                                type="text"
+                                name='user_location'
+                                type='text'
                                 className={`${toggleEdit.about && inputStyle} `}
                                 disabled={true}
                                 value={user?.user_location}
                             />
                         </div>
                     ) : (
-                        <div className="flex max-md:flex-col md:items-center md:justify-between  border-b border-black/10">
-                            <label className="max-md:text-sm max-md:mt-2" htmlFor="business_location">
-								Change Location
+                        <div className='flex max-md:flex-col md:items-center md:justify-between  border-b border-black/10'>
+                            <label
+                                className='max-md:text-sm max-md:mt-2'
+                                htmlFor='business_location'
+                            >
+                                Change Location
                             </label>
                             <InputGroup
-                                name="location"
-                                type="select"
+                                name='location'
+                                type='select'
                                 optionLists={state}
                                 className={`${toggleEdit.about && inputStyle} `}
                                 disabled={toggleEdit.about}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
-                                errorMsg={formik.touched.location && formik.errors.location ? formik.errors.location : null}
+                                errorMsg={
+                                    formik.touched.location && formik.errors.location
+                                        ? formik.errors.location
+                                        : null
+                                }
                             />
                         </div>
                     )}
-                    <div className="flex max-md:flex-col md:items-center md:justify-between  border-b border-black/10">
-                        <label className="max-md:text-sm max-md:mt-2" htmlFor="established">
-							Established
+                    <div className='flex max-md:flex-col md:items-center md:justify-between  border-b border-black/10'>
+                        <label className='max-md:text-sm max-md:mt-2' htmlFor='established'>
+                            Established
                         </label>
                         <InputGroup
-                            name="established"
-                            type="text"
+                            name='established'
+                            type='text'
                             className={`${toggleEdit.about && inputStyle} `}
                             disabled={true}
                             value={`Since ${new Date(user?.joined_on).getFullYear()}`}
                         />
                     </div>
-                    <div className="flex max-md:flex-col md:items-center md:justify-between  border-b border-black/10">
-                        <label className="max-md:text-sm max-md:mt-2" htmlFor="email">
-							E-mail
+                    <div className='flex max-md:flex-col md:items-center md:justify-between  border-b border-black/10'>
+                        <label className='max-md:text-sm max-md:mt-2' htmlFor='email'>
+                            E-mail
                         </label>
                         <InputGroup
-                            name="email"
-                            type="email"
+                            name='email'
+                            type='email'
                             className={`${toggleEdit.about && inputStyle} `}
                             disabled={true}
                             value={user?.email}
@@ -281,45 +297,50 @@ const Profile = () => {
             </div>
 
             {/* Bio container */}
-            <div className="flex flex-col my-8 md:px-2 lg:px-4">
-                <div className="flex justify-between border-b border-black/30">
+            <div className='flex flex-col my-8 md:px-2 lg:px-4'>
+                <div className='flex justify-between border-b border-black/30'>
                     <h4>Bio</h4>
                     <div
                         onClick={() => setToggleEdit((prev) => ({ ...prev, bio: false }))}
-                        className="flex gap-1 items-center text-primary text-lg font-medium cursor-pointer"
+                        className='flex gap-1 items-center text-primary text-lg font-medium cursor-pointer'
                     >
-                        <img src={EditPencil} alt="/" className="w-4" />
+                        <img src={EditPencil} alt='/' className='w-4' />
                         <span>Edit</span>
                     </div>
                 </div>
 
                 <form>
-                    <p className="text-sm text-gray-500 flex items-end justify-end mt-4">
+                    <p className='text-sm text-gray-500 flex items-end justify-end mt-4'>
                         {formik.values.bio.length}/{500} characters
                     </p>
                     <InputGroup
-                        name="bio"
-                        type="textarea"
+                        name='bio'
+                        type='textarea'
                         rows={'5'}
                         className={`${toggleEdit.bio && inputStyle} p-2`}
                         disabled={toggleEdit.bio}
                         value={formik.values.bio}
                         onChange={handleBioChange}
                         onBlur={formik.handleBlur}
-                        errorMsg={formik.touched.bio && formik.errors.bio ? formik.errors.bio : null}
+                        errorMsg={
+                            formik.touched.bio && formik.errors.bio ? formik.errors.bio : null
+                        }
                     />
                 </form>
             </div>
 
-            <div className="mb-16 px-4 sm:w-[200px] max-sm:mx-auto">
+            <div className='mb-16 px-4 sm:w-[200px] max-sm:mx-auto'>
                 <Button
-                    type="submit"
-                    variant="primary"
-                    size="full"
+                    type='submit'
+                    variant='primary'
+                    size='full'
                     onClick={formik.handleSubmit}
-                    disabled={!formik.isValid || (toggleEdit.about && toggleEdit.bio && toggleEdit.cover_image)}
+                    disabled={
+                        !formik.isValid ||
+                        (toggleEdit.about && toggleEdit.bio && toggleEdit.cover_image)
+                    }
                 >
-					Save
+                    Save
                 </Button>
             </div>
         </div>

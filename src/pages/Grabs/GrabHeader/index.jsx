@@ -8,14 +8,14 @@ const GrabHeader = ({ text, size }) => {
     // const { user } = useAuth();
 
     return (
-        <div className="flex justify-between py-2 border-b border-black/30 ">
+        <div className='flex justify-between py-2 border-b border-black/30 '>
             {size === 'h2' ? (
-                <h2 className="capitalize">{text} </h2>
+                <h2 className='capitalize'>{text} </h2>
             ) : (
-                <h3 className="capitalize">{text} </h3>
+                <h3 className='capitalize'>{text} </h3>
             )}
 
-            <button onClick={() => setShowSidebar(!showSidebar)} className=" lg:hidden">
+            <button onClick={() => setShowSidebar(!showSidebar)} className=' lg:hidden'>
                 <IoIosMenu size={28} />
             </button>
 

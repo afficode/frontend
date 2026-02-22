@@ -61,16 +61,16 @@ const Playground = () => {
     //input group
 
     return (
-        <div className="w-full max-w-5xl mx-auto">
-            <div className="w-full text-black ">
-                <h1 className="my-4 text-center ">Playground</h1>
+        <div className='w-full max-w-5xl mx-auto'>
+            <div className='w-full text-black '>
+                <h1 className='my-4 text-center '>Playground</h1>
 
                 {/* <GrabSettings /> */}
 
-                <div className="p-6 space-y-12">
-                    <div className="text-center py-6">
-                        <h3 className="py-2">Notifications</h3>
-                        <div className="flex justify-between gap-6 flex-wrap">
+                <div className='p-6 space-y-12'>
+                    <div className='text-center py-6'>
+                        <h3 className='py-2'>Notifications</h3>
+                        <div className='flex justify-between gap-6 flex-wrap'>
                             <Notification message={'Successful!'} status={'success'} />
                             <Notification message={'Error!'} status={'error'} />
                             <Notification message={'Info!'} status={'info'} />
@@ -78,10 +78,10 @@ const Playground = () => {
                     </div>
 
                     <div>
-                        <h3 className="text-center text-primary">Buttons</h3>
+                        <h3 className='text-center text-primary'>Buttons</h3>
 
-                        <div className="w-[50rem]">
-                            <p className="truncate">
+                        <div className='w-[50rem]'>
+                            <p className='truncate'>
                                 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo
                                 excepturi mollitia tenetur maiores dolorem ipsa veritatis animi?
                                 Tempore modi voluptatum iure beatae sequi, quasi quos doloribus
@@ -90,54 +90,54 @@ const Playground = () => {
                         </div>
 
                         {/* <h5>Props </h5> */}
-                        <div className="flex flex-wrap justify-center gap-12 my-3">
-                            <div className="text-center ">
+                        <div className='flex flex-wrap justify-center gap-12 my-3'>
+                            <div className='text-center '>
                                 <p>variant - primary</p>
                                 <Button
                                     onClick={notify}
-                                    variant="primary"
-                                    className="my-4 text-lg font-bold rounded-full"
+                                    variant='primary'
+                                    className='my-4 text-lg font-bold rounded-full'
                                 >
                                     + Follow
                                 </Button>
                             </div>
-                            <div className="text-center ">
+                            <div className='text-center '>
                                 <p>variant - secondary, size - small</p>
                                 <Button
-                                    variant="secondary"
+                                    variant='secondary'
                                     size={'small'}
-                                    className="my-4 text-lg font-bold rounded-full"
+                                    className='my-4 text-lg font-bold rounded-full'
                                 >
                                     + Follow
                                 </Button>
                             </div>
 
-                            <div className="text-center ">
+                            <div className='text-center '>
                                 <p>variant - subtle</p>
                                 <Button
-                                    variant="subtle"
+                                    variant='subtle'
                                     size={'full'}
-                                    className="my-4 text-lg font-bold rounded-full"
+                                    className='my-4 text-lg font-bold rounded-full'
                                 >
                                     + Follow
                                 </Button>
                             </div>
-                            <div className="text-center ">
+                            <div className='text-center '>
                                 <p>variant - outline</p>
                                 <Button
-                                    variant="outline"
-                                    className="my-4 text-lg font-bold rounded-full"
+                                    variant='outline'
+                                    className='my-4 text-lg font-bold rounded-full'
                                 >
                                     Other Shops
                                 </Button>
                             </div>
-                            <div className="text-center ">
+                            <div className='text-center '>
                                 <p>variant - primary, loading - true, size - full</p>
                                 <Button
                                     loading={true}
-                                    variant="primary"
+                                    variant='primary'
                                     size={'full'}
-                                    className="my-4 text-lg font-bold rounded-full"
+                                    className='my-4 text-lg font-bold rounded-full'
                                 >
                                     Submit
                                 </Button>
@@ -146,7 +146,7 @@ const Playground = () => {
                     </div>
 
                     <div>
-                        <h5 className="text-center">Inquiry Chat</h5>
+                        <h5 className='text-center'>Inquiry Chat</h5>
                         <InquiryChat />
                     </div>
 
@@ -155,10 +155,10 @@ const Playground = () => {
                     </div>
 
                     <div>
-                        <h3 className="text-center text-primary">Toggle</h3>
+                        <h3 className='text-center text-primary'>Toggle</h3>
 
-                        <div className="flex flex-col items-center justify-center my-6">
-                            <p className="py-2 text-center">
+                        <div className='flex flex-col items-center justify-center my-6'>
+                            <p className='py-2 text-center'>
                                 <b>ToggleSwitch</b> from flowbite
                             </p>
                             <ToggleSwitch
@@ -170,7 +170,7 @@ const Playground = () => {
                     </div>
 
                     <div>
-                        <h3 className="text-center text-primary">FormControl</h3>
+                        <h3 className='text-center text-primary'>FormControl</h3>
 
                         {/* <DatePicker onChange={handleChange} value={formData.reschedule_date} /> */}
 
@@ -184,60 +184,60 @@ const Playground = () => {
                                 {(formik) => {
                                     return (
                                         <Form>
-                                            <p className="py-0 my-0">
+                                            <p className='py-0 my-0'>
                                                 control - input, type - text, required - true
                                             </p>
                                             <FormControl
-                                                control="input"
-                                                name="name"
-                                                type="text"
-                                                label="Enter your name"
-                                                placeholder="Enter your name"
+                                                control='input'
+                                                name='name'
+                                                type='text'
+                                                label='Enter your name'
+                                                placeholder='Enter your name'
                                                 required={true}
                                             />
                                             <FormControl
-                                                control="imageinput"
-                                                name="images"
-                                                type="file"
-                                                label="Enter your images"
+                                                control='imageinput'
+                                                name='images'
+                                                type='file'
+                                                label='Enter your images'
                                             />
 
                                             <FormControl
-                                                control="textarea"
-                                                name="description"
-                                                type="text"
-                                                label="Description"
+                                                control='textarea'
+                                                name='description'
+                                                type='text'
+                                                label='Description'
                                             />
 
                                             <FormControl
-                                                control="select"
+                                                control='select'
                                                 options={dropdownOptions}
-                                                name="selectOption"
-                                                label="Select an option"
+                                                name='selectOption'
+                                                label='Select an option'
                                                 required={true}
                                             />
                                             <FormControl
-                                                control="radio"
+                                                control='radio'
                                                 options={radioOptions}
-                                                name="radioOption"
-                                                label="Radio topic"
+                                                name='radioOption'
+                                                label='Radio topic'
                                                 required={true}
                                             />
                                             <FormControl
-                                                control="checkbox"
+                                                control='checkbox'
                                                 options={checkboxOptions}
-                                                name="checkboxOption"
-                                                label="Checkbox topic"
+                                                name='checkboxOption'
+                                                label='Checkbox topic'
                                             />
                                             <FormControl
-                                                control="datepicker"
-                                                name="birthDate"
-                                                label="Pick a date"
+                                                control='datepicker'
+                                                name='birthDate'
+                                                label='Pick a date'
                                             />
 
                                             <ToggleSwitch
                                                 checked={formik.values.isVisible}
-                                                name="isVisible"
+                                                name='isVisible'
                                                 onChange={(e) =>
                                                     formik.setFieldValue('isVisible', e)
                                                 }
@@ -248,10 +248,10 @@ const Playground = () => {
 
                                             <Button
                                                 loading={loading}
-                                                type="submit"
-                                                variant="primary"
-                                                size="full"
-                                                className="my-4 text-lg font-bold rounded-sm"
+                                                type='submit'
+                                                variant='primary'
+                                                size='full'
+                                                className='my-4 text-lg font-bold rounded-sm'
                                             >
                                                 Submit
                                             </Button>

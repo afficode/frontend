@@ -21,19 +21,19 @@ const TextArea = (props) => {
         }
     };
     return (
-        <div className="formControlClass">
+        <div className='formControlClass'>
             {label && (
-                <label className="formLabel" htmlFor={name}>
+                <label className='formLabel' htmlFor={name}>
                     {label}{' '}
                     {required ? (
-                        <span className="text-black" title="This field is required">
-							*
+                        <span className='text-black' title='This field is required'>
+                            *
                         </span>
                     ) : null}
                 </label>
             )}
             <Field
-                as="textarea"
+                as='textarea'
                 name={name}
                 id={name}
                 cols={30}
@@ -43,7 +43,7 @@ const TextArea = (props) => {
                 {...rest}
             />
             {maxLength && (
-                <p className="text-sm text-gray-500">
+                <p className='text-sm text-gray-500'>
                     {wordCount}/{maxLength} words
                 </p>
             )}
