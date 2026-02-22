@@ -17,11 +17,11 @@ const PaymentSuccess = () => {
     }, []);
 
     return (
-        <div className="h-screen flex flex-col items-center justify-center space-y-6 text-center px-4">
-            <img src={BoonfuLogo} alt="Boonfu" />
-            <h4 className="text-primary font-bold ">Your transaction was successful</h4>
-            <table className="table  max-w-[25rem] border border-b border-b-gray-500">
-                <thead className="text-bold text-primary ">
+        <div className='h-screen flex flex-col items-center justify-center space-y-6 text-center px-4'>
+            <img src={BoonfuLogo} alt='Boonfu' />
+            <h4 className='text-primary font-bold '>Your transaction was successful</h4>
+            <table className='table  max-w-[25rem] border border-b border-b-gray-500'>
+                <thead className='text-bold text-primary '>
                     <tr>
                         <th>Amount (₦)</th>
                         <th>Reference ID</th>
@@ -34,10 +34,10 @@ const PaymentSuccess = () => {
                     </tr>
                 </tbody>
             </table>
-            <p className="font-semibold text-sm">
-				If you're not redirected in 5sec, Click here to go home{' '}
-                <Link to={'/'} className="text-secondary font-bold underline">
-					Boonfu Website
+            <p className='font-semibold text-sm'>
+                If you're not redirected in 5sec, Click here to go home{' '}
+                <Link to={'/'} className='text-secondary font-bold underline'>
+                    Boonfu Website
                 </Link>
             </p>
         </div>

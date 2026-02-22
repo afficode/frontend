@@ -36,18 +36,14 @@ const Logout = () => {
             disconnect_socket();
             queryClient.clear();
             navigate('/auth', { replace: 'true' });
-
-			
         };
         setTimeout(() => {
             logoutBackend();
         }, 4000);
-
-		
     }, []);
 
     return (
-        <div className="my-16 lg:my-20">
+        <div className='my-16 lg:my-20'>
             <SpinnerSkeleton
                 heading={'Logout in Process...'}
                 body={

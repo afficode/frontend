@@ -12,17 +12,18 @@ const Banner = ({ children, className }) => {
             {children ? (
                 children
             ) : (
-                <div className="flex flex-wrap items-center justify-center space-x-2 text-center">
+                <div className='flex flex-wrap items-center justify-center space-x-2 text-center'>
                     {/* <p className="font-bold">Did you know?</p> */}
                     <p>
-						Learn more about our <span className="font-bold">GRAB FEATURE </span>, You can use the feature
-						or become a <span className="font-bold">GRABBER</span>, too.!
+                        Learn more about our <span className='font-bold'>GRAB FEATURE </span>, You
+                        can use the feature or become a <span className='font-bold'>GRABBER</span>,
+                        too.!
                     </p>
                     <Link
                         to={Approutes.grab.home}
-                        className="cursor-pointer text-black/60 hover:text-black underline"
+                        className='cursor-pointer text-black/60 hover:text-black underline'
                     >
-						Click here
+                        Click here
                     </Link>
                 </div>
             )}

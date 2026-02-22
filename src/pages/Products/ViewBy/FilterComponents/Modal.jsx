@@ -57,7 +57,7 @@ const Modal = ({ setfieldvalue }) => {
     const [modalOpen, setModalOpen] = useState(false);
 
     return (
-        <div className="">
+        <div className=''>
             <button
                 className={`${
                     buttonDisplay ? ' text-start' : 'text-center'
@@ -67,40 +67,40 @@ const Modal = ({ setfieldvalue }) => {
                     resetModal();
                     setModalOpen(true);
                 }}
-                type="button"
+                type='button'
             >
                 {buttonDisplay || 'SELECT LOCATION'}
             </button>
             {modalOpen &&
                 createPortal(
                     <div
-                        id="location"
-                        className="fixed inset-0 !z-[1000000000] bg-black/50 flex items-center justify-center"
+                        id='location'
+                        className='fixed inset-0 !z-[1000000000] bg-black/50 flex items-center justify-center'
                     >
-                        <div className="modal-box w-11/12 max-w-5xl bg-gray-50">
-                            <div className="flex items-center justify-between my-2">
-                                <h3 className="font-bold text-lg tracking-normal lg:tracking-wide">
+                        <div className='modal-box w-11/12 max-w-5xl bg-gray-50'>
+                            <div className='flex items-center justify-between my-2'>
+                                <h3 className='font-bold text-lg tracking-normal lg:tracking-wide'>
                                     Please select from below
                                 </h3>
-                                <form method="dialog">
+                                <form method='dialog'>
                                     {/* if there is a button in form, it will close the modal */}
                                     <button
                                         onClick={() => setModalOpen(false)}
-                                        className="btn bg-gray-100 text-gray-600 border-gray-400 hover:bg-primary hover:border-0 hover:text-white "
+                                        className='btn bg-gray-100 text-gray-600 border-gray-400 hover:bg-primary hover:border-0 hover:text-white '
                                     >
                                         ✕
                                     </button>
                                 </form>
                             </div>
 
-                            <div className="">
-                                <input name="state_id" type="hidden" id="state" />
-                                <input name="lga_id" type="hidden" id="lga" />
+                            <div className=''>
+                                <input name='state_id' type='hidden' id='state' />
+                                <input name='lga_id' type='hidden' id='lga' />
                                 {(showState === null || showState) && state?.length > 0 && (
-                                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 text-center ">
+                                    <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 text-center '>
                                         {state.map((state, index) => (
                                             <span
-                                                className="bg-gray-200 p-3 text-black antialiased cursor-pointer hover:bg-primary hover:text-white hover:uppercase hover:font-semibold"
+                                                className='bg-gray-200 p-3 text-black antialiased cursor-pointer hover:bg-primary hover:text-white hover:uppercase hover:font-semibold'
                                                 key={index * 2}
                                                 onClick={() => {
                                                     setState(state);
@@ -113,10 +113,12 @@ const Modal = ({ setfieldvalue }) => {
                                 )}
 
                                 {showState === false && lga?.length > 0 && stateId !== null && (
-                                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 text-center mt-">
+                                    <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 text-center mt-'>
                                         <span
                                             className={`${
-                                                lgaId === null ? 'bg-primary text-white uppercase' : 'bg-gray-200 text-black capitalize'
+                                                lgaId === null
+                                                    ? 'bg-primary text-white uppercase'
+                                                    : 'bg-gray-200 text-black capitalize'
                                             }  p-3  antialiased cursor-pointer hover:bg-primary hover:text-white hover:uppercase hover:font-semibold`}
                                             onClick={() => {
                                                 setfieldvalue('lga_id', '');
@@ -146,12 +148,12 @@ const Modal = ({ setfieldvalue }) => {
                                     </div>
                                 )}
                             </div>
-                            <div className="modal-action">
-                                <form method="dialog">
+                            <div className='modal-action'>
+                                <form method='dialog'>
                                     {/* if there is a button, it will close the modal */}
                                     <button
                                         onClick={() => setModalOpen(false)}
-                                        className="btn bg-gray-100 text-gray-600 border-gray-400  hover:bg-primary hover:border-0 hover:text-white"
+                                        className='btn bg-gray-100 text-gray-600 border-gray-400  hover:bg-primary hover:border-0 hover:text-white'
                                     >
                                         Close
                                     </button>

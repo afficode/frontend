@@ -16,10 +16,12 @@ import ReactLoading from 'react-loading';
  */
 const SpinnerSkeleton = ({ heading = '', body = '', type, color = '#2686CE', height }) => {
     return (
-        <div className="w-full">
-            <div className="w-[90%] mx-auto md:w-[80%] lg:w-[65%] flex flex-col items-center justify-center">
-                {heading && <h3 className="text-xl lg:text-2xl font-bold mt-10 lg:mt-20">{heading}</h3>}
-                <p className="text-center my-4">{body}</p>
+        <div className='w-full'>
+            <div className='w-[90%] mx-auto md:w-[80%] lg:w-[65%] flex flex-col items-center justify-center'>
+                {heading && (
+                    <h3 className='text-xl lg:text-2xl font-bold mt-10 lg:mt-20'>{heading}</h3>
+                )}
+                <p className='text-center my-4'>{body}</p>
                 <ReactLoading type={type} color={color} height={height} width={height} />
             </div>
         </div>

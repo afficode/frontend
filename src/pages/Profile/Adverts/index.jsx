@@ -15,9 +15,9 @@ const Adverts = () => {
     const adsData = ads?.active_ads.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
     return (
-        <div className="max-w-[1224px] mx-auto px-4 my-10">
-            <div className="px-2 py-6 mb-12 space-y-8 border lg:px-8 border-black/30 rounded-3xl">
-                <div className="flex flex-wrap items-center justify-between">
+        <div className='max-w-[1224px] mx-auto px-4 my-10'>
+            <div className='px-2 py-6 mb-12 space-y-8 border lg:px-8 border-black/30 rounded-3xl'>
+                <div className='flex flex-wrap items-center justify-between'>
                     <div
                         onClick={() => setFilteredAd('all')}
                         className={`${filteredAd === 'all' ? 'bg-primary text-white lg:py-2 lg:px-6 py-1 px-4' : 'lg:py-2 lg:px-6 py-1 px-4'} cursor-pointer max-sm:text-sm`}
@@ -49,7 +49,7 @@ const Adverts = () => {
                         Closed <span>[{ads?.sold_ads.length || 0}]</span>
                     </div>
                 </div>
-                <div className="max-w-[400px] mx-auto">
+                <div className='max-w-[400px] mx-auto'>
                     <Link to={Approutes.dashboard.performance}>
                         <Button variant={'primary'} size={'full'} className={'rounded-xl'}>
                             Advert Performance
@@ -60,7 +60,7 @@ const Adverts = () => {
             {isLoading ? (
                 <LoadingScreen />
             ) : (
-                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 place-items-center">
+                <div className='grid gap-6 sm:grid-cols-2 lg:grid-cols-3 place-items-center'>
                     {ads && ads.total_ads > 0 ? (
                         filteredAd === 'active' ? (
                             adsData
@@ -160,7 +160,7 @@ const Adverts = () => {
                         )
                     ) : (
                         <div>
-                            <p className="text-center font-bold">
+                            <p className='text-center font-bold'>
                                 Sorry, You don't have any Advert yet. Please post one.
                             </p>
                         </div>

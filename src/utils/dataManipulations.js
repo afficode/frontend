@@ -1,6 +1,6 @@
 import { format } from 'date-fns';
 import { getUserFromLocalStorage, setUser } from './localstorage';
-import { categoriesAndSubCategories, categoryData } from '../constants/Category';
+import { categoriesAndSubCategories } from '../constants/Category';
 
 export const manipulateCategory = (category) => {
     return Object.groupBy(category, ({ category_id }) => category_id);
@@ -172,39 +172,39 @@ export const removeNullObjectsValues = (productDetails) => {
 export const manipulatePrice = (price, category_id) => {
     if (category_id.toString().startsWith('50')) {
         switch (price) {
-        case '1500000': {
-            const val = ['0', '1500000'];
-            return val;
-        }
-        case '3000000':
-            return ['1500000', '3000000'];
-        case '7500000':
-            return ['3000000', '7500000'];
-        case '11000000':
-            return ['7500000', '11000000'];
-        case '>11000000':
-            return '11000000';
-        default:
-            return '';
+            case '1500000': {
+                const val = ['0', '1500000'];
+                return val;
+            }
+            case '3000000':
+                return ['1500000', '3000000'];
+            case '7500000':
+                return ['3000000', '7500000'];
+            case '11000000':
+                return ['7500000', '11000000'];
+            case '>11000000':
+                return '11000000';
+            default:
+                return '';
         }
     } else {
         switch (price) {
-        case '5000': {
-            const val = ['0', '5000'];
-            return val;
-        }
-        case '10000':
-            return ['5000', '10000'];
-        case '15000':
-            return ['10000', '15000'];
-        case '20000':
-            return ['15000', '20000'];
-        case '30000':
-            return ['20000', '30000'];
-        case '>30000':
-            return '30000';
-        default:
-            return '';
+            case '5000': {
+                const val = ['0', '5000'];
+                return val;
+            }
+            case '10000':
+                return ['5000', '10000'];
+            case '15000':
+                return ['10000', '15000'];
+            case '20000':
+                return ['15000', '20000'];
+            case '30000':
+                return ['20000', '30000'];
+            case '>30000':
+                return '30000';
+            default:
+                return '';
         }
     }
 };

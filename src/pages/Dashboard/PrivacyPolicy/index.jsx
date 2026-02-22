@@ -23,36 +23,56 @@ const PrivacyPolicy = () => {
             <DashboardHeader />
 
             {/* Privacy Settings container */}
-            <div className="flex flex-col my-8 md:px-2 lg:px-4">
-                <div className="flex justify-between border-b border-black/30">
+            <div className='flex flex-col my-8 md:px-2 lg:px-4'>
+                <div className='flex justify-between border-b border-black/30'>
                     <h4>Privacy Settings</h4>
                 </div>
 
-                <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
+                <Formik
+                    initialValues={initialValues}
+                    onSubmit={onSubmit}
+                    validationSchema={validationSchema}
+                >
                     {() => {
                         return (
-                            <Form className=" ">
-                                <div className="max-md:mt-6 flex max-md:flex-col md:items-center md:gap-8  border-b border-black/10">
-                                    <h6 className="font-semibold w-[14rem]">Your Activity</h6>
-                                    <p>Manage profile and activity, Who can see your posts, adverts etc.</p>
+                            <Form className=' '>
+                                <div className='max-md:mt-6 flex max-md:flex-col md:items-center md:gap-8  border-b border-black/10'>
+                                    <h6 className='font-semibold w-[14rem]'>Your Activity</h6>
+                                    <p>
+                                        Manage profile and activity, Who can see your posts, adverts
+                                        etc.
+                                    </p>
 
-                                    <div className="md:ml-auto">
-                                        <FormControl control="select" name="activity_access" options={activityAccessOptions} />
+                                    <div className='md:ml-auto'>
+                                        <FormControl
+                                            control='select'
+                                            name='activity_access'
+                                            options={activityAccessOptions}
+                                        />
                                     </div>
                                 </div>
 
-                                <div className="max-md:mt-6 flex max-md:flex-col md:items-center md:gap-8  border-b border-black/10">
-                                    <h6 className="font-semibold w-[14rem]">Help people find and contact you</h6>
-                                    <p>Who can connect with you, who can look you up using your phone number and email.</p>
+                                <div className='max-md:mt-6 flex max-md:flex-col md:items-center md:gap-8  border-b border-black/10'>
+                                    <h6 className='font-semibold w-[14rem]'>
+                                        Help people find and contact you
+                                    </h6>
+                                    <p>
+                                        Who can connect with you, who can look you up using your
+                                        phone number and email.
+                                    </p>
 
-                                    <div className="md:ml-auto">
-                                        <FormControl control="select" name="contact_access" options={contactAccessOptions} />
+                                    <div className='md:ml-auto'>
+                                        <FormControl
+                                            control='select'
+                                            name='contact_access'
+                                            options={contactAccessOptions}
+                                        />
                                     </div>
                                 </div>
 
-                                <div className="w-[200px] mt-12">
-                                    <Button type="submit" variant="primary" size="full">
-										Save
+                                <div className='w-[200px] mt-12'>
+                                    <Button type='submit' variant='primary' size='full'>
+                                        Save
                                     </Button>
                                 </div>
                             </Form>

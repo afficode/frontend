@@ -37,56 +37,63 @@ const ResetPassword = () => {
             // notifySuc(submit.message);
             notify(submit.message, 'success');
             return navigate('/auth', { replace: true });
-        } 
+        }
         // notifyErr(submit.message);
         notify(submit.message, 'error');
-		
     };
 
     return (
-        <section className="w-full mt-[100px] lg:mt-[200px] ">
-            <div className="w-[90%] md:w-[75%] lg:w-[50%] mx-auto h-[768px]">
-                <div className="w-full text-xl text-center mb-8">
-					We ensure we provide you comfort. <span className="text-primary font-bold">Boonfu</span>{' '}
-					encourage you to use a strong password.
+        <section className='w-full mt-[100px] lg:mt-[200px] '>
+            <div className='w-[90%] md:w-[75%] lg:w-[50%] mx-auto h-[768px]'>
+                <div className='w-full text-xl text-center mb-8'>
+                    We ensure we provide you comfort.{' '}
+                    <span className='text-primary font-bold'>Boonfu</span> encourage you to use a
+                    strong password.
                 </div>
-                <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+                <Formik
+                    initialValues={initialValues}
+                    validationSchema={validationSchema}
+                    onSubmit={onSubmit}
+                >
                     {(formik) => (
                         <Form>
-                            <div className="form-control">
+                            <div className='form-control'>
                                 <Input
-                                    type="password"
-                                    name="password"
-                                    placeholder="Password"
-                                    className="input input-bordered border-black w-full bg-gray-100 text-black text-lg lg:text-xl rounded-none my-2 input-md"
+                                    type='password'
+                                    name='password'
+                                    placeholder='Password'
+                                    className='input input-bordered border-black w-full bg-gray-100 text-black text-lg lg:text-xl rounded-none my-2 input-md'
                                     {...formik.getFieldProps('password')}
                                 />
                             </div>
 
-                            <div className="form-control">
+                            <div className='form-control'>
                                 <Input
-                                    type="password"
-                                    name="confirmPassword"
-                                    placeholder="Confirm Password"
-                                    className="input input-bordered border-black w-full bg-gray-100 text-black text-lg lg:text-xl rounded-none my-2 input-md"
+                                    type='password'
+                                    name='confirmPassword'
+                                    placeholder='Confirm Password'
+                                    className='input input-bordered border-black w-full bg-gray-100 text-black text-lg lg:text-xl rounded-none my-2 input-md'
                                     {...formik.getFieldProps('confirmPassword')}
                                 />
                             </div>
-                            <div className="form-control">
+                            <div className='form-control'>
                                 <Button
-                                    size="lg"
-                                    type="submit"
-                                    className="text-black bg-primary w-[60%] mx-auto text-md lg:text-2xl my-2"
+                                    size='lg'
+                                    type='submit'
+                                    className='text-black bg-primary w-[60%] mx-auto text-md lg:text-2xl my-2'
                                     disabled={!formik.isValid || !formik.dirty ? 'disabled' : ''}
                                 >
                                     {!formik.isSubmitting ? (
                                         <>
-                                            <span className="text-lg">Change Password</span> &emsp;{' '}
+                                            <span className='text-lg'>Change Password</span>{' '}
+                                            &emsp;{' '}
                                         </>
                                     ) : (
                                         <>
-                                            <Spinner color="white" /> &emsp;
-                                            <span className="pl-3 text-white">We are changing password... </span>
+                                            <Spinner color='white' /> &emsp;
+                                            <span className='pl-3 text-white'>
+                                                We are changing password...{' '}
+                                            </span>
                                         </>
                                     )}
                                 </Button>

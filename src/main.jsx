@@ -15,25 +15,25 @@ import { HelmetProvider } from 'react-helmet-async';
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-	<React.StrictMode>
-		<HelmetProvider>
-			<QueryClientProvider client={queryClient}>
-				<UserProvider>
-					<NotificationProvider>
-						<TokenProvider>
-							<MessageProvider>
-								<GrabProvider>
-									<SaveProvider>
-										<App />
-									</SaveProvider>
-								</GrabProvider>
-							</MessageProvider>
-						</TokenProvider>
-					</NotificationProvider>
-				</UserProvider>
+    <React.StrictMode>
+        <HelmetProvider>
+            <QueryClientProvider client={queryClient}>
+                <UserProvider>
+                    <NotificationProvider>
+                        <TokenProvider>
+                            <MessageProvider>
+                                <GrabProvider>
+                                    <SaveProvider>
+                                        <App />
+                                    </SaveProvider>
+                                </GrabProvider>
+                            </MessageProvider>
+                        </TokenProvider>
+                    </NotificationProvider>
+                </UserProvider>
 
-				<ReactQueryDevtools initialIsOpen={false} />
-			</QueryClientProvider>
-		</HelmetProvider>
-	</React.StrictMode>,
+                <ReactQueryDevtools initialIsOpen={false} />
+            </QueryClientProvider>
+        </HelmetProvider>
+    </React.StrictMode>
 );

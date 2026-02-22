@@ -58,50 +58,50 @@ const index = () => {
     return isLoading ? (
         <ViewProduct />
     ) : user?.id === result?.data?.user_id ? (
-        <section className="w-full px-4 py-2 lg:py-4 lg:px-8">
+        <section className='w-full px-4 py-2 lg:py-4 lg:px-8'>
             {result?.data?.paid === 1 && result?.data?.active === '2' ? (
-                <div className="w-[90%] lg:w-1/2 my-3 mx-auto">
+                <div className='w-[90%] lg:w-1/2 my-3 mx-auto'>
                     <Alert
                         // additionalContent={<ContactAdmin />}
-                        color="success"
+                        color='success'
                     >
-                        <h5 className="font-medium text-red-600">This Ad is marked as closed: </h5>{' '}
-                        <div className="">
+                        <h5 className='font-medium text-red-600'>This Ad is marked as closed: </h5>{' '}
+                        <div className=''>
                             {' '}
                             This Ad is marked as closed and is not displayed for customers to see.
-                            <ul className="list-disc list-inside font-bold my-4">
-                                <li className="text-sm">
+                            <ul className='list-disc list-inside font-bold my-4'>
+                                <li className='text-sm'>
                                     You can choose to delete this Ad or it will be VACUMMED during
                                     our daily cleanup.
                                 </li>
-                                <li className="text-sm">
+                                <li className='text-sm'>
                                     Closed Ad are deleted after 48 hours of closure from our policy.
                                 </li>
                             </ul>
-                            <span className="font-bold mt-4 bg-white text-green-500 p-2">
+                            <span className='font-bold mt-4 bg-white text-green-500 p-2'>
                                 Thanks for using Boonfu!
                             </span>
                         </div>
                     </Alert>
                 </div>
             ) : result?.data?.paid === 1 && result?.data?.available === 0 ? (
-                <div className="w-[90%] lg:w-[70%] my-3 mx-auto">
+                <div className='w-[90%] lg:w-[70%] my-3 mx-auto'>
                     <Alert
                         // additionalContent={<ContactAdmin />}
-                        color="info"
+                        color='info'
                     >
-                        <h5 className="font-medium text-red-600">Ad Post successfully: </h5>{' '}
-                        <div className="">
+                        <h5 className='font-medium text-red-600'>Ad Post successfully: </h5>{' '}
+                        <div className=''>
                             {' '}
                             This Ad is been processed ATM. Processing time is less than 24 hours. If
                             this takes more than 24 hours please reach out to Admin with the contact
                             form with the below details.
-                            <ul className="list-disc list-inside font-bold ">
-                                <li className="text-sm">Ad Title</li>
-                                <li className="text-sm">Your email address</li>
-                                <li className="text-sm">Date Posted</li>
+                            <ul className='list-disc list-inside font-bold '>
+                                <li className='text-sm'>Ad Title</li>
+                                <li className='text-sm'>Your email address</li>
+                                <li className='text-sm'>Date Posted</li>
                             </ul>
-                            <div className="w-full font-bold my-2 bg-secondary text-white p-2">
+                            <div className='w-full font-bold my-2 bg-secondary text-white p-2'>
                                 Please ensure the Ad title matches exactly what you have in your Ad.
                                 This will facilitate the response to your request.
                             </div>
@@ -111,16 +111,16 @@ const index = () => {
             ) : (
                 result?.data.active === '0' &&
                 user.id === result?.data.owner && (
-                    <div className="w-[90%] lg:w-[70%] my-3 mx-auto">
+                    <div className='w-[90%] lg:w-[70%] my-3 mx-auto'>
                         <Alert
                             additionalContent={<ContactAdmin ads_id={id} />}
-                            color="warning"
+                            color='warning'
                             icon={HiInformationCircle}
                         >
                             <div>
-                                <span className="font-medium text-red-600">
+                                <span className='font-medium text-red-600'>
                                     Ad Blocked:{' '}
-                                    <span className="underline">
+                                    <span className='underline'>
                                         {' '}
                                         Change a few things up and try submitting again.
                                     </span>
@@ -131,13 +131,13 @@ const index = () => {
                 )
             )}
 
-            <section className="flex flex-col w-full gap-2 md:flex-row md:gap-8 line-clamp-1">
-                <main className="w-full flex flex-col">
-                    <div className="w-full my-2 ">
+            <section className='flex flex-col w-full gap-2 md:flex-row md:gap-8 line-clamp-1'>
+                <main className='w-full flex flex-col'>
+                    <div className='w-full my-2 '>
                         {/* ad title  */}
-                        <div className="flex items-center justify-between w-full my-2 font-bold uppercase text-md md:text-2xl xl:text-3xl">
-                            <span className="">{result.data?.title}</span>
-                            <span className=" flex items-center gap-2 lg:gap-8 my-auto ">
+                        <div className='flex items-center justify-between w-full my-2 font-bold uppercase text-md md:text-2xl xl:text-3xl'>
+                            <span className=''>{result.data?.title}</span>
+                            <span className=' flex items-center gap-2 lg:gap-8 my-auto '>
                                 <NegotiableIcon negotiable={result.data?.negotiable} />
 
                                 {isLogin && result?.data?.owner !== user?.id && (
@@ -149,9 +149,9 @@ const index = () => {
                         </div>
 
                         {/* price and status  */}
-                        <div className="flex items-center justify-between">
-                            <p className="flex items-center  w-full font-bold ">
-                                <TbCurrencyNaira className="font-bold text-black" />
+                        <div className='flex items-center justify-between'>
+                            <p className='flex items-center  w-full font-bold '>
+                                <TbCurrencyNaira className='font-bold text-black' />
                                 {numberWithCommas(result.data?.price)}
                             </p>
 
@@ -171,17 +171,17 @@ const index = () => {
                             ) : null}
                         </div>
                     </div>{' '}
-                    <div className="w-full mx-auto mt-1">
-                        <div className="relative w-full h-[600px] mx-auto mt-1  rounded-none ">
+                    <div className='w-full mx-auto mt-1'>
+                        <div className='relative w-full h-[600px] mx-auto mt-1  rounded-none '>
                             <Carousel
-                                className="w-full h-full mx-auto"
+                                className='w-full h-full mx-auto'
                                 items={result?.data?.images}
                             />
-                            <div className="absolute top-[440px] flex w-full h-10 my-0 py-2 pl-6 text-white  rounded-none">
-                                <span className="flex px-2 my-auto border-2 border-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
-                                    <FaCamera className="mt-1 text-sm" />
+                            <div className='absolute top-[440px] flex w-full h-10 my-0 py-2 pl-6 text-white  rounded-none'>
+                                <span className='flex px-2 my-auto border-2 border-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]'>
+                                    <FaCamera className='mt-1 text-sm' />
                                     &nbsp; &nbsp;{' '}
-                                    <span className="my-auto text-sm">
+                                    <span className='my-auto text-sm'>
                                         {' '}
                                         {result?.data?.images.length}
                                     </span>
@@ -194,17 +194,17 @@ const index = () => {
             </section>
 
             <GrabUpdateTable ad={result?.data} />
-            <section className="flex flex-col p-2 my-2 bg-gray-200 xl:p-6 xl:my-4">
-                <div className="flex flex-col items-start justify-start w-full gap-2 tracking-tighter lg:tracking-normal line-clamp-1">
-                    <h2 className="text-xl xl:2xl">Description</h2>
-                    <p className="bg-white p-4 min-h-[100px] text-justify text-lg border-t-4 border-t-primary whitespace-pre-line w-full">
+            <section className='flex flex-col p-2 my-2 bg-gray-200 xl:p-6 xl:my-4'>
+                <div className='flex flex-col items-start justify-start w-full gap-2 tracking-tighter lg:tracking-normal line-clamp-1'>
+                    <h2 className='text-xl xl:2xl'>Description</h2>
+                    <p className='bg-white p-4 min-h-[100px] text-justify text-lg border-t-4 border-t-primary whitespace-pre-line w-full'>
                         {result?.data?.description}
                     </p>
                 </div>
-                <div className="flex flex-col items-start justify-start w-full gap-2 my-2">
-                    <h2 className="text-xl tracking-tighter lg:tracking-normal">Overview</h2>
+                <div className='flex flex-col items-start justify-start w-full gap-2 my-2'>
+                    <h2 className='text-xl tracking-tighter lg:tracking-normal'>Overview</h2>
 
-                    <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                    <div className='grid w-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
                         {convertKeyToName(result?.data).map((val, index) => (
                             <OverviewPills overview={val} ad={result?.data} key={index} />
                         ))}
@@ -226,19 +226,19 @@ const index = () => {
             />
         </section>
     ) : (
-        <section className="w-full p-2 lg:p-4">
-            <header className="w-full">
+        <section className='w-full p-2 lg:p-4'>
+            <header className='w-full'>
                 <Breadcrumb items={items} className={'text-md breadcrumbs text-primary'} />
             </header>
 
-            <section className="flex flex-col  h-full w-full gap-2 md:flex-row md:items-stretch md:gap-8 line-clamp-1">
-                <main className="w-full h-full  md:w-[60%] xl:w-[70%] flex flex-col justify-between lg:py-4 border-2 border-transparent">
+            <section className='flex flex-col  h-full w-full gap-2 md:flex-row md:items-stretch md:gap-8 line-clamp-1'>
+                <main className='w-full h-full  md:w-[60%] xl:w-[70%] flex flex-col justify-between lg:py-4 border-2 border-transparent'>
                     {/* ad top info */}
-                    <div className="w-full mb-2 pl-2">
+                    <div className='w-full mb-2 pl-2'>
                         {/* ad name and options */}
-                        <div className="flex items-center justify-between w-full mb-2 font-bold uppercase text-md md:text-2xl xl:text-3xl">
-                            <span className="">{result?.data?.title}</span>
-                            <span className=" flex items-center gap-2 lg:gap-8 my-auto mr-4 lg:mr-0">
+                        <div className='flex items-center justify-between w-full mb-2 font-bold uppercase text-md md:text-2xl xl:text-3xl'>
+                            <span className=''>{result?.data?.title}</span>
+                            <span className=' flex items-center gap-2 lg:gap-8 my-auto mr-4 lg:mr-0'>
                                 <NegotiableIcon negotiable={result?.data?.negotiable} />
 
                                 {isLogin && result?.data?.owner !== user?.id && (
@@ -250,36 +250,36 @@ const index = () => {
                         </div>
 
                         {/* ad location */}
-                        <div className="flex items-center justify-between">
-                            <p className="w-full">
+                        <div className='flex items-center justify-between'>
+                            <p className='w-full'>
                                 <Link
                                     to={`/product/?q=&state_id=${result?.data?.state_id}&lga_id=${result?.data?.lga_id}`}
-                                    className="text-primary hover:underline"
+                                    className='text-primary hover:underline'
                                 >
                                     {result?.data?.location.split(',')[0]}
                                 </Link>{' '}
                                 |{' '}
                                 <Link
                                     to={`/product/?q=&state_id=${result?.data?.state_id}`}
-                                    className="text-primary hover:underline"
+                                    className='text-primary hover:underline'
                                 >
                                     {result?.data?.location.split(',')[1]}
                                 </Link>
                             </p>
-                            <p className="flex items-center justify-end w-full pr-2 font-bold">
-                                <TbCurrencyNaira className="font-bold text-black" />
+                            <p className='flex items-center justify-end w-full pr-2 font-bold'>
+                                <TbCurrencyNaira className='font-bold text-black' />
                                 {numberWithCommas(result?.data?.price)}
                             </p>
                         </div>
                     </div>{' '}
                     {/* ad images */}
-                    <div className="relative w-full h-[600px] mx-auto mt-1  rounded-none ">
-                        <Carousel className="w-full h-full mx-auto" items={result?.data?.images} />
-                        <div className="absolute top-[440px] flex w-full h-10 my-0 py-2 pl-6 text-white  rounded-none">
-                            <span className="flex px-2 my-auto border-2 border-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
-                                <FaCamera className="mt-1 text-sm" />
+                    <div className='relative w-full h-[600px] mx-auto mt-1  rounded-none '>
+                        <Carousel className='w-full h-full mx-auto' items={result?.data?.images} />
+                        <div className='absolute top-[440px] flex w-full h-10 my-0 py-2 pl-6 text-white  rounded-none'>
+                            <span className='flex px-2 my-auto border-2 border-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]'>
+                                <FaCamera className='mt-1 text-sm' />
                                 &nbsp; &nbsp;{' '}
-                                <span className="my-auto text-sm">
+                                <span className='my-auto text-sm'>
                                     {' '}
                                     {result?.data?.images.length}
                                 </span>
@@ -288,11 +288,11 @@ const index = () => {
                     </div>
                 </main>
 
-                <aside className="w-full h-full md:w-[40%] xl:w-[30%] border-2 border-gray-400 max-lg:p-2 lg:px-4 lg:pt-4 flex flex-col">
-                    <h2 className="w-full text-lg font-bold md:text-xl 2xl:text-3xl">
+                <aside className='w-full h-full md:w-[40%] xl:w-[30%] border-2 border-gray-400 max-lg:p-2 lg:px-4 lg:pt-4 flex flex-col'>
+                    <h2 className='w-full text-lg font-bold md:text-xl 2xl:text-3xl'>
                         {result?.data?.firstname}
                     </h2>
-                    <p className="text-lg">
+                    <p className='text-lg'>
                         Since{' '}
                         {formatDistance(
                             new Date(new Date(`${result?.data?.joined_on}`)),
@@ -304,14 +304,14 @@ const index = () => {
                         )}
                     </p>
 
-                    <hr className="h-px my-2 bg-gray-700 border-black border-1" />
+                    <hr className='h-px my-2 bg-gray-700 border-black border-1' />
 
                     {result?.data.feature !== '3' && (
-                        <div className="w-full text-lg tracking-tighter lg:text-xl">
-                            <p className="w-full">Contact {result?.data?.firstname} </p>
+                        <div className='w-full text-lg tracking-tighter lg:text-xl'>
+                            <p className='w-full'>Contact {result?.data?.firstname} </p>
                             {result?.data?.contact_type.includes('phone') && (
-                                <div className="flex items-center justify-between">
-                                    <p className="my-2 text-sm  text-start w-max">
+                                <div className='flex items-center justify-between'>
+                                    <p className='my-2 text-sm  text-start w-max'>
                                         <span>
                                             {revealNumber
                                                 ? result?.data?.number
@@ -334,7 +334,7 @@ const index = () => {
                                                 }
                                             }}
                                         >
-                                            <span className="flex items-center justify-center text-sm">
+                                            <span className='flex items-center justify-center text-sm'>
                                                 <IoEye /> &nbsp; Reveal{' '}
                                             </span>
                                         </button>
@@ -345,12 +345,12 @@ const index = () => {
                             )}
 
                             {result?.data?.contact_type.includes('email') && (
-                                <div className="flex items-center justify-between w-full">
+                                <div className='flex items-center justify-between w-full'>
                                     <p
                                         className={`my-2 w-max  text-start ${revealEmail ? 'tooltip tooltip-primary' : ''}`}
                                         data-tip={revealEmail ? result?.data?.email : ''}
                                     >
-                                        <span className="pr-1 text-sm ">
+                                        <span className='pr-1 text-sm '>
                                             {revealEmail && result?.data?.email !== null
                                                 ? result?.data?.email
                                                 : `${result?.data?.email.substring(0, 3)}XXXXXXXX`}
@@ -375,7 +375,7 @@ const index = () => {
                                                 }
                                             }}
                                         >
-                                            <span className="flex items-center justify-center text-sm">
+                                            <span className='flex items-center justify-center text-sm'>
                                                 <IoEye /> &nbsp; Reveal{' '}
                                             </span>
                                         </button>
@@ -397,17 +397,17 @@ const index = () => {
                 </aside>
             </section>
 
-            <section className="flex flex-col p-2 my-2 bg-gray-200 xl:p-6 xl:my-4">
-                <div className="flex flex-col items-start justify-start w-full gap-2 tracking-tighter lg:tracking-normal line-clamp-1">
-                    <h2 className="text-xl xl:2xl">Description</h2>
-                    <p className="bg-white p-4 min-h-[100px] text-justify text-lg border-t-4 border-t-primary whitespace-pre-line w-full">
+            <section className='flex flex-col p-2 my-2 bg-gray-200 xl:p-6 xl:my-4'>
+                <div className='flex flex-col items-start justify-start w-full gap-2 tracking-tighter lg:tracking-normal line-clamp-1'>
+                    <h2 className='text-xl xl:2xl'>Description</h2>
+                    <p className='bg-white p-4 min-h-[100px] text-justify text-lg border-t-4 border-t-primary whitespace-pre-line w-full'>
                         {result?.data?.description}
                     </p>
                 </div>
-                <div className="flex flex-col items-start justify-start w-full gap-2 my-2">
-                    <h2 className="text-xl tracking-tighter lg:tracking-normal">Overview</h2>
+                <div className='flex flex-col items-start justify-start w-full gap-2 my-2'>
+                    <h2 className='text-xl tracking-tighter lg:tracking-normal'>Overview</h2>
 
-                    <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                    <div className='grid w-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
                         {convertKeyToName(result?.data).map((val, index) => (
                             <OverviewPills overview={val} ad={result?.data} key={index} />
                         ))}

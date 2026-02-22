@@ -5,10 +5,10 @@ const CategoryCard = ({ category }) => {
     return (
         <Link
             to={`/post-ad/${id}`}
-            className="max-w-[370px] max-h-[370px] shadow-lg my-2 hover:bg-gray-100"
+            className='max-w-[370px] max-h-[370px] shadow-lg my-2 hover:bg-gray-100'
         >
-            <img src={image} alt={name} className="h-[250px] w-[370px]" />
-            <p className="text-lg py-4 pl-2 tracking-tighter line-clamp-1 lg:text-2xl font-semibold ">
+            <img src={image} alt={name} className='h-[250px] w-[370px]' />
+            <p className='text-lg py-4 pl-2 tracking-tighter line-clamp-1 lg:text-2xl font-semibold '>
                 {name}
             </p>
         </Link>

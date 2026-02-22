@@ -1,4 +1,3 @@
-
 const InputGroup = ({
     placeHolder,
     type,
@@ -12,7 +11,7 @@ const InputGroup = ({
     error,
 }) => {
     return (
-        <div className="mb-[1.7rem]">
+        <div className='mb-[1.7rem]'>
             <div
                 className={`${bgColor} ${
                     hasBorder && 'border-solid border-2 border-black'
@@ -29,10 +28,10 @@ const InputGroup = ({
                 />
                 {hasPassword && (
                     <span
-                        className="text-[rgba(0, 0, 0, 0.30)] text-[1.2rem] font-sans px-3 cursor-pointer  border-l "
+                        className='text-[rgba(0, 0, 0, 0.30)] text-[1.2rem] font-sans px-3 cursor-pointer  border-l '
                         onClick={handleShowPassword}
                     >
-            Show
+                        Show
                     </span>
                 )}
             </div>
