@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-import { COMPANY_NAME, SEO_PAGES, WELCOME_BOONFU_IMAGE, frontendLink } from '../../constants';
+import { COMPANY_NAME, WELCOME_BOONFU_IMAGE } from '../../constants';
 import { usePrerender } from '../../hooks/usePrerender';
 import { capitalizeWords } from '../../utils';
 

@@ -31,6 +31,22 @@ const GrabProducts = () => {
         );
     }
 
+    if (result?.grabs?.length === 0) {
+        return (
+            <section>
+                <GrabHeader text="Grabber’s Products Page" />
+                <div className="flex flex-col items-center justify-center h-[60vh]">
+                    <div className="text-center">
+                        <h2 className="text-xl font-bold mb-2 text-primary">No ads grabbed yet</h2>
+                        <p className="text-gray-500">Start grabbing ads to see them here.</p>
+                    </div>
+                </div>
+
+                <ScrollToTop/>
+            </section>
+        );
+    }
+
     return (
         <section>
             <GrabHeader text="Grabber’s Products Page" />
