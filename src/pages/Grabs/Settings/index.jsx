@@ -132,14 +132,14 @@ const GrabSettings = () => {
     };
 
     return (
-        <section className="mb-12 space-y-8 ">
-            <GrabHeader text="Grab Account settings" />
+        <section className='mb-12 space-y-8 '>
+            <GrabHeader text='Grab Account settings' />
 
-            <div className="p-6 my-6 space-y-12 bg-gray-300">
-                <div className="flex items-center justify-between pb-4 border-b border-gray-400">
-                    <span className="text-lg font-semibold">Update Social handle / Accounts</span>
+            <div className='p-6 my-6 space-y-12 bg-gray-300'>
+                <div className='flex items-center justify-between pb-4 border-b border-gray-400'>
+                    <span className='text-lg font-semibold'>Update Social handle / Accounts</span>
                     <button onClick={() => setEditModal(true)}>
-                        <img src={EditPencil} className="w-4" alt="/" />
+                        <img src={EditPencil} className='w-4' alt='/' />
                     </button>
                     <Modal
                         isOpen={editModal}
@@ -148,16 +148,19 @@ const GrabSettings = () => {
                         headerSize={'text'}
                         headerStye={'text-lg font-semibold'}
                     >
-                        <form onSubmit={formik.handleSubmit} className=" bg-gray-300 mx-auto  p-6 rounded-lg">
-                            <div className="flex  md:gap-4 md:justify-between  max-md:flex-col max-md:items-start">
-                                <label htmlFor="display_name" className="font-semibold mt-4">
-									Display Name
+                        <form
+                            onSubmit={formik.handleSubmit}
+                            className=' bg-gray-300 mx-auto  p-6 rounded-lg'
+                        >
+                            <div className='flex  md:gap-4 md:justify-between  max-md:flex-col max-md:items-start'>
+                                <label htmlFor='display_name' className='font-semibold mt-4'>
+                                    Display Name
                                 </label>
                                 <InputGroup
-                                    name="display_name"
-                                    type="text"
-                                    placeholder="Enter a display name"
-                                    className="w-[250px]"
+                                    name='display_name'
+                                    type='text'
+                                    placeholder='Enter a display name'
+                                    className='w-[250px]'
                                     value={formik.values.display_name}
                                     onChange={handleChange}
                                     onBlur={formik.handleBlur}
@@ -169,153 +172,175 @@ const GrabSettings = () => {
                                 />
                             </div>
 
-                            <div className="flex  justify-between w-full max-md:flex-col max-md:items-start ">
-                                <label htmlFor="current_location" className="font-semibold mt-4">
-									Location
+                            <div className='flex  justify-between w-full max-md:flex-col max-md:items-start '>
+                                <label htmlFor='current_location' className='font-semibold mt-4'>
+                                    Location
                                 </label>
                                 <InputGroup
-                                    name="current_location"
-                                    type="select"
-                                    className="w-[250px]"
+                                    name='current_location'
+                                    type='select'
+                                    className='w-[250px]'
                                     optionLists={statesOptions}
                                     value={formik.values.current_location}
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                     errorMsg={
-                                        formik.touched.current_location && formik.errors.current_location
+                                        formik.touched.current_location &&
+                                        formik.errors.current_location
                                             ? formik.errors.current_location
                                             : null
                                     }
                                 />
                             </div>
-                            <div className="flex  justify-between w-full max-md:flex-col max-md:items-start ">
-                                <label htmlFor="bio" className="font-semibold mt-4">
-									Bio
+                            <div className='flex  justify-between w-full max-md:flex-col max-md:items-start '>
+                                <label htmlFor='bio' className='font-semibold mt-4'>
+                                    Bio
                                 </label>
                                 <InputGroup
-                                    name="bio"
-                                    type="textarea"
-                                    className="w-[250px]"
+                                    name='bio'
+                                    type='textarea'
+                                    className='w-[250px]'
                                     value={formik.values.bio}
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
-                                    errorMsg={formik.touched.bio && formik.errors.bio ? formik.errors.bio : null}
+                                    errorMsg={
+                                        formik.touched.bio && formik.errors.bio
+                                            ? formik.errors.bio
+                                            : null
+                                    }
                                 />
                             </div>
-                            <div className="flex flex-col">
-                                <label className="font-semibold text-left">Social Media Handles:</label>
-                                <div className="flex  gap-4 md:justify-between ">
-                                    <label className="md:pr-8 md:ml-auto  mt-3" htmlFor="x_page">
-                                        <img src={Twitter} alt="/" className="w-8" />
+                            <div className='flex flex-col'>
+                                <label className='font-semibold text-left'>
+                                    Social Media Handles:
+                                </label>
+                                <div className='flex  gap-4 md:justify-between '>
+                                    <label className='md:pr-8 md:ml-auto  mt-3' htmlFor='x_page'>
+                                        <img src={Twitter} alt='/' className='w-8' />
                                     </label>
                                     <InputGroup
-                                        name="x_page"
-                                        type="text"
-                                        className="w-[250px]"
+                                        name='x_page'
+                                        type='text'
+                                        className='w-[250px]'
                                         value={formik.values.x_page}
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
-                                        errorMsg={formik.touched.x_page && formik.errors.x_page ? formik.errors.x_page : null}
+                                        errorMsg={
+                                            formik.touched.x_page && formik.errors.x_page
+                                                ? formik.errors.x_page
+                                                : null
+                                        }
                                     />
                                 </div>
 
-                                <div className="flex  gap-4 md:justify-between ">
-                                    <label className="md:pr-8 md:ml-auto  mt-3" htmlFor="facebook">
-                                        <img src={FacebookBlue} alt="/" className="w-8" />
+                                <div className='flex  gap-4 md:justify-between '>
+                                    <label className='md:pr-8 md:ml-auto  mt-3' htmlFor='facebook'>
+                                        <img src={FacebookBlue} alt='/' className='w-8' />
                                     </label>
                                     <InputGroup
-                                        name="facebook"
-                                        type="text"
-                                        className="w-[250px]"
+                                        name='facebook'
+                                        type='text'
+                                        className='w-[250px]'
                                         value={formik.values.facebook}
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
                                         errorMsg={
-                                            formik.touched.facebook && formik.errors.facebook ? formik.errors.facebook : null
+                                            formik.touched.facebook && formik.errors.facebook
+                                                ? formik.errors.facebook
+                                                : null
                                         }
                                     />
                                 </div>
-                                <div className="flex  gap-4 md:justify-between ">
-                                    <label className="md:pr-8 md:ml-auto  mt-3" htmlFor="whatsapp">
-                                        <img src={Whatsapp} alt="/" className="w-8" />
+                                <div className='flex  gap-4 md:justify-between '>
+                                    <label className='md:pr-8 md:ml-auto  mt-3' htmlFor='whatsapp'>
+                                        <img src={Whatsapp} alt='/' className='w-8' />
                                     </label>
                                     <InputGroup
-                                        name="whatsapp"
-                                        type="text"
-                                        className="w-[250px]"
+                                        name='whatsapp'
+                                        type='text'
+                                        className='w-[250px]'
                                         value={formik.values.whatsapp}
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
                                         errorMsg={
-                                            formik.touched.whatsapp && formik.errors.whatsapp ? formik.errors.whatsapp : null
+                                            formik.touched.whatsapp && formik.errors.whatsapp
+                                                ? formik.errors.whatsapp
+                                                : null
                                         }
                                     />
                                 </div>
-                                <div className="flex  gap-4 md:justify-between ">
-                                    <label className="md:pr-8 md:ml-auto  mt-3" htmlFor="instagram">
-                                        <img src={Instagram} alt="/" className="w-8" />
+                                <div className='flex  gap-4 md:justify-between '>
+                                    <label className='md:pr-8 md:ml-auto  mt-3' htmlFor='instagram'>
+                                        <img src={Instagram} alt='/' className='w-8' />
                                     </label>
                                     <InputGroup
-                                        name="instagram"
-                                        type="text"
-                                        className="w-[250px]"
+                                        name='instagram'
+                                        type='text'
+                                        className='w-[250px]'
                                         value={formik.values.instagram}
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
                                         errorMsg={
-                                            formik.touched.instagram && formik.errors.instagram ? formik.errors.instagram : null
+                                            formik.touched.instagram && formik.errors.instagram
+                                                ? formik.errors.instagram
+                                                : null
                                         }
                                     />
                                 </div>
-                                <div className="flex  gap-4 mb-4 md:justify-between ">
-                                    <label className="md:pr-8 md:ml-auto  mt-3" htmlFor="tiktok">
-                                        <img src={Tiktok} alt="/" className="w-8" />
+                                <div className='flex  gap-4 mb-4 md:justify-between '>
+                                    <label className='md:pr-8 md:ml-auto  mt-3' htmlFor='tiktok'>
+                                        <img src={Tiktok} alt='/' className='w-8' />
                                     </label>
                                     <InputGroup
-                                        name="tiktok"
-                                        type="text"
-                                        className="w-[250px]"
+                                        name='tiktok'
+                                        type='text'
+                                        className='w-[250px]'
                                         value={formik.values.tiktok}
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
-                                        errorMsg={formik.touched.tiktok && formik.errors.tiktok ? formik.errors.tiktok : null}
+                                        errorMsg={
+                                            formik.touched.tiktok && formik.errors.tiktok
+                                                ? formik.errors.tiktok
+                                                : null
+                                        }
                                     />
                                 </div>
                             </div>
-                            <div className="py-8 space-y-4">
+                            <div className='py-8 space-y-4'>
                                 <Button
-                                    type="submit"
+                                    type='submit'
                                     variant={'primary'}
                                     loading={formik.isSubmitting}
                                     disabled={formik.isSubmitting}
                                 >
-									Update your Grabber Account.
+                                    Update your Grabber Account.
                                 </Button>
                             </div>
                         </form>
                     </Modal>
                 </div>
 
-                <div className="flex items-center justify-between border-b border-gray-400">
-                    <span className="text-lg font-semibold">Update Location</span>
+                <div className='flex items-center justify-between border-b border-gray-400'>
+                    <span className='text-lg font-semibold'>Update Location</span>
                     <button onClick={() => setEditModal(true)}>
-                        <img src={EditPencil} className="w-4" alt="/" />
+                        <img src={EditPencil} className='w-4' alt='/' />
                     </button>
                 </div>
             </div>
 
             {/* notification settings  */}
-            <form onSubmit={formik2.handleSubmit} className="space-y-3 ">
-                <h3 className="my-6">Notification</h3>
+            <form onSubmit={formik2.handleSubmit} className='space-y-3 '>
+                <h3 className='my-6'>Notification</h3>
 
-                <div className="flex items-center justify-between p-6 bg-gray-300">
-                    <div className="text-lg font-semibold">
-                        <span className="text-primary">Turn notification for:</span> New Product Listing for Grabbers
+                <div className='flex items-center justify-between p-6 bg-gray-300'>
+                    <div className='text-lg font-semibold'>
+                        <span className='text-primary'>Turn notification for:</span> New Product
+                        Listing for Grabbers
                     </div>
 
                     <ToggleSwitch
                         checked={formik2.values.new_product}
-                        name="new_product"
+                        name='new_product'
                         onChange={(e) => {
                             formik2.setFieldValue('new_product', e);
                         }}
@@ -323,42 +348,44 @@ const GrabSettings = () => {
                     />
                 </div>
 
-                <div className="flex items-center justify-between p-6 bg-gray-300">
-                    <div className="text-lg font-semibold">
-                        <span className="text-primary">Turn notification for:</span> Sold Product
+                <div className='flex items-center justify-between p-6 bg-gray-300'>
+                    <div className='text-lg font-semibold'>
+                        <span className='text-primary'>Turn notification for:</span> Sold Product
                     </div>
 
                     <ToggleSwitch
                         checked={formik2.values.sold_product}
-                        name="sold_product"
+                        name='sold_product'
                         onChange={(e) => {
                             formik2.setFieldValue('sold_product', e);
                         }}
                         className={formik2.values.sold_product ? 'custom-toggle' : ''}
                     />
                 </div>
-                <div className="flex items-center justify-between p-6 bg-gray-300">
-                    <div className="text-lg font-semibold">
-                        <span className="text-primary">Turn notification for:</span> New Visitor from Link
+                <div className='flex items-center justify-between p-6 bg-gray-300'>
+                    <div className='text-lg font-semibold'>
+                        <span className='text-primary'>Turn notification for:</span> New Visitor
+                        from Link
                     </div>
 
                     <ToggleSwitch
                         checked={formik2.values.link_visited}
-                        name="link_visited"
+                        name='link_visited'
                         onChange={(e) => {
                             formik2.setFieldValue('link_visited', e);
                         }}
                         className={formik2.values.link_visited ? 'custom-toggle' : ''}
                     />
                 </div>
-                <div className="flex items-center justify-between p-6 bg-gray-300">
-                    <div className="text-lg font-semibold">
-                        <span className="text-primary">Turn notification for:</span> Purchase made from Link
+                <div className='flex items-center justify-between p-6 bg-gray-300'>
+                    <div className='text-lg font-semibold'>
+                        <span className='text-primary'>Turn notification for:</span> Purchase made
+                        from Link
                     </div>
 
                     <ToggleSwitch
                         checked={formik2.values.purchase_from_link}
-                        name="purchase_from_link"
+                        name='purchase_from_link'
                         onChange={(e) => {
                             formik2.setFieldValue('purchase_from_link', e);
                         }}
@@ -366,14 +393,15 @@ const GrabSettings = () => {
                     />
                 </div>
 
-                <div className="flex items-center justify-between p-6 bg-gray-300">
-                    <div className="text-lg font-semibold">
-                        <span className="text-primary">Turn notification for:</span> Commission credited to my account
+                <div className='flex items-center justify-between p-6 bg-gray-300'>
+                    <div className='text-lg font-semibold'>
+                        <span className='text-primary'>Turn notification for:</span> Commission
+                        credited to my account
                     </div>
 
                     <ToggleSwitch
                         checked={formik2.values.commission_credited}
-                        name="commission_credited"
+                        name='commission_credited'
                         onChange={(e) => {
                             formik2.setFieldValue('commission_credited', e);
                         }}
@@ -381,28 +409,30 @@ const GrabSettings = () => {
                     />
                 </div>
 
-                <div className="flex items-center justify-between p-6 bg-gray-300">
-                    <div className="text-lg font-semibold">
-                        <span className="text-primary">Turn notification for:</span> Grabbers News and Updates
+                <div className='flex items-center justify-between p-6 bg-gray-300'>
+                    <div className='text-lg font-semibold'>
+                        <span className='text-primary'>Turn notification for:</span> Grabbers News
+                        and Updates
                     </div>
 
                     <ToggleSwitch
                         checked={formik2.values.news_update}
-                        name="news_update"
+                        name='news_update'
                         onChange={(e) => {
                             formik2.setFieldValue('news_update', e);
                         }}
                         className={formik2.values.news_update ? 'custom-toggle' : ''}
                     />
                 </div>
-                <div className="flex items-center justify-between p-6 bg-gray-300">
-                    <div className="text-lg font-semibold">
-                        <span className="text-primary">Turn notification for:</span> SMS notifications
+                <div className='flex items-center justify-between p-6 bg-gray-300'>
+                    <div className='text-lg font-semibold'>
+                        <span className='text-primary'>Turn notification for:</span> SMS
+                        notifications
                     </div>
 
                     <ToggleSwitch
                         checked={formik2.values.sms_notification}
-                        name="sms_notification"
+                        name='sms_notification'
                         onChange={(e) => {
                             formik2.setFieldValue('sms_notification', e);
                         }}
@@ -410,14 +440,15 @@ const GrabSettings = () => {
                     />
                 </div>
 
-                <div className="flex items-center justify-between p-6 bg-gray-300">
-                    <div className="text-lg font-semibold">
-                        <span className="text-primary">Turn notification for:</span> Feedback messages
+                <div className='flex items-center justify-between p-6 bg-gray-300'>
+                    <div className='text-lg font-semibold'>
+                        <span className='text-primary'>Turn notification for:</span> Feedback
+                        messages
                     </div>
 
                     <ToggleSwitch
                         checked={formik2.values.feedback_message}
-                        name="feedback_message"
+                        name='feedback_message'
                         onChange={(e) => {
                             formik2.setFieldValue('feedback_message', e);
                         }}
@@ -425,12 +456,12 @@ const GrabSettings = () => {
                     />
                 </div>
                 <Button
-                    type="submit"
+                    type='submit'
                     variant={'primary'}
                     loading={formik2.isSubmitting}
                     disabled={formik2.isSubmitting}
                 >
-					Submit
+                    Submit
                 </Button>
             </form>
         </section>

@@ -23,7 +23,7 @@ const FeaturedProducts = ({ product }) => {
                         navigate(`/product/${slugGeneratorForAdIdWithName(ad.title, ad.id)}`)
                     }
                     key={index}
-                    className="overflow-hidden w-[18rem]  min-h-[12rem] md:h-[22rem] bg-white hover:bg-gray-200 border border-gray-200 rounded-lg shadow-sm cursor-pointer hover:shadow-lg transition-all  ease-in-out"
+                    className='overflow-hidden w-[18rem]  min-h-[12rem] md:h-[22rem] bg-white hover:bg-gray-200 border border-gray-200 rounded-lg shadow-sm cursor-pointer hover:shadow-lg transition-all  ease-in-out'
                 >
                     <div
                         onClick={(e) => {
@@ -41,25 +41,25 @@ const FeaturedProducts = ({ product }) => {
                                 e.preventDefault();
                             }
                         }}
-                        className="relative rounded-none"
+                        className='relative rounded-none'
                     >
                         {ad.images.length > 0 ? (
-                            <Carousel className="h-[200px] md:h-[230px] rounded-none">
+                            <Carousel className='h-[200px] md:h-[230px] rounded-none'>
                                 {ad.images.map((img, index) => (
                                     <img
                                         src={img.path}
                                         alt={img.filename}
                                         key={index * 3}
-                                        className="w-full h-full object-cover rounded-b-none "
+                                        className='w-full h-full object-cover rounded-b-none '
                                     />
                                 ))}
                             </Carousel>
                         ) : (
-                            <div className="h-[120px] md:h-[230px] rounded-none  ">
+                            <div className='h-[120px] md:h-[230px] rounded-none  '>
                                 <img
                                     src={noimage}
-                                    alt="no image"
-                                    className="w-full h-full object-cover  mx-auto rounded-none"
+                                    alt='no image'
+                                    className='w-full h-full object-cover  mx-auto rounded-none'
                                 />
                             </div>
                         )}
@@ -67,39 +67,39 @@ const FeaturedProducts = ({ product }) => {
                         {((isLogin && ad?.owner !== user?.id) || !isLogin) && (
                             <SaveProduct
                                 ads_id={ad.id}
-                                className="absolute w-10 h-12 p-1 px-2 bg-gray-200 rounded shadow-2xl top-4 right-4 hover:bg-white "
+                                className='absolute w-10 h-12 p-1 px-2 bg-gray-200 rounded shadow-2xl top-4 right-4 hover:bg-white '
                             />
                         )}
 
-                        <div className="absolute bottom-0 flex w-full h-10 pt-2 pl-2 text-white rounded-none bg-black/50">
-                            <FaCamera className="my-auto text-lg" />
-                            &emsp; <span className="my-auto"> {ad?.images.length}</span>
+                        <div className='absolute bottom-0 flex w-full h-10 pt-2 pl-2 text-white rounded-none bg-black/50'>
+                            <FaCamera className='my-auto text-lg' />
+                            &emsp; <span className='my-auto'> {ad?.images.length}</span>
                         </div>
                     </div>
 
-                    <div className="w-full p-2 tracking-tighter tooltip tooltip-secondary line-clamp-1 ">
-                        <p className="truncate text-start text-xl font-semibold uppercase  ">
+                    <div className='w-full p-2 tracking-tighter tooltip tooltip-secondary line-clamp-1 '>
+                        <p className='truncate text-start text-xl font-semibold uppercase  '>
                             {ad.title}
                         </p>
-                        <div className="flex items-center justify-start  mt-1 text-start  flex-nowrap line-clamp-1">
-                            <FaMapMarkerAlt className="inline-block mr-1" />
-                            <p className="text-xs tracking-tighter md:text-md lg:text-lg line-clamp-1 truncate">
+                        <div className='flex items-center justify-start  mt-1 text-start  flex-nowrap line-clamp-1'>
+                            <FaMapMarkerAlt className='inline-block mr-1' />
+                            <p className='text-xs tracking-tighter md:text-md lg:text-lg line-clamp-1 truncate'>
                                 {ad.location}
                             </p>
                         </div>
-                        <p className="flex justify-between mt-4 tracking-tighter  line-clamp-1">
-                            <span className="flex">
-                                <TbCurrencyNaira className="mt-1" />
+                        <p className='flex justify-between mt-4 tracking-tighter  line-clamp-1'>
+                            <span className='flex'>
+                                <TbCurrencyNaira className='mt-1' />
                                 {numberWithCommas(ad.price)}
                             </span>
-                            <span className="flex justify-around gap-2 my-auto text-xl font-bold">
+                            <span className='flex justify-around gap-2 my-auto text-xl font-bold'>
                                 <NegotiableIcon negotiable={ad?.negotiable} />
                                 {ad?.feature === '3' && isLogin && (
-                                    <GrabIcon className="text-secondary" />
+                                    <GrabIcon className='text-secondary' />
                                 )}
                             </span>{' '}
                             &nbsp;
-                            <span className="tracking-tighter">
+                            <span className='tracking-tighter'>
                                 {formatDistance(
                                     new Date(new Date(`${ad?.created_at}`)),
                                     Date.now(),
@@ -108,28 +108,28 @@ const FeaturedProducts = ({ product }) => {
                                         addSuffix: true,
                                     }
                                 ).includes('about') ? (
-                                        <>
-                                            {formatDistance(
-                                                new Date(new Date(`${ad?.created_at}`)),
-                                                Date.now(),
-                                                {
-                                                    includeSeconds: true,
-                                                    addSuffix: true,
-                                                }
-                                            ).substring(5)}
-                                        </>
-                                    ) : (
-                                        <>
-                                            {formatDistance(
-                                                new Date(new Date(`${ad?.created_at}`)),
-                                                Date.now(),
-                                                {
-                                                    includeSeconds: true,
-                                                    addSuffix: true,
-                                                }
-                                            )}
-                                        </>
-                                    )}
+                                    <>
+                                        {formatDistance(
+                                            new Date(new Date(`${ad?.created_at}`)),
+                                            Date.now(),
+                                            {
+                                                includeSeconds: true,
+                                                addSuffix: true,
+                                            }
+                                        ).substring(5)}
+                                    </>
+                                ) : (
+                                    <>
+                                        {formatDistance(
+                                            new Date(new Date(`${ad?.created_at}`)),
+                                            Date.now(),
+                                            {
+                                                includeSeconds: true,
+                                                addSuffix: true,
+                                            }
+                                        )}
+                                    </>
+                                )}
                             </span>
                         </p>
                     </div>

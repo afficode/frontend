@@ -81,9 +81,9 @@ const GrabRegister = () => {
                 setSubmitting(true);
                 let formValues;
 
-                if(checkGrabber === null){
+                if (checkGrabber === null) {
                     formValues = values;
-                }else{
+                } else {
                     formValues = {
                         ...values,
                         display_name: checkGrabber?.user?.display_name,
@@ -130,24 +130,24 @@ const GrabRegister = () => {
     };
 
     return (
-        <section className="text-center ">
-            <h3 className="py-6">Creating your Grabber’s Account</h3>
+        <section className='text-center '>
+            <h3 className='py-6'>Creating your Grabber’s Account</h3>
 
-            <div className="max-w-[1024px] rounded-lg mx-auto h-full mb-12 grab-bg py-8 pr-6">
+            <div className='max-w-[1024px] rounded-lg mx-auto h-full mb-12 grab-bg py-8 pr-6'>
                 {checkGrabber && checkGrabber.message === 'Account Exist' ? (
                     <form
                         onSubmit={formik.handleSubmit}
-                        className=" bg-white max-w-[500px] ml-auto h-fit p-6 rounded-lg"
+                        className=' bg-white max-w-[500px] ml-auto h-fit p-6 rounded-lg'
                     >
-                        <div className="flex  md:gap-4 md:justify-between  max-md:flex-col max-md:items-start">
-                            <label htmlFor="display_name" className="font-semibold mt-4">
-								Display Name
+                        <div className='flex  md:gap-4 md:justify-between  max-md:flex-col max-md:items-start'>
+                            <label htmlFor='display_name' className='font-semibold mt-4'>
+                                Display Name
                             </label>
                             <InputGroup
-                                name="display_name"
-                                type="text"
-                                placeholder="Enter a display name"
-                                className="w-[250px]"
+                                name='display_name'
+                                type='text'
+                                placeholder='Enter a display name'
+                                className='w-[250px]'
                                 value={checkGrabber.user.display_name}
                                 disabled
                                 onChange={handleChange}
@@ -160,153 +160,172 @@ const GrabRegister = () => {
                             />
                         </div>
 
-                        <div className="flex  justify-between w-full max-md:flex-col max-md:items-start ">
-                            <label htmlFor="current_location" className="font-semibold mt-4">
-								Location
+                        <div className='flex  justify-between w-full max-md:flex-col max-md:items-start '>
+                            <label htmlFor='current_location' className='font-semibold mt-4'>
+                                Location
                             </label>
                             <InputGroup
-                                name="current_location"
-                                type="select"
-                                className="w-[250px]"
+                                name='current_location'
+                                type='select'
+                                className='w-[250px]'
                                 optionLists={statesOptions}
                                 value={checkGrabber.user.current_location}
                                 disabled
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 errorMsg={
-                                    formik.touched.current_location && formik.errors.current_location
+                                    formik.touched.current_location &&
+                                    formik.errors.current_location
                                         ? formik.errors.current_location
                                         : null
                                 }
                             />
                         </div>
-                        <div className="flex  justify-between w-full max-md:flex-col max-md:items-start ">
-                            <label htmlFor="bio" className="font-semibold mt-4">
-								Bio
+                        <div className='flex  justify-between w-full max-md:flex-col max-md:items-start '>
+                            <label htmlFor='bio' className='font-semibold mt-4'>
+                                Bio
                             </label>
                             <InputGroup
-                                name="bio"
-                                type="textarea"
-                                className="w-[250px]"
+                                name='bio'
+                                type='textarea'
+                                className='w-[250px]'
                                 value={checkGrabber.user.bio}
                                 disabled
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
-                                errorMsg={formik.touched.bio && formik.errors.bio ? formik.errors.bio : null}
+                                errorMsg={
+                                    formik.touched.bio && formik.errors.bio
+                                        ? formik.errors.bio
+                                        : null
+                                }
                             />
                         </div>
 
-                        <div className="flex flex-col">
-                            <label className="font-semibold text-left">Social Media Handles:</label>
-                            <div className="flex  gap-4 md:justify-between ">
-                                <label className="md:pr-8 md:ml-auto mt-3" htmlFor="x_page">
-                                    <img src={Twitter} alt="/" className="w-8" />
+                        <div className='flex flex-col'>
+                            <label className='font-semibold text-left'>Social Media Handles:</label>
+                            <div className='flex  gap-4 md:justify-between '>
+                                <label className='md:pr-8 md:ml-auto mt-3' htmlFor='x_page'>
+                                    <img src={Twitter} alt='/' className='w-8' />
                                 </label>
                                 <InputGroup
-                                    name="x_page"
-                                    type="text"
-                                    className="w-[250px]"
+                                    name='x_page'
+                                    type='text'
+                                    className='w-[250px]'
                                     value={checkGrabber.user.x_page}
                                     disabled
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
-                                    errorMsg={formik.touched.x_page && formik.errors.x_page ? formik.errors.x_page : null}
+                                    errorMsg={
+                                        formik.touched.x_page && formik.errors.x_page
+                                            ? formik.errors.x_page
+                                            : null
+                                    }
                                 />
                             </div>
 
-                            <div className="flex  gap-4 md:justify-between ">
-                                <label className="md:pr-8 md:ml-auto mt-3" htmlFor="facebook">
-                                    <img src={FacebookBlue} alt="/" className="w-8" />
+                            <div className='flex  gap-4 md:justify-between '>
+                                <label className='md:pr-8 md:ml-auto mt-3' htmlFor='facebook'>
+                                    <img src={FacebookBlue} alt='/' className='w-8' />
                                 </label>
                                 <InputGroup
-                                    name="facebook"
-                                    type="text"
-                                    className="w-[250px]"
+                                    name='facebook'
+                                    type='text'
+                                    className='w-[250px]'
                                     value={checkGrabber.user.facebook}
                                     disabled
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                     errorMsg={
-                                        formik.touched.facebook && formik.errors.facebook ? formik.errors.facebook : null
+                                        formik.touched.facebook && formik.errors.facebook
+                                            ? formik.errors.facebook
+                                            : null
                                     }
                                 />
                             </div>
-                            <div className="flex  gap-4 md:justify-between ">
-                                <label className="md:pr-8 md:ml-auto mt-3" htmlFor="whatsapp">
-                                    <img src={Whatsapp} alt="/" className="w-8" />
+                            <div className='flex  gap-4 md:justify-between '>
+                                <label className='md:pr-8 md:ml-auto mt-3' htmlFor='whatsapp'>
+                                    <img src={Whatsapp} alt='/' className='w-8' />
                                 </label>
                                 <InputGroup
-                                    name="whatsapp"
-                                    type="text"
-                                    className="w-[250px]"
+                                    name='whatsapp'
+                                    type='text'
+                                    className='w-[250px]'
                                     value={checkGrabber.user.whatsapp}
                                     disabled
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                     errorMsg={
-                                        formik.touched.whatsapp && formik.errors.whatsapp ? formik.errors.whatsapp : null
+                                        formik.touched.whatsapp && formik.errors.whatsapp
+                                            ? formik.errors.whatsapp
+                                            : null
                                     }
                                 />
                             </div>
-                            <div className="flex  gap-4 md:justify-between ">
-                                <label className="md:pr-8 md:ml-auto mt-3" htmlFor="instagram">
-                                    <img src={Instagram} alt="/" className="w-8" />
+                            <div className='flex  gap-4 md:justify-between '>
+                                <label className='md:pr-8 md:ml-auto mt-3' htmlFor='instagram'>
+                                    <img src={Instagram} alt='/' className='w-8' />
                                 </label>
                                 <InputGroup
-                                    name="instagram"
-                                    type="text"
-                                    className="w-[250px]"
+                                    name='instagram'
+                                    type='text'
+                                    className='w-[250px]'
                                     value={checkGrabber.user.instagram}
                                     disabled
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                     errorMsg={
-                                        formik.touched.instagram && formik.errors.instagram ? formik.errors.instagram : null
+                                        formik.touched.instagram && formik.errors.instagram
+                                            ? formik.errors.instagram
+                                            : null
                                     }
                                 />
                             </div>
-                            <div className="flex  gap-4 mb-4 md:justify-between ">
-                                <label className="md:pr-8 md:ml-auto mt-3" htmlFor="tiktok">
-                                    <img src={Tiktok} alt="/" className="w-8" />
+                            <div className='flex  gap-4 mb-4 md:justify-between '>
+                                <label className='md:pr-8 md:ml-auto mt-3' htmlFor='tiktok'>
+                                    <img src={Tiktok} alt='/' className='w-8' />
                                 </label>
                                 <InputGroup
-                                    name="tiktok"
-                                    type="text"
-                                    className="w-[250px]"
+                                    name='tiktok'
+                                    type='text'
+                                    className='w-[250px]'
                                     value={checkGrabber.user.tiktok}
                                     disabled
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
-                                    errorMsg={formik.touched.tiktok && formik.errors.tiktok ? formik.errors.tiktok : null}
+                                    errorMsg={
+                                        formik.touched.tiktok && formik.errors.tiktok
+                                            ? formik.errors.tiktok
+                                            : null
+                                    }
                                 />
                             </div>
                         </div>
 
-                        <div className="py-8 space-y-4">
+                        <div className='py-8 space-y-4'>
                             <Button
-                                type="submit"
+                                type='submit'
                                 variant={'primary'}
                                 loading={formik.isSubmitting}
                                 disabled={formik.isSubmitting}
                             >
-								Activate your Grabber Account.
+                                Activate your Grabber Account.
                             </Button>
                         </div>
                     </form>
                 ) : (
                     <form
                         onSubmit={formik.handleSubmit}
-                        className=" bg-white max-w-[500px] ml-auto h-fit p-6 rounded-lg"
+                        className=' bg-white max-w-[500px] ml-auto h-fit p-6 rounded-lg'
                     >
-                        <div className="flex  md:gap-4 md:justify-between  max-md:flex-col max-md:items-start">
-                            <label htmlFor="display_name" className="font-semibold mt-4">
-								Display Name
+                        <div className='flex  md:gap-4 md:justify-between  max-md:flex-col max-md:items-start'>
+                            <label htmlFor='display_name' className='font-semibold mt-4'>
+                                Display Name
                             </label>
                             <InputGroup
-                                name="display_name"
-                                type="text"
-                                placeholder="Enter a display name"
-                                className="w-[250px]"
+                                name='display_name'
+                                type='text'
+                                placeholder='Enter a display name'
+                                className='w-[250px]'
                                 value={formik?.values?.display_name ?? ''}
                                 onChange={handleChange}
                                 onBlur={formik.handleBlur}
@@ -318,129 +337,148 @@ const GrabRegister = () => {
                             />
                         </div>
 
-                        <div className="flex  justify-between w-full max-md:flex-col max-md:items-start ">
-                            <label htmlFor="current_location" className="font-semibold mt-4">
-								Location
+                        <div className='flex  justify-between w-full max-md:flex-col max-md:items-start '>
+                            <label htmlFor='current_location' className='font-semibold mt-4'>
+                                Location
                             </label>
                             <InputGroup
-                                name="current_location"
-                                type="select"
-                                className="w-[250px]"
+                                name='current_location'
+                                type='select'
+                                className='w-[250px]'
                                 optionLists={statesOptions}
                                 value={formik?.values?.current_location ?? ''}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 errorMsg={
-                                    formik.touched.current_location && formik.errors.current_location
+                                    formik.touched.current_location &&
+                                    formik.errors.current_location
                                         ? formik.errors.current_location
                                         : null
                                 }
                             />
                         </div>
-                        <div className="flex  justify-between w-full max-md:flex-col max-md:items-start ">
-                            <label htmlFor="bio" className="font-semibold mt-4">
-								Bio
+                        <div className='flex  justify-between w-full max-md:flex-col max-md:items-start '>
+                            <label htmlFor='bio' className='font-semibold mt-4'>
+                                Bio
                             </label>
                             <InputGroup
-                                name="bio"
-                                type="textarea"
-                                className="w-[250px]"
+                                name='bio'
+                                type='textarea'
+                                className='w-[250px]'
                                 value={formik?.values?.bio ?? ''}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
-                                errorMsg={formik.touched.bio && formik.errors.bio ? formik.errors.bio : null}
+                                errorMsg={
+                                    formik.touched.bio && formik.errors.bio
+                                        ? formik.errors.bio
+                                        : null
+                                }
                             />
                         </div>
 
-                        <div className="flex flex-col">
-                            <label className="font-semibold text-left">Social Media Handles:</label>
-                            <div className="flex  gap-4 md:justify-between ">
-                                <label className="md:pr-8 md:ml-auto mt-3" htmlFor="x_page">
-                                    <img src={Twitter} alt="/" className="w-8" />
+                        <div className='flex flex-col'>
+                            <label className='font-semibold text-left'>Social Media Handles:</label>
+                            <div className='flex  gap-4 md:justify-between '>
+                                <label className='md:pr-8 md:ml-auto mt-3' htmlFor='x_page'>
+                                    <img src={Twitter} alt='/' className='w-8' />
                                 </label>
                                 <InputGroup
-                                    name="x_page"
-                                    type="text"
-                                    className="w-[250px]"
+                                    name='x_page'
+                                    type='text'
+                                    className='w-[250px]'
                                     value={formik?.values?.x_page ?? ''}
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
-                                    errorMsg={formik.touched.x_page && formik.errors.x_page ? formik.errors.x_page : null}
+                                    errorMsg={
+                                        formik.touched.x_page && formik.errors.x_page
+                                            ? formik.errors.x_page
+                                            : null
+                                    }
                                 />
                             </div>
 
-                            <div className="flex  gap-4 md:justify-between ">
-                                <label className="md:pr-8 md:ml-auto mt-3" htmlFor="facebook">
-                                    <img src={FacebookBlue} alt="/" className="w-8" />
+                            <div className='flex  gap-4 md:justify-between '>
+                                <label className='md:pr-8 md:ml-auto mt-3' htmlFor='facebook'>
+                                    <img src={FacebookBlue} alt='/' className='w-8' />
                                 </label>
                                 <InputGroup
-                                    name="facebook"
-                                    type="text"
-                                    className="w-[250px]"
+                                    name='facebook'
+                                    type='text'
+                                    className='w-[250px]'
                                     value={formik?.values?.facebook ?? ''}
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                     errorMsg={
-                                        formik.touched.facebook && formik.errors.facebook ? formik.errors.facebook : null
+                                        formik.touched.facebook && formik.errors.facebook
+                                            ? formik.errors.facebook
+                                            : null
                                     }
                                 />
                             </div>
-                            <div className="flex  gap-4 md:justify-between ">
-                                <label className="md:pr-8 md:ml-auto mt-3" htmlFor="whatsapp">
-                                    <img src={Whatsapp} alt="/" className="w-8" />
+                            <div className='flex  gap-4 md:justify-between '>
+                                <label className='md:pr-8 md:ml-auto mt-3' htmlFor='whatsapp'>
+                                    <img src={Whatsapp} alt='/' className='w-8' />
                                 </label>
                                 <InputGroup
-                                    name="whatsapp"
-                                    type="text"
-                                    className="w-[250px]"
+                                    name='whatsapp'
+                                    type='text'
+                                    className='w-[250px]'
                                     value={formik?.values?.whatsapp ?? ''}
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                     errorMsg={
-                                        formik.touched.whatsapp && formik.errors.whatsapp ? formik.errors.whatsapp : null
+                                        formik.touched.whatsapp && formik.errors.whatsapp
+                                            ? formik.errors.whatsapp
+                                            : null
                                     }
                                 />
                             </div>
-                            <div className="flex  gap-4 md:justify-between ">
-                                <label className="md:pr-8 md:ml-auto mt-3" htmlFor="instagram">
-                                    <img src={Instagram} alt="/" className="w-8" />
+                            <div className='flex  gap-4 md:justify-between '>
+                                <label className='md:pr-8 md:ml-auto mt-3' htmlFor='instagram'>
+                                    <img src={Instagram} alt='/' className='w-8' />
                                 </label>
                                 <InputGroup
-                                    name="instagram"
-                                    type="text"
-                                    className="w-[250px]"
+                                    name='instagram'
+                                    type='text'
+                                    className='w-[250px]'
                                     value={formik?.values?.instagram ?? ''}
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                     errorMsg={
-                                        formik.touched.instagram && formik.errors.instagram ? formik.errors.instagram : null
+                                        formik.touched.instagram && formik.errors.instagram
+                                            ? formik.errors.instagram
+                                            : null
                                     }
                                 />
                             </div>
-                            <div className="flex  gap-4 mb-4 md:justify-between ">
-                                <label className="md:pr-8 md:ml-auto mt-3" htmlFor="tiktok">
-                                    <img src={Tiktok} alt="/" className="w-8" />
+                            <div className='flex  gap-4 mb-4 md:justify-between '>
+                                <label className='md:pr-8 md:ml-auto mt-3' htmlFor='tiktok'>
+                                    <img src={Tiktok} alt='/' className='w-8' />
                                 </label>
                                 <InputGroup
-                                    name="tiktok"
-                                    type="text"
-                                    className="w-[250px]"
+                                    name='tiktok'
+                                    type='text'
+                                    className='w-[250px]'
                                     value={formik?.values?.tiktok ?? ''}
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
-                                    errorMsg={formik.touched.tiktok && formik.errors.tiktok ? formik.errors.tiktok : null}
+                                    errorMsg={
+                                        formik.touched.tiktok && formik.errors.tiktok
+                                            ? formik.errors.tiktok
+                                            : null
+                                    }
                                 />
                             </div>
                         </div>
 
-                        <div className="py-8 space-y-4">
+                        <div className='py-8 space-y-4'>
                             <Button
-                                type="submit"
+                                type='submit'
                                 variant={'primary'}
                                 loading={formik.isSubmitting}
                                 disabled={formik.isSubmitting || !formik.isValid}
                             >
-								Create a Grabber Account in Seconds.
+                                Create a Grabber Account in Seconds.
                             </Button>
                         </div>
                     </form>

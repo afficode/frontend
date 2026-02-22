@@ -73,9 +73,9 @@ const Register = ({ id }) => {
     };
 
     return (
-        <div className="w-full ">
+        <div className='w-full '>
             {isLoading ? (
-                <div className="mt-4 lg:mt-20">
+                <div className='mt-4 lg:mt-20'>
                     <SpinnerSkeleton
                         heading={'Submitting Data...'}
                         body={
@@ -89,77 +89,77 @@ const Register = ({ id }) => {
                 </div>
             ) : (
                 <>
-                    <div className="w-[90%] mx-auto bg-[#d9d9d993] rounded-3xl border-solid border-4 border-primary">
-                        <h1 className="text-center text-black font-normal text-[1.2rem] lg:text-3xl lg:pt-4 ">
+                    <div className='w-[90%] mx-auto bg-[#d9d9d993] rounded-3xl border-solid border-4 border-primary'>
+                        <h1 className='text-center text-black font-normal text-[1.2rem] lg:text-3xl lg:pt-4 '>
                             Register To:
                         </h1>
-                        <ul className="px-4 lg:p-[1.56rem] list-disc ml-2">
-                            <li className="text-black text-[0.8rem] lg:text-[1.2rem] font-sans pb-2">
+                        <ul className='px-4 lg:p-[1.56rem] list-disc ml-2'>
+                            <li className='text-black text-[0.8rem] lg:text-[1.2rem] font-sans pb-2'>
                                 Post and manage your ads
                             </li>
-                            <li className="text-black text-[0.8rem] lg:text-[1.2rem] font-sans pb-2">
+                            <li className='text-black text-[0.8rem] lg:text-[1.2rem] font-sans pb-2'>
                                 Become a Grabber and Earn commissions on sales
                             </li>
 
-                            <li className="text-black text-[0.8rem] lg:text-[1.2rem] font-sans pb-2">
+                            <li className='text-black text-[0.8rem] lg:text-[1.2rem] font-sans pb-2'>
                                 Never Miss a deal or offer
                             </li>
-                            <li className="text-black text-[0.8rem] lg:text-[1.2rem] font-sans pb-2">
+                            <li className='text-black text-[0.8rem] lg:text-[1.2rem] font-sans pb-2'>
                                 Expressly compare products and make informed decisions
                             </li>
                         </ul>
                     </div>
-                    <div className="my-8 w-[90%] mx-auto">
+                    <div className='my-8 w-[90%] mx-auto'>
                         <Formik
                             initialValues={initialValues}
                             validationSchema={validationSchema}
                             onSubmit={onSubmit}
                         >
                             {(formik) => (
-                                <Form autoComplete="off">
-                                    <div className="form-control">
+                                <Form autoComplete='off'>
+                                    <div className='form-control'>
                                         <Input
                                             className={inputClass}
-                                            type="text"
-                                            name="firstname"
+                                            type='text'
+                                            name='firstname'
                                             id={`${id}-register-fristname`}
-                                            placeholder="Firstname"
+                                            placeholder='Firstname'
                                             {...formik.getFieldProps('firstname')}
                                         />
                                     </div>
-                                    <div className="form-control">
+                                    <div className='form-control'>
                                         <Input
                                             className={inputClass}
-                                            type="text"
-                                            name="lastname"
+                                            type='text'
+                                            name='lastname'
                                             id={`${id}-register-lastname`}
-                                            placeholder="Lastname"
+                                            placeholder='Lastname'
                                             {...formik.getFieldProps('lastname')}
                                         />
                                     </div>
-                                    <div className="form-control">
+                                    <div className='form-control'>
                                         <Input
                                             className={inputClass}
-                                            type="email"
-                                            name="email"
+                                            type='email'
+                                            name='email'
                                             id={`${id}-register-email`}
-                                            placeholder="email@email.com"
+                                            placeholder='email@email.com'
                                             {...formik.getFieldProps('email')}
                                         />
                                     </div>
-                                    <div className="form-control">
+                                    <div className='form-control'>
                                         <Input
                                             className={inputClass}
-                                            type="text"
-                                            name="phone"
+                                            type='text'
+                                            name='phone'
                                             id={`${id}-register-phone`}
-                                            placeholder="08012345678"
+                                            placeholder='08012345678'
                                             {...formik.getFieldProps('phone')}
                                         />
                                     </div>
-                                    <div className="form-control">
+                                    <div className='form-control'>
                                         <select
-                                            name="location"
+                                            name='location'
                                             id={`${id}-register-location`}
                                             className={`${inputClass}`}
                                             {...formik.getFieldProps('location')}
@@ -171,32 +171,32 @@ const Register = ({ id }) => {
                                             ))}
                                         </select>
                                     </div>
-                                    <div className="form-control">
+                                    <div className='form-control'>
                                         <Input
                                             className={inputClass}
-                                            type="password"
-                                            name="password"
+                                            type='password'
+                                            name='password'
                                             id={`${id}-register-password`}
-                                            placeholder="Password"
+                                            placeholder='Password'
                                             {...formik.getFieldProps('password')}
                                         />
                                     </div>
-                                    <div className="form-control">
+                                    <div className='form-control'>
                                         <Input
                                             className={inputClass}
-                                            type="password"
-                                            name="confirmPassword"
+                                            type='password'
+                                            name='confirmPassword'
                                             id={`${id}-register-confirmPassword`}
-                                            placeholder="Confirm Password"
+                                            placeholder='Confirm Password'
                                             {...formik.getFieldProps('confirmPassword')}
                                         />
                                     </div>
 
-                                    <div className=" form-control">
+                                    <div className=' form-control'>
                                         <Button
-                                            type="submit"
-                                            tabIndex="-1"
-                                            aria-disabled="true"
+                                            type='submit'
+                                            tabIndex='-1'
+                                            aria-disabled='true'
                                             className={`text-white text-normal lg:text-lg border-0 bg-primary btn-md lg:btn-lg hover:bg-primary/80 ${
                                                 !formik.isValid ||
                                                 !formik.dirty ||
@@ -212,9 +212,9 @@ const Register = ({ id }) => {
                                                     Data{' '}
                                                 </>
                                             ) : (
-                                                <span className=" w-full flex text-base lg:text-lg text-white">
+                                                <span className=' w-full flex text-base lg:text-lg text-white'>
                                                     Register &nbsp;{' '}
-                                                    <MdAppRegistration className="text-lg my-auto lg:text-2xl text-white" />
+                                                    <MdAppRegistration className='text-lg my-auto lg:text-2xl text-white' />
                                                 </span>
                                             )}
                                         </Button>

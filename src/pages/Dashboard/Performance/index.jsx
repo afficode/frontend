@@ -68,22 +68,26 @@ const Performance = () => {
             <DashboardHeader />
 
             {/* header  */}
-            <div className="flex flex-col w-full gap-4 px-2 py-4 my-2 bg-gray-200 sm:px-6">
-                <div className="flex items-center gap-4 ml-auto max-sm:flex-col">
+            <div className='flex flex-col w-full gap-4 px-2 py-4 my-2 bg-gray-200 sm:px-6'>
+                <div className='flex items-center gap-4 ml-auto max-sm:flex-col'>
                     <DateView
-                        placeholderText="Select dates"
-                        className="border-transparent shadow-lg rounded-md w-[10rem] text-sm"
+                        placeholderText='Select dates'
+                        className='border-transparent shadow-lg rounded-md w-[10rem] text-sm'
                         selected={date}
                         onChange={(val) => setDate(val)}
                     />
                     <Link to={Approutes.postDecision}>
-                        <Button variant="primary" size="small" className="font-medium rounded-md text-sm">
-							+ Add Product
+                        <Button
+                            variant='primary'
+                            size='small'
+                            className='font-medium rounded-md text-sm'
+                        >
+                            + Add Product
                         </Button>
                     </Link>
                 </div>
 
-                <div className="flex flex-wrap gap-2 ">
+                <div className='flex flex-wrap gap-2 '>
                     <span
                         onClick={() => {
                             setFilteredDate('all');
@@ -95,7 +99,7 @@ const Performance = () => {
                                 : 'bg-white text-black/50 border border-black/40'
                         } cursor-pointer py-[.5rem] px-6 rounded-md font-semibold text-sm`}
                     >
-						All dates
+                        All dates
                     </span>
                     <span
                         onClick={() => {
@@ -108,7 +112,7 @@ const Performance = () => {
                                 : 'bg-white text-black/50 border border-black/40'
                         } cursor-pointer py-[.5rem] px-6 rounded-md font-semibold text-sm `}
                     >
-						12 months{' '}
+                        12 months{' '}
                     </span>
                     <span
                         onClick={() => {
@@ -121,7 +125,7 @@ const Performance = () => {
                                 : 'bg-white text-black/50 border border-black/40'
                         } cursor-pointer py-[.5rem] px-6 rounded-md font-semibold text-sm `}
                     >
-						30 days
+                        30 days
                     </span>
                     <span
                         onClick={() => {
@@ -134,7 +138,7 @@ const Performance = () => {
                                 : 'bg-white text-black/50 border border-black/40'
                         } cursor-pointer py-[.5rem] px-6 rounded-md font-semibold text-sm `}
                     >
-						7 days
+                        7 days
                     </span>
                     <span
                         onClick={() => {
@@ -147,7 +151,7 @@ const Performance = () => {
                                 : 'bg-white text-black/50 border border-black/40'
                         } cursor-pointer py-[.5rem] px-6 rounded-md font-semibold text-sm `}
                     >
-						24-hours
+                        24-hours
                     </span>
                 </div>
             </div>

@@ -30,11 +30,11 @@ const PriceInput = (props) => {
     return (
         <div className={className ? '' : 'formControlClass'}>
             {label && (
-                <label className="formLabel" htmlFor={name}>
+                <label className='formLabel' htmlFor={name}>
                     {label}{' '}
                     {required ? (
-                        <span className="text-black" title="This field is required">
-							*
+                        <span className='text-black' title='This field is required'>
+                            *
                         </span>
                     ) : null}
                 </label>
@@ -42,8 +42,8 @@ const PriceInput = (props) => {
             <Field
                 name={name}
                 id={name}
-                type="text"
-                min="0"
+                type='text'
+                min='0'
                 value={field.value || ''}
                 onChange={handleMoneyChange}
                 onKeyDown={(e) => {
@@ -53,7 +53,7 @@ const PriceInput = (props) => {
                 }}
                 className={className}
                 {...rest}
-                autoComplete="off"
+                autoComplete='off'
             />
             <ErrorMessage name={name} component={TextError} />
         </div>

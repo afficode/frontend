@@ -5,7 +5,6 @@ import { createContext } from 'react';
 const SaveContext = createContext(null);
 
 export const SaveProvider = ({ children }) => {
-
     const [saves, setSaves] = useState({});
     const [savesId, setSavesId] = useState([]);
 
@@ -20,9 +19,7 @@ const useSaveContext = () => {
     const context = useContext(SaveContext);
 
     if (context === undefined) {
-        throw new Error(
-            'useSaveContext must be used within the UserContext. Check App.js.'
-        );
+        throw new Error('useSaveContext must be used within the UserContext. Check App.js.');
     }
 
     return context;

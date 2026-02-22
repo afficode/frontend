@@ -39,18 +39,18 @@ const Footer = () => {
     }, [location.pathname]);
 
     return (
-        <footer className="bg-primary mt-16">
+        <footer className='bg-primary mt-16'>
             {!isSEOPage && <SEO />}
-            <section className=" w-full px-[1.5rem] lg:px-[4rem] max-w-[1380px] mx-auto">
-                <div className=" text-white flex flex-col gap-[1.5rem] md:gap-[3rem] py-8">
-                    <div className="grid grid-cols-1 items-center">
-                        <div className="col-span-2  space-y-2">
-                            <h3 className="text-start">Transact with peace of mind on Boonfu</h3>
-                            <p className="text-justify p-lg">
+            <section className=' w-full px-[1.5rem] lg:px-[4rem] max-w-[1380px] mx-auto'>
+                <div className=' text-white flex flex-col gap-[1.5rem] md:gap-[3rem] py-8'>
+                    <div className='grid grid-cols-1 items-center'>
+                        <div className='col-span-2  space-y-2'>
+                            <h3 className='text-start'>Transact with peace of mind on Boonfu</h3>
+                            <p className='text-justify p-lg'>
                                 Boonfu is a C2C marketplace—we do not sell, inspect, or guarantee
                                 any listed item. All listings are posted by private individuals.
                             </p>
-                            <div className="text-justify p-lg">
+                            <div className='text-justify p-lg'>
                                 <ul>
                                     <li>
                                         ● For GRAB listings: Payment is protected by Boonfu Escrow
@@ -68,7 +68,7 @@ const Footer = () => {
                                 risk.{' '}
                                 <button
                                     onClick={() => handleScrollTo(termsRef)}
-                                    className="text-secondary"
+                                    className='text-secondary'
                                 >
                                     [View More]
                                 </button>{' '}
@@ -78,9 +78,9 @@ const Footer = () => {
                     </div>
 
                     {/* footer lists  */}
-                    <div className="grid max-[450px]:grid-cols-1 grid-cols-2 lg:grid-cols-4 gap-6 justify-between">
-                        <ul className="flex flex-col ">
-                            <h6 className="px-2 md:px-8 text-2xl opacity-[.7] font-normal whitespace-nowrap mb-3">
+                    <div className='grid max-[450px]:grid-cols-1 grid-cols-2 lg:grid-cols-4 gap-6 justify-between'>
+                        <ul className='flex flex-col '>
+                            <h6 className='px-2 md:px-8 text-2xl opacity-[.7] font-normal whitespace-nowrap mb-3'>
                                 Company
                             </h6>
                             <Link to={`${Approutes.aboutUs}`}>
@@ -94,8 +94,8 @@ const Footer = () => {
                             </Link>
                         </ul>
 
-                        <ul className="flex flex-col ">
-                            <h6 className="px-2 md:px-8 text-2xl opacity-[.7] font-normal whitespace-nowrap mb-3">
+                        <ul className='flex flex-col '>
+                            <h6 className='px-2 md:px-8 text-2xl opacity-[.7] font-normal whitespace-nowrap mb-3'>
                                 Platform
                             </h6>
 
@@ -127,8 +127,8 @@ const Footer = () => {
                                 <li className={listStyles}>Candidate Privacy Policy</li>
                             </Link>
                         </ul>
-                        <ul className="flex flex-col ">
-                            <h6 className="px-2 md:px-8 text-2xl opacity-[.7] font-normal whitespace-nowrap mb-3">
+                        <ul className='flex flex-col '>
+                            <h6 className='px-2 md:px-8 text-2xl opacity-[.7] font-normal whitespace-nowrap mb-3'>
                                 Resources
                             </h6>
                             <Link to={Approutes.underConstruction}>
@@ -144,24 +144,24 @@ const Footer = () => {
                                 <li className={listStyles}>Advertise With Us</li>
                             </Link>
                         </ul>
-                        <ul className="flex flex-col ">
-                            <h6 className="px-2 md:px-8 text-2xl opacity-[.7] font-normal whitespace-nowrap mb-3">
+                        <ul className='flex flex-col '>
+                            <h6 className='px-2 md:px-8 text-2xl opacity-[.7] font-normal whitespace-nowrap mb-3'>
                                 Social
                             </h6>
-                            <div className="flex gap-4 px-2 md:px-8">
+                            <div className='flex gap-4 px-2 md:px-8'>
                                 <Link
                                     to={BOONFU_FACEBOOK}
-                                    rel="noopener noreferrer"
-                                    target="_blank"
-                                    className="hover:text-secondary"
+                                    rel='noopener noreferrer'
+                                    target='_blank'
+                                    className='hover:text-secondary'
                                 >
                                     <FaFacebook size={28} />
                                 </Link>
                                 <Link
                                     to={BOONFU_INSTAGRAM}
-                                    rel="noopener noreferrer"
-                                    target="_blank"
-                                    className="hover:text-secondary"
+                                    rel='noopener noreferrer'
+                                    target='_blank'
+                                    className='hover:text-secondary'
                                 >
                                     <FaInstagram size={28} />
                                 </Link>
@@ -170,7 +170,7 @@ const Footer = () => {
                     </div>
 
                     {/* copyright */}
-                    <p className="text-center md:text-start">
+                    <p className='text-center md:text-start'>
                         &copy; Copyright {new Date().getFullYear() + ' '}
                         <b>
                             <Link to={'/'}>Boonfu.com</Link>
@@ -179,7 +179,7 @@ const Footer = () => {
                     </p>
                 </div>
                 {/* terms and condition modal */}
-                <Modal isOpen={isOpen} setIsOpen={setIsOpen} headerText="Terms of Service">
+                <Modal isOpen={isOpen} setIsOpen={setIsOpen} headerText='Terms of Service'>
                     <TermsAndCondition
                         rulesRef={rulesRef}
                         termsRef={termsRef}

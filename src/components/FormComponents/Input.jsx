@@ -10,11 +10,11 @@ const Input = (props) => {
     return (
         <div className={className ? '' : 'formControlClass'}>
             {label && (
-                <label className="formLabel" htmlFor={name}>
+                <label className='formLabel' htmlFor={name}>
                     {label}{' '}
                     {required ? (
-                        <span className="text-black" title="This field is required">
-							*
+                        <span className='text-black' title='This field is required'>
+                            *
                         </span>
                     ) : null}
                 </label>
@@ -30,7 +30,7 @@ const Input = (props) => {
                     />
                     <span
                         onClick={() => setIsVisible(!isVisible)}
-                        className="absolute right-0 top-1/2 transform -translate-y-1/2 cursor-pointer w-16 text-center border-l border-black/30 text-sm"
+                        className='absolute right-0 top-1/2 transform -translate-y-1/2 cursor-pointer w-16 text-center border-l border-black/30 text-sm'
                     >
                         {isVisible ? 'Hide' : 'Show'}
                     </span>

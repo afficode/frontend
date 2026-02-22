@@ -456,21 +456,21 @@ const PostAd = () => {
     };
 
     return (
-        <div className="px-4 my-12 sm:px-8 md:px-12">
+        <div className='px-4 my-12 sm:px-8 md:px-12'>
             {categoryId === '51' ? (
                 <img
                     src={PropertyHeader}
-                    alt="property banner"
-                    className="w-full lg:h-[20rem] mx-auto object-fit rounded-xl my-8"
+                    alt='property banner'
+                    className='w-full lg:h-[20rem] mx-auto object-fit rounded-xl my-8'
                 />
             ) : (
-                <h1 className="pt-6 text-center">Update Ad</h1>
+                <h1 className='pt-6 text-center'>Update Ad</h1>
             )}
 
             {isLoading ? (
                 <LoadingScreen />
             ) : (
-                <div className="max-w-[1024px] mx-auto">
+                <div className='max-w-[1024px] mx-auto'>
                     <CategoryForm
                         adId={adId}
                         adImages={ad?.images}

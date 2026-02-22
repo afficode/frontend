@@ -57,14 +57,14 @@ const GrabUpdateTable = ({ ad }) => {
         <Inspections ad={ad} />
     ) : (
         ad?.negotiable === 1 && (
-            <section className="my-8 space-y-4">
-                <div className="w-full border border-black  ">
+            <section className='my-8 space-y-4'>
+                <div className='w-full border border-black  '>
                     {ad.ad_summary?.offers.length > 0 ? (
                         <>
-                            <div className=" overflow-x-auto">
-                                <table className="w-full table table-fixed">
+                            <div className=' overflow-x-auto'>
+                                <table className='w-full table table-fixed'>
                                     <thead>
-                                        <tr className=" text-center font-bold  text-black text-sm">
+                                        <tr className=' text-center font-bold  text-black text-sm'>
                                             <th>Date</th>
 
                                             <th>Location</th>
@@ -74,43 +74,44 @@ const GrabUpdateTable = ({ ad }) => {
                                             <th>Amount offering (₦)</th>
                                         </tr>
                                     </thead>
-                                    <tbody className="text-center">
+                                    <tbody className='text-center'>
                                         {ad.ad_summary.offers.map((offer, i) => (
-                                            <tr key={i} className="text-sm">
+                                            <tr key={i} className='text-sm'>
                                                 <td>{offer.date}</td>
                                                 <td>{offer.location}</td>
                                                 <td>{offer.name}</td>
-                                                <td className="font-bold">{offer.amount}</td>
+                                                <td className='font-bold'>{offer.amount}</td>
                                             </tr>
                                         ))}
                                     </tbody>
                                 </table>
                             </div>
 
-                            <div className="mb-4">
-                                <div className="mt-8 bg-secondary px-6 py-2 text-xs">
+                            <div className='mb-4'>
+                                <div className='mt-8 bg-secondary px-6 py-2 text-xs'>
                                     <p>
-										Given the amounts offered, would you like to adjust your price? If YES, please click on
-										adjust price to key in a new amount and hit submit button when you are done.
+                                        Given the amounts offered, would you like to adjust your
+                                        price? If YES, please click on adjust price to key in a new
+                                        amount and hit submit button when you are done.
                                     </p>
                                 </div>
 
                                 <form
                                     onSubmit={handleSubmit}
-                                    className="flex justify-between items-center py-4 px-6 flex-wrap gap-6"
+                                    className='flex justify-between items-center py-4 px-6 flex-wrap gap-6'
                                 >
-                                    <div className="flex flex-wrap items-end gap-4 sm:gap-6">
+                                    <div className='flex flex-wrap items-end gap-4 sm:gap-6'>
                                         <Button
-                                            type="button"
+                                            type='button'
                                             variant={'grey'}
                                             size={'small'}
                                             onClick={() => setDisabled(!disabled)}
                                         >
-											Adjust Price
+                                            Adjust Price
                                         </Button>
 
-                                        <label className="text-sm">
-											New Price (₦)
+                                        <label className='text-sm'>
+                                            New Price (₦)
                                             <InputGroup
                                                 type={'text'}
                                                 name={'amount'}
@@ -123,19 +124,19 @@ const GrabUpdateTable = ({ ad }) => {
                                     </div>
 
                                     <Button
-                                        type="submit "
+                                        type='submit '
                                         variant={'primary'}
                                         size={'small'}
                                         className={'rounded-lg self-end'}
                                         loading={isLoading}
                                     >
-										Submit
+                                        Submit
                                     </Button>
                                 </form>
                             </div>
                         </>
                     ) : (
-                        <div className="p-4 text-center">No offers made for this ad.</div>
+                        <div className='p-4 text-center'>No offers made for this ad.</div>
                     )}
                 </div>
             </section>

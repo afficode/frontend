@@ -18,6 +18,7 @@ module.exports = {
         'plugin:react/recommended',
         'plugin:react-hooks/recommended',
         'plugin:prettier/recommended',
+        'prettier',
     ],
 
     plugins: ['react', 'react-hooks', 'react-refresh', 'prettier'],
@@ -28,9 +29,9 @@ module.exports = {
     },
 
     rules: {
-        indent: ['error', 4],
+        indent: ['error', 4, { SwitchCase: 1 }],
         'linebreak-style': ['error', 'unix'],
-        quotes: ['error', 'single'],
+        quotes: ['error', 'single', { avoidEscape: true }],
         semi: ['error', 'always'],
 
         'no-console': 'error',

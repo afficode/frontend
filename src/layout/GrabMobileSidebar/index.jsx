@@ -20,7 +20,7 @@ const GrabMobileSidebar = ({ sidebar, setSidebar }) => {
             setTimeout(() => {
                 navigate(Approutes.logout);
             }, 2000);
-        // eslint-disable-next-line no-unused-vars
+            // eslint-disable-next-line no-unused-vars
         } catch (error) {
             notify('There was an error deactivating your account. Please try again.', 'error');
         }
@@ -44,31 +44,38 @@ const GrabMobileSidebar = ({ sidebar, setSidebar }) => {
         <div className={sidebar ? showStyles : closeStyles}>
             <aside
                 ref={sidebarRef}
-                className="w-[15rem] h-[100vh] bg-[#D9D9D9] rounded-r-[2.5rem] flex flex-col items-center  text-center  "
+                className='w-[15rem] h-[100vh] bg-[#D9D9D9] rounded-r-[2.5rem] flex flex-col items-center  text-center  '
             >
-                <nav className="flex flex-col justify-between flex-1 w-full px-4 my-12">
-                    <ul className="flex flex-col gap-1 sidebar-list mt-6">
+                <nav className='flex flex-col justify-between flex-1 w-full px-4 my-12'>
+                    <ul className='flex flex-col gap-1 sidebar-list mt-6'>
                         {navList.map((navItem) => (
                             <NavLink key={navItem.name} to={navItem.link}>
-                                <li className="w-full py-1 transition rounded-md p-lg hover:bg-white">{navItem.name}</li>
+                                <li className='w-full py-1 transition rounded-md p-lg hover:bg-white'>
+                                    {navItem.name}
+                                </li>
                             </NavLink>
                         ))}
                     </ul>
 
-                    <ul className="mb-2 space-y-4">
+                    <ul className='mb-2 space-y-4'>
                         <Link to={Approutes.logout}>
-                            <Button variant="plain" size="small" className="font-medium" title="Log out">
-								Log Out
+                            <Button
+                                variant='plain'
+                                size='small'
+                                className='font-medium'
+                                title='Log out'
+                            >
+                                Log Out
                             </Button>
                         </Link>
                         <Button
                             onClick={handleDeactivateGrabber}
-                            variant="plain"
-                            size="small"
-                            className="font-medium"
-                            title="Deactivate your account"
+                            variant='plain'
+                            size='small'
+                            className='font-medium'
+                            title='Deactivate your account'
                         >
-							Deactivate Account{' '}
+                            Deactivate Account{' '}
                         </Button>
                     </ul>
                 </nav>
@@ -80,9 +87,9 @@ const GrabMobileSidebar = ({ sidebar, setSidebar }) => {
 export default GrabMobileSidebar;
 
 const showStyles =
-	'fixed top-0 left-0 z-[10000] w-full h-full   bg-primary/50 transition-left duration-300 ease-in-out grid place-items-left';
+    'fixed top-0 left-0 z-[10000] w-full h-full   bg-primary/50 transition-left duration-300 ease-in-out grid place-items-left';
 const closeStyles =
-	'fixed top-0 left-[-100vw] z-[10000] w-full h-full  bg-transparent transition-left duration-300 ease-in-out';
+    'fixed top-0 left-[-100vw] z-[10000] w-full h-full  bg-transparent transition-left duration-300 ease-in-out';
 
 const navList = [
     {

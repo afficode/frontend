@@ -7,7 +7,9 @@ const FilterCard = ({ field, setfieldvalue }) => {
 
     const formatMoneyInput = (value) => {
         const numeric = (value || '').toString().replace(/[^0-9]/g, '');
-        if (!numeric) {return '';}
+        if (!numeric) {
+            return '';
+        }
         return toMoney(numeric, true);
     };
 
@@ -17,12 +19,12 @@ const FilterCard = ({ field, setfieldvalue }) => {
     };
 
     return (
-        <div className=" w-full  my-4 border-2 border-gray-300 rounded-sm p-2  overflow-auto">
-            <h5 className=" font-bold !text-sm !md:text-base tracking-tighter line-clamp-1">
+        <div className=' w-full  my-4 border-2 border-gray-300 rounded-sm p-2  overflow-auto'>
+            <h5 className=' font-bold !text-sm !md:text-base tracking-tighter line-clamp-1'>
                 {field.title}
             </h5>
             {field?.options && (
-                <div className="flex items-center justify-between my-2 tracking-tighter line-clamp-1">
+                <div className='flex items-center justify-between my-2 tracking-tighter line-clamp-1'>
                     {/* if more than 2, use the map function and make the index output a span with the to when index value is 0 */}
                     {(() => {
                         const minName = field.options[0].name;
@@ -39,7 +41,7 @@ const FilterCard = ({ field, setfieldvalue }) => {
                                     value={minDisplay}
                                     onChange={handleMoneyChange(minName)}
                                 />{' '}
-                                <span className=" antialiased text-sm">to </span>
+                                <span className=' antialiased text-sm'>to </span>
                                 <Field
                                     type={field.options[1].type}
                                     name={maxName}
@@ -54,13 +56,13 @@ const FilterCard = ({ field, setfieldvalue }) => {
                 </div>
             )}
 
-            <div className="flex flex-col m-1 gap-2 pb-2 overflow-y-scroll min-h-[30px] max-h-[200px] tracking-tighter line-clamp-1">
+            <div className='flex flex-col m-1 gap-2 pb-2 overflow-y-scroll min-h-[30px] max-h-[200px] tracking-tighter line-clamp-1'>
                 {field?.content?.map((content, index) => (
                     <FormControl
                         type={field.type}
                         content={content}
                         key={index}
-                        className="hover:bg-primary ml-2 "
+                        className='hover:bg-primary ml-2 '
                         setfieldvalue={setfieldvalue}
                     />
                 ))}

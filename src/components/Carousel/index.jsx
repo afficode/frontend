@@ -13,7 +13,7 @@ const Carousel = ({ items, className }) => {
     return (
         <div className={`w-full ${className}`}>
             {images.length === 0 ? (
-                <img src={noimage} alt="No Image for this Ad" className="w-full mx-auto" />
+                <img src={noimage} alt='No Image for this Ad' className='w-full mx-auto' />
             ) : (
                 <ImageGallery items={images} showThumbnails={true} showPlayButton={false} />
             )}

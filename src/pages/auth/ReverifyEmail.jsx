@@ -22,19 +22,22 @@ const ReverifyEmail = ({ endpoint }) => {
         if (submit?.success) {
             notify(submit.message, 'success');
             return navigate('/', { replace: true });
-        } 
+        }
         if (submit?.status === 401) {
             notify('Email not found', 'error');
         } else {
             notify(submit.message, 'success');
         }
-		
     };
 
     return (
         <div className='w-full'>
             <div className='p-2 lg:p-4'>
-                <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+                <Formik
+                    initialValues={initialValues}
+                    validationSchema={validationSchema}
+                    onSubmit={onSubmit}
+                >
                     {(formik) => (
                         <Form>
                             <Input
@@ -44,10 +47,16 @@ const ReverifyEmail = ({ endpoint }) => {
                                 className='input input-bordered border-black w-full bg-gray-100 text-black text-lg lg:text-xl rounded-none my-2 input-md'
                                 {...formik.getFieldProps('email')}
                             />
-                            <Button size='lg' type='submit' className='text-black bg-primary w-[60%] mx-auto text-md lg:text-2xl my-2' disabled={!formik.isValid || !formik.dirty ? 'disabled' : ''}>
+                            <Button
+                                size='lg'
+                                type='submit'
+                                className='text-black bg-primary w-[60%] mx-auto text-md lg:text-2xl my-2'
+                                disabled={!formik.isValid || !formik.dirty ? 'disabled' : ''}
+                            >
                                 {!formik.isSubmitting ? (
                                     <>
-                                        <span className='text-lg'>Verify</span> &emsp; <FaEnvelope className='my-auto' />
+                                        <span className='text-lg'>Verify</span> &emsp;{' '}
+                                        <FaEnvelope className='my-auto' />
                                     </>
                                 ) : (
                                     <>

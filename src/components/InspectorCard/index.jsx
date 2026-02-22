@@ -87,47 +87,53 @@ const InspectorCard = ({ data, ad_id, isLoading }) => {
 
     if (isLoading) {
         return (
-            <div className="h-48 w-[300px]">
+            <div className='h-48 w-[300px]'>
                 <SpinnerSkeleton />
             </div>
         );
     }
 
     return (
-        <div className="max-w-[400px] border  p-4">
-            <div className="flex items-center justify-between">
+        <div className='max-w-[400px] border  p-4'>
+            <div className='flex items-center justify-between'>
                 {user?.id === data?.schedules?.owner ? (
-                    <h5 className="font-semibold">Inspector’s schedule :</h5>
+                    <h5 className='font-semibold'>Inspector’s schedule :</h5>
                 ) : (
-                    <h5 className="capitalize font-semibold">
-						Response from: {data?.schedules?.ad_details.title}
+                    <h5 className='capitalize font-semibold'>
+                        Response from: {data?.schedules?.ad_details.title}
                     </h5>
                 )}
-                <img src={Inspector} alt="inspector" className="w-12" />
+                <img src={Inspector} alt='inspector' className='w-12' />
             </div>
 
-            <div className="space-y-2">
+            <div className='space-y-2'>
                 {data?.schedules?.bookings.map((booking) => {
                     return (
                         <div
                             key={booking.id}
                             className={`${
-                                booking?.user_id === data?.schedules?.owner ? 'bg-primary/80' : 'bg-secondary'
+                                booking?.user_id === data?.schedules?.owner
+                                    ? 'bg-primary/80'
+                                    : 'bg-secondary'
                             } px-2 pb-4 pt-6  rounded-lg italic sm:mr-6 relative`}
                         >
-                            <div className="absolute top-1 right-1 bg-white rounded-lg px-1  py-[0.15rem] leading-3 text-[10px]">
+                            <div className='absolute top-1 right-1 bg-white rounded-lg px-1  py-[0.15rem] leading-3 text-[10px]'>
                                 {booking.user_id === user.id ? (
                                     'You'
-                                ) : booking?.user_id === data?.schedules?.owner && booking?.remark !== 'view_contact' ? (
+                                ) : booking?.user_id === data?.schedules?.owner &&
+                                  booking?.remark !== 'view_contact' ? (
                                     'Ad owner'
-                                ) : booking?.remark === 'view_contact' && data.schedules?.grabber_details ? (
-                                    <span className="-mx-2 bg-white px-2 py-[6px] rounded-bl-lg font-semibold">Boonfu</span>
+                                ) : booking?.remark === 'view_contact' &&
+                                  data.schedules?.grabber_details ? (
+                                    <span className='-mx-2 bg-white px-2 py-[6px] rounded-bl-lg font-semibold'>
+                                        Boonfu
+                                    </span>
                                 ) : (
                                     'Inspector'
                                 )}
                             </div>
 
-                            <div className="flex items-center gap-2">
+                            <div className='flex items-center gap-2'>
                                 {booking?.remark === 'reschedule' ? (
                                     <p>Rescheduled Date & Time.</p>
                                 ) : booking?.remark === 'confirmed' ? (
@@ -138,26 +144,34 @@ const InspectorCard = ({ data, ad_id, isLoading }) => {
                                     <p>Withdrawn from the site.</p>
                                 ) : booking?.remark === 'not_available' ? (
                                     <p>Item no longer available.</p>
-                                ) : booking?.remark === 'view_contact' && !data.schedules?.grabber_details ? (
+                                ) : booking?.remark === 'view_contact' &&
+                                  !data.schedules?.grabber_details ? (
                                     <p>You can view the contact now.</p>
-                                ) : booking?.remark === 'view_contact' && data.schedules?.grabber_details ? (
-                                    <div className="space-y-4">
+                                ) : booking?.remark === 'view_contact' &&
+                                  data.schedules?.grabber_details ? (
+                                    <div className='space-y-4'>
                                         <p>
-											Thank you for booking an inspection for the{' '}
-                                            {data?.schedules?.ad_details.title.toUpperCase()} on Boonfu.com.
+                                            Thank you for booking an inspection for the{' '}
+                                            {data?.schedules?.ad_details.title.toUpperCase()} on
+                                            Boonfu.com.
                                         </p>
 
                                         <p>
-											Our Partner &#40;{data.schedules.grabber_details.name}&#41; who introduced this listing
-											to you shall be in touch with you shortly to coordinate the time and specific location
-											for the inspection.
+                                            Our Partner &#40;{data.schedules.grabber_details.name}
+                                            &#41; who introduced this listing to you shall be in
+                                            touch with you shortly to coordinate the time and
+                                            specific location for the inspection.
                                         </p>
 
-                                        <p>Should you have any questions in the meantime, feel free to reply to this message.</p>
+                                        <p>
+                                            Should you have any questions in the meantime, feel free
+                                            to reply to this message.
+                                        </p>
 
                                         <p>Best regards, The Boonfu Team</p>
                                     </div>
-                                ) : booking?.remark === 'ok' && data?.schedules?.owner === user?.id ? (
+                                ) : booking?.remark === 'ok' &&
+                                  data?.schedules?.owner === user?.id ? (
                                     <>
                                         <p>Inspector:</p>
                                         <p>{data?.schedules?.buyer_name}</p>
@@ -165,54 +179,76 @@ const InspectorCard = ({ data, ad_id, isLoading }) => {
                                 ) : null}
                             </div>
 
-                            {booking.remark === 'view_contact' && !data.schedules?.grabber_details && (
-                                <a
-                                    href={`tel:${
-                                        user?.id === data?.schedules?.owner
+                            {booking.remark === 'view_contact' &&
+                                !data.schedules?.grabber_details && (
+                                    <a
+                                        href={`tel:${
+                                            user?.id === data?.schedules?.owner
+                                                ? data?.schedules?.phone_details?.buyer_phone
+                                                : data?.schedules?.phone_details?.owner_phone
+                                        }`}
+                                        className='text-white text-sm hover:underline flex items-center gap-1'
+                                    >
+                                        <BiPhoneCall />
+                                        {user?.id === data?.schedules?.owner
                                             ? data?.schedules?.phone_details?.buyer_phone
-                                            : data?.schedules?.phone_details?.owner_phone
-                                    }`}
-                                    className="text-white text-sm hover:underline flex items-center gap-1"
-                                >
-                                    <BiPhoneCall />
-                                    {user?.id === data?.schedules?.owner
-                                        ? data?.schedules?.phone_details?.buyer_phone
-                                        : data?.schedules?.phone_details?.owner_phone}
-                                </a>
-                            )}
+                                            : data?.schedules?.phone_details?.owner_phone}
+                                    </a>
+                                )}
 
                             {(booking?.remark !== 'view_contact' ||
-								(booking?.remark === 'view_contact' && !data?.schedules?.grabber_details)) && (
+                                (booking?.remark === 'view_contact' &&
+                                    !data?.schedules?.grabber_details)) && (
                                 <>
-                                    <div className="flex items-center gap-2">
+                                    <div className='flex items-center gap-2'>
                                         <p>For:</p>
-                                        <p className="capitalize">{data?.schedules?.ad_details.title}</p>
+                                        <p className='capitalize'>
+                                            {data?.schedules?.ad_details.title}
+                                        </p>
                                     </div>
-                                    <div className="flex items-center gap-2">
+                                    <div className='flex items-center gap-2'>
                                         <p>
                                             {latestBooking?.remark === 'reschedule' &&
-											booking?.remark === 'reschedule' &&
-											latestBooking?.id === booking?.id
+                                            booking?.remark === 'reschedule' &&
+                                            latestBooking?.id === booking?.id
                                                 ? 'New'
                                                 : null}{' '}
-											Date:
+                                            Date:
                                         </p>
 
-                                        <p> {booking?.date && format(parseISO(booking?.date), 'EEEE d, MMMM yyyy')}</p>
+                                        <p>
+                                            {' '}
+                                            {booking?.date &&
+                                                format(
+                                                    parseISO(booking?.date),
+                                                    'EEEE d, MMMM yyyy'
+                                                )}
+                                        </p>
                                     </div>
-                                    <div className="flex items-center gap-2">
+                                    <div className='flex items-center gap-2'>
                                         <p>
                                             {latestBooking?.remark === 'reschedule' &&
-											booking?.remark === 'reschedule' &&
-											latestBooking?.id === booking?.id
+                                            booking?.remark === 'reschedule' &&
+                                            latestBooking?.id === booking?.id
                                                 ? 'New'
                                                 : null}{' '}
-											Time:
+                                            Time:
                                         </p>
-                                        <p className="lowercase">
-                                            {booking?.time?.from && format(parse(booking.time.from, 'HH:mm', new Date()), 'h:mma')}
+                                        <p className='lowercase'>
+                                            {booking?.time?.from &&
+                                                format(
+                                                    parse(booking.time.from, 'HH:mm', new Date()),
+                                                    'h:mma'
+                                                )}
                                             {booking?.time?.to && (
-                                                <> to {format(parse(booking.time.to, 'HH:mm', new Date()), 'h:mma')}</>
+                                                <>
+                                                    {' '}
+                                                    to{' '}
+                                                    {format(
+                                                        parse(booking.time.to, 'HH:mm', new Date()),
+                                                        'h:mma'
+                                                    )}
+                                                </>
                                             )}
                                         </p>
                                     </div>
@@ -223,13 +259,14 @@ const InspectorCard = ({ data, ad_id, isLoading }) => {
                 })}
             </div>
             {!data?.schedules?.confirmed && (
-                <div className=" border-t border-black/40 py-4 mt-4">
+                <div className=' border-t border-black/40 py-4 mt-4'>
                     {user?.id === data?.schedules?.owner ? (
-                        <h5 className="capitalize font-semibold">
-                            {data?.schedules?.ad_details.title} <span className="lowercase">reply</span>:
+                        <h5 className='capitalize font-semibold'>
+                            {data?.schedules?.ad_details.title}{' '}
+                            <span className='lowercase'>reply</span>:
                         </h5>
                     ) : (
-                        <h5 className="font-semibold">Inspector's reply:</h5>
+                        <h5 className='font-semibold'>Inspector's reply:</h5>
                     )}
 
                     <form onSubmit={formik.handleSubmit}>
@@ -242,7 +279,9 @@ const InspectorCard = ({ data, ad_id, isLoading }) => {
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                             optionLists={
-                                user?.id === data?.schedules?.owner ? sellerResponseOptions : buyerResponseOptions
+                                user?.id === data?.schedules?.owner
+                                    ? sellerResponseOptions
+                                    : buyerResponseOptions
                             }
                             className={'customSelectInput'}
                         />
@@ -254,14 +293,16 @@ const InspectorCard = ({ data, ad_id, isLoading }) => {
                                     label={'Reschedule Date'}
                                     value={formik.values.date}
                                     onChange={formik.handleChange}
-                                    moreInfo={'Select a date and the time range you will be available '}
+                                    moreInfo={
+                                        'Select a date and the time range you will be available '
+                                    }
                                     onBlur={formik.handleBlur}
                                     className={'customSelectInput'}
                                 />
-                                <div className="flex gap-6 ">
-                                    <div className="my-2">
-                                        <label className="input-group-label" htmlFor="time.from">
-											From
+                                <div className='flex gap-6 '>
+                                    <div className='my-2'>
+                                        <label className='input-group-label' htmlFor='time.from'>
+                                            From
                                         </label>
                                         <DatePicker
                                             selected={timeFromDate}
@@ -270,25 +311,32 @@ const InspectorCard = ({ data, ad_id, isLoading }) => {
                                                     formik.setFieldValue('time.from', '');
                                                     return;
                                                 }
-                                                formik.setFieldValue('time.from', format(date, 'HH:mm'));
+                                                formik.setFieldValue(
+                                                    'time.from',
+                                                    format(date, 'HH:mm')
+                                                );
                                             }}
                                             showTimeSelect
                                             showTimeSelectOnly
                                             timeIntervals={1}
-                                            timeCaption="Time"
-                                            dateFormat="h:mm aa"
-                                            placeholderText="Select time"
+                                            timeCaption='Time'
+                                            dateFormat='h:mm aa'
+                                            placeholderText='Select time'
                                             customInput={
                                                 <DatePickerInput
-                                                    name="time.from"
-                                                    value={formik.values.time.from ? format(from, 'h:mm a') : undefined}
+                                                    name='time.from'
+                                                    value={
+                                                        formik.values.time.from
+                                                            ? format(from, 'h:mm a')
+                                                            : undefined
+                                                    }
                                                 />
                                             }
                                         />
                                     </div>
-                                    <div className="my-2">
-                                        <label className="input-group-label" htmlFor="time.to">
-											To
+                                    <div className='my-2'>
+                                        <label className='input-group-label' htmlFor='time.to'>
+                                            To
                                         </label>
                                         <DatePicker
                                             selected={timeToDate}
@@ -297,18 +345,25 @@ const InspectorCard = ({ data, ad_id, isLoading }) => {
                                                     formik.setFieldValue('time.to', '');
                                                     return;
                                                 }
-                                                formik.setFieldValue('time.to', format(date, 'HH:mm'));
+                                                formik.setFieldValue(
+                                                    'time.to',
+                                                    format(date, 'HH:mm')
+                                                );
                                             }}
                                             showTimeSelect
                                             showTimeSelectOnly
                                             timeIntervals={1}
-                                            timeCaption="Time"
-                                            dateFormat="h:mm aa"
-                                            placeholderText="Select time"
+                                            timeCaption='Time'
+                                            dateFormat='h:mm aa'
+                                            placeholderText='Select time'
                                             customInput={
                                                 <DatePickerInput
-                                                    name="time.to"
-                                                    value={formik.values.time.to ? format(from, 'h:mm a') : undefined}
+                                                    name='time.to'
+                                                    value={
+                                                        formik.values.time.to
+                                                            ? format(from, 'h:mm a')
+                                                            : undefined
+                                                    }
                                                 />
                                             }
                                         />
@@ -318,7 +373,8 @@ const InspectorCard = ({ data, ad_id, isLoading }) => {
                                 {formik.values.time.from && formik.values.time.to ? (
                                     <div>
                                         <p>
-											Selected time range: <b>{format(from, 'h:mm a')}</b> - <b>{format(to, 'h:mm a')}</b>
+                                            Selected time range: <b>{format(from, 'h:mm a')}</b> -{' '}
+                                            <b>{format(to, 'h:mm a')}</b>
                                         </p>
                                     </div>
                                 ) : null}
@@ -327,12 +383,12 @@ const InspectorCard = ({ data, ad_id, isLoading }) => {
 
                         <Button
                             variant={'primary'}
-                            type="submit"
+                            type='submit'
                             disabled={submitting || !formik.dirty}
                             loading={submitting}
                             className={'rounded-lg mt-4'}
                         >
-							Send
+                            Send
                         </Button>
                     </form>
                 </div>

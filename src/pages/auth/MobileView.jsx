@@ -7,8 +7,8 @@ const MobileView = () => {
     const [view, setView] = useState('register');
 
     return (
-        <div className="w-full">
-            <div className="bg-primary flex items-center p-1 mb-6">
+        <div className='w-full'>
+            <div className='bg-primary flex items-center p-1 mb-6'>
                 <button
                     className={
                         view === 'register'

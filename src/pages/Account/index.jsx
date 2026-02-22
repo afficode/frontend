@@ -7,7 +7,7 @@ const Account = () => {
     const [transactionType] = useState('deposit');
 
     return (
-        <div className="min-h-screen p-8">
+        <div className='min-h-screen p-8'>
             <div>{transactionType === 'deposit' ? <Deposit /> : <Withdraw />}</div>
         </div>
     );

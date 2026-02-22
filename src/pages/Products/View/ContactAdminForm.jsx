@@ -30,17 +30,17 @@ export const ContactAdminForm = ({ ads_id, setIsOpen }) => {
                 <form onSubmit={handleSubmit}>
                     <TextArea
                         name={'text'}
-                        className="rounded-md p-2 placeholder:text-gray-400 text-sm focus:ring-primary focus:ring-1"
-                        placeholder="Post a remark or review for admin"
+                        className='rounded-md p-2 placeholder:text-gray-400 text-sm focus:ring-primary focus:ring-1'
+                        placeholder='Post a remark or review for admin'
                         maxLength={400}
                         required={true}
                     />
                     <button
-                        type="submit"
+                        type='submit'
                         disabled={isSubmitting}
-                        className="bg-primary text-white px-4 py-2 hover:bg-primary/70 rounded-sm"
+                        className='bg-primary text-white px-4 py-2 hover:bg-primary/70 rounded-sm'
                     >
-            Submit for review
+                        Submit for review
                     </button>
                 </form>
             )}

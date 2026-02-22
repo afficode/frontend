@@ -242,7 +242,7 @@ function App() {
                             <Route path={Approutes.account.deposit} element={<Deposit />} />
                             <Route path={Approutes.account.withdraw} element={<Withdraw />} />
                         </Route>
-                        <Route path="/my-advert" element={<AdDetail />} />
+                        <Route path='/my-advert' element={<AdDetail />} />
 
                         {/* profile layout  */}
                         <Route element={<ProfileLayout />}>
@@ -266,7 +266,7 @@ function App() {
                     </Route>
                 </Route>
 
-                <Route path="*" element={<PageNotFound />} />
+                <Route path='*' element={<PageNotFound />} />
             </Routes>
 
             <ToastContainer
@@ -277,7 +277,7 @@ function App() {
                 closeOnClick={true}
                 draggable
                 pauseOnHover
-                position="top-center"
+                position='top-center'
                 hideProgressBar={true}
             />
         </BrowserRouter>
