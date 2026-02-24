@@ -1,7 +1,7 @@
 import { categoryData } from '../../constants/Category';
 import CategoryCard from './CategoryCard';
 import { SEO } from '../../components';
-import { Approutes } from '../../constants';
+import { Approutes, frontendBaseUrl } from '../../constants';
 
 const index = () => {
     return (
@@ -12,7 +12,7 @@ const index = () => {
             <SEO
                 title='Advert categories'
                 description='Advert categories in Boonfu'
-                url={`https://boonfu.com${Approutes.postAd}`}
+                url={`${frontendBaseUrl}${Approutes.postAd}`}
                 keywords={[
                     'Advert Categories',
                     'advertisement',

@@ -32,9 +32,7 @@ const GrabProduct = () => {
     const [inspectionModal, setInspectionModal] = useState(false);
     const { user } = useAuth();
     const { data: result, isLoading, isError } = fetchProduct(ad_id);
-
-    // console.log(result)
-
+    
     const grabLink = useMemo(
         () =>
             `${frontendLink.slice(0, -1)}${Approutes.grab.grabbedProduct(`bf${user.grabber.id}`, slugGeneratorForAdIdWithName(result?.data?.title, ad_id))}`,
@@ -226,14 +224,14 @@ const GrabProduct = () => {
                                         Generate Post Now
                                     </Button>
                                 </Link>
-                                {/* <Button
+                                <Button
                                     onClick={() => setInspectionModal(true)}
                                     variant={'primary'}
                                     size={'full'}
                                     className={' rounded-xl'}
                                 >
                                     Inspection log
-                                </Button> */}
+                                </Button>
                             </div>
                         </div>
                     </aside>
@@ -282,8 +280,11 @@ const GrabProduct = () => {
                 </div>
 
                 <InspectionUpdate
+                    adId={result?.data?.id}
                     inspectionModal={inspectionModal}
                     setInspectionModal={setInspectionModal}
+                    hasRequestedPayment={result?.data?.payment_request}
+                    location={result?.data?.location}
                 />
                 <ScrollToTop />
             </section>

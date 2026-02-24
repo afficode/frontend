@@ -8,7 +8,7 @@ import { fetchProduct, useCheckOrder } from '../../../hooks';
 import { Carousel, SEO, SpinnerSkeleton } from '../../../components';
 import { categoryData, inspectableCategories } from '../../../constants/Category';
 import useAuth from '../../../context/UserContext';
-import { Approutes } from '../../../constants';
+import { Approutes, frontendBaseUrl } from '../../../constants';
 
 const GrabbedProduct = () => {
     let { grabber_id, ad_id } = useParams();
@@ -182,18 +182,18 @@ const GrabbedProduct = () => {
                     </div>
                 </div>
 
-                   <SEO
-                        title={result?.data?.title}
-                        description={result?.data?.description}
-                        url={`https://boonfu.com${Approutes.grab.grabbedProduct(grabber_id, slugGeneratorForAdIdWithName(result?.data?.title, result?.data?.id))}`}
-                        keywords={[
-                            result?.data?.title,
-                            ...categoryData.map((category) =>
-                                result?.data?.category.toString().startsWith(category.id.toString())
-                            ),
-                        ]}
-                        image={result?.data?.images[0]?.path}
-                    />
+                <SEO
+                    title={result?.data?.title}
+                    description={result?.data?.description}
+                    url={`${frontendBaseUrl}${Approutes.grab.grabbedProduct(grabber_id, slugGeneratorForAdIdWithName(result?.data?.title, result?.data?.id))}`}
+                    keywords={[
+                        result?.data?.title,
+                        ...categoryData.map((category) =>
+                            result?.data?.category.toString().startsWith(category.id.toString())
+                        ),
+                    ]}
+                    image={result?.data?.images[0]?.path}
+                />
                 <ScrollToTop />
             </section>
         );

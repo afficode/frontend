@@ -111,3 +111,4 @@ const getFrontendLink = () => {
 
 export const backendLink = getBackendLink();
 export const frontendLink = getFrontendLink();
+export const frontendBaseUrl = frontendLink.replace(/\/$/, '');

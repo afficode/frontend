@@ -154,7 +154,7 @@ const GrabFlyer = () => {
                             >
                                 <img
                                     src={ad.data.images[0].path}
-                                    className='w-full h-full object-cover bg-transparent '
+                                    className='w-full h-full object-contain bg-transparent '
                                     alt={ad.data.title}
                                     crossOrigin='anonymous'
                                 />

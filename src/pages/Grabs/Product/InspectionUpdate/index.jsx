@@ -1,14 +1,34 @@
 import { useFormik } from "formik";
 import { Button, Modal } from "../../../../ui"
+import { useInspectionUpdate, useNotify } from "../../../../hooks";
+import { useQueryClient } from "react-query";
 
-const InspectionUpdate = ({inspectionModal, setInspectionModal}) => {
+const InspectionUpdate = ({adId, inspectionModal, setInspectionModal, hasRequestedPayment, location}) => {
      const initialValues = {
-      note: '',
+      grabber_text: '',
       sold_by_me: false,
     };
 
+    const {mutate, isLoading} = useInspectionUpdate()
+    const notify = useNotify()
+    const queryClient = useQueryClient()
+
     const handleSubmit = () => {
-        // console.log(formik.values);
+        const data = {
+            ad_id: adId,
+            grabber_text: formik.values.grabber_text,
+        }
+
+        mutate(data, {
+            onSuccess: (data) => {
+                notify(data?.message, 'success')
+                setInspectionModal(false)
+                queryClient.invalidateQueries({ queryKey: ['fetch-product', adId] })
+            },
+            onError: (error) => {
+                notify(error?.response?.data?.message || 'Something went wrong', 'error')
+            }
+        })
     }
 
     const formik = useFormik({
@@ -31,27 +51,31 @@ const InspectionUpdate = ({inspectionModal, setInspectionModal}) => {
                         <div className="flex items-start justify-between ">
                             <div className="text-sm text-primary">
                                 <p>Inspection Update</p>
-                                <p>Ikeja, Lagos</p>
+                                <p>{location}</p>
                             </div>
 
-                            <span className="text-xs">25.02.2026</span>
+                            <span className="text-xs">{new Date().toLocaleDateString()}</span>
                         </div>
 
-                        <p className="text-sm text-primary">ref: 19028766476736</p>
+                        {/* <p className="text-sm text-primary">ref: 19028766476736</p> */}
                     </div>
+
+                    {hasRequestedPayment === 1 && (
+                        <p className="text-base text-secondary text-center mt-2">You have requested payment for this item</p>
+                    )}
 
                     <form onSubmit={formik.handleSubmit} className="space-y-2 pt-4">
                         <div className="flex-col items-start ">
-                            <label htmlFor="note" className="text-sm">Note</label>
+                            <label htmlFor="grabber_text" className="text-sm">Note</label>
                             <textarea 
-                                name="note" 
-                                id="note" 
+                                name="grabber_text" 
+                                id="grabber_text" 
                                 cols="10" 
                                 rows="5" 
                                 placeholder="Provide boonfu with the inspection update of the above vehicle."
                                 className="w-full text-sm border p-2 disabled:bg-[#D9D9D9] disabled:border-none" 
-                                disabled={true}
-                                value={formik.values.note}
+                                disabled={hasRequestedPayment}
+                                value={formik.values.grabber_text}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                             ></textarea>
@@ -62,6 +86,7 @@ const InspectionUpdate = ({inspectionModal, setInspectionModal}) => {
                                 type="checkbox" 
                                 name="sold_by_me" 
                                 id="sold_by_me"
+                                disabled={hasRequestedPayment}
                                 value={formik.values.sold_by_me}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
@@ -70,7 +95,7 @@ const InspectionUpdate = ({inspectionModal, setInspectionModal}) => {
                         </div>
 
                        <div className="pt-2">
-                         <Button type="submit" variant="primary" size="small" className="rounded-md ">Submit</Button>
+                         <Button type="submit" variant="primary" size="small" className="rounded-md" disabled={formik.values.grabber_text === '' || !formik.values.sold_by_me || hasRequestedPayment === 1 || isLoading} loading={isLoading}>Submit</Button>
                        </div>
                     </form>
                 </div>
