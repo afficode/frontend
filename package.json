@@ -9,7 +9,8 @@
         "build:prod": "vite build --mode production",
         "preview": "vite preview",
         "lint": "eslint .",
-        "lint:fix": "eslint . --fix"
+        "lint:fix": "eslint . --fix",
+        "clean_files": "prettier . --write --end-of-line lf"
     },
     "dependencies": {
         "@tanstack/react-query": "5.37.1",

@@ -32,7 +32,7 @@ const GrabProduct = () => {
     const [inspectionModal, setInspectionModal] = useState(false);
     const { user } = useAuth();
     const { data: result, isLoading, isError } = fetchProduct(ad_id);
-    
+
     const grabLink = useMemo(
         () =>
             `${frontendLink.slice(0, -1)}${Approutes.grab.grabbedProduct(`bf${user.grabber.id}`, slugGeneratorForAdIdWithName(result?.data?.title, ad_id))}`,
@@ -78,8 +78,8 @@ const GrabProduct = () => {
         a.download = !img.filename
             ? `download.${urlExt}`
             : /\.[a-zA-Z0-9]+$/.test(img.filename)
-              ? img.filename
-              : `${img.filename}.${urlExt}`;
+                ? img.filename
+                : `${img.filename}.${urlExt}`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
@@ -269,7 +269,7 @@ const GrabProduct = () => {
                             'flex  flex-1 items-center justify-center gap-4 px-8 py-[.75rem] w-full  font-semibold text-xl '
                         }
                     >
-                        <img src={Download} alt="download icon" className="w-8" /> Download images
+                        <img src={Download} alt='download icon' className='w-8' /> Download images
                     </Button>
 
                     <Link to={Approutes.grab.products} className='flex-1'>

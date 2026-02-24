@@ -2,7 +2,13 @@ import { Link, useParams } from 'react-router-dom';
 import { TbCurrencyNaira } from 'react-icons/tb';
 import { FaCamera } from 'react-icons/fa';
 import OverviewPills from '../../Products/View/OverviewPills';
-import { convertKeyToName, extractAdIdFromSlug, numberWithCommas, ScrollToTop, slugGeneratorForAdIdWithName } from '../../../utils';
+import {
+    convertKeyToName,
+    extractAdIdFromSlug,
+    numberWithCommas,
+    ScrollToTop,
+    slugGeneratorForAdIdWithName,
+} from '../../../utils';
 import Action from './Action';
 import { fetchProduct, useCheckOrder } from '../../../hooks';
 import { Carousel, SEO, SpinnerSkeleton } from '../../../components';
@@ -151,7 +157,7 @@ const GrabbedProduct = () => {
                         </div>
                     </div>
 
-                    <div className="xl:w-[30%]  h-full ">
+                    <div className='xl:w-[30%]  h-full '>
                         <Action
                             isGeneral={
                                 inspectableCategories.includes(result?.data.category) ? false : true

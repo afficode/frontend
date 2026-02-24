@@ -40,7 +40,8 @@ export const useGrabDashboard = () => {
 };
 
 export const useInspectionUpdate = () => {
-    const inspectionUpdate = (data) => privateAxios.post(`${backendLink}grab/payment_request`, data).then((res) => res?.data);
+    const inspectionUpdate = (data) =>
+        privateAxios.post(`${backendLink}grab/payment_request`, data).then((res) => res?.data);
 
     return useMutation(['inspection-update'], inspectionUpdate);
 };
