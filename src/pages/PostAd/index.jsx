@@ -4,7 +4,7 @@ import { useCategory } from '../../hooks';
 import { PropertyHeader } from '../../assets/images';
 import LoadingScreen from './LoadingScreen';
 import { ScrollToTop } from '../../utils';
-import { Approutes } from '../../constants';
+import { Approutes, frontendBaseUrl } from '../../constants';
 import { SEO } from '../../components';
 // import PostPreview from './PostPreview';
 
@@ -251,7 +251,7 @@ const PostAd = () => {
                     <SEO
                         title='Post an Ad'
                         description='Post a new ad on Boonfu'
-                        url={`https://boonfu.com${Approutes.postAd}`}
+                        url={`${frontendBaseUrl}${Approutes.postAd}`}
                         keywords={[
                             'post ad',
                             'advertisement',

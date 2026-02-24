@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Banner, SEO } from '../../components';
+import { frontendBaseUrl } from '../../constants';
 import DesktopView from './DesktopView';
 import MobileView from './MobileView';
 import { clearLocalStorage } from '../../utils';
@@ -13,7 +14,7 @@ const Auth = () => {
             <SEO
                 title='Register or Login'
                 description='Login or register to access your account'
-                url='https://boonfu.com/auth'
+                url={`${frontendBaseUrl}/auth`}
                 keywords={['login', 'register', 'authentication']}
             />
             <Banner className='xl:my-2'>

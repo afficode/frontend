@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Approutes } from '../../../constants';
+import { Approutes, frontendBaseUrl } from '../../../constants';
 import { fetchProduct } from '../../../hooks';
 import Breadcrumb from '../../../components/Breadcrumb';
 import { TbCurrencyNaira } from 'react-icons/tb';
@@ -215,7 +215,7 @@ const index = () => {
             <SEO
                 title={result?.data?.title}
                 description={result?.data?.description}
-                url={`https://boonfu.com${Approutes.product.view.replace(':id', slugGeneratorForAdIdWithName(result?.data?.title, result?.data?.id))}`}
+                url={`${frontendBaseUrl}${Approutes.product.view.replace(':id', slugGeneratorForAdIdWithName(result?.data?.title, result?.data?.id))}`}
                 keywords={[
                     result?.data?.title,
                     ...categoryData.map((category) =>
@@ -418,7 +418,7 @@ const index = () => {
             <SEO
                 title={result?.data?.title}
                 description={result?.data?.description}
-                url={`https://boonfu.com${Approutes.product.view.replace(':id', slugGeneratorForAdIdWithName(result?.data?.title, result?.data?.id))}`}
+                url={`${frontendBaseUrl}${Approutes.product.view.replace(':id', slugGeneratorForAdIdWithName(result?.data?.title, result?.data?.id))}`}
                 keywords={[
                     result?.data?.title,
                     ...categoryData.map((category) =>

@@ -161,7 +161,7 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
                     message:
                         chatId !== null
                             ? 'Disabled... Please continue chat in the message section'
-                            : 'Hi There, I am interested in this car, is it still available?',
+                            : 'Hi There, I am interested in this item, is it still available?',
                     phone:
                         chatId !== null
                             ? 'Disabled... Please continue chat in the message section'
