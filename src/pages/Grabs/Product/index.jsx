@@ -22,6 +22,7 @@ import useAuth from '../../../context/UserContext';
 import useGrabContext from '../../../context/GrabContext';
 import { useQueryClient } from 'react-query';
 import InspectionUpdate from './InspectionUpdate';
+import { inspectableCategories } from '../../../constants/Category';
 
 const GrabProduct = () => {
     const notify = useNotify();
@@ -224,14 +225,18 @@ const GrabProduct = () => {
                                         Generate Post Now
                                     </Button>
                                 </Link>
-                                <Button
-                                    onClick={() => setInspectionModal(true)}
-                                    variant={'primary'}
-                                    size={'full'}
-                                    className={' rounded-xl'}
-                                >
-                                    Inspection log
-                                </Button>
+                                {
+                                    inspectableCategories.includes(result?.data?.category) && (
+                                        <Button
+                                        onClick={() => setInspectionModal(true)}
+                                        variant={'primary'}
+                                        size={'full'}
+                                        className={' rounded-xl'}
+                                    >
+                                        Inspection log
+                                    </Button>
+                                )
+                                }
                             </div>
                         </div>
                     </aside>
@@ -279,13 +284,17 @@ const GrabProduct = () => {
                     </Link>
                 </div>
 
-                <InspectionUpdate
-                    adId={result?.data?.id}
-                    inspectionModal={inspectionModal}
-                    setInspectionModal={setInspectionModal}
-                    hasRequestedPayment={result?.data?.payment_request}
-                    location={result?.data?.location}
-                />
+                {
+                    inspectableCategories.includes(result?.data?.category) && (
+                        <InspectionUpdate
+                        adId={result?.data?.id}
+                        inspectionModal={inspectionModal}
+                        setInspectionModal={setInspectionModal}
+                        hasRequestedPayment={result?.data?.payment_request}
+                        location={result?.data?.location}
+                    />
+                    )
+                }
                 <ScrollToTop />
             </section>
         );
