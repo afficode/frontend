@@ -78,8 +78,8 @@ const GrabProduct = () => {
         a.download = !img.filename
             ? `download.${urlExt}`
             : /\.[a-zA-Z0-9]+$/.test(img.filename)
-                ? img.filename
-                : `${img.filename}.${urlExt}`;
+              ? img.filename
+              : `${img.filename}.${urlExt}`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
