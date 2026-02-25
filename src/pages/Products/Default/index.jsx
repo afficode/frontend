@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import Breadcrumb from '../../../components/Breadcrumb';
-import { Approutes } from '../../../constants/routes';
+import { Approutes, frontendBaseUrl } from '../../../constants/routes';
 import FeaturedProducts from './FeaturedProducts';
 import { useProduct, useCategories } from '../../../hooks/index';
 import { ProductSkeleton, SEO } from '../../../components';
@@ -131,7 +131,7 @@ const Products = () => {
                                 <SEO
                                     title='Products'
                                     description='Explore a wide range of products across various categories on our marketplace. Find the best deals and offers on cars, real-estate, electronics, fashion, home goods, and more. Start shopping now!'
-                                    url={`https://boonfu.com${Approutes.product.initial}`}
+                                    url={`${frontendBaseUrl}${Approutes.product.initial}`}
                                     keywords={[...categoryData.map((category) => category.name)]}
                                 />
                             </>
