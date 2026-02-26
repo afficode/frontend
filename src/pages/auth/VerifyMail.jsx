@@ -5,11 +5,14 @@ import axios from 'axios';
 import { useNotify } from '../../hooks';
 import { BsAlarmFill } from 'react-icons/bs';
 import { Button } from '../../ui';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 const VerifyMail = () => {
     const notify = useNotify();
     const location = useLocation();
-
+    const [otpSent, setOtpSent] = useState(false);
+    const navigate = useNavigate();
     const sendOtp = async () => {
         const searchParams = location.search;
         const token = searchParams.split('?token=')[1];
@@ -27,8 +30,16 @@ const VerifyMail = () => {
                         },
                     }
                 );
+                if (response.status === 204) {
+                    notify(response?.data?.message, 'info');
+                    setTimeout(() => {
+                        navigate('/auth');
+                    }, 8000);
+                    return;
+                }
                 if (response.status === 200) {
                     notify(response?.data?.message, 'success');
+                    setOtpSent(true);
                     // notify('An OTP has been sent to your registered phone number', 'success');
                 }
             } catch (error) {
@@ -44,8 +55,8 @@ const VerifyMail = () => {
     useEffect(() => {
         sendOtp();
     }, [location.search]);
-
-    return (
+    const otpSize = 50;
+    return otpSent ? (
         <div className='bg-white w-full  '>
             <div className='w-full  flex items-center justify-center  '>
                 <div className='md:w-[50%] w-[90%] my-[5rem] '>
@@ -59,6 +70,21 @@ const VerifyMail = () => {
                     </div>
                 </div>
             </div>
+        </div>
+    ) : (
+        <div className='w-full container flex flex-col items-center justify-center py-8'>
+            <Skeleton width={300} height={40} className='mb-4' />
+            <Skeleton width={250} height={30} className='mb-3' />
+            <Skeleton width={200} height={20} className='mb-4' />
+            <div className='w-full flex justify-center space-x-4'>
+                <Skeleton width={otpSize} height={otpSize} className='inline-block' />
+                <Skeleton width={otpSize} height={otpSize} className='inline-block' />
+                <Skeleton width={otpSize} height={otpSize} className='inline-block' />
+                <Skeleton width={otpSize} height={otpSize} className='inline-block' />
+                <Skeleton width={otpSize} height={otpSize} className='inline-block' />
+                <Skeleton width={otpSize} height={otpSize} className='inline-block' />
+            </div>
+            <Skeleton width={150} height={otpSize} className='inline-block mt-4' />
         </div>
     );
 };

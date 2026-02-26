@@ -225,9 +225,8 @@ const GrabProduct = () => {
                                         Generate Post Now
                                     </Button>
                                 </Link>
-                                {
-                                    inspectableCategories.includes(result?.data?.category) && (
-                                        <Button
+                                {inspectableCategories.includes(result?.data?.category) && (
+                                    <Button
                                         onClick={() => setInspectionModal(true)}
                                         variant={'primary'}
                                         size={'full'}
@@ -235,8 +234,7 @@ const GrabProduct = () => {
                                     >
                                         Inspection log
                                     </Button>
-                                )
-                                }
+                                )}
                             </div>
                         </div>
                     </aside>
@@ -284,17 +282,15 @@ const GrabProduct = () => {
                     </Link>
                 </div>
 
-                {
-                    inspectableCategories.includes(result?.data?.category) && (
-                        <InspectionUpdate
+                {inspectableCategories.includes(result?.data?.category) && (
+                    <InspectionUpdate
                         adId={result?.data?.id}
                         inspectionModal={inspectionModal}
                         setInspectionModal={setInspectionModal}
                         hasRequestedPayment={result?.data?.payment_request}
                         location={result?.data?.location}
                     />
-                    )
-                }
+                )}
                 <ScrollToTop />
             </section>
         );
