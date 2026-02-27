@@ -161,7 +161,7 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
                     message:
                         chatId !== null
                             ? 'Disabled... Please continue chat in the message section'
-                            : 'Hi There, I am interested in this item, is it still available?',
+                            : 'Hi there, I am interested in this item, is it still available?',
                     phone:
                         chatId !== null
                             ? 'Disabled... Please continue chat in the message section'
@@ -283,13 +283,13 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
                                     as='textarea'
                                     name='message'
                                     id='message'
-                                    className={`border-2 w-full border-gray-200 p-4 focus:outline-none focus:bg-white focus:border-primary tracking-tighter line-clamp-1 ${
+                                    className={`border-2 w-full border-gray-200 p-4 focus:outline-none focus:bg-white focus:border-primary tracking-tighter ${
                                         !isLogin && 'bg-gray-100 cursor-not-allowed'
                                     } ${chatId !== null && 'bg-gray-300 cursor-not-allowed'}`}
                                     placeholder={
                                         chatId !== null
                                             ? 'Disabled... Please continue chat in the message section'
-                                            : 'Hi There, I am interested in this d, is it still available?'
+                                            : 'Hi there, I am interested in this item, is it still available?'
                                     }
                                     cols={20}
                                     rows={5}
@@ -386,7 +386,7 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
                                             tabIndex={0}
                                             className='dropdown-content   z-[10] menu  p-4 bg-white shadow-2xl w-full flex flex-col justify-between'
                                         >
-                                            <form className='space-y-4'>
+                                            <div className='space-y-4'>
                                                 <div>
                                                     <div className='flex items-center justify-between'>
                                                         <p>Price:</p>
@@ -446,7 +446,7 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
                                                 >
                                                     Send this offer
                                                 </Button>
-                                            </form>
+                                            </div>
                                         </div>
                                     </div>
                                 )}

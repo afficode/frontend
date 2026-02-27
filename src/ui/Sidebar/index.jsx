@@ -1,6 +1,7 @@
 import { Sidebar } from 'flowbite-react';
 import { HiOutlineMinusSm, HiOutlinePlusSm } from 'react-icons/hi';
 import { twMerge } from 'tailwind-merge';
+import { Link } from 'react-router-dom';
 import { Approutes } from '../../constants';
 import { getCategoryName } from '../../utils';
 
@@ -38,21 +39,23 @@ const SidebarUI = ({ items }) => {
                                     }}
                                 >
                                     <Sidebar.Item
-                                        href={`${Approutes.product.category}/${getCategoryName(id)}`}
+                                        as={Link}
+                                        to={`${Approutes.product.category}/${getCategoryName(id)}`}
                                         key={index}
                                     >
                                         {name}
                                     </Sidebar.Item>
                                     {items[`${id}`].map(({ id, name }, index) => (
                                         <Sidebar.Item
-                                            href={`${Approutes.product.category}/${getCategoryName(id)}`}
+                                            as={Link}
+                                            to={`${Approutes.product.category}/${getCategoryName(id)}`}
                                             key={index}
                                         >
                                             {name}
                                         </Sidebar.Item>
                                     ))}
                                 </Sidebar.Collapse>
-                            ) : // <Sidebar.Item href="#">{`${name}`}</Sidebar.Item>
+                            ) : 
                             null}
                         </div>
                     ))}

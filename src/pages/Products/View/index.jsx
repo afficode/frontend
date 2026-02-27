@@ -136,7 +136,42 @@ const index = () => {
                     <div className='w-full my-2 '>
                         {/* ad title  */}
                         <div className='flex items-center justify-between w-full my-2 font-bold uppercase text-md md:text-2xl xl:text-3xl'>
-                            <span className=''>{result.data?.title}</span>
+                                 <div className='flex flex-col '>
+                                <span className=''>{result?.data?.title}</span>
+                                <span className='tracking-tighter font-normal lowercase text-sm'>
+                                  <span className='!capitalize'>  Posted: {' '}</span>
+                                    {formatDistance(
+                                        new Date(new Date(`${result?.data?.created_at}`)),
+                                        Date.now(),
+                                        {
+                                            includeSeconds: true,
+                                            addSuffix: true,
+                                        }
+                                    ).includes('about') ? (
+                                        <>
+                                            {formatDistance(
+                                                new Date(new Date(`${result?.data?.created_at}`)),
+                                                Date.now(),
+                                                {
+                                                    includeSeconds: true,
+                                                    addSuffix: true,
+                                                }
+                                            )?.substring(5)}
+                                        </>
+                                    ) : (
+                                        <>
+                                            {formatDistance(
+                                                new Date(new Date(`${result?.data?.created_at}`)),
+                                                Date.now(),
+                                                {
+                                                    includeSeconds: true,
+                                                    addSuffix: true,
+                                                }
+                                            )}
+                                        </>
+                                    )}
+                                </span>
+                           </div>
                             <span className=' flex items-center gap-2 lg:gap-8 my-auto '>
                                 <NegotiableIcon negotiable={result.data?.negotiable} />
 
@@ -172,7 +207,7 @@ const index = () => {
                         </div>
                     </div>{' '}
                     <div className='w-full mx-auto mt-1'>
-                        <div className='relative w-full h-[600px] mx-auto mt-1  rounded-none '>
+                        <div className='relative w-full min-h-[600px] mx-auto mt-1  rounded-none '>
                             <Carousel
                                 className='w-full h-full mx-auto'
                                 items={result?.data?.images}
@@ -237,7 +272,43 @@ const index = () => {
                     <div className='w-full mb-2 pl-2'>
                         {/* ad name and options */}
                         <div className='flex items-center justify-between w-full mb-2 font-bold uppercase text-md md:text-2xl xl:text-3xl'>
-                            <span className=''>{result?.data?.title}</span>
+                           <div className='flex flex-col '>
+                                <span className=''>{result?.data?.title}</span>
+                                <span className='tracking-tighter font-normal lowercase text-sm'>
+                                  <span className='!capitalize'>  Posted: {' '}</span>
+                                    {formatDistance(
+                                        new Date(new Date(`${result?.data?.created_at}`)),
+                                        Date.now(),
+                                        {
+                                            includeSeconds: true,
+                                            addSuffix: true,
+                                        }
+                                    ).includes('about') ? (
+                                        <>
+                                            {formatDistance(
+                                                new Date(new Date(`${result?.data?.created_at}`)),
+                                                Date.now(),
+                                                {
+                                                    includeSeconds: true,
+                                                    addSuffix: true,
+                                                }
+                                            )?.substring(5)}
+                                        </>
+                                    ) : (
+                                        <>
+                                            {formatDistance(
+                                                new Date(new Date(`${result?.data?.created_at}`)),
+                                                Date.now(),
+                                                {
+                                                    includeSeconds: true,
+                                                    addSuffix: true,
+                                                }
+                                            )}
+                                        </>
+                                    )}
+                                </span>
+                           </div>
+
                             <span className=' flex items-center gap-2 lg:gap-8 my-auto mr-4 lg:mr-0'>
                                 <NegotiableIcon negotiable={result?.data?.negotiable} />
 
@@ -273,7 +344,7 @@ const index = () => {
                         </div>
                     </div>{' '}
                     {/* ad images */}
-                    <div className='relative w-full h-[600px] mx-auto mt-1  rounded-none '>
+                    <div className='relative w-full min-h-[600px] mx-auto mt-1  rounded-none '>
                         <Carousel className='w-full h-full mx-auto' items={result?.data?.images} />
                         <div className='absolute top-[440px] flex w-full h-10 my-0 py-2 pl-6 text-white  rounded-none'>
                             <span className='flex px-2 my-auto border-2 border-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]'>
@@ -315,7 +386,7 @@ const index = () => {
                                         <span>
                                             {revealNumber
                                                 ? result?.data?.number
-                                                : `${result?.data?.number.substring(0, 3)}XXXXXXXX`}
+                                                : `${result?.data?.number?.substring(0, 3)}XXXXXXXX`}
                                         </span>
                                     </p>
                                     {!revealNumber ? (
@@ -353,7 +424,7 @@ const index = () => {
                                         <span className='pr-1 text-sm '>
                                             {revealEmail && result?.data?.email !== null
                                                 ? result?.data?.email
-                                                : `${result?.data?.email.substring(0, 3)}XXXXXXXX`}
+                                                : `${result?.data?.email?.substring(0, 3)}XXXXXXXX`}
                                         </span>
                                     </p>
 

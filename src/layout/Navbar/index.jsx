@@ -180,16 +180,6 @@ const Navbar = () => {
                         {/* top nav items */}
                         <div className='flex items-center gap-2 lg:gap-3'>
                             {isLogin && (
-                                // <Link to={Approutes.profile.notifications}>
-                                // 	<div
-                                // 		className="flex flex-col items-center text-white cursor-pointer "
-                                // 		title="My Notifications"
-                                // 	>
-                                // 		<AiOutlineBell size={25} />
-                                // 		<span className="text-xs sm:text-sm">Notifications</span>
-                                // 	</div>
-                                // </Link>
-                                // <div className="max-h-screen dropdown">
                                 <>
                                     <Link to={Approutes.profile.notifications}>
                                         <div
@@ -221,9 +211,9 @@ const Navbar = () => {
                                     </div>
                                 </>
                             )}
-                            <Link to={Approutes.profile.saved}>
+                            <Link to={Approutes.profile.saved} className='max-md:hidden'>
                                 <div
-                                    className='relative flex flex-col items-center text-white cursor-pointer max-md:hidden'
+                                    className='relative flex flex-col items-center text-white cursor-pointer '
                                     title='Saved items'
                                 >
                                     <GoBookmark size={25} />
@@ -236,10 +226,10 @@ const Navbar = () => {
                                 </div>
                             </Link>
                             {/* post ad dropdown */}
-                            <div className='dropdown '>
+                            <div className='dropdown max-md:hidden '>
                                 <div
                                     tabIndex={0}
-                                    className='flex flex-col items-center text-white cursor-pointer '
+                                    className='flex flex-col items-center text-white cursor-pointer max-md:hidden  '
                                     title='Post an ad'
                                 >
                                     <HiOutlineSpeakerphone size={25} />
@@ -300,7 +290,7 @@ const Navbar = () => {
                                 <>
                                     <Link to={Approutes.profile.messages}>
                                         <div
-                                            className='relative flex flex-col items-center  text-white cursor-pointer max-md:hidden'
+                                            className='relative flex flex-col items-center  text-white cursor-pointer '
                                             title='My messages'
                                         >
                                             {' '}
@@ -315,11 +305,11 @@ const Navbar = () => {
                                             </span>
                                         </div>
                                     </Link>
-                                    <div className='dropdown dropdown-hover'>
+                                    <div className='dropdown dropdown-hover max-sm:hidden'>
                                         <Link to={Approutes.profile.initial}>
                                             <div
                                                 tabIndex={0}
-                                                className='flex flex-col max-sm:hidden items-center text-white cursor-pointer'
+                                                className='flex flex-col  items-center text-white cursor-pointer'
                                                 title='My profile'
                                             >
                                                 <CgProfile size={25} />
@@ -458,7 +448,7 @@ const Navbar = () => {
                                     >
                                         <div
                                             ref={navRef}
-                                            className='w-[70%] h-full bg-white p-4 flex flex-col gap-[3rem] '
+                                            className='w-[70%] h-full bg-white px-4 py-6 flex flex-col gap-[3rem] '
                                         >
                                             <button
                                                 className='ml-auto lg:hidden '
@@ -578,47 +568,65 @@ const Navbar = () => {
                         </div>
                     </div>
 
-                    {/* <!-- Mobile search input --> */}
-                    <div className='flex items-center w-full px-1 mt-2 lg:hidden'>
-                        <form className='relative w-full'>
-                            <input
-                                title='Search for items here.'
-                                type='text'
-                                className='w-full py-2 pl-4 pr-[12rem] text-black text-sm bg-white border border-transparent rounded-3xl  focus:border-secondary outline-none focus:ring focus:ring-opacity-10 focus:ring-secondary'
-                                placeholder='Searching for?.....'
-                                defaultValue={searchParams.get('q') || ''}
-                                onChange={(e) => {
-                                    const query = e.target.value;
-                                    const stateId = searchParams.get('state_id') || '';
-                                    handleSearch(query, stateId);
-                                }}
-                            />
-                            <div className='absolute inset-y-0 right-0 flex items-center pr-3'>
-                                <div className='border-l-4 border-l-primary'>
-                                    <select
-                                        type='select'
-                                        className='text-xs w-[10rem] h-6 border-transparent outline-none focus:border-none focus:ring focus:ring-transparent'
-                                        defaultValue={searchParams.get('state_id') || ''}
-                                        onChange={(e) => {
-                                            const query = searchParams.get('q') || '';
-                                            const stateId = e.target.value;
-                                            handleSearch(query, stateId);
-                                        }}
-                                    >
-                                        {statesOptions.map((option) => (
-                                            <option value={option.value} key={option.value}>
-                                                {option.key}
-                                            </option>
-                                        ))}
-                                    </select>
-                                </div>
+                    <>
+                        {/* <!-- Mobile search input --> */}
+                        <div className='flex items-center w-full px-1 mt-2 lg:hidden'>
+                            <form className='relative w-full'>
+                                <input
+                                    title='Search for items here.'
+                                    type='text'
+                                    className='w-full py-2 pl-4 pr-[12rem] text-black text-sm bg-white border border-transparent rounded-3xl  focus:border-secondary outline-none focus:ring focus:ring-opacity-10 focus:ring-secondary'
+                                    placeholder='Searching for?.....'
+                                    defaultValue={searchParams.get('q') || ''}
+                                    onChange={(e) => {
+                                        const query = e.target.value;
+                                        const stateId = searchParams.get('state_id') || '';
+                                        handleSearch(query, stateId);
+                                    }}
+                                />
+                                <div className='absolute inset-y-0 right-0 flex items-center pr-3'>
+                                    <div className='border-l-4 border-l-primary'>
+                                        <select
+                                            type='select'
+                                            className='text-xs w-[10rem] h-6 border-transparent outline-none focus:border-none focus:ring focus:ring-transparent'
+                                            defaultValue={searchParams.get('state_id') || ''}
+                                            onChange={(e) => {
+                                                const query = searchParams.get('q') || '';
+                                                const stateId = e.target.value;
+                                                handleSearch(query, stateId);
+                                            }}
+                                        >
+                                            {statesOptions.map((option) => (
+                                                <option value={option.value} key={option.value}>
+                                                    {option.key}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
 
-                                <button className='bg-primary p-[0.4rem] rounded-xl'>
-                                    <HiSearch size={23} className='text-white' />
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+                                    <button className='bg-primary p-[0.4rem] rounded-xl'>
+                                        <HiSearch size={23} className='text-white' />
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+
+                        {(window.location.pathname !== Approutes.postDecision && !window.location.pathname.startsWith('/post-ad')) &&
+                            <button
+                            tabIndex={0}
+                            className='flex flex-col items-center text-white  border border-1 border-white bg-primary p-3 rounded-2xl cursor-pointer md:hidden  fixed bottom-3 right-3'
+                            type='button'
+                            onClick={() => {
+                                navigate(Approutes.postDecision)
+                            }}
+                            >
+                                <HiOutlineSpeakerphone size={25} />
+                                <span className='text-xs sm:text-sm whitespace-nowrap'>
+                                    Post ad
+                                </span>
+                            </button>
+                        }
+                    </>
 
                     {/* bottom nav  */}
                     <div className='mt-2 border-y-2 border-y-white '>

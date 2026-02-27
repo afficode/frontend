@@ -3,6 +3,7 @@ import { Approutes } from '../../../constants';
 import { BsBellFill, BsBookmarkFill, BsChatLeftTextFill } from 'react-icons/bs';
 import { GrTransaction } from 'react-icons/gr';
 import { HiOutlineSpeakerphone } from 'react-icons/hi';
+import { ScrollToTop } from '../../../utils';
 
 const ProfileLayout = () => {
     return (
@@ -29,6 +30,8 @@ const ProfileLayout = () => {
 
             <div>
                 <Outlet />
+
+                  <ScrollToTop/>
             </div>
         </div>
     );
