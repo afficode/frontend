@@ -271,7 +271,7 @@ function App() {
 
             <ToastContainer
                 limit={1}
-                autoClose={3500}
+                autoClose={10000}
                 newestOnTop={true}
                 closeButton={false}
                 closeOnClick={true}
