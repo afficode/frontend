@@ -5,11 +5,16 @@ import axios from 'axios';
 import { useNotify } from '../../hooks';
 import { BsAlarmFill } from 'react-icons/bs';
 import { Button } from '../../ui';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
+import { Alert } from 'flowbite-react';
 
 const VerifyMail = () => {
     const notify = useNotify();
     const location = useLocation();
-
+    const [otpSent, setOtpSent] = useState(false);
+    const [error, setError] = useState('');
+    const navigate = useNavigate();
     const sendOtp = async () => {
         const searchParams = location.search;
         const token = searchParams.split('?token=')[1];
@@ -27,8 +32,17 @@ const VerifyMail = () => {
                         },
                     }
                 );
+                if (response.status === 204) {
+                    notify('Your account has been verified, You can now login', 'info');
+                    setTimeout(() => {
+                        navigate('/auth');
+                    }, 8000);
+                    return;
+                }
                 if (response.status === 200) {
                     notify(response?.data?.message, 'success');
+                    setOtpSent(true);
+                    setError('');
                     // notify('An OTP has been sent to your registered phone number', 'success');
                 }
             } catch (error) {
@@ -37,6 +51,7 @@ const VerifyMail = () => {
                 } else {
                     notify(error.response?.data.message, 'error');
                 }
+                setError(error.response?.data.message || 'An error occurred while sending an OTP');
             }
         }
     };
@@ -44,8 +59,32 @@ const VerifyMail = () => {
     useEffect(() => {
         sendOtp();
     }, [location.search]);
+    const otpSize = 50;
+    const handleReload = () => {
+        window.location.reload();
+    };
 
-    return (
+    if (error !== '') {
+        return (
+            <Alert
+                color={'failure'}
+                withBorderAccent
+                className='w-full flex items-center justify-center my-4'
+            >
+                <div className='w-full flex flex-col items-center justify-center mx-auto'>
+                    <h1 className='text-center text-xl'>Account Verification - OTP Error</h1>
+                    <p className='w-full text-center my-4'>
+                        Error sending OTP. Please reload the page. <br />
+                        If this persist, please contact admin with the contact us form.
+                    </p>
+                    <button onClick={handleReload} className='btn btn-primary text-white mx-auto'>
+                        Reload
+                    </button>
+                </div>
+            </Alert>
+        );
+    }
+    return otpSent ? (
         <div className='bg-white w-full  '>
             <div className='w-full  flex items-center justify-center  '>
                 <div className='md:w-[50%] w-[90%] my-[5rem] '>
@@ -59,6 +98,21 @@ const VerifyMail = () => {
                     </div>
                 </div>
             </div>
+        </div>
+    ) : (
+        <div className='w-full container flex flex-col items-center justify-center py-8'>
+            <Skeleton width={300} height={40} className='mb-4' />
+            <Skeleton width={250} height={30} className='mb-3' />
+            <Skeleton width={200} height={20} className='mb-4' />
+            <div className='w-full flex justify-center space-x-4'>
+                <Skeleton width={otpSize} height={otpSize} className='inline-block' />
+                <Skeleton width={otpSize} height={otpSize} className='inline-block' />
+                <Skeleton width={otpSize} height={otpSize} className='inline-block' />
+                <Skeleton width={otpSize} height={otpSize} className='inline-block' />
+                <Skeleton width={otpSize} height={otpSize} className='inline-block' />
+                <Skeleton width={otpSize} height={otpSize} className='inline-block' />
+            </div>
+            <Skeleton width={150} height={otpSize} className='inline-block mt-4' />
         </div>
     );
 };
@@ -93,7 +147,7 @@ const ConfirmPhoneNumber = () => {
                 }
             );
             if (response.status === 200) {
-                notify(data?.message, 'success');
+                notify(response.data?.message, 'success');
                 setTimer(300);
                 setIsExpired(false);
             }
@@ -265,8 +319,8 @@ const ConfirmPhoneNumber = () => {
                                     Math.floor(timer / 60) > 2
                                         ? 'text-green-700'
                                         : Math.floor(timer / 60) > 1
-                                          ? 'text-yellow-500'
-                                          : 'text-red-700'
+                                            ? 'text-yellow-500'
+                                            : 'text-red-700'
                                 }`}
                             />
                         </span>

@@ -6,10 +6,12 @@ import { ImageUpload } from '../../../assets/images';
 import useAuth from '../../../context/UserContext';
 import { Approutes } from '../../../constants';
 import { useNavigate } from 'react-router-dom';
+import { useImageCompressor } from '../../../hooks';
 
 const RefundForm = ({ escrowDetails, escrowReason, otherEscrowReason }) => {
     const { user } = useAuth();
     const navigate = useNavigate();
+    const { compressImages } = useImageCompressor();
 
     const initialValues = {
         escrow_reason: escrowReason || '',
@@ -63,8 +65,8 @@ const RefundForm = ({ escrowDetails, escrowReason, otherEscrowReason }) => {
         validationSchema,
     });
 
-    const handleFileChange = (e) => {
-        const file = e.currentTarget.files[0];
+    const handleFileChange = async (e) => {
+        const file = (await compressImages([e.currentTarget.files[0]]))[0];
         formik.setFieldValue('image', null);
         if (file && file.type.startsWith('image/')) {
             if (file.size <= 1024 * 1024) {
