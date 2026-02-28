@@ -27,7 +27,7 @@ const index = () => {
                 ]}
             />
 
-            <ScrollToTop/>
+            <ScrollToTop />
         </div>
     );
 };

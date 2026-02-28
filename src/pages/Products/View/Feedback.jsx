@@ -66,9 +66,7 @@ const Feedbacks = ({ name, feedback_on, positive, text }) => {
     return (
         <div className='flex flex-col w-full items-center justify-start bg-slate-50 p-2 lg:p-4 shadow-xl border border-b-primary border-b-4'>
             <div className='w-full text-slate-600 text-xs text-right my-4'>
-                <span className='tracking-tighter'>
-                    {formatTimeAgo(feedback_on)}
-                </span>
+                <span className='tracking-tighter'>{formatTimeAgo(feedback_on)}</span>
             </div>
             <p className='text-justify w-full'>{text}</p>
             <div className='flex items-center justify-around  py-2 w-full'>

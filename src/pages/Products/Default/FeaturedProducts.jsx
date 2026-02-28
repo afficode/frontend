@@ -3,7 +3,11 @@ import { FaCamera, FaMapMarkerAlt } from 'react-icons/fa';
 import { TbCurrencyNaira } from 'react-icons/tb';
 import { noimage } from '../../../assets/images';
 import { useNavigate } from 'react-router-dom';
-import { numberWithCommas, slugGeneratorForAdIdWithName, formatTimeAgo } from '../../../utils/index.js';
+import {
+    numberWithCommas,
+    slugGeneratorForAdIdWithName,
+    formatTimeAgo,
+} from '../../../utils/index.js';
 import SaveProduct from './SaveProduct';
 import useAuth from '../../../context/UserContext';
 import { NegotiableIcon } from '../../../ui';

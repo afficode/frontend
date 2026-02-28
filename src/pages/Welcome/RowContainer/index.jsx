@@ -81,9 +81,7 @@ const CardDetails = ({ id, title, location, images, created_at, price, feature }
                         <TbCurrencyNaira className='mt-1' />
                         {numberWithCommas(price)}
                     </span>
-                    <span className=''>
-                        {formatTimeAgo(created_at)}
-                    </span>
+                    <span className=''>{formatTimeAgo(created_at)}</span>
                 </p>
             </div>
         </Link>

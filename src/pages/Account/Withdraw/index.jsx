@@ -264,7 +264,11 @@ const Withdraw = () => {
                 </Button>
             </form>
 
-            <Modal isOpen={newBankAccount} setIsOpen={setNewBankAccount}  className={'max-w-fit px-4'}>
+            <Modal
+                isOpen={newBankAccount}
+                setIsOpen={setNewBankAccount}
+                className={'max-w-fit px-4'}
+            >
                 <NewAccount closeModal={() => setNewBankAccount(false)} />
             </Modal>
         </div>

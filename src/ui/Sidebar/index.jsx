@@ -55,8 +55,7 @@ const SidebarUI = ({ items }) => {
                                         </Sidebar.Item>
                                     ))}
                                 </Sidebar.Collapse>
-                            ) : 
-                            null}
+                            ) : null}
                         </div>
                     ))}
                 </Sidebar.ItemGroup>

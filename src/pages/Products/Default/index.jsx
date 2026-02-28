@@ -126,7 +126,7 @@ const Products = () => {
                         )}
                     </div>
 
-                      {isLoading ||
+                    {isLoading ||
                         (product && product?.ads.length > 0 && (
                             <div className='join mx-auto mt-4 bg-primary text-white'>
                                 <button
@@ -146,7 +146,7 @@ const Products = () => {
                                     Prev
                                 </button>
                                 <button
-                                  onClick={() => {
+                                    onClick={() => {
                                         setSearchParams({
                                             page: product?.next,
                                             q:
