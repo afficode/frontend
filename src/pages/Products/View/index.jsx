@@ -254,7 +254,9 @@ const index = () => {
                             <span className=' flex items-center gap-2 lg:gap-8 my-auto mr-4 lg:mr-0'>
                                 <NegotiableIcon negotiable={result?.data?.negotiable} />
 
-                                {isLogin && result?.data?.owner !== user?.id && (
+                                {result?.data?.active !== '2' &&
+                                    isLogin &&
+                                    result?.data?.owner !== user?.id && (
                                     <>
                                         <SaveProduct ads_id={id} />
                                     </>
@@ -279,10 +281,34 @@ const index = () => {
                                     {result?.data?.location.split(',')[1]}
                                 </Link>
                             </p>
-                            <p className='flex items-center justify-end w-full pr-2 font-bold'>
-                                <TbCurrencyNaira className='font-bold text-black' />
-                                {numberWithCommas(result?.data?.price)}
-                            </p>
+                            {/* price and status  */}
+                            <div className='flex flex-col items-center justify-between'>
+                                <p className='flex items-center  w-full font-bold '>
+                                    <TbCurrencyNaira className='font-bold text-black' />
+                                    {numberWithCommas(result.data?.price)}
+                                </p>
+
+                                {result?.data?.active === '1' ? (
+                                    <span
+                                        className={'px-4 py-1 rounded-lg text-white bg-green-700  '}
+                                    >
+                                        Active
+                                    </span>
+                                ) : result?.data?.active === '2' ? (
+                                    <span
+                                        className={'px-4 py-1 rounded-lg text-white bg-gray-700  '}
+                                    >
+                                        Closed
+                                    </span>
+                                ) : null}
+                                {result?.data?.active === '0' && result?.data.paid === 1 ? (
+                                    <span
+                                        className={'px-4 py-1 rounded-lg text-white bg-red-700  '}
+                                    >
+                                        Blocked
+                                    </span>
+                                ) : null}
+                            </div>
                         </div>
                     </div>{' '}
                     {/* ad images */}
@@ -389,14 +415,15 @@ const index = () => {
                             )}
                         </div>
                     )}
-
-                    <ChatForm
-                        ad={result?.data}
-                        ad_id={result?.data?.id}
-                        feature={result?.data?.feature}
-                        owner={result?.data?.owner}
-                        active={result?.data?.active}
-                    />
+                    {result?.data?.active !== '2' && (
+                        <ChatForm
+                            ad={result?.data}
+                            ad_id={result?.data?.id}
+                            feature={result?.data?.feature}
+                            owner={result?.data?.owner}
+                            active={result?.data?.active}
+                        />
+                    )}
                 </aside>
             </section>
 

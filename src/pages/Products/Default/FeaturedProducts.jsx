@@ -80,7 +80,7 @@ const FeaturedProducts = ({ product }) => {
                         </div>
                     </div>
 
-                    <div className='w-full p-2 tracking-tighter tooltip tooltip-secondary line-clamp-1 '>
+                    <div className='w-full p-2 tracking-tighter tooltip tooltip-secondary '>
                         <p className='truncate text-start text-xl font-semibold uppercase  '>
                             {ad.title}
                         </p>
