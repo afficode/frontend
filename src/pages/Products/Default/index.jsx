@@ -45,7 +45,7 @@ const Products = () => {
             const savedIds = savedAds?.saves.map((save) => save.ads_id);
             setSavesId(() => savedIds);
         }
-    }, [isLogin, saveLoading, savedAds, setSaves, setSavesId]);
+    }, [isLogin, saveLoading, savedAds, setSaves]);
 
     useEffect(() => {
         if (result.data) {

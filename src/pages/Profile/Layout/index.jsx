@@ -31,7 +31,7 @@ const ProfileLayout = () => {
             <div>
                 <Outlet />
 
-                  <ScrollToTop/>
+                <ScrollToTop/>
             </div>
         </div>
     );

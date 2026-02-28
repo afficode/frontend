@@ -14,9 +14,9 @@ import {
     convertKeyToName,
     extractAdIdFromSlug,
     slugGeneratorForAdIdWithName,
+    formatTimeAgo,
 } from '../../../utils/index.js';
 import OverviewPills from './OverviewPills';
-import { formatDistance } from 'date-fns';
 import { ScrollToTop } from '../../../utils';
 import { HiInformationCircle } from 'react-icons/hi';
 import ContactAdmin from './ContactAdmin';
@@ -140,36 +140,7 @@ const index = () => {
                                 <span className=''>{result?.data?.title}</span>
                                 <span className='tracking-tighter font-normal lowercase text-sm'>
                                   <span className='!capitalize'>  Posted: {' '}</span>
-                                    {formatDistance(
-                                        new Date(new Date(`${result?.data?.created_at}`)),
-                                        Date.now(),
-                                        {
-                                            includeSeconds: true,
-                                            addSuffix: true,
-                                        }
-                                    ).includes('about') ? (
-                                        <>
-                                            {formatDistance(
-                                                new Date(new Date(`${result?.data?.created_at}`)),
-                                                Date.now(),
-                                                {
-                                                    includeSeconds: true,
-                                                    addSuffix: true,
-                                                }
-                                            )?.substring(5)}
-                                        </>
-                                    ) : (
-                                        <>
-                                            {formatDistance(
-                                                new Date(new Date(`${result?.data?.created_at}`)),
-                                                Date.now(),
-                                                {
-                                                    includeSeconds: true,
-                                                    addSuffix: true,
-                                                }
-                                            )}
-                                        </>
-                                    )}
+                                    {formatTimeAgo(result?.data?.created_at)}
                                 </span>
                            </div>
                             <span className=' flex items-center gap-2 lg:gap-8 my-auto '>
@@ -276,36 +247,7 @@ const index = () => {
                                 <span className=''>{result?.data?.title}</span>
                                 <span className='tracking-tighter font-normal lowercase text-sm'>
                                   <span className='!capitalize'>  Posted: {' '}</span>
-                                    {formatDistance(
-                                        new Date(new Date(`${result?.data?.created_at}`)),
-                                        Date.now(),
-                                        {
-                                            includeSeconds: true,
-                                            addSuffix: true,
-                                        }
-                                    ).includes('about') ? (
-                                        <>
-                                            {formatDistance(
-                                                new Date(new Date(`${result?.data?.created_at}`)),
-                                                Date.now(),
-                                                {
-                                                    includeSeconds: true,
-                                                    addSuffix: true,
-                                                }
-                                            )?.substring(5)}
-                                        </>
-                                    ) : (
-                                        <>
-                                            {formatDistance(
-                                                new Date(new Date(`${result?.data?.created_at}`)),
-                                                Date.now(),
-                                                {
-                                                    includeSeconds: true,
-                                                    addSuffix: true,
-                                                }
-                                            )}
-                                        </>
-                                    )}
+                                    {formatTimeAgo(result?.data?.created_at)}
                                 </span>
                            </div>
 
@@ -365,14 +307,7 @@ const index = () => {
                     </h2>
                     <p className='text-lg'>
                         Since{' '}
-                        {formatDistance(
-                            new Date(new Date(`${result?.data?.joined_on}`)),
-                            Date.now(),
-                            {
-                                includeSeconds: true,
-                                addSuffix: true,
-                            }
-                        )}
+                        {formatTimeAgo(result?.data?.joined_on)}
                     </p>
 
                     <hr className='h-px my-2 bg-gray-700 border-black border-1' />

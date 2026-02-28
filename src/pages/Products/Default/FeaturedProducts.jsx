@@ -3,8 +3,7 @@ import { FaCamera, FaMapMarkerAlt } from 'react-icons/fa';
 import { TbCurrencyNaira } from 'react-icons/tb';
 import { noimage } from '../../../assets/images';
 import { useNavigate } from 'react-router-dom';
-import { numberWithCommas, slugGeneratorForAdIdWithName } from '../../../utils/index.js';
-import { formatDistance } from 'date-fns';
+import { numberWithCommas, slugGeneratorForAdIdWithName, formatTimeAgo } from '../../../utils/index.js';
 import SaveProduct from './SaveProduct';
 import useAuth from '../../../context/UserContext';
 import { NegotiableIcon } from '../../../ui';
@@ -100,36 +99,7 @@ const FeaturedProducts = ({ product }) => {
                             </span>{' '}
                             &nbsp;
                             <span className='tracking-tighter'>
-                                {formatDistance(
-                                    new Date(new Date(`${ad?.created_at}`)),
-                                    Date.now(),
-                                    {
-                                        includeSeconds: true,
-                                        addSuffix: true,
-                                    }
-                                ).includes('about') ? (
-                                    <>
-                                        {formatDistance(
-                                            new Date(new Date(`${ad?.created_at}`)),
-                                            Date.now(),
-                                            {
-                                                includeSeconds: true,
-                                                addSuffix: true,
-                                            }
-                                        ).substring(5)}
-                                    </>
-                                ) : (
-                                    <>
-                                        {formatDistance(
-                                            new Date(new Date(`${ad?.created_at}`)),
-                                            Date.now(),
-                                            {
-                                                includeSeconds: true,
-                                                addSuffix: true,
-                                            }
-                                        )}
-                                    </>
-                                )}
+                                {formatTimeAgo(ad?.created_at)}
                             </span>
                         </p>
                     </div>
