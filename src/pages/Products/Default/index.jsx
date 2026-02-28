@@ -30,34 +30,22 @@ const Products = () => {
     const { isLogin } = useAuth();
     const { setSaves, setSavesId } = useSaveContext([]);
 
-    const [product, setProduct] = useState({ ads: [] });
-    const [featured, setFeatured] = useState([]);
-    const { isLoading, data } = useProduct({
+    const { isLoading, data: product } = useProduct({
         page: searchParams.get('page'),
         q: searchParams.get('q') || null,
         state_id: searchParams.get('state_id') || null,
     });
-    // const [saved, setSaved] = useState([]);
     const { data: savedAds, isLoading: saveLoading } = getSaves();
 
-    useEffect(() => {
-        // when product change, we update the featured product immediately
-        if (data) {
-            setProduct(() => ({ ...data }));
-            if (data.ads.length > 0) {
-                // TODO: Revisit this after discussing with Mr Lawal the criteria for the Featured.
-                setFeatured(() => [...data?.ads?.slice(0, 8)]);
-            } else {
-                setFeatured(() => []);
-            }
-        }
+    const featured = product?.ads?.slice(0, 8) || [];
 
+    useEffect(() => {
         if (isLogin && savedAds?.saves?.length >= 0) {
             setSaves(() => savedAds?.saves);
             const savedIds = savedAds?.saves.map((save) => save.ads_id);
             setSavesId(() => savedIds);
         }
-    }, [isLoading, data, saveLoading, savedAds]);
+    }, [isLogin, saveLoading, savedAds, setSaves]);
 
     useEffect(() => {
         if (result.data) {
@@ -120,7 +108,7 @@ const Products = () => {
                                         <ProductSkeleton key={index} />
                                     ))}
                             </>
-                        ) : product && product?.ads.length === 0 ? (
+                        ) : !isLoading && (!product || product?.ads?.length === 0) ? (
                             <NotFound
                                 title={'Not Found'}
                                 description={'No product matches your search in our DB.'}
@@ -138,7 +126,6 @@ const Products = () => {
                         )}
                     </div>
 
-                    {/* <div className="join mx-auto mt-4 bg-primary text-white"> */}
                     {isLoading ||
                         (product && product?.ads.length > 0 && (
                             <div className='join mx-auto mt-4 bg-primary text-white'>
@@ -151,16 +138,14 @@ const Products = () => {
                                                     ? ''
                                                     : searchParams.get('q'),
                                         });
-                                        window.location.reload();
+                                        window.scrollTo({ top: 0, behavior: 'smooth' });
                                     }}
-                                    // to={`${Approutes.product.initial}?page=${product?.prev}`}
                                     className='join-item btn bg-primary text-white border-gray-300 hover:bg-secondary hover:text-black hover:border-gray-300'
                                     disabled={product?.prev === null}
                                 >
                                     Prev
                                 </button>
                                 <button
-                                    // to={`${Approutes.product.initial}?page=${product?.next}`}
                                     onClick={() => {
                                         setSearchParams({
                                             page: product?.next,
@@ -169,7 +154,7 @@ const Products = () => {
                                                     ? ''
                                                     : searchParams.get('q'),
                                         });
-                                        window.location.reload();
+                                        window.scrollTo({ top: 0, behavior: 'smooth' });
                                     }}
                                     className='join-item btn bg-primary text-white border-gray-300 hover:bg-secondary hover:text-black hover:border-gray-300'
                                     disabled={product?.next === null}
@@ -178,7 +163,6 @@ const Products = () => {
                                 </button>
                             </div>
                         ))}
-                    {/* </div> */}
                 </main>
             </section>
 

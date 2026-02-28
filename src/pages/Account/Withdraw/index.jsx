@@ -141,7 +141,7 @@ const Withdraw = () => {
                         </button>
                         <ul
                             tabIndex={0}
-                            className='dropdown-content  z-[1] menu  shadow bg-white   w-96 flex flex-col justify-between'
+                            className='dropdown-content  z-[1] menu  shadow bg-white  w-full sm:w-96 flex flex-col justify-between'
                         >
                             <div>
                                 <div className='bg-secondary text-center p-2'>
@@ -264,7 +264,11 @@ const Withdraw = () => {
                 </Button>
             </form>
 
-            <Modal isOpen={newBankAccount} setIsOpen={setNewBankAccount}>
+            <Modal
+                isOpen={newBankAccount}
+                setIsOpen={setNewBankAccount}
+                className={'max-w-fit px-4'}
+            >
                 <NewAccount closeModal={() => setNewBankAccount(false)} />
             </Modal>
         </div>

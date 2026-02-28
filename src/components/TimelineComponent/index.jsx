@@ -1,4 +1,4 @@
-import { formatDistanceToNow } from 'date-fns';
+import { formatTimeAgo } from '../../utils';
 import { Timeline } from 'flowbite-react';
 import { FaRobot, FaUserCircle, FaUserTie } from 'react-icons/fa';
 import useAuth from '../../context/UserContext';
@@ -15,7 +15,7 @@ const TimelineComponent = ({ data }) => {
                             <Timeline.Content>
                                 {el?.date && (
                                     <Timeline.Time className='flex items-start justify-between'>
-                                        <span>{formatDistanceToNow(new Date(el?.date))}</span>{' '}
+                                        <span>{formatTimeAgo(el?.date)}</span>{' '}
                                         <span className='mr-4 text-lg bg-white rounded-full p-2'>
                                             {el?.user === null ? (
                                                 <FaRobot className='text-black' />
