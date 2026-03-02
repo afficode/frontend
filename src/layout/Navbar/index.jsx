@@ -664,19 +664,19 @@ const Navbar = () => {
                             {/* bottom nav lists */}
                             <ul className='flex items-center justify-between w-full'>
                                 <li className='dropdown dropdown-hover'>
-                                    <a
-                                        href={`${Approutes.product.category}/${getCategoryName(50)}`}
+                                    <Link
+                                        to={`${Approutes.product.category}/${getCategoryName(50)}`}
                                         tabIndex={0}
                                         className={listStyles}
                                     >
                                         CARS & VEHICLES
-                                    </a>
-                                    <a
-                                        href={`${Approutes.product.category}/${getCategoryName(50)}`}
+                                    </Link>
+                                    <Link
+                                        to={`${Approutes.product.category}/${getCategoryName(50)}`}
                                         className={mobileListStyles}
                                     >
                                         <FaCarSide size={25} />
-                                    </a>
+                                    </Link>
                                     {filteredCategories?.vehicleCat && (
                                         <CategoryDropdown
                                             category={'CARS & VEHICLES'}
@@ -688,19 +688,19 @@ const Navbar = () => {
                                 <span className='border border-r-4 border-white h-[2rem]' />
 
                                 <li className='dropdown dropdown-hover'>
-                                    <a
-                                        href={`${Approutes.product.category}/${getCategoryName(51)}`}
+                                    <Link
+                                        to={`${Approutes.product.category}/${getCategoryName(51)}`}
                                         tabIndex={0}
                                         className={listStyles}
                                     >
                                         PROPERTY
-                                    </a>
-                                    <a
-                                        href={`${Approutes.product.category}/${getCategoryName(51)}`}
+                                    </Link>
+                                    <Link
+                                        to={`${Approutes.product.category}/${getCategoryName(51)}`}
                                         className={mobileListStyles}
                                     >
                                         <FaBuilding size={25} />
-                                    </a>
+                                    </Link>
                                     {filteredCategories?.propertyCat && (
                                         <CategoryDropdown
                                             category={'PROPERTY'}
@@ -712,19 +712,19 @@ const Navbar = () => {
                                 <span className='border border-r-4 border-white h-[2rem]' />
 
                                 <li className='dropdown dropdown-hover '>
-                                    <a
-                                        href={`${Approutes.product.category}/${getCategoryName(52)}`}
+                                    <Link
+                                        to={`${Approutes.product.category}/${getCategoryName(52)}`}
                                         tabIndex={0}
                                         className={listStyles}
                                     >
                                         SERVICES
-                                    </a>
-                                    <a
-                                        href={`${Approutes.product.category}/${getCategoryName(52)}`}
+                                    </Link>
+                                    <Link
+                                        to={`${Approutes.product.category}/${getCategoryName(52)}`}
                                         className={mobileListStyles}
                                     >
                                         <MdMiscellaneousServices size={25} />
-                                    </a>
+                                    </Link>
                                     {filteredCategories?.servicesCat && (
                                         <CategoryDropdown
                                             category={'SERVICES'}
@@ -736,19 +736,19 @@ const Navbar = () => {
                                 <span className='border border-r-4 border-white h-[2rem]' />
 
                                 <li className='dropdown dropdown-hover '>
-                                    <a
-                                        href={`${Approutes.product.category}/${getCategoryName(53)}`}
+                                    <Link
+                                        to={`${Approutes.product.category}/${getCategoryName(53)}`}
                                         tabIndex={0}
                                         className={listStyles}
                                     >
                                         AGRICULTURE
-                                    </a>
-                                    <a
-                                        href={`${Approutes.product.category}/${getCategoryName(53)}`}
+                                    </Link>
+                                    <Link
+                                        to={`${Approutes.product.category}/${getCategoryName(53)}`}
                                         className={mobileListStyles}
                                     >
                                         <FaRegHandshake size={25} />
-                                    </a>
+                                    </Link>
                                     {filteredCategories?.agricCat && (
                                         <CategoryDropdown
                                             category={'AGRICULTURE'}
@@ -760,19 +760,19 @@ const Navbar = () => {
                                 <span className='border border-r-4 border-white h-[2rem]' />
 
                                 <li className='dropdown dropdown-hover mr-4'>
-                                    <a
-                                        href={`${Approutes.product.category}/${getCategoryName(54)}`}
+                                    <Link
+                                        to={`${Approutes.product.category}/${getCategoryName(54)}`}
                                         tabIndex={0}
                                         className={listStyles}
                                     >
                                         ELECTRONICS
-                                    </a>
-                                    <a
-                                        href={`${Approutes.product.category}/${getCategoryName(54)}`}
+                                    </Link>
+                                    <Link
+                                        to={`${Approutes.product.category}/${getCategoryName(54)}`}
                                         className={mobileListStyles}
                                     >
                                         <VscGitPullRequestGoToChanges size={25} />
-                                    </a>
+                                    </Link>
                                     {filteredCategories?.electCat && (
                                         <CategoryDropdown
                                             category={'ELECTRONICS'}

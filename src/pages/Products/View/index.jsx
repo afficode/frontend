@@ -139,7 +139,7 @@ const index = () => {
                             <div className='flex flex-col '>
                                 <span className=''>{result?.data?.title}</span>
                                 <span className='tracking-tighter font-normal lowercase text-sm'>
-                                    <span className='!capitalize'> Posted: </span>
+                                    <span className='!capitalize'> Posted </span>
                                     {formatTimeAgo(result?.data?.created_at)}
                                 </span>
                             </div>
@@ -245,10 +245,34 @@ const index = () => {
                         <div className='flex items-center justify-between w-full mb-2 font-bold uppercase text-md md:text-2xl xl:text-3xl'>
                             <div className='flex flex-col '>
                                 <span className=''>{result?.data?.title}</span>
-                                <span className='tracking-tighter font-normal lowercase text-sm'>
-                                    <span className='!capitalize'> Posted: </span>
-                                    {formatTimeAgo(result?.data?.created_at)}
-                                </span>
+
+                                <div className='flex items-center gap-2'>
+                                    {result?.data?.active === '1' ? (
+                                        <span
+                                            className={'px-4 py-1 text-xs rounded-lg text-white bg-green-700  '}
+                                        >
+                                            Active
+                                        </span>
+                                    ) : result?.data?.active === '2' ? (
+                                        <span
+                                            className={'px-4 py-1 text-xs rounded-lg text-white bg-gray-700  '}
+                                        >
+                                            Closed
+                                        </span>
+                                    ) : null}
+                                    {result?.data?.active === '0' && result?.data.paid === 1 ? (
+                                        <span
+                                            className={'px-4 py-1 text-xs rounded-lg text-white bg-red-700  '}
+                                        >
+                                            Blocked
+                                        </span>
+                                    ) : null}
+
+                                    <span className='tracking-tighter font-normal lowercase text-sm'>
+                                        <span className='!capitalize'> Posted </span>
+                                        {formatTimeAgo(result?.data?.created_at)}
+                                    </span>
+                                </div>
                             </div>
 
                             <span className=' flex items-center gap-2 lg:gap-8 my-auto mr-4 lg:mr-0'>
@@ -264,7 +288,7 @@ const index = () => {
                             </span>
                         </div>
 
-                        {/* ad location */}
+                        {/* ad location and price*/}
                         <div className='flex items-center justify-between'>
                             <p className='w-full'>
                                 <Link
@@ -281,34 +305,10 @@ const index = () => {
                                     {result?.data?.location.split(',')[1]}
                                 </Link>
                             </p>
-                            {/* price and status  */}
-                            <div className='flex flex-col items-center justify-between'>
-                                <p className='flex items-center  w-full font-bold '>
-                                    <TbCurrencyNaira className='font-bold text-black' />
-                                    {numberWithCommas(result.data?.price)}
-                                </p>
-
-                                {result?.data?.active === '1' ? (
-                                    <span
-                                        className={'px-4 py-1 rounded-lg text-white bg-green-700  '}
-                                    >
-                                        Active
-                                    </span>
-                                ) : result?.data?.active === '2' ? (
-                                    <span
-                                        className={'px-4 py-1 rounded-lg text-white bg-gray-700  '}
-                                    >
-                                        Closed
-                                    </span>
-                                ) : null}
-                                {result?.data?.active === '0' && result?.data.paid === 1 ? (
-                                    <span
-                                        className={'px-4 py-1 rounded-lg text-white bg-red-700  '}
-                                    >
-                                        Blocked
-                                    </span>
-                                ) : null}
-                            </div>
+                            <p className='flex items-center justify-end w-full pr-2 font-bold'>
+                                <TbCurrencyNaira className='font-bold text-black' />
+                                {numberWithCommas(result.data?.price)}
+                            </p>
                         </div>
                     </div>{' '}
                     {/* ad images */}
