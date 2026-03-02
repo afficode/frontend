@@ -138,7 +138,9 @@ const Products = () => {
                                                     ? ''
                                                     : searchParams.get('q'),
                                         });
-                                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                                        setTimeout(() => {
+                                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                                        }, 500);
                                     }}
                                     className='join-item btn bg-primary text-white border-gray-300 hover:bg-secondary hover:text-black hover:border-gray-300'
                                     disabled={product?.prev === null}
@@ -154,7 +156,9 @@ const Products = () => {
                                                     ? ''
                                                     : searchParams.get('q'),
                                         });
-                                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                                        setTimeout(() => {
+                                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                                        }, 500);
                                     }}
                                     className='join-item btn bg-primary text-white border-gray-300 hover:bg-secondary hover:text-black hover:border-gray-300'
                                     disabled={product?.next === null}

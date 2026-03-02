@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Approutes } from '../../constants';
 import { getCategoryName } from '../../utils';
 
@@ -20,14 +21,14 @@ const CategoryDropdown = ({ category, subCategories }) => {
             </h5>
             <ul className='grid grid-cols-1 md:grid-cols-2 gap-[0.1rem] menu max-h-full w-full md:w-[35rem]  py-4 '>
                 {subCategories.map((subCategory) => (
-                    <a
-                        href={`${Approutes.product.category}/${getCategoryName(subCategory.id)}`}
+                    <Link
+                        to={`${Approutes.product.category}/${getCategoryName(subCategory.id)}`}
                         key={subCategory.id}
                     >
                         <li className='text-lg capitalize whitespace-normal max-sm:text-base lg:pr-12 hover:underline'>
                             {subCategory.name}
                         </li>
-                    </a>
+                    </Link>
                 ))}
             </ul>
         </div>

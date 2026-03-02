@@ -161,7 +161,7 @@ const index = () => {
                                 {numberWithCommas(result.data?.price)}
                             </p>
 
-                            {result?.data?.active === '1' ? (
+                            {result?.data?.active === '1' && result?.data.available === 1 ? (
                                 <span className={'px-4 py-1 rounded-lg text-white bg-green-700  '}>
                                     Active
                                 </span>
@@ -175,6 +175,12 @@ const index = () => {
                                     Blocked
                                 </span>
                             ) : null}
+
+                            {result?.data?.active === '1' && result?.data.available === 0 && (
+                                <span className={'px-4 py-1 rounded-lg text-white bg-primary whitespace-nowrap '}>
+                                    In Review
+                                </span>
+                            )}
                         </div>
                     </div>{' '}
                     <div className='w-full mx-auto mt-1'>
