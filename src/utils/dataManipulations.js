@@ -350,3 +350,12 @@ export const joinObjectArrayAndSortByCreatedAt = (array) =>
     array
         .filter((item) => item.created_at)
         .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
+export const numberAbbreviationFormatter = (num) => {
+    const formatter = new Intl.NumberFormat('en-US', {
+        notation: 'compact',
+        compactDisplay: 'short',
+        maximumFractionDigits: 2,
+    });
+    return formatter.format(num);
+};
