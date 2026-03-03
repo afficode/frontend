@@ -48,13 +48,13 @@ const ItemContainer = ({ name, location, specifications, price, images, ads_id }
                         <img
                             src={images[0].path}
                             alt={name}
-                            className=' h-full w-full p-1 m-auto object-fit'
+                            className=' h-full w-full p-1 m-auto object-cover'
                         />
                     ) : (
                         <img
                             src={noimage}
                             alt='no images'
-                            className=' h-full w-full p-1 m-auto object-fit'
+                            className=' h-full w-full p-1 m-auto object-cover'
                         />
                     )}
 

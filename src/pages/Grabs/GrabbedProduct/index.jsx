@@ -139,7 +139,7 @@ const GrabbedProduct = () => {
                                 </p>
                             </div>
                         </div>{' '}
-                        <div className='relative w-full h-[600px] mx-auto mt-1  rounded-none '>
+                        <div className='relative w-full min-h-[600px] mx-auto mt-1  rounded-none '>
                             <Carousel
                                 className='w-full h-full mx-auto'
                                 items={result?.data?.images}

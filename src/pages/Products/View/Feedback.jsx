@@ -1,4 +1,4 @@
-import { formatDistance } from 'date-fns';
+import { formatTimeAgo } from '../../../utils';
 import useAuth from '../../../context/UserContext';
 
 import FeedbackForm from './FeedbackForm';
@@ -66,26 +66,7 @@ const Feedbacks = ({ name, feedback_on, positive, text }) => {
     return (
         <div className='flex flex-col w-full items-center justify-start bg-slate-50 p-2 lg:p-4 shadow-xl border border-b-primary border-b-4'>
             <div className='w-full text-slate-600 text-xs text-right my-4'>
-                <span className='tracking-tighter'>
-                    {formatDistance(new Date(new Date(`${feedback_on}`)), Date.now(), {
-                        includeSeconds: true,
-                        addSuffix: true,
-                    }).includes('about') ? (
-                        <>
-                            {formatDistance(new Date(new Date(`${feedback_on}`)), Date.now(), {
-                                includeSeconds: true,
-                                addSuffix: true,
-                            }).substring(5)}
-                        </>
-                    ) : (
-                        <>
-                            {formatDistance(new Date(new Date(`${feedback_on}`)), Date.now(), {
-                                includeSeconds: true,
-                                addSuffix: true,
-                            })}
-                        </>
-                    )}
-                </span>
+                <span className='tracking-tighter'>{formatTimeAgo(feedback_on)}</span>
             </div>
             <p className='text-justify w-full'>{text}</p>
             <div className='flex items-center justify-around  py-2 w-full'>

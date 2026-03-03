@@ -14,13 +14,13 @@ const Drawer = ({ items, icon }) => {
                     </label>
                 )}
             </div>
-            <div className='drawer-side z-[2000] min-h-screen'>
+            <div className='drawer-side z-[2000] !fixed !inset-0 !h-[100dvh]'>
                 <label
                     htmlFor='my-drawer'
                     aria-label='close sidebar'
-                    className='drawer-overlay min-h-full'
+                    className='drawer-overlay !fixed !inset-0 !h-[100dvh]'
                 ></label>
-                <ul className='menu p-4 w-80 min-h-full bg-white '>
+                <ul className='menu p-4 w-80 !h-[100dvh] overflow-y-auto bg-white '>
                     {/* Sidebar content here */}
                     {items}
                 </ul>

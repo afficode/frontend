@@ -8,10 +8,8 @@ const Carousel = ({ items, className }) => {
         thumbnail: String(item.path || ''),
     }));
 
-    // console.log(typeof images);
-
     return (
-        <div className={`w-full ${className}`}>
+        <div className={`${className}`}>
             {images.length === 0 ? (
                 <img src={noimage} alt='No Image for this Ad' className='w-full mx-auto' />
             ) : (

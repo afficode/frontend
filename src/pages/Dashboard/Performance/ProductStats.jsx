@@ -1,7 +1,7 @@
 const ProductStats = ({ adsData }) => {
     return (
         <div className='w-full'>
-            <div className='flex gap-1 mx-auto rounded-lg'>
+            {/* <div className='flex gap-1 mx-auto rounded-lg'>
                 <Pallet
                     color='primary'
                     title='Total Shop Visitor'
@@ -15,7 +15,7 @@ const ProductStats = ({ adsData }) => {
                     stat={adsData?.sold_ads || 0}
                     className='rounded-r-2xl '
                 />
-            </div>
+            </div> */}
 
             <div className='flex gap-4 mt-4'>
                 <div className='self-end flex-1 text-center bg-gray-200'>

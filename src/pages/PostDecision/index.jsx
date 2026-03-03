@@ -2,6 +2,7 @@ import { categoryData } from '../../constants/Category';
 import CategoryCard from './CategoryCard';
 import { SEO } from '../../components';
 import { Approutes, frontendBaseUrl } from '../../constants';
+import { ScrollToTop } from '../../utils';
 
 const index = () => {
     return (
@@ -25,6 +26,8 @@ const index = () => {
                     ...categoryData.map((category) => category.name),
                 ]}
             />
+
+            <ScrollToTop />
         </div>
     );
 };

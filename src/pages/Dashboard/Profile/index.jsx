@@ -10,6 +10,7 @@ import { useStates } from '../../../hooks/index.js';
 import { userUpdate } from '../../../hooks/index.js';
 import { useNotify } from '../../../hooks/index.js';
 import VerifyPhoneNumber from './VerifyPhoneNumber.jsx';
+import { useImageCompressor } from '../../../hooks/index.js';
 
 const Profile = () => {
     const [toggleEdit, setToggleEdit] = useState({
@@ -30,6 +31,7 @@ const Profile = () => {
     const { user, updateUserInfo } = useAuth();
     const { mutate, isLoading: isUpdating } = userUpdate('dashboard/update_user');
     const notify = useNotify();
+    const { compressImages } = useImageCompressor();
 
     const index = user?.phone.findIndex((num) => num.isDefault === '1');
     const phoneDetails = user?.phone[index];
@@ -109,8 +111,8 @@ const Profile = () => {
         validationSchema,
     });
 
-    const handleFileChange = (e) => {
-        const file = e.currentTarget.files[0];
+    const handleFileChange = async (e) => {
+        const file = (await compressImages([e.currentTarget.files[0]]))[0];
         formik.setFieldValue('cover_image', null);
         if (file && file.type.startsWith('image/')) {
             if (file.size <= 1024 * 1024) {

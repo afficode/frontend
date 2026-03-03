@@ -2,6 +2,7 @@ import imageCompression from 'browser-image-compression';
 
 const useImageCompressor = () => {
     const compressImages = async (files) => {
+    
         const compressedFiles = await Promise.all(
             files.map(async (file) => {
                 if (!(file instanceof File)) {

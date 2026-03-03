@@ -9,9 +9,9 @@ import {
     getCategoryName,
     numberWithCommas,
     slugGeneratorForAdIdWithName,
+    formatTimeAgo,
 } from '../../../utils/index.js';
 import { FaMapMarkerAlt } from 'react-icons/fa';
-import { formatDistance } from 'date-fns';
 import Feature from '../../Products/Default/Feature';
 import { Button } from '../../../ui/index.js';
 
@@ -81,12 +81,7 @@ const CardDetails = ({ id, title, location, images, created_at, price, feature }
                         <TbCurrencyNaira className='mt-1' />
                         {numberWithCommas(price)}
                     </span>
-                    <span className=''>
-                        {formatDistance(new Date(new Date(`${created_at}`)), Date.now(), {
-                            includeSeconds: true,
-                            addSuffix: true,
-                        })}
-                    </span>
+                    <span className=''>{formatTimeAgo(created_at)}</span>
                 </p>
             </div>
         </Link>

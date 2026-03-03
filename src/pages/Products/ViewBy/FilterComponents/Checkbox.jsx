@@ -1,6 +1,6 @@
 import { Field } from 'formik';
 
-const Checkbox = ({ type, content: { name, value, label }, ...rest }) => {
+const Checkbox = ({ type, content: { name, value, label }, setfieldvalue, ...rest }) => {
     return (
         <label>
             <Field type={type} name={name} value={value} {...rest} />

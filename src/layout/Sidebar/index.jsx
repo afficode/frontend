@@ -8,12 +8,14 @@ import useAuth from '../../context/UserContext';
 import { useNotify, userUpdate } from '../../hooks';
 import { useState } from 'react';
 import { getInitials } from '../../utils';
+import { useImageCompressor } from '../../hooks/index';
 
 const Sidebar = () => {
     const { mutate, isLoading } = userUpdate('dashboard/update_user');
     const [uploadingImage, setUploadingImage] = useState(false);
     const notify = useNotify();
     const { user, updateUserInfo } = useAuth();
+    const { compressImages } = useImageCompressor();
 
     const initialValues = {
         profile_image: null,
@@ -44,9 +46,8 @@ const Sidebar = () => {
     });
 
     const handleFileChange = async (event) => {
-        const file = event.currentTarget.files[0];
-
         try {
+            const file = (await compressImages([event.currentTarget.files[0]]))[0];
             const formData = new FormData();
             setUploadingImage(true);
 

@@ -239,7 +239,10 @@ const AccountHistory = () => {
                 <div className='flex items-center justify-center mt-6'>
                     <div className='join'>
                         <button
-                            onClick={() => updateParams('p', data?.prev)}
+                            onClick={() => {
+                                updateParams('p', data?.prev);
+                                window.scrollTo({ top: 0, behavior: 'smooth' });
+                            }}
                             disabled={data?.prev === null}
                             className='join-item btn bg-primary disabled:bg-gray-300 border-none'
                         >
@@ -249,7 +252,10 @@ const AccountHistory = () => {
                             Page {data?.page} of {data?.total_page}
                         </div>
                         <button
-                            onClick={() => updateParams('p', data?.next)}
+                            onClick={() => {
+                                updateParams('p', data?.next);
+                                window.scrollTo({ top: 0, behavior: 'smooth' });
+                            }}
                             disabled={data?.next === null}
                             className='disabled:bg-gray-300 bg-primary join-item btn border-none'
                         >

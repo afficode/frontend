@@ -11,3 +11,4 @@ export { default as getSearchParamsObject } from './getSearchParamsObject';
 export { default as ScrollToTop } from './scrollToTop';
 export { default as formatAdId } from './formatAdId';
 export { default as getRemarkMessage } from './getRemarkMessage';
+export { default as formatTimeAgo } from './formatTimeAgo';

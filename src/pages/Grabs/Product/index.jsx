@@ -22,6 +22,7 @@ import useAuth from '../../../context/UserContext';
 import useGrabContext from '../../../context/GrabContext';
 import { useQueryClient } from 'react-query';
 import InspectionUpdate from './InspectionUpdate';
+import { inspectableCategories } from '../../../constants/Category';
 
 const GrabProduct = () => {
     const notify = useNotify();
@@ -148,7 +149,7 @@ const GrabProduct = () => {
                                 </p>
                             </div>
                         </div>{' '}
-                        <div className='relative w-full h-[600px] mx-auto mt-1  rounded-none '>
+                        <div className='relative w-full min-h-[600px] mx-auto mt-1  rounded-none '>
                             <Carousel
                                 className='w-full h-full mx-auto'
                                 items={result?.data?.images}
@@ -224,21 +225,23 @@ const GrabProduct = () => {
                                         Generate Post Now
                                     </Button>
                                 </Link>
-                                <Button
-                                    onClick={() => setInspectionModal(true)}
-                                    variant={'primary'}
-                                    size={'full'}
-                                    className={' rounded-xl'}
-                                >
-                                    Inspection log
-                                </Button>
+                                {inspectableCategories.includes(result?.data?.category) && (
+                                    <Button
+                                        onClick={() => setInspectionModal(true)}
+                                        variant={'primary'}
+                                        size={'full'}
+                                        className={' rounded-xl'}
+                                    >
+                                        Inspection log
+                                    </Button>
+                                )}
                             </div>
                         </div>
                     </aside>
                 </div>
 
                 {/* description and overview */}
-                <div className='flex flex-col p-2 my-2 bg-gray-200 xl:p-6 xl:my-4'>
+                <div className='w-full flex flex-col p-2 my-2 bg-gray-200 xl:p-6 xl:my-4'>
                     <div className='flex flex-col items-start justify-start w-full gap-2 tracking-tighter lg:tracking-normal line-clamp-1'>
                         <h2 className='text-xl xl:2xl'>Description</h2>
 
@@ -279,13 +282,15 @@ const GrabProduct = () => {
                     </Link>
                 </div>
 
-                <InspectionUpdate
-                    adId={result?.data?.id}
-                    inspectionModal={inspectionModal}
-                    setInspectionModal={setInspectionModal}
-                    hasRequestedPayment={result?.data?.payment_request}
-                    location={result?.data?.location}
-                />
+                {inspectableCategories.includes(result?.data?.category) && (
+                    <InspectionUpdate
+                        adId={result?.data?.id}
+                        inspectionModal={inspectionModal}
+                        setInspectionModal={setInspectionModal}
+                        hasRequestedPayment={result?.data?.payment_request}
+                        location={result?.data?.location}
+                    />
+                )}
                 <ScrollToTop />
             </section>
         );
