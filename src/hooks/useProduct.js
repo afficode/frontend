@@ -28,7 +28,12 @@ export const useProduct = (params) => {
     });
 };
 
-export const fetchProduct = (ad_id, isLogin = false) => {
+export const fetchProduct = (ad_id, option = {}) => {
+    const { isLogin = false, query } = option;
+    if (query) {
+        const queryString = new URLSearchParams(query).toString();
+        ad_id = `${ad_id}?${queryString}`;
+    }
     const fetchSingleProduct = isLogin
         ? () => privateAxios.get(`${backendLink}ads/${ad_id}`)
         : () => axios.get(`${backendLink}ads/${ad_id}`);
