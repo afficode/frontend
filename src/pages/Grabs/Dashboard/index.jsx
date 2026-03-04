@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { GrabIcon, InspectionTick, New } from '../../../assets/svgs';
 import { GrabMobileSidebar } from '../../../layout';
-import { ScrollToTop, toMoney } from '../../../utils';
+import { numberAbbreviationFormatter, ScrollToTop, toMoney } from '../../../utils';
 import GrabHeader from '../GrabHeader';
 import { format } from 'date-fns';
 import { useGrabDashboard } from '../../../hooks';
@@ -43,8 +43,11 @@ const GrabDashboard = () => {
                             <tr className='text-black bg-gray-200'>
                                 <th>Product(s)</th>
                                 <th className='text-center'>Grabbed date</th>
+                                <th className='text-center'>Link Views</th>
                                 <th className='text-center'>Status</th>
-                                <th className='text-center'>Commission in (₦)</th>
+                                <th className='text-center'>
+                                    Earned <br /> Commission in (₦)
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -68,13 +71,19 @@ const GrabDashboard = () => {
                                         <td className='text-center text-primary'>
                                             {format(new Date(det?.grabbed_date), 'MMM dd, yyyy')}
                                         </td>
+                                        <td className='text-center '>
+                                            {numberAbbreviationFormatter(
+                                                parseInt(det?.views?.users || 0) +
+                                                    parseInt(det?.views?.anonymous || 0) || 0
+                                            )}
+                                        </td>
                                         <td
                                             className={`text-center ${det?.sold === 0 ? 'text-green-500' : 'text-red-500'}`}
                                         >
                                             {det?.sold === 0 ? 'Active' : 'Sold'}
                                         </td>
                                         <td className='text-center '>
-                                            ₦{toMoney(det?.commission)}
+                                            {det?.sold !== 0 ? `₦${toMoney(det?.commission)}` : '-'}
                                         </td>
                                     </tr>
                                 ))
