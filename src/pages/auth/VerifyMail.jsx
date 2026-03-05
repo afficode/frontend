@@ -319,8 +319,8 @@ const ConfirmPhoneNumber = () => {
                                     Math.floor(timer / 60) > 2
                                         ? 'text-green-700'
                                         : Math.floor(timer / 60) > 1
-                                            ? 'text-yellow-500'
-                                            : 'text-red-700'
+                                          ? 'text-yellow-500'
+                                          : 'text-red-700'
                                 }`}
                             />
                         </span>

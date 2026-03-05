@@ -2,7 +2,7 @@ import { Button, InputGroup } from '../../ui';
 import { inspectableCategories } from '../../constants/Category';
 import Inspections from './Inspections';
 import { useState } from 'react';
-import { fromMoney, toMoney } from '../../utils';
+import { formatMoneyInput, fromMoney, toMoney } from '../../utils';
 import { useNotify, useUpdateAd } from '../../hooks';
 import { useQueryClient } from 'react-query';
 
@@ -11,22 +11,7 @@ const GrabUpdateTable = ({ ad }) => {
     const [disabled, setDisabled] = useState(true);
 
     const handleMoneyChange = (event) => {
-        const inputValue = event.target.value;
-
-        const raw = String(inputValue).replace(/[^0-9.]/g, '');
-
-        if (!raw) {
-            setAmount('');
-            return;
-        }
-
-        const [intPart, decimalPart] = raw.split('.');
-        let formatted = new Intl.NumberFormat('en-US').format(Number(intPart || '0'));
-
-        if (decimalPart !== undefined) {
-            formatted += '.' + decimalPart;
-        }
-
+        const formatted = formatMoneyInput(event.target.value);
         setAmount(formatted);
     };
 

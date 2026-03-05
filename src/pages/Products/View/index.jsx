@@ -267,10 +267,10 @@ const index = () => {
                                 {result?.data?.active !== '2' &&
                                     isLogin &&
                                     result?.data?.owner !== user?.id && (
-                                    <>
-                                        <SaveProduct ads_id={id} />
-                                    </>
-                                )}
+                                        <>
+                                            <SaveProduct ads_id={id} />
+                                        </>
+                                    )}
                             </span>
                         </div>
 
