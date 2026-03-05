@@ -17,16 +17,19 @@ import useAuth from '../../../context/UserContext';
 import { Approutes, frontendBaseUrl } from '../../../constants';
 
 const GrabbedProduct = () => {
-    let { grabber_id, ad_id } = useParams();
+    const { grabber_id, ad_id: initialAdId } = useParams();
     let grabberId;
-    ad_id = extractAdIdFromSlug(ad_id);
+    const ad_id = extractAdIdFromSlug(initialAdId);
 
     if (grabber_id) {
         grabberId = grabber_id.slice(2);
     }
     const { user } = useAuth();
 
-    const { data: result, isLoading } = fetchProduct(ad_id);
+    const { data: result, isLoading } = fetchProduct(ad_id, {
+        isLogin: !!user,
+        query: { grabber_id: grabberId },
+    });
 
     const category = result?.data?.category;
 
@@ -101,10 +104,13 @@ const GrabbedProduct = () => {
                         Welcome to: <span className='capitalize'>{result?.data.title}</span>,{' '}
                         {result.data?.location.split(',')[1]} - Page
                     </h4>
-                    {grabber_id && (
+                    {grabber_id && result?.data?.grabber_details?.display_name && (
                         <h5 className='flex justify-center max-sm:flex-col max-sm:items-center p-2 bg-white'>
                             You were directed here by:
-                            <span className='px-2 text-primary'> {`BF${grabberId}`}</span>{' '}
+                            <span className='px-2 text-primary'>
+                                {' '}
+                                {`${result?.data?.grabber_details.display_name}`}
+                            </span>{' '}
                         </h5>
                     )}
                 </div>

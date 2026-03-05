@@ -35,7 +35,7 @@ const index = () => {
     const [revealNumber, setRevealNumber] = useState(false);
     const [revealEmail, setRevealEmail] = useState(false);
     const { isLogin, user } = useAuth();
-    const { data: result, isLoading } = fetchProduct(id, isLogin);
+    const { data: result, isLoading } = fetchProduct(id, { isLogin });
     const { isLoading: saveLoading } = getSaves();
     const notify = useNotify();
 
@@ -177,7 +177,11 @@ const index = () => {
                             ) : null}
 
                             {result?.data?.active === '1' && result?.data.available === 0 && (
-                                <span className={'px-4 py-1 rounded-lg text-white bg-primary whitespace-nowrap '}>
+                                <span
+                                    className={
+                                        'px-4 py-1 rounded-lg text-white bg-primary whitespace-nowrap '
+                                    }
+                                >
                                     In Review
                                 </span>
                             )}
