@@ -1,5 +1,6 @@
 import { Field, ErrorMessage, useField, useFormikContext } from 'formik';
 import TextError from './TextError';
+import { formatMoneyInput } from '../../utils';
 
 const PriceInput = (props) => {
     const { label, name, required, className, ...rest } = props;
@@ -7,23 +8,8 @@ const PriceInput = (props) => {
     const formik = useFormikContext();
 
     const handleMoneyChange = (event) => {
-        const inputValue = event.target.value;
         const inputName = event.target.name || name;
-
-        const raw = String(inputValue).replace(/[^0-9.]/g, '');
-
-        if (!raw) {
-            formik.setFieldValue(inputName, '');
-            return;
-        }
-
-        const [intPart, decimalPart] = raw.split('.');
-        let formatted = new Intl.NumberFormat('en-US').format(Number(intPart || '0'));
-
-        if (decimalPart !== undefined) {
-            formatted += '.' + decimalPart;
-        }
-
+        const formatted = formatMoneyInput(event.target.value);
         formik.setFieldValue(inputName, formatted);
     };
 

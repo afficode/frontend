@@ -20,7 +20,7 @@ import { useGrabAd } from '../../../hooks/useGrab.js';
 import { ArrowDown, Cancel, Naira } from '../../../assets/svgs/index.js';
 import { InputGroup } from '../../../ui/index.js';
 import { inspectableCategories } from '../../../constants/Category.js';
-import { toMoney } from '../../../utils';
+import { formatMoneyInput, toMoney } from '../../../utils';
 import { TermsAndCondition } from '../../../components/index.js';
 import { useQueryClient } from 'react-query';
 
@@ -131,22 +131,7 @@ const ChatForm = ({ ad_id, owner, active, feature, ad }) => {
     };
 
     const handleMoneyChange = (event) => {
-        const inputValue = event.target.value;
-
-        const raw = String(inputValue).replace(/[^0-9.]/g, '');
-
-        if (!raw) {
-            setOffer('');
-            return;
-        }
-
-        const [intPart, decimalPart] = raw.split('.');
-        let formatted = new Intl.NumberFormat('en-US').format(Number(intPart || '0'));
-
-        if (decimalPart !== undefined) {
-            formatted += '.' + decimalPart;
-        }
-
+        const formatted = formatMoneyInput(event.target.value);
         setOffer(formatted);
     };
 

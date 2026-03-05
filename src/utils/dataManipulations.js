@@ -359,3 +359,15 @@ export const numberAbbreviationFormatter = (num) => {
     });
     return formatter.format(num);
 };
+
+export const formatMoneyInput = (value) => {
+    if (value === '' || value === undefined || value === null) return '';
+
+    const raw = String(value).replace(/[^0-9.]/g, '');
+    if (!raw) return '';
+
+    const [intPart, decimalPart] = raw.split('.');
+    const formattedInt = new Intl.NumberFormat('en-US').format(Number(intPart || '0'));
+
+    return decimalPart !== undefined ? `${formattedInt}.${decimalPart}` : formattedInt;
+};
