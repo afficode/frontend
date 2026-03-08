@@ -1,6 +1,6 @@
 import { BsFastForwardFill } from 'react-icons/bs';
 import { SportCar, Furniture, House, Tailor, noimage } from '../../../assets/images';
-import { Card } from '../../../components';
+import { Card, SpinnerSkeleton } from '../../../components';
 import { Link } from 'react-router-dom';
 import { useProduct } from '../../../hooks';
 import { Approutes } from '../../../constants';
@@ -16,7 +16,8 @@ import Feature from '../../Products/Default/Feature';
 import { Button } from '../../../ui/index.js';
 
 const RowContainer = ({ title, link }) => {
-    const product = useProduct();
+    const {data:product, isLoading} = useProduct();
+
     return (
         <section className='px-4 md:px-[4rem] py-6'>
             <div className='flex items-center justify-between pb-4'>
@@ -32,7 +33,11 @@ const RowContainer = ({ title, link }) => {
             </div>
 
             {title === 'Discover more...' &&
-            (product?.data?.ads === undefined || product?.data?.ads?.length === 0) ? (
+            isLoading ?
+                <div className='p-6'>
+                    <SpinnerSkeleton/>
+                </div>
+            : (!isLoading && (product?.ads === undefined || product?.ads?.length === 0)) ? (
                 <div className='py-6 space-y-4 flex flex-col items-center justify-center md:px-4'>
                     <p className='text-center w-full text-lg'>No ads available</p>
                     <Button variant={'primary'} size={'small'}>
@@ -42,7 +47,7 @@ const RowContainer = ({ title, link }) => {
             ) : (
                 <div className='grid grid-cols-1 gap-4 place-items-center sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
                     {title === 'Discover more...'
-                        ? product?.data?.ads
+                        ? product?.ads
                               ?.slice(0, 4)
                               .map((item) => <CardDetails key={item.id} {...item} />)
                         : title === 'Categories'
@@ -50,6 +55,7 @@ const RowContainer = ({ title, link }) => {
                           : null}
                 </div>
             )}
+
         </section>
     );
 };
