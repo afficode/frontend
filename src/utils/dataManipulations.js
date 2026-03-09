@@ -350,3 +350,24 @@ export const joinObjectArrayAndSortByCreatedAt = (array) =>
     array
         .filter((item) => item.created_at)
         .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
+export const numberAbbreviationFormatter = (num) => {
+    const formatter = new Intl.NumberFormat('en-US', {
+        notation: 'compact',
+        compactDisplay: 'short',
+        maximumFractionDigits: 2,
+    });
+    return formatter.format(num);
+};
+
+export const formatMoneyInput = (value) => {
+    if (value === '' || value === undefined || value === null) return '';
+
+    const raw = String(value).replace(/[^0-9.]/g, '');
+    if (!raw) return '';
+
+    const [intPart, decimalPart] = raw.split('.');
+    const formattedInt = new Intl.NumberFormat('en-US').format(Number(intPart || '0'));
+
+    return decimalPart !== undefined ? `${formattedInt}.${decimalPart}` : formattedInt;
+};

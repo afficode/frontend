@@ -9,7 +9,7 @@ import { CiCreditCard2 } from 'react-icons/ci';
 import NewAccount from './NewAccount';
 import { useFetchPayouts, useNotify, useWithdraw } from '../../../hooks';
 import { useQueryClient } from 'react-query';
-import { fromMoney, joinObjectArrayAndSortByCreatedAt } from '../../../utils';
+import { formatMoneyInput, fromMoney, joinObjectArrayAndSortByCreatedAt } from '../../../utils';
 import { FaCcMastercard } from 'react-icons/fa6';
 
 const Withdraw = () => {
@@ -79,22 +79,7 @@ const Withdraw = () => {
     };
 
     const handleMoneyChange = (event) => {
-        const inputValue = event.target.value;
-
-        const raw = String(inputValue).replace(/[^0-9.]/g, '');
-
-        if (!raw) {
-            formikWithdraw.setFieldValue('amount', '');
-            return;
-        }
-
-        const [intPart, decimalPart] = raw.split('.');
-        let formatted = new Intl.NumberFormat('en-US').format(Number(intPart || '0'));
-
-        if (decimalPart !== undefined) {
-            formatted += '.' + decimalPart;
-        }
-
+        const formatted = formatMoneyInput(event.target.value);
         formikWithdraw.setFieldValue('amount', formatted);
     };
 

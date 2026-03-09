@@ -154,7 +154,6 @@ const MobileSidebar = ({ sidebar, setSidebar }) => {
                         <h4 className='capitalize'>
                             {user.firstname} {user.lastname}
                         </h4>
-                        <p className='font-semibold capitalize'>Auto Dealer</p>
                     </div>
                 </div>
 

@@ -9,8 +9,9 @@ import { Button } from '../../../ui';
 import { BsFastForwardFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import { slugGeneratorForAdIdWithName } from '../../../utils';
+import { SpinnerSkeleton } from '../../../components';
 
-const RowContainer = ({ title, link, data }) => {
+const RowContainer = ({ title, link, data, isLoading }) => {
     return (
         <section className='w-full px-4 md:px-[2rem] py-8'>
             <div className='relative flex items-center w-full pb-2'>
@@ -24,30 +25,38 @@ const RowContainer = ({ title, link, data }) => {
                     </span>
                 )}
             </div>
-            <div className='relative w-full pb-8'>
-                {data === undefined || data.length === 0 ? (
-                    <div className='py-6 space-y-4 flex flex-col items-center justify-center md:px-4'>
-                        <p className='text-center w-full text-lg'>No featured ads available</p>
-                        <Button variant={'primary'} size={'small'}>
-                            <Link to={Approutes.postDecision}>Create an ad</Link>
-                        </Button>
-                    </div>
-                ) : (
-                    <div className='py-4 bg-primary/20 md:px-4'>
-                        <Carousel renderDotsOutside responsive={responsive} showDots={true}>
-                            {title !== 'Shops'
-                                ? data && data.length > 0
-                                    ? data.map((product) => (
-                                          <FeaturedProductsCard key={uuidv4()} product={product} />
-                                      ))
-                                    : Array(12)
-                                          .fill(1)
-                                          .map((_) => <FeaturedProductsCard key={uuidv4()} />)
-                                : null}
-                        </Carousel>
-                    </div>
-                )}
-            </div>
+                {
+                    isLoading ? (
+                        <div className='p-6'>
+                            <SpinnerSkeleton/>
+                        </div>
+                    ) : (
+                        <div className='relative w-full pb-8'>
+                    {data === undefined || data.length === 0 ? (
+                        <div className='py-6 space-y-4 flex flex-col items-center justify-center md:px-4'>
+                            <p className='text-center w-full text-lg'>No featured ads available</p>
+                            <Button variant={'primary'} size={'small'}>
+                                <Link to={Approutes.postDecision}>Create an ad</Link>
+                            </Button>
+                        </div>
+                    ) : (
+                        <div className='py-4 bg-primary/20 md:px-4'>
+                            <Carousel renderDotsOutside responsive={responsive} showDots={true}>
+                                {title !== 'Shops'
+                                    ? data && data.length > 0
+                                        ? data.map((product) => (
+                                            <FeaturedProductsCard key={uuidv4()} product={product} />
+                                        ))
+                                        : Array(12)
+                                            .fill(1)
+                                            .map((_) => <FeaturedProductsCard key={uuidv4()} />)
+                                    : null}
+                            </Carousel>
+                        </div>
+                    )}
+                </div>
+                    )
+                }
         </section>
     );
 };

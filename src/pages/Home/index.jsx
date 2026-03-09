@@ -5,7 +5,7 @@ import Hero from './Hero';
 import RowContainer from './RowContainer';
 import { useProduct } from '../../hooks';
 const Home = () => {
-    const { data } = useProduct();
+    const { data, isLoading } = useProduct();
 
     return (
         <>
@@ -15,6 +15,7 @@ const Home = () => {
                 title={'Featured Ads'}
                 link={Approutes.product.initial}
                 data={data?.ads?.slice(0, 12)}
+                isLoading={isLoading}
             />
             <SEO />
         </>
