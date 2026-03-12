@@ -3,11 +3,12 @@ import { Button } from '../../ui';
 import { useTransactions } from '../../hooks';
 import { format } from 'date-fns';
 import { toMoney } from '../../utils';
-import { useLocation, useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import DateView from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useEffect, useState } from 'react';
 import LoadingScreen from './LoadingScreen';
+import { Approutes } from '../../constants';
 
 const AccountHistory = () => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -89,6 +90,7 @@ const AccountHistory = () => {
     const groupedTransactions = groupByMonth(data?.data || []);
 
     const { hash } = useLocation();
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (hash) {
@@ -107,6 +109,7 @@ const AccountHistory = () => {
                     variant={'plain'}
                     size={'small'}
                     className={'whitespace-nowrap max-sm:text-xs font-semibold'}
+                    onClick={() => navigate(Approutes.grab.home)}
                 >
                     Join now
                 </Button>
