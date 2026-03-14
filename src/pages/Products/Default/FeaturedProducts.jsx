@@ -3,15 +3,10 @@ import { FaCamera, FaMapMarkerAlt } from 'react-icons/fa';
 import { TbCurrencyNaira } from 'react-icons/tb';
 import { noimage } from '../../../assets/images';
 import { useNavigate } from 'react-router-dom';
-import {
-    numberWithCommas,
-    slugGeneratorForAdIdWithName,
-    formatTimeAgo,
-} from '../../../utils/index.js';
+import { numberWithCommas, slugGeneratorForAdIdWithName } from '../../../utils/index.js';
 import SaveProduct from './SaveProduct';
 import useAuth from '../../../context/UserContext';
-import { NegotiableIcon } from '../../../ui';
-import { GrabIcon } from '../../../ui';
+import { NegotiableIcon, GrabIcon, AdListingStatus } from '../../../ui';
 
 const FeaturedProducts = ({ product }) => {
     const { isLogin, user } = useAuth();
@@ -102,9 +97,7 @@ const FeaturedProducts = ({ product }) => {
                                 )}
                             </span>{' '}
                             &nbsp;
-                            <span className='tracking-tighter'>
-                                {formatTimeAgo(ad?.created_at)}
-                            </span>
+                            <AdListingStatus createdAt={ad?.created_at} />
                         </p>
                     </div>
                 </div>
