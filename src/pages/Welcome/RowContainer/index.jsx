@@ -54,7 +54,6 @@ const RowContainer = ({ title, link }) => {
                           : null}
                 </div>
             )}
-
         </section>
     );
 };
