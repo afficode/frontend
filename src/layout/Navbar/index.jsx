@@ -615,21 +615,25 @@ const Navbar = () => {
                         </div>
 
                         {window.location.pathname !== Approutes.postDecision &&
-                        !window.location.pathname.startsWith('/post-ad') && (
-                            <button
-                                tabIndex={0}
-                                className='flex flex-col items-center text-white  border border-1 border-white bg-primary p-3 rounded-2xl cursor-pointer md:hidden  fixed bottom-3 right-3'
-                                type='button'
-                                onClick={() => setPostAdModal(true)}
-                            >
-                                <HiOutlineSpeakerphone size={25} />
-                                <span className='text-xs sm:text-sm whitespace-nowrap'>
-                                    Post ad
-                                </span>
-                            </button>
-                        )}
+                            !window.location.pathname.startsWith('/post-ad') && (
+                                <button
+                                    tabIndex={0}
+                                    className='flex flex-col items-center text-white  border border-1 border-white bg-primary p-3 rounded-2xl cursor-pointer md:hidden  fixed bottom-3 right-3'
+                                    type='button'
+                                    onClick={() => setPostAdModal(true)}
+                                >
+                                    <HiOutlineSpeakerphone size={25} />
+                                    <span className='text-xs sm:text-sm whitespace-nowrap'>
+                                        Post ad
+                                    </span>
+                                </button>
+                            )}
 
-                        <PostAdModal modalOpen={postAdModal} setModalOpen={setPostAdModal} filteredCategories={filteredCategories}/>
+                        <PostAdModal
+                            modalOpen={postAdModal}
+                            setModalOpen={setPostAdModal}
+                            filteredCategories={filteredCategories}
+                        />
                     </>
 
                     {/* bottom nav  */}

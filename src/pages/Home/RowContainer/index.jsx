@@ -25,13 +25,12 @@ const RowContainer = ({ title, link, data, isLoading }) => {
                     </span>
                 )}
             </div>
-                {
-                    isLoading ? (
-                        <div className='p-6'>
-                            <SpinnerSkeleton/>
-                        </div>
-                    ) : (
-                        <div className='relative w-full pb-8'>
+            {isLoading ? (
+                <div className='p-6'>
+                    <SpinnerSkeleton />
+                </div>
+            ) : (
+                <div className='relative w-full pb-8'>
                     {data === undefined || data.length === 0 ? (
                         <div className='py-6 space-y-4 flex flex-col items-center justify-center md:px-4'>
                             <p className='text-center w-full text-lg'>No featured ads available</p>
@@ -45,18 +44,20 @@ const RowContainer = ({ title, link, data, isLoading }) => {
                                 {title !== 'Shops'
                                     ? data && data.length > 0
                                         ? data.map((product) => (
-                                            <FeaturedProductsCard key={uuidv4()} product={product} />
-                                        ))
+                                              <FeaturedProductsCard
+                                                  key={uuidv4()}
+                                                  product={product}
+                                              />
+                                          ))
                                         : Array(12)
-                                            .fill(1)
-                                            .map((_) => <FeaturedProductsCard key={uuidv4()} />)
+                                              .fill(1)
+                                              .map((_) => <FeaturedProductsCard key={uuidv4()} />)
                                     : null}
                             </Carousel>
                         </div>
                     )}
                 </div>
-                    )
-                }
+            )}
         </section>
     );
 };
