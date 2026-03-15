@@ -13,10 +13,10 @@ import {
 } from '../../../utils/index.js';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import Feature from '../../Products/Default/Feature';
-import { Button } from '../../../ui/index.js';
+import { AdListingStatus, Button } from '../../../ui/index.js';
 
 const RowContainer = ({ title, link }) => {
-    const {data:product, isLoading} = useProduct();
+    const { data: product, isLoading } = useProduct();
 
     return (
         <section className='px-4 md:px-[4rem] py-6'>
@@ -32,12 +32,11 @@ const RowContainer = ({ title, link }) => {
                 </Link>
             </div>
 
-            {title === 'Discover more...' &&
-            isLoading ?
+            {title === 'Discover more...' && isLoading ? (
                 <div className='p-6'>
-                    <SpinnerSkeleton/>
+                    <SpinnerSkeleton />
                 </div>
-            : (!isLoading && (product?.ads === undefined || product?.ads?.length === 0)) ? (
+            ) : !isLoading && (product?.ads === undefined || product?.ads?.length === 0) ? (
                 <div className='py-6 space-y-4 flex flex-col items-center justify-center md:px-4'>
                     <p className='text-center w-full text-lg'>No ads available</p>
                     <Button variant={'primary'} size={'small'}>
@@ -87,7 +86,7 @@ const CardDetails = ({ id, title, location, images, created_at, price, feature }
                         <TbCurrencyNaira className='mt-1' />
                         {numberWithCommas(price)}
                     </span>
-                    <span className=''>{formatTimeAgo(created_at)}</span>
+                    <AdListingStatus createdAt={created_at} />
                 </p>
             </div>
         </Link>

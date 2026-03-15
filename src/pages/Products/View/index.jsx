@@ -23,7 +23,7 @@ import ContactAdmin from './ContactAdmin';
 import { Alert } from 'flowbite-react';
 import SaveProduct from '../Default/SaveProduct';
 import { getSaves } from '../../../hooks/useSaves';
-import { NegotiableIcon } from '../../../ui';
+import { NegotiableIcon, AdListingStatus } from '../../../ui';
 import { useNotify } from '../../../hooks';
 import { ActionBar, Carousel, GrabUpdateTable, SEO } from '../../../components';
 import { categoryData } from '../../../constants/Category.js';
@@ -138,10 +138,7 @@ const index = () => {
                         <div className='flex items-center justify-between w-full my-2 font-bold uppercase text-md md:text-2xl xl:text-3xl'>
                             <div className='flex flex-col '>
                                 <span className=''>{result?.data?.title}</span>
-                                <span className='tracking-tighter font-normal lowercase text-sm'>
-                                    <span className='!capitalize'> Posted: </span>
-                                    {formatTimeAgo(result?.data?.created_at)}
-                                </span>
+                                <AdListingStatus createdAt={result?.data?.created_at} />
                             </div>
                             <span className=' flex items-center gap-2 lg:gap-8 my-auto '>
                                 <NegotiableIcon negotiable={result.data?.negotiable} />
@@ -255,10 +252,7 @@ const index = () => {
                         <div className='flex items-center justify-between w-full mb-2 font-bold uppercase text-md md:text-2xl xl:text-3xl'>
                             <div className='flex flex-col '>
                                 <span className=''>{result?.data?.title}</span>
-                                <span className='tracking-tighter font-normal lowercase text-sm'>
-                                    <span className='!capitalize'> Posted: </span>
-                                    {formatTimeAgo(result?.data?.created_at)}
-                                </span>
+                                <AdListingStatus createdAt={result?.data?.created_at} />
                             </div>
 
                             <span className=' flex items-center gap-2 lg:gap-8 my-auto mr-4 lg:mr-0'>
