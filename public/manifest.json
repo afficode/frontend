@@ -1,0 +1,63 @@
+{
+	"name": "Boonfu",
+	"short_name": "Boonfu",
+	"description": "Boonfu - Nigeria’s Premier Marketplace to Buy, Sell & Earn",
+	"start_url": "/",
+	"display": "standalone",
+	"background_color": "#fff",
+	"theme_color": "#2686CE",
+	"orientation": "portrait-primary",
+	"icons": [
+		{
+			"src": "/icon-192.png",
+			"sizes": "192x192",
+			"type": "image/png",
+			"purpose": "any"
+		},
+		{
+			"src": "/icon-512.png",
+			"sizes": "512x512",
+			"type": "image/png",
+			"purpose": "any"
+		},
+		{
+			"src": "/icon-192.png",
+			"sizes": "192x192",
+			"type": "image/png",
+			"purpose": "maskable"
+		},
+		{
+			"src": "/icon-512.png",
+			"sizes": "512x512",
+			"type": "image/png",
+			"purpose": "maskable"
+		}
+	],
+	"screenshots": [
+		{
+			"src": "/screenshot-wide.png",
+			"sizes": "1280x720",
+			"type": "image/png",
+			"form_factor": "wide",
+			"label": "Boonfu Homepage - Desktop"
+		},
+		{
+			"src": "/screenshot-narrow.png",
+			"sizes": "750x1334",
+			"type": "image/png",
+			"form_factor": "narrow",
+			"label": "Boonfu Homepage - Mobile"
+		}
+	],
+	"categories": [
+        "marketplace Nigeria",
+        "buy and sell",
+        "affiliate marketing",
+        "escrow payments",
+        "Boonfu",
+        "Grab feature",
+        "digital commerce"
+    ],
+	"lang": "en",
+	"dir": "ltr"
+}
