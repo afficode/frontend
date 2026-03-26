@@ -4,6 +4,7 @@
         <meta charset="UTF-8" />
         <link rel="icon" type="image/svg+xml" href="/boonfuLogo.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="manifest" href="/manifest.json" />
 
         <!-- font family -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -63,5 +64,12 @@
             window.prerenderReady = false;
         </script>
         <script type="module" src="/src/main.jsx"></script>
+        <script>
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('/sw.js');
+                });
+            }
+        </script>
     </body>
 </html>

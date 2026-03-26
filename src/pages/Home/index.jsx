@@ -4,6 +4,7 @@ import { Approutes } from '../../constants';
 import Hero from './Hero';
 import RowContainer from './RowContainer';
 import { useProduct } from '../../hooks';
+
 const Home = () => {
     const { data, isLoading } = useProduct();
 
