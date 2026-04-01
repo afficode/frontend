@@ -10,13 +10,13 @@ const Faq = () => {
             <div className='flex flex-col gap-4 max-w-4xl mx-auto mt-6'>
                 {faqsList.map((faq, i) => (
                     <details
-                        className='collapse bg-base-100  border-b border-b-black/10 collapse-arrow '
+                        className='collapse bg-gray-200/80 collapse-arrow '
                         name='my-accordion-det-1'
                         key={faq.question.toString().substring(0, 10).toString() + i}
                         open
                     >
-                        <summary className='collapse-title font-semibold bg-gray-200'>{faq.question}</summary>
-                        <div className='collapse-content text-sm duration-200 text-justify'>{faq.answer}</div>
+                        <summary className='collapse-title font-semibold'>{faq.question}</summary>
+                        <div className='collapse-content text-sm duration-200 border-t border-t-black/10 pt-2  text-justify'>{faq.answer}</div>
                     </details>
                 ))}
             </div>
@@ -52,7 +52,7 @@ const faqsList = [
         ),
     },
     {
-        question: (<>What does it mean to<span className="font-semibold text-primary">"Boonfu-it"</span>? </>),
+        question: (<>What does it mean to <span className="font-semibold text-primary">"Boonfu-it"</span> ? </>),
         answer: (
             <>
                 <b className='font-semibold text-primary'>"Boonfu-it"</b> is our shorthand for taking action. Whether you’re listing an item for
