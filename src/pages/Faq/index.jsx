@@ -12,10 +12,11 @@ const Faq = () => {
                     <details
                         className='collapse bg-base-100  border-b border-b-black/10 collapse-arrow '
                         name='my-accordion-det-1'
+                        key={faq.question.toString().substring(0, 10).toString() + i}
                         open
                     >
-                        <summary className='collapse-title font-semibold '>{faq.question}</summary>
-                        <div className='collapse-content text-sm duration-200'>{faq.answer}</div>
+                        <summary className='collapse-title font-semibold bg-gray-200'>{faq.question}</summary>
+                        <div className='collapse-content text-sm duration-200 text-justify'>{faq.answer}</div>
                     </details>
                 ))}
             </div>
@@ -51,10 +52,10 @@ const faqsList = [
         ),
     },
     {
-        question: 'What does it mean to "Boonfu-it"? ',
+        question: (<>What does it mean to<span className="font-semibold text-primary">"Boonfu-it"</span>? </>),
         answer: (
             <>
-                "Boonfu-it" is our shorthand for taking action. Whether you’re listing an item for
+                <b className='font-semibold text-primary'>"Boonfu-it"</b> is our shorthand for taking action. Whether you’re listing an item for
                 sale or clicking "Buy" on a deal you love, to Boonfu-it means to execute a trade
                 with 100% security and zero delay.
             </>
@@ -75,14 +76,30 @@ const faqsList = [
         question: 'How do I start selling?',
         answer: (
             <>
-                It’s simple. Go to the homepage and click "Sign-in," which will take you to the
-                welcome page. Click "Register," fill out the short form, and hit the "Submit"
-                button. Check your email to verify your account—keep an eye out for the "Boonfu
-                Account Verification" message (check your spam folder if you don’t see it). Open the
-                message, click the link, and verify your phone number using the OTP sent to you via
-                text. Sign in again to start selling! To post an ad on mobile, tap the "Post Ad"
-                button at the bottom right of your screen. On a laptop, you’ll find "Post Ad" in the
+                It’s simple:
+                <ul className='list-disc list-inside'>
+                    <li>Go to the homepage and click <b>"Sign-in"</b> - this takes you to the
+                        welcome page.</li>
+                    <li>Click <b>"Register"</b> </li>
+                    <li>Fill out the short form</li>
+                    <li>Submit</li>
+                </ul>
+                <br />
+                You'll receive an email with a link to verify your phone number.
+                <br />
+                Post Action:
+                <ul>
+                    <li>Check your email to verify your account — keep an eye out for the <b>"Boonfu
+                        Account Verification"</b> email subject (check your spam folder if you don’t see it).
+                    </li>
+                </ul>
+                <br />
+                Open the message, click the link, and verify your phone number using the OTP sent to you via
+                text. Sign in again to start selling!
+                <br />To post an ad on mobile, tap the <b>"Post Ad"</b>
+                button at the bottom right of your screen. On a laptop, you’ll find <b>"Post Ad"</b> in the
                 top right corner. Select your category, follow the prompts, and fill out the form.
+                <br />
                 Upload high-quality photos and set your price. Once your item is live, the Boonfu
                 engine starts connecting you with buyers and Grabbers instantly.
             </>
@@ -92,18 +109,18 @@ const faqsList = [
         question: 'Are there fees for listing on Boonfu?',
         answer: (
             <>
-                Listing on Boonfu.com is completely free, unless you choose the "Sell Urgently"
-                option. This activates the Grab Feature, where a small commission is required. For
-                most categories, a 10% commission is held in your wallet. For example, on a 100,000
+                Listing on Boonfu.com is completely free, unless you choose the <b>"Sell Urgently"</b>
+                option. This activates the <b>Grab Feature, where a small commission is required</b>. For
+                most categories, a <b>10% commission</b> is held in your wallet. For example, on a 100,000
                 Naira listing, 10,000 Naira is locked as the Grabber’s Commission. If a Grabber
                 closes the sale, the commission is theirs. However, if you sell the item yourself
-                (outside of the Grab network) within the one-month period, you can reclaim 90% of
-                that locked amount (9,000 Naira). The remaining 10% of the commission (1,000 Naira)
+                (outside of the Grab network) within the one-month period, you can reclaim <b>90%</b> of
+                that locked amount (9,000 Naira). The remaining <b>10%</b> of the commission (1,000 Naira)
                 is retained as an administrative fee.
                 <br />
                 <br />
-                Note: For high-value categories like Vehicles or Property, the required Grabber’s
-                commission is only 1% of the total value
+                <b>Note:</b> For high-value categories like Vehicles or Property, the required Grabber’s
+                commission is only <b>1%</b> of the total value.
             </>
         ),
     },
@@ -112,8 +129,8 @@ const faqsList = [
         answer: (
             <>
                 Yes! Many of our most successful users sell their own inventory while "Grabbing"
-                other great deals to earn extra commissions on the side. One platform. Infinite ways
-                to win.
+                other great deals to earn extra commissions on the side. <b className='font-semibold text-primary uppercase'>One platform. Infinite ways
+                    to win.</b>
             </>
         ),
     },
