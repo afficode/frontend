@@ -7,6 +7,7 @@ import { useNotify } from '../../hooks';
 import secureLocalStorage from 'react-secure-storage';
 
 // icons
+import { FiPhone } from 'react-icons/fi';
 import { BiEnvelope } from 'react-icons/bi';
 import { SlLocationPin } from 'react-icons/sl';
 import { FaWhatsapp } from 'react-icons/fa';
@@ -134,18 +135,22 @@ const ContactUs = () => {
                     </div>
 
                     <div>
-                        {/* <Link to={'tel:+2348136155728'}>
-							<span className="inline-block p-3 text-white transition-all rounded-full bg-primary hover:scale-105">
-								<FiPhone size={20} />
-							</span>
-						</Link>
+                        <Link to={`tel:${BOONFU_PHONE}`}>
+                            <span className='inline-block p-3 text-white transition-all rounded-full bg-primary hover:scale-105'>
+                                <FiPhone size={20} />
+                            </span>
+                        </Link>
 
-						<h6 className="mt-4 font-medium text-black ">Phone</h6>
-						<p className="mt-2 text-gray-500 dark:text-gray-400">Mon-Fri from 8am to 5pm.</p>
+                        <h6 className='mt-4 font-medium text-black '>Phone</h6>
+                        <p className='mt-2 text-gray-500 dark:text-gray-400'>
+                            Mon-Fri from 8am to 5pm.
+                        </p>
 
-						<Link to={'tel:+2348136155728'}>
-							<span className="mt-2 text-sm hover:underline text-primary">{BOONFU_PHONE}</span>
-						</Link> */}
+                        <Link to={`tel:${BOONFU_PHONE}`}>
+                            <span className='mt-2 text-sm hover:underline text-primary'>
+                                {BOONFU_PHONE}
+                            </span>
+                        </Link>
                     </div>
                 </div>
 
@@ -216,7 +221,13 @@ const ContactUs = () => {
                                 variant={'primary'}
                                 size={'small'}
                                 loading={loading}
-                                disabled={loading}
+                                disabled={
+                                    loading ||
+                                    !formData?.email ||
+                                    !formData?.message ||
+                                    !formData?.firstname ||
+                                    !formData?.lastname
+                                }
                                 className={'flex items-center gap-2 p-2 rounded-md'}
                             >
                                 Send message <BiEnvelope size={20} />

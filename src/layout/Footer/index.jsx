@@ -131,7 +131,7 @@ const Footer = () => {
                             <h6 className='px-2 md:px-8 text-2xl opacity-[.7] font-normal whitespace-nowrap mb-3'>
                                 Resources
                             </h6>
-                            <Link to={Approutes.underConstruction}>
+                            <Link to={Approutes.faq}>
                                 <li className={listStyles}>FAQs</li>
                             </Link>
                             <Link to={Approutes.safety}>

@@ -10,6 +10,7 @@ export { default as Pickup } from './Checkout/PickUp';
 export { default as ContactUs } from './ContactUs';
 export { default as CookiePolicy } from './CookiePolicy';
 export { default as Deposit } from './Account/Deposit';
+export { default as Faq } from './Faq';
 export { default as GrabFlyer } from './Grabs/Flyer';
 export { default as Grabs } from './Grabs';
 export { default as GrabRegister } from './Grabs/Register';
