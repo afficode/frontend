@@ -3,7 +3,7 @@ import { removeParamFromUrl } from '../utils';
 
 export const BOONFU_MAIL = 'customerservice@boonfu.com';
 export const BOONFU_LEGAL_MAIL = 'legal@boonfu.com';
-export const BOONFU_PHONE = '+2349065681845';
+export const BOONFU_PHONE = '+2348084251910';
 export const BOONFU_FACEBOOK = 'https://www.facebook.com/profile.php?id=61583231027675';
 export const BOONFU_INSTAGRAM = 'https://www.instagram.com/myboonfu/';
 export const BOONFU_ADDRESS =
