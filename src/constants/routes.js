@@ -29,6 +29,7 @@ export const Approutes = {
         viewCategoryId: '/product/category/:id',
     },
     aboutUs: '/about-us',
+    faq: '/faqs',
     privacyPolicy: '/privacy-policy',
     grabSystem: '/grab-system',
     cookiePolicy: '/cookie-policy',
