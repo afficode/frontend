@@ -398,7 +398,7 @@ const PostAd = () => {
                     ? ad?.ad_condition?.split(',')
                     : ad?.ad_condition,
             year: ad?.year,
-            mileage: ad?.mileage,
+            millage: ad?.millage,
             transmission: ad?.transmission,
             color: ad?.color,
             fuel_type: ad?.fuel_type,
