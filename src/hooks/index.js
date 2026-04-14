@@ -11,6 +11,7 @@ export * from './useCategories';
 export * from './useLocation';
 export * from './usePayment';
 export * from './useProduct';
+export * from './useRequests';
 export * from './useSchedule';
 export * from './useEscrow';
 export { default as useNotify } from './useNotify';

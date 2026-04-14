@@ -22,7 +22,7 @@ const InputGroup = ({
     ...rest
 }) => {
     return (
-        <div className='my-2'>
+        <div className='my-2 w-full'>
             {label ? (
                 <label className='input-group-label' htmlFor={name}>
                     {label}
@@ -189,7 +189,7 @@ const InputGroup = ({
                 </>
             ) : (
                 <>
-                    <div className={amount || cancelButton ? 'relative' : ''}>
+                    <div className={amount || cancelButton ? 'relative w-full' : 'w-full'}>
                         <input
                             type={type ? type : 'text'}
                             name={name}
