@@ -11,6 +11,7 @@ import { GrabProvider } from './context/GrabContext.jsx';
 import { TokenProvider } from './context/TokenContext.jsx';
 import { NotificationProvider } from './context/Notification.jsx';
 import { HelmetProvider } from 'react-helmet-async';
+import { RequestProvider } from './context/RequestContext.jsx';
 
 const queryClient = new QueryClient();
 
@@ -24,7 +25,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                             <MessageProvider>
                                 <GrabProvider>
                                     <SaveProvider>
-                                        <App />
+                                        <RequestProvider>
+                                            <App />
+                                        </RequestProvider>
                                     </SaveProvider>
                                 </GrabProvider>
                             </MessageProvider>

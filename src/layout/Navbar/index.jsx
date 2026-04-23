@@ -766,7 +766,7 @@ const Navbar = () => {
 
                                 <span className='border border-r-4 border-white h-[2rem]' />
 
-                                <li className='dropdown dropdown-hover mr-4'>
+                                {/* <li className='dropdown dropdown-hover mr-4'>
                                     <Link
                                         to={`${Approutes.product.category}/${getCategoryName(54)}`}
                                         tabIndex={0}
@@ -786,6 +786,21 @@ const Navbar = () => {
                                             subCategories={filteredCategories?.electCat}
                                         />
                                     )}
+                                </li> */}
+                                <li className='mr-4 bg-white  border-2 border-secondary rounded-xl '>
+                                    <Link
+                                        to={Approutes.requests}
+                                        tabIndex={0}
+                                        className={`${listStyles} !text-secondary`}
+                                    >
+                                        REQUESTS
+                                    </Link>
+                                    <Link to={Approutes.requests} className={mobileListStyles}>
+                                        <VscGitPullRequestGoToChanges
+                                            size={25}
+                                            className='text-secondary'
+                                        />
+                                    </Link>
                                 </li>
                             </ul>
                         </div>

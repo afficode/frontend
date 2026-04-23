@@ -3,15 +3,15 @@ import { Button, InputGroup, Modal } from '../../../ui';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { BiUpload } from 'react-icons/bi';
-import { useAddRequest, useImageCompressor, useNotify } from '../../../hooks';
+import { useImageCompressor, useNotify, useUpdateRequest } from '../../../hooks';
 import { addWatermarkToImage } from '../../../utils';
 import { AD_IMAGE_SIZE } from '../../../constants';
 
-const PostRequest = ({ isOpen, setIsOpen, mainCategories = [] }) => {
+const EditRequest = ({ isOpen, setIsOpen, requestData, mainCategories = [] }) => {
     const initialValues = {
-        item_name: '',
-        description: '',
-        category: '',
+        item_name: requestData?.item_name || '',
+        description: requestData?.description || '',
+        category: requestData?.category || '',
         image: '',
     };
 
@@ -30,16 +30,18 @@ const PostRequest = ({ isOpen, setIsOpen, mainCategories = [] }) => {
         category: Yup.string().required('Required'),
         image: Yup.mixed().test('fileSize', 'Image size is too large (max 10MB)', (value) => {
             if (!value) return true;
+            if (typeof value === 'string') return true;
             return value.size <= AD_IMAGE_SIZE;
         }),
     });
 
     const { compressImages } = useImageCompressor();
     const notify = useNotify();
-    const { mutate, isLoading } = useAddRequest();
+    const { mutate, isLoading } = useUpdateRequest(requestData?.request_id);
 
     const handleSubmit = async (values, { resetForm, setSubmitting }) => {
         setSubmitting(true);
+
         const formData = new FormData();
         formData.append('item_name', values.item_name);
         formData.append('description', values.description);
@@ -58,13 +60,13 @@ const PostRequest = ({ isOpen, setIsOpen, mainCategories = [] }) => {
 
         mutate(formData, {
             onSuccess: (data) => {
-                notify(data?.message || 'Request posted successfully!', 'success');
+                notify(data?.message || 'Request updated successfully!', 'success');
                 resetForm();
                 setIsOpen(false);
                 setSubmitting(false);
             },
             onError: (error) => {
-                notify(error?.response?.data?.message || 'Failed to post request', 'error');
+                notify(error?.response?.data?.message || 'Failed to update request', 'error');
                 setSubmitting(false);
             },
         });
@@ -77,6 +79,14 @@ const PostRequest = ({ isOpen, setIsOpen, mainCategories = [] }) => {
         onSubmit: handleSubmit,
         enableReinitialize: true,
     });
+
+    const getPreviewImage = () => {
+        if (formik.values.image) {
+            return URL.createObjectURL(formik.values.image);
+        }
+        return requestData?.image || null;
+    };
+    const previewContent = getPreviewImage();
 
     const wordCount = formik.values.description
         ? formik.values.description
@@ -94,7 +104,7 @@ const PostRequest = ({ isOpen, setIsOpen, mainCategories = [] }) => {
             className={'!py-0 sm:!w-[450px]'}
         >
             <header className='flex items-center justify-between px-4 pb-4 border-b border-b-gray-200'>
-                <h3 className='font-bold'>Place a Request</h3>
+                <h3 className='font-bold'>Edit Request</h3>
 
                 <button type='button' onClick={() => setIsOpen(false)}>
                     <IoMdClose size={25} className='text-gray-500' />
@@ -176,10 +186,10 @@ const PostRequest = ({ isOpen, setIsOpen, mainCategories = [] }) => {
                             Upload Image (Optional)
                         </span>
 
-                        {formik.values.image ? (
+                        {previewContent ? (
                             <div className='!w-full h-52 relative rounded-xl border-2 border-primary overflow-hidden cursor-pointer group'>
                                 <img
-                                    src={URL.createObjectURL(formik.values.image)}
+                                    src={previewContent}
                                     alt='Preview'
                                     className='w-full h-full object-contain'
                                 />
@@ -221,11 +231,11 @@ const PostRequest = ({ isOpen, setIsOpen, mainCategories = [] }) => {
                     className='w-full rounded-2xl'
                     disabled={isLoading || formik.isSubmitting}
                 >
-                    {isLoading || formik.isSubmitting ? 'Posting...' : 'Post Request'}
+                    {isLoading || formik.isSubmitting ? 'Updating...' : 'Update Request'}
                 </Button>
             </form>
         </Modal>
     );
 };
 
-export default PostRequest;
+export default EditRequest;
