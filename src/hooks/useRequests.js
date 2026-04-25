@@ -2,16 +2,21 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { backendLink } from '../constants';
 import { api, privateAxios } from '../utils';
 
+const CACHE_CONFIG = {
+    staleTime: 0,
+    cacheTime: 10 * 60 * 1000,
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+    refetchInterval: false,
+    refetchIntervalInBackground: false,
+}
+
 export const useGetRequests = (params) => {
     const getRequests = () => api.get(`${backendLink}request`, { params }).then((res) => res?.data);
 
     return useQuery(['get-requests', params], getRequests, {
+        ...CACHE_CONFIG, 
         staleTime: 5 * 60 * 1000,
-        cacheTime: 10 * 60 * 1000,
-        refetchOnWindowFocus: false,
-        refetchOnMount: false,
-        refetchInterval: false,
-        refetchIntervalInBackground: false,
     });
 };
 
@@ -20,12 +25,7 @@ export const useGetUserRequests = (options) => {
         privateAxios.get(`${backendLink}request/user`).then((res) => res?.data);
 
     return useQuery(['get-user-requests'], getUserRequests, {
-        staleTime: 5 * 60 * 1000,
-        cacheTime: 10 * 60 * 1000,
-        refetchOnWindowFocus: false,
-        refetchOnMount: false,
-        refetchInterval: false,
-        refetchIntervalInBackground: false,
+        ...CACHE_CONFIG,
         ...options,
     });
 };
@@ -35,6 +35,7 @@ export const useGetRequest = (requestId, options) => {
         privateAxios.get(`${backendLink}request/${requestId}`).then((res) => res?.data);
 
     return useQuery(['get-request', requestId], getRequest, {
+        ...CACHE_CONFIG,
         ...options,
     });
 };
@@ -88,6 +89,7 @@ export const useGetInteractions = (options) => {
         privateAxios.get(`${backendLink}interaction/user`).then((res) => res?.data);
 
     return useQuery(['get-interactions'], getInteractions, {
+        ...CACHE_CONFIG,
         ...options,
     });
 };
@@ -138,6 +140,7 @@ export const useGetDiscussion = (interaction_id, options) => {
         privateAxios.get(`${backendLink}discussion/${interaction_id}`).then((res) => res?.data);
 
     return useQuery(['get-discussion', interaction_id], getDiscussion, {
+        ...CACHE_CONFIG,
         ...options,
     });
 };

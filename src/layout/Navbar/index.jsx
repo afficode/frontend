@@ -793,7 +793,7 @@ const Navbar = () => {
                                         tabIndex={0}
                                         className={`${listStyles} !text-secondary`}
                                     >
-                                        REQUESTS
+                                        REQUEST IT
                                     </Link>
                                     <Link to={Approutes.requests} className={mobileListStyles}>
                                         <VscGitPullRequestGoToChanges
