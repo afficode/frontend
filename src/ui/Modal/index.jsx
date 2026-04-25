@@ -6,6 +6,7 @@ import { ImCancelCircle } from 'react-icons/im';
 const Modal = ({
     isOpen,
     setIsOpen,
+    closeOnOutsideClick = true,
     modalHeader = true,
     children,
     headerText,
@@ -17,6 +18,7 @@ const Modal = ({
     const modalRef = useRef();
 
     useEffect(() => {
+        if (!closeOnOutsideClick) return;
         const handleClickOutside = (e) => {
             if (modalRef.current && !modalRef.current.contains(e.target)) {
                 setIsOpen(false);

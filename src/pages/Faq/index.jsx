@@ -16,7 +16,9 @@ const Faq = () => {
                         open
                     >
                         <summary className='collapse-title font-semibold'>{faq.question}</summary>
-                        <div className='collapse-content text-sm duration-200 border-t border-t-black/10 pt-2  text-justify'>{faq.answer}</div>
+                        <div className='collapse-content text-sm duration-200 border-t border-t-black/10 pt-2  text-justify'>
+                            {faq.answer}
+                        </div>
                     </details>
                 ))}
             </div>
@@ -52,12 +54,17 @@ const faqsList = [
         ),
     },
     {
-        question: (<>What does it mean to <span className="font-semibold text-primary">"Boonfu-it"</span> ? </>),
+        question: (
+            <>
+                What does it mean to <span className='font-semibold text-primary'>"Boonfu-it"</span>{' '}
+                ?{' '}
+            </>
+        ),
         answer: (
             <>
-                <b className='font-semibold text-primary'>"Boonfu-it"</b> is our shorthand for taking action. Whether you’re listing an item for
-                sale or clicking "Buy" on a deal you love, to Boonfu-it means to execute a trade
-                with 100% security and zero delay.
+                <b className='font-semibold text-primary'>"Boonfu-it"</b> is our shorthand for
+                taking action. Whether you’re listing an item for sale or clicking "Buy" on a deal
+                you love, to Boonfu-it means to execute a trade with 100% security and zero delay.
             </>
         ),
     },
@@ -78,9 +85,13 @@ const faqsList = [
             <>
                 It’s simple:
                 <ul className='list-disc list-inside'>
-                    <li>Go to the homepage and click <b>"Sign-in"</b> - this takes you to the
-                        welcome page.</li>
-                    <li>Click <b>"Register"</b> </li>
+                    <li>
+                        Go to the homepage and click <b>"Sign-in"</b> - this takes you to the
+                        welcome page.
+                    </li>
+                    <li>
+                        Click <b>"Register"</b>{' '}
+                    </li>
                     <li>Fill out the short form</li>
                     <li>Submit</li>
                 </ul>
@@ -89,16 +100,22 @@ const faqsList = [
                 <br />
                 Post Action:
                 <ul>
-                    <li>Check your email to verify your account — keep an eye out for the <b>"Boonfu
-                        Account Verification"</b> email subject (check your spam folder if you don’t see it).
+                    <li>
+                        Check your email to verify your account — keep an eye out for the{' '}
+                        <b>"Boonfu Account Verification"</b> email subject (check your spam folder
+                        if you don’t see it).
                     </li>
                 </ul>
                 <br />
-                Open the message, click the link, and verify your phone number using the OTP sent to you via
-                text. Sign in again to start selling!
-                <br />To post an ad on mobile, tap the <b>"Post Ad"</b>
-                button at the bottom right of your screen. On a laptop, you’ll find <b>"Post Ad"</b> in the
-                top right corner. Select your category, follow the prompts, and fill out the form.
+                Open the message, click the link, and verify your phone number using the OTP sent to
+                you via text. Sign in again to start selling!
+                <br />
+                To post an ad on mobile, tap the <b>"Post Ad"</b>
+                button at the bottom right of your screen. On a laptop, you’ll find <b>
+                    "Post Ad"
+                </b>{' '}
+                in the top right corner. Select your category, follow the prompts, and fill out the
+                form.
                 <br />
                 Upload high-quality photos and set your price. Once your item is live, the Boonfu
                 engine starts connecting you with buyers and Grabbers instantly.
@@ -109,18 +126,19 @@ const faqsList = [
         question: 'Are there fees for listing on Boonfu?',
         answer: (
             <>
-                Listing on Boonfu.com is completely free, unless you choose the <b>"Sell Urgently"</b>
-                option. This activates the <b>Grab Feature, where a small commission is required</b>. For
-                most categories, a <b>10% commission</b> is held in your wallet. For example, on a 100,000
-                Naira listing, 10,000 Naira is locked as the Grabber’s Commission. If a Grabber
-                closes the sale, the commission is theirs. However, if you sell the item yourself
-                (outside of the Grab network) within the one-month period, you can reclaim <b>90%</b> of
-                that locked amount (9,000 Naira). The remaining <b>10%</b> of the commission (1,000 Naira)
-                is retained as an administrative fee.
+                Listing on Boonfu.com is completely free, unless you choose the{' '}
+                <b>"Sell Urgently"</b>
+                option. This activates the <b>Grab Feature, where a small commission is required</b>
+                . For most categories, a <b>10% commission</b> is held in your wallet. For example,
+                on a 100,000 Naira listing, 10,000 Naira is locked as the Grabber’s Commission. If a
+                Grabber closes the sale, the commission is theirs. However, if you sell the item
+                yourself (outside of the Grab network) within the one-month period, you can reclaim{' '}
+                <b>90%</b> of that locked amount (9,000 Naira). The remaining <b>10%</b> of the
+                commission (1,000 Naira) is retained as an administrative fee.
                 <br />
                 <br />
-                <b>Note:</b> For high-value categories like Vehicles or Property, the required Grabber’s
-                commission is only <b>1%</b> of the total value.
+                <b>Note:</b> For high-value categories like Vehicles or Property, the required
+                Grabber’s commission is only <b>1%</b> of the total value.
             </>
         ),
     },
@@ -129,8 +147,10 @@ const faqsList = [
         answer: (
             <>
                 Yes! Many of our most successful users sell their own inventory while "Grabbing"
-                other great deals to earn extra commissions on the side. <b className='font-semibold text-primary uppercase'>One platform. Infinite ways
-                    to win.</b>
+                other great deals to earn extra commissions on the side.{' '}
+                <b className='font-semibold text-primary uppercase'>
+                    One platform. Infinite ways to win.
+                </b>
             </>
         ),
     },

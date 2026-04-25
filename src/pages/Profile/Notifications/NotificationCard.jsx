@@ -26,7 +26,9 @@ const NotificationCard = ({ feature, body, time, id, adId, isRead, metadata }) =
                               ? Approutes.product.initial + '/' + adId
                               : feature.includes('message')
                                 ? Approutes.profile.messages
-                                : null
+                                : feature.includes('request')
+                                  ? `${Approutes.requests}?req=${metadata?.request_id}`
+                                  : null
                 );
             }}
             className={`${

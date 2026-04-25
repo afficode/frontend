@@ -74,6 +74,7 @@ export const Approutes = {
     logout: '/logout',
     media: '/boonfu-media',
     safety: '/safety-guides',
+    requests: '/requests',
     playground: '/playground',
     postAd: '/post-ad',
     postDecision: '/post-decision',

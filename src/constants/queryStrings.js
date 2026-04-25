@@ -3,4 +3,5 @@ export const queryStrings = {
     search: 'q',
     subCategory: 'sub',
     page: 'page',
+    category: 'cat',
 };

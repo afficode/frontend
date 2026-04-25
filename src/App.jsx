@@ -60,6 +60,7 @@ import {
     CookiePolicy,
     GrabSystem,
     Faq,
+    Requests,
 } from './pages';
 import { AppLayout, DashboardLayout } from './layout';
 import { Approutes } from './constants';
@@ -98,6 +99,7 @@ function App() {
                     <Route path={Approutes.auth.reverifyEmail} element={<ReverifyEmail />} />
                     <Route path={Approutes.auth.resetPassword} element={<ResetPassword />} />
                     <Route path={Approutes.logout} element={<Logout />} />
+                    <Route path={Approutes.requests} element={<Requests />} />
                     <Route path={Approutes.product.initial} element={<Products />} />
                     <Route path={Approutes.product.view} element={<ViewProduct />} />
                     <Route path={Approutes.product.category} element={<Categories />} />
