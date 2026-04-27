@@ -11,7 +11,11 @@ import { formatTimeAgo } from '../../../utils';
 import { Approutes } from '../../../constants';
 import { useNavigate } from 'react-router-dom';
 
+<<<<<<< HEAD
 const RequestCard = ({ data, setModalOpen, setRequestId, mainCategories }) => {
+=======
+const RequestCard = ({ data, setModalOpen, setRequestId, mainCategories, notify }) => {
+>>>>>>> 00fe4e76665a2de3efed7d18a8db284fad249f44
     const { user, isLogin } = useAuth();
     const isOwner = user?.id === data?.publisher;
     const [editOpen, setEditOpen] = useState(false);
@@ -34,6 +38,15 @@ const RequestCard = ({ data, setModalOpen, setRequestId, mainCategories }) => {
                 onClick={handleClick}
                 className='bg-white w-full h-full flex flex-col justify-between rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer hover:scale-103 group relative'
             >
+<<<<<<< HEAD
+=======
+                {notify && (
+                    <span
+                        title='You have new message'
+                        className='absolute top-4 right-4 w-3 h-3 bg-secondary rounded-full animate-ping z-20'
+                    ></span>
+                )}
+>>>>>>> 00fe4e76665a2de3efed7d18a8db284fad249f44
                 {data?.image && (
                     <div className='w-full h-full  max-h-[260px] relative '>
                         <div className={`${BADGE_STYLE} absolute top-4 left-4`}>
@@ -42,7 +55,11 @@ const RequestCard = ({ data, setModalOpen, setRequestId, mainCategories }) => {
                         <img
                             src={data?.image}
                             alt={data?.item_name}
+<<<<<<< HEAD
                             className='w-full h-full object-contain rounded-t-2xl'
+=======
+                            className='w-full h-full object-cover rounded-t-2xl'
+>>>>>>> 00fe4e76665a2de3efed7d18a8db284fad249f44
                         />
                     </div>
                 )}
