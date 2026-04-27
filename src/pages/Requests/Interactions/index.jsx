@@ -6,16 +6,21 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { IoMdClose } from 'react-icons/io';
 import { useGetInteraction, useGetInteractions, useGetRequest } from '../../../hooks';
 import SpinnerSkeleton from '../../../components/SpinnersUi';
+import { useSearchParams } from 'react-router-dom';
 
 const RequestInteractions = ({ isOpen, setIsOpen, requestId }) => {
+    const [searchParams, setSearchParams] = useSearchParams();
+    const interactionId = searchParams.get('interaction');
     const [chatWindow, setChatWindow] = useState(false);
     const [activeSelectionId, setActiveSelectionId] = useState(null);
 
     useEffect(() => {
-        if (isOpen && requestId) {
+        if (isOpen && interactionId) {
+            setActiveSelectionId(interactionId);
+        } else if (isOpen && requestId) {
             setActiveSelectionId(requestId);
         }
-    }, [isOpen, requestId]);
+    }, [isOpen, requestId, interactionId]);
 
     const { data: requestRes, isLoading: requestLoading } = useGetRequest(requestId, {
         enabled: !!requestId && isOpen,
@@ -75,6 +80,7 @@ const RequestInteractions = ({ isOpen, setIsOpen, requestId }) => {
         setIsOpen(false);
         setChatWindow(false);
         setActiveSelectionId(null);
+        setSearchParams({});
     }, [setIsOpen]);
 
     const isItemActive = (item) => {

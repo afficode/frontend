@@ -7,18 +7,20 @@ const InteractionList = ({ data, isActive, handleSelectInteraction }) => {
     const displayMessage = data?.last_user_option
         ? getDiscussionText(data.last_user_option)
         : 'Start a conversation...';
-    const displayName = data?.name || data?.publisher_name || 'User';
     const { user } = useAuth();
     const { onlineUsers } = useMessageContext();
+
+    const isPublisher = data?.publisher_id === user?.id;
+    const displayName = isPublisher
+        ? data?.interactor_name || data?.name || 'User'
+        : data?.publisher_name || data?.name || 'User';
 
     const otherUserId =
         data?.publisher_id === user?.id
             ? data?.interactor_id
             : data?.interactor_id === user?.id
                 ? data?.publisher_id
-                : data?.publisher === user?.id
-                    ? 'user'
-                    : data?.publisher;
+                : null;
     const isOnline = onlineUsers.includes(otherUserId);
 
     return (

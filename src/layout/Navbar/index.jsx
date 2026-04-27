@@ -787,18 +787,18 @@ const Navbar = () => {
                                         />
                                     )}
                                 </li> */}
-                                <li className='mr-4 bg-white  border-2 border-secondary rounded-xl '>
+                                <li className='mr-4 bg-secondary  animate-pulse hover:animate-none '>
                                     <Link
                                         to={Approutes.requests}
                                         tabIndex={0}
-                                        className={`${listStyles} !text-secondary`}
+                                        className={`${listStyles} !text-black`}
                                     >
                                         REQUEST IT
                                     </Link>
                                     <Link to={Approutes.requests} className={mobileListStyles}>
                                         <VscGitPullRequestGoToChanges
                                             size={25}
-                                            className='text-secondary'
+                                            className='text-black'
                                         />
                                     </Link>
                                 </li>
