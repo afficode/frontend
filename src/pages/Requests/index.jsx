@@ -153,7 +153,7 @@ const Requests = () => {
                     {isDataLoading
                         ? Array.from({ length: 6 }).map((_, i) => <RequestCardSkeleton key={i} />)
                         : activeTab === 'all'
-                            ? data?.requests
+                          ? data?.requests
                                 ?.sort((a, b) => new Date(b.created_on) - new Date(a.created_on))
                                 .map((request) => (
                                     <RequestCard
@@ -165,7 +165,7 @@ const Requests = () => {
                                         mainCategories={mainCategories}
                                     />
                                 ))
-                            : userRequests?.requests
+                          : userRequests?.requests
                                 ?.sort((a, b) => new Date(b.created_on) - new Date(a.created_on))
                                 .map((request) => (
                                     <RequestCard

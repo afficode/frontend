@@ -9,13 +9,13 @@ const CACHE_CONFIG = {
     refetchOnMount: false,
     refetchInterval: false,
     refetchIntervalInBackground: false,
-}
+};
 
 export const useGetRequests = (params) => {
     const getRequests = () => api.get(`${backendLink}request`, { params }).then((res) => res?.data);
 
     return useQuery(['get-requests', params], getRequests, {
-        ...CACHE_CONFIG, 
+        ...CACHE_CONFIG,
         staleTime: 5 * 60 * 1000,
     });
 };
