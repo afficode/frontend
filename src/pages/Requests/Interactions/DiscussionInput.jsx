@@ -79,21 +79,12 @@ const DiscussionInput = ({
     if (isChatClosed) {
         return (
             <div className='bg-white p-4 flex flex-col items-center justify-center border-t border-gray-100 min-h-[80px] gap-2'>
-<<<<<<< HEAD
                 <span className='text-sm text-gray-500 font-bold uppercase'>
                     This conversation is closed
                 </span>
                 {shareContactSelected && role === 'publisher' ? (
                     <div className='bg-secondary/80 border border-gray-100 rounded-xl p-3 flex flex-col items-center shadow-sm w-full max-w-[300px]'>
                         <span className='text-xs text-black font-bold uppercase mb-1'>
-=======
-                <span className='text-sm text-secondary font-bold uppercase'>
-                    This conversation is closed
-                </span>
-                {shareContactSelected && role === 'publisher' ? (
-                    <div className='bg-gray-50 border border-gray-100 rounded-xl p-3 flex flex-col items-center shadow-sm w-full max-w-[300px]'>
-                        <span className='text-xs text-gray-500 font-bold uppercase mb-1'>
->>>>>>> 00fe4e76665a2de3efed7d18a8db284fad249f44
                             Interactor Contact
                         </span>
                         <a
@@ -106,11 +97,7 @@ const DiscussionInput = ({
                         </a>
                     </div>
                 ) : shareContactSelected && role === 'interactor' ? (
-<<<<<<< HEAD
                     <div className='bg-secondary/80 border border-gray-100 rounded-xl p-3 flex flex-col items-center shadow-sm w-full max-w-[300px]'>
-=======
-                    <div className='bg-gray-50 border border-gray-100 rounded-xl p-3 flex flex-col items-center shadow-sm w-full max-w-[300px]'>
->>>>>>> 00fe4e76665a2de3efed7d18a8db284fad249f44
                         <span className='text-sm font-extrabold text-black'>
                             Your contact has been shared
                         </span>

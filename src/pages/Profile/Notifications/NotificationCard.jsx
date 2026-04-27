@@ -19,7 +19,6 @@ const NotificationCard = ({ feature, body, time, id, adId, isRead, metadata }) =
                     feature.includes('inspection_log') && metadata && metadata?.ad_owner === user.id
                         ? Approutes.product.initial + '/' + adId
                         : feature.includes('inspection_log')
-<<<<<<< HEAD
                             ? Approutes.grab.inspectionLog
                             : feature.includes('escrow')
                                 ? Approutes.profile.transactions
@@ -30,18 +29,6 @@ const NotificationCard = ({ feature, body, time, id, adId, isRead, metadata }) =
                                         : feature.includes('request')
                                             ? `${Approutes.requests}?interaction=${metadata?.interaction_id}`
                                             : null
-=======
-                          ? Approutes.grab.inspectionLog
-                          : feature.includes('escrow')
-                            ? Approutes.profile.transactions
-                            : feature.includes('ads')
-                              ? Approutes.product.initial + '/' + adId
-                              : feature.includes('message')
-                                ? Approutes.profile.messages
-                                : feature.includes('request')
-                                  ? `${Approutes.requests}?req=${metadata?.request_id}`
-                                  : null
->>>>>>> 00fe4e76665a2de3efed7d18a8db284fad249f44
                 );
             }}
             className={`${isRead === 1 ? 'bg-white' : 'bg-primary/20'
