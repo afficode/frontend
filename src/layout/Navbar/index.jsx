@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation, useSearchParams, useNavigate } from 'react-router-dom';
 import { Approutes } from '../../constants/routes';
 import { CategoryDropdown, WalletDropdown } from '../../ui';
-import { BoonfuWhite } from '../../assets/images';
+import { BoonfuWhite, RequestIcon } from '../../assets/images';
 import { useCategories, useStates } from '../../hooks';
 import useAuth from '../../context/UserContext';
 import useMessageContext from '../../context/MessageContext';
@@ -14,7 +14,7 @@ import { IoWalletOutline } from 'react-icons/io5';
 import { BiEnvelope } from 'react-icons/bi';
 import { GoBookmark } from 'react-icons/go';
 import { IoMdClose } from 'react-icons/io';
-import { VscGitPullRequestGoToChanges, VscMenu } from 'react-icons/vsc';
+import { VscMenu } from 'react-icons/vsc';
 import { CgProfile } from 'react-icons/cg';
 import { MdMiscellaneousServices } from 'react-icons/md';
 import { FaCarSide, FaBuilding, FaRegHandshake } from 'react-icons/fa';
@@ -731,6 +731,7 @@ const Navbar = () => {
                                         className={mobileListStyles}
                                     >
                                         <MdMiscellaneousServices size={25} />
+
                                     </Link>
                                     {filteredCategories?.servicesCat && (
                                         <CategoryDropdown
@@ -796,10 +797,7 @@ const Navbar = () => {
                                         REQUEST IT
                                     </Link>
                                     <Link to={Approutes.requests} className={mobileListStyles}>
-                                        <VscGitPullRequestGoToChanges
-                                            size={25}
-                                            className='text-black'
-                                        />
+                                        <img src={RequestIcon} alt="Request" className='w-6 p-[0.125rem]' />
                                     </Link>
                                 </li>
                             </ul>

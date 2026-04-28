@@ -7,7 +7,6 @@ const InteractionList = ({ data, isActive, handleSelectInteraction }) => {
     const displayMessage = data?.last_user_option
         ? getDiscussionText(data.last_user_option)
         : 'Start a conversation...';
-<<<<<<< HEAD
     const { user } = useAuth();
     const { onlineUsers } = useMessageContext();
 
@@ -16,24 +15,12 @@ const InteractionList = ({ data, isActive, handleSelectInteraction }) => {
         ? data?.interactor_name || data?.name || 'User'
         : data?.publisher_name || data?.name || 'User';
 
-=======
-    const displayName = data?.name || data?.publisher_name || 'User';
-    const { user } = useAuth();
-    const { onlineUsers } = useMessageContext();
-
->>>>>>> 00fe4e76665a2de3efed7d18a8db284fad249f44
     const otherUserId =
         data?.publisher_id === user?.id
             ? data?.interactor_id
             : data?.interactor_id === user?.id
                 ? data?.publisher_id
-<<<<<<< HEAD
                 : null;
-=======
-                : data?.publisher === user?.id
-                    ? 'user'
-                    : data?.publisher;
->>>>>>> 00fe4e76665a2de3efed7d18a8db284fad249f44
     const isOnline = onlineUsers.includes(otherUserId);
 
     return (
