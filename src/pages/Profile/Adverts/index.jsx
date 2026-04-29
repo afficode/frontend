@@ -13,7 +13,7 @@ const Adverts = () => {
     const { data: ads, isLoading } = useMyAds();
 
     const adsData = ads?.active_ads.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-
+    console.log(ads)
     return (
         <div className='max-w-[1224px] mx-auto px-4 my-10'>
             <div className='px-2 py-6 mb-12 space-y-8 border lg:px-8 border-black/30 rounded-3xl'>

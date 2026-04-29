@@ -78,7 +78,7 @@ const AdCard = ({
         });
     };
 
-    const createdAt = (feature === '3' && new Date(grab_activity[0]?.created_at)) || new Date();
+    const createdAt = (feature === '3' && new Date(grab_activity?.[0]?.created_at || new Date()));
 
     const diffInMs = Date.now() - createdAt;
     const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
@@ -87,6 +87,7 @@ const AdCard = ({
         feature === '3' && diffInDays > GRAB_AD_EXPIRY_DAYS && active != '2' && available != '0';
 
     const expiryDate = addDays(new Date(createdAt), GRAB_AD_EXPIRY_DAYS);
+    console.log(title, createdAt, isExpired, expiryDate);
 
     return (
         <Link
