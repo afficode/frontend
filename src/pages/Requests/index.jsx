@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useCategories, useGetRequests, useGetUserRequests } from '../../hooks';
 import RequestCard from './Card';
 import { RiSparkling2Fill } from 'react-icons/ri';
@@ -20,7 +20,6 @@ const Requests = () => {
     const [activeTab, setActiveTab] = useState('all');
     const [searchParams, setSearchParams] = useSearchParams();
     const PAGE = Number(searchParams.get(queryStrings.page)) || 1;
-    const notifyId = searchParams.get('req');
 
     const params = useMemo(
         () => ({
@@ -35,6 +34,13 @@ const Requests = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isAddOpen, setIsAddOpen] = useState(false);
     const [requestId, setRequestId] = useState(null);
+    const interactionId = searchParams.get('interaction');
+
+    useEffect(() => {
+        if (interactionId) {
+            setIsOpen(true);
+        }
+    }, [interactionId]);
 
     const mainCategories = useMemo(() => {
         return categories?.slice(0, 14) || [];
@@ -157,7 +163,6 @@ const Requests = () => {
                                         data={request}
                                         setModalOpen={setIsOpen}
                                         mainCategories={mainCategories}
-                                        notify={notifyId === request.request_id}
                                     />
                                 ))
                           : userRequests?.requests
@@ -170,7 +175,6 @@ const Requests = () => {
                                         data={request}
                                         setModalOpen={setIsOpen}
                                         mainCategories={mainCategories}
-                                        notify={notifyId === request.request_id}
                                     />
                                 ))}
                 </div>
@@ -231,7 +235,7 @@ const Requests = () => {
             <button
                 type='button'
                 onClick={() => setIsAddOpen(true)}
-                className='max-md:bottom-[5.25rem] max-md:right-3 max-md:flex-col max-md:text-xs max-md:rounded-2xl max-md:p-2 flex  items-center py-2 px-4 rounded-full font-semibold bg-primary text-white fixed bottom-8 right-4 shadow-xl gap-1 border border-white z-20'
+                className='max-md:bottom-[5.25rem] max-md:right-3 max-md:flex-col max-md:text-xs max-md:rounded-2xl max-md:p-2 flex  items-center py-2 px-4 rounded-full font-semibold bg-primary text-white max-md:bg-secondary max-md:text-black fixed bottom-8 right-4 shadow-xl gap-1 border border-white z-20'
             >
                 <IoMdAdd size={25} className='font-bold' /> Request
             </button>

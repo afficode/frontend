@@ -467,14 +467,14 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
                         : vehicleAccessoriesTypeOptions,
             },
             ['5005', '5007'].includes(selectedVehicleCategory) &&
-            otherType && {
-                control: 'input',
-                label: 'Other Type',
-                name: 'type_other',
-                type: 'text',
-                placeholder: 'Enter type',
-                required: true,
-            },
+                otherType && {
+                    control: 'input',
+                    label: 'Other Type',
+                    name: 'type_other',
+                    type: 'text',
+                    placeholder: 'Enter type',
+                    required: true,
+                },
             !['5002', '5005'].includes(selectedVehicleCategory) && {
                 control: 'checkbox',
                 type: 'checkbox',
@@ -950,13 +950,13 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
                 options: servicesExpertiseOptions,
             },
             selectedServicesCategory === '5206' &&
-            otherExpertise && {
-                control: 'input',
-                label: 'Other Expertise',
-                name: 'expertise',
-                type: 'text',
-                placeholder: 'Enter expertise',
-            },
+                otherExpertise && {
+                    control: 'input',
+                    label: 'Other Expertise',
+                    name: 'expertise',
+                    type: 'text',
+                    placeholder: 'Enter expertise',
+                },
 
             selectedServicesCategory === '5213' && {
                 control: 'select',
@@ -984,13 +984,13 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
                 ],
             },
             selectedServicesCategory === '5213' &&
-            otherMake && {
-                control: 'input',
-                label: 'Other Make of vehicle',
-                name: 'make_other',
-                type: 'text',
-                placeholder: 'Enter make',
-            },
+                otherMake && {
+                    control: 'input',
+                    label: 'Other Make of vehicle',
+                    name: 'make_other',
+                    type: 'text',
+                    placeholder: 'Enter make',
+                },
             {
                 control: 'radio',
                 label: 'Available to Travel',
@@ -1321,14 +1321,14 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
             },
 
             ['5404', '5405', '5407', '5408', '5410'].includes(selectedElectronicsCategory) &&
-            otherType && {
-                control: 'input',
-                label: 'Other Type',
-                name: 'type',
-                type: 'text',
-                placeholder: 'Enter type',
-                required: true,
-            },
+                otherType && {
+                    control: 'input',
+                    label: 'Other Type',
+                    name: 'type',
+                    type: 'text',
+                    placeholder: 'Enter type',
+                    required: true,
+                },
 
             selectedElectronicsCategory === '5402' && {
                 control: 'select',
@@ -1451,14 +1451,14 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
                 options: processorsOptions,
             },
             selectedElectronicsCategory === '5409' &&
-            otherProcessor && {
-                control: 'input',
-                type: 'text',
-                label: 'Other Processor',
-                name: 'processor_other',
-                placeholder: 'Enter other processor',
-                required: true,
-            },
+                otherProcessor && {
+                    control: 'input',
+                    type: 'text',
+                    label: 'Other Processor',
+                    name: 'processor_other',
+                    placeholder: 'Enter other processor',
+                    required: true,
+                },
             selectedElectronicsCategory === '5409' && {
                 control: 'select',
                 label: 'Operating System',
@@ -3088,14 +3088,14 @@ const CategoryForm = ({ categoryId, categoryName, initialValues }) => {
                 options: motorbikeTypeOptions,
             },
             selectedMotorbikeCategory === '6301' &&
-            otherType && {
-                control: 'input',
-                label: 'Other Type',
-                name: 'type_other',
-                type: 'text',
-                placeholder: 'Enter type',
-                required: true,
-            },
+                otherType && {
+                    control: 'input',
+                    label: 'Other Type',
+                    name: 'type_other',
+                    type: 'text',
+                    placeholder: 'Enter type',
+                    required: true,
+                },
             {
                 control: 'textarea',
                 label: 'Description',

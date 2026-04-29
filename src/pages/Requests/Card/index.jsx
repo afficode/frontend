@@ -11,7 +11,7 @@ import { formatTimeAgo } from '../../../utils';
 import { Approutes } from '../../../constants';
 import { useNavigate } from 'react-router-dom';
 
-const RequestCard = ({ data, setModalOpen, setRequestId, mainCategories, notify }) => {
+const RequestCard = ({ data, setModalOpen, setRequestId, mainCategories }) => {
     const { user, isLogin } = useAuth();
     const isOwner = user?.id === data?.publisher;
     const [editOpen, setEditOpen] = useState(false);
@@ -34,12 +34,6 @@ const RequestCard = ({ data, setModalOpen, setRequestId, mainCategories, notify 
                 onClick={handleClick}
                 className='bg-white w-full h-full flex flex-col justify-between rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer hover:scale-103 group relative'
             >
-                {notify && (
-                    <span
-                        title='You have new message'
-                        className='absolute top-4 right-4 w-3 h-3 bg-secondary rounded-full animate-ping z-20'
-                    ></span>
-                )}
                 {data?.image && (
                     <div className='w-full h-full  max-h-[260px] relative '>
                         <div className={`${BADGE_STYLE} absolute top-4 left-4`}>
@@ -48,7 +42,7 @@ const RequestCard = ({ data, setModalOpen, setRequestId, mainCategories, notify 
                         <img
                             src={data?.image}
                             alt={data?.item_name}
-                            className='w-full h-full object-cover rounded-t-2xl'
+                            className='w-full h-full object-contain rounded-t-2xl'
                         />
                     </div>
                 )}

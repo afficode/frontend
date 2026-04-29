@@ -27,7 +27,7 @@ const NotificationCard = ({ feature, body, time, id, adId, isRead, metadata }) =
                               : feature.includes('message')
                                 ? Approutes.profile.messages
                                 : feature.includes('request')
-                                  ? `${Approutes.requests}?req=${metadata?.request_id}`
+                                  ? `${Approutes.requests}?interaction=${metadata?.interaction_id}`
                                   : null
                 );
             }}
@@ -48,7 +48,9 @@ const NotificationCard = ({ feature, body, time, id, adId, isRead, metadata }) =
                                     ? 'bg-blue-500'
                                     : feature.includes('escrow_refund')
                                       ? 'bg-orange-500'
-                                      : 'bg-green-500'
+                                      : feature.includes('request')
+                                        ? 'bg-secondary !text-black'
+                                        : 'bg-green-500'
                         } text-white w-fit text-xs rounded-md`}
                     >
                         {feature.split('_').join(' ')}

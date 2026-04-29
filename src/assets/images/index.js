@@ -18,6 +18,7 @@ export { default as Three } from './three.png';
 export { default as PaymentSuccessful } from './PaymentSuccessful.png';
 export { default as Property } from './property.png';
 export { default as PropertyHeader } from './propertyHeader.png';
+export { default as RequestIcon } from './RequestIcon.png';
 export { default as Sale } from './sale.png';
 export { default as Services } from './services.png';
 export { default as SportCar } from './sportCar.png';

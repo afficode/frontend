@@ -30,10 +30,11 @@ const SideBar = ({ displayCategories, currentCategoryId }) => {
                         displayCategories?.map((cat, index) => (
                             <span
                                 key={index}
-                                className={`hover:text-primary hover:underline hover:font-bold ease-in cursor-pointer tracking-tighter line-clamp-1 ${cat.category === currentCategoryId
+                                className={`hover:text-primary hover:underline hover:font-bold ease-in cursor-pointer tracking-tighter line-clamp-1 ${
+                                    cat.category === currentCategoryId
                                         ? 'text-primary font-semibold'
                                         : ''
-                                    }`}
+                                }`}
                                 onClick={() => handleCategoryChange(cat.category)}
                             >
                                 {cat.name} ({cat.amount})
