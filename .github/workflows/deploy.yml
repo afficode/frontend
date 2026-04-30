@@ -5,7 +5,7 @@ env:
 
 on:
     push:
-        branches: [dev, main]
+        branches: [ dev, main ]
 
 jobs:
     build-or-promote:
@@ -74,8 +74,8 @@ jobs:
             - name: Trigger Coolify (Main/Prod)
               if: github.ref == 'refs/heads/main'
               run: |
-                  curl --request GET '${{ secrets.COOLIFY_PROD_WEBHOOK }}' --header 'Authorization: Bearer ${{ secrets.COOLIFY_PROD_TOKEN }}'
+                  curl --request GET '${{ vars.COOLIFY_PROD_WEBHOOK_URL }}' --header 'Authorization: Bearer ${{ secrets.COOLIFY_PROD_TOKEN }}'
             - name: Trigger Coolify (Dev)
               if: github.ref == 'refs/heads/dev'
               run: |
-                  curl --request GET '${{ secrets.COOLIFY_DEV_WEBHOOK }}' --header 'Authorization: Bearer ${{ secrets.COOLIFY_DEV_TOKEN }}'
+                  curl --request GET '${{ vars.COOLIFY_DEV_WEBHOOK_URL }}' --header 'Authorization: Bearer ${{ secrets.COOLIFY_DEV_TOKEN }}'
