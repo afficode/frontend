@@ -2,7 +2,7 @@ import { Modal } from '../../../ui';
 import { MdChatBubbleOutline } from 'react-icons/md';
 import InteractionWindow from './InteractionWindow';
 import InteractionList from './InteractionList';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { IoMdClose } from 'react-icons/io';
 import { useGetInteraction, useGetInteractions, useGetRequest } from '../../../hooks';
 import SpinnerSkeleton from '../../../components/SpinnersUi';
@@ -11,7 +11,6 @@ import { useSearchParams } from 'react-router-dom';
 const RequestInteractions = ({ isOpen, setIsOpen, requestId }) => {
     const [searchParams, setSearchParams] = useSearchParams();
     const interactionId = searchParams.get('interaction');
-    const [chatWindow, setChatWindow] = useState(false);
     const [activeSelectionId, setActiveSelectionId] = useState(null);
 
     useEffect(() => {
@@ -70,6 +69,20 @@ const RequestInteractions = ({ isOpen, setIsOpen, requestId }) => {
         activeItem?.interaction_id ||
         interactionData?.interactionId ||
         interactionData?.interaction_id;
+
+    const [chatWindow, setChatWindow] = useState(false);
+    const initializedForRequestId = useRef(null);
+
+    useEffect(() => {
+        if (!interactionLoading && !requestLoading && requestId !== initializedForRequestId.current) {
+            if (requestId && !actualInteractionId) {
+                setChatWindow(true);
+            } else {
+                setChatWindow(false);
+            }
+            initializedForRequestId.current = requestId;
+        }
+    }, [actualInteractionId, interactionLoading, requestLoading, requestId]);
 
     const handleSelectInteraction = useCallback((item) => {
         setActiveSelectionId(item.interaction_id || item.request_id);
