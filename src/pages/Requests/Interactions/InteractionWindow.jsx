@@ -6,6 +6,7 @@ import useAuth from '../../../context/UserContext';
 import { useGetDiscussion } from '../../../hooks';
 import { useEffect, useRef } from 'react';
 import { format } from 'date-fns';
+import { FiArrowLeft } from 'react-icons/fi';
 
 const InteractionWindow = ({ request, requestId, interactionId, setIsOpen, setChatWindow }) => {
     const { user } = useAuth();
@@ -46,9 +47,9 @@ const InteractionWindow = ({ request, requestId, interactionId, setIsOpen, setCh
     const displayOtherPersonaName = isPublisher
         ? discussions?.interaction?.interactor_name || request?.name || 'User'
         : discussions?.interaction?.publisher_name ||
-          request?.publisher_name ||
-          request?.name ||
-          'User';
+        request?.publisher_name ||
+        request?.name ||
+        'User';
 
     const discussionDisabled = (isPublisher && discussionsList.length === 0) || isLastMessageFromMe;
 
@@ -111,9 +112,20 @@ const InteractionWindow = ({ request, requestId, interactionId, setIsOpen, setCh
             {/* chat window */}
             <div className=' bg-gray-100/40 h-full px-2 sm:px-4 flex flex-col gap-4 overflow-y-auto'>
                 <div className='bg-white border border-gray-100 mt-2 sm:mt-4 p-3 sm:p-4 flex flex-col items-start gap-1 rounded-3xl shadow-sm'>
-                    <span className='uppercase font-extrabold text-[10px] text-gray-500'>
-                        Request context
-                    </span>
+                    <div className='flex items-center justify-between w-full'>
+                        <span className='uppercase font-extrabold text-[10px] text-gray-500'>
+                            Request context
+                        </span>
+
+                        <button
+                            className=' text-xs font-bold text-secondary underline md:hidden flex items-center gap-1'
+                            onClick={() => {
+                                setChatWindow(false);
+                            }}
+                        >
+                            <FiArrowLeft size={10} />
+                            Back</button>
+                    </div>
                     <h4 className='text-sm sm:text-base font-extrabold text-black capitalize'>
                         {discussions?.interaction?.item_name || request?.item_name}
                     </h4>
