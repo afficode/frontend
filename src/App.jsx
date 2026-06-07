@@ -61,6 +61,8 @@ import {
     GrabSystem,
     Faq,
     Requests,
+    RequestDetails,
+    RequestInteractions,
 } from './pages';
 import { AppLayout, DashboardLayout } from './layout';
 import { Approutes } from './constants';
@@ -99,7 +101,8 @@ function App() {
                     <Route path={Approutes.auth.reverifyEmail} element={<ReverifyEmail />} />
                     <Route path={Approutes.auth.resetPassword} element={<ResetPassword />} />
                     <Route path={Approutes.logout} element={<Logout />} />
-                    <Route path={Approutes.requests} element={<Requests />} />
+                    <Route path={Approutes.requests.initial} element={<Requests />} />
+                    <Route path={Approutes.requests.view} element={<RequestDetails />} />
                     <Route path={Approutes.product.initial} element={<Products />} />
                     <Route path={Approutes.product.view} element={<ViewProduct />} />
                     <Route path={Approutes.product.category} element={<Categories />} />
@@ -114,6 +117,10 @@ function App() {
                 <Route element={<RequireAuth />}>
                     {/* Use NavBar and Footer layout  */}
                     <Route element={<AppLayout />}>
+                        <Route
+                            path={Approutes.requests.interactions}
+                            element={<RequestInteractions />}
+                        />
                         <Route element={<DashboardLayout />}>
                             <Route
                                 path={Approutes.dashboard.initial}

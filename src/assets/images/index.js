@@ -10,6 +10,7 @@ export { default as Four } from './four.png';
 export { default as Furniture } from './furniture.png';
 export { default as House } from './house.png';
 export { default as ImageUpload } from './imageUpload.png';
+export { default as Interactors } from './Interactors.png';
 export { default as NigFlag } from './nigFlag.png';
 export { default as One } from './one.png';
 export { default as PreviewInfo } from './previewInfo.png';

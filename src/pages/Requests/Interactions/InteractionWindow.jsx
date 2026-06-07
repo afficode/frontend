@@ -7,18 +7,21 @@ import { useGetDiscussion } from '../../../hooks';
 import { useEffect, useRef } from 'react';
 import { format } from 'date-fns';
 import { FiArrowLeft } from 'react-icons/fi';
+import { useNavigate } from 'react-router-dom';
+import { Approutes } from '../../../constants';
 
-const InteractionWindow = ({ request, requestId, interactionId, setIsOpen, setChatWindow }) => {
+const InteractionWindow = ({ interactionId, setChatWindow }) => {
     const { user } = useAuth();
-    const latestMessageRef = useRef(null);
+    const scrollContainerRef = useRef(null);
 
     const { data: discussions, isLoading } = useGetDiscussion(interactionId, {
         enabled: interactionId !== undefined && interactionId !== null,
     });
 
     useEffect(() => {
-        if (latestMessageRef.current) {
-            latestMessageRef.current.scrollIntoView({ behavior: 'smooth' });
+        const container = scrollContainerRef.current;
+        if (container) {
+            container.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
         }
     }, [discussions]);
 
@@ -42,26 +45,24 @@ const InteractionWindow = ({ request, requestId, interactionId, setIsOpen, setCh
     )[discussionsList.length - 1];
     const isLastMessageFromMe = lastMessage?.user_id === user?.id;
 
-    const isPublisher = (discussions?.interaction?.publisher_id || request?.publisher) === user?.id;
+    const isPublisher = (discussions?.interaction?.publisher_id) === user?.id;
 
     const displayOtherPersonaName = isPublisher
-        ? discussions?.interaction?.interactor_name || request?.name || 'User'
-        : discussions?.interaction?.publisher_name ||
-        request?.publisher_name ||
-        request?.name ||
-        'User';
+        ? discussions?.interaction?.interactor_name || 'User'
+        : discussions?.interaction?.publisher_name || 'User';
 
     const discussionDisabled = (isPublisher && discussionsList.length === 0) || isLastMessageFromMe;
+    const navigate = useNavigate();
 
     return (
         <div className=' w-full h-full flex flex-col  '>
             {/* chat window header  */}
-            <div className='flex gap-2 justify-between items-start w-full pt-1 pb-2 sm:pb-4 px-4 border-b border-gray-200 '>
+            <div className='bg-white flex gap-2 justify-between items-start w-full pt-1 pb-2 sm:pb-4 px-4 border-b border-gray-200 '>
                 <div className='flex items-center gap-2'>
-                    {discussions?.interaction?.image || request?.image ? (
+                    {discussions?.interaction?.image ? (
                         <img
-                            src={discussions?.interaction?.image || request?.image}
-                            alt={request?.item_name || 'Item'}
+                            src={discussions?.interaction?.image}
+                            alt={discussions?.interaction?.item_name || 'Item'}
                             className='w-10 h-10 rounded-full object-cover'
                         />
                     ) : (
@@ -92,50 +93,37 @@ const InteractionWindow = ({ request, requestId, interactionId, setIsOpen, setCh
                         <span className='font-bold text-[10px] sm:text-xs text-primary uppercase'>
                             RE:{' '}
                             {discussions?.interaction?.item_name ||
-                                request?.item_name ||
                                 'Request Item'}
                         </span>
                     </div>
                 </div>
 
                 <button
-                    className='bg-white p-2 rounded-full shadow-lg'
+                    className='hidden md:flex text-secondary hover:underline text-sm  items-center'
                     onClick={() => {
-                        setIsOpen(false);
+                        navigate(Approutes.requests.initial)
                         setChatWindow(false);
                     }}
                 >
-                    <IoMdClose size={20} className='text-gray-500' />
+                    <FiArrowLeft />   Back
+                </button>
+                <button
+                    className='max-md:flex hidden text-secondary hover:underline text-sm items-center'
+                    onClick={() => {
+                        setChatWindow(false);
+                    }}
+                >
+                    <FiArrowLeft />   Back
                 </button>
             </div>
 
             {/* chat window */}
             <div className=' bg-gray-100/40 h-full px-2 sm:px-4 flex flex-col gap-4 overflow-y-auto'>
-                <div className='bg-white border border-gray-100 mt-2 sm:mt-4 p-3 sm:p-4 flex flex-col items-start gap-1 rounded-3xl shadow-sm'>
-                    <div className='flex items-center justify-between w-full'>
-                        <span className='uppercase font-extrabold text-[10px] text-gray-500'>
-                            Request context
-                        </span>
 
-                        <button
-                            className=' text-xs font-bold text-secondary underline md:hidden flex items-center gap-1'
-                            onClick={() => {
-                                setChatWindow(false);
-                            }}
-                        >
-                            <FiArrowLeft size={10} />
-                            Back</button>
-                    </div>
-                    <h4 className='text-sm sm:text-base font-extrabold text-black capitalize'>
-                        {discussions?.interaction?.item_name || request?.item_name}
-                    </h4>
-                    <span className='text-[10px] sm:text-xs text-gray-500 font-semibold'>
-                        The conversation is regarding the request for "
-                        {discussions?.interaction?.item_name || request?.item_name}".
-                    </span>
-                </div>
-
-                <div className='mt-auto flex flex-col py-3 pr-3 overflow-x-hidden overflow-y-auto scrollbar-thin scrollbar-track-white scrollbar-thumb-rounded-md scrollbar-thumb-secondary scrollbar-track-rounded-md '>
+                <div
+                    ref={scrollContainerRef}
+                    className='mt-auto flex flex-col py-3 pr-3 overflow-x-hidden overflow-y-auto scrollbar-thin scrollbar-track-white scrollbar-thumb-rounded-md scrollbar-thumb-secondary scrollbar-track-rounded-md '
+                >
                     {isLoading ? (
                         <div className='flex-1 flex flex-col items-center justify-center text-gray-400 opacity-60 min-h-[100px]'>
                             <span className='font-semibold text-sm'>Loading...</span>
@@ -154,9 +142,6 @@ const InteractionWindow = ({ request, requestId, interactionId, setIsOpen, setCh
                                         <div
                                             key={i}
                                             className={`w-fit max-w-[80%] py-2 ${message.user_id === user.id ? 'ml-auto' : ''}`}
-                                            ref={
-                                                i === messages.length - 1 ? latestMessageRef : null
-                                            }
                                         >
                                             <Discussion
                                                 message={message}
@@ -182,7 +167,6 @@ const InteractionWindow = ({ request, requestId, interactionId, setIsOpen, setCh
                     </div>
                 ) : (
                     <DiscussionInput
-                        requestId={requestId}
                         interactionId={interactionId}
                         role={isPublisher ? 'publisher' : 'interactor'}
                         disabled={discussionDisabled}

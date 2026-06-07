@@ -1,5 +1,5 @@
+import { interactorResponse, publisherResponse } from '../../../constants';
 import {
-    useCreateInteraction,
     useSendDiscussion,
     useImageCompressor,
     useNotify,
@@ -7,14 +7,12 @@ import {
 import { addWatermarkToImage } from '../../../utils';
 
 const DiscussionInput = ({
-    requestId,
     interactionId,
     role,
     disabled,
     discussionsList,
     interaction,
 }) => {
-    const { mutate: createInteraction, isLoading: isCreating } = useCreateInteraction(requestId);
     const { mutate: sendDiscussion, isLoading: isSending } = useSendDiscussion();
     const { compressImages } = useImageCompressor();
     const notify = useNotify();
@@ -60,13 +58,11 @@ const DiscussionInput = ({
         if (interactionId) {
             payload.append('interaction_id', interactionId);
             sendDiscussion(payload, { onSuccess, onError });
-        } else {
-            createInteraction(payload, { onSuccess, onError });
         }
     };
 
     const response = role === 'publisher' ? publisherResponse : interactorResponse;
-    const isLoading = isCreating || isSending;
+    const isLoading = isSending;
 
     const shareContactSelected =
         interaction?.show_contact === 1 ||
@@ -119,6 +115,15 @@ const DiscussionInput = ({
                         Hold for {role === 'publisher' ? 'interactor' : 'publisher'} response
                     </span>
                 )}
+            </div>
+        );
+    }
+    if (!interactionId) {
+        return (
+            <div className='bg-white p-4 flex items-center justify-center border-t border-gray-100 min-h-[60px]'>
+                <span className='text-sm text-secondary font-semibold italic'>
+                    Select an Interaction to start a conversation
+                </span>
             </div>
         );
     }
@@ -199,52 +204,3 @@ const DiscussionInput = ({
 
 export default DiscussionInput;
 
-const publisherResponse = [
-    {
-        label: 'Thank you, can you share image of this item?',
-        value: 'share_image',
-        type: 'text',
-    },
-    {
-        label: 'Can i see more images of this item',
-        value: 'more_image',
-        type: 'text',
-    },
-    {
-        label: 'I am interested, share contact',
-        value: 'share_contact',
-        type: 'contact',
-    },
-    {
-        label: 'I am not interested, thank you!',
-        value: 'not_interested',
-        type: 'close',
-    },
-];
-const interactorResponse = [
-    {
-        label: 'I have this Item',
-        value: 'have_item',
-        type: 'text',
-    },
-    {
-        label: 'I know exactly where you can get this',
-        value: 'know_where_to_get_item',
-        type: 'text',
-    },
-    {
-        label: 'I have something similar',
-        value: 'have_something_similar',
-        type: 'text',
-    },
-    {
-        label: 'Share image',
-        value: 'share_image_interactor',
-        type: 'file',
-    },
-    {
-        label: 'Share image(s)',
-        value: 'more_image_interactor',
-        type: 'files',
-    },
-];

@@ -353,9 +353,8 @@ const index = () => {
                                     </p>
                                     {!revealNumber ? (
                                         <button
-                                            className={`font-bold  text-black bg-white rounded-none btn btn-sm hover:bg-primary hover:text-white hover:border-0 hover:rounded-sm ${
-                                                !isLogin && 'bg-gray-100 cursor-not-allowed'
-                                            }`}
+                                            className={`font-bold  text-black bg-white rounded-none btn btn-sm hover:bg-primary hover:text-white hover:border-0 hover:rounded-sm ${!isLogin && 'bg-gray-100 cursor-not-allowed'
+                                                }`}
                                             onClick={() => {
                                                 if (
                                                     isLogin &&
@@ -392,9 +391,8 @@ const index = () => {
 
                                     {!revealEmail ? (
                                         <button
-                                            className={`font-bold text-black bg-white rounded-none btn btn-sm hover:bg-primary hover:text-white hover:border-0 hover:rounded-sm ${
-                                                !isLogin && 'bg-gray-100 cursor-not-allowed'
-                                            } `}
+                                            className={`font-bold text-black bg-white rounded-none btn btn-sm hover:bg-primary hover:text-white hover:border-0 hover:rounded-sm ${!isLogin && 'bg-gray-100 cursor-not-allowed'
+                                                } `}
                                             onClick={() => {
                                                 if (
                                                     isLogin &&

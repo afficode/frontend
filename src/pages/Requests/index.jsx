@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useCategories, useGetRequests, useGetUserRequests } from '../../hooks';
 import RequestCard from './Card';
 import { RiSparkling2Fill } from 'react-icons/ri';
@@ -12,7 +12,6 @@ import { FaPlus } from 'react-icons/fa6';
 import { Button } from '../../ui';
 import useAuth from '../../context/UserContext';
 import { IoMdAdd } from 'react-icons/io';
-import RequestInteractions from './Interactions';
 
 const Requests = () => {
     const { isLogin } = useAuth();
@@ -31,16 +30,7 @@ const Requests = () => {
     );
 
     const { data: categories, isLoading: isCategoriesLoading } = useCategories();
-    const [isOpen, setIsOpen] = useState(false);
     const [isAddOpen, setIsAddOpen] = useState(false);
-    const [requestId, setRequestId] = useState(null);
-    const interactionId = searchParams.get('interaction');
-
-    useEffect(() => {
-        if (interactionId) {
-            setIsOpen(true);
-        }
-    }, [interactionId]);
 
     const mainCategories = useMemo(() => {
         return categories?.slice(0, 14) || [];
@@ -157,11 +147,8 @@ const Requests = () => {
                                 ?.sort((a, b) => new Date(b.created_on) - new Date(a.created_on))
                                 .map((request) => (
                                     <RequestCard
-                                        setRequestId={setRequestId}
                                         key={request.request_id}
-                                        modalOpen={isOpen}
                                         data={request}
-                                        setModalOpen={setIsOpen}
                                         mainCategories={mainCategories}
                                     />
                                 ))
@@ -169,11 +156,8 @@ const Requests = () => {
                                 ?.sort((a, b) => new Date(b.created_on) - new Date(a.created_on))
                                 .map((request) => (
                                     <RequestCard
-                                        setRequestId={setRequestId}
                                         key={request.request_id}
-                                        modalOpen={isOpen}
                                         data={request}
-                                        setModalOpen={setIsOpen}
                                         mainCategories={mainCategories}
                                     />
                                 ))}
@@ -225,7 +209,6 @@ const Requests = () => {
                 )}
             </div>
 
-            <RequestInteractions requestId={requestId} isOpen={isOpen} setIsOpen={setIsOpen} />
             <PostRequest
                 isOpen={isAddOpen}
                 setIsOpen={setIsAddOpen}
