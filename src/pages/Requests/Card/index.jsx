@@ -7,7 +7,7 @@ import EditRequest from '../Edit';
 import DeleteRequest from '../Delete';
 import { formatTimeAgo, slugGeneratorForAdIdWithName } from '../../../utils';
 import { useNavigate } from 'react-router-dom';
-import { Interactors } from '../../../assets/images';
+import { Declined, Interactors } from '../../../assets/images';
 
 const RequestCard = ({ data, mainCategories }) => {
     const { user } = useAuth();
@@ -24,8 +24,8 @@ const RequestCard = ({ data, mainCategories }) => {
         <>
             <div
                 role='button'
-                onClick={handleClick}
-                className='bg-white w-full h-full flex flex-col justify-between rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer hover:scale-103 group relative'
+                onClick={isOwner && data?.status === 'rejected' ? null : handleClick}
+                className=' bg-white w-full h-full flex flex-col justify-between rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer hover:scale-103 group relative'
             >
                 {data?.image && (
                     <div className='w-full h-full  max-h-[260px] relative '>
@@ -125,6 +125,43 @@ const RequestCard = ({ data, mainCategories }) => {
                         </div>
                     )}
                 </div>
+
+                {
+                    isOwner && data?.status === 'rejected' && (
+                        <div className='absolute inset-0 z-10 bg-gray-900/85 rounded-2xl h-full flex item-center justify-center flex-col p-4'>
+                            <div className='flex items-center justify-center'>
+                                <img src={Declined} className='' alt="Request Declined" />
+                            </div>
+                            <div className="flex item-center justify-center gap-2">
+                                <button
+                                    title='Edit'
+                                    className='p-2 bg-blue-50 rounded-full text-blue-500 hover:bg-blue-100 transition-colors'
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        setEditOpen(true);
+                                    }}
+                                >
+                                    <FiEdit size={15} />
+                                </button>
+                                <button
+                                    title='Delete'
+                                    className='p-2 bg-red-50 rounded-full text-red-500 hover:bg-red-100 transition-colors'
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        setDeleteOpen(true);
+                                    }}
+                                >
+                                    <FaRegTrashAlt size={15} />
+                                </button>
+                            </div>
+                            <div className='flex flex-col items-center  mt-4 px-2'>
+                                <h3 className='text-secondary font-bold'>Reason</h3>
+                                <p className='text-center !text-xs font-semibold text-white'>
+                                    {data?.reason}</p>
+                            </div>
+                        </div>
+                    )
+                }
             </div>
 
             <EditRequest

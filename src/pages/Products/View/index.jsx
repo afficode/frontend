@@ -31,7 +31,6 @@ import { categoryData } from '../../../constants/Category.js';
 const index = () => {
     let { id } = useParams();
     id = extractAdIdFromSlug(id);
-    const [items, setItems] = useState(null);
     const [revealNumber, setRevealNumber] = useState(false);
     const [revealEmail, setRevealEmail] = useState(false);
     const { isLogin, user } = useAuth();
@@ -39,15 +38,11 @@ const index = () => {
     const { isLoading: saveLoading } = getSaves();
     const notify = useNotify();
 
-    useEffect(() => {
-        if (result?.data) {
-            setItems(() => [
-                { name: 'Home', link: Approutes.home },
-                { name: 'Products', link: Approutes.product.initial },
-                { name: result?.data?.title },
-            ]);
-        }
-    }, [isLoading, saveLoading]);
+    const breadcrumbItems = result?.data ? [
+        { name: 'Home', link: Approutes.home },
+        { name: 'Products', link: Approutes.product.initial },
+        { name: result.data.title },
+    ] : [];
 
     useEffect(() => {
         if (result?.data?.available === 0 && user?.id !== result?.data?.user_id) {
@@ -241,7 +236,7 @@ const index = () => {
     ) : (
         <section className='w-full p-2 lg:p-4'>
             <header className='w-full'>
-                <Breadcrumb items={items} className={'text-md breadcrumbs text-primary'} />
+                <Breadcrumb items={breadcrumbItems} className={'text-md breadcrumbs text-primary'} />
             </header>
 
             <section className='flex flex-col  h-full w-full gap-2 md:flex-row md:items-stretch md:gap-8 line-clamp-1'>

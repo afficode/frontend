@@ -160,7 +160,8 @@ const Requests = () => {
                                         data={request}
                                         mainCategories={mainCategories}
                                     />
-                                ))}
+                                ))
+                    }
                 </div>
 
                 {hasNoRequests && (

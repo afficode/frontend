@@ -79,8 +79,6 @@ export const Approutes = {
         view: '/requests/:id',
         interactions: '/requests/interactions',
     },
-    requestView: '/requests/:id',
-    requestInteractions: '/requests/interactions',
     playground: '/playground',
     postAd: '/post-ad',
     postDecision: '/post-decision',

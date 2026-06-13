@@ -72,6 +72,25 @@ const DiscussionInput = ({
         discussionsList?.some((msg) => msg.user_option === 'not_interested') ||
         interaction?.closed === 1;
 
+    if (!isChatClosed && interaction?.deleted === 1 && role === 'interactor') {
+        return (
+            <div className='bg-white p-4 flex flex-col items-center justify-center border-t border-gray-100 min-h-[80px] gap-2'>
+                <span className='text-sm text-red-500 font-bold uppercase'>
+                    Publisher has just indicated he had received a satisfactory lead from an earlier interactor, please do well to stay active on Request page next time. Thanks for your interaction
+                </span>
+            </div>
+        )
+    }
+    if (!isChatClosed && interaction?.deleted === 1 && role === 'publisher') {
+        return (
+            <div className='bg-white p-4 flex flex-col items-center justify-center border-t border-gray-100 min-h-[80px] gap-2'>
+                <span className='text-sm text-red-500 font-bold uppercase'>
+                    You deleted this request
+                </span>
+            </div>
+        )
+    }
+
     if (isChatClosed) {
         return (
             <div className='bg-white p-4 flex flex-col items-center justify-center border-t border-gray-100 min-h-[80px] gap-2'>

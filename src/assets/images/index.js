@@ -6,6 +6,7 @@ export { default as BoonfuLogo } from './boonfuLogo.png';
 export { default as BoonfuLogo1 } from './BoonfuLogo1.png';
 export { default as BoonfuLogoWhiteBg } from './BoonfuLogoWhiteBg.png';
 export { default as BoonfuWhite } from './BoonfuWhite.webp';
+export { default as Declined } from './Declined.png';
 export { default as Four } from './four.png';
 export { default as Furniture } from './furniture.png';
 export { default as House } from './house.png';

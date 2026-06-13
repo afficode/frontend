@@ -15,32 +15,27 @@ import {
 import { AdListingStatus, Button } from '../../../ui';
 import { SEO } from '../../../components';
 import SpinnerSkeleton from '../../../components/SpinnersUi';
-import { useEffect, useState } from 'react';
 import Breadcrumb from '../../../components/Breadcrumb';
 import { categoryData } from '../../../constants/Category';
 import { Interactors } from '../../../assets/images';
+import { useQueryClient } from 'react-query';
 
 const RequestDetails = () => {
     const { id } = useParams();
     const requestId = extractAdIdFromSlug(id);
     const navigate = useNavigate();
     const { isLogin, user } = useAuth();
-    const [items, setItems] = useState()
 
     const { data: requestRes, isLoading } = useGetRequest(requestId, {
         enabled: !!requestId,
         isLogin,
     });
 
-    useEffect(() => {
-        if (requestRes?.request) {
-            setItems(() => [
-                { name: 'Home', link: Approutes.home },
-                { name: 'Requests', link: Approutes.requests.initial },
-                { name: requestRes?.request?.item_name },
-            ]);
-        }
-    }, [isLoading]);
+    const breadcrumbItems = requestRes?.request ? [
+        { name: 'Home', link: Approutes.home },
+        { name: 'Requests', link: Approutes.requests.initial },
+        { name: requestRes.request.item_name },
+    ] : [];
 
     const request = requestRes?.request;
     const isOwner = user?.id === request?.publisher;
@@ -59,6 +54,7 @@ const RequestDetails = () => {
     const { mutate: createInteraction, isLoading: isCreating } = useCreateInteraction(request?.request_id);
 
     const notify = useNotify();
+    const queryClient = useQueryClient()
 
     const handleOptionClick = async (option, event = null) => {
         let payload = { user_option: option.value };
@@ -70,10 +66,12 @@ const RequestDetails = () => {
             if (event?.target) event.target.value = null;
             notify(data?.message, 'success');
             navigate(`${Approutes.requests.interactions}?d=${data?.interactionId}`);
+
+            queryClient.invalidateQueries(['get-interactions']);
         };
 
         const onError = (err) => {
-            notify(err?.response?.data?.message || 'Failed to send message', 'error');
+            notify(err?.response?.data?.message || 'Failed to reach publisher', 'error');
         };
 
         createInteraction(payload, { onSuccess, onError });
@@ -109,14 +107,14 @@ const RequestDetails = () => {
     return (
         <section className='w-full p-2 lg:p-4'>
             <header className='w-full'>
-                <Breadcrumb items={items} className={'text-md breadcrumbs text-primary'} />
+                <Breadcrumb items={breadcrumbItems} className={'text-md breadcrumbs text-primary'} />
             </header>
 
             <section className='flex flex-col h-full w-full gap-2 md:flex-row md:items-stretch md:gap-8'>
                 {/* request image */}
                 <main className='w-full h-full md:w-[60%] xl:w-[70%] flex flex-col gap-2 lg:py-4 border-2 border-transparent'>
                     <div className='space-y-2'>
-                        <div className="flex items-center">
+                        <div >
                             <h2 className='font-bold'>{request?.item_name}</h2>
                         </div>
                         <div className="flex items-center justify-between">
@@ -183,6 +181,12 @@ const RequestDetails = () => {
                         }
                     </div>
 
+                    {
+                        request?.deleted === 1 && !isOwner && <div className="mt-2 text-red-500 w-full p-2 font-bold text-start rounded-xl">
+                            Publisher has just indicated he had received a satisfactory lead from an earlier interactor, please do well to stay active on Request page next time. Thanks for your interaction
+                        </div>
+                    }
+
                     <hr className='h-px my-3 bg-gray-700 border-black border-1' />
 
                     {/* request description */}
@@ -197,8 +201,6 @@ const RequestDetails = () => {
 
                     {/* action buttons */}
                     <div className='flex flex-col gap-3 mt-auto'>
-
-
                         {
                             isOwner ?
                                 <Button
@@ -224,14 +226,15 @@ const RequestDetails = () => {
                                     </Button>
                                 ) :
                                     (
-                                        <div className='dropdown dropdown-top dropdown-center w-full '>
+                                        <div className='dropdown dropdown-top dropdown-center w-full'>
                                             <Button
                                                 variant={'primary'}
                                                 className={
                                                     'w-full rounded-xl flex items-center justify-center gap-2 font-semibold'
                                                 }
+                                                disabled={request?.deleted === 1}
                                             >
-                                                Start a conversation
+                                                Interact with this request
                                             </Button>
 
                                             <div

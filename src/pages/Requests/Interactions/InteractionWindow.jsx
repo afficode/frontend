@@ -1,6 +1,5 @@
 import { PiSquaresFour } from 'react-icons/pi';
 import Discussion from './Discussion';
-import { IoMdClose } from 'react-icons/io';
 import DiscussionInput from './DiscussionInput';
 import useAuth from '../../../context/UserContext';
 import { useGetDiscussion } from '../../../hooks';
