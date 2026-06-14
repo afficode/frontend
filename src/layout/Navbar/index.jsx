@@ -790,13 +790,13 @@ const Navbar = () => {
                                 </li> */}
                                 <li className='mr-4 bg-secondary  animate-pulse hover:animate-none '>
                                     <Link
-                                        to={Approutes.requests}
+                                        to={Approutes.requests.initial}
                                         tabIndex={0}
                                         className={`${listStyles} !text-black`}
                                     >
                                         REQUEST IT
                                     </Link>
-                                    <Link to={Approutes.requests} className={mobileListStyles}>
+                                    <Link to={Approutes.requests.initial} className={mobileListStyles}>
                                         <img src={RequestIcon} alt="Request" className='w-6 p-[0.125rem]' />
                                     </Link>
                                 </li>

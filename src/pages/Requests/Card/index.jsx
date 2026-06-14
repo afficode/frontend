@@ -1,38 +1,31 @@
 import { PiSquaresFour } from 'react-icons/pi';
-import { Button } from '../../../ui';
-import { IoChatbubbleOutline } from 'react-icons/io5';
 import { FiEdit } from 'react-icons/fi';
 import { FaRegTrashAlt } from 'react-icons/fa';
 import useAuth from '../../../context/UserContext';
 import { useState } from 'react';
 import EditRequest from '../Edit';
 import DeleteRequest from '../Delete';
-import { formatTimeAgo } from '../../../utils';
-import { Approutes } from '../../../constants';
+import { formatTimeAgo, slugGeneratorForAdIdWithName } from '../../../utils';
 import { useNavigate } from 'react-router-dom';
+import { Declined, Interactors } from '../../../assets/images';
 
-const RequestCard = ({ data, setModalOpen, setRequestId, mainCategories }) => {
-    const { user, isLogin } = useAuth();
+const RequestCard = ({ data, mainCategories }) => {
+    const { user } = useAuth();
     const isOwner = user?.id === data?.publisher;
     const [editOpen, setEditOpen] = useState(false);
     const [deleteOpen, setDeleteOpen] = useState(false);
     const navigate = useNavigate();
 
     const handleClick = () => {
-        if (!isLogin) {
-            navigate(`${Approutes.auth.initial}?next=${Approutes.requests}`);
-            return;
-        }
-        setModalOpen(true);
-        setRequestId(data?.request_id);
+        navigate(`/requests/${slugGeneratorForAdIdWithName(data?.item_name, data?.request_id)}`);
     };
 
     return (
         <>
             <div
                 role='button'
-                onClick={handleClick}
-                className='bg-white w-full h-full flex flex-col justify-between rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer hover:scale-103 group relative'
+                onClick={isOwner && data?.status === 'rejected' ? null : handleClick}
+                className=' bg-white w-full h-full flex flex-col justify-between rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer hover:scale-103 group relative'
             >
                 {data?.image && (
                     <div className='w-full h-full  max-h-[260px] relative '>
@@ -42,7 +35,8 @@ const RequestCard = ({ data, setModalOpen, setRequestId, mainCategories }) => {
                         <img
                             src={data?.image}
                             alt={data?.item_name}
-                            className='w-full h-full object-contain rounded-t-2xl'
+                            className='w-full h-full object-cover rounded-t-2xl'
+                            height={260}
                         />
                     </div>
                 )}
@@ -116,17 +110,58 @@ const RequestCard = ({ data, setModalOpen, setRequestId, mainCategories }) => {
                         <h3 className='font-bold text-lg sm:text-xl line-clamp-2'>
                             {data?.item_name}
                         </h3>
-                        <p className='!text-xs text-gray-700 '>{data?.description}</p>
+                        <p className='!text-xs text-gray-700 line-clamp-3'>{data?.description}</p>
                     </div>
 
-                    <Button
-                        variant={'primary'}
-                        className={`${isOwner ? '!bg-primary' : '!bg-black'} w-full rounded-xl flex items-center justify-center gap-2 font-semibold hover:!bg-primary group/btn`}
-                    >
-                        <IoChatbubbleOutline size={20} className='group-hover/btn:animate-bounce' />{' '}
-                        {isOwner ? 'Respond' : 'Interact'}
-                    </Button>
+                    {isOwner && (
+                        <div className='flex items-center gap-4 mt-2'>
+                            <span className='flex items-center gap-1 text-xs'>
+                                <img src={Interactors} className='w-4' alt="Number of interactions" />
+                                Interactions: {data?.interaction_count || 0}
+                            </span>
+                            <span className='flex items-center gap-1 text-xs'>
+                                Views: {data?.views || 0}
+                            </span>
+                        </div>
+                    )}
                 </div>
+
+                {
+                    isOwner && data?.status === 'rejected' && (
+                        <div className='absolute inset-0 z-10 bg-gray-900/85 rounded-2xl h-full flex item-center justify-center flex-col p-4'>
+                            <div className='flex items-center justify-center'>
+                                <img src={Declined} className='' alt="Request Declined" />
+                            </div>
+                            <div className="flex item-center justify-center gap-2">
+                                <button
+                                    title='Edit'
+                                    className='p-2 bg-blue-50 rounded-full text-blue-500 hover:bg-blue-100 transition-colors'
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        setEditOpen(true);
+                                    }}
+                                >
+                                    <FiEdit size={15} />
+                                </button>
+                                <button
+                                    title='Delete'
+                                    className='p-2 bg-red-50 rounded-full text-red-500 hover:bg-red-100 transition-colors'
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        setDeleteOpen(true);
+                                    }}
+                                >
+                                    <FaRegTrashAlt size={15} />
+                                </button>
+                            </div>
+                            <div className='flex flex-col items-center  mt-4 px-2'>
+                                <h3 className='text-secondary font-bold'>Reason</h3>
+                                <p className='text-center !text-xs font-semibold text-white'>
+                                    {data?.reason}</p>
+                            </div>
+                        </div>
+                    )
+                }
             </div>
 
             <EditRequest

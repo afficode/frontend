@@ -4,4 +4,5 @@ export const queryStrings = {
     subCategory: 'sub',
     page: 'page',
     category: 'cat',
+    discussion: 'd',
 };

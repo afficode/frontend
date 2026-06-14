@@ -30,13 +30,15 @@ export const useGetUserRequests = (options) => {
     });
 };
 
-export const useGetRequest = (requestId, options) => {
+export const useGetRequest = (requestId, options = {}) => {
+    const { isLogin, ...queryOptions } = options;
+    const client = isLogin ? privateAxios : api;
     const getRequest = () =>
-        privateAxios.get(`${backendLink}request/${requestId}`).then((res) => res?.data);
+        client.get(`${backendLink}request/${requestId}`).then((res) => res?.data);
 
     return useQuery(['get-request', requestId], getRequest, {
         ...CACHE_CONFIG,
-        ...options,
+        ...queryOptions,
     });
 };
 
@@ -116,6 +118,7 @@ export const useCreateInteraction = (request_id) => {
         onSuccess: () => {
             queryClient.invalidateQueries(['get-interactions']);
             queryClient.invalidateQueries(['get-interaction', request_id]);
+            queryClient.invalidateQueries(['get-request', request_id]);
         },
     });
 };

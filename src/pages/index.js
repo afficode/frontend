@@ -32,6 +32,8 @@ export { default as PostDecision } from './PostDecision';
 export { default as PostSuccess } from './PostSuccess';
 export { default as PrivacyPolicy } from './PrivacyPolicy';
 export { default as Requests } from './Requests';
+export { default as RequestDetails } from './Requests/Details';
+export { default as RequestInteractions } from './Requests/Interactions';
 export { default as SafetyGuides } from './SafetyGuides';
 export { default as UnderConstuction } from './UnderConstruction';
 export { default as UpdateAd } from './UpdateAd';

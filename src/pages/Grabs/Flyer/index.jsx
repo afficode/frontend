@@ -123,10 +123,10 @@ const GrabFlyer = () => {
                                         )
                                             ? ad.data.title
                                             : ['50', '51'].some((prefix) =>
-                                                    String(ad.data.category).startsWith(prefix)
-                                                )
-                                              ? ad.data.ad_condition
-                                              : ad.data.type || ad.data.title}
+                                                String(ad.data.category).startsWith(prefix)
+                                            )
+                                                ? ad.data.ad_condition
+                                                : ad.data.type || ad.data.title}
                                     </h3>
                                 </div>
                                 <div className='bg-white border border-primary rounded-lg p-2 w-full -rotate-6 mr-3 -mt-[2.2rem] z-1 '>
@@ -139,10 +139,10 @@ const GrabFlyer = () => {
                                         )
                                             ? ad.data.title
                                             : ['50', '51'].some((prefix) =>
-                                                    String(ad.data.category).startsWith(prefix)
-                                                )
-                                              ? ad.data.ad_condition
-                                              : ad.data.type || ad.data.title}
+                                                String(ad.data.category).startsWith(prefix)
+                                            )
+                                                ? ad.data.ad_condition
+                                                : ad.data.type || ad.data.title}
                                     </h3>
                                 </div>
                             </div>
