@@ -121,7 +121,7 @@ const Requests = () => {
                 <button
                     onClick={() => {
                         if (!isLogin) {
-                            navigate(`${Approutes.auth.initial}?next=${Approutes.requests}`);
+                            navigate(`${Approutes.auth.initial}?next=${Approutes.requests.initial}`);
                             return;
                         }
                         setActiveTab('my-requests');
