@@ -120,15 +120,19 @@ const RequestDetails = () => {
                         <div className="flex items-center justify-between">
                             <AdListingStatus createdAt={request?.created_on} />
 
-                            {request?.status === 'approved' ? (
-                                <span className={'px-3 uppercase text-sm rounded-xl text-white bg-green-700  '}>
-                                    Active
-                                </span>
-                            ) : request?.status === 'closed' ? (
-                                <span className={'px-3 uppercase text-sm rounded-xl text-white bg-gray-700  '}>
-                                    Closed
-                                </span>
-                            ) : null}
+                            {request?.deleted === 1 && isOwner ?
+                                (<span className={'px-3 uppercase text-sm rounded-xl text-white bg-red-700  '}>
+                                    Delete in progress
+                                </span>)
+                                : request?.status === 'approved' ? (
+                                    <span className={'px-3 uppercase text-sm rounded-xl text-white bg-green-700  '}>
+                                        Active
+                                    </span>
+                                ) : request?.status === 'closed' ? (
+                                    <span className={'px-3 uppercase text-sm rounded-xl text-white bg-gray-700  '}>
+                                        Closed
+                                    </span>
+                                ) : null}
                             {request?.status === 'rejected' ? (
                                 <span className={'px-3 uppercase text-sm rounded-xl text-white bg-red-700  '}>
                                     Rejected
@@ -181,12 +185,6 @@ const RequestDetails = () => {
                         }
                     </div>
 
-                    {
-                        request?.deleted === 1 && !isOwner && <div className="mt-2 text-red-500 w-full p-2 font-bold text-start rounded-xl">
-                            Publisher has just indicated he had received a satisfactory lead from an earlier interactor, please do well to stay active on Request page next time. Thanks for your interaction
-                        </div>
-                    }
-
                     <hr className='h-px my-3 bg-gray-700 border-black border-1' />
 
                     {/* request description */}
@@ -232,7 +230,6 @@ const RequestDetails = () => {
                                                 className={
                                                     'w-full rounded-xl flex items-center justify-center gap-2 font-semibold'
                                                 }
-                                                disabled={request?.deleted === 1}
                                             >
                                                 Interact with this request
                                             </Button>
