@@ -12,8 +12,8 @@ const DeleteRequest = ({ isOpen, setIsOpen, data }) => {
                 notify(res?.message || 'Request deleted successfully', 'success');
                 setIsOpen(false);
             },
-            onError: (err) => {
-                notify(err?.response?.data?.message || 'Failed to delete request', 'error');
+            onError: (_) => {
+                notify('Deleting in progress', 'error');
             },
         });
     };

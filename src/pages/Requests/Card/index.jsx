@@ -35,7 +35,7 @@ const RequestCard = ({ data, mainCategories }) => {
                         <img
                             src={data?.image}
                             alt={data?.item_name}
-                            className='w-full h-full object-cover rounded-t-2xl'
+                            className='w-full h-full object-contain rounded-t-2xl'
                             height={260}
                         />
                     </div>
@@ -58,7 +58,7 @@ const RequestCard = ({ data, mainCategories }) => {
                                 <img
                                     src={data?.image}
                                     alt={data?.item_name}
-                                    className='w-10 h-10 rounded-full object-cover'
+                                    className='w-10 h-10 rounded-full object-contain'
                                 />
                             ) : (
                                 <span className='p-[6px] bg-primary/10 rounded-full'>
