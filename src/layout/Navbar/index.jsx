@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation, useSearchParams, useNavigate } from 'react-router-dom';
 import { Approutes } from '../../constants/routes';
-import { CategoryDropdown, WalletDropdown } from '../../ui';
+import { CategoryDropdown } from '../../ui';
 import { BoonfuWhite, RequestIcon } from '../../assets/images';
 import { useCategories, useStates } from '../../hooks';
 import useAuth from '../../context/UserContext';
@@ -10,7 +10,6 @@ import useMessageContext from '../../context/MessageContext';
 // icons
 import { HiSearch, HiOutlineSpeakerphone } from 'react-icons/hi';
 import { SlArrowRight } from 'react-icons/sl';
-import { IoWalletOutline } from 'react-icons/io5';
 import { BiEnvelope } from 'react-icons/bi';
 import { GoBookmark } from 'react-icons/go';
 import { IoMdClose } from 'react-icons/io';
@@ -201,17 +200,6 @@ const Navbar = () => {
                                             )}
                                         </div>
                                     </Link>
-                                    <div className='dropdown'>
-                                        <button
-                                            tabIndex={0}
-                                            className='flex flex-col items-center px-2 py-1 bg-white rounded-md cursor-pointer outline outline-4 outline-secondary text-primary'
-                                            title='My Wallet'
-                                        >
-                                            <IoWalletOutline size={25} />
-                                            <span className='text-xs sm:text-sm'>Wallet</span>
-                                        </button>
-                                        <WalletDropdown />
-                                    </div>
                                 </>
                             )}
                             <Link to={Approutes.profile.saved} className='max-md:hidden'>

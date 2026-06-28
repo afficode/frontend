@@ -132,7 +132,9 @@ const RequestDetails = () => {
                                     <span className={'px-3 uppercase text-sm rounded-xl text-white bg-gray-700  '}>
                                         Closed
                                     </span>
-                                ) : null}
+                                ) : request?.status === 'pending_approval' ? <span className={'px-3 uppercase text-sm rounded-xl text-white bg-yellow-700  '}>
+                                    Pending Approval
+                                </span> : null}
                             {request?.status === 'rejected' ? (
                                 <span className={'px-3 uppercase text-sm rounded-xl text-white bg-red-700  '}>
                                     Rejected

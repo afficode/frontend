@@ -42,7 +42,7 @@ const RequestInteractions = () => {
         [setSearchParams]
     );
 
-    const { data: interactionLists, isLoading: interactionLoading } = useGetInteractions({});
+    const { data: interactionLists, isLoading: interactionLoading } = useGetInteractions();
     const [chatWindow, setChatWindow] = useState(false);
 
     const filteredList = useMemo(() => {
