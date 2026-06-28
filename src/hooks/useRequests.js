@@ -86,14 +86,11 @@ export const useDeleteRequest = (requestId) => {
 };
 
 // discussions apis
-export const useGetInteractions = (options) => {
+export const useGetInteractions = () => {
     const getInteractions = () =>
         privateAxios.get(`${backendLink}interaction/user`).then((res) => res?.data);
 
-    return useQuery(['get-interactions'], getInteractions, {
-        ...CACHE_CONFIG,
-        ...options,
-    });
+    return useQuery(['get-interactions'], getInteractions);
 };
 
 export const useGetInteraction = (request_id, options) => {
@@ -143,7 +140,6 @@ export const useGetDiscussion = (interaction_id, options) => {
         privateAxios.get(`${backendLink}discussion/${interaction_id}`).then((res) => res?.data);
 
     return useQuery(['get-discussion', interaction_id], getDiscussion, {
-        ...CACHE_CONFIG,
         ...options,
     });
 };

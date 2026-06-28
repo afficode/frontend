@@ -57,8 +57,8 @@ const PostRequest = ({ isOpen, setIsOpen, mainCategories = [] }) => {
         }
 
         mutate(formData, {
-            onSuccess: (data) => {
-                notify(data?.message || 'Request posted successfully!', 'success');
+            onSuccess: (_) => {
+                notify('Request under review by admin, will be published soon', 'success');
                 resetForm();
                 setIsOpen(false);
                 setSubmitting(false);
@@ -80,9 +80,9 @@ const PostRequest = ({ isOpen, setIsOpen, mainCategories = [] }) => {
 
     const wordCount = formik.values.description
         ? formik.values.description
-              .trim()
-              .split(/\s+/)
-              .filter((w) => w.length > 0).length
+            .trim()
+            .split(/\s+/)
+            .filter((w) => w.length > 0).length
         : 0;
 
     return (

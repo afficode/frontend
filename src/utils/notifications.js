@@ -24,7 +24,7 @@ export function getNotificationRoute(feature, metadata, adId, userId) {
         },
         {
             match: () => feature.includes('request'),
-            getRoute: () => `${Approutes.requests.interactions}?d=${metadata?.interaction_id}`,
+            getRoute: () => `${Approutes.requests.interactions}?d=${metadata?.interaction_id}&tab=${metadata?.user_definition === "interactor" ? '2' : '1'}`,
         },
     ];
 

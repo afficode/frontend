@@ -154,7 +154,7 @@ const RequestCard = ({ data, mainCategories }) => {
                                     <FaRegTrashAlt size={15} />
                                 </button>
                             </div>
-                            <div className='flex flex-col items-center  mt-4 px-2'>
+                            <div className='flex flex-col items-center  py-4 px-2'>
                                 <h3 className='text-secondary font-bold'>Reason</h3>
                                 <p className='text-center !text-xs font-semibold text-white'>
                                     {data?.reason}</p>
