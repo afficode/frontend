@@ -12,3 +12,5 @@ export { default as ScrollToTop } from './scrollToTop';
 export { default as formatAdId } from './formatAdId';
 export { default as getRemarkMessage } from './getRemarkMessage';
 export { default as formatTimeAgo } from './formatTimeAgo';
+export { default as getDiscussionText } from './getDiscussionText';
+export * from './notifications';

@@ -33,7 +33,6 @@ const Category = () => {
     const mainCategoryId = useMemo(() => getCategoryId(id), [id]);
 
     const [displayCategories, setDisplayCategories] = useState();
-    const [items, setItems] = useState(null);
 
     const allParams = getSearchParamsObject(searchParams);
     const {
@@ -55,23 +54,24 @@ const Category = () => {
 
     useEffect(() => {
         if (categories) {
-            let name = '';
-
-            categories?.summary.forEach((cat) => {
-                if (cat.category === currentCategoryId) {
-                    name = cat.name;
-                }
-            });
-            setItems(() => [
-                { name: 'Home', link: Approutes.home },
-                { name: 'Products', link: Approutes.product.initial },
-                { name: 'Categories', link: Approutes.product.category },
-                { name },
-            ]);
-
             setDisplayCategories(() => [...categories?.summary]);
         }
     }, [categoryIsLoading, currentCategoryId, categories]);
+
+    const breadcrumbItems = categories ? (() => {
+        let name = '';
+        categories.summary.forEach((cat) => {
+            if (cat.category === currentCategoryId) {
+                name = cat.name;
+            }
+        });
+        return [
+            { name: 'Home', link: Approutes.home },
+            { name: 'Products', link: Approutes.product.initial },
+            { name: 'Categories', link: Approutes.product.category },
+            { name },
+        ];
+    })() : [];
 
     return (
         <section className='flex gap-x-2'>
@@ -95,7 +95,7 @@ const Category = () => {
                 </div>
                 <div className='w-full my-4'>
                     {!isLoading && (
-                        <Breadcrumb items={items} className={'text-md breadcrumbs text-primary'} />
+                        <Breadcrumb items={breadcrumbItems} className={'text-md breadcrumbs text-primary'} />
                     )}
                 </div>
                 {((!isLoading && data?.ads?.length === 0) || error) && (

@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation, useSearchParams, useNavigate } from 'react-router-dom';
 import { Approutes } from '../../constants/routes';
-import { CategoryDropdown, WalletDropdown } from '../../ui';
-import { BoonfuWhite } from '../../assets/images';
+import { CategoryDropdown } from '../../ui';
+import { BoonfuWhite, RequestIcon } from '../../assets/images';
 import { useCategories, useStates } from '../../hooks';
 import useAuth from '../../context/UserContext';
 import useMessageContext from '../../context/MessageContext';
@@ -10,11 +10,10 @@ import useMessageContext from '../../context/MessageContext';
 // icons
 import { HiSearch, HiOutlineSpeakerphone } from 'react-icons/hi';
 import { SlArrowRight } from 'react-icons/sl';
-import { IoWalletOutline } from 'react-icons/io5';
 import { BiEnvelope } from 'react-icons/bi';
 import { GoBookmark } from 'react-icons/go';
 import { IoMdClose } from 'react-icons/io';
-import { VscGitPullRequestGoToChanges, VscMenu } from 'react-icons/vsc';
+import { VscMenu } from 'react-icons/vsc';
 import { CgProfile } from 'react-icons/cg';
 import { MdMiscellaneousServices } from 'react-icons/md';
 import { FaCarSide, FaBuilding, FaRegHandshake } from 'react-icons/fa';
@@ -201,17 +200,6 @@ const Navbar = () => {
                                             )}
                                         </div>
                                     </Link>
-                                    <div className='dropdown'>
-                                        <button
-                                            tabIndex={0}
-                                            className='flex flex-col items-center px-2 py-1 bg-white rounded-md cursor-pointer outline outline-4 outline-secondary text-primary'
-                                            title='My Wallet'
-                                        >
-                                            <IoWalletOutline size={25} />
-                                            <span className='text-xs sm:text-sm'>Wallet</span>
-                                        </button>
-                                        <WalletDropdown />
-                                    </div>
                                 </>
                             )}
                             <Link to={Approutes.profile.saved} className='max-md:hidden'>
@@ -731,6 +719,7 @@ const Navbar = () => {
                                         className={mobileListStyles}
                                     >
                                         <MdMiscellaneousServices size={25} />
+
                                     </Link>
                                     {filteredCategories?.servicesCat && (
                                         <CategoryDropdown
@@ -766,7 +755,7 @@ const Navbar = () => {
 
                                 <span className='border border-r-4 border-white h-[2rem]' />
 
-                                <li className='dropdown dropdown-hover mr-4'>
+                                {/* <li className='dropdown dropdown-hover mr-4'>
                                     <Link
                                         to={`${Approutes.product.category}/${getCategoryName(54)}`}
                                         tabIndex={0}
@@ -786,6 +775,18 @@ const Navbar = () => {
                                             subCategories={filteredCategories?.electCat}
                                         />
                                     )}
+                                </li> */}
+                                <li className='mr-4 bg-secondary  animate-pulse hover:animate-none '>
+                                    <Link
+                                        to={Approutes.requests.initial}
+                                        tabIndex={0}
+                                        className={`${listStyles} !text-black`}
+                                    >
+                                        REQUEST IT
+                                    </Link>
+                                    <Link to={Approutes.requests.initial} className={mobileListStyles}>
+                                        <img src={RequestIcon} alt="Request" className='w-6 p-[0.125rem]' />
+                                    </Link>
                                 </li>
                             </ul>
                         </div>

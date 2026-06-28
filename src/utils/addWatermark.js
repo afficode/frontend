@@ -14,7 +14,7 @@ const addWatermarkToImage = (file, watermarkText = '©boonfu.com') => {
 
                 ctx.drawImage(img, 0, 0);
 
-                const fontSize = Math.max(12, canvas.width / 40);
+                const fontSize = Math.max(10, canvas.width / 40);
                 ctx.font = `bold ${fontSize}px Inter`;
                 ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
                 ctx.strokeStyle = 'rgba(0, 0, 0, 0.5)';
